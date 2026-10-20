@@ -1,0 +1,123 @@
+# dsh-ninfer-local · 本地模型专属瘦身改动记录
+
+> 作用域：仅本插件的 `provider`（ninfer / 本地 1234）。云端 provider 各有 adapter，不经过这些改动。
+> 原因：本地 12G 卡（RTX 5070 Ti Laptop）上，DSH 默认前缀 94,377 tokens 导致冷 prefill ≈165s（首字慢），
+> 且高思考档会把 8,192 输出预算全烧在 reasoning 上、正文 0 字（会话 session-cceef1ab 实测）。
+
+## 当前生效配置（lib/index.js DEFAULT_CONFIG）
+
+| 键 | 值 | 作用 |
+|---|---|---|
+| `toolAllowlist` | 12 个：write/read/edit/ops_bash/ops_glob/ops_grep/skill/web_search/ninfer_*4 | 工具 schema 264KB → 10KB |
+| `slimSkills` | `true` | `<available_skills>` 描述折叠为技能名 |
+| `skillNameLimit` | `60` | 技能名只列前 60，其余提示用 find-skills 检索 |
+| `slimSystem` | `true` | system 段去重（`[TAG]…[/TAG]` 同名块 + markdown 同名同内容章节） |
+| `defaultEffort` | `minimal` | 模型选择器初始档，避免默认 high |
+| `forceReasoningEffort` | `minimal` | **请求级强制**：无视 UI 下发的 reasoning_effort |
+| `statsPath` | `_work/session-audit/ninfer-stats.jsonl` | 每请求 payload 统计（tools 数 / systemChars / payloadBytes） |
+
+## 函数（lib/index.js，src/adapter.ts 需同步）
+
+- `slimSkillsBlock(system, limit)` —— 折叠技能清单
+- `dedupeSystem(system)` —— TAG 块 + markdown 章节去重
+- `filterTools(tools, allow)` / `matchAllow(name, allow)` —— 白名单裁剪（支持 `前缀*`）
+- `stream()` 中：messages 逐条 slimSkillsBlock + dedupeSystem；tools 走 filterTools；reasoning_effort 走强制档
+
+## 实测（同一 task，冷缓存，RTX 5070 Ti Laptop）
+
+| 版本 | tools | 前缀字符 | prompt tokens | 冷 TTFT |
+|---|---|---|---|---|
+| 原始 | 238 | 370,578 | 94,377 | **165.4s** |
+| v1 | 21 | 53,900 | 15,815 | 19.7s |
+| **v2（当前）** | **12** | **38,540** | **11,695** | **14.1s** |
+
+热缓存（同 prompt 复跑）：0.30–0.43s。
+
+## 回滚点
+
+```
+lib/index.js.bak-think    # 原始（238 工具、无瘦身）
+lib/index.js.bak-think2   # v1（21 工具 + slimSkills）
+lib/index.js.bak-think3   # v2（12 工具 + dedupeSystem）
+```
+回滚：`cp lib/index.js.bak-think3 lib/index.js` → 重载插件或重启 dsh。
+
+## A 方案：provider 归属切换（2026-10-20，已改 profile，待重启生效）
+
+**问题**：`provider=ninfer` 实际由 `llm-pi-ai` 的 `PiAiAdapter` 承载（`llm.adapters.get('ninfer').adapter.constructor.name === 'PiAiAdapter'`），
+本插件 `registerAdapter` 默认 `false` → 上面所有瘦身**从未进入请求路径**（会话 56b44334 实测 header tools 仍 238 个 / 264,458B，stats 文件不生成）。
+
+**改动**（工作区外的 `~/.dsh/profiles/desktop/`，已备份 `.bak-armor`）：
+```yaml
+# cordis.yml 与 cordis.patch.yml 各删 31 行
+llm-pi-ai:
+  config:
+    providers:
+-     ninfer:            # ← 整段删除（apiKeyEnv/displayName/api/baseURL/models/streamIdleTimeoutMs/retryPolicy）
+-       ...
+
+# cordis.yml 唯一一处
+- id: dsh-ninfer-local
+  config:
+    registerAdapter: true   # ← 新增，让 NinferAdapter 接管 nfer 路由
+```
+
+**影响面**：只影响 `provider=ninfer`；nvidia / openai-codex / commandcode×2 / deepseek×2 / codex-local / daseinai 全部不动。
+**代价**：图片输入降级为占位文本、重试策略固定 maxRetries=1、无独立 streamIdleTimeoutMs。
+**回滚**：
+```bash
+cp ~/.dsh/profiles/desktop/cordis.yml.bak-armor        ~/.dsh/profiles/desktop/cordis.yml
+cp ~/.dsh/profiles/desktop/cordis.patch.yml.bak-armor  ~/.dsh/profiles/desktop/cordis.patch.yml
+```
+**生效判据（重启后）**：`_work/session-audit/ninfer-stats.jsonl` 出现且 `tools:12`。
+
+## 适配器契约修复（2026-10-20，会话 a34fde6d / 6aa004b2 暴露）
+
+| 现象 | 根因 | 修复 |
+|---|---|---|
+| 回复被吞（流里有内容，消息正文为空） | 三处 `block-end` 写死 `block.text: ''`；DSH 以 `block-end.block` 作为最终内容 | 累积 `textBuf` / `reasonBuf`，`block-end` 传全文 |
+| `Assistant stream chunk must be losslessly JSON-serializable` | `usage.reasoningTokens` / `cacheReadTokens` 用 `|| undefined`，undefined 字段不可无损序列化 | 只放有值字段：`if (rt > 0) u.reasoningTokens = rt` |
+| usage 恒为 null | 未开 `stream_options.include_usage` | body 加 `stream_options: { include_usage: true }` |
+| 前缀仍偏大（真实会话 payload 118KB ≈ 30K tokens） | skills 清单注入在 **user 消息**（`<system-reminder>`）里，旧逻辑只折叠 `role === 'system'` | 所有消息都折叠 `<available_skills>`；段去重仍只对 system |
+| 所有工具调用整轮失败：`tool-call-delta index must be a non-negative safe integer`（会话 7e069ddd turn8+） | `tool-call-delta` 没带 `index`；且 `name: cur.name \|\| undefined` 有 undefined 风险 | 按 id 分配非负整数 index；name 仅在有值时下发；tool-call 块 index 按已用块顺延（`blockBase + tIdx`），避免与 reasoning 块撞 0 |
+
+验证（staging 直连 adapter.stream）：
+- `block-end` text 长度：修复前 0 → 修复后 2（"收到"），reasoning 18
+- chunk 无损序列化 round-trip 问题数：0
+- 18,074 字符的假 skills 块 → 实际发出 `totalChars` 1,022（折叠 94%）
+
+## 提示-工具一致性 + 执行纪律（2026-10-20，会话 ea3a32d0）
+
+| 改动 | 内容 | 依据 |
+|---|---|---|
+| `stripToolHints: ['kitty']` | 白名单不含 `kitty_*` 时，从 system/user 中剔除 kitty 两段 TOOL LOCK（2,046 字符）与「A 通道速查」段（到 `docs/API-FREEZE.md` 止） | 模型 reasoning 亲口说“工具列表里没有 kitty_ce”，但仍被提示指挥去调，41 步空转后被用户 abort |
+| `executionRules` | 向 system 末尾注入 6 条纪律：①工具缺失即上报（禁自造桥接）②环境事实（**PATH 的 python 是 WindowsApps 0 字节占位符；真解释器 `C:\ProgramData\anaconda3\python.exe` = 3.13.9，须全路径**；node 可用；shell 用 pwsh）③验收纪律（回读≤1 次，禁反复 wc -l）④规格核对（字数不够就续写）⑤产物自检（HTML/脚本验一次）⑥临时文件放 `_tmp/` 并清理 | 会话 ea3a32d0 的 M2 震荡（16 步）/M3 盲探（12 步）/M4 字数不足/M6 不自检/D3 shell 用错/D4 垃圾残留 |
+
+实测：样本 system 1,444 字符 → 剥离后 495 → 注入纪律后 **884**（finish=stop 正常）。
+
+> kitty 专项的**彻底方案（薄封装 / 后训练样本）**记录在 `_work/session-audit/KITTY-ISSUE-BACKLOG.md`，按操作者要求留待后训练阶段处理。
+
+## 行为自愈与质量项（2026-10-20 第三轮）
+
+| 项 | 实现 | 验证 |
+|---|---|---|
+| **B1a 动态输出预算** | 长产物任务（完整/详细/3000字/HTML/SVG/整段代码…）→ `max_tokens` 提到 ≥16384，其余用原值 | 代码审查；避免 reasoning 吃光 8192 后正文为空 |
+| **B1b 空交付可见化** | `finish=length` 且只有 reasoning 无正文时，补一条 text：「本轮只产出思考，正文被 max_tokens 截断；建议重发或把任务拆小」 | 实测 `maxTokens=4` → 返回该 38 字符提示，finish=max-tokens（原为空白） |
+| **B2 重复调用告警** | 最近 12 次工具调用里，同 `name+参数前140字符` 出现 ≥3 次 → 向 system 追加「重复调用警告」，要求说明阻塞/请求决策/换策略 | 实测 systemChars 565 → 677（+112 注入生效）；修过一次数据源（要用 DSH 原始 messages，转换后 tool_call 在 msg.tool_calls） |
+| **B4 旁路阈值收紧** | `offloadToolResultMaxChars` 2000 → 1200 | 更多工具输出落盘，长会话上下文更省 |
+
+未能实施（记录原因）：
+
+| 项 | 原因 |
+|---|---|
+| A1 `prefillChunk=1024` | 启动失败：`requires 1,964,088,576 bytes, only 1,661,698,048 available`（显存仅剩~1.6GB，chunk 加倍要 1.9GB runtime workspace） |
+| A2 历史裁剪 | 需要在 adapter 内做摘要（额外一次请求 ~10s），且可能丢细节，风险高于收益 |
+| A3 system 再精准删 | v5.7 副本里含独有的「路径记录」小节，精准删只能省 540 字符 ≈ 0.3s，风险/收益不划算 |
+| B3 few-shot | 会 +300 tokens（首字 +0.4s），与「提速」目标冲突，且当前格式遵循已达标（42 条测试） |
+
+## 注意
+
+- `scripts/build.sh` 需要 DSH checkout + tsc，本机不可用；以上改动直接落在运行产物 `lib/index.js`。
+  若日后在具备 checkout 的环境重新构建，请按本文件与 `lib/index.js` 现状同步 `src/adapter.ts` 与 `src/index.ts`。
+- 白名单里 12 个名字均在 header tools（238）中实际存在，命中率 12/12。
+- 若某任务需要 MCP（godot-ai / js-reverse）或 kitty 工具，把相应名字加进 `toolAllowlist` 即可，其它不变。

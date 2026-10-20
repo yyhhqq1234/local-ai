@@ -1,0 +1,12 @@
+{
+  "deviceKV": 36864,
+  "hostKVMiB": 7168,
+  "kvDtype": "nvfp4",
+  "prefillChunk": 512,
+  "draftTokens": 3,
+  "reasoningEffort": "minimal",
+  "maxContext": 262144,
+  "vision": "cpu",
+  "port": 1234,
+  "modelFile": "Huihui-Qwen3.8-27B-abliterated-Swift-1.5-GSQ-RCO-IQ2_S-mtp.ninfer"
+}

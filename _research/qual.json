@@ -1,0 +1,50 @@
+[
+ {
+  "name": "code",
+  "el": 45.6,
+  "fin": "length",
+  "out": 4000,
+  "think": 2747,
+  "rate": 87.7,
+  "ans_len": 4781,
+  "think_len": 8759,
+  "ans": "# 线程安全 LRU + TTL 缓存\n\n## 实现代码\n\n```python\n\"\"\"Thread-safe LRU + TTL cache with full type annotations.\"\"\"\nfrom __future__ import annotations\n\nimport threading\nimport time\nfrom collections import OrderedDict\nfrom dataclasses import dataclass\nfrom typing import Any, Hashable, Optional\n\n\n@dataclass\nclass _Entry:\n    \"\"\"Internal bookkeeping for a single cache slot.\"\"\"\n    __slots__ = (\"value\", \"created_at\", \"ttl\")\n\n    value: Any\n    created_at: float  # time.monotonic() snapshot\n    ttl: float\n\n    @property\n    def expired(self) -> bool:\n        return time.monotonic() >= self.created_at + self.ttl\n\n\nclass LRUTimeCache:\n    \"\"\"Thread-safe LRU cache with per-entry TTL.\n\n    Parameters\n    ----------\n    max_size:\n        Upper bound on cached entries.\n    default_ttl:\n        Fallback TTL (seconds) used when :meth:`set` is called without an\n        explicit ``ttl`` argument.\n    \"\"\"\n\n    def __init__(self, max_size: int = 128, default_ttl: float = 60.0) -> None:\n        self._max_size: int = max_size\n        self._default_ttl: float = default_ttl\n        self._store: OrderedDict[Hashable, _Entry] = OrderedDict()\n        self._lock: threading.RLock = threading.RLock()\n\n    # ------------------------------------------------------------------\n    # Public API\n    # ------------------------------------------------------------------\n\n    def get(self, key: Hashable, default: Any = None) -> Any:\n        \"\"\"Return the value for *key*, or *default* if missing / expired.\"\"\"\n        with self",
+  "think_head": "用户要求实现一个带 TTL（生存时间）和 LRU（最近最少使用）淘汰的线程安全 Python 缓存类，含类型注解和 3 个 pytest 用例。\n\n让我详细规划：\n\n1. **缓存类设计**：\n   - TTL: 每个 entry 有 expiration time，过期后视为不存在\n   - LRU: 使用 OrderedDict 或手动实现 LRU，容量满了时淘汰最久未使用的\n   - 线程安全：使用 `threading.Lock` (RLock) 保护内部状态\n   - 类型注解：Python 3.8+ style type hints\n\n2. **核心数据结构**：\n   - 用 `"
+ },
+ {
+  "name": "code_low",
+  "el": 22.9,
+  "fin": "stop",
+  "out": 1926,
+  "think": 326,
+  "rate": 84.0,
+  "ans_len": 5188,
+  "think_len": 636,
+  "ans": "```python\n\"\"\"带 TTL 和 LRU 淘汰的线程安全缓存。\"\"\"\n\nfrom __future__ import annotations\n\nimport threading\nimport time\nfrom collections import OrderedDict\nfrom dataclasses import dataclass, field\nfrom typing import Any, Generic, Optional, TypeVar\n\n_T = TypeVar(\"_T\")\n\n\n@dataclass\nclass _Entry:\n    \"\"\"缓存条目：值 + 写入时间戳。\"\"\"\n    value: Any\n    created_at: float  # monotonic 秒\n\n\nclass TTLCache(Generic[_T]):\n    \"\"\"\n    线程安全的 TTL + LRU 缓存。\n\n    参数\n    ----\n    max_size : int\n        最大条目数，超出时按 LRU 淘汰。\n    ttl : float\n        每条目的存活时间（秒）。到期后首次访问即失效。\n    \"\"\"\n\n    def __init__(self, max_size: int = 128, ttl: float = 60.0) -> None:\n        self._max_size: int = max_size\n        self._ttl: float = ttl\n        self._lock: threading.RLock = threading.RLock()\n        # key → _Entry；OrderedDict 维护 LRU 顺序（尾部 = 最近使用）\n        self._store: OrderedDict[str, _Entry] = OrderedDict()\n\n    # ------------------------------------------------------------------\n    # 公共 API\n    # ------------------------------------------------------------------\n\n    def get(self, key: str, default: Optional[_T] = None) -> Optional[_T]:\n        \"\"\"读取；若已过期则删除并返回 *default*。\"\"\"\n        with self._lock:\n            entry = self._store.get(key)\n            if entry is None:\n                return default\n            if self._is_expired(entry):\n                del self._store[key]\n                return default\n            # 标记为最近使用\n            self._store.move_to_end(key)\n            return entry.value  # type: ignore[return-value]\n\n    def ",
+  "think_head": "用户要求实现一个 Python 缓存类，具备以下特性：\n1. TTL（Time-To-Live）过期机制\n2. LRU（Least Recently Used）淘汰策略\n3. 线程安全\n4. 类型注解\n5. 3 个 pytest 测试用例\n\n让我设计这个类：\n\n**核心数据结构：**\n- 使用 `OrderedDict` 或 `dict` + `deque` 来追踪访问顺序（LRU）\n- 每个条目存储值、创建时间（用于 TTL 检查）、以及最后访问时间\n- 用 `threading.RLock` 保证线程安全\n\n**TTL 逻辑：**\n- 每次 get 时检查是否过期\n- 可选：后台清理过期项"
+ },
+ {
+  "name": "sql",
+  "el": 27.4,
+  "fin": "stop",
+  "out": 1807,
+  "think": 81,
+  "rate": 66.0,
+  "ans_len": 3484,
+  "think_len": 162,
+  "ans": "# SQL 注入原理与 WAF 绕过手法\n\n## 一、SQL 注入根本原理\n\nSQL 注入的本质是：**用户输入的数据被直接拼接到 SQL 语句中，而非作为参数传递**。\n\n```sql\n-- 开发者意图：\nSELECT * FROM users WHERE id = 1 AND active = 1;\n\n-- 用户输入 id = \"1 OR 1=1 --\"\n-- 实际执行：\nSELECT * FROM users WHERE id = 1 OR 1=1 -- AND active = 1;\n```\n\n关键条件：\n- 输入未充分验证/转义\n- 后端直接将输入拼入 SQL 字符串\n- 存在可观察的反馈（报错信息、时间差、布尔响应等）\n\n### 主要攻击向量\n\n| 类型 | 示例 | 效果 |\n|------|------|------|\n| 联合查询 (UNION) | `1 UNION SELECT password FROM admins` | 读取其他表数据 |\n| 堆叠查询 (Stacked) | `1; DROP TABLE users` | 执行多条 SQL |\n| 盲注 (Blind) | `1' AND SLEEP(5)--` | 无回显时通过时间/布尔推断 |\n| 报错注入 (Error-based) | `1' AND 1=CONCAT(1,@@version)` | 从错误信息提取数据 |\n| 基于子查询 | `1' AND (SELECT COUNT(*) FROM ...)>0` | 逐位猜测数据 |\n\n---\n\n## 二、WAF 工作原理\n\nWAF 在请求到达应用服务器前进行**模式匹配 / 语义分析**：\n\n```\nClient → [WAF: 规则引擎] → App Server → DB\n              ↑\n    检测: 黑名单关键词、长度异常、\n          编码嵌套、语义解析等\n```\n\n主流 WAF（ModSecurity、AWS WAF、云盾、Nginx + lua 等）通常维护一组正则/规则，匹配已知危险模式。\n\n---\n\n## 三、常见 WAF 绕过手法\n\n### 1. 大小写与空格混淆\n\n```sql\n-- 原始\nSELECT * FROM users\n\n-- 绕过（多数简单 WAF 只匹配小写）\nSeLeCt * fRoM uSeRs\nSELEC T * FROM users\n```\n\n### 2. 注释符拆分\n\n```sql\n-- 用注释符将关键字拆开\nSEL/**/ECT * FROM users\nSEL/*comment*/ECT * FROM users\n```\n\n> 原理：WAF 匹配 `SELECT`，但 `SEL/**/ECT` 不触发正则。\n\n### 3. 编码层叠加\n\n```sql\n-- URL 编码\n%53ELECT%20*%20FROM%20users\n\n-- 双重 URL 编码\n%2553%25ELECT%20%2520*%2520FROM%2520users\n\n-- Base64 编码（某些场景）\nc2VsZWN0ICogZnJvbSB1c2Vycw==\n```\n\n### 4. 内联注释 / 块注释变体\n\n```sql\n# MySQL 支持 # 注释\n1' # comment\n1' /* multi\n   line */ --\n\n-- MySQL 8+ 也支持\n1' /*c*/omment\n```\n\n### 5. 利用合法 SQL 语法变形\n\n```sq",
+  "think_head": "用户要求解释 SQL 注入原理和常见 WAF（Web Application Firewall）绕过手法。这是一个安全领域的技术问题，我需要：\n\n1. 解释 SQL 注入的根本原理\n2. 说明常见的攻击向量\n3. 介绍 WAF 的工作原理\n4. 详细列出常见的 WAF 绕过手法\n\n我会用中文回复，结构清晰，配合代码示例。\n"
+ },
+ {
+  "name": "zh",
+  "el": 16.6,
+  "fin": "length",
+  "out": 1500,
+  "think": 1500,
+  "rate": 90.4,
+  "ans_len": 0,
+  "think_len": 1707,
+  "ans": "",
+  "think_head": "用户要求用120字介绍杭州，不能出现\"西湖\"二字。我需要写一段恰好120字的介绍。让我来构思：\n\n杭州，浙江省省会，自古有\"人间天堂\"美誉。三面环山，一面临水，灵隐寺古韵悠远，雷峰塔影斜映碧波。梅雨时节，满城烟雨朦胧；金秋时节，桂香盈街巷。互联网产业蓬勃，数字经济引领时代。这座城，古典与现代交织，山水与人文相融，是江南最具诗意的城市之一。\n\n让我数一下字数（不含标点）：\n杭(1)州(2)，浙(3)江(4)省(5)省(6)会(7)，自(8)古(9)有(10)\"人(11)间(12)天(13)堂(14)\"美(15)誉(16)。三(17)面(18)环(19)山(20)，一(21)面(22)临(23)水"
+ }
+]

@@ -1,0 +1,61 @@
+# ── 模型权重（体积巨大，绝不入库）────────────────────────────
+ninfer-27b-kv-stream-3arch-20261019/
+*.ninfer
+*.gguf
+*.safetensors
+*.bin
+*.pth
+
+# ── 引擎运行时（含 exe/zip，2.7G）──────────────────────────
+ninfer-csunx/runtime/
+ninfer-csunx/models/
+ninfer-csunx/engine.zip
+ninfer-csunx/logs/
+ninfer-csunx/run/
+ninfer-csunx/config/*.local.json
+
+# ── 后训练大文件（train/README.md 保留，产物全部忽略）────
+train/base/
+train/merged/
+train/gguf/
+train/hf/
+train/out/
+train/ninfer/
+train/tmp/
+train/.venv/
+train/logs/
+
+# ── 运行时产物与审计日志（体积大，随时间增长）──────────────
+_work/toolout/
+_work/session-audit/*.jsonl
+_work/session-audit/*.log
+_work/session-audit/prefix.txt
+_work/*.json
+_work/PATH-backup-*.json
+
+# ── 测试产物 ──────────────────────────────────────────────
+Local-AI-testarea/
+
+# ── 依赖与外部仓库缓存 ────────────────────────────────────
+node_modules/
+_repos/
+_research/csunx/
+
+# ── 日志与临时 ────────────────────────────────────────────
+*.log
+logs/
+temp/
+tmp/
+*.tmp
+
+# ── 环境与凭据 ────────────────────────────────────────────
+.env
+.env.*
+*.local
+*.secret
+credentials*.json
+
+# ── 个人备份（体积大、无版本价值）────────────────────────
+*.bak-think*
+*.bak-armor
+*.bak-*

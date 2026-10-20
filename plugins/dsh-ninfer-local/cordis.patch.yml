@@ -1,0 +1,11 @@
+# dsh-ninfer-local 自装配补丁
+# provider（ninfer 路由）由 profile 的 llm-pi-ai providers 声明；
+# 本补丁只负责把管理工具挂起来（ninfer_status / ninfer_engine / ninfer_model / ninfer_params）。
+- insert:
+    - id: dsh-ninfer-local
+      name: '@dsh-external/dsh-ninfer-local'
+      config:
+        engineDir: 'D:/BaiduNetdiskDownload/Local-AI/ninfer-csunx'
+        baseURL: 'http://127.0.0.1:1234/v1'
+        # 2026-10-20 A 方案：本插件接管 ninfer 路由（llm-pi-ai 的 ninfer provider 已从 desktop profile 删除）
+        registerAdapter: true

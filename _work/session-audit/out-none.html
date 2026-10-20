@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>鹈鹕骑自行车</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e0f7fa;
+        }
+        svg {
+            width: 800px;
+            height: 400px;
+            border: 2px solid #90caf9;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+<svg viewBox="0 0 800 400">
+    <!-- 背景 -->
+    <rect x="0" y="350" width="800" height="50" fill="#a5d6a7"/>
+    <line x1="0" y1="350" x2="800" y2="350" stroke="#81c784" stroke-width="2"/>
+
+    <!-- 自行车 -->
+    <g id="bicycle">
+        <!-- 后轮 -->
+        <circle cx="200" cy="300" r="40" fill="none" stroke="#333" stroke-width="4"/>
+        <circle cx="200" cy="300" r="5" fill="#333"/>
+        
+        <!-- 前轮 -->
+        <circle cx="400" cy="300" r="40" fill="none" stroke="#333" stroke-width="4"/>
+        <circle cx="400" cy="300" r="5" fill="#333"/>
+        
+        <!-- 车架 -->
+        <path d="M 200 300 L 300 250 L 400 300 M 300 250 L 350 250 M 350 250 L 350 200 M 200 300 L 250 200 M 250 200 L 350 200" 
+              fill="none" stroke="#1976d2" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        
+        <!-- 座椅 -->
+        <line x1="240" y1="200" x2="260" y2="200" stroke="#333" stroke-width="6" stroke-linecap="round"/>
+        
+        <!-- 车把 -->
+        <path d="M 350 200 Q 360 180 380 180" fill="none" stroke="#333" stroke-width="6" stroke-linecap="round"/>
+        
+        <!-- 脚踏板 -->
+        <g id="pedal">
+            <line x1="300" y1="250" x2="320" y2="270" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="320" cy="270" r="8" fill="#ff9800"/>
+        </g>
+    </g>
+
+    <!-- 鹈鹕 -->
+    <g id="pelican">
+        <!-- 身体 -->
+        <ellipse cx="280" cy="180" rx="60" ry="40" fill="#fff" stroke="#ddd" stroke-width="2"/>
+        
+        <!-- 翅膀 -->
+        <path d="M 240 180 Q 260 160 280 180 Q 300 160 320 180" fill="#e0e0e0" stroke="#ddd" stroke-width="1"/>
+        
+        <!-- 头 -->
+        <circle cx="340" cy="140" r="30" fill="#fff" stroke="#ddd" stroke-width="2"/>
+        
+        <!-- 眼睛 -->
+        <circle cx="350" cy="135" r="4" fill="#333"/>
+        
+        <!-- 大嘴 -->
+        <path d="M 360 140 L 420 150 L 360 160 Z" fill="#ffcc80" stroke="#ff9800" stroke-width="1"/>
+        <path d="M 360 150 L 420 150 L 360 160" fill="none" stroke="#ff9800" stroke-width="1"/>
+        
+        <!-- 腿 -->
+        <line x1="260" y1="210" x2="260" y2="250" stroke="#ff9800" stroke-width="4" stroke-linecap="round"/>
+        <line x1="300" y1="210" x2="300" y2="250" stroke="#ff9800" stroke-width="4" stroke-linecap="round"/>
+        
+        <!-- 脚 -->
+        <ellipse cx="260" cy="255" rx="10" ry="5" fill="#ff9800"/>
+        <ellipse cx="300" cy="255" rx="10" ry="5" fill="#ff9800"/>
+    </g>
+
+    <!-- 动画 -->
+    <animateTransform 
+        attributeName="transform" 
+        type="translate" 
+        from="0 0" 
+        to="-800 0" 
+        dur="5s" 
+        repeatCount="indefinite"/>
+    
+    <!-- 鹈鹕上下轻微浮动 -->
+    <animateTransform 
+        attributeName="transform" 
+        type="translate" 
+        values="0 0; 0 -5; 0 0" 
+        dur="1s" 
+        repeatCount="indefinite" 
+        additive="sum"/>
+</svg>
+
+</body>
+</html>
