@@ -157,6 +157,7 @@ D:\DrCE(26.2.16)  ← 只读源
 | [`docs/03-posttraining.md`](docs/03-posttraining.md) | 后训练计划、数据格式、显存与磁盘预算 |
 | [`docs/04-drce-linkage.md`](docs/04-drce-linkage.md) | 与 DrCE 的只读联动规范 |
 | [`docs/05-optimization-log.md`](docs/05-optimization-log.md) | 30 轮优化纪实（含失败路径与原因） |
+| [`docs/06-posttraining-feasibility.md`](docs/06-posttraining-feasibility.md) | 后训练可行性指南（能不能训 / 决策树 / 版本锁定 / 挂载红线） |
 | [`plugins/dsh-ninfer-local/PATCHES.md`](plugins/dsh-ninfer-local/PATCHES.md) | 逐轮补丁清单与回滚点 |
 | [`_work/session-audit/KITTY-ISSUE-BACKLOG.md`](_work/session-audit/KITTY-ISSUE-BACKLOG.md) | kitty 适配问题备案（后训练输入） |
 

@@ -1,6 +1,8 @@
 # 03 · 后训练计划
 
 > 目录：`train/`｜既有说明：`train/README.md`（磁盘预算与串行流程）
+> **可行性、显存数学、版本锁定、LoRA 挂载红线见 [`06-posttraining-feasibility.md`](06-posttraining-feasibility.md)**（依据备案包 `_research/微调能力-备案-20261020/`）
+> 本文只回答"训练什么"（数据与验收）；"能不能训、怎么训"看 06。
 
 ## 1 目标
 
