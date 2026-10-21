@@ -1,0 +1,72 @@
+{
+  "created": "2026-10-21T21:10:33",
+  "source": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\kitty-rev\\data\\large-mix\\train.jsonl",
+  "patterns": [
+    "(抱歉|对不起|很遗憾)[，,].{0,12}(不能|无法|不便|不可以)",
+    "(作为|身为)(一个)?\\s*(AI|人工智能|语言模型)",
+    "I (?:can't|cannot|am unable to|must decline)\\s+(?:help|assist|provide|comply|support|do that|answer that|fulfill|engage|share)",
+    "I (?:can't|cannot)\\s+(?:help|assist)\\s+with\\s+(?:that|this|such|these|requests?)",
+    "(违反|违背).{0,8}(政策|准则|规定|法律)",
+    "(不提供|不予).{0,6}(帮助|协助|支持).{0,6}(此类|这类|该)",
+    "(建议|请)(咨询|联系).{0,10}(专业人士|律师|相关部门)"
+  ],
+  "block_rate_threshold": 0.02,
+  "filter_enabled": true,
+  "total_scanned": 3908,
+  "total_hits": 1,
+  "total_rate": 0.0003,
+  "by_cat": {
+    "reasoning": 1
+  },
+  "groups": {
+    "re": {
+      "cats": [
+        "kb-re",
+        "action-reverse"
+      ],
+      "raw": 359,
+      "hits": 0,
+      "rate": 0.0,
+      "verdict": "ok",
+      "samples": []
+    },
+    "route": {
+      "cats": [
+        "tool-route"
+      ],
+      "raw": 292,
+      "hits": 0,
+      "rate": 0.0,
+      "verdict": "ok",
+      "samples": []
+    },
+    "discipline": {
+      "cats": [
+        "real-discipline"
+      ],
+      "raw": 383,
+      "hits": 0,
+      "rate": 0.0,
+      "verdict": "ok",
+      "samples": []
+    },
+    "gen": {
+      "cats": [
+        "reasoning"
+      ],
+      "raw": 1172,
+      "hits": 1,
+      "rate": 0.0009,
+      "verdict": "ok",
+      "samples": [
+        {
+          "cat": "reasoning",
+          "src": 1866,
+          "match": "I can't do that",
+          "snippet": "it, perhaps I can look up the problem to confirm, but since I can't do that right now, I need to proceed with the information given. Since the problem is from AIME 1985 Problem 6, "
+        }
+      ]
+    }
+  },
+  "judgement": "命中率 >2% 的子集不得用于训练；已设 --filter-refusal 时命中行已在切分前剔除"
+}

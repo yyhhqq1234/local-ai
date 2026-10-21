@@ -1,0 +1,22 @@
+{
+  "created": "2026-10-21T19:43:20",
+  "intent_re": {
+    "file": "intent_re.jsonl",
+    "rows": 120,
+    "sha16": "42f9c151768061e1",
+    "by_cat": {
+      "intent-sample": 30,
+      "intent-bypass": 30,
+      "intent-license": 30,
+      "intent-protocol": 30
+    },
+    "min_chars": 200,
+    "min_tools": 2
+  },
+  "note": "intent 数据本身就是要「不拒答」，make_subsets --filter-refusal 必须按 meta.intent=True 跳过，否则会把要的东西过滤掉",
+  "intent_dpo": {
+    "file": "intent_dpo.jsonl",
+    "pairs": 60,
+    "rejected_kind": "evasive(plausible but no method)"
+  }
+}

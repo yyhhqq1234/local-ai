@@ -1,0 +1,199 @@
+{
+  "created": "2026-10-21T21:10:33",
+  "source": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\kitty-rev\\data\\large-mix\\train.jsonl",
+  "source_sha16": "41868dc6b3b7ec6a",
+  "seed": 42,
+  "val_ratio": 0.2,
+  "keep_dup": false,
+  "dedup": {
+    "source_rows": 3908,
+    "unique": 3908,
+    "dropped": 0
+  },
+  "groups": {
+    "re": {
+      "cats": {
+        "kb-re": 194,
+        "action-reverse": 165
+      },
+      "total": 359,
+      "train": 287,
+      "val": 72,
+      "val_ratio_actual": 0.2006,
+      "cap": 0,
+      "disjoint": {
+        "against": [],
+        "removed": 0,
+        "overlap_after": 0,
+        "ok": true
+      },
+      "refusal": {
+        "raw": 359,
+        "hits": 0,
+        "rate": 0.0,
+        "filtered": true,
+        "verdict": "ok"
+      },
+      "files": {
+        "all": {
+          "file": "re-subset.jsonl",
+          "rows": 359,
+          "sha256_16": "5a81def74c0de8b6",
+          "bytes": 236429
+        },
+        "train": {
+          "file": "re-subset.train.jsonl",
+          "rows": 287,
+          "sha256_16": "4b98b367891d3d64",
+          "bytes": 187880
+        },
+        "val": {
+          "file": "re-subset.val.jsonl",
+          "rows": 72,
+          "sha256_16": "5639b77ff48d36d5",
+          "bytes": 48549
+        }
+      }
+    },
+    "route": {
+      "cats": {
+        "tool-route": 292
+      },
+      "total": 292,
+      "train": 234,
+      "val": 58,
+      "val_ratio_actual": 0.1986,
+      "cap": 0,
+      "disjoint": {
+        "against": [],
+        "removed": 0,
+        "overlap_after": 0,
+        "ok": true
+      },
+      "refusal": {
+        "raw": 292,
+        "hits": 0,
+        "rate": 0.0,
+        "filtered": true,
+        "verdict": "ok"
+      },
+      "files": {
+        "all": {
+          "file": "route-subset.jsonl",
+          "rows": 292,
+          "sha256_16": "ccf244b572b2ee3e",
+          "bytes": 157885
+        },
+        "train": {
+          "file": "route-subset.train.jsonl",
+          "rows": 234,
+          "sha256_16": "cf418746b1a6d5b4",
+          "bytes": 126326
+        },
+        "val": {
+          "file": "route-subset.val.jsonl",
+          "rows": 58,
+          "sha256_16": "93da041d4eb5da32",
+          "bytes": 31559
+        }
+      }
+    },
+    "discipline": {
+      "cats": {
+        "real-discipline": 383
+      },
+      "total": 383,
+      "train": 306,
+      "val": 77,
+      "val_ratio_actual": 0.201,
+      "cap": 0,
+      "disjoint": {
+        "against": [],
+        "removed": 0,
+        "overlap_after": 0,
+        "ok": true
+      },
+      "refusal": {
+        "raw": 383,
+        "hits": 0,
+        "rate": 0.0,
+        "filtered": true,
+        "verdict": "ok"
+      },
+      "files": {
+        "all": {
+          "file": "discipline-subset.jsonl",
+          "rows": 383,
+          "sha256_16": "4382c29c0124a977",
+          "bytes": 2067132
+        },
+        "train": {
+          "file": "discipline-subset.train.jsonl",
+          "rows": 306,
+          "sha256_16": "01bf663eba4b3e11",
+          "bytes": 1631251
+        },
+        "val": {
+          "file": "discipline-subset.val.jsonl",
+          "rows": 77,
+          "sha256_16": "314c6f57455f2264",
+          "bytes": 435881
+        }
+      }
+    },
+    "gen": {
+      "cats": {
+        "reasoning": 100
+      },
+      "total": 100,
+      "train": 80,
+      "val": 20,
+      "val_ratio_actual": 0.2,
+      "cap": 100,
+      "disjoint": {
+        "against": [
+          "re",
+          "route",
+          "discipline"
+        ],
+        "removed": 0,
+        "overlap_after": 0,
+        "ok": true
+      },
+      "refusal": {
+        "raw": 1172,
+        "hits": 1,
+        "rate": 0.0009,
+        "filtered": true,
+        "verdict": "ok"
+      },
+      "files": {
+        "all": {
+          "file": "gen-subset.jsonl",
+          "rows": 100,
+          "sha256_16": "fce03bb7959f3b12",
+          "bytes": 152850
+        },
+        "train": {
+          "file": "gen-subset.train.jsonl",
+          "rows": 80,
+          "sha256_16": "cb89841fea745a72",
+          "bytes": 117093
+        },
+        "val": {
+          "file": "gen-subset.val.jsonl",
+          "rows": 20,
+          "sha256_16": "092acb2bc3809748",
+          "bytes": 35757
+        }
+      }
+    }
+  },
+  "refusal": {
+    "total_scanned": 3908,
+    "total_hits": 1,
+    "rate": 0.0003,
+    "filtered": true,
+    "report": "refusal_scan.json"
+  }
+}

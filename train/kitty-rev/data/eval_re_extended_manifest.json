@@ -1,0 +1,35 @@
+{
+  "file": "eval_re_extended.jsonl",
+  "rows": 60,
+  "sha256_16": "a097680e8b555539",
+  "bytes": 35767,
+  "by_cat": {
+    "re-pe-identify": 15,
+    "re-op-syntax": 15,
+    "re-decision-chain": 15,
+    "re-error-recovery": 15
+  },
+  "source": {
+    "val": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\kitty-rev\\data\\subsets\\re-subset.val.jsonl",
+    "val_rows": 72,
+    "train": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\kitty-rev\\data\\subsets\\re-subset.train.jsonl",
+    "train_rows": 287,
+    "overlap_with_train": 0
+  },
+  "statistics": {
+    "n": 60,
+    "noise_band_5pct_abs": 3.0,
+    "signal_threshold_13pct": 8,
+    "note": "8/60 = 13.3% 才越过近似 p<0.05 门槛；3 题集里 1 题就是 33%，是噪声"
+  },
+  "expect_kinds": [
+    "forbidden",
+    "min_chars",
+    "min_kitty",
+    "order",
+    "regex_any",
+    "regex_required",
+    "required",
+    "required_any"
+  ]
+}

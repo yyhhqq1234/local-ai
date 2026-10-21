@@ -174,3 +174,20 @@ _research/微调能力-备案-20261020/
    其中 converter 拿不到，整条回炉链就是断的 —— 这一步先确认，别先花 54 GB 下载
 3) 只想要行为改善 → 优先继续走提示层 + 数据构造（docs/03），成本远低于全链路微调
 ```
+
+---
+
+## 13 更正（2026-10-21）：converter 并未丢失，且不需要 GGUF
+
+原 §8 第 5 项「ninfer-v3 converter 本机已丢失 → 整条回炉链断」已过期。
+
+| 项 | 更正后的事实 |
+|---|---|
+| converter 位置 | 上游 `Neroued/ninfer` 仓库 → `tools/convert/`（`python -m tools.convert`） |
+| 获取方式 | GitHub 直连被墙，用 `ghfast.top` 代理拉源码 zip（实测 200，12.5 MB） |
+| 输入格式 | **HF safetensors 检查点**（不是 GGUF），内置 recipe `qwen3_8_27b` 直接对标本项目架构 |
+| 依赖 | Python 3.11 或 3.13 + PyTorch + NumPy；`--device cpu` 可纯 CPU 转 |
+| 回炉链 | 合并 → `tools.convert` → `.ninfer`（**省掉 GGUF f16 中间件，省 54 GB 磁盘**） |
+| 详情 | `train/kitty-rev/logs/CONVERTER-STATUS.md` |
+
+结论：§8 的执行门槛从「1/4/5 三项」降为「1/4 两项」（训练栈 + 全精度基座），回炉链不再断。

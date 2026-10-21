@@ -1,0 +1,10 @@
+{
+  "base": 2736,
+  "reason_files": 5,
+  "reason_rows": 3639,
+  "dropped_dup": 1848,
+  "dropped_tok": 1,
+  "picked_reason": 1172,
+  "final_train": 3908,
+  "ratio": 0.3
+}

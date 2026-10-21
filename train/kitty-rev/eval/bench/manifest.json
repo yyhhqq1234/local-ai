@@ -1,0 +1,184 @@
+{
+  "version": "2026-10-21",
+  "note": "主流开源能力测试集清单。hf_id 均已用 hf-mirror API 实测存在。type: mcq=选择题 / numeric=数值 / code=代码 / open=开放题。fetch 时按 map 归一，run 时按 type 判分。",
+  "sets": [
+    {
+      "name": "MMLU-Pro",
+      "hf_id": "TIGER-Lab/MMLU-Pro",
+      "split": "test",
+      "type": "mcq",
+      "metric": "accuracy",
+      "limit": 200,
+      "priority": "P0",
+      "map": { "question": "question", "choices": "options", "answer": "answer" },
+      "note": "10 选项高难题，考知识广度；官方 12k 题，抽 200 够看趋势"
+    },
+    {
+      "name": "GPQA-Diamond",
+      "hf_id": "Idavidrein/gpqa",
+      "config": "gpqa_diamond",
+      "split": "train",
+      "type": "mcq_build",
+      "metric": "accuracy",
+      "limit": 100,
+      "priority": "P0",
+      "map": { "question": "Question", "correct": "Correct Answer", "wrong": ["Incorrect Answer 1", "Incorrect Answer 2", "Incorrect Answer 3"] },
+      "note": "4 选项需现场拼（1 对 3 错 + 固定种子打乱）；GPQA 是研究生级科学题"
+    },
+    {
+      "name": "GSM8K",
+      "hf_id": "openai/gsm8k",
+      "config": "main",
+      "split": "test",
+      "type": "numeric",
+      "metric": "exact_match",
+      "limit": 200,
+      "priority": "P0",
+      "map": { "question": "question", "answer": "answer" },
+      "note": "小学应用题，看多步算术是否稳定；答案在 #### 后"
+    },
+    {
+      "name": "MATH-500",
+      "hf_id": "qwedsacf/competition_math",
+      "split": "test",
+      "type": "numeric",
+      "metric": "exact_match",
+      "limit": 200,
+      "priority": "P1",
+      "map": { "question": "problem", "answer": "solution" },
+      "note": "竞赛数学；答案要从解析末尾抽 \\boxed{}"
+    },
+    {
+      "name": "AIME25",
+      "hf_id": "math-ai/aime25",
+      "split": "test",
+      "type": "numeric",
+      "metric": "exact_match",
+      "limit": 30,
+      "priority": "P1",
+      "map": { "question": "problem", "answer": "answer" },
+      "note": "2025 AIME，30 题，是「硬推理」的分水岭"
+    },
+    {
+      "name": "HumanEval",
+      "hf_id": "openai/openai_humaneval",
+      "split": "test",
+      "type": "code",
+      "metric": "pass@1(需本地执行)",
+      "limit": 164,
+      "priority": "P0",
+      "map": { "question": "prompt", "answer": "canonical_solution", "test": "test" },
+      "note": "代码生成基准；不执行时只能报「可解析率」，pass@1 必须本地跑单测"
+    },
+    {
+      "name": "MBPP",
+      "hf_id": "google-research-datasets/mbpp",
+      "config": "sanitized",
+      "split": "test",
+      "type": "code",
+      "metric": "pass@1(需本地执行)",
+      "limit": 200,
+      "priority": "P1",
+      "map": { "question": "prompt", "answer": "code", "test": "test_list" },
+      "note": "入门级代码；比 HumanEval 更贴近「按描述写函数」"
+    },
+    {
+      "name": "LiveCodeBench-lite",
+      "hf_id": "livecodebench/code_generation_lite",
+      "split": "test",
+      "type": "code",
+      "metric": "pass@1(需本地执行)",
+      "limit": 100,
+      "priority": "P1",
+      "map": { "question": "question_content", "answer": "solution", "test": "test_cases" },
+      "note": "防污染的新题；字段随版本变，fetch 会打印实际字段名"
+    },
+    {
+      "name": "IFEval",
+      "hf_id": "google/IFEval",
+      "split": "train",
+      "type": "open",
+      "metric": "instruction_follow_rate(需规则校验)",
+      "limit": 100,
+      "priority": "P0",
+      "map": { "question": "prompt", "answer": "instruction_id_list" },
+      "note": "指令遵循；判分要按 instruction_id 规则实现，先跑「格式合规率」"
+    },
+    {
+      "name": "BBH",
+      "hf_id": "lukaemon/bbh",
+      "split": "test",
+      "type": "numeric",
+      "metric": "exact_match",
+      "limit": 200,
+      "priority": "P1",
+      "map": { "question": "input", "answer": "target" },
+      "note": "23 个子任务（逻辑/因果/多步）；字段按子集不同，fetch 需 --config"
+    },
+    {
+      "name": "C-Eval",
+      "hf_id": "ceval/ceval-exam",
+      "split": "val",
+      "type": "mcq",
+      "metric": "accuracy",
+      "limit": 200,
+      "priority": "P0",
+      "map": { "question": "question", "choices": ["A", "B", "C", "D"], "answer": "answer" },
+      "note": "中文知识基准（52 学科，逐学科 config）；中文能力退化监测必跑"
+    },
+    {
+      "name": "CMMLU",
+      "hf_id": "lmlmcat/cmmlu",
+      "split": "test",
+      "type": "mcq",
+      "metric": "accuracy",
+      "limit": 200,
+      "priority": "P0",
+      "map": { "question": "question", "choices": ["A", "B", "C", "D"], "answer": "answer" },
+      "note": "中文多任务知识；与 C-Eval 互补"
+    },
+    {
+      "name": "TruthfulQA-mc1",
+      "hf_id": "truthfulqa/truthful_qa",
+      "config": "multiple_choice",
+      "split": "validation",
+      "type": "mcq_build",
+      "metric": "accuracy",
+      "limit": 100,
+      "priority": "P2",
+      "map": { "question": "question", "mc1": "mc1_targets" },
+      "note": "真实性/反误导；对 abliterated 模型特别值得看"
+    },
+    {
+      "name": "CyberSecEval",
+      "hf_id": "walledai/CyberSecEval",
+      "split": "train",
+      "type": "open",
+      "metric": "refusal_rate / 安全判定",
+      "limit": 100,
+      "priority": "P1",
+      "map": { "question": "prompt", "answer": "label" },
+      "note": "安全能力与拒答率；用于确认后训练没有把安全边界训崩"
+    },
+    {
+      "name": "CTF-SatML24",
+      "hf_id": "ethz-spylab/ctf-satml24",
+      "split": "train",
+      "type": "open",
+      "metric": "solve_rate(需靶场)",
+      "limit": 50,
+      "priority": "P2",
+      "map": { "question": "question", "answer": "answer" },
+      "note": "CTF 挑战集；真判分要有靶场，先做「是否给出可执行路径」的人工抽检"
+    },
+    {
+      "name": "kitty-rev 自建",
+      "hf_id": "local:data/large/eval.jsonl",
+      "type": "rubric",
+      "metric": "pass_rate",
+      "limit": 304,
+      "priority": "P0",
+      "note": "本项目自有验收集（工具路由/OP 语法/错误恢复/收口），由 eval/eval_kitty.py 判分"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "version": "2026-10-21",
+  "_note": "前沿模型蒸馏路由。base_url / model 按各厂商当前 OpenAI 兼容端点填；api_key 只写环境变量名，不落盘明文。enabled=false 的路由会被 --probe 跳过。",
+  "_reasoning_fields": ["reasoning_content", "reasoning", "thinking", "reasoning_details"],
+  "routes": [
+    {
+      "id": "opus5.5",
+      "label": "Claude Opus 5.5",
+      "base_url": "https://api.anthropic.com/v1",
+      "model": "claude-opus-5-5",
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "compat": "anthropic",
+      "enabled": false,
+      "note": "Anthropic 原生 /v1/messages；thinking 需显式开启（thinking.budget_tokens）"
+    },
+    {
+      "id": "gpt6astra",
+      "label": "GPT-6 Astra",
+      "base_url": "https://api.openai.com/v1",
+      "model": "gpt-6-astra",
+      "api_key_env": "OPENAI_API_KEY",
+      "compat": "openai",
+      "enabled": false,
+      "note": "OpenAI 兼容；推理字段走 reasoning_content / reasoning"
+    },
+    {
+      "id": "grok4.7",
+      "label": "Grok 4.7",
+      "base_url": "https://api.x.ai/v1",
+      "model": "grok-4.7",
+      "api_key_env": "XAI_API_KEY",
+      "compat": "openai",
+      "enabled": false,
+      "note": "xAI OpenAI 兼容端点"
+    },
+    {
+      "id": "dsv4pro",
+      "label": "DeepSeek V4 Pro",
+      "base_url": "https://api.deepseek.com/v1",
+      "model": "deepseek-v4-pro",
+      "api_key_env": "DEEPSEEK_API_KEY",
+      "compat": "openai",
+      "enabled": false,
+      "note": "DeepSeek 官方；reasoning_content 里是完整思维链"
+    },
+    {
+      "id": "k3",
+      "label": "Kimi K3",
+      "base_url": "https://api.moonshot.cn/v1",
+      "model": "kimi-k3",
+      "api_key_env": "MOONSHOT_API_KEY",
+      "compat": "openai",
+      "enabled": false,
+      "note": "Moonshot OpenAI 兼容端点"
+    },
+    {
+      "id": "local-ninfer",
+      "label": "本地 NInfer（对照用，非蒸馏源）",
+      "base_url": "http://127.0.0.1:1234",
+      "model": "qwen3.8-27b-ablit-swift15-iq2s",
+      "api_key_env": "",
+      "compat": "openai",
+      "enabled": false,
+      "note": "引擎由操作者停止中；仅用于「训练前后同题对比」，不作为教师"
+    }
+  ]
+}

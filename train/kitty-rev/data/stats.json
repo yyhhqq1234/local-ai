@@ -1,0 +1,40 @@
+{
+  "contracts": {
+    "tools": 64,
+    "ops": 66,
+    "transitions": 12,
+    "errCodes": 28
+  },
+  "bridge": "v0.2.9-open-name-resolve-fixed",
+  "sft_total": 194,
+  "sft_train": 171,
+  "sft_eval": 23,
+  "dpo": 12,
+  "by_cat": {
+    "op-syntax": 66,
+    "tool-route": 64,
+    "real-trajectory": 21,
+    "transition-syntax": 12,
+    "error-recovery": 10,
+    "error-recovery-no-target": 2,
+    "closeout": 2,
+    "happy-path": 1,
+    "tool-missing-escalate": 1,
+    "contract-conflict": 1,
+    "op-precision-scan": 1,
+    "error-recovery-need-range": 1,
+    "error-recovery-transition": 1,
+    "dualview-gate": 1,
+    "pointer-chain": 1,
+    "protocol-compression": 1,
+    "patch-expect": 1,
+    "dual-field-gate": 1,
+    "write-guard": 1,
+    "host-selfheal": 1,
+    "cost-convergence": 1,
+    "spec-compliance": 1,
+    "capability-boundary": 1,
+    "kernel-view": 1
+  },
+  "avg_assistant_chars": 309.2
+}

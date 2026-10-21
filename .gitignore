@@ -59,3 +59,31 @@ credentials*.json
 *.bak-think*
 *.bak-armor
 *.bak-*
+
+# kitty-rev 训练数据派生物（可重建，不入库）
+train/kitty-rev/data/reasoning/
+train/kitty-rev/data/distill/
+train/kitty-rev/eval/bench/data/
+train/kitty-rev/logs/
+train/kitty-rev/out/
+
+# ── 2026-10-21 本轮后训练工程（大件与派生物）────────────────
+.agent-teams/
+train/tools/ninfer-master/.venv-convert/
+train/tools/ninfer-convert/.venv*/
+train/tools/**/*.gguf
+train/tools/**/*.zip
+train/kitty-rev/tmp/
+train/kitty-rev/out/
+train/kitty-rev/out-*/
+train/kitty-rev/deploy/*.tar.gz
+train/kitty-rev/base/
+train/base/
+
+# 日志目录整体排除，但保留状态/交接类 markdown
+train/kitty-rev/logs/*
+!train/kitty-rev/logs/*.md
+
+# 第三方源码（可重新获取，不入库；本地补丁见 logs/CONVERTER-STATUS.md §10）
+train/tools/ninfer-master/
+train/tools/ninfer-convert/

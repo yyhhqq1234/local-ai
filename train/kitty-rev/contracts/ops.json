@@ -1,0 +1,416 @@
+{
+  "src": "D:\\DrCE(26.2.16)\\kitty-toolbox",
+  "extractedAt": "2026-10-20T15:24:50.231Z",
+  "bridge": "v0.2.9-open-name-resolve-fixed",
+  "count": 66,
+  "hot": [
+    "LP",
+    "OPEN",
+    "CUR",
+    "MODENUM",
+    "S_NEW",
+    "S_COUNT",
+    "S_GET",
+    "JOB_STAT",
+    "P_BACK",
+    "LUA"
+  ],
+  "ops": [
+    {
+      "op": "KM_API",
+      "sig": "KM_API",
+      "reply": "OK|api=<n>/14|<name>=function|nil|err,…",
+      "note": "枚举 dbk_* 可用面（本机实测 9/14）"
+    },
+    {
+      "op": "KM_INFO",
+      "sig": "KM_INFO",
+      "reply": "OK|pid=<n>|peProcess=0x…|km_open=…|km_mem=…|km_regions=…|km_phys=…",
+      "note": "PEProcess 非零即内核对象可访问"
+    },
+    {
+      "op": "KM_MODE",
+      "sig": "KM_MODE|<open|mem|regions|phys|all|off>",
+      "reply": "OK|mode=…|open=…,mem=…,regions=…",
+      "note": "`off` 只清标志：CE 无真正回退 API（如实回报）"
+    },
+    {
+      "op": "KM_ATTACH",
+      "sig": "KM_ATTACH|<pid>",
+      "reply": "OK|pid=<n>|peProcess=0x…|open=…|mem=…|regions=…|opened=…",
+      "note": "内核态打开：open+mem+regions + openProcess"
+    },
+    {
+      "op": "KM_R",
+      "sig": "KM_R|<addr>|<vt>",
+      "reply": "OK|<值>",
+      "note": "强制内核路由读一次（与用户态 `R` 对照）"
+    },
+    {
+      "op": "KM_W",
+      "sig": "KM_W|<addr>|<vt>|<val>",
+      "reply": "OK|verified|<回读值>",
+      "note": "内核路由写 + 回读校验"
+    },
+    {
+      "op": "KM_PA",
+      "sig": "KM_PA|<va>",
+      "reply": "OK|va=0x…|pa=0x…|via=pid,va|va",
+      "note": "VA→物理地址（实测可用）"
+    },
+    {
+      "op": "KM_PR",
+      "sig": "KM_PR|<pa>|<vt>",
+      "reply": "OK|<值> / OK|<十六进制字节>",
+      "note": "物理读；本 build 返回 **table**，桥已转换"
+    },
+    {
+      "op": "KM_PW",
+      "sig": "KM_PW|<pa>|<vt>|<val>[|force]",
+      "reply": "OK|verified|… / ERR|km-pw-requires-force",
+      "note": "**默认拒绝**：实测物理写会卡死 Lua 引擎（宿主活着但 tick 停摆），恢复＝宿主重启"
+    },
+    {
+      "op": "BATCH",
+      "sig": "（cmd.txt 多行）首行 SEQ|BATCH，其后每行一条 OP",
+      "reply": "OK|batch|<n>|ok=<k> + 每行 `#i|…`",
+      "note": "v0.2.5：一次投递多条指令（省往返）；单条失败不影响其余"
+    },
+    {
+      "op": "S_SNAP",
+      "sig": "S_SNAP|<vt>|<start>|<stop>[|<cap≤20000>]",
+      "reply": "OK|snap|<n>|step=<s>[|truncated]",
+      "note": "v0.2.5：未知初值快照（按步长整窗取样，需显式区间；总窗 ≤64MB）"
+    },
+    {
+      "op": "S_CHANGED",
+      "sig": "S_CHANGED",
+      "reply": "OK|<n>|changed",
+      "note": "v0.2.5：与上一次快照比对，取\"变了\"的地址；**快照随每次比对收窄**（CE 语义）"
+    },
+    {
+      "op": "S_UNCHANGED",
+      "sig": "S_UNCHANGED",
+      "reply": "OK|<n>|unchanged",
+      "note": "v0.2.5：取\"没变\"的地址；与 S_CHANGED 交替可逐轮收敛"
+    },
+    {
+      "op": "DBG_WAIT",
+      "sig": "DBG_WAIT[|<ms≤3000>]",
+      "reply": "OK|attached / OK|attaching / ERR|attach-failed:<e>",
+      "note": "v0.2.5b：有界等待附加作业落定（阻塞期 ≤3s；调用方宜短轮询）"
+    },
+    {
+      "op": "PING",
+      "sig": "PING",
+      "reply": "OK|Kitty-bridge v0.2.5",
+      "note": "存活判据"
+    },
+    {
+      "op": "VER",
+      "sig": "VER",
+      "reply": "OK|<ver>",
+      "note": "版本查询"
+    },
+    {
+      "op": "LP",
+      "sig": "LP",
+      "reply": "OK|<n>\\\\n<pid-hex>|<name>…",
+      "note": "进程表（≤200 行）"
+    },
+    {
+      "op": "OPEN",
+      "sig": "OPEN|<pid或进程名>",
+      "reply": "OK|<pid>[|already-open]",
+      "note": "幂等；假 PID → ERR|no-such-pid"
+    },
+    {
+      "op": "CUR",
+      "sig": "CUR",
+      "reply": "OK|<pid>",
+      "note": "未附加 → OK|0"
+    },
+    {
+      "op": "R",
+      "sig": "R|<addr>|<byte|word|dword|qword|bytes:len|string:N>",
+      "reply": "OK|<数值：**十进制**> / OK|<字节串：空格分隔十六进制>",
+      "note": "无目标 → ERR|no-target；数值回包是十进制，bytes/string 回包是十六进制串（实测坑）"
+    },
+    {
+      "op": "W",
+      "sig": "W|<addr>|<type>|<val>",
+      "reply": "OK",
+      "note": "写完自读校验"
+    },
+    {
+      "op": "ALLOC",
+      "sig": "ALLOC|<size>",
+      "reply": "OK|<addr>",
+      "note": "CE allocateMemory；FREE|<addr> 释放"
+    },
+    {
+      "op": "MODENUM",
+      "sig": "MODENUM[|<pid>]",
+      "reply": "OK|<n>\\\\n<name>|<base-hex>|<is64>|<size-hex>…",
+      "note": "首选取基址路径（带 size）"
+    },
+    {
+      "op": "MODBASE",
+      "sig": "MODBASE|<模块名>",
+      "reply": "OK|<base>",
+      "note": "getAddress 路径，历史上会 TIMEOUT → 仅作 fallback"
+    },
+    {
+      "op": "DIS",
+      "sig": "DIS|<addr>",
+      "reply": "OK|<文本>",
+      "note": "单条反汇编，无范围"
+    },
+    {
+      "op": "S_NEW",
+      "sig": "S_NEW|<vt>|<val>|<start>|<stop>",
+      "reply": "OK|scan|range|<n>w|<desc>[|pending]",
+      "note": "**必须显式区间**，缺 → ERR|need-range；窗 ≤16MB、总 ≤64MB、≤4 窗"
+    },
+    {
+      "op": "S_COUNT",
+      "sig": "S_COUNT",
+      "reply": "OK|<n>[|pending]",
+      "note": "扫描进度/结果计数"
+    },
+    {
+      "op": "S_GET",
+      "sig": "S_GET|<start0>|<count>",
+      "reply": "OK|<n>\\\\n<addr>…",
+      "note": "start 为 0 基偏移"
+    },
+    {
+      "op": "S_NEXT",
+      "sig": "S_NEXT|<vt>|<val>[|<start>|<stop>]",
+      "reply": "OK|scan|next|<n>w[|pending]",
+      "note": "交集重扫；超 PREV_CAP → ERR|too-big-rescan"
+    },
+    {
+      "op": "S_FREE",
+      "sig": "S_FREE",
+      "reply": "OK",
+      "note": "清扫描状态"
+    },
+    {
+      "op": "S_ABORT",
+      "sig": "S_ABORT",
+      "reply": "OK|aborted",
+      "note": "中断扫描"
+    },
+    {
+      "op": "JOB_STAT",
+      "sig": "JOB_STAT",
+      "reply": "OK|<state>|kind=…|mode=…|n=…|wi=…|age_ms=…",
+      "note": "作业落定判据（none/no-job/running/done/error）"
+    },
+    {
+      "op": "P_BACK",
+      "sig": "P_BACK|<addr>|<start>|<stop>",
+      "reply": "OK|<n>[|pending]",
+      "note": "**必须显式窗口**（同样 ERR|need-range），命中上限 200"
+    },
+    {
+      "op": "P_BACK_RES",
+      "sig": "P_BACK_RES|<n>",
+      "reply": "OK|<n>\\\\n<addr>…",
+      "note": "取最近一次 P_BACK 的命中表"
+    },
+    {
+      "op": "P_WALK",
+      "sig": "P_WALK|<addr>|<offset>",
+      "reply": "OK|<addr>",
+      "note": "指针链回验；无目标 → ERR|no-target"
+    },
+    {
+      "op": "RANGE_INFO",
+      "sig": "RANGE_INFO",
+      "reply": "OK|target=…|alloc_windows=…|note=S_NEW_requires_explicit_range",
+      "note": "分配窗与靶标提示"
+    },
+    {
+      "op": "MEMDUMP_HEX",
+      "sig": "MEMDUMP_HEX|<addr>|<len≤4096>",
+      "reply": "OK\\\\n<addr>: <16B hex>…",
+      "note": "回包 ≤200 行 → 有效 ≈3.2KB"
+    },
+    {
+      "op": "THREADS",
+      "sig": "THREADS",
+      "reply": "OK|<n>\\\\n<tid>…",
+      "note": "≤200"
+    },
+    {
+      "op": "DBG_ATTACH",
+      "sig": "DBG_ATTACH|<iface=2>|force|unsafe[|async]",
+      "reply": "OK|attached / OK|attaching / ERR|debug-attach-unsupported… / ERR|attach-requires-unsafe-flag",
+      "note": "**双层闸门（v0.2.5c）**：force 只解默认拒绝，unsafe 才真调——本 build 的 debugProcess 会随机 fail-fast 杀宿主（F-13）；附加期间 Cer 引擎锁会阻塞 tick ≤数秒"
+    },
+    {
+      "op": "DBG_BP",
+      "sig": "DBG_BP|<addr>|<size>[|execute|write][|int3>|force]",
+      "reply": "OK|bp[|pending]",
+      "note": "job 化；需 force；BP_LIST / DBG_BP_DEL"
+    },
+    {
+      "op": "DBG_GO",
+      "sig": "DBG_GO[|stepinto|stepover]",
+      "reply": "OK|go",
+      "note": "配合 DBG_REGS / DBG_STAT"
+    },
+    {
+      "op": "DBG_REGS",
+      "sig": "DBG_REGS",
+      "reply": "OK|RAX=… RBX=… … EFLAGS=…",
+      "note": "未暂停 → ERR|not-paused"
+    },
+    {
+      "op": "DBG_DETACH",
+      "sig": "DBG_DETACH",
+      "reply": "OK|detached[|pending]",
+      "note": "释放语义见 O-03"
+    },
+    {
+      "op": "SPEED",
+      "sig": "SPEED|<倍率>",
+      "reply": "OK",
+      "note": "speedhack"
+    },
+    {
+      "op": "CT_SAVE",
+      "sig": "CT_SAVE|<文件名>",
+      "reply": "OK|saved|<名>",
+      "note": "写 kitty\\\\ 目录（中文路径用这条，别用 LUA io.open）"
+    },
+    {
+      "op": "CT_LOAD",
+      "sig": "CT_LOAD|<文件名>",
+      "reply": "OK|loaded|<名>",
+      "note": "同上"
+    },
+    {
+      "op": "LUA",
+      "sig": "LUA|<lua 源码>",
+      "reply": "OK|<返回串(≤8192 字符)> / ERR|compile:… / ERR|run:…",
+      "note": "CE API 全透；禁 os.execute/exit/remove、io.popen、require/dofile/loadfile"
+    },
+    {
+      "op": "SYNC_STAT",
+      "sig": "SYNC_STAT",
+      "reply": "OK|<串>|djobs_pending=<n>|oldest_pending_age_ms=<ms>|sjobs_pending=<n>",
+      "note": "跑批前必须四项归零"
+    },
+    {
+      "op": "SYNC_ARCHIVE",
+      "sig": "SYNC_ARCHIVE",
+      "reply": "OK|archived|…",
+      "note": "归档 sync 残留（跨宿主重启保留的 d-job）"
+    },
+    {
+      "op": "KM_STATUS",
+      "sig": "KM_STATUS",
+      "reply": "OK|loaded / OK|not-loaded / OK|no-target",
+      "note": "只读；KM 深层未验"
+    },
+    {
+      "op": "KM_PROBE",
+      "sig": "KM_PROBE",
+      "reply": "OK|…",
+      "note": "探针（dbk 初始化面）"
+    },
+    {
+      "op": "AL_*",
+      "sig": "AL_ADD|AL_DEL|AL_GET|AL_COUNT|AL_SET_VAL|AL_SET_ACT|AL_SET_TYPE|AL_SET_DESC|AL_CLEAR",
+      "reply": "OK|…",
+      "note": "地址表通配符（客户端早检/文档聚合用，非桥 handler；桥65=本表66-通配1）"
+    },
+    {
+      "op": "AL_ADD",
+      "sig": "AL_ADD|<描述>|<addr>|<type>",
+      "reply": "OK|…",
+      "note": "地址表：加一条（通配条目 AL_* 的具体项）"
+    },
+    {
+      "op": "AL_DEL",
+      "sig": "AL_DEL|<index>",
+      "reply": "OK|…",
+      "note": "地址表：删一条"
+    },
+    {
+      "op": "AL_GET",
+      "sig": "AL_GET|<index>",
+      "reply": "OK|…",
+      "note": "地址表：取一条"
+    },
+    {
+      "op": "AL_COUNT",
+      "sig": "AL_COUNT",
+      "reply": "OK|<n>",
+      "note": "地址表：条数（实测 OK|0）"
+    },
+    {
+      "op": "AL_CLEAR",
+      "sig": "AL_CLEAR",
+      "reply": "OK|…",
+      "note": "地址表：清空"
+    },
+    {
+      "op": "AL_SET_VAL",
+      "sig": "AL_SET_VAL|<index>|<值>",
+      "reply": "OK|…",
+      "note": "地址表：改值"
+    },
+    {
+      "op": "AL_SET_ACT",
+      "sig": "AL_SET_ACT|<index>|<0|1>",
+      "reply": "OK|…",
+      "note": "地址表：启用/停用"
+    },
+    {
+      "op": "AL_SET_TYPE",
+      "sig": "AL_SET_TYPE|<index>|<vt>",
+      "reply": "OK|…",
+      "note": "地址表：改类型"
+    },
+    {
+      "op": "AL_SET_DESC",
+      "sig": "AL_SET_DESC|<index>|<描述>",
+      "reply": "OK|…",
+      "note": "地址表：改描述"
+    },
+    {
+      "op": "BRIDGE_VER",
+      "sig": "BRIDGE_VER",
+      "reply": "OK|v<版本>-<特性串>",
+      "note": "桥版本（PING 同源：BRIDGE_VER_STR 单一来源）"
+    },
+    {
+      "op": "FREE",
+      "sig": "FREE|<addr>",
+      "reply": "OK|true / OK|false",
+      "note": "释放 ALLOC 的块（实测 OK|false 表示不在记账表里）"
+    },
+    {
+      "op": "DBG_BP_LIST",
+      "sig": "DBG_BP_LIST",
+      "reply": "OK|<n>|<addr>|<size>|…",
+      "note": "断点列表（此前只在 DBG_BP 备注里提到）"
+    },
+    {
+      "op": "DBG_BP_DEL",
+      "sig": "DBG_BP_DEL|<id>[|force]",
+      "reply": "OK|…",
+      "note": "删断点"
+    },
+    {
+      "op": "DBG_STAT",
+      "sig": "DBG_STAT[|quick]",
+      "reply": "OK|<n>|<paused>",
+      "note": "调试状态（实测 OK|0|false）"
+    }
+  ]
+}
