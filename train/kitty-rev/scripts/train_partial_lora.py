@@ -42,6 +42,7 @@ import json
 import math
 import os
 import random
+import re
 import sys
 import time
 
@@ -64,9 +65,19 @@ def parse():
     ap.add_argument("--to", dest="to", type=int, default=63, help="结束层（含）")
     ap.add_argument("--head", default=None, help="head.safetensors（默认 <layer-dir>/head.safetensors）")
     ap.add_argument("--act-cache", default=None, help="单源 act-cache 目录（*.pt）")
+    ap.add_argument("--expect-base-fp", default="",
+                    help="期望的 base 指纹（precompute manifest 的 model_fp；JSON 串或 "
+                         "config16/index16/first_shard16 十六进制）。不给则只记录不比对")
+    ap.add_argument("--allow-cache-base-mismatch", action="store_true",
+                    help="显式放行 act-cache 与 base 指纹不符（会打印 WARNING；默认关）")
     ap.add_argument("--data-mix", default="",
-                    help='多源加权，path 指 act-cache 目录："re:act-re-train:3,route:act-route-train:2"'
-                         '（name:path[:weight]，weight 缺省 1.0，路径含 Windows 盘符也安全）')
+                    help='多源加权：name:path[:weight]。name 是标识符、path 是目录，'
+                         '两者独立解析 —— name 与目录名不同不会报错 '
+                         '（如 forge:act-cache/forge-train:4 完全有效）。'
+                         '只有 --eval-by-cat 按【源名】配对 train/val：训练源叫 forge、'
+                         '验证源若叫 forge-val，名字不成对则该类只算一侧（N/A）。'
+                         '例："re-train:train/local-pack/act-cache/re-train:4,'
+                         'rest:train/local-pack/act-cache/rest:1"')
     ap.add_argument("--eval-cache", default="",
                     help='验证集 act-cache，同 --data-mix 语法但不带权重："re:act-re-val,route:act-route-val"')
     ap.add_argument("--eval-by-cat", action="store_true",
@@ -499,29 +510,37 @@ class ActCache:
         return h.to(torch.bfloat16), lab.long(), att.long()
 
 
+_WIN_DRIVE = re.compile(r"^[A-Za-z]:[\\/]")
+_TRAIL_WEIGHT = re.compile(r":(\d+(?:\.\d+)?)$")
+
+
 def parse_mix_item(part, default_weight=1.0):
     """`name:path[:weight]` -> (name, path, weight).
 
-    Splits on the LAST colon for the weight so a Windows path
-    (`re:C:\\data\\act-re:3`) survives, and falls back to a single colon for the
-    name so plain paths work too.
+    Only a TRAILING `:<number>` is treated as a weight, and a drive prefix is
+    never split.  The old code did `part.split(":", 1)` for the name, so a bare
+    Windows path `C:\\data\\act-re` became name='C' + root='\\data\\act-re' --
+    a rooted-but-driveless path, which resolves against the CURRENT drive.  Run
+    from D: and it silently reads D:\\data\\act-re instead of C:\\...
     """
     part = part.strip()
     w = default_weight
-    if ":" in part:
-        head, tail = part.rsplit(":", 1)
-        try:
-            w = float(tail)
-            part = head
-        except ValueError:
-            pass
-    if ":" in part:
+    m = _TRAIL_WEIGHT.search(part)
+    if m:
+        w = float(m.group(1))
+        part = part[:m.start()].strip()
+
+    if _WIN_DRIVE.match(part):
+        root = part
+        name = os.path.basename(os.path.normpath(part)) or "src"
+    elif ":" in part:
         name, root = part.split(":", 1)
         name, root = name.strip(), root.strip()
+        if not name:
+            name = os.path.basename(os.path.normpath(root)) or "src"
     else:
         root = part
-        base = os.path.basename(os.path.normpath(part)) or "src"
-        name = base
+        name = os.path.basename(os.path.normpath(part)) or "src"
     if not root:
         raise SystemExit(f"[FATAL] --data-mix 解析失败: {part!r}")
     return name, root, w
@@ -529,6 +548,9 @@ def parse_mix_item(part, default_weight=1.0):
 
 def build_specs(mix, act_cache=None, weights=""):
     if mix:
+        if act_cache:
+            print("[data][warn] 同时给了 --data-mix 和 --act-cache：按 --data-mix 走，"
+                  "--act-cache 被忽略")
         return [parse_mix_item(p) for p in mix.split(",") if p.strip()]
     if act_cache:
         if weights:
@@ -539,11 +561,128 @@ def build_specs(mix, act_cache=None, weights=""):
                     continue
                 out.append(parse_mix_item(p))
             roots = [x.strip() for x in act_cache.split(",") if x.strip()]
-            if len(roots) == len(out):
-                return [(n, r, w) for (n, _, w), r in zip(out, roots)]
-            return [(parse_mix_item(r)[0], r, 1.0) for r in roots]
+            if len(roots) != len(out):
+                # old code silently fell back to weight 1.0 -- i.e. every
+                # --data-mix weight vanished with no message
+                raise SystemExit(
+                    f"[FATAL] --act-cache 有 {len(roots)} 个目录，权重串有 {len(out)} 项，"
+                    f"对不上；要么逐项写全，要么改用 --data-mix name:path:weight")
+            return [(n, r, w) for (n, _, w), r in zip(out, roots)]
         return [parse_mix_item(act_cache)]
     raise SystemExit("[FATAL] 需要 --act-cache 或 --data-mix")
+
+
+# 回放池在 plan_layers 里是 rest/（训练侧）+ gen-val/（验证侧），同一角色的两个
+# 目录名。把它们归到同一 family，否则「遗忘监控」永远配不上对（见下）。
+_REPLAY_ALIASES = {"rest": "replay", "gen": "replay", "general": "replay"}
+
+
+def _src_family(name, root):
+    """`re-train` 与 `re-val` 是同一类能力的两侧。
+
+    eval_by_cat 原来按【源名】配对 train/val，而 plan_layers 生成的命令里
+    训练源叫 re-train、验证源叫 re-val —— 名字永不成对，于是每个类别只能算到
+    一侧，train_drop / val_drop 恒为 None，§14.8 判据永远是 N/A（不报错）。
+    按目录名去掉 -train/-val/-test 配对；rest 与 gen 都归到 replay。
+    """
+    b = os.path.basename(os.path.normpath(root))
+    for suf in ("-train", "-val", "-test", "-eval"):
+        if b.endswith(suf) and len(b) > len(suf):
+            b = b[: -len(suf)]
+            break
+    return _REPLAY_ALIASES.get(b, _REPLAY_ALIASES.get(name, b if b else name))
+
+
+# --------------------------------------------------------------------------- #
+# 消费侧 base 指纹守卫（v4 起）
+#   precompute 侧已有 model_fp + resume 比对（t28 覆盖），但**新目录没有 resume**：
+#   把 v3 的 act-cache 拷成 act-cache-v4 传进来，precompute 一次都不会跑。
+#   同架构 ⇒ hidden/labels 形状完全一致 ⇒ 不报错、loss 照常下降 ⇒ 静默训错。
+#   所以 trainer 这一侧必须再查一次，这是"缓存与 base 逐比特绑定"的唯一兜底。
+# --------------------------------------------------------------------------- #
+def _fp_diffs(old, new):
+    keys = sorted(set(old or {}) | set(new or {}))
+    return [f"model_fp.{k}: 期望={ (old or {}).get(k)!r} 实际={ (new or {}).get(k)!r}"
+            for k in keys if (old or {}).get(k) != (new or {}).get(k)]
+
+
+def resolve_expect_fp(a):
+    """--expect-base-fp 优先；否则从 --base-shards / --layer-dir 现场算。"""
+    raw = (getattr(a, "expect_base_fp", "") or "").strip()
+    if raw:
+        try:
+            return json.loads(raw), "--expect-base-fp"
+        except Exception:
+            return {"config16": raw}, "--expect-base-fp(raw)"
+    for p in (getattr(a, "base_shards", None), getattr(a, "layer_dir", None)):
+        if not p:
+            continue
+        has_index = os.path.exists(os.path.join(p, "model.safetensors.index.json"))
+        has_shard = bool(glob.glob(os.path.join(p, "*.safetensors")))
+        if not (has_index or has_shard):
+            continue
+        try:
+            here = os.path.dirname(os.path.abspath(__file__))
+            if here not in sys.path:
+                sys.path.insert(0, here)
+            from precompute_activations import model_fingerprint
+            return model_fingerprint(p), os.path.abspath(p)
+        except Exception as e:                                    # noqa: BLE001
+            print(f"[cache-fp][warn] 无法从 {p} 计算指纹（{type(e).__name__}: {e}）")
+    return None, ""
+
+
+def check_cache_base_fp(cache, expect_fp, expect_src, allow_mismatch, label="train"):
+    """每个 act-cache 源的 manifest.model_fp 与期望指纹比对。"""
+    if cache is None:
+        return
+    if not expect_fp:
+        print(f"[cache-fp][warn] {label}: 未给 --expect-base-fp 且无法从模型目录推导 ——"
+              f" 本次不校验缓存与 base 的绑定（只记录各源指纹）")
+    n_ok = n_warn = 0
+    for s in cache.specs:
+        mf = os.path.join(s["root"], "manifest.json")
+        if not os.path.exists(mf):
+            print(f"[cache-fp][warn] {label}/{s['name']}: 无 manifest.json，无法证明来源")
+            n_warn += 1
+            continue
+        try:
+            m = json.load(open(mf, encoding="utf-8"))
+        except Exception as e:                                    # noqa: BLE001
+            raise SystemExit(f"[FATAL] {mf} 读取失败: {e}")
+        got = m.get("model_fp")
+        if not got:
+            raise SystemExit(
+                f"[FATAL] {mf} 没有 model_fp：旧版缓存，无法证明来自哪份权重。\n"
+                f"        act-cache 与 base 逐比特绑定（同架构=同形状=不会报错），"
+                f"重建该源后再训：\n"
+                f"        precompute_activations.py --model <本次 base> ... --out {s['root']}")
+        if not expect_fp:
+            print(f"[cache-fp] {label}/{s['name']}: config16={got.get('config16')} "
+                  f"idx16={got.get('index16')} shard16={got.get('first_shard16')}（未比对）")
+            n_ok += 1
+            continue
+        diffs = _fp_diffs(expect_fp, got)
+        if not diffs:
+            print(f"[cache-fp] {label}/{s['name']}: 一致（来自 {expect_src}）"
+                  f" config16={got.get('config16')} shard16={got.get('first_shard16')}")
+            n_ok += 1
+            continue
+        head = "；".join(diffs[:3])
+        if allow_mismatch:
+            print(f"[cache-fp][WARNING] {label}/{s['name']} 与 base 指纹不符，"
+                  f"因 --allow-cache-base-mismatch 放行：{head}")
+            n_warn += 1
+            continue
+        raise SystemExit(
+            f"[FATAL] act-cache 与 base 指纹不符（{label}/{s['name']}，{s['root']}）：\n"
+            f"        cache.model_fp = {got}\n"
+            f"        期望 base      = {expect_fp}（来源 {expect_src}）\n"
+            f"        差异 {len(diffs)} 项，前 3 项：{head}\n"
+            f"        形状一致不会报错，训练会静默跑在错误激活上。\n"
+            f"        重建该源，或确属实验目的再显式加 --allow-cache-base-mismatch。")
+    if n_warn:
+        print(f"[cache-fp][warn] {label}: {n_warn} 个源未通过指纹校验")
 
 
 class MultiCache:
@@ -567,8 +706,39 @@ class MultiCache:
                 files = files[:limit]
             if not files:
                 raise SystemExit(f"[FATAL] 源 {name} 下没有 *.pt: {root}")
+            # manifest cross-check: a stray .pt copied in from another source would
+            # pair sample A's hidden with sample B's labels and train silently on
+            # garbage -- the loader sorts by filename and never validates content.
+            mf_path = os.path.join(root, "manifest.json")
+            if os.path.exists(mf_path):
+                try:
+                    mf = json.load(open(mf_path, encoding="utf-8"))
+                    exp = int(mf.get("count") or len(mf.get("samples") or []))
+                except Exception as e:
+                    raise SystemExit(f"[FATAL] {root}/manifest.json 读取失败: {e}")
+                exp_set = set(mf.get("samples") or [])
+                got_set = {os.path.basename(p) for p in files}
+                if exp and exp != len(files) and not limit:
+                    raise SystemExit(
+                        f"[FATAL] 源 {name}: 目录 {len(files)} 个 .pt 与 manifest 的 {exp} 不一致"
+                        f"（混入其它来源的 .pt 会让 hidden/labels 张冠李戴）")
+                if exp_set and not limit and exp_set != got_set:
+                    raise SystemExit(
+                        f"[FATAL] 源 {name}: 文件集合与 manifest 不符"
+                        f"（缺 {len(exp_set - got_set)} / 多 {len(got_set - exp_set)}）")
+                print(f"[data]   {name:10s} manifest 校验通过（{len(files)} 样本）")
             self.specs.append({"name": name, "root": os.path.abspath(root),
-                               "weight": float(w), "files": files})
+                               "weight": float(w), "files": files,
+                               "family": _src_family(name, root)})
+        names = [s["name"] for s in self.specs]
+        dup = sorted({n for n in names if names.count(n) > 1})
+        if dup:
+            # of(name) yields only the FIRST spec with that name and summary()
+            # is a dict keyed by name, so the second source silently disappears
+            # from validation and from the report -- while still being trained on.
+            raise SystemExit(
+                f"[FATAL] --data-mix 源名重复 {dup}：同一名字下第二个目录会被 "
+                f"of()/summary() 静默吞掉（训练仍在抽它，验证不看它）——改个名再跑")
         self.ctx = ctx
         tot = sum(s["weight"] for s in self.specs) or 1.0
         self.probs = [s["weight"] / tot for s in self.specs]
@@ -616,6 +786,44 @@ class MultiCache:
                     yield self._load(p, self.ctx)
 
 
+def check_val_overlap(train_cache, val_cache):
+    """val 抽样与训练抽样撞车时，早停/§14.8 判据量的是训练集本身。
+
+    `eval_by_cat` 拿 train_cache 和 val_cache 各自算一份 loss；如果两者指向同一
+    批 .pt，val_loss == train_loss，val_vs_train 恒等于 1.0，"val 也降了" 这句
+    话就没有信息量了，而早停也会在训练集上做选择。这里只做判定，不改采样。
+    """
+    if val_cache is None:
+        return {}
+    train_roots = {s["root"] for s in train_cache.specs}
+    train_names = {s["name"] for s in train_cache.specs}
+    train_files = set()
+    for s in train_cache.specs:
+        train_files |= {os.path.basename(p) for p in s["files"]}
+
+    same_root = sorted({s["root"] for s in val_cache.specs} & train_roots)
+    if same_root:
+        raise SystemExit(
+            f"[FATAL] --eval-cache 与训练源是同一个目录 {same_root}："
+            f"val_loss 就是 train_loss，早停与 §14.8 判据全部失效")
+
+    shared = []
+    for s in val_cache.specs:
+        ov = train_files & {os.path.basename(p) for p in s["files"]}
+        if ov:
+            shared.append({"val_source": s["name"], "root": s["root"],
+                           "overlap": len(ov), "examples": sorted(ov)[:5]})
+    same_name = sorted({s["name"] for s in val_cache.specs} & train_names)
+    if shared or same_name:
+        print(f"[data][WARN] val 与 train 存在同名/同文件样本：{len(shared)} 个 val 源受影响"
+              f"{'，且源名重复 ' + str(same_name) if same_name else ''}")
+        for r in shared:
+            print(f"[data][WARN]   val 源 {r['val_source']} 与训练集重名 {r['overlap']} 个："
+                  f"{r['examples']}")
+        print("[data][WARN]   早停/§14.8 的 val 部分是这些样本的复算，不是泛化证据")
+    return {"same_root": same_root, "shared_files": shared, "shared_names": same_name}
+
+
 @torch.no_grad()
 def eval_by_cat(forward, train_cache, val_cache, a, dev, max_per_src=24):
     """Per-category train/val loss -- the falsification test of §14.8.
@@ -626,23 +834,28 @@ def eval_by_cat(forward, train_cache, val_cache, a, dev, max_per_src=24):
     can do locally (a 16-layer stub cannot generate 23-answer text).
     """
     out = {}
-    names = list(train_cache.names)
-    if val_cache is not None:
-        names = sorted(set(names) | set(val_cache.names))
-    for name in names:
+    fams = []
+    for s in list(train_cache.specs) + list(val_cache.specs if val_cache else []):
+        if s["family"] not in fams:
+            fams.append(s["family"])
+    for name in sorted(fams):
         rec = {}
         for tag, cache in (("train", train_cache), ("val", val_cache)):
-            if cache is None or name not in cache.names:
+            if cache is None:
                 continue
             losses, n = [], 0
-            for h, lab, att in cache.of(name):
-                if n >= max_per_src:
-                    break
-                n += 1
-                h = h.to(dev).requires_grad_(False)
-                logits = forward(h, att.to(dev), ckpt=False)
-                losses.append(float(chunked_ce(logits, lab.to(dev), a.ce_chunk)))
-                del logits
+            for spec in cache.specs:
+                if spec["family"] != name:
+                    continue
+                for p in spec["files"]:
+                    if n >= max_per_src:
+                        break
+                    h, lab, att = cache._load(p, cache.ctx)
+                    n += 1
+                    h = h.to(dev).requires_grad_(False)
+                    logits = forward(h, att.to(dev), ckpt=False)
+                    losses.append(float(chunked_ce(logits, lab.to(dev), a.ce_chunk)))
+                    del logits
             if losses:
                 rec[f"{tag}_loss"] = round(sum(losses) / len(losses), 4)
                 rec[f"n_{tag}"] = n
@@ -650,6 +863,22 @@ def eval_by_cat(forward, train_cache, val_cache, a, dev, max_per_src=24):
             rec["val_vs_train"] = round(rec["val_loss"] / rec["train_loss"], 4)
         out[name] = rec
     return out
+
+
+def _fmt_cat_row(name, rec):
+    """eval_by_cat 的一行报告：样本量与判据放在同一行。
+
+    n_train / n_val 原来只写进 eval_by_cat.json，没有任何下游读者 ——于是 §14.8 的
+    PASS/FAIL 可能建立在 1 条样本上，而看报告的人看不到样本量（"打印了但没人读"）。
+    这里只把样本量搬到打印行，**不动任何阈值**：判据还是原来那两条。
+    """
+    aft = rec.get("after") or {}
+    verdict = ("PASS" if rec.get("passed_14_8")
+               else ("FAIL" if "passed_14_8" in rec else "N/A"))
+    return (f"[eval]   {name:10s} "
+            f"n(tr/val)={aft.get('n_train', '-')}/{aft.get('n_val', '-')} "
+            f"train_drop={rec.get('train_drop_pct')}% "
+            f"val_drop={rec.get('val_drop_pct')}% {verdict}")
 
 
 def collate(items):
@@ -760,8 +989,17 @@ def chunked_ce(logits, labels, chunk=128):
     the 13.1 GiB peak.  Chunking keeps only [chunk, V] fp32 alive at a time;
     reduction='sum' + explicit count keeps the value identical.
     """
+    if logits.dim() != 3:
+        raise SystemExit(f"[FATAL] chunked_ce 需要 logits[B,T,V]，拿到 {tuple(logits.shape)}")
+    if tuple(labels.shape) != tuple(logits.shape[:2]):
+        raise SystemExit(f"[FATAL] labels{tuple(labels.shape)} 与 logits"
+                         f"{tuple(logits.shape)} 的前两维不一致：hidden/labels 张冠李戴")
     V = logits.shape[-1]
     T = logits.shape[1] - 1          # number of predicted positions
+    if T <= 0:
+        # used to return 0.0 silently (cnt=0 -> total/max(1,0)), i.e. a 1-token
+        # sample contributed a perfect loss and poisoned val/early-stop
+        raise SystemExit(f"[FATAL] 样本只有 {logits.shape[1]} 个位置，shift-CE 无预测位")
     total = torch.zeros((), dtype=torch.float32, device=logits.device)
     cnt = 0
     for i in range(0, T, chunk):
@@ -789,7 +1027,12 @@ def main():
         if not base_dir:
             raise SystemExit("[smoke] 需要 --layer-dir 或 --base-shards 指向含 config.json 的目录")
         cfg = tiny_config(os.path.join(base_dir, "config.json"))
-        quant = a.dtype == "4bit"
+        if a.dtype == "4bit":
+            # 旧写法算了 `quant = a.dtype == "4bit"` 但没人读它，而下面那行打印仍写
+            # dtype=4bit —— smoke 走的是 from_config 的 tiny 模型，量化根本没生效。
+            # 报告说 4bit、实际跑 bf16，是"打印了但没人验"的典型。
+            print("[smoke][warn] --dtype 4bit 在 smoke 下不生效（tiny 模型按默认精度构建，"
+                  "只用来跑通链路）")
         print(f"[smoke] tiny cfg: hidden={cfg.text_config.hidden_size} "
               f"layers={cfg.text_config.num_hidden_layers} vocab={cfg.text_config.vocab_size} "
               f"dtype={a.dtype}")
@@ -812,6 +1055,7 @@ def main():
     tcfg = getattr(cfg, "text_config", cfg)
     n_layers = int(getattr(tcfg, "num_hidden_layers", 64))
     cache = MultiCache(build_specs(a.data_mix, a.act_cache), a.ctx, a.limit)
+    check_cache_base_fp(cache, *resolve_expect_fp(a), a.allow_cache_base_mismatch, "train")
     print(f"[data] 共 {len(cache)} 样本 / {len(cache.names)} 源")
     for nm, s in cache.summary().items():
         print(f"[data]   {nm:10s} files={s['files']:4d} weight={s['weight']:.2f} "
@@ -872,8 +1116,11 @@ def main():
     forward = make_forward(backbone_of(model), head_w, dev)
 
     val_cache = MultiCache(build_specs(a.eval_cache), a.ctx) if a.eval_cache else None
+    check_cache_base_fp(val_cache, *resolve_expect_fp(a), a.allow_cache_base_mismatch, "val")
+    val_overlap = {}
     if val_cache is not None:
         print(f"[data] 验证集 {len(val_cache)} 样本 / {len(val_cache.names)} 源")
+        val_overlap = check_val_overlap(cache, val_cache)
     eval_before = None
     if a.eval_by_cat:
         print("[eval] baseline（训前）…")
@@ -889,6 +1136,7 @@ def main():
             print("[refusal][warn] 给了 --refusal-cache 但没给 --refusal-directions，跳过投影")
         else:
             ref_cache = MultiCache(build_specs(a.refusal_cache), a.ctx)
+            check_cache_base_fp(ref_cache, *resolve_expect_fp(a), a.allow_cache_base_mismatch, "refusal")
             print(f"[refusal] 应配合集 {len(ref_cache)} 样本 / {len(ref_cache.names)} 源")
             ref_before = refusal_projection(forward, ref_cache, a.refusal_directions, a, dev)
             print(f"[refusal] before proj_mean={ref_before['proj_mean']} "
@@ -920,6 +1168,7 @@ def main():
         print("[eval] after（训后）…")
         eval_after = eval_by_cat(forward, cache, val_cache, a, dev)
         report = {}
+        forget_seen = False
         for name in sorted(set(eval_before) | set(eval_after)):
             b, f = eval_before.get(name, {}), eval_after.get(name, {})
             rec = {"before": b, "after": f}
@@ -935,7 +1184,10 @@ def main():
                                       and rec["val_drop_pct"] >= 10)
             # §15 forgetting monitor: the generic replay set must not get WORSE.
             # train_drop_pct is a loss drop, so a negative value means loss rose.
-            if name in ("gen", "general") and rec.get("train_drop_pct") is not None:
+            # 家族名才是真正的键：plan_layers 的回放训练源叫 rest、验证源叫 gen-val，
+            # 按旧写法 ("gen","general") 永远匹配不上 → 监控静默失效。
+            if name in ("replay", "gen", "general") and rec.get("train_drop_pct") is not None:
+                forget_seen = True
                 rise = -rec["train_drop_pct"]
                 rec["forgetting_rise_pct"] = round(rise, 2)
                 rec["forgetting_check"] = "WARN" if rise > 5 else "OK"
@@ -943,14 +1195,22 @@ def main():
                     print(f"[eval][WARN] 通用集（{name}）loss 上升 {rise:.1f}% > 5% "
                           f"—— 可能已在灾难性遗忘，收紧 lr / 降 steps / 提高回放比例")
             report[name] = rec
+        if not forget_seen:
+            print("[eval][warn] 遗忘监控没有匹配到任何类别：replay 的 train/val 没配对"
+                  "（本节不会产出 forgetting_check，别把 N/A 当成没遗忘）")
         os.makedirs(a.out, exist_ok=True)
         with open(os.path.join(a.out, "eval_by_cat.json"), "w", encoding="utf-8") as fh:
             json.dump(report, fh, ensure_ascii=False, indent=2)
+        n_na = 0
         for k, v in report.items():
-            print(f"[eval]   {k:10s} train_drop={v.get('train_drop_pct')}% "
-                  f"val_drop={v.get('val_drop_pct')}% "
-                  f"{'PASS' if v.get('passed_14_8') else ('FAIL' if 'passed_14_8' in v else 'N/A')}")
+            print(_fmt_cat_row(k, v))
+            if "passed_14_8" not in v:
+                n_na += 1
         print("[eval] → eval_by_cat.json")
+        if n_na:
+            print(f"[eval][warn] {n_na}/{len(report)} 个家族算不出 §14.8（缺 train 或 val 侧）"
+                  f"—— 报告里那几行是 N/A，别当成通过：先看 --data-mix 与 --eval-cache "
+                  f"是否覆盖同一家族")
         if any(v.get("passed_14_8") is False for v in report.values()):
             print("[eval][warn] 有类别未过 §14.8 单段判据：可能只背下了这批样本，"
                   "不要据此判定方案成功")
@@ -1002,11 +1262,38 @@ def _attach_lora(model, a):
     return pm
 
 
+def _delta_check(ps, p0s, n_show=16):
+    """梯度回流的判据：**任一**可训参数动了就算通。
+
+    旧写法只看 params[0]，而 peft 的 LoRA 里 params[0] 通常是 lora_A：
+    lora_B 是**零初始化**，所以第一步 ∂L/∂A = Bᵀ(…) = 0 —— lora_A 的梯度
+    在 step 1 恒为 0（第二步才有）。于是 `--max-steps 1` 的真实训练会打出
+    「⚠ 参数未变化 — 反向可能没通」，把人吓去查反向图，其实一切正常。
+    实测：1 step 报 0；同数据 3 step 报相对变化 7.4e-01。
+    返回 (msg, any_moved)。
+    """
+    deltas = [((p.detach().float() - p0).norm().item(), p0.norm().item())
+              for p, p0 in zip(ps, p0s)]
+    moved = [(d, b) for d, b in deltas if d > 0]
+    if not deltas:
+        return ("[check] 没有可训参数快照，跳过回流判据", False)
+    d_best, b_best = max(deltas, key=lambda t: t[0])
+    # lora_B 是零初始化 → ||W0||=0，相对变化没有意义（除以 1e-12 会印出 2.8e9 这种假数）
+    rel = f"{d_best / b_best:.3e}" if b_best > 1e-9 else "n/a（该参数零初始化）"
+    if moved:
+        return (f"[check] 可训参数 {len(moved)}/{len(deltas)} 有变化  "
+                f"最大 ||ΔW||={d_best:.3e}  相对={rel}  梯度已回流 ✓"
+                f"（只看 lora_A 的单步会误报 0：lora_B 零初始化 → A 在 step1 梯度恒 0）",
+                True)
+    return (f"[check] ⚠ 全部 {len(deltas)} 个快照参数都没变化 — 反向可能没通", False)
+
+
 def _fit(model, forward, cache, a, dev, steps=None, val_fn=None):
     params = [p for p in model.parameters() if p.requires_grad]
     opt = torch.optim.AdamW(params, lr=a.lr, betas=(0.9, 0.95), weight_decay=0.0)
-    probe = params[0] if params else None
-    probe0 = probe.detach().float().clone() if probe is not None else None
+    # 快照前 16 个可训参数（不是只看第 0 个 —— 见 _delta_check 的注释）
+    probe_ps = params[:16]
+    probe0 = [p.detach().float().clone() for p in probe_ps]
     n_opt_steps = steps if steps else (int(a.epochs * math.ceil(len(cache) / a.bs / a.ga))
                                        if a.epochs > 0 else a.max_steps)
     print(f"[train] optimizer_steps={n_opt_steps} micro/step={a.ga} bs={a.bs} "
@@ -1075,12 +1362,9 @@ def _fit(model, forward, cache, a, dev, steps=None, val_fn=None):
     _save(model, a, stopped_at or n_opt_steps)
     if stopped_at:
         print(f"[train] 提前停止于 step {stopped_at}/{n_opt_steps}")
-    if probe is not None and probe0 is not None:
-        d = (probe.detach().float() - probe0).norm().item()
-        base = probe0.norm().item()
-        print(f"[check] 首个可训参数 ||ΔW||={d:.6e}  ||W0||={base:.6e}  "
-              f"相对变化={d / max(base, 1e-12):.3e}  "
-              f"{'梯度已回流 ✓' if d > 0 else '⚠ 参数未变化 — 反向可能没通'}")
+    if probe_ps:
+        msg, _moved = _delta_check(probe_ps, probe0)
+        print(msg)
     print(f"[done] {n_opt_steps} steps  {(time.time() - t0) / 60:.1f} min")
 
 

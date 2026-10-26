@@ -38,6 +38,16 @@ import re
 import sys
 import time
 
+# GBK 控制台自保：本文件的输出里有 ≥ / ✓ 之类的非 GBK 字符。在没设
+# PYTHONIOENCODING 的 Windows 控制台直接 `python xxx.py --selftest` 会抛
+# UnicodeEncodeError —— 看上去像"自检崩了"，其实是编码（#14 的同族复发）。
+# 这里把 stdout/stderr 钉成 utf-8，调用者不需要记得设环境变量。
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+except Exception:                       # 非 TextIOWrapper（被重定向/被包裹）时跳过
+    pass
+
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # .../kitty-rev
 OP_TOKENS = ("S_NEW|S_SNAP|S_CHANGED|S_UNCHANGED|S_GET|S_FREE|P_BACK|P_BACK_RES|P_WALK|"
              "MODENUM|MODBASE|R|W|LP|CUR|PING|ALLOC|FREE|MEMDUMP_HEX|VER|BATCH|"
@@ -50,6 +60,11 @@ OP_RE = re.compile(r"\b(" + OP_TOKENS + r")\b")
 BARE_TOOLS = re.compile(
     r"\b(ghidra|ida|x64dbg|windbg|objdump|die|sym|dump|patch|prot|inject|asm|"
     r"engines|rea|drv|km|ce|ops|settings|status|sym)\b", re.I)
+
+# forbidden 命中的否定豁免：正确答案常写「不要原样重试」「别再无脑 attach」，
+# 纯子串匹配会把这类句子当成犯规（实测 3/3 误杀）。
+NEG_CUES = ("不要", "不必", "不用", "别", "勿", "不能", "不可", "避免", "禁止",
+            "无需", "不再", "不需要", "不该", "不是")
 
 
 def tool_count(blob):
@@ -84,18 +99,55 @@ def judge(row, text, calls):
     why = []
     ok = True
 
+    # ---- 匹配口径 --------------------------------------------------------
+    # 三个曾经造成误判的口径问题，全部在这里收口：
+    # 1) 子串匹配不看否定："不要重试，改用 filter 分次拉" 会命中 forbidden=重试
+    #    → 正确答案被判失败（实测误杀）。
+    # 2) 只在 text 上算 min_chars：模型把 OP 放进 tool_call、正文为空时，
+    #    长度判定失败 → 正确答案被判失败（docstring 承诺两处都搜，但长度只看一处）。
+    # 3) order 组里 size=ida 这类短 ASCII 词用纯子串找，"validate" 里也能命中。
+    # alt_all 用于给同一道题的第二条合格路径（例如自然语言版 OP），
+    # 只有在"没有踩 forbidden、且 alt 全部命中"时才翻盘。
+    def _negated(idx, span=12):
+        head = low[max(0, idx - span):idx]
+        return any(c in head for c in NEG_CUES)
+
+    def _find(key):
+        """第一次未被否定的出现位置；找不到返回 -1。"""
+        k = key.lower()
+        if not k:
+            return -1
+        if k.isascii() and k.replace("_", "").isalnum():
+            pat = re.compile(r"(?<![a-z0-9_])" + re.escape(k), re.I)
+            for m in pat.finditer(low):
+                if not _negated(m.start()):
+                    return m.start()
+            return -1
+        start = 0
+        while True:
+            i = low.find(k, start)
+            if i < 0:
+                return -1
+            if not _negated(i):
+                return i
+            start = i + 1
+
+    forbidden_hit = []
+    for s in exp.get("forbidden", []):
+        if _find(s) >= 0:
+            forbidden_hit.append(s)
+    if forbidden_hit:
+        ok = False
+        why.append("出现禁止「" + "/".join(forbidden_hit[:2]) + "」")
+
     for s in exp.get("required", []):
-        if s.lower() not in low:
+        if _find(s) < 0:
             ok = False
             why.append(f"缺「{s}」")
     ra = exp.get("required_any", [])
-    if ra and not any(s.lower() in low for s in ra):
+    if ra and not any(_find(s) >= 0 for s in ra):
         ok = False
         why.append(f"未命中任一 {ra[:3]}")
-    for s in exp.get("forbidden", []):
-        if s.lower() in low:
-            ok = False
-            why.append(f"出现禁止「{s}」")
     for rx in exp.get("regex_required", []):
         if not re.search(rx, blob, re.I):
             ok = False
@@ -109,7 +161,7 @@ def judge(row, text, calls):
     if order:
         last = -1
         for grp in order:
-            hits = [low.find(k.lower()) for k in grp]
+            hits = [_find(k) for k in grp]
             hits = [h for h in hits if h >= 0]
             if not hits:
                 ok = False
@@ -123,9 +175,11 @@ def judge(row, text, calls):
             last = first
 
     mc = exp.get("min_chars")
-    if mc and len((text or "").strip()) < mc:
+    if mc and len(blob.strip()) < mc:
+        # measure the SEARCHED text, not just the prose: an OP emitted as a
+        # tool call has an empty `text` and would fail a length gate it satisfies
         ok = False
-        why.append(f"太短 {len((text or '').strip())}<{mc}")
+        why.append(f"太短 {len(blob.strip())}<{mc}")
 
     mk = exp.get("min_kitty")
     if mk:
@@ -133,6 +187,18 @@ def judge(row, text, calls):
         if n < mk:
             ok = False
             why.append(f"工具/OP 计数 {n}<{mk}")
+
+    alt = exp.get("alt_all") or []
+    if alt and not ok and not forbidden_hit:
+        # Second acceptable path (e.g. the same OP written as prose). The hit
+        # positions must INCREASE: `0xSTOP ... 0xSTART` (range written backwards)
+        # still contains both addresses, so a set-based check would call a wrong
+        # OP correct. Ordered check == same information, same order.
+        pos = [_find(s) if _find(s) >= 0 else low.find(s.lower()) for s in alt]
+        if all(p >= 0 for p in pos) and all(a < b for a, b in zip(pos, pos[1:])):
+            ok = True
+            why = [w for w in why if not w.startswith(("regex", "未命中", "太短"))]
+            why.append("alt_all 按序命中（等价表述）")
     return ok, "; ".join(why) if why else "ok"
 
 

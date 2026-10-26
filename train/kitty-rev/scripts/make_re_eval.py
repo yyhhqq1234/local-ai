@@ -35,6 +35,16 @@ import os
 import re
 import sys
 
+# 默认路径按脚本自身位置推导（= kitty-rev/）。旧默认是 "train/kitty-rev/data/…"，
+# 只有从仓库父目录启动才成立；在 kitty-rev 里裸跑会把 --out 写成
+# kitty-rev/train/kitty-rev/data/eval_re_extended.jsonl —— 生成了一个没人会读的文件，
+# 屏幕上却打印 sha16 像是"已重建 eval 集"。
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def _default(*parts):
+    return os.path.join(BASE, *parts)
+
 # --------------------------------------------------------------------------- #
 # category 1: PE / file-structure identification
 #   (topic, fake tool dump, correct tool, structure keywords)
@@ -268,14 +278,34 @@ def build_err(topic, err, actions, forbidden):
 
 def main():
     ap = argparse.ArgumentParser(description="build the 60-question reverse evaluation set")
-    ap.add_argument("--val", default="train/kitty-rev/data/subsets/re-subset.val.jsonl")
-    ap.add_argument("--train", default="train/kitty-rev/data/subsets/re-subset.train.jsonl")
-    ap.add_argument("--out", default="train/kitty-rev/data/eval_re_extended.jsonl")
+    ap.add_argument("--val", default=_default("data", "subsets", "re-subset.val.jsonl"))
+    ap.add_argument("--train", default=_default("data", "subsets", "re-subset.train.jsonl"))
+    ap.add_argument("--out", default=_default("data", "eval_re_extended.jsonl"),
+                    help="输出文件。若该文件已含人工校准的 meta.expect，重建后需重跑 "
+                         "apply_adjustments.py 把校准打回去（脚本会自动 .bak 并打印 warn）")
     ap.add_argument("--seed", type=int, default=42)
     a = ap.parse_args()
 
-    val = [json.loads(l) for l in open(a.val, encoding="utf-8")] if os.path.exists(a.val) else []
-    trn = [json.loads(l) for l in open(a.train, encoding="utf-8")] if os.path.exists(a.train) else []
+    # 启动就把话说明白：这个 out 可能是承载 170 条人工校准的正式评测集。
+    print(f"[warn] 本脚本会重写 {a.out}")
+    print("[warn] 若该文件含人工校准的 meta.expect（170 条）与 rationale，"
+          "重建后必须重跑 apply_adjustments.py，否则判据退回校准前版本（误杀 ~100%）")
+    print("[warn] 重建后请依次验证：eval_re_extended.py --selftest（6/6） → "
+          "scripts/regression/run_all.py（全 PASS）")
+
+    # 缺失/空 → FATAL。旧写法 `if exists else []` 会让"eval prompt 污染 train"这条
+    # 隔离检查变成空比对：trn_h 为空 → leaked 恒空 → 报告打「重叠 0 ✓」，
+    # 而 60 题的 source_hash 全是 None（下游也没人看）。
+    def _load_split(path, label):
+        if not os.path.exists(path):
+            raise SystemExit(f"[FATAL] {label} 不存在: {path}")
+        rows_ = [json.loads(l) for l in open(path, encoding="utf-8") if l.strip()]
+        if not rows_:
+            raise SystemExit(f"[FATAL] {label} 是空的: {path}")
+        return rows_
+
+    val = _load_split(a.val, "--val")
+    trn = _load_split(a.train, "--train")
     val_h = [sha256_msgs(r.get("messages") or []) for r in val]
     trn_h = set(sha256_msgs(r.get("messages") or []) for r in trn)
     print(f"[src] val={len(val)} train={len(trn)}  交集={len(set(val_h) & trn_h)}")
@@ -314,6 +344,14 @@ def main():
         })
 
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
+    # 覆盖前先备份：现有的 eval_re_extended.jsonl 里有人工校准过的 meta.expect
+    # （2026-10-21 判分器校准，170 条改动），跑一次本脚本会把它们全部改回默认表。
+    if os.path.exists(a.out):
+        import shutil as _shutil
+        import time as _time
+        bak = a.out + _time.strftime(".bak-%Y%m%d-%H%M%S")
+        _shutil.copy(a.out, bak)
+        print(f"[bak] 覆盖前已备份现有文件 → {bak}")
     with open(a.out, "w", encoding="utf-8") as f:
         for r in rows:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")

@@ -98,9 +98,27 @@ def group_name(group, idx):
 
 
 def load_adapter(adapter_dir):
-    """-> ({(layer, mod): (A, B)}, meta). 152 MiB total, safe to hold in RAM."""
+    """-> ({(layer, mod): (A, B)}, meta). 152 MiB total, safe to hold in RAM.
+
+    缺 adapter_config.json 时**必须 FATAL**：旧写法 `... if exists else {}` 把 cfg 变成
+    空 dict，后续 cfg.get(...) 全走默认值 -> 合并比例/秩静默用错，包照样打得出来、层数也对。
+    这是签名 S1（缺失被默认值吸收）在本仓的又一次复发。
+    """
     cfg_path = os.path.join(adapter_dir, "adapter_config.json")
-    cfg = json.load(open(cfg_path, encoding="utf-8")) if os.path.exists(cfg_path) else {}
+    if not os.path.exists(cfg_path):
+        raise SystemExit(
+            "[FATAL] 缺 {}  "
+            "这里要读 LoRA 的 r / lora_alpha / target_modules，缺了会静默按默认值合并。"
+            " 期望来源：训练产物目录 <out>/adapter（train_kitty.py --out <out> 下的 adapter）"
+            .format(cfg_path))
+    with open(cfg_path, encoding="utf-8") as f:
+        cfg = json.load(f)
+    if not isinstance(cfg, dict) or not cfg:
+        raise SystemExit("[FATAL] {} 不是有效 JSON 对象（读到 {}）".format(
+            cfg_path, type(cfg).__name__))
+    _lack = [k for k in ("r", "lora_alpha") if k not in cfg]
+    if _lack:
+        print("[warn] {} 缺 {} -- 若合并比例不对，先查这里".format(cfg_path, _lack))
     st = os.path.join(adapter_dir, "adapter_model.safetensors")
     if not os.path.exists(st):
         raise SystemExit(f"[FATAL] 缺少 {st}")
@@ -144,6 +162,44 @@ def sha256_16(path):
         for chunk in iter(lambda: fh.read(1 << 20), b""):
             h.update(chunk)
     return h.hexdigest()[:16]
+
+
+META_FILES = ("config.json", "generation_config.json", "tokenizer.json",
+              "tokenizer_config.json", "chat_template.jinja",
+              "preprocessor_config.json", "video_preprocessor_config.json")
+
+
+def copy_meta(src, out, required=("config.json",)):
+    """把本地训练要用的元数据拷进产物目录，并**回读验证**。
+
+    缺 config.json 不许静默跳过：pack 里没有 config，下游 train_partial_lora 连骨架
+    都建不出来（v3 就是这么少了一个文件，事后靠 deploy/fix_pack.sh 补）。
+    判据落在产物特征上：拷了几个 / config 里的 architectures 读不读得出来。
+    """
+    copied, missing = [], []
+    for name in META_FILES:
+        spar = os.path.join(src, name)
+        if os.path.exists(spar):
+            shutil.copy2(spar, os.path.join(out, name))
+            copied.append(name)
+        elif name in required:
+            missing.append(spar)
+    if missing:
+        raise SystemExit(
+            "[FATAL] 产物缺必需元数据 {}  期望来源：拆层源目录 {}（正常应含 config.json）"
+            "  缺它 = pack 能打出来但本地训不起来（v3 的静默错）".format(missing, src))
+    cfg_out = os.path.join(out, "config.json")
+    try:
+        with open(cfg_out, encoding="utf-8") as f:
+            arch = (json.load(f) or {}).get("architectures")
+    except Exception as e:                                      # noqa: BLE001
+        raise SystemExit("[FATAL] 产物 {} 回读失败（{}: {}）".format(
+            cfg_out, type(e).__name__, e))
+    if not arch:
+        print("[warn] {} 没有 architectures -- 本地训练不依赖它，但 GGUF 转换/加载链依赖（v4 坑 c）"
+              .format(cfg_out))
+    print("[copy] 元数据 {} 个 -> {}: {}  architectures={}".format(len(copied), out, copied, arch))
+    return {"copied": copied, "architectures": arch}
 
 
 def main():
@@ -364,15 +420,7 @@ def main():
 
     # ship the metadata the local trainer needs (config/tokenizer are tiny and
     # otherwise the downstream train_partial_lora.py cannot build its skeleton)
-    copied = []
-    for name in ("config.json", "generation_config.json", "tokenizer.json",
-                 "tokenizer_config.json", "chat_template.jinja",
-                 "preprocessor_config.json", "video_preprocessor_config.json"):
-        s = os.path.join(src, name)
-        if os.path.exists(s):
-            shutil.copy2(s, os.path.join(out, name))
-            copied.append(name)
-    print(f"[copy] 元数据 {len(copied)} 个 → {out}: {copied}")
+    copy_meta(src, out)
 
     meta = {"src": src, "adapter": os.path.abspath(a.adapter), "out": out,
             "created": time.strftime("%Y-%m-%dT%H:%M:%S"),

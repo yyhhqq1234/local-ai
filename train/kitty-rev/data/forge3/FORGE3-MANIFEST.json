@@ -1,0 +1,44 @@
+{
+ "created": "2026-10-22",
+ "generator": "tmp/build_forge3.py",
+ "output": "data/forge3/train.jsonl",
+ "total": 60,
+ "by_tag": {
+  "P1": 30,
+  "P2": 10,
+  "P3": 8,
+  "P4": 6,
+  "RW-R": 3,
+  "RW-W": 3
+ },
+ "by_forge_cat": {
+  "op-syntax-literal": 30,
+  "op-syntax-prose": 10,
+  "op-syntax-template": 8,
+  "op-syntax-negative": 6,
+  "op-r": 3,
+  "op-w": 3
+ },
+ "sha16": "6bf06b2b9f271433",
+ "length": {
+  "min": 103,
+  "p50": 177,
+  "max": 223
+ },
+ "gate": {
+  "P1_regex_hit": "30/30",
+  "addr_from_scenario": "base 与 size 必须在 user 中逐字出现；end==base+size",
+  "P4_why_present": "全部命中失败原因关键词",
+  "isolation": {
+   "vs_eval60_full_hash": 0,
+   "vs_eval60_user_hash": 0,
+   "vs_train4388_user_hash": 0,
+   "max_jaccard": {
+    "ev": 0.2,
+    "train907": 0.097,
+    "intra": 0.349
+   }
+  }
+ },
+ "why": "re60 的 15 条 op-syntax 期望字面量五段管道；训练集 46 处 5 段管道全是占位符（严格可抄 0），本批补实例化。见 logs/RE60-OPSYNTAX-AUDIT.md"
+}

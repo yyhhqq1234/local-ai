@@ -28,7 +28,92 @@ PER_LAYER_4BIT_GIB = 189 / 1024          # 实测单层 4bit
 HEAD_GIB = 2.37
 ACT_GIB = 1.2
 
-CATS = ["kb-re", "action-reverse", "tool-route", "op-syntax", "real-discipline"]
+# 类别清单在 CAT_TO_DIR 定义之后派生（见下）：新增类别只要登记映射，
+# 就不会出现「映射了但决策树不看」。这里只是占位，避免前向引用。
+CATS = []
+
+# --------------------------------------------------------------------------- #
+# act-cache layout produced by precompute_activations.py --split-by-subsets.
+# The source name in --data-mix MUST equal the act-cache subdirectory name
+# verbatim (`re-train`, not `re`), otherwise MultiCache raises
+# "[FATAL] 源 re 下没有 *.pt" before the first training step.
+# --------------------------------------------------------------------------- #
+ACT_ROOT = "train/local-pack/act-cache"      # forward slashes: safe in bash and PowerShell
+CAT_TO_DIR = {
+    "kb-re": "re-train",
+    "action-reverse": "re-train",            # SAME directory as kb-re -> must merge
+    "tool-route": "route-train",
+    "op-syntax": "route-train",
+    "real-discipline": "discipline-train",
+    # comply-*: 配合意愿（下一轮配比 comply:3, forge:4, re-train:2, rest:1）。
+    # 登记后 CATS 自动含它们（决策树"看得见"）；但**不会被自动加权** ——
+    # 决策树里的 cats_to_mix({...}) 是硬编码调用点，下一轮要用时必须在 seg() 里显式加。
+    "comply-a": "comply-train",
+    "comply-b": "comply-train",
+    "comply-c": "comply-train",
+    "comply-d": "comply-train",
+}
+CATS = list(CAT_TO_DIR)                      # 单一真相源：类别 = 映射表的键
+# Replay pool: rest/ has 2774 rows; gen-train has only 80, so a 4:1 mix on
+# gen-train would resample the same 80 rows 3-4x per epoch = overfit on 80.
+REPLAY_TRAIN_DIR = "rest"
+REPLAY_VAL_DIR = "gen-val"                   # 20 rows, independent -> enough for early stop
+
+
+def cats_to_mix(cat_weights, unknown=None):
+    """{'kb-re':3,'action-reverse':1} -> {'re-train':4}   (weights summed).
+
+    Two categories share one act-cache directory; emitting them as two sources
+    with the same name would collide inside MultiCache.
+
+    未知类别过去静默落 `rest` —— 双重错：新类别的权重被并进**回放池**，
+    而 `rest` 一进 mix，build_mix() 就不再追加回放项，回放权重无声变 0。
+    新数据组（forge-*）必须先登记 CAT_TO_DIR；没登记就明说，不要猜。
+    """
+    out, bad = {}, []
+    for cat, w in cat_weights.items():
+        if cat not in CAT_TO_DIR:
+            bad.append(cat)
+            continue
+        d = CAT_TO_DIR[cat]
+        out[d] = out.get(d, 0.0) + float(w)
+    if bad:
+        if unknown is not None:
+            unknown.extend(bad)
+        else:
+            raise SystemExit(
+                f"[FATAL] 未知类别 {bad}：不在 CAT_TO_DIR 里。新增数据组（如 forge-*）"
+                f"必须先登记它的 act-cache 子目录，否则权重会静默并进 rest（回放池）"
+                f"并把回放权重清零。已知类别：{sorted(CAT_TO_DIR)}")
+    return out
+
+
+def build_mix(mix, replay_weight=1.0, root=None):
+    """{'re-train':4} -> 're-train:<root>/re-train:4,rest:<root>/rest:1'"""
+    root = root or ACT_ROOT
+    parts = [f"{src}:{root}/{src}:{w:g}" for src, w in mix.items()]
+    if REPLAY_TRAIN_DIR in mix:
+        print(f"[mix][warn] {REPLAY_TRAIN_DIR} 已在 mix 里（权重 {mix[REPLAY_TRAIN_DIR]:g}）："
+              f"按显式权重走，额外回放项被跳过")
+    elif replay_weight:
+        parts.append(f"{REPLAY_TRAIN_DIR}:{root}/{REPLAY_TRAIN_DIR}:{replay_weight:g}")
+    return ",".join(parts)
+
+
+def build_val(extra_dirs=(), root=None, with_forge=False):
+    """Val sources: the segment's own val dirs + forge-val (if forge is in play)
+    + the shared replay val dir.
+
+    forge-val pairs with forge-train by FAMILY (directory name minus -train/-val
+    -> `forge`), so the two source names do NOT need to match.
+    """
+    root = root or ACT_ROOT
+    dirs = list(extra_dirs)
+    if with_forge and "forge-val" not in dirs:
+        dirs.append("forge-val")
+    if REPLAY_VAL_DIR not in dirs:
+        dirs.append(REPLAY_VAL_DIR)
+    return ",".join(f"{d}:{root}/{d}" for d in dirs)
 
 
 def load_json(p):
@@ -111,8 +196,22 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--probe-dir", required=True)
     ap.add_argument("--out", default="")
+    ap.add_argument("--act-root", default=ACT_ROOT,
+                    help=f"act-cache 根目录（默认 {ACT_ROOT}）")
+    ap.add_argument("--forge", choices=["auto", "on", "off"], default="auto",
+                    help="是否把 forge-train 作为独立源（auto=该目录存在则用，配比 forge:4 + re-train:2）")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
+
+    act_root = a.act_root
+    if a.forge == "on":
+        use_forge = True
+    elif a.forge == "off":
+        use_forge = False
+    else:
+        use_forge = os.path.isdir(os.path.join(act_root, "forge-train"))
+    print(f"[act] root={act_root}  forge={'on' if use_forge else 'off'}"
+          f"{'（auto 探测到 forge-train/）' if a.forge == 'auto' and use_forge else ''}")
 
     by_cat = norm_by_cat(load_json(os.path.join(a.probe_dir, "probe_by_cat.json")))
     overall = norm_overall(load_json(os.path.join(a.probe_dir, "probe_acc.json")))
@@ -123,8 +222,20 @@ def main():
         print("[FATAL] probe_by_cat.json 与 adapter_layer_norm.json 都缺，无法决策")
         sys.exit(2)
 
+    unknown_cats = sorted(set(by_cat) - set(CAT_TO_DIR))
+    if unknown_cats:
+        print(f"[warn] probe_by_cat.json 里有未登记的类别 {unknown_cats}："
+              f"它们不进决策树、也不分配权重（先登记 CAT_TO_DIR 再跑）")
+    # 反向：该有的类别没数据（probe 侧 <8 条被 skip、或全被弱标签过滤），
+    # 决策树就静默少看这一类，而兜底分支的 note 写「峰不分离」—— 归因错了。
+    missing_cats = [c for c in CAT_TO_DIR if by_cat and c not in by_cat]
+    if missing_cats:
+        print(f"[warn] 期望类别在 probe_by_cat.json 里缺失 {missing_cats}："
+              f"这些类没有探针数据，本计划不含它们（不是峰不分离的问题）")
     report = {"inputs": {"by_cat": bool(by_cat), "overall": bool(overall),
                          "adapter": bool(adapter), "logit_lens": bool(lens)},
+              "unknown_cats": unknown_cats,
+              "missing_cats": missing_cats,
               "spans": {}, "adapter_peak": None, "convergence_layer": None}
 
     # 1) 每类的敏感层段
@@ -157,32 +268,48 @@ def main():
     dis_span = spans.get("real-discipline")
     plan = {"segments": [], "note": "", "strategy": ""}
 
-    def seg(name, start, end, rank, data, steps):
+    def seg(name, start, end, rank, mix, val_dirs, steps):
+        """mix: {act_cache_subdir: weight}; val_dirs: [act_cache val subdirs]."""
         n = end - start + 1
         return {"name": name, "from": start, "to": end, "lora_r": rank,
-                "data": data, "max_steps": steps,
+                "mix": mix, "val_dirs": val_dirs, "max_steps": steps,
+                "data_mix": build_mix(mix, root=act_root),
+                "val_cache": build_val(val_dirs, root=act_root, with_forge=use_forge),
                 "vram_gib": round(memory_estimate(n), 2),
                 "ok": memory_estimate(n) <= VRAM_BUDGET_GIB}
 
+    # 裁决 A 的配比：forge 是独立池（re/route/discipline 已剔除 forge 行），
+    # 所以 "forge:4, re-train:2" 的语义就是「forge 4 倍、旧 re 2 倍」，
+    # 不会有某 60 条被双计成 6 倍。
+    re_mix = {"forge-train": 4, "re-train": 2} if use_forge else {"re-train": 4}
+
+    # Weights are expressed over CATEGORIES and then folded onto act-cache
+    # directories with cats_to_mix(), so kb-re + action-reverse never become two
+    # sources pointing at the same `re-train` directory.
     if re_span and route_span and abs(re_span["peak"] - route_span["peak"]) >= 8:
         plan["strategy"] = "peak-separated"
         plan["note"] = "三类能力峰分离，按段训专用 LoRA（§14.4 情况一）"
         plan["segments"] = [
-            seg("A_re", max(0, re_span["peak"] - 4), min(63, re_span["peak"] + 4), 32, "re-subset.jsonl", 120),
-            seg("B_route", max(0, route_span["peak"] - 4), min(63, route_span["peak"] + 4), 16, "route-subset.jsonl", 80),
-            seg("C_close", 56, 63, 8, "discipline-subset.jsonl", 60),
+            seg("A_re", max(0, re_span["peak"] - 4), min(63, re_span["peak"] + 4), 32,
+                dict(re_mix), ["re-val"], 120),
+            seg("B_route", max(0, route_span["peak"] - 4), min(63, route_span["peak"] + 4), 16,
+                cats_to_mix({"tool-route": 2}), ["route-val"], 80),
+            seg("C_close", 56, 63, 8,
+                cats_to_mix({"real-discipline": 1}), ["discipline-val"], 60),
         ]
     elif re_span and route_span and re_span["peak"] >= 44 and route_span["peak"] >= 44:
         plan["strategy"] = "concentrated-tail"
         plan["note"] = "逆向与路由都集中后段 → 单段 48–63，靠数据加权补偿（§14.4 情况三，最常见）"
         plan["segments"] = [
-            seg("A_re_weighted", 48, 63, 16, "re-subset.jsonl x3 + route x2 + discipline x1", 160),
+            seg("A_re_weighted", 48, 63, 16, dict(re_mix), ["re-val"], 160),
         ]
     else:
         plan["strategy"] = "merged-or-unknown"
         plan["note"] = "峰不分离且不在后段 → 先按 32–63 试，或降级为格式对齐（§14.4 情况二/四）"
         plan["segments"] = [
-            seg("A_wide", 32, 63, 16, "re x3 + route x2 + discipline x1", 140),
+            seg("A_wide", 32, 63, 16,
+                {**re_mix, **cats_to_mix({"tool-route": 2})},
+                ["re-val", "route-val"], 140),
         ]
 
     # 5) 显存闸门检查
@@ -191,21 +318,27 @@ def main():
         plan["warning"] = [f"{s['name']} 预估 {s['vram_gib']} GiB > {VRAM_BUDGET_GIB} GiB，需 --ce-chunk 64 或缩层段"
                            for s in over]
 
+    if missing_cats:
+        plan["note"] += f"（注意：{missing_cats} 没有探针数据，本结论不含它们）"
     report["plan"] = plan
 
-    # 6) 生成命令
+    # 6) 生成命令（复制即可跑：源名 = act-cache 子目录名，回放走 rest/）
     cmds = []
     for s in plan["segments"]:
         cmds.append(
             "& train\\.venv\\Scripts\\python.exe train\\kitty-rev\\scripts\\train_partial_lora.py `\n"
-            f"    --layer-dir train\\local-pack\\merged-layers --from {s['from']} --to {s['to']} `\n"
-            f"    --head train\\local-pack\\merged-layers\\head.safetensors `\n"
-            f"    --act-cache train\\local-pack\\act-cache --ctx 512 --lora-r {s['lora_r']} `\n"
-            f"    --data-mix \"{s['data']}\" --bs 1 --ga 8 --max-steps {s['max_steps']} `\n"
+            f"    --layer-dir train/local-pack/merged-layers --from {s['from']} --to {s['to']} `\n"
+            f"    --head train/local-pack/merged-layers/head.safetensors `\n"
+            f"    --data-mix \"{s['data_mix']}\" `\n"
+            f"    --eval-cache \"{s['val_cache']}\" `\n"
+            f"    --ctx 512 --lora-r {s['lora_r']} --bs 1 --ga 8 --max-steps {s['max_steps']} `\n"
             f"    --dtype 4bit --max-vram-gb {VRAM_BUDGET_GIB} --eval-by-cat `\n"
-            f"    --out train\\kitty-rev\\out-{s['name']}"
+            f"    --out train/kitty-rev/out-{s['name']}"
         )
     report["commands"] = cmds
+    report["optional_refusal_args"] = (
+        f"--refusal-cache \"comply:{ACT_ROOT}/comply\" "
+        f"--refusal-directions train/local-pack/refusal.direction.pt")
 
     print("=" * 70)
     print(f"strategy : {plan['strategy']}")
@@ -218,14 +351,17 @@ def main():
     print("-" * 70)
     for s in plan["segments"]:
         flag = "OK " if s["ok"] else "OVER"
+        mixs = " + ".join(f"{k}:{v:g}" for k, v in s["mix"].items())
         print(f"  [{flag}] {s['name']:16s} layers {s['from']}-{s['to']}  r={s['lora_r']}  "
               f"steps={s['max_steps']}  vram≈{s['vram_gib']} GiB")
+        print(f"         数据 {mixs} + {REPLAY_TRAIN_DIR}:1   val {', '.join(s['val_dirs'] + [REPLAY_VAL_DIR])}")
     if plan.get("warning"):
         for w in plan["warning"]:
             print(f"  [WARN] {w}")
     print("=" * 70)
     for i, c in enumerate(cmds, 1):
         print(f"\n--- command {i} ---\n{c}\n")
+    print(f"[可选] 另需 abliteration 探针时，在命令末尾追加：\n  {report['optional_refusal_args']}")
 
     if a.dry_run:
         print("[dry-run] 未写文件")

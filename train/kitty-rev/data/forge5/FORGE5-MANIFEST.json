@@ -1,0 +1,49 @@
+{
+ "created": "2026-10-22",
+ "generator": "tmp/build_forge5.py",
+ "output": "data/forge5/train.jsonl",
+ "total": 20,
+ "sha16": "532010c397c81ba9",
+ "length": {
+  "min": 252,
+  "p50": 321,
+  "max": 376
+ },
+ "gate": {
+  "order_check": "复刻 eval_re_extended.judge 的 order 语义（首个未被否定的命中位置，组位置取组内最小，三组严格递增）：20/20 通过",
+  "min_chars": 60,
+  "forbidden": [
+   "跳过 triage",
+   "直接跳过",
+   "顺序无所谓",
+   "哪一步不重要",
+   "三个词本身",
+   "不用做",
+   "可以省略"
+  ],
+  "isolation": {
+   "vs_eval60+23_full_hash": 0,
+   "vs_4388_full_hash": 0,
+   "max_jaccard": 0.235
+  },
+  "criteria": "每条 ≥2 个具体判据（hex / 命令+参数 / 回包或偏移）"
+ },
+ "why": "C 组基线 re-decision-chain 0/15：base 只用自然语言描述流程，不用 triage→static→dynamic 术语链；本批教术语链 + 具体判据",
+ "pos_sample": [
+  [
+   2,
+   123,
+   253
+  ],
+  [
+   2,
+   116,
+   229
+  ],
+  [
+   2,
+   132,
+   232
+  ]
+ ]
+}

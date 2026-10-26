@@ -61,6 +61,21 @@ def key_of(route):
     return os.environ.get(env, "") if env else ""
 
 
+def probe_verdict(rc, code, err=""):
+    """curl 退出码 + HTTP 码 → (判读, 明细)。
+
+    旧写法只用 -w "%{http_code}" 的输出：curl 连不上时 stdout 是空串，rc!=0 被丢掉，
+    判读落成 "HTTP"（后面没有码），打印出来像"HTTP 层判定"，实际是**根本没连上**。
+    DNS/TLS/超时/代理这些"探活失败"最该看见的情形，反而被伪装成 HTTP 结果。
+    """
+    code = (code or "").strip()
+    if rc != 0 or not code:
+        return "CURL-ERR", f"rc={rc} code={code or '-'} {(err or '').strip()[:80]}"
+    verdict = {"200": "OK", "401": "BAD-KEY", "403": "FORBIDDEN",
+               "404": "NO-ENDPOINT"}.get(code, f"HTTP{code}")
+    return verdict, f"{code} {(err or '').strip()[:80]}"
+
+
 # ---------------------------------------------------------------- probe
 def cmd_probe(a):
     doc = load_routes()
@@ -79,9 +94,8 @@ def cmd_probe(a):
         else:
             rc, out, err = curl(["-o", "/dev/null", "-w", "%{http_code}", "-H", f"Authorization: Bearer {key}",
                                  base + "/models"])
-        code = (out or "").strip()
-        verdict = {"200": "OK", "401": "BAD-KEY", "403": "FORBIDDEN", "404": "NO-ENDPOINT"}.get(code, f"HTTP{code}")
-        rows.append((rt["id"], verdict, f"{base}/models → {code} {err[:80]}"))
+        verdict, detail = probe_verdict(rc, out, err)
+        rows.append((rt["id"], verdict, f"{base}/models → {detail}"))
     print(f"{'route':14s} {'verdict':12s} detail")
     for r in rows:
         print(f"{r[0]:14s} {r[1]:12s} {r[2]}")

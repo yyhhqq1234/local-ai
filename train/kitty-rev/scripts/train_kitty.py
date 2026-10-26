@@ -37,6 +37,66 @@ BASE = {
 TARGET_MODULES = ["q_proj", "k_proj", "v_proj", "o_proj",
                   "gate_proj", "up_proj", "down_proj"]
 
+# peft 对 **list** 型 target_modules 走 `key.endswith(f".{k}")` 后缀匹配
+# （peft/tuners/tuners_utils.py::check_target_module_exists）。今天 27B 里没有
+# `model.visual.*`，所以不会误挂；但 v4 基座是 **VL 包装模型**，一旦哪天按
+# ConditionalGeneration 加载（或加载带 vision 的目录），`visual.blocks.N.attn.q_proj`
+# 也会被后缀命中 —— 每个 vision block 白挂 4 个 LoRA，trainable 数字变了却没人看得出来。
+# 所以：**匹配仍用 list（与 v3 逐比特一致，保住可比性），但挂之前做一次审计**：
+# 被后缀命中却不在这条严格白名单里的模块 → FATAL（列名；--lora-audit off 可逃生）。
+STRICT_LORA_RE = (r"^(?:base_model\.model\.)?(?:model\.)?(?:language_model\.)?layers\.\d+\."
+                  r"(?:self_attn|mlp|linear_attn)\."
+                  r"(?:q_proj|k_proj|v_proj|o_proj|gate_proj|up_proj|down_proj)$")
+
+
+def lora_target_audit(names, targets=None, strict_pattern=STRICT_LORA_RE):
+    """纯函数：算出「peft 会挂哪些」与「严格白名单允许哪些」，差集即误挂。
+
+    names: model.named_modules() 遍历出的模块名列表。
+    返回 {ends, strict, extra, n_ends, n_strict}；extra 非空 = 有后缀误命中。
+    """
+    import re
+    targets = list(targets or TARGET_MODULES)
+    strict = re.compile(strict_pattern)
+    ends = [n for n in names if n and n.rsplit(".", 1)[-1] in targets]
+    strict_hit = [n for n in ends if strict.match(n)]
+    extra = [n for n in ends if not strict.match(n)]
+    return {"ends": ends, "strict": strict_hit, "extra": extra,
+            "n_ends": len(ends), "n_strict": len(strict_hit)}
+
+
+def visual_modules(names):
+    """纯函数：视觉/多模态模块名（text-only 加载后必须为空）。"""
+    out = []
+    for n in names:
+        lo = (n or "").lower()
+        if "visual" in lo or "vision_tower" in lo or lo.endswith(".mm") or ".mm." in lo:
+            out.append(n)
+    return out
+
+
+def text_only_patch(cfg):
+    """纯函数：尝试给 config 打 language_model_only。
+
+    transformers 5.20.2 的 Qwen3_5 配置里**没有**这个字段 → hasattr 恒 False，
+    `--text-only` 是 no-op。返回 dict，调用方**必须**打印结论（不许静默）：
+        {"supported": bool, "applied": bool, "note": str}
+    """
+    if hasattr(cfg, "language_model_only"):
+        try:
+            cfg.language_model_only = True
+            return {"supported": True, "applied": True,
+                    "note": "config.language_model_only=True 已生效"}
+        except Exception as e:                              # noqa: BLE001
+            return {"supported": True, "applied": False,
+                    "note": f"字段存在但赋值失败（{type(e).__name__}: {e}）"}
+    return {"supported": False, "applied": False,
+            "note": ("本版 transformers 的 config 没有 language_model_only 字段 → --text-only 是 "
+                     "**no-op**；正确性不受影响（AutoModelForCausalLM 本来不建 vision），"
+                     "但不能拿它当「已跳过 vision」的证据。真判据 = 加载后 visual/vision 模块数"
+                     "（本脚本打印 [verify] 行）+ 权重里 visual.* 张量数")}
+
+
 # 训练集里必须出现的类别（缺一类就说明数据构造没跑全）
 REQUIRED_CATS = ["real-trajectory", "op-syntax", "tool-route", "kb-re", "kb-tool"]
 
@@ -89,7 +149,9 @@ def parse():
     ap.add_argument("--no-4bit", action="store_true")
     ap.add_argument("--max-memory", default="", help='形如 "cuda:0=10GiB,cpu=24GiB"；27B 4bit offload 必填')
     ap.add_argument("--cpu-offload", action="store_true", help="4bit 允许 CPU/磁盘 offload（llm_int8_enable_fp32_cpu_offload）")
-    ap.add_argument("--text-only", action="store_true", help="VL 包装模型只加载文本塔（config.language_model_only=True）")
+    ap.add_argument("--text-only", action="store_true", help="VL 包装模型只加载文本塔（本版 transformers 是 no-op，见文本；真判据看 [verify] 行）")
+    ap.add_argument("--lora-audit", default="fatal", choices=("fatal", "warn", "off"),
+                    help="target_modules(list)后缀误命中审计：fatal=拒绝起训(默认) / warn=只警告 / off=不审")
     ap.add_argument("--all-gpu", action="store_true", help='强制 device_map={"": 0}（全放 GPU，不触发 accelerate offload 钩子）')
     ap.add_argument("--gpu-layers", type=int, default=0,
                     help="部分层 4bit 放 GPU，其余层保持 bf16 驻 CPU（offload 不量化路线）")
@@ -99,6 +161,14 @@ def parse():
                     help="跳过 peft.prepare_model_for_kbit_training 的全局 fp32 upcast（offload 场景会 OOM）")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--resume", default=None)
+    # DataLoader 提速（v3 复盘：workers=0 单线程喂数据 → GPU 20-100% 锯齿）。
+    # 默认全关 = 与 v3 逐比特一致；显式打开才提速，不悄悄改变可比性。
+    ap.add_argument("--dl-workers", type=int, default=0,
+                    help="DataLoader 进程数（v3=0；复盘建议 4）。0 = 保持 v3 口径")
+    ap.add_argument("--pin-memory", action="store_true",
+                    help="dataloader_pin_memory=True（与 --dl-workers>0 配合）")
+    ap.add_argument("--prefetch", type=int, default=0,
+                    help="dataloader_prefetch_factor（需 --dl-workers>0；建议 2）")
     return ap.parse_args()
 
 
@@ -233,10 +303,16 @@ def main():
     if a.text_only:
         from transformers import AutoConfig as _AC
         _cfg = _AC.from_pretrained(base, trust_remote_code=True)
-        if hasattr(_cfg, "language_model_only"):
-            _cfg.language_model_only = True
+        _r = text_only_patch(_cfg)
+        if _r["applied"]:
             load_kw["config"] = _cfg
-            print("[load] text-only: 只加载文本塔（跳过 vision）")
+            print(f"[load] text-only: {_r['note']}")
+        else:
+            # 不许静默：旧代码 hasattr 为 False 时**一行都不打**，于是用户以为
+            # --text-only 生效了，把「vision 已被跳过」当既定事实写进报告（坑 a）。
+            print(f"[WARN] --text-only 未生效（no-op）：{_r['note']}")
+            print("[WARN] 继续训练是安全的（ForCausalLM 不建 vision），"
+                  "但结论只能来自下一行的 [verify] 实测")
     if a.all_gpu:
         load_kw["device_map"] = {"": 0}
     if a.max_memory and not a.all_gpu:
@@ -248,6 +324,33 @@ def main():
             mm[int(k) if k.isdigit() else k] = v.strip()
         load_kw["max_memory"] = mm
     model = AutoModelForCausalLM.from_pretrained(base, **load_kw)
+    # 真判据：加载完数一遍视觉模块（--text-only 的 no-op 不影响正确性，但必须实测）
+    _names = [n for n, _ in model.named_modules()]
+    _vis = visual_modules(_names)
+    # ---- S1 硬判据的证据行（train-watch 在 S1 阶段 grep "[S1]"） --------------
+    #   判据① class 名、判据② visual/vision 模块数 = 0、判据③ trainable=79691776
+    #   必须由**训练脚本自己**打印：审计脚本里的数字不能当训练跑的证词。
+    print(f"[S1] class={type(model).__name__}  visual_modules={len(_vis)}  modules={len(_names)}"
+          f"   ← 判据②：visual_modules 必须 =0")
+    if _vis:
+        print(f"[WARN] 仍有视觉模块（{len(_vis)} 个，例：{_vis[:6]}）→ 本次不是纯文本加载；"
+              f"S1 判据② 不成立，报告里不许写「已跳过 vision」")
+    if a.text_only:
+        print(f"[verify] text-only: modules={len(_names)}  visual/vision 模块数={len(_vis)}"
+              f"  {'✓ 纯文本塔' if not _vis else '✗ 仍有视觉模块：' + str(_vis[:6])}")
+    _aud = lora_target_audit(_names)
+    _layers = {n.split(".layers.")[1].split(".")[0] for n in _aud["strict"] if ".layers." in n}
+    print(f"[lora] 后缀命中 {_aud['n_ends']} 个挂点，严格白名单 {_aud['n_strict']} 个"
+          f"（{len(_layers)} 层）")
+    if _aud["extra"]:
+        msg = (f"target_modules(list) 后缀误命中 {len(_aud['extra'])} 个模块，"
+               f"前几个：{_aud['extra'][:6]}")
+        if a.lora_audit == "fatal":
+            raise SystemExit(f"[FATAL] {msg}\n"
+                             f"        这些模块不在严格白名单 {STRICT_LORA_RE} 内（多模态/vision 的 Linear）。\n"
+                             f"        继续会让 trainable 数字失真、把不该训的层带歪。\n"
+                             f"        处理：确认无害后加 --lora-audit warn 或 --lora-audit off")
+        print(f"[{'WARN' if a.lora_audit == 'warn' else 'note'}] {msg}")
     if not a.no_4bit:
         if a.skip_kbit_prepare:
             print("[prep] skip peft fp32 upcast（offload 场景）：手动开梯度检查点 + 冻结主干")
@@ -269,9 +372,60 @@ def main():
             r=a.lora_r, lora_alpha=a.lora_alpha, lora_dropout=0.05, bias="none",
             task_type="CAUSAL_LM", target_modules=TARGET_MODULES))
         model.print_trainable_parameters()
+        _trainable = sum(p_.numel() for p_ in model.parameters() if p_.requires_grad)
+        _V3_TRAINABLE = 79_691_776
+        _flag = "✓ 与 v3 一致" if _trainable == _V3_TRAINABLE else f"✗ 与 v3 不一致（差 {_trainable - _V3_TRAINABLE:+d}）"
+        print(f"[S1] trainable={_trainable}  {_flag}   ← 判据③：v3/v4 必须都是 {_V3_TRAINABLE}")
+
+    def _norm_tool_calls(messages):
+        """把 tool_calls[].function.arguments 从 JSON 字符串转成 dict。
+
+        原因（data-QA 实测）：Qwen 的 chat_template.jinja:135-136 用
+        `tool_call.arguments|items` 迭代，要求 arguments 是 mapping。
+        而我们的数据里 961 个 arguments 全是 JSON 字符串 →
+        TypeError: Can only get item pairs from a mapping。
+        """
+        out = []
+        for msg in messages:
+            tcs = msg.get("tool_calls")
+            if not tcs:
+                out.append(msg)
+                continue
+            msg = dict(msg)
+            fixed = []
+            for tc in tcs:
+                tc2 = dict(tc)
+                fn = dict(tc2.get("function") or {})
+                a = fn.get("arguments")
+                if isinstance(a, str):
+                    try:
+                        fn["arguments"] = json.loads(a)
+                    except Exception:
+                        fn["arguments"] = {}
+                tc2["function"] = fn
+                fixed.append(tc2)
+            msg["tool_calls"] = fixed
+            out.append(msg)
+        return out
 
     def to_text(ex):
-        m = ex["messages"]
+        m = _norm_tool_calls(ex["messages"])
+        tools = ex.get("tools")
+        if tools:
+            try:
+                return {"text": tok.apply_chat_template(
+                    m, tools=tools, tokenize=False, add_generation_prompt=False)}
+            except TypeError as e:
+                # 只吞「老版 transformers 不认 tools 关键字」这一种；
+                # template 内部渲染失败（如 mapping 问题）必须抛出来，不能静默降级
+                # —— 否则会训练出「不会发 tool_call」的模型而毫无告警。
+                if "unexpected keyword argument" not in str(e) and "tools" not in str(e):
+                    raise
+                globals()["_TOOLS_KWARG_UNSUPPORTED"] = True
+            except Exception as e:
+                raise RuntimeError(
+                    f"[data] tools 渲染失败（不是老版 transformers 问题，必须修）："
+                    f"{type(e).__name__}: {e}") from e
         return {"text": tok.apply_chat_template(m, tokenize=False, add_generation_prompt=False)}
 
     if a.stage == "sft":
@@ -280,6 +434,16 @@ def main():
         ds = load_dataset("json", data_files=a.data, split="train")
         ds = ds.map(to_text, remove_columns=[c for c in ds.column_names if c != "text"])
         print(f"[data] samples={len(ds)}")
+        # DataLoader 提速参数（只在显式传了才进去；默认空 = 与 v3 完全一致）
+        dl_kw = {}
+        if a.dl_workers > 0:
+            dl_kw["dataloader_num_workers"] = a.dl_workers
+            if a.prefetch > 0:
+                dl_kw["dataloader_prefetch_factor"] = a.prefetch
+        if a.pin_memory:
+            dl_kw["dataloader_pin_memory"] = True
+        if dl_kw:
+            print(f"[dl] {dl_kw}")
         args = _build_args(SFTConfig,
             output_dir=a.out, num_train_epochs=a.epochs, max_steps=a.max_steps,
             per_device_train_batch_size=a.bs, gradient_accumulation_steps=ga,
@@ -288,6 +452,7 @@ def main():
             save_strategy="epoch" if a.max_steps < 0 else "no", save_total_limit=2,
             optim="paged_adamw_8bit", max_grad_norm=0.3, report_to="none",
             max_length=ctx, dataset_text_field="text", resume_from_checkpoint=a.resume,
+            **dl_kw,
         )
         _trainer(SFTTrainer, model=model, args=args, train_dataset=ds, tokenizer=tok).train()
         out = os.path.join(a.out, "adapter")

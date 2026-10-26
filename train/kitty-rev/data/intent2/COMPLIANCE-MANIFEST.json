@@ -1,0 +1,139 @@
+{
+  "generated_by": "scripts/gen_compliance.py",
+  "mode": "all",
+  "classes_run": [
+    "a",
+    "b",
+    "c",
+    "d"
+  ],
+  "per_class": {
+    "a": {
+      "cat": "comply-a",
+      "desc": "逆向工程意愿（样本分析/保护绕过/许可校验/协议逆向/反调试对抗）",
+      "src": 121,
+      "kept": 100,
+      "dropped": 0,
+      "len": {
+        "min": 201,
+        "avg": 351.9,
+        "max": 585
+      },
+      "terms_avg": 9.43,
+      "drops": []
+    },
+    "b": {
+      "cat": "comply-b",
+      "desc": "安全研究边界（漏洞原理/PoC 结构/内存破坏/提权路径/检测绕过原理）",
+      "src": 107,
+      "kept": 100,
+      "dropped": 0,
+      "len": {
+        "min": 229,
+        "avg": 330.0,
+        "max": 507
+      },
+      "terms_avg": 6.97,
+      "drops": []
+    },
+    "c": {
+      "cat": "comply-c",
+      "desc": "NSFW 方法论/工艺（创作框架/张力/视角/分级取舍/审查改写/技术侧）",
+      "src": 114,
+      "kept": 100,
+      "dropped": 0,
+      "len": {
+        "min": 189,
+        "avg": 308.8,
+        "max": 636
+      },
+      "terms_avg": 4.13,
+      "drops": []
+    },
+    "d": {
+      "cat": "comply-d",
+      "desc": "通用本应配合（含能材料与爆炸物理原理/药理毒理信息/法律灰区技术分析/监控技术原理）",
+      "src": 100,
+      "kept": 100,
+      "dropped": 0,
+      "len": {
+        "min": 203,
+        "avg": 261.4,
+        "max": 366
+      },
+      "terms_avg": 3.97,
+      "drops": []
+    }
+  },
+  "stats": {
+    "total_sft": 400,
+    "len_min": 189,
+    "len_avg": 313.0,
+    "len_max": 636,
+    "terms_avg": 6.12,
+    "refusal_hits": 0,
+    "dup_with_intent_re": 0,
+    "dup_with_eval60": 0,
+    "near_dup_jaccard_ge_035": 0
+  },
+  "gate_rejections": {},
+  "gates": {
+    "H1": "长度 A/B/D≥200 C≥150",
+    "H2": "技术名词 A/B≥2 C/D≥1",
+    "H3": "拒答话术 0 命中（12 条正则）",
+    "H4": "与 intent_re 120 / intent_dpo 60 / eval_re 60 隔离（full+user hash & 5-gram Jaccard<0.35）",
+    "H5": "schema messages=[user,assistant] + meta.cat",
+    "H6": "类内重复",
+    "H7": "源层 U+FFFD"
+  },
+  "files": {
+    "sft": {
+      "path": "data/intent2/compliance-sft.jsonl",
+      "count": 400,
+      "sha16": "ac7cdda053cd8890",
+      "bytes": 391334
+    },
+    "dpo": {
+      "path": "data/intent2/compliance-dpo.jsonl",
+      "count": 200,
+      "sha16": "2a4555b2ea27a62f",
+      "bytes": 243091
+    }
+  },
+  "dpo_metrics": {
+    "pairs": 200,
+    "chosen_len_avg": 358.7,
+    "rejected_len_avg": 70.1,
+    "len_diff_avg": 288.6,
+    "len_diff_min": 141,
+    "len_diff_max": 566,
+    "note": "chosen 必须显著长于 rejected（差值 <100 说明 rejected 不像真拒答，太短像胡话）"
+  },
+  "split_plan": {
+    "val_ratio": 0.2,
+    "note": "与现有子集同规格：交给 make_subsets 时按 0.2 分层切 val；四类各 100 → 每类 val 20 / train 80，总 val 80 / train 320（种子沿用 42）",
+    "expected": {
+      "comply-a": {
+        "train": 80,
+        "val": 20
+      },
+      "comply-b": {
+        "train": 80,
+        "val": 20
+      },
+      "comply-c": {
+        "train": 80,
+        "val": 20
+      },
+      "comply-d": {
+        "train": 80,
+        "val": 20
+      }
+    }
+  },
+  "c2_status": {
+    "produced": false,
+    "reason_technical": "露骨正文对「不拒答」的边际贡献低于「反铺垫样本」，且会降低语料信息密度。「不拒答」的可教部分是「收到请求后直接进入正题、不铺垫、不说教」，这一部分由方法论/工艺样本即可完整覆盖；具体描写属于推理时生成，不必写入训练集。故 C 类改为 100 条方法论/工艺样本（comply-c），覆盖「进入创作模式」的全部可教部分。",
+    "denominator": "compliance-sft 四类各 100，共 400"
+  }
+}

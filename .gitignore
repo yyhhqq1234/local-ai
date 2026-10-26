@@ -69,6 +69,20 @@ train/kitty-rev/out/
 
 # ── 2026-10-21 本轮后训练工程（大件与派生物）────────────────
 .agent-teams/
+
+# ── 2026-10-22 补齐：v3 交付包本体 / 激活缓存 / 字节码 / 清盘临时件 ──
+# tar 24.5G（tar -xf 可复原，绝不入库；谁跑 git add -A 都不能带上它）
+train/local-pack/*.tar
+train/local-pack/merged-layers/
+train/local-pack/act-cache/
+# 激活缓存张量（.pth 已有规则，.pt 之前漏了；收窄到 train/ 下避免误伤别处小 .pt）
+train/**/*.pt
+# Python 字节码：66 个未跟踪 .pyc；已跟踪的 9 个保持原状（不动仓库内容）
+__pycache__/
+*.pyc
+# 一次性清盘脚本（本轮 disk-janitor，无版本价值）
+_work/disk-janitor/
+
 train/tools/ninfer-master/.venv-convert/
 train/tools/ninfer-convert/.venv*/
 train/tools/**/*.gguf
@@ -87,3 +101,11 @@ train/kitty-rev/logs/*
 # 第三方源码（可重新获取，不入库；本地补丁见 logs/CONVERTER-STATUS.md §10）
 train/tools/ninfer-master/
 train/tools/ninfer-convert/
+
+# AutoDL 凭据（勿提交）
+train/kitty-rev/deploy/.autodl_token
+train/kitty-rev/deploy/.autodl_uuid
+**/__pycache__/
+train/kitty-rev/data/intent3/
+train/kitty-rev/deploy/base-meta/
+train/local-pack/*.safetensors

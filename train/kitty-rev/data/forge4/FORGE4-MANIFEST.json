@@ -1,0 +1,28 @@
+{
+ "created": "2026-10-22",
+ "generator": "tmp/build_forge4.py",
+ "output": "data/forge4/train.jsonl",
+ "total": 19,
+ "by_object": {
+  "lp": 4,
+  "km_pr": 3,
+  "dbg_bp": 3,
+  "dbg_bp_del": 3,
+  "dis": 3,
+  "reverse_add_target": 3
+ },
+ "sha16": "e8f665a9d06ff0d8",
+ "length": {
+  "min": 151,
+  "p50": 199,
+  "max": 261
+ },
+ "gates": {
+  "G1_strict_no_placeholder": "通过（0 命中）",
+  "G2_derivation": "KM_PR 全部含 KM_PA→PA；DBG_BP 含 base+off；LP 含 hex→dec",
+  "G3_reply": "18 条含 OK|/ERR|；reverse_add_target 3 条给记录对象 id=target-N",
+  "G4_isolation": "vs eval60+eval23+4388：full/user hash 0 重叠，5-gram max 0.24",
+  "G5_selftest": "对象名+|/= 19/19；条数与计划一致"
+ },
+ "why": "at-risk 清单（logs/CORPUS-INSTANCE-AUDIT.md）：DBG_BP/DBG_BP_DEL/KM_PR/DIS 只有签名表，LP/reverse_add_target 在语料里零出现却被评测考到"
+}

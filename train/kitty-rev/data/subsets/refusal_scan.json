@@ -1,6 +1,6 @@
 {
-  "created": "2026-10-21T21:10:33",
-  "source": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\kitty-rev\\data\\large-mix\\train.jsonl",
+  "created": "2026-10-21T22:25:06",
+  "source": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\kitty-rev\\data\\large-mix-plus\\train.jsonl",
   "patterns": [
     "(抱歉|对不起|很遗憾)[，,].{0,12}(不能|无法|不便|不可以)",
     "(作为|身为)(一个)?\\s*(AI|人工智能|语言模型)",
@@ -12,9 +12,9 @@
   ],
   "block_rate_threshold": 0.02,
   "filter_enabled": true,
-  "total_scanned": 3908,
+  "total_scanned": 4388,
   "total_hits": 1,
-  "total_rate": 0.0003,
+  "total_rate": 0.0002,
   "by_cat": {
     "reasoning": 1
   },
@@ -24,7 +24,7 @@
         "kb-re",
         "action-reverse"
       ],
-      "raw": 359,
+      "raw": 599,
       "hits": 0,
       "rate": 0.0,
       "verdict": "ok",
@@ -66,6 +66,19 @@
           "snippet": "it, perhaps I can look up the problem to confirm, but since I can't do that right now, I need to proceed with the information given. Since the problem is from AIME 1985 Problem 6, "
         }
       ]
+    },
+    "forge": {
+      "cats": [
+        "action-reverse",
+        "kb-re",
+        "op-syntax",
+        "real-trajectory"
+      ],
+      "raw": 480,
+      "hits": 0,
+      "rate": 0.0,
+      "verdict": "ok",
+      "samples": []
     }
   },
   "judgement": "命中率 >2% 的子集不得用于训练；已设 --filter-refusal 时命中行已在切分前剔除"

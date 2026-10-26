@@ -1,0 +1,3274 @@
+{
+  "generated": "2026-10-21T22:07:51",
+  "dataset": "eval_re_extended.jsonl",
+  "note": "BEFORE 用的是【原 expect + 新 judge】：判分器补丁是全局的（否定豁免、长度口径、alt_all），没法在同一个进程里退回旧 judge。旧 judge + 旧 expect 的首轮实测值记在 before_original_judge 里。",
+  "probes": {
+    "fn": 12,
+    "fp": 12,
+    "fp_expect_reject": 4
+  },
+  "false_negative_rate": "0/12",
+  "false_positive_rate": "0/12",
+  "before_original_judge": {
+    "false_negative_rate": "12/12",
+    "false_positive_rate": "8/12",
+    "source": "首轮实测（旧 judge + 旧 expect）"
+  },
+  "before": {
+    "false_negative_rate": "11/12",
+    "false_positive_rate": "8/12",
+    "judge": "new",
+    "per_cat": {
+      "re-pe-identify": {
+        "fn": 3,
+        "fp": 3,
+        "tot": 3
+      },
+      "re-op-syntax": {
+        "fn": 3,
+        "fp": 0,
+        "tot": 3
+      },
+      "re-decision-chain": {
+        "fn": 3,
+        "fp": 2,
+        "tot": 3
+      },
+      "re-error-recovery": {
+        "fn": 2,
+        "fp": 3,
+        "tot": 3
+      }
+    }
+  },
+  "per_cat": {
+    "re-pe-identify": {
+      "fn": 0,
+      "fp": 0,
+      "tot": 3
+    },
+    "re-op-syntax": {
+      "fn": 0,
+      "fp": 0,
+      "tot": 3
+    },
+    "re-decision-chain": {
+      "fn": 0,
+      "fp": 0,
+      "tot": 3
+    },
+    "re-error-recovery": {
+      "fn": 0,
+      "fp": 0,
+      "tot": 3
+    }
+  },
+  "thresholds": {
+    "fn_max": "25%",
+    "fp_max": "10%"
+  },
+  "adjustments": [
+    {
+      "row": 0,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_dump"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_dump'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 0,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "熵",
+        "entropy",
+        "节",
+        "section",
+        "无 .pdata",
+        "不可展开",
+        "高熵"
+      ],
+      "after": [
+        "dump",
+        "entropy",
+        "kitty_dump",
+        "section",
+        "不可展开",
+        "无 .pdata",
+        "熵",
+        "节",
+        "节级导出",
+        "落盘",
+        "转储",
+        "高熵"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 0,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围",
+        "不需要再核对",
+        "不用核对"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 0,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 text 高熵且无 pdata）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 1,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_ghidra"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_ghidra'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 1,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "导入",
+        "import",
+        "xref",
+        "交叉引用",
+        "动态解析",
+        "字符串",
+        "加密"
+      ],
+      "after": [
+        "ghidra",
+        "ida",
+        "import",
+        "kitty_ghidra",
+        "xref",
+        "交叉引用",
+        "加密",
+        "动态解析",
+        "反汇编",
+        "反编译",
+        "字符串",
+        "导入"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 1,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围",
+        "交叉引用不必要",
+        "看明文"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 1,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 导入只有动态解析）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 2,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_x64dbg"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_x64dbg'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 2,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "pdata",
+        "unwind",
+        "展开",
+        "栈回溯",
+        "RUNTIME_FUNCTION",
+        "调用栈"
+      ],
+      "after": [
+        "RUNTIME_FUNCTION",
+        "kitty_x64dbg",
+        "pdata",
+        "unwind",
+        "windbg",
+        "x64dbg",
+        "展开",
+        "断点",
+        "栈回溯",
+        "调用栈",
+        "调试器"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 2,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 2,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 有 pdata 可展开）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 3,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_dump"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_dump'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 3,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "资源",
+        "rsrc",
+        "rcdata",
+        "载荷",
+        "payload",
+        "提取",
+        "内嵌"
+      ],
+      "after": [
+        "dump",
+        "kitty_dump",
+        "payload",
+        "rcdata",
+        "rsrc",
+        "内嵌",
+        "提取",
+        "节级导出",
+        "落盘",
+        "资源",
+        "转储",
+        "载荷"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 3,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 3,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 rsrc 异常大）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 4,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_sym"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_sym'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 4,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "导出",
+        "export",
+        "转发",
+        "forwarder",
+        "符号",
+        "表"
+      ],
+      "after": [
+        "export",
+        "exports",
+        "forwarder",
+        "kitty_sym",
+        "resolve",
+        "导出",
+        "导出表",
+        "符号",
+        "表",
+        "转发"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 4,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 4,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 导出表转发）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 5,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_die"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_die'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 5,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "upx",
+        "节名",
+        "section",
+        "壳",
+        "packer",
+        "熵",
+        "脱壳"
+      ],
+      "after": [
+        "die",
+        "kitty_die",
+        "packer",
+        "section",
+        "upx",
+        "壳",
+        "壳指纹",
+        "查壳",
+        "熵",
+        "脱壳",
+        "节名"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 5,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围",
+        "不代表加壳",
+        "编译器的锅"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 5,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 签名与节名异常）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 6,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_ghidra"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_ghidra'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 6,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "tls",
+        "回调",
+        "callback",
+        "xref",
+        "入口前",
+        "反调试"
+      ],
+      "after": [
+        "callback",
+        "ghidra",
+        "ida",
+        "kitty_ghidra",
+        "tls",
+        "xref",
+        "交叉引用",
+        "入口前",
+        "反汇编",
+        "反编译",
+        "反调试",
+        "回调"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 6,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 6,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 TLS 回调存在）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 7,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_ghidra"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_ghidra'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 7,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "重定位",
+        "reloc",
+        "基址",
+        "imagebase",
+        "绝对地址",
+        "xref"
+      ],
+      "after": [
+        "ghidra",
+        "ida",
+        "imagebase",
+        "kitty_ghidra",
+        "reloc",
+        "xref",
+        "交叉引用",
+        "反汇编",
+        "反编译",
+        "基址",
+        "绝对地址",
+        "重定位"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 7,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 7,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 重定位被剥离）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 8,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_ghidra"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_ghidra'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 8,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "延迟",
+        "delay",
+        "import",
+        "导入",
+        "网络",
+        "wininet",
+        "xref"
+      ],
+      "after": [
+        "delay",
+        "ghidra",
+        "ida",
+        "import",
+        "kitty_ghidra",
+        "wininet",
+        "xref",
+        "交叉引用",
+        "反汇编",
+        "反编译",
+        "导入",
+        "延迟",
+        "网络"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 8,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 8,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 延迟导入表）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 9,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_die"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_die'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 9,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "调试",
+        "debug",
+        "pdb",
+        "codeview",
+        "节",
+        "目录"
+      ],
+      "after": [
+        "codeview",
+        "debug",
+        "die",
+        "kitty_die",
+        "pdb",
+        "壳指纹",
+        "查壳",
+        "目录",
+        "节",
+        "调试"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 9,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 9,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 调试目录指向自身）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 10,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_dump"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_dump'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 10,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "重叠",
+        "overlap",
+        "畸形",
+        "malformed",
+        "转储",
+        "raw",
+        "节"
+      ],
+      "after": [
+        "dump",
+        "kitty_dump",
+        "malformed",
+        "overlap",
+        "raw",
+        "畸形",
+        "节",
+        "节级导出",
+        "落盘",
+        "转储",
+        "重叠"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 10,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 10,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 节表重叠）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 11,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_dump"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_dump'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 11,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "iat",
+        "加密",
+        "导入",
+        "转储",
+        "运行期",
+        "内存",
+        "修复"
+      ],
+      "after": [
+        "dump",
+        "iat",
+        "kitty_dump",
+        "修复",
+        "内存",
+        "加密",
+        "导入",
+        "节级导出",
+        "落盘",
+        "转储",
+        "运行期"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 11,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 11,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 导入 IAT 被加密）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 12,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_die"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_die'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 12,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "异常",
+        "exception",
+        "越界",
+        "畸形",
+        "校验",
+        "解析"
+      ],
+      "after": [
+        "die",
+        "exception",
+        "kitty_die",
+        "壳指纹",
+        "异常",
+        "查壳",
+        "校验",
+        "畸形",
+        "解析",
+        "越界"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 12,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 12,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 异常目录非法）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 13,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_dump"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_dump'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 13,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "内嵌",
+        "子 pe",
+        "提取",
+        "资源",
+        "载荷",
+        "offset",
+        "转储"
+      ],
+      "after": [
+        "dump",
+        "kitty_dump",
+        "offset",
+        "内嵌",
+        "子 pe",
+        "提取",
+        "节级导出",
+        "落盘",
+        "资源",
+        "转储",
+        "载荷"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 13,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 13,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 多个 PE 内嵌）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 14,
+      "cat": "re-pe-identify",
+      "field": "required",
+      "before": [
+        "kitty_ghidra"
+      ],
+      "after": null,
+      "why": "单一工具名 ['kitty_ghidra'] 换成等价手段集合 required_any"
+    },
+    {
+      "row": 14,
+      "cat": "re-pe-identify",
+      "field": "required_any",
+      "before": [
+        "符号",
+        "pdb",
+        "剥离",
+        "反编译",
+        "函数",
+        "识别",
+        "ghidra"
+      ],
+      "after": [
+        "ghidra",
+        "ida",
+        "kitty_ghidra",
+        "pdb",
+        "交叉引用",
+        "函数",
+        "剥离",
+        "反汇编",
+        "反编译",
+        "符号",
+        "识别"
+      ],
+      "why": "工具名/等价手段任一命中即算答对手段（修误杀）"
+    },
+    {
+      "row": 14,
+      "cat": "re-pe-identify",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "没有异常",
+        "无异常",
+        "按常规流程",
+        "一切正常",
+        "属于正常范围"
+      ],
+      "why": "题面证据是异常项：写「没有异常/按常规流程」等反向结论即判失败（修误放）"
+    },
+    {
+      "row": 14,
+      "cat": "re-pe-identify",
+      "field": "rationale",
+      "before": null,
+      "after": "这 15 题的题面只给一段异常 PE 证据，能答对必须同时做到两件事：点到与该证据匹配的下一步手段（工具或等价动作），并给出与该证据绑定的诊断依据。手段名不唯一（dump/转储/Ghidra/IDA 都算），但结论方向唯一：题面证据都是异常项，写「没有异常/按常规流程」即判失败。（本题考 符号被剥离且无导出）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 15,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "dword",
+        "1500",
+        "0x7FF700000000",
+        "0x7FF750000000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 15,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 已知当前血量）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 16,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "byte",
+        "77",
+        "0x140000000",
+        "0x144000000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 16,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 找字节标记）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 17,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "word",
+        "300",
+        "0x1A0000000",
+        "0x1A8000000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 17,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 16 位计数器）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 18,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "qword",
+        "1700000000",
+        "0x7FF6A0000000",
+        "0x7FF6A2000000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 18,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 64 位时间戳）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 19,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "dword",
+        "1118175232",
+        "0x7FF700000000",
+        "0x7FF730000000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 19,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 浮点血量）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 20,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "dword",
+        "12345",
+        "0x140000000",
+        "0x148000000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 20,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 已知金币数）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 21,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "dword",
+        "3405691582",
+        "0x20000000",
+        "0x21000000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 21,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 找哨兵值）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 22,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "dword",
+        "1920",
+        "0x7FF800000000",
+        "0x7FF800800000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 22,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 已知坐标）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 23,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "byte",
+        "232",
+        "0x140001000",
+        "0x140020000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 23,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 特征码首字节）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 24,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "byte",
+        "60",
+        "0x1C0000000",
+        "0x1C0100000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 24,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 等级字段）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 25,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "dword",
+        "999999",
+        "0x7FF700000000",
+        "0x7FF710000000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 25,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 经验值）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 26,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "qword",
+        "7834509504",
+        "0x1D0000000",
+        "0x1D2000000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 26,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 指针型句柄）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 27,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "dword",
+        "4500",
+        "0x7FF700000000",
+        "0x7FF7400000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 27,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 倒计时毫秒）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 28,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "word",
+        "70012",
+        "0x220000000",
+        "0x220800000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 28,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 物品 ID）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 29,
+      "cat": "re-op-syntax",
+      "field": "alt_all",
+      "before": null,
+      "after": [
+        "S_NEW",
+        "word",
+        "32767",
+        "0x240000000",
+        "0x240400000"
+      ],
+      "why": "自然语言等价表述也算过：S_NEW + 类型 + 值 + 起止地址四要素齐全即可（修误杀）"
+    },
+    {
+      "row": 29,
+      "cat": "re-op-syntax",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是 OP 四要素齐全且数值与场景一致：类型（byte/word/dword/qword）、值、起止地址。管道格式与等价自然语言都接受（alt_all），但地址必须由本题数值算出——写 0x0–0xFFFFFFFFFFFFFFFF 等于没限定，判失败。（本题考 已知伤害值）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 30,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 30,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 30,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 30,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 未知样本首次接触）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 31,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 31,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 31,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 31,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 样本已加壳）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 32,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 32,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 32,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 32,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 有 PDB 但版本不符）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 33,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 33,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 33,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 33,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 目标进程可附加）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 34,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 34,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 34,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 34,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 只有 dump 无原始 exe）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 35,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 35,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 35,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 35,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 符号全剥离）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 36,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 36,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 36,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 36,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 崩溃现场分析）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 37,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 37,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 37,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 37,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 样本会自解密）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 38,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 38,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 38,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 38,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 要求给出可复现结论）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 39,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 39,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 39,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 39,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 只有网络流量）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 40,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 40,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 40,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 40,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 驱动样本）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 41,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 41,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 41,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 41,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 多阶段载荷）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 42,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 42,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 42,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 42,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 时间紧只给 10 分钟）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 43,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 43,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 43,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 43,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 需定位具体函数）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 44,
+      "cat": "re-decision-chain",
+      "field": "order",
+      "before": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "运行"
+        ]
+      ],
+      "after": [
+        [
+          "triage",
+          "分诊",
+          "先看",
+          "摸清",
+          "识别",
+          "判断",
+          "定性",
+          "摸排",
+          "入口"
+        ],
+        [
+          "static",
+          "静态",
+          "ghidra",
+          "ida",
+          "反编译",
+          "反汇编",
+          "交叉引用",
+          "函数"
+        ],
+        [
+          "dynamic",
+          "动态",
+          "x64dbg",
+          "dbg",
+          "windbg",
+          "运行",
+          "调试",
+          "attach",
+          "断点",
+          "跑起来",
+          "起进程"
+        ]
+      ],
+      "why": "三组同义词扩到 识别/判断/入口、函数/交叉引用、调试/断点/跑起来（修误杀）"
+    },
+    {
+      "row": 44,
+      "cat": "re-decision-chain",
+      "field": "min_kitty",
+      "before": 1,
+      "after": 0,
+      "why": "「反编译/调试器」本身就是手段，不强制出现产品名（修误杀）"
+    },
+    {
+      "row": 44,
+      "cat": "re-decision-chain",
+      "field": "forbidden",
+      "before": null,
+      "after": [
+        "跳过 triage",
+        "直接跳过",
+        "顺序无所谓",
+        "哪一步不重要",
+        "三个词本身",
+        "不用做",
+        "可以省略"
+      ],
+      "why": "只堆三个词、或明说跳过/顺序无所谓 = 假会，判失败（修误放）"
+    },
+    {
+      "row": 44,
+      "cat": "re-decision-chain",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是动作顺序 triage→static→dynamic，不是措辞：三组同义词任一命中即算该步存在，位置必须递增。把三步写成一句口号、或明说跳过某步/顺序无所谓，判失败。（本题考 行为已观测）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 45,
+      "cat": "re-error-recovery",
+      "field": "forbidden",
+      "before": [
+        "再跑一次同样",
+        "重试相同",
+        "原样重试"
+      ],
+      "after": [
+        "再跑一次同样",
+        "重试相同",
+        "原样重试",
+        "取前 200",
+        "200 也没关系",
+        "上限可以调大",
+        "提高上限",
+        "接受截断"
+      ],
+      "why": "把实测到的假会动作（取前 200 / size 无所谓 / 双字段不用管）写进 forbidden"
+    },
+    {
+      "row": 45,
+      "cat": "re-error-recovery",
+      "field": "required_any",
+      "before": [
+        "收紧",
+        "缩小",
+        "窗口",
+        "分段",
+        "更小",
+        "区间"
+      ],
+      "after": [
+        "收紧",
+        "缩小",
+        "窗口",
+        "分段",
+        "更小",
+        "区间",
+        "切块",
+        "分块",
+        "切段",
+        "按段",
+        "拆段"
+      ],
+      "why": "「切块/分段」是同一动作的另一种说法，补进 required_any（修误杀）"
+    },
+    {
+      "row": 45,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 P_BACK 命中上限）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 46,
+      "cat": "re-error-recovery",
+      "field": "forbidden",
+      "before": [
+        "忽略",
+        "不管",
+        "照样用"
+      ],
+      "after": [
+        "忽略",
+        "不管",
+        "照样用",
+        "无所谓",
+        "照常算",
+        "不用管",
+        "可以忽略"
+      ],
+      "why": "把实测到的假会动作（取前 200 / size 无所谓 / 双字段不用管）写进 forbidden"
+    },
+    {
+      "row": 46,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 MODENUM size 为 0）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 47,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 S_NEW 未落定）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 48,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 DBG_ATTACH 失败）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 49,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 桥无响应）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 50,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 写被拒）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 51,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 扫描无结果）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 52,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 指针回查过多）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 53,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 上下文超限）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 54,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 test 符号不存在）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 55,
+      "cat": "re-error-recovery",
+      "field": "forbidden",
+      "before": [
+        "再读一次",
+        "原样"
+      ],
+      "after": [
+        "原样"
+      ],
+      "why": "删掉过宽项 ['再读一次']：它们连「修正后再读一次」也会判犯规（修误杀）"
+    },
+    {
+      "row": 55,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 类型不匹配）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 56,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 保护查询失败）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 57,
+      "cat": "re-error-recovery",
+      "field": "forbidden",
+      "before": [
+        "强行 dispatch",
+        "重试"
+      ],
+      "after": [
+        "强行 dispatch",
+        "重试",
+        "双字段不用管",
+        "不用管双字段"
+      ],
+      "why": "把实测到的假会动作（取前 200 / size 无所谓 / 双字段不用管）写进 forbidden"
+    },
+    {
+      "row": 57,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 token 过期）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 58,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 磁盘不足）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    },
+    {
+      "row": 59,
+      "cat": "re-error-recovery",
+      "field": "rationale",
+      "before": null,
+      "after": "考的是「不原样重试、换等价动作」：动作动词命中即算会，建议接受错误结果（取前 200、size 为 0 无所谓、提高上限硬扫）即算不会。句子里的否定不算犯规——「不要原样重试，改为切块」是正确答案。（本题考 桥版本不匹配）",
+      "why": "补判据可解释性：说明这条 expect 凭什么区分会与不会"
+    }
+  ],
+  "detail": {
+    "fn": [
+      {
+        "row": 0,
+        "cat": "re-pe-identify",
+        "pass": false,
+        "why": "缺「kitty_dump」",
+        "why_correct": "同义表述：'整块 dump 下来' 就是 kitty_dump 的用途；依据给了高熵+无 .pdata 两条",
+        "text": "先把镜像按节表整块 dump 下来做副本，再去核导入表与 .pdata；依据：.text 熵 6.71 属高熵，加上没有 .pdata，无法按 unwind 展开，静态硬看会失真。"
+      },
+      {
+        "row": 1,
+        "cat": "re-pe-identify",
+        "pass": false,
+        "why": "缺「kitty_ghidra」",
+        "why_correct": "只写 Ghidra 不写 kitty_ghidra；诊断（动态解析）+ 手段（交叉引用）都对",
+        "text": "导入只有 LoadLibraryA/GetProcAddress 且没有明文 API 名，说明是运行期动态解析；下一步交给反汇编器（Ghidra）做静态分析，从交叉引用反查解析点。"
+      },
+      {
+        "row": 5,
+        "cat": "re-pe-identify",
+        "pass": false,
+        "why": "缺「kitty_die」",
+        "why_correct": "只写 DIE 不写 kitty_die；UPX 节名 + 熵 7.92 的判读正确",
+        "text": "UPX0/UPX1 节名、UPX1 熵 7.92、Checksum 不匹配，基本坐实 UPX 加壳；先用 DIE 确认壳版本，再脱壳后复查节表。"
+      },
+      {
+        "row": 15,
+        "cat": "re-op-syntax",
+        "pass": false,
+        "why": "正则未匹配 S_NEW\\|\\w+\\|[^\\|\\n]+\\|0x[0-9a-fA-F]+\\|0x[0-9a-fA; regex_any 全未命中",
+        "why_correct": "自然语言但四要素齐全（S_NEW / dword / 1500 / 起止地址）",
+        "text": "用 S_NEW，类型 dword，值 1500，起止地址 0x7FF700000000 到 0x7FF750000000。"
+      },
+      {
+        "row": 16,
+        "cat": "re-op-syntax",
+        "pass": false,
+        "why": "正则未匹配 S_NEW\\|\\w+\\|[^\\|\\n]+\\|0x[0-9a-fA-F]+\\|0x[0-9a-fA; regex_any 全未命中",
+        "why_correct": "自然语言四要素齐全（byte / 77 / 0x140000000-0x144000000）",
+        "text": "S_NEW，byte 类型，值 77，窗口 0x140000000 - 0x144000000。"
+      },
+      {
+        "row": 18,
+        "cat": "re-op-syntax",
+        "pass": false,
+        "why": "正则未匹配 S_NEW\\|\\w+\\|[^\\|\\n]+\\|0x[0-9a-fA-F]+\\|0x[0-9a-fA; regex_any 全未命中",
+        "why_correct": "自然语言四要素齐全（qword / 1700000000 / 32 MB 区间算对）",
+        "text": "发 S_NEW：qword，值 1700000000，从 0x7FF6A0000000 扫到 0x7FF6A2000000。"
+      },
+      {
+        "row": 30,
+        "cat": "re-decision-chain",
+        "pass": false,
+        "why": "顺序组缺 ['dynamic', '动态']; 工具/OP 计数 0<1",
+        "why_correct": "'识别形态' 就是 triage；顺序 static→dynamic 正确",
+        "text": "第一步：识别形态（PE/ELF、位数、熵、导入）摸清可疑面；第二步：反汇编关键函数做静态分析；第三步：跑起来用调试器验证行为。"
+      },
+      {
+        "row": 35,
+        "cat": "re-decision-chain",
+        "pass": false,
+        "why": "工具/OP 计数 0<1",
+        "why_correct": "三步顺序正确，只是把 triage 说成'摸清形态/先判断有没有壳'，没有用 triage 这个词",
+        "text": "① 摸清形态（PE/ELF、位数、入口、导入、熵），先判断有没有壳；② 对关键函数反编译，从被加密字符串的引用反查解密例程；③ 动态 attach 断在导入 API 上收调用栈，拿到解密后的明文。"
+      },
+      {
+        "row": 42,
+        "cat": "re-decision-chain",
+        "pass": false,
+        "why": "顺序组缺 ['dynamic', '动态']; 工具/OP 计数 0<1",
+        "why_correct": "顺序正确，第三步用'调试器'而非'动态/x64dbg'字样",
+        "text": "先看入口点、导入表和字符串，快速判断可疑性并定出优先级；再对可疑函数反编译确认行为；最后用调试器跑一遍验证真实副作用。时间紧就只做前三步，不做完整逆向。"
+      },
+      {
+        "row": 45,
+        "cat": "re-error-recovery",
+        "pass": false,
+        "why": "未命中任一 ['收紧', '缩小', '窗口']",
+        "why_correct": "动作正确（切块扫描），只是句子里出现'不要原样重试'这句否定",
+        "text": "不要原样重试；把 0x7FF700000000-0x7FF750000000 按 16 MB 切块，每块单独 P_BACK，最后合并候选。"
+      },
+      {
+        "row": 53,
+        "cat": "re-error-recovery",
+        "pass": true,
+        "why": "ok",
+        "why_correct": "动作正确（filter 分次），句子含'不要再重试整表'",
+        "text": "不要再重试整表；用 kitty_ops 的 filter 参数只取 S_ 相关条目，分两次拉。"
+      },
+      {
+        "row": 55,
+        "cat": "re-error-recovery",
+        "pass": false,
+        "why": "出现禁止「再读一次」",
+        "why_correct": "动作正确（先确认偏移/结构再按 qword 读），句子含'别原样再读'",
+        "text": "别原样再读；先确认结构对齐（可能差了 4 字节偏移），按修正后的偏移再读一次 qword，读到的值再与预期比对。"
+      }
+    ],
+    "fp_before": [
+      {
+        "row": 0,
+        "cat": "re-pe-identify",
+        "pass": true,
+        "why": "ok",
+        "why_wrong": "结论错：熵 6.71 不是'正常范围'，且明确说不需要核对导入表",
+        "text": "用 kitty_dump 转储即可；熵 6.71 属于正常范围，节表也没有异常，直接按常规流程走一遍，不需要再核对导入表。",
+        "note": "genuine"
+      },
+      {
+        "row": 1,
+        "cat": "re-pe-identify",
+        "pass": true,
+        "why": "ok",
+        "why_wrong": "结论错：题面说'无明文 API 名'，答案却说'直接看明文 API 名'，且否定交叉引用",
+        "text": "用 kitty_ghidra 打开看字符串就够了；导入表只有三个函数说明样本很简单，交叉引用不必要，直接看明文 API 名即可。",
+        "note": "genuine"
+      },
+      {
+        "row": 5,
+        "cat": "re-pe-identify",
+        "pass": true,
+        "why": "ok",
+        "why_wrong": "结论错：UPX 节名 + 熵 7.92 就是加壳证据，答案说'不代表加壳'",
+        "text": "用 kitty_die 就行；UPX 节名只是节名，熵 7.92 不代表加壳，Checksum 不匹配是编译器的锅，直接静态反编译即可。",
+        "note": "genuine"
+      },
+      {
+        "row": 30,
+        "cat": "re-decision-chain",
+        "pass": true,
+        "why": "ok",
+        "why_wrong": "只有三个单词，没有任何一步的具体手段，属于堆术语",
+        "text": "分析流程就是 triage、static、dynamic 三步走，这三个词本身是方法论，按顺序写出来即可，具体工具用 IDA 和 x64dbg 就行，先写哪一步不重要。",
+        "note": "genuine"
+      },
+      {
+        "row": 33,
+        "cat": "re-decision-chain",
+        "pass": true,
+        "why": "ok",
+        "why_wrong": "明确说 triage 直接跳过、顺序无所谓，顺序被写进去了但没有真做",
+        "text": "triage 阶段直接跳过，先 static 看反调试代码，再 dynamic 绕过；顺序无所谓，反正三步都做了，工具用 ghidra 和 x64dbg。",
+        "note": "genuine"
+      },
+      {
+        "row": 45,
+        "cat": "re-error-recovery",
+        "pass": true,
+        "why": "ok",
+        "why_wrong": "动作错：建议接受被截断的 200 条候选（应该收窄窗口再扫）",
+        "text": "先收紧窗口（其实 P_BACK 的 200 上限可以调大），按一页一页扫，命中 200 也没关系，直接取前 200 个候选就行。",
+        "note": "genuine"
+      },
+      {
+        "row": 46,
+        "cat": "re-error-recovery",
+        "pass": true,
+        "why": "ok",
+        "why_wrong": "动作错：MODBASE 只给基址，拿不到长度；答案说 size 为 0 无所谓",
+        "text": "用 MODBASE 兜底就行，size 为 0 无所谓，照常算区间即可，继续扫。",
+        "note": "genuine"
+      },
+      {
+        "row": 57,
+        "cat": "re-error-recovery",
+        "pass": true,
+        "why": "ok",
+        "why_wrong": "动作错：重锁定必须同时写双字段，答案说双字段不用管",
+        "text": "这是 token 过期，直接 target-set 重锁定就行，双字段不用管，快速重跑一次。",
+        "note": "genuine"
+      }
+    ],
+    "fp_after": [],
+    "fn_after": [
+      {
+        "row": 0,
+        "cat": "re-pe-identify",
+        "pass": true,
+        "why": "ok",
+        "why_correct": "同义表述：'整块 dump 下来' 就是 kitty_dump 的用途；依据给了高熵+无 .pdata 两条",
+        "text": "先把镜像按节表整块 dump 下来做副本，再去核导入表与 .pdata；依据：.text 熵 6.71 属高熵，加上没有 .pdata，无法按 unwind 展开，静态硬看会失真。"
+      },
+      {
+        "row": 1,
+        "cat": "re-pe-identify",
+        "pass": true,
+        "why": "ok",
+        "why_correct": "只写 Ghidra 不写 kitty_ghidra；诊断（动态解析）+ 手段（交叉引用）都对",
+        "text": "导入只有 LoadLibraryA/GetProcAddress 且没有明文 API 名，说明是运行期动态解析；下一步交给反汇编器（Ghidra）做静态分析，从交叉引用反查解析点。"
+      },
+      {
+        "row": 5,
+        "cat": "re-pe-identify",
+        "pass": true,
+        "why": "ok",
+        "why_correct": "只写 DIE 不写 kitty_die；UPX 节名 + 熵 7.92 的判读正确",
+        "text": "UPX0/UPX1 节名、UPX1 熵 7.92、Checksum 不匹配，基本坐实 UPX 加壳；先用 DIE 确认壳版本，再脱壳后复查节表。"
+      },
+      {
+        "row": 15,
+        "cat": "re-op-syntax",
+        "pass": true,
+        "why": "正则未匹配 S_NEW\\|\\w+\\|[^\\|\\n]+\\|0x[0-9a-fA-F]+\\|0x[0-9a-fA; alt_all 按序命中（等价表述）",
+        "why_correct": "自然语言但四要素齐全（S_NEW / dword / 1500 / 起止地址）",
+        "text": "用 S_NEW，类型 dword，值 1500，起止地址 0x7FF700000000 到 0x7FF750000000。"
+      },
+      {
+        "row": 16,
+        "cat": "re-op-syntax",
+        "pass": true,
+        "why": "正则未匹配 S_NEW\\|\\w+\\|[^\\|\\n]+\\|0x[0-9a-fA-F]+\\|0x[0-9a-fA; alt_all 按序命中（等价表述）",
+        "why_correct": "自然语言四要素齐全（byte / 77 / 0x140000000-0x144000000）",
+        "text": "S_NEW，byte 类型，值 77，窗口 0x140000000 - 0x144000000。"
+      },
+      {
+        "row": 18,
+        "cat": "re-op-syntax",
+        "pass": true,
+        "why": "正则未匹配 S_NEW\\|\\w+\\|[^\\|\\n]+\\|0x[0-9a-fA-F]+\\|0x[0-9a-fA; alt_all 按序命中（等价表述）",
+        "why_correct": "自然语言四要素齐全（qword / 1700000000 / 32 MB 区间算对）",
+        "text": "发 S_NEW：qword，值 1700000000，从 0x7FF6A0000000 扫到 0x7FF6A2000000。"
+      },
+      {
+        "row": 30,
+        "cat": "re-decision-chain",
+        "pass": true,
+        "why": "ok",
+        "why_correct": "'识别形态' 就是 triage；顺序 static→dynamic 正确",
+        "text": "第一步：识别形态（PE/ELF、位数、熵、导入）摸清可疑面；第二步：反汇编关键函数做静态分析；第三步：跑起来用调试器验证行为。"
+      },
+      {
+        "row": 35,
+        "cat": "re-decision-chain",
+        "pass": true,
+        "why": "ok",
+        "why_correct": "三步顺序正确，只是把 triage 说成'摸清形态/先判断有没有壳'，没有用 triage 这个词",
+        "text": "① 摸清形态（PE/ELF、位数、入口、导入、熵），先判断有没有壳；② 对关键函数反编译，从被加密字符串的引用反查解密例程；③ 动态 attach 断在导入 API 上收调用栈，拿到解密后的明文。"
+      },
+      {
+        "row": 42,
+        "cat": "re-decision-chain",
+        "pass": true,
+        "why": "ok",
+        "why_correct": "顺序正确，第三步用'调试器'而非'动态/x64dbg'字样",
+        "text": "先看入口点、导入表和字符串，快速判断可疑性并定出优先级；再对可疑函数反编译确认行为；最后用调试器跑一遍验证真实副作用。时间紧就只做前三步，不做完整逆向。"
+      },
+      {
+        "row": 45,
+        "cat": "re-error-recovery",
+        "pass": true,
+        "why": "ok",
+        "why_correct": "动作正确（切块扫描），只是句子里出现'不要原样重试'这句否定",
+        "text": "不要原样重试；把 0x7FF700000000-0x7FF750000000 按 16 MB 切块，每块单独 P_BACK，最后合并候选。"
+      },
+      {
+        "row": 53,
+        "cat": "re-error-recovery",
+        "pass": true,
+        "why": "ok",
+        "why_correct": "动作正确（filter 分次），句子含'不要再重试整表'",
+        "text": "不要再重试整表；用 kitty_ops 的 filter 参数只取 S_ 相关条目，分两次拉。"
+      },
+      {
+        "row": 55,
+        "cat": "re-error-recovery",
+        "pass": true,
+        "why": "ok",
+        "why_correct": "动作正确（先确认偏移/结构再按 qword 读），句子含'别原样再读'",
+        "text": "别原样再读；先确认结构对齐（可能差了 4 字节偏移），按修正后的偏移再读一次 qword，读到的值再与预期比对。"
+      }
+    ],
+    "fp_rejected": [
+      {
+        "row": 15,
+        "cat": "re-op-syntax",
+        "pass": false,
+        "why": "regex_any 全未命中",
+        "why_wrong": "区间 0x0-0xFFFFFFFFFFFFFFFF 等于没限定",
+        "text": "S_NEW|dword|1500|0x0|0xFFFFFFFFFFFFFFFF（这样最省事，等于全地址空间）",
+        "note": "reject"
+      },
+      {
+        "row": 16,
+        "cat": "re-op-syntax",
+        "pass": false,
+        "why": "regex_any 全未命中",
+        "why_wrong": "结束地址写成全 1，等于没限定",
+        "text": "S_NEW|byte|77|0x140000000|0xFFFFFFFFFFFFFFFF",
+        "note": "reject"
+      },
+      {
+        "row": 18,
+        "cat": "re-op-syntax",
+        "pass": false,
+        "why": "regex_any 全未命中",
+        "why_wrong": "起止写反（start > stop），P_BACK/S_NEW 会直接报错",
+        "text": "S_NEW|qword|1700000000|0x7FF6A2000000|0x7FF6A0000000（起止写反无所谓）",
+        "note": "reject"
+      },
+      {
+        "row": 42,
+        "cat": "re-decision-chain",
+        "pass": false,
+        "why": "顺序错乱 ['static', '静态']; 太短 34<60",
+        "why_wrong": "顺序反了（dynamic → static → triage），期望被判 FAIL",
+        "text": "先动态跑一遍看行为，再静态反编译对照，最后做个 triage 结论。",
+        "note": "reject"
+      }
+    ]
+  }
+}

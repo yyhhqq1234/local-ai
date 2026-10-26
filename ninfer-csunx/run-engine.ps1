@@ -71,8 +71,6 @@ $engineArgs = @(
     '--cuda-graph-allowance-mib', '64',
     '--prefill-chunk', [string]$PrefillChunk,
     '--gdn-state-fp16',
-    '--spec', 'mtp',
-    '--draft-tokens', [string]$DraftTokens,
     '--default-max-tokens', '0',
     '--kv-lease-growth',
     '--default-reasoning-effort', $ReasoningEffort,

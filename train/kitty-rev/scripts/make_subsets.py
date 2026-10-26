@@ -43,17 +43,38 @@ GROUPS = {
     # generic replay set: mixed in at 逆向:通用 = 4:1 so 359 reverse rows cannot
     # drag the last 16 layers off-distribution (catastrophic forgetting)
     "gen": ["reasoning"],
+    # ["*"] = 用 SELECTORS[forge] 的行级判据切，不按 cat（见 SELECTORS 注释）
+    "forge": ["*"],
+    # comply = 配合意愿四类（data/intent2，各 100）。按 cat 显式列举而不是前缀匹配：
+    # cat 名是稳定契约，前缀匹配会在将来新增 comply-e 时静默并进来（宁可报 0 也不要默默变大）。
+    # 注意 EXCLUDE_FORGE 不含 comply —— comply 行没有 meta.forge，不会被剔除。
+    "comply": ["comply-a", "comply-b", "comply-c", "comply-d"],
 }
 # a group may cap how many rows it keeps (gen is a sample, not a whole category)
 CAPS = {"gen": 100}
+# Groups selected by a row PREDICATE instead of cat membership.
+#   forge = data/forge 产出的高密度逆向样本（meta.forge 存在即入选）。
+#   WHY not by cat: op-syntax（473 条）/ real-trajectory 两个 cat 里混着大量旧的
+#   模板式低密度行，按 cat 整体并入会把 4 倍密度的 forge 样本稀释掉。逆向权重靠
+#   训练侧分层采样（forge:4 / re:2 / rest:1）来拿，不靠在切分侧混池。
+SELECTORS = {
+    "forge": lambda r: bool((r.get("meta") or {}).get("forge")),
+}
 # gen must be disjoint from the targeted groups -- asserted, not just reported
 DISJOINT = {"gen": ["re", "route", "discipline"]}
+# forge 是独立池：目标组若重复收 forge 行，`forge:4,re-train:2` 里那部分实际权重
+# 会变成 6 而非 4，配比表失去可解释性（lead 裁决 A）。
+EXCLUDE_FORGE = {"re", "route", "discipline"}
 # reference counts on 2026-10-21; a mismatch is reported, not fatal
 EXPECT = {
     "re": {"kb-re": 194, "action-reverse": 165, "total": 359},
     "route": {"tool-route": 292, "total": 292},
     "discipline": {"real-discipline": 383, "total": 383},
     "gen": {"reasoning": 100, "total": 100},
+    # forge 目标 480（四类各 120）；实得少于目标时只报警不失败
+    "forge": {"total": 480},
+    # comply 目标 400（四类各 100）；本轮不参与训练，下轮启用
+    "comply": {"total": 400},
 }
 
 
@@ -102,9 +123,15 @@ def scan_refusals(rows, patterns=None):
     patterns = patterns or REFUSAL_PATTERNS
     hits = {}
     for r in rows:
+        m0 = r.get("meta") or {}
         # §17 intent data is DELIBERATELY non-refusing; filtering it would delete
         # exactly the behaviour we are trying to install.
-        if (r.get("meta") or {}).get("intent"):
+        if m0.get("intent"):
+            continue
+        # forge rows are high-density reverse samples selected by a row-level
+        # SELECTOR; they are meant to teach "answer directly", so a lexical
+        # refusal hit here would be a false positive on the teaching material.
+        if m0.get("forge"):
             continue
         txt = " ".join((m.get("content") or "") for m in (r.get("messages") or [])
                        if m.get("role") == "assistant")
@@ -210,17 +237,39 @@ def main():
 
     ok = True
     used = set()          # hashes already claimed by earlier groups
+    group_hashes = {}     # gname -> set(hash), for the no-overlap assertion
     for gname, cats in groups.items():
         pool = []
         cat_counts = {}
         removed_disjoint = 0
+        removed_forge = 0
         raw_n = raw_ref = 0
+        sel = SELECTORS.get(gname)
+        if cats == ["*"] and sel is None:
+            print(f"[{gname}][FATAL] 组 {gname} 声明为 ['*'] 但 SELECTORS 里没有对应判据")
+            ok = False
+            continue
+        if cats == ["*"]:
+            # 行级判据分组：cat 列表由命中行反推，pool 只收命中行
+            buckets = {}
+            for r in uniq:
+                if sel(r):
+                    buckets.setdefault((r.get("meta") or {}).get("cat", "?"), []).append(r)
+            cats = sorted(buckets)
+        else:
+            buckets = {c: list(by_cat.get(c, [])) for c in cats}
         for c in cats:
-            lst = list(by_cat.get(c, []))
+            lst = buckets[c]
             if gname in DISJOINT:
                 before = len(lst)
                 lst = [r for r in lst if r["_hash"] not in used]
                 removed_disjoint += before - len(lst)
+            # 裁决 A：目标组剔除 forge 行，保证 `forge:4,re-train:2` 的权重语义干净
+            if gname in EXCLUDE_FORGE:
+                before = len(lst)
+                lst = [r for r in lst
+                       if not (r.get("meta") or {}).get("forge")]
+                removed_forge += before - len(lst)
             raw_n += len(lst)
             raw_ref += sum(1 for r in lst if r["_hash"] in refusal_hits)
             if a.filter_refusal:
@@ -279,8 +328,10 @@ def main():
                 h, sz = file_sha16(path)
                 files[tag].update({"sha256_16": h, "bytes": sz})
 
+        group_hashes[gname] = {r["_hash"] for r in pool}
         manifest["groups"][gname] = {
             "cats": cat_counts, "total": len(pool),
+            "excluded_forge": removed_forge,
             "train": len(train), "val": len(val),
             "val_ratio_actual": round(len(val) / max(1, len(pool)), 4),
             "cap": CAPS.get(gname, 0),
@@ -310,6 +361,40 @@ def main():
             if ov:
                 print(f"[overlap] {names[i]} ∩ {names[j]} = {ov} 条（同内容跨组，训练时可能重复计权）")
 
+    # ---- 覆盖断言：各组互不重叠，且 并集 + 未分组 == 输入行数 ----------
+    # (placed BEFORE the dry-run return so --dry-run validates the identity too)
+    seen, overlaps = set(), []
+    for g, hs in group_hashes.items():
+        ov = seen & hs
+        if ov:
+            overlaps.append({"group": g, "overlap": len(ov),
+                             "with": sorted(x for x in group_hashes
+                                            if group_hashes[x] & ov and x != g)})
+        seen |= hs
+    unassigned = len(uniq) - len(seen)
+    n_rows = len(uniq)
+    sum_groups = sum(len(h) for h in group_hashes.values())
+    if overlaps:
+        ok = False
+        print(f"[assert][FATAL] 组间重叠: {overlaps}")
+    if sum_groups + unassigned != n_rows:
+        ok = False
+        print(f"[assert][FATAL] 恒等式不成立: Σ组={sum_groups} + 未分组={unassigned} "
+              f"!= 总行数={n_rows}")
+    else:
+        print(f"[assert] 互不重叠 ✓  Σ组={sum_groups} + 未分组={unassigned} = {n_rows} ✓")
+    manifest["coverage"] = {
+        "rows": n_rows, "sum_groups": sum_groups, "unassigned": unassigned,
+        "overlaps": overlaps,
+        "identity_ok": (sum_groups + unassigned == n_rows and not overlaps),
+        "per_group": {g: len(h) for g, h in group_hashes.items()},
+    }
+    # 提到顶层：打开 subsets_manifest.json 第一眼就能看到恒等式是否成立
+    manifest["identity_ok"] = manifest["coverage"]["identity_ok"]
+    manifest["rows"] = n_rows
+    manifest["sum_groups"] = sum_groups
+    manifest["unassigned"] = unassigned
+
     if a.dry_run:
         print("[dry-run] 未写任何文件")
         return 0 if ok else 1
@@ -317,8 +402,18 @@ def main():
     # ---- refusal scan report (§16) -----------------------------------------
     scan_groups = {}
     for gname, cats in groups.items():
-        sub = [d for _h, d in refusal_hits.items() if d["cat"] in cats]
-        n_raw = sum(len(by_cat.get(c, [])) for c in cats)
+        sel = SELECTORS.get(gname)
+        if cats == ["*"] and sel is not None:
+            # 行级判据组：cats 从未被回写进 groups，这里必须按 sel 反推，
+            # 否则 by_cat.get("*") 恒为 0（曾导致 [refusal][forge] raw=0 的假数字）
+            sel_rows = [r for r in uniq if sel(r)]
+            sel_hashes = {r["_hash"] for r in sel_rows}
+            sub = [d for h, d in refusal_hits.items() if h in sel_hashes]
+            n_raw = len(sel_rows)
+            cats = sorted({(r.get("meta") or {}).get("cat", "?") for r in sel_rows})
+        else:
+            sub = [d for _h, d in refusal_hits.items() if d["cat"] in cats]
+            n_raw = sum(len(by_cat.get(c, [])) for c in cats)
         rate = len(sub) / max(1, n_raw)
         scan_groups[gname] = {
             "cats": cats, "raw": n_raw, "hits": len(sub), "rate": round(rate, 4),

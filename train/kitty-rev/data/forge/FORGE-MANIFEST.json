@@ -1,0 +1,191 @@
+{
+  "generated_by": "scripts/gen_forge.py",
+  "mode": "all",
+  "per_class": "full",
+  "files": {
+    "re-pe-structure": {
+      "path": "data/forge/re-pe-structure.jsonl",
+      "cat": "kb-re",
+      "count": 120,
+      "sha16": "9133df18272434a4",
+      "bytes": 158966
+    },
+    "re-op-semantics": {
+      "path": "data/forge/re-op-semantics.jsonl",
+      "cat": "op-syntax",
+      "count": 120,
+      "sha16": "c0cf097ffcc99fc8",
+      "bytes": 132887
+    },
+    "re-decision-chain": {
+      "path": "data/forge/re-decision-chain.jsonl",
+      "cat": "action-reverse",
+      "count": 120,
+      "sha16": "91d6c4661375c80d",
+      "bytes": 159823
+    },
+    "re-detour-trajectory": {
+      "path": "data/forge/re-detour-trajectory.jsonl",
+      "cat": "real-trajectory",
+      "count": 120,
+      "sha16": "5b1234ae789d928c",
+      "bytes": 177310
+    }
+  },
+  "baseline": {},
+  "dedupe": {
+    "base_full_hashes": 3908,
+    "base_user_hashes": 3602,
+    "eval_full_hashes": 60,
+    "eval_user_hashes": 60
+  },
+  "gates": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "total": 480,
+  "stats": {
+    "len_min": 225,
+    "len_avg": 516.7,
+    "len_max": 1393,
+    "tool_density_avg": 4.51,
+    "refusal_hits": 0,
+    "dup_with_359": 0,
+    "dup_with_eval60": 0,
+    "near_dup_with_eval60": 0
+  },
+  "per_cat": {
+    "pe": {
+      "cat": "kb-re",
+      "file": "re-pe-structure",
+      "want": 122,
+      "kept": 120,
+      "dropped": 0,
+      "dup_base": 0,
+      "dup_eval": 0,
+      "dup_self": 0,
+      "near_eval": 0,
+      "len": {
+        "min": 351,
+        "avg": 530.0,
+        "max": 754
+      },
+      "tool_density": 4.33,
+      "drop_detail": []
+    },
+    "op": {
+      "cat": "op-syntax",
+      "file": "re-op-semantics",
+      "want": 123,
+      "kept": 120,
+      "dropped": 0,
+      "dup_base": 0,
+      "dup_eval": 0,
+      "dup_self": 0,
+      "near_eval": 0,
+      "len": {
+        "min": 225,
+        "avg": 391.4,
+        "max": 833
+      },
+      "tool_density": 4.69,
+      "drop_detail": []
+    },
+    "chain": {
+      "cat": "action-reverse",
+      "file": "re-decision-chain",
+      "want": 120,
+      "kept": 120,
+      "dropped": 0,
+      "dup_base": 0,
+      "dup_eval": 0,
+      "dup_self": 0,
+      "near_eval": 0,
+      "len": {
+        "min": 282,
+        "avg": 539.0,
+        "max": 1021
+      },
+      "tool_density": 4.49,
+      "drop_detail": []
+    },
+    "detour": {
+      "cat": "real-trajectory",
+      "file": "re-detour-trajectory",
+      "want": 129,
+      "kept": 120,
+      "dropped": 0,
+      "dup_base": 0,
+      "dup_eval": 0,
+      "dup_self": 0,
+      "near_eval": 0,
+      "len": {
+        "min": 311,
+        "avg": 606.3,
+        "max": 1393
+      },
+      "tool_density": 4.54,
+      "drop_detail": []
+    }
+  },
+  "gate_rejections": {},
+  "capped_sources": {
+    "rule": "每类封顶 TARGET_PER=120；源条数超过目标时按源顺序取前 120 条（确定性，非随机抽），被封掉的是同类里排序最末的一批",
+    "target_per": 120,
+    "per_class": {
+      "pe": {
+        "source_pairs": 122,
+        "passed_gates": 122,
+        "kept": 120,
+        "capped": 2
+      },
+      "op": {
+        "source_pairs": 123,
+        "passed_gates": 123,
+        "kept": 120,
+        "capped": 3
+      },
+      "chain": {
+        "source_pairs": 120,
+        "passed_gates": 120,
+        "kept": 120,
+        "capped": 0
+      },
+      "detour": {
+        "source_pairs": 129,
+        "passed_gates": 129,
+        "kept": 120,
+        "capped": 9
+      }
+    },
+    "reproducibility": "源文件与模块列表决定顺序；改动任一 forge_src 模块的条目顺序会改变被封掉的那批，重跑后请比对本字段的 capped 值是否仍与预期一致"
+  },
+  "forge_tag_coverage": {
+    "rows": 480,
+    "tagged": 480,
+    "rate": "1.000",
+    "note": "每条都带 meta.forge；make_subsets 按该标记切 forge 组，并从 re/route/discipline 剔除"
+  },
+  "data_observations": [
+    {
+      "id": "obs-prompt-collision",
+      "what": "data/large-mix/train.jsonl 3908 行中，306 行的 user 提示完全相同（同问不同答）",
+      "cause": "action-reverse silver 是模板生成：同一句「X 是哪个 kitty 工具的 action？」对不同工具/动作各一条",
+      "verdict": "已知设计性重复，本轮不修改 —— 改动会破坏与历史基线的可比性",
+      "impact": "min_chars / min_tool 这类「按 user 提示去重再判」的判据效果会减弱；按 assistant 内容判定的判据不受影响",
+      "measured_by": "user_hash = sha256(normalized user contents)；rows=3908, unique_user_hash=3602"
+    },
+    {
+      "id": "obs-no-row-dup",
+      "what": "同文件无行级重复（full_hash 3908/3908 唯一）",
+      "verdict": "无需处理"
+    }
+  ]
+}

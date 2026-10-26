@@ -1,0 +1,51 @@
+{
+  "generated_by": "scripts/make_comply_subsets.py",
+  "source": "data/intent2/compliance-sft.jsonl",
+  "source_rows": 400,
+  "seed": 42,
+  "val_ratio": 0.2,
+  "hash_algo": "make_subsets.content_hash（json.dumps(norm, ensure_ascii=False, sort_keys=True)）",
+  "per_cat": {
+    "comply-a": {
+      "total": 100,
+      "train": 80,
+      "val": 20
+    },
+    "comply-b": {
+      "total": 100,
+      "train": 80,
+      "val": 20
+    },
+    "comply-c": {
+      "total": 100,
+      "train": 80,
+      "val": 20
+    },
+    "comply-d": {
+      "total": 100,
+      "train": 80,
+      "val": 20
+    }
+  },
+  "train": {
+    "file": "comply-subset.train.jsonl",
+    "rows": 320,
+    "sha16": "4dbced23e07831b2",
+    "bytes": 313297
+  },
+  "val": {
+    "file": "comply-subset.val.jsonl",
+    "rows": 80,
+    "sha16": "d03b8e61ffbf1412",
+    "bytes": 78037
+  },
+  "assertions": {
+    "train_val_hash_disjoint": true,
+    "leak_count": 0,
+    "prompt_unique": true,
+    "dup_prompt": {},
+    "same_prompt_diff_answer": {},
+    "counts_ok": true,
+    "verdict": "PASS"
+  }
+}

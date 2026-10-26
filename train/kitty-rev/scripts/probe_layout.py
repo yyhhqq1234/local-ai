@@ -2,6 +2,10 @@
 # -*- coding: utf-8 -*-
 """probe_layout.py -- read-only layout probe for the partial-LoRA pipeline.
 
+⚠ 只能在 AutoDL 实例内跑：BASE / ADAPTER 硬编码 /root/autodl-tmp/kitty-rev/...，
+  本机直接执行会 FileNotFoundError（本脚本无 argparse，--help 也会走 main）。
+  2026-10-21 判为非缺陷（云端一次性探针，已交付）；要本地跑请改下面两个常量。
+
 Prints, without loading any weight into RAM beyond headers:
   * base shard/key layout (from model.safetensors.index.json)
   * which layers/modules the LoRA adapter actually covers

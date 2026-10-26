@@ -1,0 +1,2460 @@
+{
+  "src": "tmp/audit/plus480/train.jsonl",
+  "out": "tmp/audit/mf/deep/out.jsonl",
+  "rows_src": 4388,
+  "rows_added": 0,
+  "rows_total": 4388,
+  "sha256": "b90a1ae8a8b5519b7abefe619395877d9ee222eb2adeb39e5fea99a0c0d6503d",
+  "bytes": 5972631,
+  "added_per_cat": {
+    "kb-re": 0,
+    "op-syntax": 0,
+    "action-reverse": 0,
+    "real-trajectory": 0
+  },
+  "dropped": [
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 1,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 2,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 3,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 4,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 5,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 6,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 7,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 8,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 9,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 10,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 11,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 12,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 13,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 14,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 15,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 16,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 17,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 18,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 19,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 20,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 21,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 22,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 23,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 24,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 25,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 26,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 27,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 28,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 29,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 30,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 31,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 32,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 33,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 34,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 35,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 36,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 37,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 38,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 39,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 40,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 41,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 42,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 43,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 44,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 45,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 46,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 47,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 48,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 49,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 50,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 51,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 52,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 53,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 54,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 55,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 56,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 57,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 58,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 59,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 60,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 61,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 62,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 63,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 64,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 65,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 66,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 67,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 68,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 69,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 70,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 71,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 72,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 73,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 74,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 75,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 76,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 77,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 78,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 79,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 80,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 81,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 82,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 83,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 84,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 85,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 86,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 87,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 88,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 89,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 90,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 91,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 92,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 93,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 94,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 95,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 96,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 97,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 98,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 99,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 100,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 101,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 102,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 103,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 104,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 105,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 106,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 107,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 108,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 109,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 110,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 111,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 112,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 113,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 114,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 115,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 116,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 117,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 118,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 119,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-pe-structure.jsonl",
+      "line": 120,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 1,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 2,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 3,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 4,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 5,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 6,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 7,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 8,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 9,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 10,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 11,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 12,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 13,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 14,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 15,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 16,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 17,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 18,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 19,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 20,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 21,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 22,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 23,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 24,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 25,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 26,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 27,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 28,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 29,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 30,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 31,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 32,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 33,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 34,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 35,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 36,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 37,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 38,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 39,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 40,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 41,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 42,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 43,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 44,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 45,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 46,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 47,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 48,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 49,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 50,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 51,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 52,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 53,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 54,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 55,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 56,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 57,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 58,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 59,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 60,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 61,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 62,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 63,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 64,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 65,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 66,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 67,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 68,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 69,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 70,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 71,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 72,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 73,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 74,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 75,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 76,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 77,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 78,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 79,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 80,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 81,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 82,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 83,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 84,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 85,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 86,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 87,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 88,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 89,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 90,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 91,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 92,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 93,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 94,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 95,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 96,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 97,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 98,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 99,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 100,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 101,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 102,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 103,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 104,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 105,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 106,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 107,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 108,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 109,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 110,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 111,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 112,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 113,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 114,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 115,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 116,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 117,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 118,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 119,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-op-semantics.jsonl",
+      "line": 120,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 1,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 2,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 3,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 4,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 5,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 6,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 7,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 8,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 9,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 10,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 11,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 12,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 13,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 14,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 15,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 16,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 17,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 18,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 19,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 20,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 21,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 22,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 23,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 24,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 25,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 26,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 27,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 28,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 29,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 30,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 31,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 32,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 33,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 34,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 35,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 36,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 37,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 38,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 39,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 40,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 41,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 42,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 43,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 44,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 45,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 46,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 47,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 48,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 49,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 50,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 51,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 52,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 53,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 54,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 55,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 56,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 57,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 58,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 59,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 60,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 61,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 62,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 63,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 64,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 65,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 66,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 67,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 68,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 69,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 70,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 71,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 72,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 73,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 74,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 75,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 76,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 77,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 78,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 79,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 80,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 81,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 82,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 83,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 84,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 85,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 86,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 87,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 88,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 89,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 90,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 91,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 92,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 93,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 94,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 95,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 96,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 97,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 98,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 99,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 100,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 101,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 102,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 103,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 104,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 105,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 106,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 107,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 108,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 109,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 110,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 111,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 112,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 113,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 114,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 115,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 116,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 117,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 118,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 119,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-decision-chain.jsonl",
+      "line": 120,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 1,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 2,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 3,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 4,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 5,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 6,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 7,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 8,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 9,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 10,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 11,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 12,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 13,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 14,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 15,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 16,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 17,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 18,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 19,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 20,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 21,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 22,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 23,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 24,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 25,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 26,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 27,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 28,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 29,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 30,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 31,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 32,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 33,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 34,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 35,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 36,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 37,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 38,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 39,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 40,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 41,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 42,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 43,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 44,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 45,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 46,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 47,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 48,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 49,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 50,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 51,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 52,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 53,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 54,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 55,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 56,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 57,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 58,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 59,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 60,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 61,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 62,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 63,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 64,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 65,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 66,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 67,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 68,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 69,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 70,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 71,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 72,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 73,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 74,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 75,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 76,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 77,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 78,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 79,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 80,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 81,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 82,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 83,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 84,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 85,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 86,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 87,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 88,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 89,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 90,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 91,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 92,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 93,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 94,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 95,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 96,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 97,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 98,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 99,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 100,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 101,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 102,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 103,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 104,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 105,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 106,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 107,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 108,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 109,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 110,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 111,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 112,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 113,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 114,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 115,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 116,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 117,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 118,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 119,
+      "why": "与既有/已并入行重复"
+    },
+    {
+      "file": "re-detour-trajectory.jsonl",
+      "line": 120,
+      "why": "与既有/已并入行重复"
+    }
+  ],
+  "cat_distribution": {
+    "reasoning": 1172,
+    "op-syntax": 593,
+    "tool-action": 529,
+    "real-discipline": 383,
+    "kb-re": 314,
+    "tool-route": 292,
+    "action-reverse": 285,
+    "kb-tool": 221,
+    "real-trajectory": 137,
+    "trajectory": 100,
+    "guard": 87,
+    "transition-syntax": 54,
+    "error-recovery": 45,
+    "kb-guard": 43,
+    "next-action": 37,
+    "real-kitty": 36,
+    "op-tool-map": 33,
+    "error-trajectory": 6,
+    "closeout": 2,
+    "error-recovery-no-target": 2,
+    "protocol-compression": 1,
+    "capability-boundary": 1,
+    "pointer-chain": 1,
+    "kernel-view": 1,
+    "tool-missing-escalate": 1,
+    "host-selfheal": 1,
+    "error-recovery-transition": 1,
+    "cost-convergence": 1,
+    "dual-field-gate": 1,
+    "happy-path": 1,
+    "dualview-gate": 1,
+    "spec-compliance": 1,
+    "patch-expect": 1,
+    "op-precision-scan": 1,
+    "contract-conflict": 1,
+    "write-guard": 1,
+    "error-recovery-need-range": 1
+  },
+  "eval_isolation": {
+    "eval_rows": 60,
+    "collisions": 0
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "_readme": "P6 反扫的人工分诊结论。每条必须有 reason；没有理由的白名单等于把缺陷藏起来。数字要降就写理由，不要改代码去迁就扫描器。",
+  "_generated_by": "tmp/audit/gen_allow.py（审查岗 audit-fix-2，2026-10-21）",
+  "D1": [
+    {
+      "file": "scripts/fetch_reasoning.py",
+      "name": "cjk",
+      "line": 137,
+      "reason": "headtail 里算了 CJK 字符数但没用（ratio 用的是 est_tokens 重算）。纯死计算，无行为影响；保留它只会误导下次改截断比例的人。要删随时可删，不影响输出。"
+    },
+    {
+      "file": "scripts/plan_layers.py",
+      "name": "dis_span",
+      "line": 268,
+      "reason": "决策树只按 re/route 两路分叉（L289 起），real-discipline 的 span 取出来没用。属于「少一条裁决依据」而非算错；文件已交回 deliver-prep，审查岗不越界改。"
+    },
+    {
+      "file": "scripts/probe_layers.py",
+      "name": "why",
+      "line": 446,
+      "reason": "judges.judge 的 why 是诊断文本，ablation 记录只落 text/pass。判非缺陷：pass 已落盘，why 可从同一条 text 重跑复现。"
+    },
+    {
+      "file": "scripts/refusal_probe.py",
+      "name": "pi",
+      "line": 151,
+      "reason": "is_refusal 返回 (bool, pattern_index, hit_text)，调用方只用 bool 与 hit_text；pattern_index 是调试用，不打不影响判定。"
+    },
+    {
+      "file": "scripts/refusal_probe.py",
+      "name": "samples",
+      "line": 175,
+      "reason": "measure_text 里局部 samples=[] 没被用（返回值另起的 dict 里 samples=refused[:10]）。判非缺陷：输出正确，只是多了一个空列表。"
+    },
+    {
+      "file": "scripts/split_model_layers.py",
+      "name": "total_bytes",
+      "line": 84,
+      "reason": "plan[gk]['bytes'] 从未累加 → total_bytes 恒 0，且打印行已明说「待精确统计」。判非缺陷（诚实标注过），但别指望这个字段能当容量预算。"
+    },
+    {
+      "file": "scripts/train_kitty.py",
+      "name": "kw2",
+      "line": 220,
+      "reason": "部分层 4bit 分支里复制了一份旧 quantization_config 到 kw2 就再没读过。纯死赋值。"
+    },
+    {
+      "file": "scripts/train_partial_lora.py",
+      "name": "val_overlap",
+      "line": 1021,
+      "reason": "check_val_overlap 的判据靠 side effect（同根 FATAL / 同文件 WARN），返回值没人读。检查本身在跑，不是静默；要把 same_root/shared_files 落进报告属新功能，不在审查岗范围。"
+    }
+  ],
+  "D2": [
+    {
+      "file": "scripts/compliance_probe.py",
+      "key": "stream",
+      "line": 146,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/gen_forge.py",
+      "key": "cats",
+      "line": 244,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/gen_forge.py",
+      "key": "abort",
+      "line": 244,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/gen_forge.py",
+      "key": "files",
+      "line": 319,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/gen_forge.py",
+      "key": "baseline",
+      "line": 319,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/gen_selfgen_replay.py",
+      "key": "stream",
+      "line": 165,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/make_subsets.py",
+      "key": "groups",
+      "line": 228,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/plan_layers.py",
+      "key": "spans",
+      "line": 239,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/plan_layers.py",
+      "key": "adapter_peak",
+      "line": 239,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/plan_layers.py",
+      "key": "convergence_layer",
+      "line": 239,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/precompute_activations.py",
+      "key": "samples",
+      "line": 464,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/precompute_activations.py",
+      "key": "skipped",
+      "line": 464,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/precompute_activations.py",
+      "key": "truncated",
+      "line": 464,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/precompute_activations.py",
+      "key": "mask_bad_spans",
+      "line": 464,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/precompute_activations.py",
+      "key": "mask_bad",
+      "line": 465,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/precompute_activations.py",
+      "key": "skipped_by_subset",
+      "line": 465,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/probe_layers.py",
+      "key": "cats",
+      "line": 697,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/probe_layers.py",
+      "key": "ablation_dloss",
+      "line": 698,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/probe_layers.py",
+      "key": "sensitive_span",
+      "line": 698,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/probe_layers.py",
+      "key": "recommendation",
+      "line": 698,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/probe_layers.py",
+      "key": "tasks",
+      "line": 390,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/probe_layers.py",
+      "key": "modules",
+      "line": 552,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/probe_layers.py",
+      "key": "fro_delta_sum",
+      "line": 552,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/probe_layers.py",
+      "key": "spec_max",
+      "line": 553,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/probe_layers.py",
+      "key": "spec_sum",
+      "line": 553,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/probe_layers.py",
+      "key": "n",
+      "line": 553,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/refusal_probe.py",
+      "key": "stream",
+      "line": 165,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    },
+    {
+      "file": "scripts/validate_dataset.py",
+      "key": "issues",
+      "line": 71,
+      "reason": "report 骨架初始化（空容器/None/0），运行期被填充；本轮抽查 validate_dataset:issues、precompute:samples、gen_forge:cats 三处均如此 → 判非缺陷。若是「写死且永不变化」的字段（第 8 例 collisions），不在此列，应改成计数器。"
+    }
+  ]
+}

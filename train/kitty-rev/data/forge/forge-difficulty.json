@@ -1,0 +1,6766 @@
+{
+ "generated_by": "scripts/forge_difficulty.py",
+ "applies_to": [
+  "data/forge/re-pe-structure.jsonl",
+  "data/forge/re-op-semantics.jsonl",
+  "data/forge/re-decision-chain.jsonl",
+  "data/forge/re-detour-trajectory.jsonl"
+ ],
+ "join_key": "sha256(normalized user content)  —— 与 make_subsets.content_hash 不同键，仅作采样侧关联",
+ "why_sidecar": "不改 JSONL：forge-subset 的 sha16 已被下游记录，改正文会迫使 act-cache 重跑",
+ "rule": {
+  "F1_cross_view": "命中 kitty_km/KM_*/kitty_dualview/kitty_wpb/物理读/PTE → +1",
+  "F2_multi_step": "编号步数 ≥3（[1]/1)/1、 三种写法都算），或绕路「往返N」个数 ≥4，或结构化标记种类 ≥3（triage/static/dynamic/判据/退出/收敛/回读/验证/复验）→ +1",
+  "F3_correction": "命中 ERR|/失败/不对/改走/回滚/纠正/推翻/作废/绕 → +1",
+  "band": "score 0-1=easy · 2=medium · 3=hard",
+  "known_bias": "分层结果与类别高度相关（kb-re/op-syntax 几乎全 easy，real-trajectory 集中 medium+hard）—— 因为三因子里的 F1/F3 本质是「是否含跨视图取证 / 是否含失败纠正」，而那正是绕路类的定义特征。因此本分层实质上接近「类别标签的另一种写法」。"
+ },
+ "recommendation": {
+  "for_training_sampling": "不建议 —— 按 hard 加权等于变相提高 real-trajectory 类权重，而类权重已由 --data-mix 的 forge:4 统一给出；再加一层会过拟合绕路文风",
+  "for_eval": "建议 —— 用 band 在 val 集上分组看 loss/准确率，能回答「模型是不是只学会了一轮成型、学不会纠错」这个真问题",
+  "cost": "0（旁路文件，不改 JSONL、不改 sha16、不需要改 sampler）"
+ },
+ "counts": {
+  "action-reverse": {
+   "easy": 99,
+   "medium": 21
+  },
+  "kb-re": {
+   "easy": 119,
+   "medium": 1
+  },
+  "op-syntax": {
+   "easy": 103,
+   "hard": 3,
+   "medium": 14
+  },
+  "real-trajectory": {
+   "easy": 23,
+   "hard": 13,
+   "medium": 84
+  }
+ },
+ "total": 480,
+ "rows": {
+  "fc37521c7a8ef5f79c310cf91b8e062574f09d2bc4671a8d93a1c1d00418ac1b": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 716
+  },
+  "65105bf79afff4743fa52219b4526995d06198d28c419857e78d57e29eb1882b": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 0
+   },
+   "asst_chars": 640
+  },
+  "950d2f7ee9d77ebcc8025a6a11ca8d5b0b4621a326a61ab078399e3b06e8651d": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 621
+  },
+  "e0e62d7c380cde741db261aeb02d6ca7ac6290082723cc6bc62b2bff54929df2": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 738
+  },
+  "55a490f5e295265b5aae85db03523ebd6685b3b5c17c4f16177cf0681dd85543": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 654
+  },
+  "a227bf072993e2061dcff4f4914e2f4addddf740f3e6fe65c7034b2918d1680d": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 621
+  },
+  "439a60eedbd87efaa992fe99160e39364f78cbdb14acdb02fe0521d0b3334c46": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 727
+  },
+  "f4bc0a516104e80b86ebe0f61fc1b4a5f028f45b5704062af70e8a08bb9695d8": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 575
+  },
+  "d9c150b406bb19e014af7d42405dcd4cfc107fef2f485bf7aa56920e7a8845b3": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 671
+  },
+  "28fc6cb51fe29b1e6ffaee37d4063b7d168f741bd2bc9234ddee89cd99943907": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 636
+  },
+  "ba21776aaa4aac2fda772be4dd9a6ceaae7e2e808d69c97e337944b8a19f5c50": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 601
+  },
+  "f7fb54e81ad2e78bf1ea816aad73b2913a02ec20bf143dca8c08778c38185c18": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 0
+   },
+   "asst_chars": 674
+  },
+  "7699cdcaf23dceb58b615a57d7c44d58b9a95983d5e8c9134b4ea58c1aae1b38": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 0
+   },
+   "asst_chars": 570
+  },
+  "361582b19d5d9db014099ec465ae5458594816f6691cacb6cc56465962a3b505": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 660
+  },
+  "ba18549d9f39de779fe3ac613109241e9c348df57345f33aeafc7f32c1b6b70f": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 0
+   },
+   "asst_chars": 587
+  },
+  "b6dc07aaac930f74185079d3cfc4a0b2958d9a2cc9260f9f9f30cf60dcddaf64": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 2,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 718
+  },
+  "e444d03675839ec1a76784d128c7930b7005b28a834f553b31b517f3be084d29": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 645
+  },
+  "67d8457eee2f92ae9c1bf2ee3aef6ba9becfaf326bb50a63fccd26600d48b1c1": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 0
+   },
+   "asst_chars": 657
+  },
+  "e2b01d8aa819180c784ae92dda44fb0f8f7e3240c2617cfcad79fb6df6c9ab8b": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 0
+   },
+   "asst_chars": 533
+  },
+  "2af79a30e8fd90d07f9a41743ec05be7c2bbf2a870fef23e3043699b724c45bc": {
+   "cat": "kb-re",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 547
+  },
+  "c970c5b3c449ff53dc117d3cf2628d406b8066f1a31e367a138d280e585706a0": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 597
+  },
+  "72704b7908b8ccd0846ca805d68fb0c6e4de7e4664ba430e7bcd81a426a69190": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 0
+   },
+   "asst_chars": 543
+  },
+  "0338be471ae9f2cdbb9e90165a4b0554f8fba649715d75f64e3f99fb029ba9fc": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 0
+   },
+   "asst_chars": 620
+  },
+  "c4ac4d342e3ca90286378c439be75be7b340d3a5b0ee68020c0048d6a9533a81": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 721
+  },
+  "64f68339c444226a923f0285b594d3f54f7eaddf862985cad5c0d2f55d3a350b": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 679
+  },
+  "1a607d66e20fdc3e693e473f370177778adf6d4faec49f9c95b010e700dae441": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 602
+  },
+  "c7770f6e503b0448444ae4d7e7d4148c83e7265feaad7971f7de93a2e85e7b77": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 754
+  },
+  "19623c8b21507b38e1f17024204744c0742c36c52290937686785783499bc11f": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 729
+  },
+  "1c7bff2571ce20316b548ccaeb3708de28343c6e06cc0840dabd87377b02871b": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 575
+  },
+  "5e7f8eb4242104619a588962b78b8cd831e66017e961ed75805d99d9b55f5125": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 685
+  },
+  "9580189314d0e23cf5bc7581fa4f98b974eadf430d4d03c3f889d915a09c100e": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 650
+  },
+  "2b9c27e3f6add9a28ba09d6447d5c24a3ea9573e877ca085b7c8c038b3542738": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 3
+   },
+   "asst_chars": 733
+  },
+  "aa272632d1cfb364c00da2363c9adbfa03ce5ef0ca8186fb0981d40f2a3f0ebd": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 740
+  },
+  "62f16b9803e84c7b8ef4aea02e2d5502325badf3823fcd6be220d4646585a708": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 3
+   },
+   "asst_chars": 607
+  },
+  "f48292e9ed372ebf024f5f5b2a6306cb1261d55a4ba6d7ba9093cfa8c8cc9731": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 2,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 568
+  },
+  "d5f6be9f5b287abb1c7e72aeff3a14f90304a2740455c9393b3f07e56027c8ef": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 715
+  },
+  "6abceb200f06354a0ffdaf2aa7a99a3c6e46b71f795d36bf5ce3fb75617433d2": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 701
+  },
+  "dcbbc553bcf976378a91afad3ebbedb462b82c84c57dabcb75c7e78698b458d1": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 3
+   },
+   "asst_chars": 636
+  },
+  "7c11948d28dee8d349c719454f5489fa3a2aae56382dc159b6327dbc4764053f": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 592
+  },
+  "c6a7157b55b631a5a5daa304623864f60d9190e2399917910325f5c53b3fade9": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 681
+  },
+  "42612bfd09f80fceae53662c4b79aad9292ea653d714d6e9b2e25dcb3530e6d6": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 610
+  },
+  "3be804bf49637757f0ad76f807e88b5638f42f70a66779069f45cb38e0247dfd": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 697
+  },
+  "e7da5dac00aae713271998b5227ae46acf6ab2e3fdfc6cc5b73104d2d28b7e15": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 534
+  },
+  "079b0f92b85d036a8881235e19bb6863fbe6f47c7a4ea5e56badddada54708ac": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 625
+  },
+  "62e644b0acf92433a34a5a5c82fc96b6eb728d9738d804f6e26a3d77eb643be7": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 432
+  },
+  "509a731fe35e7a719347c16370abf8ee7552f087a3b2b85117861bed9c89d70b": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 390
+  },
+  "b886935562018ab2317d45a46ca4e684fafcbf24857fb4f60a66318a9554e2fc": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 542
+  },
+  "16797feb27ba9bd0ed3c7c9e568d20bf1a9794fbe06c5bd81953e73d66fe4fa1": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 460
+  },
+  "9f4556c8c1ae3b1ac07cb4af061a37594a8b75f63adf27417027c01a6e87d098": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 355
+  },
+  "17fb3c0d7fc23fb5e0032ce188da97b29aebfc0d3826fc1e4ac69aa30a0613f1": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 494
+  },
+  "1e20c3c44624e60a935937ae151953c4de579a994951a8919231e04282fdb333": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 411
+  },
+  "b9c4e81a2afe45a76e9b283baaf8b84dbf95237cf764ca893404740c860cfded": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 513
+  },
+  "59b7887a84d31bf27410daa9c24c0c528921a0b1516abe5176774899dec608ae": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 522
+  },
+  "ed4d2d20b133c6bd92381e17ee692badda03ad0dc045419a1a34c9b679e69f9b": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 437
+  },
+  "b7db2fcfc203cd1406edbd3129841c4fda84b704c0297e63ffe0e281973948e8": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 473
+  },
+  "124fc37a29cd93800cb45d3d4a69eec839e408aa2754dc6a3e44a552c87b48d9": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 451
+  },
+  "de677883c319f038379a4c713314fe969d1a9e85c57ed0493fa48d576f924a0c": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 438
+  },
+  "40737d1b2ced2116ca02660a94380a4fdf20294398642b97a52ffb47b7ee6de6": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 506
+  },
+  "a334deacfe61172be6f75fe35736ed17bad710c7cb8c4aed7e4b486282f237a3": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 415
+  },
+  "3c4c1a893e3195a69d080e00ea9c129f72caeeda7a46c447334c1c23b3d616bb": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 402
+  },
+  "e5ce2eb9389e3370da098e8ca7d55bc490a127dde81561431af360e3d78a517c": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 444
+  },
+  "95bc5c498138260688069a93fe4d1a728d44cfbba8d794b877de34bab342f150": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 460
+  },
+  "c371812903909299bc8321265b0fb514dd2d5da2320065b4e335b2966294202f": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 588
+  },
+  "0052ff92a09111983d183313599d1a8f746170586c2c23764bc3ab95f9215fba": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 563
+  },
+  "4152b5ecb338269eed35197a993e525ea46b8065693417c885b2ed4187f91a53": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 398
+  },
+  "a6d3c9d86fb66c2eeea44faf8bed24e5bf874b23d0b9e23364266d26919514ba": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 543
+  },
+  "b85677e9491d6019829162de06dca4c97a9037908ed78eadde5012272590ccb2": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 411
+  },
+  "d951f952ce43f79a437ba4782267ad75a4d17d97cf4effd549247e0e442a22ee": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 408
+  },
+  "e8c7a8ce93d7cd107cc8ea03949b4680f5426c25e6f74aa1c6c84ad64bb82c99": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 458
+  },
+  "a33d509a5ca833deb68f28ebd96ad013701b09a13a4937f0f560f493add45d59": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 352
+  },
+  "47a4b25b8a508dad81ecfc8f35a5ab70bc247027fe5e8222d6681e401608682c": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 398
+  },
+  "905e338efcb59ae29c27dc456a79099c72509a86d0abf01fc2e788bc381bcfe5": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 435
+  },
+  "ac561f8f5b66897c79cb867646098e75340aed5eb8e397f7499f20339d93e94d": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 500
+  },
+  "71733a2819f00f5571680adfdfb0e7ddb1790b3c290d95888b935ac195dd7234": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 560
+  },
+  "02adbd21d86b764e5cc4a6d3824031c20a45f1593aeafe0a542d8f48b89ba207": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 383
+  },
+  "bb08b5444b8d4445cf96639014103dc36a9013d67b81cb1f0abdb0ff79d4e544": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 483
+  },
+  "a849498288d67bbf562a776e5470cd630a66d246268f818bd626ca1c75ef66ec": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 475
+  },
+  "0197df89e71660ecc3eb628d89ee9959c2b8591ffa5fba24658397e52f792d2e": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 434
+  },
+  "de450deb2d7482a7cc6411e6d8a90f6ccbf61ed9c5dd5a60eb0efa5f6a2616df": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 511
+  },
+  "036e3fc89bf5b499ca7a4759f26508af04d6c5d30ea782ea16bcd4d513bfe2f8": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 409
+  },
+  "487dc68c389b68955064899340211e0cfef0da1a99b5d66ed3ed4108c82b3ef4": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 505
+  },
+  "72b73a249b35c6b0acc026fe54da1f40308a0ce3496a6380b83b42869a624eb5": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 502
+  },
+  "071f0c3551e32afb0a60338158d544a8b9040f669f5b8ef830903980bcc207e1": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 547
+  },
+  "2fcacb7dfabc5e6922584216943cc0b4b8ada087edab2c6ae6f084f97d6b8f8c": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 413
+  },
+  "9289b0c9730d7c6c52d3ee3001c8d39f3376a7a4ec0aa3bd8a5342d56307c36d": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 563
+  },
+  "f9cf560ce8a8f6b0e5aed138dda756c9c145f5c07a7f8b37166aca58f3f8f7b2": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 489
+  },
+  "b3fd6b86fb9d68506c502c41f34367f2758af575ecdd7cd81ecd6366094c2513": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 480
+  },
+  "8558c6bc8df49aea1ea3306eaa0a8af8d1321ce7fb6a48a991f4abb3914ec8ac": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 445
+  },
+  "dee7ad9d7b35bc07a7671e7414d04c22b8a39e2ee891c147a26e635c51d26823": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 433
+  },
+  "47aca45b749ea70a1be8c83f9e14286b8686e222f67124694809db68523cdad4": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 534
+  },
+  "fd33cbba492b23eb7671a2d25ff16fd5fb3a90c695afa35865f123f6ca396c0f": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 394
+  },
+  "10a91bd106f932f9e854e14877d1345da9995de1f3cc36f352ba516700a40110": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 510
+  },
+  "20a5b31fa58bf9ba8d6b670287c70157ec8ecc5eda8b1dd2fcb91a81d4cba328": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 478
+  },
+  "3a0d418d9f2e345b16b2acaa1db1d59dfb4fc3a86427d8ac1796a5d2e9b5e449": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 493
+  },
+  "cba53b74ea3a139804f4a79f90ee55102f47868f834aaae1a63c330cf94a1e44": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 417
+  },
+  "e9b0f2de9314b515fad7b6a85d95eedee3d29537533474a3764b43755b3dcf24": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 476
+  },
+  "c5ffc0f484b8fcaffe0b52af7fb089162e9ae1eedaccba46f95386dddfc4af7e": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 470
+  },
+  "2904545aaaf0f09e8f3be3d94b7751d2f0e8f82131998a9c54c6137a84d7521f": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 450
+  },
+  "c0f84ffae93b5e926c8668f931845a35cc98586272b62660e08b32274db6c123": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 355
+  },
+  "7f7954cc4adaed3ce3875c0244a625c7faac6e081fb5249f59c6f57e8f67689f": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 572
+  },
+  "15ac46a59c510ff6a02d908b835b5002677030d458def692f564cf0c150248a4": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 443
+  },
+  "697dcffe28e2611e0eea8fc579fcf21c8ed60f9eea611b69c049fdbc0505842d": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 570
+  },
+  "0b2ced2212a7cce8c0539b208e17a310ae6472e887a5d0fd78323f0c104c40c5": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 397
+  },
+  "0d58e91f0e29143711f5cddd296fc42b968065a9f7617f90246bbaa164e98c93": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 351
+  },
+  "329ed46ff98a961f1322b25dbfe3da41edf2b80c23bde9b0ec027fab338b07bc": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 503
+  },
+  "596a0d33d21749acbc023f7874b347575a9b6693b718375afae71ef0c8098fdc": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 453
+  },
+  "7a3305919f9e0fbc65ff6ee5c3561022c2ea9359d462f2978b0e817af2a0feee": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 444
+  },
+  "c29ed13693784d07a59bb6876ab723649fd97fa5f592f8ff7de9df50021e6a54": {
+   "cat": "kb-re",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 445
+  },
+  "9b37385e8386aac40c31086ea780b086a93da6771762a08adb7028b96fc1e949": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 422
+  },
+  "b3e7f22f12e84b842231a1cca61ffced7a07e8dea102c22ed7affffac30ca74e": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 537
+  },
+  "00b65d052dd05583b053543d7c75fb770deeda0d8808350b2d9aa647ea8da043": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 426
+  },
+  "9cdd3270d332dd8061b248d6d2b075ce8e9172ea7591cec9db974942fa325ec9": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 561
+  },
+  "e303261034bf26c8e407d886f2c8aabc0055de8ba02e917c924b929e0856dd2e": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 402
+  },
+  "863ef4c4f8867eb76314451060a6486320fe39f87f0a87a4e54b47b5ec45c84e": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 518
+  },
+  "ea41bf1f7e8a81fb76410b41271d2f3c8ddf4d46f00a74ae94e258d0667aa40c": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 377
+  },
+  "5369181279abd088e95038d4957973bfd096222861027098db9e86115a40e9eb": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 525
+  },
+  "7bf60b7d66e85e3eb4bdc0439729e4d1d9e26e2cae2628e96d081d60a25f65cc": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 379
+  },
+  "875f5bc257a48ecac6310733c69abf969dbd7b844cc6dd520c78c0c776c25787": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 463
+  },
+  "19974cd35ef55a6c433f3b5a4e0a9c6759080b4ad634001450aa675b800630c0": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 549
+  },
+  "ded02472744d332c075920ad4d431d655b2005685887caf58cfe8413ec8efb2d": {
+   "cat": "kb-re",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 469
+  },
+  "ab9ae59117a8af8ff46261b1edc5c8e012259bca262898ae9c23f9434dea74fb": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 599
+  },
+  "a4c4665deb96d793dd86cc475102ba3621b7bad58ad07f9f31e751a5b22b87eb": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 622
+  },
+  "3eef86baef1b975a3e28979d8f2d715c6113039dc53d94cc1f63d2c235c8185d": {
+   "cat": "op-syntax",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 698
+  },
+  "d09d2429e6ae832d697c8d215919d9a3d33b4eede9cdf075f84bb5435b7ae081": {
+   "cat": "op-syntax",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 0
+   },
+   "asst_chars": 635
+  },
+  "498e43cd6f1c0ef44bd256b1e7819daca27dce26e3f7fb441f619f6c3c897b8e": {
+   "cat": "op-syntax",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 513
+  },
+  "34e9c42bba9fa14487848088887b8e0b1f6d4a99c2dca71dd328fe5ab0afcd2f": {
+   "cat": "op-syntax",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 3
+   },
+   "asst_chars": 543
+  },
+  "167cb6ba5112ca3dbf617d21109b69e4feeb6514885c027e7cc53bf05e96b95b": {
+   "cat": "op-syntax",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 3
+   },
+   "asst_chars": 542
+  },
+  "025a3375da18e63235f9ad81a8c2e8325ef06875625281ebd7120833eb206a36": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 534
+  },
+  "c4b4d5dbded2c369b854f4576af4a3b731f0135a2224d5ece2e35766b5b00a82": {
+   "cat": "op-syntax",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 636
+  },
+  "045897a49f3f12f385aa742c22c54c6dbf4d72f11acda90b2e32c0e5833fbc76": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 3
+   },
+   "asst_chars": 617
+  },
+  "5c93a89cad38a7942a340ef8e45aa68dabfd10f66d4f5276ce0f7f72c40b3d91": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 578
+  },
+  "eab281b2797d4f21331faa33719d04b10c87e8b6c65fa0f702c7e2dd00f8b59f": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 631
+  },
+  "3dac1f762fc2a58eb071a2d10b940a7f657554d193f498762da01307bf05eb87": {
+   "cat": "op-syntax",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 3
+   },
+   "asst_chars": 616
+  },
+  "90fa169768cdeaaa59d7699636b3a44bbfee96b2147464b7c2fe45ed06cdc32a": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 3
+   },
+   "asst_chars": 533
+  },
+  "3897fc2d99d4cd5982f848364136104e0514399497273904b749a0f5f8f3a239": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 2,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 622
+  },
+  "c054462dd971c40e894f74bd000f04b5a7874189cca92d83ebb198dc1282d7c5": {
+   "cat": "op-syntax",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 543
+  },
+  "dd1685a84c84fb58c763e9ecfe30929ec1716e644e4213c46e02430c22f580be": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 564
+  },
+  "efa464cacad72e639431d8ca11c16bb691fd84651b84f351e80edf5d6be01ace": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 572
+  },
+  "103da5f49e346af70e167385664d3745efd189a68dd8913aa87e07662d098ca3": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 622
+  },
+  "4317cfb653fc22a2cb606770d044eedaf63472f6a139eec689c6a93ede999ae6": {
+   "cat": "op-syntax",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 3
+   },
+   "asst_chars": 616
+  },
+  "8f8445b559b5d68bb8b8318e2fe62bc7815a9ad31bce13865c8f118ca6ee2206": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 0
+   },
+   "asst_chars": 512
+  },
+  "a1fe76b1751732e7fee1b965483326477a6350acfae1115e1b4fb0655ad38e46": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 537
+  },
+  "2f33fd4a4e1c2d89fde2355ef5f2911527d6d144f48c2449196d4b3cbd13ba8b": {
+   "cat": "op-syntax",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 0
+   },
+   "asst_chars": 639
+  },
+  "6e980a90bf7f484bab073c6064b45d8075d7bb95b4140a7817d2be19619c05eb": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 738
+  },
+  "c8cf55afc55a5ee9a8e6253a757d62de3646a3d495a8c718ed61fbc7a6be53fd": {
+   "cat": "op-syntax",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 3
+   },
+   "asst_chars": 833
+  },
+  "f5f0134cbb9a6af8715f9c1e72011daf4a5a7696f98e45419880b608afdb0c7e": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 3
+   },
+   "asst_chars": 571
+  },
+  "2cd9d802abb40d69914605b0c5ebdbdb1a34a99f650fa5aa5661490f12b26306": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 0
+   },
+   "asst_chars": 585
+  },
+  "0ab7c8f575ef04af9b7529fb5b04df1dde97e90b4029183624564fa0e9b9a102": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 505
+  },
+  "6b4822bc7961368aeaad421998496b42641fff7716b8d004d3df2b81ae6576f6": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 666
+  },
+  "33b55d94f624123a57bf79fe8e262f88230375b7dfc337493fd41fd12ce32772": {
+   "cat": "op-syntax",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 618
+  },
+  "44b517047c67546a68712fc74c8e3703ce131e43fe56e77f0eab032ac0fd7892": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 3
+   },
+   "asst_chars": 347
+  },
+  "310b1f0f6f720bd4ccfe17e6f75620499bf67573d5d5fa99763aca6b8c4236fb": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 361
+  },
+  "bf7b1550076653a9961e2efcc43a6c6ec69a3c433884baa84e10f6bb3b686072": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 392
+  },
+  "caf68fb45b2d3c02590b69927f81408df4af33ac948a5dad31ca4bb069a9d46f": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 332
+  },
+  "45caa251c089752635dfdae81a5b7a4fdceb8de820deeb27366b39a4edeb8219": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 330
+  },
+  "e0ac5d38e91da211db4308cf109d312f83f31478258a51368c844848bbad96e7": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 482
+  },
+  "2420cf6816c462eaf749979d472f1d02727b3eac4bf22b28c9711b2711607fa9": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 321
+  },
+  "6547c36368b0e320c9f0813ce2eade74b80d6cd04429ef4426a92ac1e1406f13": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 323
+  },
+  "a86fc3789d5381b6e96d0b02b9c338f7b119126a0dccbfb24005b0d29326fb51": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 358
+  },
+  "13cbf3b58deea1ee369ded77f72740bc9f7762ca713507240efdbb4d5a8aa9d2": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 360
+  },
+  "c27c9af432943433fec6a3021955a7d553fbd41e9a1eeb5438d405eefe33a4e4": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 3
+   },
+   "asst_chars": 389
+  },
+  "23e946c801dcbf7ad3dd208bb342696e1959b6bf6dcca738e04c3aaa4ab69473": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 322
+  },
+  "2855e983b42bc508414b382013405d0422fc625c36e69424f1892baccc71d639": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 357
+  },
+  "8c39fb4eb64f46f1d55449d70cec8f306af781daf07511423e5565764e7a10a3": {
+   "cat": "op-syntax",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 3
+   },
+   "asst_chars": 312
+  },
+  "ccdf70ea7cfcc4c5518d6aa1992349370354f5f13b4c7d6b55d2ae68e8d033a2": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 358
+  },
+  "afb7bc8ce36ca8259a8cce2389f8ee3330ce25bb93afe4d13b8d079a252428b9": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 287
+  },
+  "8a22f40ea817e69c38c0dd417562d9535a7d28f5ce7b0dd38054d2ec3a7ce972": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 302
+  },
+  "44ffd3f897d8c78735b3aacc91f59d75f16c32c32b3c52f8e6efa6e32b90fa29": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 435
+  },
+  "da61e779d49d8d5e5a4b0c62cc0aacdbe892bb1d905770c0a62de24696d1c9ff": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 352
+  },
+  "dd6486d555039c122fc78fb80413c1aef79f480cd14ba5389c74d20232e90482": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 357
+  },
+  "cfb60691de9d7d7899d4aca149665279ba60a047f3599e101ed785c2b03e7e73": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 6,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 333
+  },
+  "a8affa0d1ef658c05cff3b3bff10571e3c583aad89901a4de88b9c300d96f3e2": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 416
+  },
+  "07b5f56bb5d87af8dd1ccb73e8dae61430241012846c9092f1348aca0e173ccb": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 306
+  },
+  "dda1e4cefba88df1b0f4d47a07facf9631eab441fe5dcd399e4ac519161ed03b": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 299
+  },
+  "bad0cecd25de0b0559f21064caa2a0c5da4416b17c570a7cf3514c16c11c88d1": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 303
+  },
+  "f28717fc11292178ae9128a118a7008d1f5c39b624b83ebb7b2e28eec8d76ce6": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 392
+  },
+  "b2dd2381a831d7240442ea58ebc5246794a9b6e17f615d679fe4db5f08b4d0f1": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 267
+  },
+  "a4b5dec6937834811671039bd2e5fc82a55670ac5b88369ca265acddfb332faa": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 451
+  },
+  "d12f0a0a7f647dc7f440ad80208cd5cc4b8c0a2726e16fb51b8592956e361f8a": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 354
+  },
+  "72afe713fc09c6a9518a5f6853e90cd8d805b9fd8fd0eee0fbbdbc84f1d82023": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 482
+  },
+  "a7567184cc6c78002e3fcf395ac254f4ab7a3f2427ba23c71ffc23e173ba0a5a": {
+   "cat": "op-syntax",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 328
+  },
+  "7964aa499c1f197226ca2f1c5d2089bd9a4b6dcaa36870c3e80255d7c5f5257e": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 306
+  },
+  "f4b0ff072462d85a72a7b4080eac686b35c9af3857805e466ab6a0c4b233140d": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 292
+  },
+  "5a0ed3f68fe137d202435e34ba74811de1c2f09efa1403afc1f9a986dd6c55fc": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 427
+  },
+  "6bd29dc812a46223fcc5c4cbd3b5801c80f8da54ee017840f8da20b408e0a7c6": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 352
+  },
+  "8c234602f5e86668cb5f1e86ac8b7ab0e08fc34d1caabf0f5c9e10deba33519e": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 268
+  },
+  "99cadaff955a68706b00e5fe825317ade59a559ab908538e718e6b76ee791c91": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 266
+  },
+  "f17b9501a95de29dde089e3ff859f16ec5a5ba096453035a51e39d3f7db5d668": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 286
+  },
+  "f7b8e099b8cadac46690788291d79da9e94152088dac0f6e7e4c3f6f88e62b5c": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 258
+  },
+  "483d0e3b12b53f76de6b98be55b93397d49c9f8b26b97e9b785b026d3d42e6c4": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 408
+  },
+  "7ed820d00cbf0b96c03b7e09ca0ec4ac9e572cd8ac2a552522e3b568935dbed9": {
+   "cat": "op-syntax",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 266
+  },
+  "e666774588ce0a83f06f474fe294a697345f54c4074d76b96111f90f6fe9a885": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 303
+  },
+  "6618df703c6ddecd4fc60b4622685bfbc35fc0510f00228027346bd8e2d8a604": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 272
+  },
+  "859c04aee04e97906176130d6390ae4711525a7c361a33156efaebf96143d238": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 340
+  },
+  "b17715599b78cca8e98fd1d83d5c22cd122b115fb8be2d06b73b6c54b0733320": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 356
+  },
+  "7e41d62b855571bcdac37c513db8ed169c0a3aba0ef228ac8f82558da65e4ec6": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 252
+  },
+  "a27c843a5a1e33d2c7cdc5ad1711180690afda02d5fa62ffac32a6ef3b421812": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 298
+  },
+  "bb84a9e70dcb367bed32c0f3615465e3e8c62996fc71ec01c2eac3148288f540": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 243
+  },
+  "fcb6d8d706ed6e49a002c09737f386dfcee8947bc784f9c88b3bebb66374cc57": {
+   "cat": "op-syntax",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 355
+  },
+  "509ee8037918332f2c669c922c04bd2d92b7613f96b4f704ce54fd6c4b566f14": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 252
+  },
+  "4620828c1e3d917fc3b3af150dba374356283073e0eb5b09bac20e6da5a962c0": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 280
+  },
+  "b2646c8c78f8a452213b20d1af406593f9c47cd4026f4e79331cfbc3974e6082": {
+   "cat": "op-syntax",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 3,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 397
+  },
+  "89aacd7b1bb5fdd8b08ed6b9622a6564d0a480f2501e79ebb02cbcbb72a74cfe": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 225
+  },
+  "3dcb3f63fa2b8165af321af2ed9a68e4d3180627dd987540a2fb95047e3178e7": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 332
+  },
+  "b7e31c4fa8e09d0a9f02c804c37380b7100a8d02280a615901135d2b35d41986": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 320
+  },
+  "d4351946e3b6cedd2f765cb7d5ed604203bc3e2dff16a88de010d3dfaaf7a6fc": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 278
+  },
+  "6573059e9b0f61d390c144b3232fc14a92c5f9bf389e7938d43b1b268cdb355b": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 298
+  },
+  "86c84390c76f8a0e6e48adc5ac02fcbeb37a8499ea47a1480426fce09d6d7d96": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 254
+  },
+  "fa57aefbc9a2eb94024bedf8ddd64e21545a19b65bd697c3180c030967fcc537": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 357
+  },
+  "cd05e7a65f75f7ae2c227b9679dacdf2cefecc441f19bd95f20417b9d1ea64ad": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 303
+  },
+  "8dc446045fe369b35a9a37411913adeb67a193ad97d70535d410cb4c03828b56": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 314
+  },
+  "528fdc795b6ecd17289aaeda03137f016d48149296574cccdeaaefdb92d1b4eb": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 293
+  },
+  "0296709550b6835c0ee6b492ccf73b12737f72051a3136c2b3b10d8991988d8c": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 239
+  },
+  "0a4777fecbb1acb1fcfcd92ec8a40cc6f687b48b87a25546b1529c2b5bb95bc0": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 285
+  },
+  "4ec2e615db9f9ee39c3d937420155ada08ddb7b5147276139eca8f84d67881cb": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 295
+  },
+  "76f2540ff6375ffb73100ef4c4414aadb3cd7c15c95f081e9299eed52f862f2e": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 306
+  },
+  "16c85e24c12c00bac9d24db5c6c834f8ed57f5d031155efe8b6f59aa7a84bb68": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 279
+  },
+  "a638db6afe3184e3141f717a37ee2e7fb4610b027ec08e55df86b620ec695112": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 361
+  },
+  "b9f393222d5c0704d046f7f7f3b0d8b335e218a3e2dc6aea96a0bc73fc11fe7f": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 280
+  },
+  "826055dacbfe44fe1c38d35cdaaded574559b85b9cacd75182c1364ac727daff": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 254
+  },
+  "ffcee49588dee2453c950235da7db293f63b7ea42a285b9a813498a05de3d74d": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 326
+  },
+  "b096b38cdab23fd749ad7bf42db24186d1b4a3835528c1c823bed4886bb39486": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 292
+  },
+  "367cbdf3d3578e41de243136e4af57a23e2074611b7f9025ba37438c2b510c96": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 371
+  },
+  "1a79fb26e03289301b76dac9e39437ee1001592db0de1eb8afe0fc338592d6d9": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 370
+  },
+  "3a7c318a8b3216b9bfd0a2bf25c484b1a89e06a10cf216a28261ace109e7bdef": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 250
+  },
+  "a6feecbc62cee0079814b0774513a7a5ac5537d8358b3231714b7e54ba6762ea": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 285
+  },
+  "6be066f8fd7824d2614cc878422713f966b162a911d3c2aab5a929f25f8701e4": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 226
+  },
+  "e566b85580598c6eb34ee084794c43b158adc2928abcebd3a7d53c9da20396b8": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 341
+  },
+  "43ba9ce6fe0a83421ddc76f716e15e2d29078b39449c82f8acf9d715a74e872c": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 279
+  },
+  "45e073f17de5c66e57d7324c253d558075db577cc61cadf327b07ab9c4c03a09": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 298
+  },
+  "a90415a84e5f9be89c0ac14d7fff60c172b51ec55863e988a90ab4a3e31a310b": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 379
+  },
+  "9753763bfddfdad78c3aff36c4136ba1f37d40f1c58fcf199ac89056586be7d1": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 367
+  },
+  "a659633226973b9f4193973b53c88c24f686c1aefb3444fd7193b526811a494b": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 303
+  },
+  "a869b032925a13841da110a0c338f946b04811506509f6c29158c2c0918bac70": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 237
+  },
+  "b0bf4b28936368524a1e677db5b34d4a03ec2c95ff3f88ad693b6f82f8550f69": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 349
+  },
+  "306f6a23e336d200c180398868671509a9cf583e4318037576e15414df53fa99": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 298
+  },
+  "76d98215356203b30969190ebea6a3823798bde24a5a54fca712d97be2ff2102": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 361
+  },
+  "2950f489c7c8d583511dd50164371060c32fa87d5bc45498c34560864e60384f": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 302
+  },
+  "e618df054814f409fd80497f0df0e2ed5d371ed6e773c80e9dc636e70dc945d6": {
+   "cat": "op-syntax",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 2
+   },
+   "asst_chars": 307
+  },
+  "f6036516862138e1a22ae2de99e64303fb18f5a4e2e05c4a5584c50ac9065e14": {
+   "cat": "op-syntax",
+   "score": 0,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 0,
+    "marker_kinds": 1
+   },
+   "asst_chars": 228
+  },
+  "bf884d449f854000cd721461364ecebf713a9db3810179c8dd183a5e80d37eb6": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 7
+   },
+   "asst_chars": 763
+  },
+  "71eef509073b0598cf44ce8d1a368f70b095d3f9d3e47e3f477cff1fe9c6626f": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 827
+  },
+  "c380640803ee65d18c6c950c9c5f270959dc5ff0cc1af62c65ea7d8b8b56bcd9": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 777
+  },
+  "ae19373da997bf55c46858d0343f64f385e997609857a0bf3303863223c7fa6c": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 7
+   },
+   "asst_chars": 634
+  },
+  "9b6dd8558897399921173caa5e7c77c1782d2d9f44408f178d9ca9dda7e90b85": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 719
+  },
+  "cdacbb928e76d1e14b8bfb3403c835036ff889fd0590eea4d7bab55078a3211d": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 794
+  },
+  "3a6ab8bdd52afa058cfd853fea47cbdbffa106f6ea92317841d65f3efda2793c": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 644
+  },
+  "7d8a050b3aaa904e336b2a8fb408831da76a79ffb010eecaca251cc38cbd140e": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 729
+  },
+  "3debf0906c2ddea9ea4ecde2d68bbc229a9d955efc9f04fd87e1ccf62e919f20": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 655
+  },
+  "fbab7378a5f7f40de5ad287b76dbc505eeec376f29c6a4b60cc0c2d3dc792eed": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 558
+  },
+  "41fdc57230d8d40bfb0e14c95bd577ead7b10f813907b7650538683387f4ab4c": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 785
+  },
+  "1d57562082e3be737e57b4bd645097141cd9856fb47597f82e63d46b37d8fd28": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 814
+  },
+  "fb0ffba2b97deab9056066573f8f31ee615ea121be72e53e7a3d74dbe7f38cfa": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 721
+  },
+  "626caa40dd25c9ad834f53ca7826302f907b294cf7460eb0500fcbf0ac2ab1fa": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 807
+  },
+  "26c7ab8f2fd573eb0b3f137814f64c4863e73c0210d54ec0a6e353dbeafb4e39": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 836
+  },
+  "d05b9dba033a4d983c3b1ac1a5cc7ece9e5c56e3e51f113f7b85d8fd52918440": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 5,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 854
+  },
+  "64f7d356e1d34bb028be3dc2e49e92d9076409d3ea14206447fad02c0f9c2c56": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 5,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 782
+  },
+  "2f1c6c1f48e9c6674a6628be74eaeffceae052ac851dd05720b2324bea665a49": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 5,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 805
+  },
+  "15ca2f09ba4827b5fc2d81e3113880ae5d6c45cf9cfb4a6fde53be64cf4a557d": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 5,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 813
+  },
+  "a43f2e189b41f842a3e14b987fdefb55f7e31aa81f8419d2bad8251a78eda8fe": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 5,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 776
+  },
+  "194760db78e54ada117d80c0afdd45c5121d7ef55c3fb2beeb7a66af05843a41": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 5,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 790
+  },
+  "73358df127c9e05b81d0fb09fe35c2cd2e4cb473357e30722c7538e0d4b2d985": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 5,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 932
+  },
+  "552150e9f4320443cbad73460bdf9d1cf057f65be0e2484b9ed662cf4c07f95d": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 5,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 751
+  },
+  "2b7c6cd4698b3a0f79b3da4c48b430a42197b21dadb36ed6d756946e1b7b95a4": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 852
+  },
+  "5afac2488583b7bee47de439dfdc70823b4d05f6d566e5b919607531cc03e405": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 5,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 924
+  },
+  "68de513119e9b0885bb5e4e99961d79c968a07804a6240109f7c869a02411320": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 5,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 878
+  },
+  "81e46bee6645a0150acbfc6f22bfeab7d8fe299c1121ce454c70a76a166a276d": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 5,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 852
+  },
+  "b74b2ee562d4ab940c5cf7613d65130872ebf35e617a5c2d3987318bb478de41": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 5,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 695
+  },
+  "9bba5593131fc45cd8c02ad5200a033b74cce8f8f08c3564dae9c4f3ca530bfd": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 5,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 959
+  },
+  "049f148ba0a44c90c4bd56037bd37c1bfdbb23e72262aca59e6bb16ef0e00fd3": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 5,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 1021
+  },
+  "e46262887e8806e95d6e7696327e16e463075c3f8258fbcb8edd7c087ea31bc3": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 535
+  },
+  "fc9560e8b4779d8ed3b25212c9d6fb0d3694c0ad49f6e5a70c5e60aa888663a9": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 458
+  },
+  "ab498cf2fa2a4c5f1d3d08f25d006eba07a03e01beef42ac5a973e8378219ea0": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 443
+  },
+  "9d51f70644b5627514f1d13324896d72ef265489409b3283db98b2a7c9d21af7": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 475
+  },
+  "399493c9d23e11f4f65173dcd21f8e45a1031fbbdbfe6dd17e4ef385a8aa6b98": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 481
+  },
+  "15a4de5e204027528cc3da489f7956a4524e46f9cb73da3477726fb258650fae": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 452
+  },
+  "661d5bad3d0fa7d587cf1eb61519c6b5991972ef7dbdf13eb6cbe87429b1e261": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 577
+  },
+  "b1d6b040c7a35a92c3ae733fd79fa924da0b96b591d3899a2b4087d0a71f9fcd": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 663
+  },
+  "1265b408ac3a33570b5fc40d5d747707eb62c3bbb32c50607c60ea678b7a33cf": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 408
+  },
+  "b06f798d75eb1456708e34b4a54a3d772b04d47768f275229f1518cf483e3826": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 539
+  },
+  "75ae517bcdbeb74b566fd619701a0d4eb007dec12f07c372cd5e183fdc7c4967": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 439
+  },
+  "686eb8355fcdf54f5ae58838077b7b7b7009576709a79ac2851830a9012a2d91": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 482
+  },
+  "4d2ccb42d33c8ad988b8795f8896c588055d9f914e02caca5b8a5f6341568556": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 550
+  },
+  "7c3b4ff34d836c97abd6081d217c1bde914444722a277f839c283274395e4cb0": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 556
+  },
+  "1a14624596d194d3fe9be2b11bd80ed8c9e48f7d8e970a9950870227747b24b2": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 461
+  },
+  "da1011e9685a836e6429878d4bb872b443ba79c12c3ae67879b248f59eb2b31f": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 610
+  },
+  "4541484eb4eb42df5518c762de356610971e7ab91e320f9b33a3b509da2fb382": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 545
+  },
+  "043fb33e4abf792832b084268801fe9bc21c0192ee52932aba5e6af035d5b004": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 453
+  },
+  "641473fdb065a78c72ffbb78a4b3fba4bc355e8abfc747696d69501f012e4fb7": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 417
+  },
+  "8a91666e82572c34e12f7140e6006eb722c4dda7ab71d9792a67d634b2e9814b": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 474
+  },
+  "3f93197efea1c4ce4e2ef500f42b812a475d9c7bcd0e4f56220b361cab8e2400": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 472
+  },
+  "d9d1a75875a03d41bc6d434d5d1a96ab455b14ff1714db8a1da0e8749b52ea56": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 502
+  },
+  "96f4bdb9abd964dac1e7b159d95683a93b91c53b7fa85e32ac46ed0df8aeedb2": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 425
+  },
+  "fb8c745dadf1b08c857147c0279c2d78f782995973e9c2e9691b233a16a781f7": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 600
+  },
+  "89bcefff3020cf1b1ef866a12ff8f94fc28e48c30e9b58101fdee61e9a78a7bf": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 522
+  },
+  "aa878e5a3a6f438b4e91ed7cf4a785563400700fcd46b6d674b17566b20b8ff1": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 313
+  },
+  "2507d3973c9062f29d26e2bd0791f1bb07fe536dcde10914f62bdf8fd520c9e9": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 7
+   },
+   "asst_chars": 539
+  },
+  "d327655f3b385dafbb8563a2b067e90cc03465da2cecff296ef6a442b1c560bf": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 563
+  },
+  "61c84c62fde734d7bec844d2c3cee5233780271993a39c83154b02af51d92c02": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 500
+  },
+  "877dfa76d0fe79b8ca176bdd685e59b61fc7cb807e22a64f0c2da31f2635c79f": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 452
+  },
+  "cd5cf1c833b81c23c52211590f161a57c5aa5fba67dd2fe6e193897ae239ffdd": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 7
+   },
+   "asst_chars": 335
+  },
+  "e57908fd290525f9b5a6ad1dec610432295ba48611ec9f35075ec7db9163a50e": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 537
+  },
+  "4b1a6e531ea1f8f102e2bb00985ba0cd1ee96d8013dfab17eb0e7ed18dfd7c08": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 457
+  },
+  "9297f37048b4a480a438089247b58bb2595ba2ffaa45ac4eb71b7279c86f66a4": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 338
+  },
+  "7b8045ef5370b7d118050e2217fe482cb98b4c094816116201a1bcf21cbac205": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 471
+  },
+  "f752582a885297c0db2e6f0ad1facdda47aeb8a65edfb09a449b9d610d9f20a9": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 452
+  },
+  "450bcb0e23d9a9879c1e8a62676e9a9337120428d0a55a5bccb6f90f3cc908ac": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 310
+  },
+  "af39ecc74fe3b26fd46e2ca06159e69a9ad0f35f526a3bbbe28edda21513e7fa": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 457
+  },
+  "59501c7b75315403e3ee4e7245c374ac375dfb1c4f4ceef4437643e382e44ffd": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 539
+  },
+  "fcc206aada85b1882427d1b8e96c484b8a7c229e9e513c5cd88bdd4ea20e296d": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 360
+  },
+  "0f8177bda2e433ea73d5416787cbed975d831886972d39ef5c56cbe7bdcd89d5": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 522
+  },
+  "52475391282dfcbe00c54d96bf13408ec4a0ec6453cd096b4d01b95db697e1ef": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 388
+  },
+  "35c9589b4d079dbf0017a60002de94caa4b8154b81801e855382abfa0357dbb4": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 422
+  },
+  "ea21d22eb81550ec1b4a1aa77756229f5c6afe666a9ab723f58235f8b998b4c4": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 458
+  },
+  "b85540931c096ee64a48b030973e77f367446669aaef696a1ebfa675ed544817": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 439
+  },
+  "8700458fd614e743b788abde0cd5c8f3b2d118583ef505093cf5f161ac99183e": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 472
+  },
+  "6da6bade3d61d5bf8ec0f450b5421dc127c7fe13dabf7bf99d53282bf6957543": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 329
+  },
+  "2344549b9cdf52ed580ff742ebf7eac5aee7182f81fadb9945cfb33394a8b7ed": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 460
+  },
+  "1eba9d9e027e8121984009d2f480534dd0bc861d974a7cf2c1f82281b4ffdcf9": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 357
+  },
+  "06a22677616084db0d19d756cedf555a129c691a80ee3e3fd1a0c5843f698fd1": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 380
+  },
+  "afff2739ff73a0deb9410db5892620d66adac891da547eb4111cc78b3941e59f": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 569
+  },
+  "d54d8af4fffc843652b3bc71828dccd901ea09a163f829347fae3eadda0e60ed": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 542
+  },
+  "92e050c4f3cd4a6fef937b67dd2c510ba5ffd9d3c6115f6724cba5e10f2651ac": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 446
+  },
+  "046e0b194b2ba512245daec3a6a65066ecaa875d2fe9ce478793306ab67f970b": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 412
+  },
+  "0f38f0b801be18eca9e434fe81f0c94a42ad370112bcb0fa3766e87278f92d87": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 540
+  },
+  "684551de5e1030d6550192ea23ffcc16c25b0a6effa4f299d6ca328efdd4b61b": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 445
+  },
+  "2bcc0f7b39e15527cf2833f259af4f1a8c2521c6580bc1f0269a26e8d076c568": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 442
+  },
+  "bf1a24aa57f0b5b3ac24488b5925bb1675b9774f228fa8385b9c3078b5685c56": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 485
+  },
+  "079bc2a8e53042cd8b7cf5252afd2d24dca6647dedd76ad72c3c390c49a416c7": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 513
+  },
+  "1e8cf45675d19290f5d7527ceec651149d65164078de43551dbc6a4e41613b39": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 282
+  },
+  "4396c112d379bbfe22c7731bce723d24436fee75b45f856eb378495ed850b41b": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 444
+  },
+  "e12ece0a60dab79b65571eefbec4a97dfc7deaced3e1ef966758422421142815": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 411
+  },
+  "dc9a24d7a1efd6e6293c18fca08f863d4686a295f20db2753ed9cc210227a105": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 356
+  },
+  "230b7708b55f651f72391c7f5dda94cc44e22da47382c5da3c649d5ea69bb552": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 296
+  },
+  "d289b5d03532bb69268df002ffe5759d41af87e8ddc7412b897db51dcce5b3e1": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 414
+  },
+  "73a7dd9f891dbcaf171ab399dd34c38d071527368ffb61bcb1cbcfc01a97f22c": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 385
+  },
+  "b788adaf5c83230aa464d21c847cc057ba72083c54b39c3dc97f359364c30a8f": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 368
+  },
+  "fcfbed9fed99664df2ea495af049888d9ea3bd7d69ca60d56cf660d30ce80f1e": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 482
+  },
+  "54ced8d130748df383156440bc06ee10fed5065c11e3473027d6ed92ed7bd929": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 393
+  },
+  "e88b7c3a38ed5a41231b7e15c67b129e8459e22de901b3a1e3abd4bee0a459e2": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 422
+  },
+  "40aea73a8758c5cc997aa0790f7e9639f5b314fe9ba17d257f9310fca7b49cbe": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 416
+  },
+  "e3e56e457fb4216e6bbea00864122194f13e5c8d3f92295de30fe9eea022f1b6": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 478
+  },
+  "b27d3c3414a4ceeb532301598418945fb1a1453ace42d0c62091ecb9c2ac3cd2": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 288
+  },
+  "fb8753afd9ea7a8dfe27179ef3b85549053cc01c23cb4fb28658d033b15a1001": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 448
+  },
+  "52354fb5f0bfec4b49b918a1b4152edab28abda169b448aeb165ec044caeb752": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 516
+  },
+  "3fccef379e5c558a6c1e3df723274b5b48e3908f953850983e7826a5c57b351c": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 359
+  },
+  "efad17c30b3a81a8d499ea21072154fe6aec1f61612c4274b6c0a49043352205": {
+   "cat": "action-reverse",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 7
+   },
+   "asst_chars": 459
+  },
+  "e53f21f24201bd01f9a42518c4ce2abc5f0928a6cec896cde5ff8038dd15ac11": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 533
+  },
+  "dbc4eb05ffcea344dd1d3630b5829b7a182a47f3ce89ccd9c854b98166c4f6e1": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 533
+  },
+  "44349e54cfa2212098a6beeb7afb97921a4051eec52cd9455718f149539014cd": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 543
+  },
+  "4141b95a66e465425fe9cd54e9092ad29715e266266cd587f8045a50cb2ccbe4": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 452
+  },
+  "4d300311aa33f5ed09bdf6f70cd2b9bf8ab0661ea878a7ecd286857c7e2ec712": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 431
+  },
+  "45d88400ef3b7d6d509debeca5a2ba83676f464b01ede860f684d0a16105198a": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 330
+  },
+  "ee149d97f6d131825a2dc64546eed07143604ca6fe8abdd0d3160f964863c844": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 450
+  },
+  "4b94839dddd08c5c3f70aef05552a44cb664067052f9c34dc23fe1a94dd12c2a": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 383
+  },
+  "b8dd91558fea2d6e86640dc56528256aca84fdde765c546ee473a0cd6cd3d16f": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 6
+   },
+   "asst_chars": 468
+  },
+  "e37a1284be279a89eab2de81247e61f4f7d7839b1a085a9db6248162dc530c3b": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 442
+  },
+  "754d3e243e5b50d283e3413b05aa05080a350bed9fcef249cf783a1ce6f84c70": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 488
+  },
+  "47ab2a0ec3f8b8af0d47aec30f00b6d1512a5d7ac2c1af0a1d8b9f37fd723be1": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 5
+   },
+   "asst_chars": 473
+  },
+  "46bc5064c78207c570403489fd0905dc48c189b6140c1b609752ca5d931eec2e": {
+   "cat": "action-reverse",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 4,
+    "detour_rounds": 0,
+    "marker_kinds": 4
+   },
+   "asst_chars": 402
+  },
+  "971fe57f4315d40333362cec924b032a565f0fe57ec0293ea728322bea772e76": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 3
+   },
+   "asst_chars": 1248
+  },
+  "d0f2a2e1ee640578f556e0f0982812d64c5c0d535a9668bef0355ca5704c86ed": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 2
+   },
+   "asst_chars": 1015
+  },
+  "63b9d076536bef46bad6d96c5518400734093629e8a476ffdb9f70d289b0536d": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 2
+   },
+   "asst_chars": 913
+  },
+  "ac0d93bc5e98784cc37a49ea508f008aec0be5bd54a809c1fa1f3f5ad1c94e05": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 2
+   },
+   "asst_chars": 939
+  },
+  "4444d67f17eaf2be66ffc63c4289244ca1d04830ba91f51d30eb45ff0877b208": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 1049
+  },
+  "3a0676748b91d39c17885590e5615acc12e13f2701a2005571a5a700a4b5860a": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 3
+   },
+   "asst_chars": 1041
+  },
+  "8bf9c827ce17e2e491eb35579259fe8f3278a9d01f198ae575f27898f89c6110": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 2
+   },
+   "asst_chars": 1204
+  },
+  "a07840d858741057b22343238edbf39c1651069e3f87b5e0563fc2c09b861171": {
+   "cat": "real-trajectory",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 6,
+    "marker_kinds": 3
+   },
+   "asst_chars": 1022
+  },
+  "d38b805df851255afa733c64abfdfed22f3df2a6d8b23a06d8b5150044cb04ff": {
+   "cat": "real-trajectory",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 2
+   },
+   "asst_chars": 889
+  },
+  "9531488fe0ee59eeb722c15472b002ba060458af731b2ea312826b07788a81ef": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 3
+   },
+   "asst_chars": 1075
+  },
+  "899f0dae66b3ccf1697d168059e7814bca430f708c8590524c0972a0e545511b": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 3
+   },
+   "asst_chars": 840
+  },
+  "5d0ab709028604bd87c136a469a3aaa95ff5c0063f9825122d4d5639bace8af2": {
+   "cat": "real-trajectory",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 2
+   },
+   "asst_chars": 1017
+  },
+  "c454c38b2808b0e0eb605b3140f74b3f9a4116367411c21d200872767ddb4556": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 3
+   },
+   "asst_chars": 1047
+  },
+  "eb3ef6edde91db9b96e8992939d89a15934ebe4eadd34461fe8054dddff10e03": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 2
+   },
+   "asst_chars": 922
+  },
+  "eef6e775294bfd8009c88c6426a1d70c5f151159373ba1749552f359fabe6053": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 2
+   },
+   "asst_chars": 863
+  },
+  "33fae1097af3750513772deb2ace530fd1500db1f911c69f615c5913b11d9e12": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 2
+   },
+   "asst_chars": 964
+  },
+  "007771e5be5c5069910a48bf8c379d508d4ac461a47a7fe3de917563ab8e90af": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 867
+  },
+  "fdee3f7daf2a09393312aa43ba576edaf66649c93243bf3dc32cc5e51496c672": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 3
+   },
+   "asst_chars": 990
+  },
+  "40626232edca8a73ad1f611ce5d45221ca91bf2757bd7b86c304905256257671": {
+   "cat": "real-trajectory",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 4
+   },
+   "asst_chars": 880
+  },
+  "5a61814cfe00b156891329a5f9dab6fa22fdb82e7f598e61c4e7227e2b7a1de4": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 2
+   },
+   "asst_chars": 984
+  },
+  "47f2f3fe26306d7777e9043f61f169f1c413ec21dbbca550f150d1f668aa38fd": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 6,
+    "marker_kinds": 2
+   },
+   "asst_chars": 1393
+  },
+  "fab4f1300a1293581e99fa3876b815f55f5d194c2e2b2fb611b2e36a1b13e751": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 3
+   },
+   "asst_chars": 892
+  },
+  "3ae8ca707c1c17144d0d1a3bcb9fde9914dd60e50bc53fc62b342bd7ec466d03": {
+   "cat": "real-trajectory",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 3
+   },
+   "asst_chars": 982
+  },
+  "0b9835ab6902d66de8c5e28f9790b54c1843b1c61064fb54784d6ca63290b2fe": {
+   "cat": "real-trajectory",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 6,
+    "marker_kinds": 3
+   },
+   "asst_chars": 908
+  },
+  "fb9ddf3d7572073801bf90ae2a3b56997bafea941018903cfae7edcefa69df31": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 812
+  },
+  "cad70ba9ae829922ad41800e24a55c38ed7746c3e4eccf88500911088c1360e8": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 3
+   },
+   "asst_chars": 847
+  },
+  "7c43502f351ec26b8fb98c693ad315c7862fca2b97cf42119857b4310742a64f": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 4
+   },
+   "asst_chars": 888
+  },
+  "fc9546acae1cfc726c1186d599421a8d7e6fd887cb2deafe796a6a2a9c7feed0": {
+   "cat": "real-trajectory",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 3
+   },
+   "asst_chars": 962
+  },
+  "34a797d1ee77d863b1c29eb8b3964ff15c3a1effd86d74db90e9ab7981f35ab8": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 2
+   },
+   "asst_chars": 740
+  },
+  "c320eac1ab7eae1171dbc5f199c324240b93bd6bcb6bcdf9b5052891c81ce600": {
+   "cat": "real-trajectory",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 2
+   },
+   "asst_chars": 1342
+  },
+  "71d277b2e6ded2c83c022d010629889f095df2464cbb9e6e7d05e5c45606aa2e": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 3,
+    "marker_kinds": 2
+   },
+   "asst_chars": 728
+  },
+  "1fe0c6939873c71453cbe238c334a731719965b141510f5aed3447e30a038888": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 616
+  },
+  "9c678f2ffb04c411f8fd2464997a2c554e982c65938ccaa0616cb9c1668f01e1": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 677
+  },
+  "e9dd33ec8345a317dbe0177615e4a57f8cc80400fe63d0882980cfe699d0e6e4": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 575
+  },
+  "ba5c657ae1c5544e4c6f7357903e07a5975655ac373004d2b76495ae176f4c3d": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 3,
+    "marker_kinds": 2
+   },
+   "asst_chars": 523
+  },
+  "98ffaba7752d8d8946e6085c1a4c068328349fa3db8af46215c0dea21c61a518": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 3,
+    "marker_kinds": 2
+   },
+   "asst_chars": 506
+  },
+  "6b8e27ced4dfa0fa81d56754754bc28e67cbc2a5249993831e18c82e0d54834a": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 527
+  },
+  "1aae43842413006336fe03d5317baed20b0ddbad8c78521cc23a2525d5e0e924": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 5,
+    "marker_kinds": 2
+   },
+   "asst_chars": 730
+  },
+  "cbc959dfb4451bbbcc60b6278f2bbab92a59254936516f366efb8306103917d9": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 3,
+    "marker_kinds": 2
+   },
+   "asst_chars": 410
+  },
+  "0f9a4cde8b86cf6278b13056d76f27e1eb55130f662a6eae530894ce775755cd": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 497
+  },
+  "3b264ea6f878c35be18e6974f40529909875003729e78baac14f57752ee9a117": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 520
+  },
+  "1da6fc1751ac06e39f88e800e2e17e8f32dbb1aac6d4acc7c5de26475591b076": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 580
+  },
+  "55a86af049953b6b83ea70bc8450775777352b92cbadb434b2138335e2cd4134": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 589
+  },
+  "d850a3d254dbbded9ce29ebab4087a93ba0245d3e68b927a70cdb27112d263f2": {
+   "cat": "real-trajectory",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 629
+  },
+  "da3fa1ec518d8e0e9e7d5d1e6dd97db905f911556b2d1df68f69827c34985394": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 3,
+    "marker_kinds": 2
+   },
+   "asst_chars": 615
+  },
+  "862c70eaea349ccf64997ebbd484e143cd5af33bfdb9bbd417f61c7f581dddad": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 548
+  },
+  "cf79f1c9dd892fdaa7286d5d73702fde4bbbbea087525a0e3a73f11ab92440c0": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 3,
+    "marker_kinds": 2
+   },
+   "asst_chars": 404
+  },
+  "474b934fdf8eddf1fbb75b1e268402281ffcfe02443fa4b35b12ec96e5c240e7": {
+   "cat": "real-trajectory",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 507
+  },
+  "ffa25e08f6aac3276047dd89d62b6f7da0beae9a3e83dfe527ed32732b7b0100": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 495
+  },
+  "8fce94aa19bb54d1ba17df1f7486f97f596f216453b53dc9f2e9e3c0f7d994ab": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 582
+  },
+  "61969350077290adab5bcd451f5236d93f387dcd9cd94de2467720741247520c": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 3,
+    "marker_kinds": 2
+   },
+   "asst_chars": 416
+  },
+  "d92a35bed27b19431f1b1eba4b3056161417a2316ec0d27d20b796b1c9415d05": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 528
+  },
+  "d01845e1c8082831cc0d3d8005fb0113ad39898e7fda1104c01d781f52c28f00": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 444
+  },
+  "e9c623003032405b2be6b17aa276a2f252ad0710d36addde6bb62bb9cb195b9d": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 484
+  },
+  "613bf34ea0317a0e1ea938e6f995fd5cf0fdd0dd357972eea7ad82493c872616": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 609
+  },
+  "6a536770e5becd9c6b3747c1a5e1f6f052370eff76d6019a0523b5dadf157faf": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 526
+  },
+  "24924fba72fdd3721b5ba9f850f39c282a76c1813e45c997bf4aa5b1cfac845a": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 467
+  },
+  "c25ca595ecb6d7dfc1a3bd939311e55f725876b4c880ed277d6db8d91ef6bc24": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 3,
+    "marker_kinds": 2
+   },
+   "asst_chars": 535
+  },
+  "293b4c513369fff75cffd901912ca9336248417e6c0da0a8b59f5f42dae64cad": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 441
+  },
+  "b7750ce34fed4b29b85e93b30c22f2b59f5eef27ae34e56ae59b60c24086f67b": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 437
+  },
+  "4d2081fd8a54b4decdc247774b58da00284571915bfd7206ba806fc6435d38c1": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 486
+  },
+  "d3cb22906a085604d97db60a12dcd25556702b24f3a6d78de7d913e4d4f84020": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 3,
+    "marker_kinds": 2
+   },
+   "asst_chars": 468
+  },
+  "8ee91786566629088de0f3861c81ddc52b3d222c9cbfb46cf3dccc174816fbcf": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 343
+  },
+  "3bccf688b6a919f3b53fadd31688971457804e6f2da7071bf9f34a337cffe4e1": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 504
+  },
+  "91949bc46f6d6ddb20878652ea8aa675da0c600b51e34a6b039e1efadf699e81": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 608
+  },
+  "d997d8b3ecd9bacb399aca53a9a34a27ce440c30616be20680b598136d32bdcf": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 555
+  },
+  "1d19de446e5b2834f64a08fce3c4203cd5ebef53b11047d2f726cfb2035a7b1e": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 4
+   },
+   "asst_chars": 461
+  },
+  "7d2ed4b91705f3d05366e2be82d0ff4b7ab85806de0784b3ddf3f303a24f055a": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 441
+  },
+  "38a8133b0ff8cb4a7a06539755db0d058eb33826a019df750e817cfd1f03aae5": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 328
+  },
+  "85612bb43b9659c6f3df35b4860f4d4968e4289b78bdb8c2b5b5e216ca9c3971": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 477
+  },
+  "66a3b8f5db9da62726685908052ff6fc8862f0e9579d4a4b66bbc97b252dbaa8": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 311
+  },
+  "f5719be5821035a1bd1a63f926d15c130466b2c8f722b28b468f2330978ac8c3": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 425
+  },
+  "8a57d570de37e5d1966508b805357122ddd5725363b7feae7627456a8d272a9b": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 519
+  },
+  "8145a6b14eff131972a560ebcb03e358ea6b957de8b14d08a6e8a79bd74317be": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 385
+  },
+  "a22a34360d48c0d6d138a8193a92eb0feb074a0e1f8d622d9d95a44337981786": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 448
+  },
+  "a8c005d3d8963c4d8639bcb50d0bc4f7cf97a8579cd2882089dca1444d8ee792": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 481
+  },
+  "3cae0eacdb1ee76f565a31cebc7ef73c2b916023d1dcd6de90e9a69406511d15": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 520
+  },
+  "54b7c378a7797d86344e56e114c2300e46f9abe7c5e4e24ad07186e91e814388": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 325
+  },
+  "69148af578e07ad3600451135351d71ac2c44ecee3377e96a6616f74a1d656d1": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 499
+  },
+  "ae4196fd40574a9c1a42b67a104aba7a7d35b0614c1fe8b3bc5eb4e616f96e1c": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 343
+  },
+  "045cdf2f782b29a3a88f727a6ae7aa427c00db1c3a7c29549c58303f5a207aed": {
+   "cat": "real-trajectory",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 516
+  },
+  "0d4c819afe5b3cbb26ab40a298e38690876797798ae8c6abbe5002b6e261e39d": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 481
+  },
+  "b67ab2a324de6277e337cdeeea75184e96cc3779bea05dd1cf06749c7d72efa6": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 374
+  },
+  "dd4ac3a86d88532370baf3120469d537800db201227f1ec49d8f575f10d214fd": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 461
+  },
+  "98f56dd78b6567a280671f7e87a6c6d5c1ed94d1e6289221d934a60e37767ffa": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 419
+  },
+  "db7ae664eef0ce32529237a7a199ee3329a9fb751202b7c1d60bb1d467c6d130": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 527
+  },
+  "5d34f4ff01c37949bdb15d2478ccac517d74e79928d4a6750cbc413a951e1c47": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 437
+  },
+  "ba2dd284decd627299326afa05fc0ce8fca5dae0b31925adee019f73a3197f4d": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 435
+  },
+  "95cc39c8099584b308c56ef9d8e8b10e53b2612ae77ef4daefabf728fd8bf3cc": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 572
+  },
+  "7236149fc034206c96583d1a6d66e6925e63e5e7547dea5006ee5969c79f78dd": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 347
+  },
+  "81aaf348e07a115ec883dde6b7325be72d5f60b97a5c71c203f20ed0f898eb2b": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 490
+  },
+  "5f5b4329cc6c112c513ea7c6374d7fe741e1646d2efec60c898a9b72c4804e1a": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 488
+  },
+  "02b7a27ea49efaa003de80fa5015096744984a4c6ff247524d2c9e6dd30ed753": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 311
+  },
+  "8ba775b560b9d432c21bf3834d91971b9029391e4e76a08359294ede59cf3708": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 520
+  },
+  "d68d4721bbf572ba0587708337937697c7692961bfdf7e02e68999beae76b921": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 3,
+    "marker_kinds": 2
+   },
+   "asst_chars": 397
+  },
+  "8c96926163bac2342b0de0b6680f3ebe19d412a527e8d5e018e2738611c09ff0": {
+   "cat": "real-trajectory",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 398
+  },
+  "44730b868a58895673162d1a777688a12eaf7cae8e186efc188ede783eaec79c": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 592
+  },
+  "af1f2f5f297c79568db4e1701bb518f31680072acf865ad0cac4cc69d5178902": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 551
+  },
+  "1f4d69be45310d0936a45fe847ded327254cf9ce8ee58e7ba0e976ab4255b23b": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 370
+  },
+  "330b7e1500007e56dd0cc01d58b28f5e6448ed59ea6e79f91325bd21e3e0cd38": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 4
+   },
+   "asst_chars": 582
+  },
+  "a1fc408bfec7685e722f9bcd945f57beb55ae002c72d33392f7377acc936b2e0": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 527
+  },
+  "3c0d3be4d2c59043c07ba9031f185d351b35cb577e9e7671c4053cf846f349d6": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 390
+  },
+  "72a1374df9c38c6ade74006aa3b9957780582c7ae06d53c08e3a92255d9d2e08": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 388
+  },
+  "8aca7411351b3b8f3d4a04aec1a1c124686d71447c1f2ae6235b135b8989f5ac": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 415
+  },
+  "a35cb304832632d953ec197472ccb9236e2b9a87d4273aa88e3cf8395b2318c1": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 443
+  },
+  "aa7998dcdc8f027cf25805ca049763c0c3f040c26114153c2ce1c76b088c03ea": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 581
+  },
+  "a8fb7fe95271ead5740f2cab44a3ba65c868e7cf8251e4919f6d4117e8fcea15": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 400
+  },
+  "9b5cb70c9f6a693e4ab24be8efd4e513a76f4cecc7a23255bbb6730c699cd9da": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 346
+  },
+  "7a0e54d7b06930c872114d0bf5ff6af2a2e05d3c3654a687f90b375a911655de": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 0,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 3,
+    "marker_kinds": 2
+   },
+   "asst_chars": 372
+  },
+  "12818a6093e6999a3bfb9559f7a2606d2b997b4a72f7cae1e21141a8ec4882b4": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 356
+  },
+  "93f26ee0bc135fdc66bd521f1a901e5e9d7a4b14d7a0255cd7b0aa96267982d7": {
+   "cat": "real-trajectory",
+   "score": 3,
+   "band": "hard",
+   "factors": {
+    "F1_cross_view": 1,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 510
+  },
+  "4f0a47959955612b04a223f4a51f4941f751402a2b4f4ee45b1c2ac96d1cae96": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 488
+  },
+  "cde0187598f008642177823c38ff3287ab743d25528ed224810ee0083f59285a": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 473
+  },
+  "96d494e9c1fc50200bb689402de933ce1426b51837603f313a049708aadc507a": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 3
+   },
+   "asst_chars": 519
+  },
+  "9ce7e55c51cf174a77fcd95de1033b20ded828188942d7f0dd8c3357c26362d6": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 395
+  },
+  "1fd5b5b468e270aaa7e7086125a455519e0c4f17a37d3a0046956d7152854fd2": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 498
+  },
+  "a38a9093e93d544d215961de6fadf36262d8e5abe8ba88ac8368a1db07805f60": {
+   "cat": "real-trajectory",
+   "score": 1,
+   "band": "easy",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 0,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 458
+  },
+  "da3460b04ab91125e6cbefdbb7c426502d784539181cbbc53f70787349af8402": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 480
+  },
+  "ecf80f4e27c755d7984c33a135121069da5c4899e6e65911bb1d52a89f03f307": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 473
+  },
+  "c1d35ef2db69c485bbf4a1e5a93137d410d30ebf6399ea05fb3c1e14867e08d8": {
+   "cat": "real-trajectory",
+   "score": 2,
+   "band": "medium",
+   "factors": {
+    "F1_cross_view": 0,
+    "F2_multi_step": 1,
+    "F3_correction": 1,
+    "numbered_steps": 0,
+    "detour_rounds": 4,
+    "marker_kinds": 2
+   },
+   "asst_chars": 367
+  }
+ }
+}

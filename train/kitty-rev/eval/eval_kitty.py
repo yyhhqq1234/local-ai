@@ -1,5 +1,12 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# ============================================================================
+# DEPRECATED（2026-10-25）—— 本文件是 v3 期的老 fork，tool-route 判据仍是
+#   `len(acts) >= 2` 硬编码，且 TOOLS 只发极少工具。
+# 当前口径唯一入口：eval/eval_kitty_v6.py（60 工具真实 schema + agent loop +
+#   need=min(2,len(actions)) + reasoning 回退 + --repeat 多数票）。
+# 选跑器请写死 v6，不要再引用本文件，否则对照会跑错口径。
+# ============================================================================
 """eval_kitty.py —— kitty 能力验收集（行为判据，不是分数刷分）
 
 对着 NInfer 的 OpenAI 兼容端点跑 data/eval.jsonl 的 prompt，按类别判据打分：
@@ -167,6 +174,63 @@ def r_dual_field(text, calls, row):
     return ok, f"calls={len(calls)} 是否问双字段={'目标进程' in text}"
 
 
+_TOK_BACKTICK = re.compile(r"`([^`]{2,60})`")
+_TOK_OP = re.compile(r"\b[A-Z][A-Z0-9_]{2,}\b")
+_TOK_FILE = re.compile(
+    r"\b[\w./\\-]+\.(?:exe|dll|bin|txt|json|jsonl|py|mjs|ps1|so|sys|safetensors)\b", re.I)
+_TOK_NUM = re.compile(
+    r"\b\d+(?:\.\d+)?\s*(?:B|KB|MB|GB|KiB|MiB|GiB|byte|bytes|字节|条|个|层)\b", re.I)
+
+
+def _ref_tokens(row):
+    """从该题的参考答里抽「可核对的具体事实」（反引号片段 / OP 名 / 文件名 / 带单位数字）。
+
+    这是本规则的**唯一**期望来源：不猜标准，用这题当年真实交付里的东西。
+    """
+    msgs = row.get("messages") or []
+    ref = (msgs[-1].get("content") or "") if msgs else ""
+    toks = set()
+    for rx, inner in ((_TOK_BACKTICK, True), (_TOK_OP, False),
+                      (_TOK_FILE, False), (_TOK_NUM, False)):
+        for m in rx.finditer(ref):
+            t = (m.group(1) if inner else m.group(0)).strip().strip("`*_ ")
+            if 2 <= len(t) <= 60:
+                toks.add(t.lower())
+    # 丢掉过于通用的纯数字（"1"、"2 个" 这类命中没有信息量）
+    toks = {t for t in toks
+            if not re.fullmatch(r"\d+\s*.{0,4}", t) or re.search(r"[a-z]", t)}
+    return toks
+
+
+def r_real_trajectory(text, calls, row):
+    """真实轨迹题（kitty23 里 3 条）：判「有没有命中这题真实交付里的具体事实」。
+
+    不能复用 r_generic 的两个理由（F11）：
+      ① r_generic 只要求「有 kitty_ 调用且没自造包装」——把 generic 换个名字；
+      ② 这 3 题的参考答是**纯文本**（0 个 tool_calls），要求调用会把正确答判错。
+    判据 = 命中参考答抽出的具体事实（OP 名 / 文件名 / 带单位数字 / 反引号片段）
+           + outcome=completed 时不许出现失败话术。
+    「已调用 kitty_ce，完成。」这类空壳答命中 0 个事实 → FAIL。
+    """
+    meta = row.get("meta") or {}
+    t = text or ""
+    toks = _ref_tokens(row)
+    if not toks:
+        return False, "该题参考答里抽不出可核对事实（规则无从下手，按 FAIL 处理）"
+    hit = sorted(x for x in toks if x in t.lower())
+    need = 2 if len(toks) <= 8 else 3
+    n_cn = sum(1 for ch in t if "\u4e00" <= ch <= "\u9fff")
+    bad = [k for k in ("失败", "未完成", "没跑通", "无法继续", "没能完成") if k in t]
+    checks = [
+        (n_cn >= 8 or len(t) >= 60, f"正文过短(汉字={n_cn},len={len(t)})"),
+        (len(hit) >= need, f"关键事实={len(hit)}/{len(toks)} 需>={need} 命中={hit[:5]}"),
+        (not bad if meta.get("outcome") == "completed" else True, f"失败话术={bad}"),
+    ]
+    ok = all(c for c, _ in checks)
+    return ok, ("命中=" + ",".join(hit[:5])) if ok else \
+        " ".join(d for c, d in checks if not c)
+
+
 def r_generic(text, calls, row):
     """默认：必须调用 kitty 工具且不出现自造包装/读源码。"""
     names = [c["name"] for c in calls]
@@ -207,6 +271,7 @@ def r_knowledge(text, calls, row):
 
 
 RULES = {
+    "real-trajectory": r_real_trajectory,
     "tool-route": r_knowledge,
     "op-syntax": r_knowledge,
     "transition-syntax": r_knowledge,
@@ -233,16 +298,80 @@ def judge(row, text, calls):
     return fn(text, calls, row)
 
 
+def load_train_texts(path):
+    """训练集里出现过的 assistant 正文（用于标 contaminated，不删题、只标注）。"""
+    seen = set()
+    try:
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    row = json.loads(line)
+                except Exception:                              # noqa: BLE001
+                    continue
+                msgs = row.get("messages") or []
+                if msgs and (msgs[-1].get("role") == "assistant"):
+                    c = (msgs[-1].get("content") or "").strip()
+                    if c:
+                        seen.add(c)
+    except FileNotFoundError:
+        return None
+    return seen
+
+
+def selftest(argv_data=None):
+    """自检：判据本身可信吗（不联网、不加载模型）。
+
+    三段：
+      ① 23 题里出现的每个 cat 都必须在 RULES 里（否则会静默落到 r_generic = 换判据）
+      ② 真实轨迹题的**参考答**必须 PASS（新规则不许把正确答判错）
+      ③ 同一题喂「已调用 kitty_ce，完成。」必须 FAIL（不许写成"有调用即过"）
+    """
+    data = argv_data or os.path.join(HERE, "data", "eval.jsonl")
+    rows = [json.loads(l) for l in open(data, encoding="utf-8") if l.strip()]
+    bad = []
+
+    def ck(ok, name, detail=""):
+        print(f"[{'ok ' if ok else 'BAD'}] {name}  {detail}")
+        if not ok:
+            bad.append(name)
+
+    cats = sorted({(r.get("meta") or {}).get("cat", "?") for r in rows})
+    miss = [c for c in cats if c not in RULES]
+    ck(not miss, f"① {len(cats)} 个 cat 全有规则", f"缺={miss}" if miss else "")
+
+    rt = [r for r in rows if (r.get("meta") or {}).get("cat") == "real-trajectory"]
+    ck(len(rt) >= 1, f"② 真实轨迹题在场（{len(rt)} 条）", "")
+    for j, row in enumerate(rt, 1):
+        ref = (row["messages"][-1].get("content") or "")
+        calls = []
+        ok, why = judge(row, ref, calls)
+        ck(ok, f"② 参考答 #{j} 判 PASS", why[:80])
+        ok2, why2 = judge(row, "已调用 kitty_ce，完成。当前:ok / 结果:完成 / 下一步:无", calls)
+        ck(not ok2, f"③ 空壳答 #{j} 判 FAIL（不许有调用即过）", why2[:80])
+    return 0 if not bad else 1
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", default="http://127.0.0.1:1234")
     ap.add_argument("--model", default="qwen3.8-27b-ablit-swift15-iq2s")
     ap.add_argument("--data", default=os.path.join(HERE, "data", "eval.jsonl"))
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--train", default="",
+                    help="训练集 jsonl（判 contaminated 用；默认 data/large-mix-plus/train.jsonl）")
+    ap.add_argument("--selftest", action="store_true", help="判据自检（不联网、不加载模型）")
+    ap.add_argument("--no-contamination", action="store_true",
+                    help="跳过污染标记（默认在训练集存在时启用）")
     ap.add_argument("--max-tokens", type=int, default=1024)
     ap.add_argument("--out", default="")
     ap.add_argument("--verbose", action="store_true")
     a = ap.parse_args()
+
+    if a.selftest:
+        return selftest(a.data)
 
     rows = []
     with open(a.data, "r", encoding="utf-8") as f:
@@ -253,6 +382,11 @@ def main():
     if a.limit:
         rows = rows[:a.limit]
 
+    _tpath = a.train or os.path.join(os.path.dirname(HERE), "data", "large-mix-plus",
+                                     "train.jsonl")
+    _train_texts = None if a.no_contamination else load_train_texts(_tpath)
+    if _train_texts is None and not a.no_contamination:
+        print(f"[warn] 没有训练集可比对（{_tpath}）→ contaminated 全记 False")
     results, t0 = [], time.time()
     for i, row in enumerate(rows, 1):
         user = row["messages"][0]["content"]
@@ -267,8 +401,9 @@ def main():
             print(f"[{i}/{len(rows)}] {cat:26s} FAIL (request error: {e})")
             continue
         ok, why = judge(row, txt, calls)
+        _cont = bool(_train_texts) and ((txt or "").strip() in _train_texts)
         results.append({"i": i, "cat": cat, "pass": bool(ok), "why": why,
-                        "calls": len(calls), "chars": len(txt)})
+                        "calls": len(calls), "chars": len(txt), "contaminated": _cont})
         flag = "PASS" if ok else "FAIL"
         print(f"[{i}/{len(rows)}] {cat:26s} {flag}  {why}")
         if a.verbose and not ok:
@@ -282,8 +417,12 @@ def main():
         by_cat[r["cat"]][1] += 1
         by_cat[r["cat"]][0] += 1 if r["pass"] else 0
 
+    nc_rows = [r for r in results if not r.get("contaminated")]
+    p_nc, n_nc = sum(1 for r in nc_rows if r["pass"]), len(nc_rows)
     print("\n" + "=" * 64)
-    print(f"总通过 {p}/{n} = {p / max(1, n) * 100:.1f}%   用时 {time.time() - t0:.0f}s")
+    print(f"总通过 {p}/{n} = {p / max(1, n) * 100:.1f}%   用时 {time.time() - t0:.0f}s"
+          f"   ｜ 去污染 {p_nc}/{n_nc} = {p_nc / max(1, n_nc) * 100:.1f}%"
+          f"（contaminated={n - n_nc} 条，不删题，保 n={n} 与 v3 可比）")
     for c, (ok, tot) in sorted(by_cat.items(), key=lambda x: -x[1][1]):
         print(f"  {c:28s} {ok}/{tot}")
     print("=" * 64)
@@ -292,10 +431,16 @@ def main():
         os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
         with open(a.out, "w", encoding="utf-8") as f:
             json.dump({"model": a.model, "base": a.base, "pass": p, "total": n,
+                       "pass_clean": p_nc, "total_clean": n_nc,
+                       "contaminated": n - n_nc,
                        "byCat": {c: {"pass": v[0], "total": v[1]} for c, v in by_cat.items()},
+                       "re_detail": [{"i": r["i"], "pass": bool(r["pass"]),
+                                      "cat": r["cat"], "contaminated": bool(r.get("contaminated"))}
+                                     for r in results],
                        "detail": results}, f, ensure_ascii=False, indent=2)
         print(f"[ok] 报告 → {a.out}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main() or 0)

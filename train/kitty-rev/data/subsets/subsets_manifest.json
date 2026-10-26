@@ -1,13 +1,13 @@
 {
-  "created": "2026-10-21T21:10:33",
-  "source": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\kitty-rev\\data\\large-mix\\train.jsonl",
-  "source_sha16": "41868dc6b3b7ec6a",
+  "created": "2026-10-21T22:25:06",
+  "source": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\kitty-rev\\data\\large-mix-plus\\train.jsonl",
+  "source_sha16": "b90a1ae8a8b5519b",
   "seed": 42,
   "val_ratio": 0.2,
   "keep_dup": false,
   "dedup": {
-    "source_rows": 3908,
-    "unique": 3908,
+    "source_rows": 4388,
+    "unique": 4388,
     "dropped": 0
   },
   "groups": {
@@ -17,6 +17,7 @@
         "action-reverse": 165
       },
       "total": 359,
+      "excluded_forge": 240,
       "train": 287,
       "val": 72,
       "val_ratio_actual": 0.2006,
@@ -60,6 +61,7 @@
         "tool-route": 292
       },
       "total": 292,
+      "excluded_forge": 0,
       "train": 234,
       "val": 58,
       "val_ratio_actual": 0.1986,
@@ -103,6 +105,7 @@
         "real-discipline": 383
       },
       "total": 383,
+      "excluded_forge": 0,
       "train": 306,
       "val": 77,
       "val_ratio_actual": 0.201,
@@ -146,6 +149,7 @@
         "reasoning": 100
       },
       "total": 100,
+      "excluded_forge": 0,
       "train": 80,
       "val": 20,
       "val_ratio_actual": 0.2,
@@ -187,12 +191,77 @@
           "bytes": 35757
         }
       }
+    },
+    "forge": {
+      "cats": {
+        "action-reverse": 120,
+        "kb-re": 120,
+        "op-syntax": 120,
+        "real-trajectory": 120
+      },
+      "total": 480,
+      "excluded_forge": 0,
+      "train": 384,
+      "val": 96,
+      "val_ratio_actual": 0.2,
+      "cap": 0,
+      "disjoint": {
+        "against": [],
+        "removed": 0,
+        "overlap_after": 0,
+        "ok": true
+      },
+      "refusal": {
+        "raw": 480,
+        "hits": 0,
+        "rate": 0.0,
+        "filtered": true,
+        "verdict": "ok"
+      },
+      "files": {
+        "all": {
+          "file": "forge-subset.jsonl",
+          "rows": 480,
+          "sha256_16": "72cf28cb526e67e1",
+          "bytes": 638586
+        },
+        "train": {
+          "file": "forge-subset.train.jsonl",
+          "rows": 384,
+          "sha256_16": "b50113b880fdec35",
+          "bytes": 510189
+        },
+        "val": {
+          "file": "forge-subset.val.jsonl",
+          "rows": 96,
+          "sha256_16": "1f4c02245ded7fcc",
+          "bytes": 128397
+        }
+      }
     }
   },
+  "coverage": {
+    "rows": 4388,
+    "sum_groups": 1614,
+    "unassigned": 2774,
+    "overlaps": [],
+    "identity_ok": true,
+    "per_group": {
+      "re": 359,
+      "route": 292,
+      "discipline": 383,
+      "gen": 100,
+      "forge": 480
+    }
+  },
+  "identity_ok": true,
+  "rows": 4388,
+  "sum_groups": 1614,
+  "unassigned": 2774,
   "refusal": {
-    "total_scanned": 3908,
+    "total_scanned": 4388,
     "total_hits": 1,
-    "rate": 0.0003,
+    "rate": 0.0002,
     "filtered": true,
     "report": "refusal_scan.json"
   }
