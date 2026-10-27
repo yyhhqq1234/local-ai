@@ -1,0 +1,16703 @@
+[
+ {
+  "i": 0,
+  "type": "session",
+  "len": 213,
+  "keys": [
+   "type",
+   "version",
+   "id",
+   "createdAt",
+   "cwd",
+   "isSeeded",
+   "delegationDepth",
+   "agentPreset"
+  ]
+ },
+ {
+  "i": 1,
+  "type": "permission/preset",
+  "len": 96,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 2,
+  "type": "sandbox/mode",
+  "len": 89,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 3,
+  "type": "approval/policy",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 4,
+  "type": "session/end-seed",
+  "len": 66,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 5,
+  "type": "model/selection",
+  "len": 119,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 6,
+  "type": "model/selection",
+  "len": 143,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 7,
+  "type": "model/selection",
+  "len": 144,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 8,
+  "type": "agent/inbox/spliced",
+  "len": 383,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 9,
+  "type": "turn/start",
+  "len": 68,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 10,
+  "type": "agent/inbox/spliced",
+  "len": 130,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 11,
+  "type": "step/start",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 12,
+  "type": "system/message",
+  "len": 31534,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 13,
+  "type": "user/message",
+  "len": 352,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 14,
+  "type": "user/message",
+  "len": 8399,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 15,
+  "type": "user/message",
+  "len": 2960,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 16,
+  "type": "user/message",
+  "len": 155391,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 17,
+  "type": "user/message",
+  "len": 435,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 18,
+  "type": "user/message",
+  "len": 805,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 19,
+  "type": "request/header",
+  "len": 251618,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 20,
+  "type": "request/context",
+  "len": 144,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 21,
+  "type": "session/title",
+  "len": 162,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 22,
+  "type": "session/title-llm-request",
+  "len": 1063,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 23,
+  "type": "session/title",
+  "len": 241,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 24,
+  "type": "assistant/message",
+  "len": 5864,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 25,
+  "type": "tool/call",
+  "len": 365,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 26,
+  "type": "job/registered",
+  "len": 328,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 27,
+  "type": "job/settled",
+  "len": 440,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 28,
+  "type": "tool/result",
+  "len": 5256,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 29,
+  "type": "tool/call",
+  "len": 340,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 30,
+  "type": "job/registered",
+  "len": 299,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 31,
+  "type": "job/settled",
+  "len": 411,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 32,
+  "type": "tool/result",
+  "len": 15231,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 33,
+  "type": "step/end",
+  "len": 76,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 34,
+  "type": "step/start",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 35,
+  "type": "user/message",
+  "len": 562,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 36,
+  "type": "assistant/message",
+  "len": 6215,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 37,
+  "type": "tool/call",
+  "len": 507,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 38,
+  "type": "job/registered",
+  "len": 476,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 39,
+  "type": "job/settled",
+  "len": 588,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 40,
+  "type": "tool/result",
+  "len": 705,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 41,
+  "type": "tool/call",
+  "len": 316,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 42,
+  "type": "job/registered",
+  "len": 289,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 43,
+  "type": "job/settled",
+  "len": 401,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 44,
+  "type": "tool/result",
+  "len": 3119,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 45,
+  "type": "step/end",
+  "len": 76,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 46,
+  "type": "step/start",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 47,
+  "type": "user/message",
+  "len": 562,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 48,
+  "type": "assistant/message",
+  "len": 5780,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 49,
+  "type": "tool/call",
+  "len": 548,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 50,
+  "type": "job/registered",
+  "len": 512,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 51,
+  "type": "job/settled",
+  "len": 624,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 52,
+  "type": "tool/result",
+  "len": 6961,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 53,
+  "type": "tool/call",
+  "len": 572,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 54,
+  "type": "job/registered",
+  "len": 531,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 55,
+  "type": "job/settled",
+  "len": 643,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 56,
+  "type": "tool/result",
+  "len": 464,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 57,
+  "type": "step/end",
+  "len": 76,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 58,
+  "type": "step/start",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 59,
+  "type": "user/message",
+  "len": 562,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 60,
+  "type": "assistant/message",
+  "len": 6210,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 61,
+  "type": "tool/call",
+  "len": 742,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 62,
+  "type": "job/registered",
+  "len": 696,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 63,
+  "type": "job/settled",
+  "len": 808,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 64,
+  "type": "tool/result",
+  "len": 3642,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 65,
+  "type": "tool/call",
+  "len": 368,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 66,
+  "type": "job/registered",
+  "len": 334,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 67,
+  "type": "job/settled",
+  "len": 446,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 68,
+  "type": "tool/result",
+  "len": 1496,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 69,
+  "type": "step/end",
+  "len": 76,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 70,
+  "type": "step/start",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 71,
+  "type": "user/message",
+  "len": 562,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 72,
+  "type": "assistant/message",
+  "len": 5929,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 73,
+  "type": "tool/call",
+  "len": 537,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 74,
+  "type": "job/registered",
+  "len": 505,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 75,
+  "type": "job/settled",
+  "len": 617,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 76,
+  "type": "tool/result",
+  "len": 1175,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 77,
+  "type": "step/end",
+  "len": 76,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 78,
+  "type": "step/start",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 79,
+  "type": "user/message",
+  "len": 562,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 80,
+  "type": "assistant/message",
+  "len": 5108,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 81,
+  "type": "tool/call",
+  "len": 695,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 82,
+  "type": "job/registered",
+  "len": 660,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 83,
+  "type": "job/settled",
+  "len": 772,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 84,
+  "type": "tool/result",
+  "len": 941,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 85,
+  "type": "step/end",
+  "len": 76,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 86,
+  "type": "step/start",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 87,
+  "type": "user/message",
+  "len": 562,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 88,
+  "type": "assistant/message",
+  "len": 7897,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 89,
+  "type": "tool/call",
+  "len": 1301,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 90,
+  "type": "job/registered",
+  "len": 1239,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 91,
+  "type": "job/settled",
+  "len": 1351,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 92,
+  "type": "tool/result",
+  "len": 11588,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 93,
+  "type": "step/end",
+  "len": 76,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 94,
+  "type": "step/start",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 95,
+  "type": "user/message",
+  "len": 562,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 96,
+  "type": "assistant/message",
+  "len": 4795,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 97,
+  "type": "tool/call",
+  "len": 667,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 98,
+  "type": "job/registered",
+  "len": 627,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 99,
+  "type": "job/settled",
+  "len": 739,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 100,
+  "type": "tool/result",
+  "len": 3259,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 101,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 102,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 103,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 104,
+  "type": "assistant/message",
+  "len": 7138,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 105,
+  "type": "tool/call",
+  "len": 1032,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 106,
+  "type": "job/registered",
+  "len": 969,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 107,
+  "type": "job/settled",
+  "len": 1081,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 108,
+  "type": "tool/result",
+  "len": 10689,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 109,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 110,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 111,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 112,
+  "type": "assistant/message",
+  "len": 5378,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 113,
+  "type": "tool/call",
+  "len": 685,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 114,
+  "type": "job/registered",
+  "len": 645,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 115,
+  "type": "job/settled",
+  "len": 757,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 116,
+  "type": "tool/result",
+  "len": 3082,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 117,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 118,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 119,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 120,
+  "type": "assistant/message",
+  "len": 6362,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 121,
+  "type": "tool/call",
+  "len": 886,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 122,
+  "type": "job/registered",
+  "len": 844,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 123,
+  "type": "job/settled",
+  "len": 956,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 124,
+  "type": "tool/result",
+  "len": 10099,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 125,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 126,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 127,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 128,
+  "type": "assistant/message",
+  "len": 6303,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 129,
+  "type": "tool/call",
+  "len": 507,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 130,
+  "type": "job/registered",
+  "len": 455,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 131,
+  "type": "job/settled",
+  "len": 567,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 132,
+  "type": "tool/result",
+  "len": 2076,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 133,
+  "type": "tool/call",
+  "len": 407,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 134,
+  "type": "job/registered",
+  "len": 370,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 135,
+  "type": "job/settled",
+  "len": 482,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 136,
+  "type": "tool/result",
+  "len": 1551,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 137,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 138,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 139,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 140,
+  "type": "assistant/message",
+  "len": 8291,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 141,
+  "type": "tool/call",
+  "len": 718,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 142,
+  "type": "job/registered",
+  "len": 669,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 143,
+  "type": "job/settled",
+  "len": 781,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 144,
+  "type": "tool/result",
+  "len": 1762,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 145,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 146,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 147,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 148,
+  "type": "assistant/message",
+  "len": 4627,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 149,
+  "type": "tool/call",
+  "len": 428,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 150,
+  "type": "job/registered",
+  "len": 368,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 151,
+  "type": "job/settled",
+  "len": 480,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 152,
+  "type": "tool/result",
+  "len": 746,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 153,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 154,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 155,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 156,
+  "type": "assistant/message",
+  "len": 7903,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 157,
+  "type": "tool/call",
+  "len": 407,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 158,
+  "type": "job/registered",
+  "len": 363,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 159,
+  "type": "job/settled",
+  "len": 475,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 160,
+  "type": "tool/result",
+  "len": 3204,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 161,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 162,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 163,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 164,
+  "type": "assistant/message",
+  "len": 20147,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 165,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 166,
+  "type": "turn/end",
+  "len": 98,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 167,
+  "type": "agent/inbox/spliced",
+  "len": 464,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 168,
+  "type": "turn/start",
+  "len": 70,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 169,
+  "type": "agent/inbox/spliced",
+  "len": 132,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 170,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 171,
+  "type": "user/message",
+  "len": 432,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 172,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 173,
+  "type": "assistant/message",
+  "len": 9079,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 174,
+  "type": "tool/call",
+  "len": 506,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 175,
+  "type": "job/registered",
+  "len": 456,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 176,
+  "type": "job/settled",
+  "len": 568,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 177,
+  "type": "tool/result",
+  "len": 979,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 178,
+  "type": "tool/call",
+  "len": 558,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 179,
+  "type": "job/registered",
+  "len": 507,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 180,
+  "type": "job/settled",
+  "len": 619,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 181,
+  "type": "tool/result",
+  "len": 2813,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 182,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 183,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 184,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 185,
+  "type": "assistant/message",
+  "len": 8288,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 186,
+  "type": "tool/call",
+  "len": 590,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 187,
+  "type": "job/registered",
+  "len": 533,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 188,
+  "type": "job/settled",
+  "len": 645,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 189,
+  "type": "tool/result",
+  "len": 2870,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 190,
+  "type": "tool/call",
+  "len": 641,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 191,
+  "type": "job/registered",
+  "len": 590,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 192,
+  "type": "job/settled",
+  "len": 702,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 193,
+  "type": "tool/result",
+  "len": 2035,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 194,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 195,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 196,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 197,
+  "type": "assistant/message",
+  "len": 7870,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 198,
+  "type": "tool/call",
+  "len": 294,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 199,
+  "type": "job/registered",
+  "len": 276,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 200,
+  "type": "job/settled",
+  "len": 388,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 201,
+  "type": "tool/result",
+  "len": 5376,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 202,
+  "type": "tool/call",
+  "len": 389,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 203,
+  "type": "job/registered",
+  "len": 353,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 204,
+  "type": "job/settled",
+  "len": 465,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 205,
+  "type": "tool/result",
+  "len": 3489,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 206,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 207,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 208,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 209,
+  "type": "assistant/message",
+  "len": 7544,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 210,
+  "type": "tool/call",
+  "len": 490,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 211,
+  "type": "job/registered",
+  "len": 435,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 212,
+  "type": "job/settled",
+  "len": 547,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 213,
+  "type": "tool/result",
+  "len": 1818,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 214,
+  "type": "tool/call",
+  "len": 483,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 215,
+  "type": "job/registered",
+  "len": 438,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 216,
+  "type": "job/settled",
+  "len": 550,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 217,
+  "type": "tool/result",
+  "len": 1276,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 218,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 219,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 220,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 221,
+  "type": "assistant/message",
+  "len": 46691,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 222,
+  "type": "tool/call",
+  "len": 8149,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 223,
+  "type": "tool/result",
+  "len": 618,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 224,
+  "type": "tool/call",
+  "len": 439,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 225,
+  "type": "job/registered",
+  "len": 396,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 226,
+  "type": "job/settled",
+  "len": 508,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 227,
+  "type": "tool/result",
+  "len": 8895,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 228,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 229,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 230,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 231,
+  "type": "assistant/message",
+  "len": 4589,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 232,
+  "type": "tool/call",
+  "len": 421,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 233,
+  "type": "job/registered",
+  "len": 386,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 234,
+  "type": "job/settled",
+  "len": 498,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 235,
+  "type": "tool/result",
+  "len": 804,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 236,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 237,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 238,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 239,
+  "type": "assistant/message",
+  "len": 3619,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 240,
+  "type": "tool/call",
+  "len": 443,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 241,
+  "type": "job/registered",
+  "len": 400,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 242,
+  "type": "job/settled",
+  "len": 512,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 243,
+  "type": "tool/result",
+  "len": 781,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 244,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 245,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 246,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 247,
+  "type": "assistant/message",
+  "len": 8335,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 248,
+  "type": "tool/call",
+  "len": 695,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 249,
+  "type": "job/registered",
+  "len": 658,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 250,
+  "type": "job/settled",
+  "len": 770,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 251,
+  "type": "tool/result",
+  "len": 1017,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 252,
+  "type": "tool/call",
+  "len": 576,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 253,
+  "type": "job/registered",
+  "len": 516,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 254,
+  "type": "job/settled",
+  "len": 628,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 255,
+  "type": "tool/result",
+  "len": 739,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 256,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 257,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 258,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 259,
+  "type": "assistant/message",
+  "len": 32122,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 260,
+  "type": "tool/call",
+  "len": 5054,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 261,
+  "type": "tool/result",
+  "len": 640,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 262,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 263,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 264,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 265,
+  "type": "assistant/message",
+  "len": 2534,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 266,
+  "type": "tool/call",
+  "len": 342,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 267,
+  "type": "job/registered",
+  "len": 306,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 268,
+  "type": "job/settled",
+  "len": 418,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 269,
+  "type": "tool/result",
+  "len": 1171,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 270,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 271,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 272,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 273,
+  "type": "assistant/message",
+  "len": 8795,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 274,
+  "type": "tool/call",
+  "len": 695,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 275,
+  "type": "job/registered",
+  "len": 662,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 276,
+  "type": "job/settled",
+  "len": 774,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 277,
+  "type": "tool/result",
+  "len": 804,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 278,
+  "type": "tool/call",
+  "len": 610,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 279,
+  "type": "job/registered",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 280,
+  "type": "job/settled",
+  "len": 676,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 281,
+  "type": "tool/result",
+  "len": 1523,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 282,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 283,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 284,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 285,
+  "type": "assistant/message",
+  "len": 18595,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 286,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 287,
+  "type": "workspace/changes",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 288,
+  "type": "turn/end",
+  "len": 98,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 289,
+  "type": "agent/inbox/spliced",
+  "len": 341,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 290,
+  "type": "turn/start",
+  "len": 70,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 291,
+  "type": "agent/inbox/spliced",
+  "len": 132,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 292,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 293,
+  "type": "user/message",
+  "len": 309,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 294,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 295,
+  "type": "assistant/message",
+  "len": 54935,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 296,
+  "type": "tool/call",
+  "len": 10522,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 297,
+  "type": "tool/result",
+  "len": 622,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 298,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 299,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 300,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 301,
+  "type": "assistant/message",
+  "len": 2989,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 302,
+  "type": "tool/call",
+  "len": 442,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 303,
+  "type": "job/registered",
+  "len": 401,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 304,
+  "type": "job/settled",
+  "len": 513,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 305,
+  "type": "tool/result",
+  "len": 757,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 306,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 307,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 308,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 309,
+  "type": "assistant/message",
+  "len": 8816,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 310,
+  "type": "tool/call",
+  "len": 757,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 311,
+  "type": "job/registered",
+  "len": 712,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 312,
+  "type": "job/settled",
+  "len": 824,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 313,
+  "type": "tool/result",
+  "len": 921,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 314,
+  "type": "tool/call",
+  "len": 791,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 315,
+  "type": "job/registered",
+  "len": 752,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 316,
+  "type": "job/settled",
+  "len": 864,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 317,
+  "type": "tool/result",
+  "len": 696,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 318,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 319,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 320,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 321,
+  "type": "assistant/message",
+  "len": 12106,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 322,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 323,
+  "type": "workspace/changes",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 324,
+  "type": "turn/end",
+  "len": 98,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 325,
+  "type": "agent/inbox/spliced",
+  "len": 338,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 326,
+  "type": "turn/start",
+  "len": 70,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 327,
+  "type": "agent/inbox/spliced",
+  "len": 132,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 328,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 329,
+  "type": "user/message",
+  "len": 306,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 330,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 331,
+  "type": "user/message",
+  "len": 790,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 332,
+  "type": "assistant/message",
+  "len": 7286,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 333,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 334,
+  "type": "turn/end",
+  "len": 121,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 335,
+  "type": "agent/inbox/spliced",
+  "len": 374,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 336,
+  "type": "turn/start",
+  "len": 70,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 337,
+  "type": "agent/inbox/spliced",
+  "len": 132,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 338,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 339,
+  "type": "user/message",
+  "len": 342,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 340,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 341,
+  "type": "assistant/message",
+  "len": 11284,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 342,
+  "type": "tool/call",
+  "len": 1020,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 343,
+  "type": "job/registered",
+  "len": 966,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 344,
+  "type": "job/settled",
+  "len": 1078,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 345,
+  "type": "tool/result",
+  "len": 2295,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 346,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 347,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 348,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 349,
+  "type": "assistant/message",
+  "len": 40869,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 350,
+  "type": "tool/call",
+  "len": 8797,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 351,
+  "type": "tool/result",
+  "len": 618,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 352,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 353,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 354,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 355,
+  "type": "assistant/message",
+  "len": 3306,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 356,
+  "type": "tool/call",
+  "len": 511,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 357,
+  "type": "job/registered",
+  "len": 461,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 358,
+  "type": "job/settled",
+  "len": 573,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 359,
+  "type": "tool/result",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 360,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 361,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 362,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 363,
+  "type": "assistant/message",
+  "len": 75664,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 364,
+  "type": "tool/call",
+  "len": 12955,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 365,
+  "type": "tool/result",
+  "len": 624,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 366,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 367,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 368,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 369,
+  "type": "assistant/message",
+  "len": 2502,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 370,
+  "type": "tool/call",
+  "len": 334,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 371,
+  "type": "job/registered",
+  "len": 298,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 372,
+  "type": "job/settled",
+  "len": 410,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 373,
+  "type": "tool/result",
+  "len": 672,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 374,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 375,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 376,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 377,
+  "type": "assistant/message",
+  "len": 8921,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 378,
+  "type": "tool/call",
+  "len": 880,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 379,
+  "type": "job/registered",
+  "len": 845,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 380,
+  "type": "job/settled",
+  "len": 957,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 381,
+  "type": "tool/result",
+  "len": 3752,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 382,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 383,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 384,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 385,
+  "type": "assistant/message",
+  "len": 21713,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 386,
+  "type": "tool/call",
+  "len": 4273,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 387,
+  "type": "tool/result",
+  "len": 642,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 388,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 389,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 390,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 391,
+  "type": "assistant/message",
+  "len": 87737,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 392,
+  "type": "tool/call",
+  "len": 16212,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 393,
+  "type": "tool/result",
+  "len": 23427,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 394,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 395,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 396,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 397,
+  "type": "assistant/message",
+  "len": 2237,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 398,
+  "type": "tool/call",
+  "len": 334,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 399,
+  "type": "job/registered",
+  "len": 298,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 400,
+  "type": "job/settled",
+  "len": 410,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 401,
+  "type": "tool/result",
+  "len": 1120,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 402,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 403,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 404,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 405,
+  "type": "assistant/message",
+  "len": 3928,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 406,
+  "type": "tool/call",
+  "len": 474,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 407,
+  "type": "tool/result",
+  "len": 1759,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 408,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 409,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 410,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 411,
+  "type": "assistant/message",
+  "len": 2175,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 412,
+  "type": "tool/call",
+  "len": 319,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 413,
+  "type": "job/registered",
+  "len": 298,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 414,
+  "type": "job/settled",
+  "len": 410,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 415,
+  "type": "tool/result",
+  "len": 685,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 416,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 417,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 418,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 419,
+  "type": "assistant/message",
+  "len": 16036,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 420,
+  "type": "tool/call",
+  "len": 2893,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 421,
+  "type": "tool/result",
+  "len": 625,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 422,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 423,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 424,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 425,
+  "type": "assistant/message",
+  "len": 2327,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 426,
+  "type": "tool/call",
+  "len": 365,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 427,
+  "type": "job/registered",
+  "len": 341,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 428,
+  "type": "job/settled",
+  "len": 453,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 429,
+  "type": "tool/result",
+  "len": 703,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 430,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 431,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 432,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 433,
+  "type": "assistant/message",
+  "len": 23784,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 434,
+  "type": "tool/call",
+  "len": 5418,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 435,
+  "type": "tool/result",
+  "len": 613,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 436,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 437,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 438,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 439,
+  "type": "model/selection",
+  "len": 145,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 440,
+  "type": "assistant/message",
+  "len": 2533,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 441,
+  "type": "tool/call",
+  "len": 341,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 442,
+  "type": "job/registered",
+  "len": 318,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 443,
+  "type": "job/settled",
+  "len": 430,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 444,
+  "type": "tool/result",
+  "len": 680,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 445,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 446,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 447,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 448,
+  "type": "request/header",
+  "len": 251617,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 449,
+  "type": "assistant/message",
+  "len": 35548,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 450,
+  "type": "tool/call",
+  "len": 6534,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 451,
+  "type": "tool/result",
+  "len": 619,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 452,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 453,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 454,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 455,
+  "type": "assistant/message",
+  "len": 3258,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 456,
+  "type": "tool/call",
+  "len": 406,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 457,
+  "type": "job/registered",
+  "len": 374,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 458,
+  "type": "job/settled",
+  "len": 486,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 459,
+  "type": "tool/result",
+  "len": 1290,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 460,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 461,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 462,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 463,
+  "type": "assistant/message",
+  "len": 11384,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 464,
+  "type": "tool/call",
+  "len": 1357,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 465,
+  "type": "tool/result",
+  "len": 1564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 466,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 467,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 468,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 469,
+  "type": "assistant/message",
+  "len": 3298,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 470,
+  "type": "tool/call",
+  "len": 504,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 471,
+  "type": "job/registered",
+  "len": 442,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 472,
+  "type": "job/settled",
+  "len": 554,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 473,
+  "type": "tool/result",
+  "len": 1030,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 474,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 475,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 476,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 477,
+  "type": "assistant/message",
+  "len": 6744,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 478,
+  "type": "tool/call",
+  "len": 846,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 479,
+  "type": "job/registered",
+  "len": 794,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 480,
+  "type": "job/settled",
+  "len": 906,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 481,
+  "type": "tool/result",
+  "len": 1121,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 482,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 483,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 484,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 485,
+  "type": "assistant/message",
+  "len": 13084,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 486,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 487,
+  "type": "workspace/changes",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 488,
+  "type": "turn/end",
+  "len": 98,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 489,
+  "type": "model/selection",
+  "len": 146,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 490,
+  "type": "agent/inbox/spliced",
+  "len": 439,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 491,
+  "type": "turn/start",
+  "len": 70,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 492,
+  "type": "agent/inbox/spliced",
+  "len": 132,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 493,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 494,
+  "type": "user/message",
+  "len": 407,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 495,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 496,
+  "type": "user/message",
+  "len": 796,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 497,
+  "type": "request/header",
+  "len": 251618,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 498,
+  "type": "assistant/message",
+  "len": 11109,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 499,
+  "type": "tool/call",
+  "len": 705,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 500,
+  "type": "job/registered",
+  "len": 622,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 501,
+  "type": "job/settled",
+  "len": 734,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 502,
+  "type": "tool/result",
+  "len": 2242,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 503,
+  "type": "tool/call",
+  "len": 455,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 504,
+  "type": "job/registered",
+  "len": 415,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 505,
+  "type": "job/settled",
+  "len": 527,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 506,
+  "type": "tool/result",
+  "len": 4207,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 507,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 508,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 509,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 510,
+  "type": "assistant/message",
+  "len": 25226,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 511,
+  "type": "tool/call",
+  "len": 3436,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 512,
+  "type": "tool/result",
+  "len": 618,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 513,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 514,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 515,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 516,
+  "type": "assistant/message",
+  "len": 4159,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 517,
+  "type": "tool/call",
+  "len": 322,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 518,
+  "type": "job/registered",
+  "len": 295,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 519,
+  "type": "job/settled",
+  "len": 407,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 520,
+  "type": "tool/result",
+  "len": 872,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 521,
+  "type": "tool/call",
+  "len": 391,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 522,
+  "type": "job/registered",
+  "len": 352,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 523,
+  "type": "job/settled",
+  "len": 464,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 524,
+  "type": "tool/result",
+  "len": 867,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 525,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 526,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 527,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 528,
+  "type": "assistant/message",
+  "len": 29513,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 529,
+  "type": "tool/call",
+  "len": 4921,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 530,
+  "type": "tool/result",
+  "len": 620,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 531,
+  "type": "tool/call",
+  "len": 401,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 532,
+  "type": "job/registered",
+  "len": 366,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 533,
+  "type": "job/settled",
+  "len": 478,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 534,
+  "type": "tool/result",
+  "len": 4328,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 535,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 536,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 537,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 538,
+  "type": "assistant/message",
+  "len": 4682,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 539,
+  "type": "tool/call",
+  "len": 307,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 540,
+  "type": "job/registered",
+  "len": 279,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 541,
+  "type": "job/settled",
+  "len": 391,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 542,
+  "type": "tool/result",
+  "len": 5105,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 543,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 544,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 545,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 546,
+  "type": "assistant/message",
+  "len": 32123,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 547,
+  "type": "tool/call",
+  "len": 5883,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 548,
+  "type": "tool/result",
+  "len": 634,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 549,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 550,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 551,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 552,
+  "type": "assistant/message",
+  "len": 2576,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 553,
+  "type": "tool/call",
+  "len": 357,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 554,
+  "type": "job/registered",
+  "len": 303,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 555,
+  "type": "job/settled",
+  "len": 415,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 556,
+  "type": "tool/result",
+  "len": 839,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 557,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 558,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 559,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 560,
+  "type": "assistant/message",
+  "len": 5917,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 561,
+  "type": "tool/call",
+  "len": 614,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 562,
+  "type": "job/registered",
+  "len": 562,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 563,
+  "type": "job/settled",
+  "len": 674,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 564,
+  "type": "tool/result",
+  "len": 1100,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 565,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 566,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 567,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 568,
+  "type": "assistant/message",
+  "len": 5796,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 569,
+  "type": "tool/call",
+  "len": 422,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 570,
+  "type": "job/registered",
+  "len": 368,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 571,
+  "type": "job/settled",
+  "len": 480,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 572,
+  "type": "tool/result",
+  "len": 1531,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 573,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 574,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 575,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 576,
+  "type": "assistant/message",
+  "len": 33882,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 577,
+  "type": "tool/call",
+  "len": 5852,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 578,
+  "type": "tool/result",
+  "len": 9210,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 579,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 580,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 581,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 582,
+  "type": "assistant/message",
+  "len": 2508,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 583,
+  "type": "tool/call",
+  "len": 335,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 584,
+  "type": "job/registered",
+  "len": 303,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 585,
+  "type": "job/settled",
+  "len": 415,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 586,
+  "type": "tool/result",
+  "len": 997,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 587,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 588,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 589,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 590,
+  "type": "assistant/message",
+  "len": 5552,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 591,
+  "type": "tool/call",
+  "len": 449,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 592,
+  "type": "job/registered",
+  "len": 392,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 593,
+  "type": "job/settled",
+  "len": 504,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 594,
+  "type": "tool/result",
+  "len": 866,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 595,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 596,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 597,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 598,
+  "type": "assistant/message",
+  "len": 41409,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 599,
+  "type": "tool/call",
+  "len": 7036,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 600,
+  "type": "tool/result",
+  "len": 625,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 601,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 602,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 603,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 604,
+  "type": "assistant/message",
+  "len": 2508,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 605,
+  "type": "tool/call",
+  "len": 338,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 606,
+  "type": "job/registered",
+  "len": 298,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 607,
+  "type": "job/settled",
+  "len": 410,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 608,
+  "type": "tool/result",
+  "len": 647,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 609,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 610,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 611,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 612,
+  "type": "assistant/message",
+  "len": 6486,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 613,
+  "type": "tool/call",
+  "len": 287,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 614,
+  "type": "job/registered",
+  "len": 266,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 615,
+  "type": "job/settled",
+  "len": 378,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 616,
+  "type": "tool/result",
+  "len": 7038,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 617,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 618,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 619,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 620,
+  "type": "assistant/message",
+  "len": 48952,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 621,
+  "type": "tool/call",
+  "len": 7937,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 622,
+  "type": "tool/result",
+  "len": 625,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 623,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 624,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 625,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 626,
+  "type": "assistant/message",
+  "len": 6603,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 627,
+  "type": "tool/call",
+  "len": 1225,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 628,
+  "type": "job/registered",
+  "len": 1155,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 629,
+  "type": "job/settled",
+  "len": 1267,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 630,
+  "type": "tool/result",
+  "len": 692,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 631,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 632,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 633,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 634,
+  "type": "assistant/message",
+  "len": 24233,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 635,
+  "type": "tool/call",
+  "len": 3795,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 636,
+  "type": "tool/result",
+  "len": 631,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 637,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 638,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 639,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 640,
+  "type": "assistant/message",
+  "len": 2515,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 641,
+  "type": "tool/call",
+  "len": 344,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 642,
+  "type": "job/registered",
+  "len": 301,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 643,
+  "type": "job/settled",
+  "len": 413,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 644,
+  "type": "tool/result",
+  "len": 885,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 645,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 646,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 647,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 648,
+  "type": "assistant/message",
+  "len": 26667,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 649,
+  "type": "tool/call",
+  "len": 4373,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 650,
+  "type": "tool/result",
+  "len": 633,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 651,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 652,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 653,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 654,
+  "type": "assistant/message",
+  "len": 2484,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 655,
+  "type": "tool/call",
+  "len": 337,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 656,
+  "type": "job/registered",
+  "len": 302,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 657,
+  "type": "job/settled",
+  "len": 414,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 658,
+  "type": "tool/result",
+  "len": 735,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 659,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 660,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 661,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 662,
+  "type": "assistant/message",
+  "len": 7977,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 663,
+  "type": "tool/call",
+  "len": 946,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 664,
+  "type": "job/registered",
+  "len": 902,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 665,
+  "type": "job/settled",
+  "len": 1014,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 666,
+  "type": "tool/result",
+  "len": 566,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 667,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 668,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 669,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 670,
+  "type": "assistant/message",
+  "len": 13942,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 671,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 672,
+  "type": "workspace/changes",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 673,
+  "type": "turn/end",
+  "len": 98,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 674,
+  "type": "model/selection",
+  "len": 145,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 675,
+  "type": "agent/inbox/spliced",
+  "len": 355,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 676,
+  "type": "turn/start",
+  "len": 70,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 677,
+  "type": "agent/inbox/spliced",
+  "len": 132,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 678,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 679,
+  "type": "user/message",
+  "len": 323,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 680,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 681,
+  "type": "request/header",
+  "len": 251617,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 682,
+  "type": "assistant/message",
+  "len": 7242,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 683,
+  "type": "tool/call",
+  "len": 417,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 684,
+  "type": "job/registered",
+  "len": 378,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 685,
+  "type": "job/settled",
+  "len": 490,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 686,
+  "type": "tool/result",
+  "len": 1505,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 687,
+  "type": "tool/call",
+  "len": 412,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 688,
+  "type": "job/registered",
+  "len": 377,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 689,
+  "type": "job/settled",
+  "len": 489,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 690,
+  "type": "tool/result",
+  "len": 2452,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 691,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 692,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 693,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 694,
+  "type": "assistant/message",
+  "len": 7844,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 695,
+  "type": "tool/call",
+  "len": 338,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 696,
+  "type": "job/registered",
+  "len": 303,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 697,
+  "type": "job/settled",
+  "len": 415,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 698,
+  "type": "tool/result",
+  "len": 2467,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 699,
+  "type": "tool/call",
+  "len": 304,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 700,
+  "type": "job/registered",
+  "len": 283,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 701,
+  "type": "job/settled",
+  "len": 395,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 702,
+  "type": "tool/result",
+  "len": 5086,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 703,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 704,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 705,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 706,
+  "type": "assistant/message",
+  "len": 45269,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 707,
+  "type": "tool/call",
+  "len": 9666,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 708,
+  "type": "tool/result",
+  "len": 614,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 709,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 710,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 711,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 712,
+  "type": "assistant/message",
+  "len": 3259,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 713,
+  "type": "tool/call",
+  "len": 312,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 714,
+  "type": "job/registered",
+  "len": 296,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 715,
+  "type": "job/settled",
+  "len": 408,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 716,
+  "type": "tool/result",
+  "len": 1196,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 717,
+  "type": "tool/call",
+  "len": 308,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 718,
+  "type": "job/registered",
+  "len": 284,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 719,
+  "type": "job/settled",
+  "len": 396,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 720,
+  "type": "tool/result",
+  "len": 4838,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 721,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 722,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 723,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 724,
+  "type": "assistant/message",
+  "len": 4829,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 725,
+  "type": "tool/call",
+  "len": 446,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 726,
+  "type": "tool/result",
+  "len": 1204,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 727,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 728,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 729,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 730,
+  "type": "assistant/message",
+  "len": 2202,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 731,
+  "type": "tool/call",
+  "len": 329,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 732,
+  "type": "job/registered",
+  "len": 296,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 733,
+  "type": "job/settled",
+  "len": 408,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 734,
+  "type": "tool/result",
+  "len": 515,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 735,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 736,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 737,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 738,
+  "type": "assistant/message",
+  "len": 7526,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 739,
+  "type": "tool/call",
+  "len": 305,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 740,
+  "type": "job/registered",
+  "len": 286,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 741,
+  "type": "job/settled",
+  "len": 398,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 742,
+  "type": "tool/result",
+  "len": 3933,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 743,
+  "type": "tool/call",
+  "len": 513,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 744,
+  "type": "job/registered",
+  "len": 471,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 745,
+  "type": "job/settled",
+  "len": 583,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 746,
+  "type": "tool/result",
+  "len": 2565,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 747,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 748,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 749,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 750,
+  "type": "assistant/message",
+  "len": 8022,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 751,
+  "type": "tool/call",
+  "len": 450,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 752,
+  "type": "job/registered",
+  "len": 403,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 753,
+  "type": "job/settled",
+  "len": 515,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 754,
+  "type": "tool/result",
+  "len": 1758,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 755,
+  "type": "tool/call",
+  "len": 313,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 756,
+  "type": "job/registered",
+  "len": 284,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 757,
+  "type": "job/settled",
+  "len": 396,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 758,
+  "type": "tool/result",
+  "len": 3767,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 759,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 760,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 761,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 762,
+  "type": "assistant/message",
+  "len": 59821,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 763,
+  "type": "tool/call",
+  "len": 10150,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 764,
+  "type": "tool/result",
+  "len": 620,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 765,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 766,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 767,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 768,
+  "type": "assistant/message",
+  "len": 4888,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 769,
+  "type": "tool/call",
+  "len": 316,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 770,
+  "type": "job/registered",
+  "len": 296,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 771,
+  "type": "job/settled",
+  "len": 408,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 772,
+  "type": "tool/result",
+  "len": 535,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 773,
+  "type": "tool/call",
+  "len": 550,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 774,
+  "type": "job/registered",
+  "len": 498,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 775,
+  "type": "job/settled",
+  "len": 610,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 776,
+  "type": "tool/result",
+  "len": 4104,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 777,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 778,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 779,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 780,
+  "type": "assistant/message",
+  "len": 7170,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 781,
+  "type": "tool/call",
+  "len": 384,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 782,
+  "type": "job/registered",
+  "len": 354,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 783,
+  "type": "job/settled",
+  "len": 466,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 784,
+  "type": "tool/result",
+  "len": 2073,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 785,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 786,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 787,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 788,
+  "type": "assistant/message",
+  "len": 54489,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 789,
+  "type": "tool/call",
+  "len": 13089,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 790,
+  "type": "tool/result",
+  "len": 615,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 791,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 792,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 793,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 794,
+  "type": "assistant/message",
+  "len": 2783,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 795,
+  "type": "tool/call",
+  "len": 497,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 796,
+  "type": "job/registered",
+  "len": 472,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 797,
+  "type": "job/settled",
+  "len": 584,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 798,
+  "type": "tool/result",
+  "len": 561,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 799,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 800,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 801,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 802,
+  "type": "assistant/message",
+  "len": 8568,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 803,
+  "type": "tool/call",
+  "len": 548,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 804,
+  "type": "job/registered",
+  "len": 495,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 805,
+  "type": "job/settled",
+  "len": 607,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 806,
+  "type": "tool/result",
+  "len": 7020,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 807,
+  "type": "tool/call",
+  "len": 569,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 808,
+  "type": "job/registered",
+  "len": 523,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 809,
+  "type": "job/settled",
+  "len": 635,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 810,
+  "type": "tool/result",
+  "len": 5153,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 811,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 812,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 813,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 814,
+  "type": "assistant/message",
+  "len": 107852,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 815,
+  "type": "tool/call",
+  "len": 19166,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 816,
+  "type": "tool/result",
+  "len": 621,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 817,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 818,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 819,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 820,
+  "type": "user/message",
+  "len": 790,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 821,
+  "type": "assistant/message",
+  "len": 3131,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 822,
+  "type": "tool/call",
+  "len": 313,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 823,
+  "type": "job/registered",
+  "len": 296,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 824,
+  "type": "job/settled",
+  "len": 408,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 825,
+  "type": "tool/result",
+  "len": 574,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 826,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 827,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 828,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 829,
+  "type": "assistant/message",
+  "len": 11911,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 830,
+  "type": "tool/call",
+  "len": 1227,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 831,
+  "type": "job/registered",
+  "len": 1176,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 832,
+  "type": "job/settled",
+  "len": 1288,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 833,
+  "type": "tool/result",
+  "len": 648,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 834,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 835,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 836,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 837,
+  "type": "assistant/message",
+  "len": 8155,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 838,
+  "type": "tool/call",
+  "len": 828,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 839,
+  "type": "tool/result",
+  "len": 1410,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 840,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 841,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 842,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 843,
+  "type": "assistant/message",
+  "len": 4597,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 844,
+  "type": "tool/call",
+  "len": 764,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 845,
+  "type": "tool/result",
+  "len": 1415,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 846,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 847,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 848,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 849,
+  "type": "assistant/message",
+  "len": 2767,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 850,
+  "type": "tool/call",
+  "len": 487,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 851,
+  "type": "job/registered",
+  "len": 445,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 852,
+  "type": "job/settled",
+  "len": 557,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 853,
+  "type": "tool/result",
+  "len": 1077,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 854,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 855,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 856,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 857,
+  "type": "assistant/message",
+  "len": 5839,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 858,
+  "type": "tool/call",
+  "len": 854,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 859,
+  "type": "job/registered",
+  "len": 806,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 860,
+  "type": "job/settled",
+  "len": 918,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 861,
+  "type": "tool/result",
+  "len": 693,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 862,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 863,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 864,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 865,
+  "type": "assistant/message",
+  "len": 13320,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 866,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 867,
+  "type": "workspace/changes",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 868,
+  "type": "turn/end",
+  "len": 98,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 869,
+  "type": "agent/inbox/spliced",
+  "len": 359,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 870,
+  "type": "turn/start",
+  "len": 70,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 871,
+  "type": "agent/inbox/spliced",
+  "len": 132,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 872,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 873,
+  "type": "user/message",
+  "len": 327,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 874,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 875,
+  "type": "assistant/message",
+  "len": 20764,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 876,
+  "type": "tool/call",
+  "len": 3393,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 877,
+  "type": "tool/result",
+  "len": 630,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 878,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 879,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 880,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 881,
+  "type": "assistant/message",
+  "len": 2508,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 882,
+  "type": "tool/call",
+  "len": 336,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 883,
+  "type": "job/registered",
+  "len": 301,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 884,
+  "type": "job/settled",
+  "len": 413,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 885,
+  "type": "tool/result",
+  "len": 1875,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 886,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 887,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 888,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 889,
+  "type": "assistant/message",
+  "len": 7615,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 890,
+  "type": "tool/call",
+  "len": 538,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 891,
+  "type": "job/registered",
+  "len": 497,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 892,
+  "type": "job/settled",
+  "len": 609,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 893,
+  "type": "tool/result",
+  "len": 2861,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 894,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 895,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 896,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 897,
+  "type": "agent/inbox/spliced",
+  "len": 328,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 898,
+  "type": "assistant/message",
+  "len": 112065,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 899,
+  "type": "tool/call",
+  "len": 19889,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 900,
+  "type": "tool/result",
+  "len": 622,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 901,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 902,
+  "type": "agent/inbox/spliced",
+  "len": 132,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 903,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 904,
+  "type": "user/message",
+  "len": 296,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 905,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 906,
+  "type": "assistant/message",
+  "len": 6810,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 907,
+  "type": "tool/call",
+  "len": 326,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 908,
+  "type": "job/registered",
+  "len": 297,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 909,
+  "type": "job/settled",
+  "len": 409,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 910,
+  "type": "tool/result",
+  "len": 637,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 911,
+  "type": "tool/call",
+  "len": 404,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 912,
+  "type": "job/registered",
+  "len": 372,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 913,
+  "type": "job/settled",
+  "len": 484,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 914,
+  "type": "tool/result",
+  "len": 5034,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 915,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 916,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 917,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 918,
+  "type": "assistant/message",
+  "len": 9307,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 919,
+  "type": "tool/call",
+  "len": 356,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 920,
+  "type": "job/registered",
+  "len": 323,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 921,
+  "type": "job/settled",
+  "len": 435,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 922,
+  "type": "tool/result",
+  "len": 4626,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 923,
+  "type": "tool/call",
+  "len": 484,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 924,
+  "type": "job/registered",
+  "len": 436,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 925,
+  "type": "job/settled",
+  "len": 548,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 926,
+  "type": "tool/result",
+  "len": 4783,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 927,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 928,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 929,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 930,
+  "type": "assistant/message",
+  "len": 81749,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 931,
+  "type": "tool/call",
+  "len": 14023,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 932,
+  "type": "tool/result",
+  "len": 620,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 933,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 934,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 935,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 936,
+  "type": "assistant/message",
+  "len": 2188,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 937,
+  "type": "tool/call",
+  "len": 321,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 938,
+  "type": "job/registered",
+  "len": 296,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 939,
+  "type": "job/settled",
+  "len": 408,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 940,
+  "type": "tool/result",
+  "len": 1373,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 941,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 942,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 943,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 944,
+  "type": "assistant/message",
+  "len": 6202,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 945,
+  "type": "tool/call",
+  "len": 753,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 946,
+  "type": "tool/result",
+  "len": 1896,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 947,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 948,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 949,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 950,
+  "type": "assistant/message",
+  "len": 2477,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 951,
+  "type": "tool/call",
+  "len": 327,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 952,
+  "type": "job/registered",
+  "len": 296,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 953,
+  "type": "job/settled",
+  "len": 408,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 954,
+  "type": "tool/result",
+  "len": 603,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 955,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 956,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 957,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 958,
+  "type": "assistant/message",
+  "len": 6875,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 959,
+  "type": "tool/call",
+  "len": 1104,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 960,
+  "type": "job/registered",
+  "len": 1043,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 961,
+  "type": "job/settled",
+  "len": 1155,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 962,
+  "type": "tool/result",
+  "len": 1089,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 963,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 964,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 965,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 966,
+  "type": "assistant/message",
+  "len": 3705,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 967,
+  "type": "tool/call",
+  "len": 473,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 968,
+  "type": "job/registered",
+  "len": 429,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 969,
+  "type": "job/settled",
+  "len": 541,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 970,
+  "type": "tool/result",
+  "len": 1010,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 971,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 972,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 973,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 974,
+  "type": "assistant/message",
+  "len": 15607,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 975,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 976,
+  "type": "workspace/changes",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 977,
+  "type": "turn/end",
+  "len": 98,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 978,
+  "type": "agent/inbox/spliced",
+  "len": 380,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 979,
+  "type": "turn/start",
+  "len": 70,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 980,
+  "type": "agent/inbox/spliced",
+  "len": 132,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 981,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 982,
+  "type": "user/message",
+  "len": 348,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 983,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 984,
+  "type": "assistant/message",
+  "len": 6872,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 985,
+  "type": "tool/call",
+  "len": 376,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 986,
+  "type": "job/registered",
+  "len": 332,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 987,
+  "type": "job/settled",
+  "len": 444,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 988,
+  "type": "tool/result",
+  "len": 3512,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 989,
+  "type": "tool/call",
+  "len": 565,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 990,
+  "type": "job/registered",
+  "len": 513,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 991,
+  "type": "job/settled",
+  "len": 625,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 992,
+  "type": "tool/result",
+  "len": 2921,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 993,
+  "type": "step/end",
+  "len": 77,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 994,
+  "type": "step/start",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 995,
+  "type": "user/message",
+  "len": 563,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 996,
+  "type": "assistant/message",
+  "len": 8909,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 997,
+  "type": "tool/call",
+  "len": 379,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 998,
+  "type": "job/registered",
+  "len": 350,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 999,
+  "type": "job/settled",
+  "len": 462,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1000,
+  "type": "tool/result",
+  "len": 3673,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1001,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1002,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1003,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1004,
+  "type": "assistant/message",
+  "len": 66427,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1005,
+  "type": "tool/call",
+  "len": 10515,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1006,
+  "type": "tool/result",
+  "len": 622,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1007,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1008,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1009,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1010,
+  "type": "assistant/message",
+  "len": 2488,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1011,
+  "type": "tool/call",
+  "len": 328,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1012,
+  "type": "job/registered",
+  "len": 297,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1013,
+  "type": "job/settled",
+  "len": 409,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1014,
+  "type": "tool/result",
+  "len": 1369,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1015,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1016,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1017,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1018,
+  "type": "assistant/message",
+  "len": 5548,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1019,
+  "type": "tool/call",
+  "len": 719,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1020,
+  "type": "tool/result",
+  "len": 1885,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1021,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1022,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1023,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1024,
+  "type": "assistant/message",
+  "len": 2477,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1025,
+  "type": "tool/call",
+  "len": 327,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1026,
+  "type": "job/registered",
+  "len": 297,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1027,
+  "type": "job/settled",
+  "len": 409,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1028,
+  "type": "tool/result",
+  "len": 1425,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1029,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1030,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1031,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1032,
+  "type": "assistant/message",
+  "len": 8011,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1033,
+  "type": "tool/call",
+  "len": 882,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1034,
+  "type": "tool/result",
+  "len": 624,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1035,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1036,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1037,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1038,
+  "type": "assistant/message",
+  "len": 3077,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1039,
+  "type": "tool/call",
+  "len": 452,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1040,
+  "type": "job/registered",
+  "len": 419,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1041,
+  "type": "job/settled",
+  "len": 531,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1042,
+  "type": "tool/result",
+  "len": 2279,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1043,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1044,
+  "type": "step/start",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1045,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1046,
+  "type": "assistant/message",
+  "len": 50443,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1047,
+  "type": "tool/call",
+  "len": 11292,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1048,
+  "type": "tool/result",
+  "len": 568,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1049,
+  "type": "step/end",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1050,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1051,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1052,
+  "type": "user/message",
+  "len": 791,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1053,
+  "type": "assistant/message",
+  "len": 60655,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1054,
+  "type": "tool/call",
+  "len": 11012,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1055,
+  "type": "tool/result",
+  "len": 625,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1056,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1057,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1058,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1059,
+  "type": "assistant/message",
+  "len": 2480,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1060,
+  "type": "tool/call",
+  "len": 328,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1061,
+  "type": "job/registered",
+  "len": 298,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1062,
+  "type": "job/settled",
+  "len": 410,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1063,
+  "type": "tool/result",
+  "len": 556,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1064,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1065,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1066,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1067,
+  "type": "assistant/message",
+  "len": 6077,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1068,
+  "type": "tool/call",
+  "len": 293,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1069,
+  "type": "job/registered",
+  "len": 258,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1070,
+  "type": "job/settled",
+  "len": 370,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1071,
+  "type": "tool/result",
+  "len": 3217,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1072,
+  "type": "tool/call",
+  "len": 309,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1073,
+  "type": "job/registered",
+  "len": 280,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1074,
+  "type": "job/settled",
+  "len": 392,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1075,
+  "type": "tool/result",
+  "len": 3090,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1076,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1077,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1078,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1079,
+  "type": "assistant/message",
+  "len": 40107,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1080,
+  "type": "tool/call",
+  "len": 6397,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1081,
+  "type": "tool/result",
+  "len": 631,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1082,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1083,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1084,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1085,
+  "type": "assistant/message",
+  "len": 3046,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1086,
+  "type": "tool/call",
+  "len": 446,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1087,
+  "type": "job/registered",
+  "len": 422,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1088,
+  "type": "job/settled",
+  "len": 534,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1089,
+  "type": "tool/result",
+  "len": 566,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1090,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1091,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1092,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1093,
+  "type": "assistant/message",
+  "len": 7147,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1094,
+  "type": "tool/call",
+  "len": 1189,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1095,
+  "type": "job/registered",
+  "len": 1144,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1096,
+  "type": "job/settled",
+  "len": 1256,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1097,
+  "type": "tool/result",
+  "len": 945,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1098,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1099,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1100,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1101,
+  "type": "assistant/message",
+  "len": 3197,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1102,
+  "type": "tool/call",
+  "len": 477,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1103,
+  "type": "job/registered",
+  "len": 434,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1104,
+  "type": "job/settled",
+  "len": 546,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1105,
+  "type": "tool/result",
+  "len": 847,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1106,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1107,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1108,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1109,
+  "type": "assistant/message",
+  "len": 13575,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1110,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1111,
+  "type": "workspace/changes",
+  "len": 78,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1112,
+  "type": "turn/end",
+  "len": 99,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1113,
+  "type": "agent/inbox/spliced",
+  "len": 375,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1114,
+  "type": "turn/start",
+  "len": 72,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1115,
+  "type": "agent/inbox/spliced",
+  "len": 133,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1116,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1117,
+  "type": "user/message",
+  "len": 343,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1118,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1119,
+  "type": "user/message",
+  "len": 801,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1120,
+  "type": "assistant/message",
+  "len": 5393,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1121,
+  "type": "tool/call",
+  "len": 355,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1122,
+  "type": "job/registered",
+  "len": 320,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1123,
+  "type": "job/settled",
+  "len": 432,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1124,
+  "type": "tool/result",
+  "len": 4946,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1125,
+  "type": "tool/call",
+  "len": 397,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1126,
+  "type": "job/registered",
+  "len": 370,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1127,
+  "type": "job/settled",
+  "len": 482,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1128,
+  "type": "tool/result",
+  "len": 2576,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1129,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1130,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1131,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1132,
+  "type": "assistant/message",
+  "len": 12470,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1133,
+  "type": "tool/call",
+  "len": 401,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1134,
+  "type": "job/registered",
+  "len": 364,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1135,
+  "type": "job/settled",
+  "len": 476,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1136,
+  "type": "tool/result",
+  "len": 5671,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1137,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1138,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1139,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1140,
+  "type": "assistant/message",
+  "len": 77751,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1141,
+  "type": "tool/call",
+  "len": 13217,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1142,
+  "type": "tool/result",
+  "len": 623,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1143,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1144,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1145,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1146,
+  "type": "assistant/message",
+  "len": 2426,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1147,
+  "type": "tool/call",
+  "len": 315,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1148,
+  "type": "job/registered",
+  "len": 297,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1149,
+  "type": "job/settled",
+  "len": 409,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1150,
+  "type": "tool/result",
+  "len": 554,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1151,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1152,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1153,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1154,
+  "type": "assistant/message",
+  "len": 6139,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1155,
+  "type": "tool/call",
+  "len": 363,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1156,
+  "type": "job/registered",
+  "len": 333,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1157,
+  "type": "job/settled",
+  "len": 445,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1158,
+  "type": "tool/result",
+  "len": 1973,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1159,
+  "type": "tool/call",
+  "len": 281,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1160,
+  "type": "job/registered",
+  "len": 258,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1161,
+  "type": "job/settled",
+  "len": 370,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1162,
+  "type": "tool/result",
+  "len": 2322,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1163,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1164,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1165,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1166,
+  "type": "assistant/message",
+  "len": 42582,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1167,
+  "type": "tool/call",
+  "len": 6561,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1168,
+  "type": "tool/result",
+  "len": 627,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1169,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1170,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1171,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1172,
+  "type": "assistant/message",
+  "len": 3054,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1173,
+  "type": "tool/call",
+  "len": 445,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1174,
+  "type": "job/registered",
+  "len": 416,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1175,
+  "type": "job/settled",
+  "len": 528,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1176,
+  "type": "tool/result",
+  "len": 580,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1177,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1178,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1179,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1180,
+  "type": "assistant/message",
+  "len": 7198,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1181,
+  "type": "tool/call",
+  "len": 1192,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1182,
+  "type": "job/registered",
+  "len": 1154,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1183,
+  "type": "job/settled",
+  "len": 1266,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1184,
+  "type": "tool/result",
+  "len": 1021,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1185,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1186,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1187,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1188,
+  "type": "assistant/message",
+  "len": 3222,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1189,
+  "type": "tool/call",
+  "len": 482,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1190,
+  "type": "job/registered",
+  "len": 443,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1191,
+  "type": "job/settled",
+  "len": 555,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1192,
+  "type": "tool/result",
+  "len": 671,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1193,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1194,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1195,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1196,
+  "type": "assistant/message",
+  "len": 15819,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1197,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1198,
+  "type": "workspace/changes",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1199,
+  "type": "turn/end",
+  "len": 100,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1200,
+  "type": "agent/inbox/spliced",
+  "len": 338,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1201,
+  "type": "turn/start",
+  "len": 72,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1202,
+  "type": "agent/inbox/spliced",
+  "len": 133,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1203,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1204,
+  "type": "user/message",
+  "len": 306,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1205,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1206,
+  "type": "assistant/message",
+  "len": 28757,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1207,
+  "type": "tool/call",
+  "len": 5091,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1208,
+  "type": "tool/result",
+  "len": 629,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1209,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1210,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1211,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1212,
+  "type": "assistant/message",
+  "len": 2411,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1213,
+  "type": "tool/call",
+  "len": 314,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1214,
+  "type": "job/registered",
+  "len": 300,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1215,
+  "type": "job/settled",
+  "len": 412,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1216,
+  "type": "tool/result",
+  "len": 669,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1217,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1218,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1219,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1220,
+  "type": "assistant/message",
+  "len": 6772,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1221,
+  "type": "tool/call",
+  "len": 495,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1222,
+  "type": "job/registered",
+  "len": 454,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1223,
+  "type": "job/settled",
+  "len": 566,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1224,
+  "type": "tool/result",
+  "len": 1474,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1225,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1226,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1227,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1228,
+  "type": "assistant/message",
+  "len": 39174,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1229,
+  "type": "tool/call",
+  "len": 6623,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1230,
+  "type": "tool/result",
+  "len": 633,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1231,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1232,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1233,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1234,
+  "type": "assistant/message",
+  "len": 4151,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1235,
+  "type": "tool/call",
+  "len": 672,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1236,
+  "type": "job/registered",
+  "len": 650,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1237,
+  "type": "job/settled",
+  "len": 762,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1238,
+  "type": "tool/result",
+  "len": 579,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1239,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1240,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1241,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1242,
+  "type": "assistant/message",
+  "len": 2458,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1243,
+  "type": "tool/call",
+  "len": 323,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1244,
+  "type": "job/registered",
+  "len": 300,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1245,
+  "type": "job/settled",
+  "len": 412,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1246,
+  "type": "tool/result",
+  "len": 660,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1247,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1248,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1249,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1250,
+  "type": "assistant/message",
+  "len": 9427,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1251,
+  "type": "tool/call",
+  "len": 1109,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1252,
+  "type": "tool/result",
+  "len": 1978,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1253,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1254,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1255,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1256,
+  "type": "assistant/message",
+  "len": 4475,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1257,
+  "type": "tool/call",
+  "len": 734,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1258,
+  "type": "tool/result",
+  "len": 1404,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1259,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1260,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1261,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1262,
+  "type": "assistant/message",
+  "len": 2470,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1263,
+  "type": "tool/call",
+  "len": 327,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1264,
+  "type": "job/registered",
+  "len": 300,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1265,
+  "type": "job/settled",
+  "len": 412,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1266,
+  "type": "tool/result",
+  "len": 507,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1267,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1268,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1269,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1270,
+  "type": "assistant/message",
+  "len": 6085,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1271,
+  "type": "tool/call",
+  "len": 617,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1272,
+  "type": "job/registered",
+  "len": 589,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1273,
+  "type": "job/settled",
+  "len": 701,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1274,
+  "type": "tool/result",
+  "len": 465,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1275,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1276,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1277,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1278,
+  "type": "assistant/message",
+  "len": 5689,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1279,
+  "type": "tool/call",
+  "len": 541,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1280,
+  "type": "tool/result",
+  "len": 1583,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1281,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1282,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1283,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1284,
+  "type": "assistant/message",
+  "len": 3585,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1285,
+  "type": "tool/call",
+  "len": 558,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1286,
+  "type": "job/registered",
+  "len": 532,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1287,
+  "type": "job/settled",
+  "len": 644,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1288,
+  "type": "tool/result",
+  "len": 798,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1289,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1290,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1291,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1292,
+  "type": "assistant/message",
+  "len": 6626,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1293,
+  "type": "tool/call",
+  "len": 459,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1294,
+  "type": "job/registered",
+  "len": 428,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1295,
+  "type": "job/settled",
+  "len": 540,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1296,
+  "type": "tool/result",
+  "len": 575,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1297,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1298,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1299,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1300,
+  "type": "assistant/message",
+  "len": 12062,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1301,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1302,
+  "type": "workspace/changes",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1303,
+  "type": "turn/end",
+  "len": 100,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1304,
+  "type": "session/end-seed",
+  "len": 69,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1305,
+  "type": "agent/inbox/spliced",
+  "len": 3488,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1306,
+  "type": "turn/start",
+  "len": 72,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1307,
+  "type": "agent/inbox/spliced",
+  "len": 133,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1308,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1309,
+  "type": "user/message",
+  "len": 3456,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1310,
+  "type": "user/message",
+  "len": 2962,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1311,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1312,
+  "type": "user/message",
+  "len": 805,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1313,
+  "type": "request/header",
+  "len": 251618,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1314,
+  "type": "assistant/message",
+  "len": 44674,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1315,
+  "type": "tool/call",
+  "len": 7407,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1316,
+  "type": "tool/result",
+  "len": 617,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1317,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1318,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1319,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1320,
+  "type": "assistant/message",
+  "len": 3225,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1321,
+  "type": "tool/call",
+  "len": 493,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1322,
+  "type": "job/registered",
+  "len": 429,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1323,
+  "type": "job/settled",
+  "len": 541,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1324,
+  "type": "tool/result",
+  "len": 815,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1325,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1326,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1327,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1328,
+  "type": "assistant/message",
+  "len": 39491,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1329,
+  "type": "tool/call",
+  "len": 7176,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1330,
+  "type": "tool/result",
+  "len": 617,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1331,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1332,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1333,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1334,
+  "type": "assistant/message",
+  "len": 3206,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1335,
+  "type": "tool/call",
+  "len": 494,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1336,
+  "type": "job/registered",
+  "len": 439,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1337,
+  "type": "job/settled",
+  "len": 551,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1338,
+  "type": "tool/result",
+  "len": 756,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1339,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1340,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1341,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1342,
+  "type": "assistant/message",
+  "len": 8378,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1343,
+  "type": "tool/call",
+  "len": 430,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1344,
+  "type": "job/registered",
+  "len": 406,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1345,
+  "type": "job/settled",
+  "len": 518,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1346,
+  "type": "tool/result",
+  "len": 1695,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1347,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1348,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1349,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1350,
+  "type": "assistant/message",
+  "len": 65006,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1351,
+  "type": "tool/call",
+  "len": 11265,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1352,
+  "type": "tool/result",
+  "len": 621,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1353,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1354,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1355,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1356,
+  "type": "assistant/message",
+  "len": 5540,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1357,
+  "type": "tool/call",
+  "len": 690,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1358,
+  "type": "job/registered",
+  "len": 661,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1359,
+  "type": "job/settled",
+  "len": 773,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1360,
+  "type": "tool/result",
+  "len": 636,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1361,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1362,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1363,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1364,
+  "type": "assistant/message",
+  "len": 6486,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1365,
+  "type": "tool/call",
+  "len": 904,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1366,
+  "type": "job/registered",
+  "len": 814,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1367,
+  "type": "job/settled",
+  "len": 926,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1368,
+  "type": "tool/result",
+  "len": 1036,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1369,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1370,
+  "type": "step/start",
+  "len": 81,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1371,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1372,
+  "type": "assistant/message",
+  "len": 14524,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1373,
+  "type": "tool/call",
+  "len": 2007,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1374,
+  "type": "tool/result",
+  "len": 621,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1375,
+  "type": "step/end",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1376,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1377,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1378,
+  "type": "assistant/message",
+  "len": 3469,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1379,
+  "type": "tool/call",
+  "len": 565,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1380,
+  "type": "job/registered",
+  "len": 504,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1381,
+  "type": "job/settled",
+  "len": 616,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1382,
+  "type": "tool/result",
+  "len": 1319,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1383,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1384,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1385,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1386,
+  "type": "assistant/message",
+  "len": 8873,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1387,
+  "type": "tool/call",
+  "len": 515,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1388,
+  "type": "job/registered",
+  "len": 445,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1389,
+  "type": "job/settled",
+  "len": 557,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1390,
+  "type": "tool/result",
+  "len": 521,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1391,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1392,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1393,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1394,
+  "type": "assistant/message",
+  "len": 11931,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1395,
+  "type": "tool/call",
+  "len": 1266,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1396,
+  "type": "tool/result",
+  "len": 1990,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1397,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1398,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1399,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1400,
+  "type": "assistant/message",
+  "len": 3399,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1401,
+  "type": "tool/call",
+  "len": 531,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1402,
+  "type": "job/registered",
+  "len": 478,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1403,
+  "type": "job/settled",
+  "len": 590,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1404,
+  "type": "tool/result",
+  "len": 629,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1405,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1406,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1407,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1408,
+  "type": "assistant/message",
+  "len": 12160,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1409,
+  "type": "tool/call",
+  "len": 636,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1410,
+  "type": "job/registered",
+  "len": 545,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1411,
+  "type": "job/settled",
+  "len": 657,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1412,
+  "type": "tool/result",
+  "len": 956,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1413,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1414,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1415,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1416,
+  "type": "assistant/message",
+  "len": 56719,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1417,
+  "type": "tool/call",
+  "len": 9787,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1418,
+  "type": "tool/result",
+  "len": 632,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1419,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1420,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1421,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1422,
+  "type": "assistant/message",
+  "len": 4319,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1423,
+  "type": "tool/call",
+  "len": 706,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1424,
+  "type": "job/registered",
+  "len": 683,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1425,
+  "type": "job/settled",
+  "len": 795,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1426,
+  "type": "tool/result",
+  "len": 483,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1427,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1428,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1429,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1430,
+  "type": "assistant/message",
+  "len": 4803,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1431,
+  "type": "tool/call",
+  "len": 824,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1432,
+  "type": "job/registered",
+  "len": 747,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1433,
+  "type": "job/settled",
+  "len": 859,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1434,
+  "type": "tool/result",
+  "len": 806,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1435,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1436,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1437,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1438,
+  "type": "assistant/message",
+  "len": 4794,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1439,
+  "type": "tool/call",
+  "len": 605,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1440,
+  "type": "job/registered",
+  "len": 535,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1441,
+  "type": "job/settled",
+  "len": 647,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1442,
+  "type": "tool/result",
+  "len": 882,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "sourceEventSeqs",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1443,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1444,
+  "type": "step/start",
+  "len": 82,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1445,
+  "type": "user/message",
+  "len": 564,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1446,
+  "type": "assistant/message",
+  "len": 16935,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data",
+   "surfaceOp"
+  ]
+ },
+ {
+  "i": 1447,
+  "type": "step/end",
+  "len": 80,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1448,
+  "type": "workspace/changes",
+  "len": 79,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ },
+ {
+  "i": 1449,
+  "type": "turn/end",
+  "len": 100,
+  "keys": [
+   "type",
+   "seq",
+   "time",
+   "data"
+  ]
+ }
+]

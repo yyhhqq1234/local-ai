@@ -8,5 +8,5 @@
   "maxContext": 262144,
   "vision": "cpu",
   "port": 1234,
-  "modelFile": "qwen3.8-27b-kittyrev-v6-iq2s-mtp.ninfer"
+  "modelFile": "Huihui-Qwen3.8-27B-abliterated-Swift-1.5-GSQ-RCO-IQ2_S-mtp.ninfer"
 }

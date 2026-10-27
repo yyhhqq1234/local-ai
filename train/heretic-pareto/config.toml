@@ -1,0 +1,45 @@
+# Heretic 帕累托搜索配置 —— OxCoder-9B 去审查（方案 B）
+# 关键调整：Refusals / KL 各 100 条 → 30 条，单 trial 从 9.6 min 降到 ~3 min
+# 50 trials + 10 启动试验，预计 2.5-3 小时
+# 用法：在本目录下运行（Heretic 固定读取 cwd 的 config.toml）
+#   cd train/heretic-pareto
+#   ../.venv/Scripts/python.exe -u ../scripts/heretic_auto.py
+
+model = "D:/BaiduNetdiskDownload/Local-AI/train/models/OxCoder-9B"
+quantization = "bnb_4bit"
+device_map = "auto"
+offload_outputs_to_cpu = true
+batch_size = 1
+max_batch_size = 4
+max_response_length = 48
+
+n_trials = 50
+n_startup_trials = 10
+seed = 42
+study_checkpoint_dir = "D:/BaiduNetdiskDownload/Local-AI/train/logs/heretic-pareto"
+
+export_strategy = "adapter"
+save_directory = "D:/BaiduNetdiskDownload/Local-AI/train/models/OxCoder-9B-abl-lora-pareto"
+model_action = "save"
+
+# ── 目标函数 ──────────────────────────────────────────
+[[scorers]]
+plugin = "heretic.scorers.keyword_rate.KeywordRate"
+optimization = "minimize"
+
+[[scorers]]
+plugin = "heretic.scorers.kl_divergence.KLDivergence"
+optimization = "minimize"
+
+# ── 评估规模（感知阈值；30 条足以区分 trial 优劣，省 3 倍时间）──
+[scorer.KeywordRate]
+[scorer.KeywordRate.prompts]
+dataset = "mlabonne/harmful_behaviors"
+split = "test[:30]"
+column = "text"
+
+[scorer.KLDivergence]
+[scorer.KLDivergence.prompts]
+dataset = "mlabonne/harmless_alpaca"
+split = "test[:30]"
+column = "text"

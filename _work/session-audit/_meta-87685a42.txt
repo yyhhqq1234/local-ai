@@ -1,0 +1,235 @@
+### session #1
+{
+ "type": "session",
+ "version": 4,
+ "id": "session-87685a42-5e89-49ef-8411-50484c40a28f",
+ "createdAt": 1793082796037,
+ "cwd": "D:\\BaiduNetdiskDownload\\Local-AI",
+ "isSeeded": false,
+ "delegationDepth": 0,
+ "agentPreset": "standard"
+}
+
+### permission/preset #1
+{
+ "type": "permission/preset",
+ "seq": 0,
+ "time": 1793082796048,
+ "data": {
+  "preset": "danger-full-access"
+ }
+}
+
+### sandbox/mode #1
+{
+ "type": "sandbox/mode",
+ "seq": 1,
+ "time": 1793082796048,
+ "data": {
+  "mode": "danger-full-access"
+ }
+}
+
+### approval/policy #1
+{
+ "type": "approval/policy",
+ "seq": 2,
+ "time": 1793082796050,
+ "data": {
+  "policy": "never"
+ }
+}
+
+### model/selection #1
+{
+ "type": "model/selection",
+ "seq": 3,
+ "time": 1793082808395,
+ "data": {
+  "provider": "ninfer",
+  "model": "qwen3.8-27b-ablit-swift15-iq2s",
+  "reasoningEffort": "minimal"
+ }
+}
+
+### request/context #1
+{
+ "type": "request/context",
+ "seq": 16,
+ "time": 1793082872038,
+ "data": {
+  "provider": "ninfer",
+  "model": "qwen3.8-27b-ablit-swift15-iq2s",
+  "contextWindow": 262144
+ }
+}
+
+### session/title #1
+{
+ "type": "session/title",
+ "seq": 17,
+ "time": 1793082872041,
+ "data": {
+  "title": "session-579eaa2f-b169-4f17-8b37-8f0deda8",
+  "messageSeqs": [
+   9
+  ],
+  "source": {
+   "kind": "fallback"
+  }
+ }
+}
+
+### session/title #2
+{
+ "type": "session/title",
+ "seq": 19,
+ "time": 1793082873662,
+ "data": {
+  "title": "优化词表并整合NSFW原始数据",
+  "messageSeqs": [
+   9
+  ],
+  "source": {
+   "kind": "provider",
+   "provider": "session-title-first-prompt-llm",
+   "model": {
+    "provider": "ninfer",
+    "model": "qwen3.8-27b-ablit-swift15-iq2s"
+   }
+  }
+ }
+}
+
+### workspace/changes #1
+{
+ "type": "workspace/changes",
+ "seq": 255,
+ "time": 1793083873887,
+ "data": {
+  "turn": 1
+ }
+}
+
+### workspace/changes #2
+{
+ "type": "workspace/changes",
+ "seq": 411,
+ "time": 1793085707972,
+ "data": {
+  "turn": 2
+ }
+}
+
+### workspace/changes #3
+{
+ "type": "workspace/changes",
+ "seq": 456,
+ "time": 1793086145600,
+ "data": {
+  "turn": 3
+ }
+}
+
+### command/run #1
+{
+ "type": "command/run",
+ "seq": 792,
+ "time": 1793098061750,
+ "data": {
+  "commandId": "cmd-5d9786f5-2",
+  "name": "compact",
+  "args": "",
+  "source": {
+   "kind": "user"
+  }
+ }
+}
+
+### command/done #1
+{
+ "type": "command/done",
+ "seq": 793,
+ "time": 1793098061751,
+ "data": {
+  "commandId": "cmd-5d9786f5-2",
+  "kind": "error",
+  "text": "this.adapters.get(...)?.adapter.imageRequestPricing is not a function"
+ }
+}
+
+### session/end-seed #1
+{
+ "type": "session/end-seed",
+ "seq": 794,
+ "time": 1793100944358,
+ "data": {}
+}
+
+### command/run #2
+{
+ "type": "command/run",
+ "seq": 795,
+ "time": 1793101000700,
+ "data": {
+  "commandId": "cmd-abfe7fce-1",
+  "name": "compact",
+  "args": "",
+  "source": {
+   "kind": "user"
+  }
+ }
+}
+
+### command/done #2
+{
+ "type": "command/done",
+ "seq": 796,
+ "time": 1793101000703,
+ "data": {
+  "commandId": "cmd-abfe7fce-1",
+  "kind": "error",
+  "text": "this.adapters.get(...)?.adapter.imageRequestPricing is not a function"
+ }
+}
+
+### command/run #3
+{
+ "type": "command/run",
+ "seq": 797,
+ "time": 1793101010199,
+ "data": {
+  "commandId": "cmd-abfe7fce-2",
+  "name": "compact",
+  "args": "",
+  "source": {
+   "kind": "user"
+  }
+ }
+}
+
+### command/done #3
+{
+ "type": "command/done",
+ "seq": 798,
+ "time": 1793101010200,
+ "data": {
+  "commandId": "cmd-abfe7fce-2",
+  "kind": "error",
+  "text": "this.adapters.get(...)?.adapter.imageRequestPricing is not a function"
+ }
+}
+
+=== 时间线（turn/step） ===
+turn/start   {"type":"turn/start","seq":5,"time":1793082871930,"data":{"turn":1}}
+turn/end   {"type":"turn/end","seq":256,"time":1793083873887,"data":{"turn":1,"reason":{"kind":"completed"}}}
+turn/start   {"type":"turn/start","seq":258,"time":1793084667093,"data":{"turn":2}}
+turn/end   {"type":"turn/end","seq":412,"time":1793085707973,"data":{"turn":2,"reason":{"kind":"completed"}}}
+turn/start   {"type":"turn/start","seq":414,"time":1793085791083,"data":{"turn":3}}
+turn/end   {"type":"turn/end","seq":457,"time":1793086145600,"data":{"turn":3,"reason":{"kind":"completed"}}}
+turn/start   {"type":"turn/start","seq":459,"time":1793086301873,"data":{"turn":4}}
+turn/end   {"type":"turn/end","seq":634,"time":1793088933792,"data":{"turn":4,"reason":{"kind":"completed"}}}
+turn/start   {"type":"turn/start","seq":636,"time":1793094775757,"data":{"turn":5}}
+turn/end   {"type":"turn/end","seq":692,"time":1793095982265,"data":{"turn":5,"reason":{"kind":"completed"}}}
+turn/start   {"type":"turn/start","seq":694,"time":1793096237909,"data":{"turn":6}}
+turn/end   {"type":"turn/end","seq":791,"time":1793097703491,"data":{"turn":6,"reason":{"kind":"completed"}}}

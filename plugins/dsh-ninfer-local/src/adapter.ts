@@ -58,6 +58,24 @@ interface OpenAIMessage {
   tool_call_id?: string
 }
 
+/** 图片在 ninfer 路由上的唯一占位文本（blocksToText 与 imageRequestPricing 共用；运行时以 lib 为准） */
+const IMAGE_PLACEHOLDER_TEXT = '[图片：本机视觉为 CPU 路径，历史图片不回灌]'
+
+/** 与 core textOnlyImageText 同构：text-only 路由出网前会把 image 块替换成该文本 */
+function imageAttachmentId(block: unknown): string {
+  const ref = (((block as { attachment?: unknown } | null)?.attachment ?? block ?? {}) as {
+    attachmentId?: string
+    sha256?: string
+    id?: string
+  })
+  const raw = String(ref.attachmentId ?? ref.sha256 ?? ref.id ?? '')
+  return raw.startsWith('sha256:') ? raw.slice(7) : raw
+}
+
+function textOnlyImageText(block: unknown): string {
+  return `[image omitted because this model accepts text only; attachment sha256:${imageAttachmentId(block).slice(0, 8)}]`
+}
+
 /** DSH content blocks → 纯文本（图片走占位，避免 12G 卡被图像 token 挤爆） */
 function blocksToText(blocks: readonly ContentBlock[]): string {
   const out: string[] = []
@@ -70,7 +88,7 @@ function blocksToText(blocks: readonly ContentBlock[]): string {
         // 历史里的思考不回灌给模型，避免污染上下文
         break
       case 'image':
-        out.push('[图片：本机 NInfer 视觉为 CPU 路径，历史图片不回灌]')
+        out.push(IMAGE_PLACEHOLDER_TEXT)
         break
       case 'file':
         out.push(`[文件附件 ${b.attachment.name}，${b.attachment.bytes} 字节，内容未内联]`)
@@ -206,6 +224,38 @@ export class NinferAdapter extends LlmAdapter {
 
   override providerInfo(provider: string) {
     return { id: provider, name: this.profile.displayName }
+  }
+
+  /** core 调用形态 (provider, model, image)；尺寸缺失时回落到 1024 保守值 */
+  override imageRequestTarget(
+    _provider: string,
+    _model: string,
+    image: { width?: number; height?: number; mediaType?: string },
+  ) {
+    const w = Math.trunc(Number(image?.width))
+    const h = Math.trunc(Number(image?.height))
+    return {
+      width: w > 0 ? w : 1024,
+      height: h > 0 ? h : 1024,
+      maxBytes: 4 * 1024 * 1024,
+    }
+  }
+
+  /**
+   * 请求图片定价。core LlmService.imageRequestPricing(provider, model) 同步取用，
+   * 缺此方法会在 compact / token meter 直接 TypeError。
+   * ninfer 的 resolveModel 不声明 inputModalities=image → core 按纯文本路由把 image 块
+   * 替换为 textOnlyImageText；本适配器 blocksToText 再兜占位。故 visualTokens 恒为 0。
+   */
+  override imageRequestPricing(_provider: string, _model: string) {
+    const visionCapable = (this.profile as { visionCapable?: boolean }).visionCapable === true
+    return {
+      priceImages: (images: readonly unknown[]) =>
+        (Array.isArray(images) ? images : []).map((block) => ({
+          visualTokens: 0,
+          text: visionCapable ? IMAGE_PLACEHOLDER_TEXT : textOnlyImageText(block),
+        })),
+    }
   }
 
   override async listModels(_provider: string): Promise<readonly LlmModelInfo[]> {

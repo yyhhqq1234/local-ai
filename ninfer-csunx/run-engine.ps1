@@ -87,6 +87,11 @@ $engineArgs = @(
     '--port', [string]$EnginePort
 )
 
+# MTP 投机解码（2026-10-27 补回）：引擎默认 SPECULATIVE DECODING off（--help 原文），
+# 不传 --spec/--draft-tokens 时 decode 只有 34-40 tok/s；传 mtp + 3 实测 52-71 tok/s
+# （10-20 22:12 / 10-24 23:18 日志：mtp accepted 46-81%，decode 52-71）。$DraftTokens=0 则不启用。
+if ($DraftTokens -gt 0) { $engineArgs += @('--spec', 'mtp', '--draft-tokens', [string]$DraftTokens) }
+
 if ($NoVision) {
 } elseif ($VisionCpu) {
     $engineArgs += @('--vision', '--vision-cpu', '--vision-max-merged', '256')

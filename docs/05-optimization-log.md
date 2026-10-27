@@ -101,3 +101,42 @@ kitty 任务步数       12（最好），p90 约 15
 验收脚本            _work/session-audit/{bench_speed2,bench_ctx,sim2,verify_*}.mjs
 每请求统计          _work/session-audit/ninfer-stats.jsonl
 ```
+
+## 2026-10-27 · decode 腰斩回归：MTP 投机解码被启动脚本丢掉
+
+现象：`decode 60~70 tok/s` → `30~40 tok/s`，其余设置（deviceKV 36864 / hostKV 7168 / nvfp4 / chunk 512 / draftTokens 3）全部没变。
+
+取证（引擎日志 `req#N done` 行的 `mtp accepted` 字段是判据）：
+
+| 时间 | decode | mtp accepted | 说明 |
+|---|---|---|---|
+| 10-20 22:12 | 71.3 tok/s | 109/135 (80.7%) | MTP 生效 |
+| 10-24 23:18 | 63.4 tok/s | 115/248 (46.4%) | MTP 生效 |
+| 10-25 18:18 | 24.1 tok/s | 0/288 (0%) | MTP 生效但该内容零接受（长代码 prompt） |
+| **10-25 20:39 起** | **40.6 / 36.7 / 35.4 tok/s** | **字段消失** | **MTP 已不在，解码头完全没跑** |
+| 10-27 12:37（修前） | 39.4 / 36.1 tok/s | 字段消失 | 同一现象 |
+
+根因：`ninfer-csunx/run-engine.ps1`（mtime **2026-10-25 18:36**）重写时把投机解码参数丢了 ——
+脚本有 `-DraftTokens 3` 形参、启动横幅也打印 `mtp: 3`，但 `$engineArgs` 里从未拼 `--spec mtp --draft-tokens N`。
+引擎侧 `--help` 原文：`SPECULATIVE DECODING (off by default)` → 不传就是纯单 token 解码，
+所以默认掉档 ≈ 1.5×（历史接受率 42~80%）。参数横幅造成的假象让问题看起来像"引擎自己变慢了"。
+
+修复（[run-engine.ps1:93](../../ninfer-csunx/run-engine.ps1)）：
+
+```powershell
+if ($DraftTokens -gt 0) { $engineArgs += @('--spec', 'mtp', '--draft-tokens', [string]$DraftTokens) }
+```
+
+实测（重启后同一 prompt）：
+
+```text
+before  decode 39.4 tok/s   TTFT 58.5s(排队)   mtp 无字段
+after   decode 60.2 tok/s   TTFT 0.238s        mtp accepted 68/159 (42.8%)
+```
+
+回滚：`Copy-Item run-engine.ps1.bak-nospec run-engine.ps1 -Force`（回落到无 MTP，decode 约 36）。
+自动重启+实测脚本：`_work/session-audit/restart-engine-mtp.ps1`（失败自动回退备份启动器）。
+
+顺带记录（未改）：无 MTP 那版实例长时间跑完后每 5s 刷 `demote-other short ... noresident=645` 且
+`host 100%`（KVMem 页在 host 侧非驻留）；MTP 重启后该刷屏消失。若再复现，按 KV ring 参数
+（window 19456 / retrieve 3840 / sink 12288）与 deviceKV 36864 的配比复查。
