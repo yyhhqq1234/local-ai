@@ -16,6 +16,7 @@ ninfer-csunx/config/*.local.json
 
 # ── 后训练大文件（train/README.md 保留，产物全部忽略）────
 train/base/
+train/models/
 train/merged/
 train/gguf/
 train/hf/
@@ -24,6 +25,15 @@ train/ninfer/
 train/tmp/
 train/.venv/
 train/logs/
+# build_mix.py 生成物（每次重新合成，不入库）
+train/data/mix-*.jsonl
+
+# ── 本地语料与训练数据集（不入库）────────────────────────
+# 原始语料：成人向文本原始素材，仅本地保留
+user-temp/NSFW小说/
+# 训练数据集：体积大（含 13668+5602 条样本与 94MB 快照）
+# 数据集谱系以 train/data/versions/*.sha256 为锚点，工作副本无需入库
+train/data/
 
 # ── 运行时产物与审计日志（体积大，随时间增长）──────────────
 _work/toolout/
@@ -109,3 +119,9 @@ train/kitty-rev/deploy/.autodl_uuid
 train/kitty-rev/data/intent3/
 train/kitty-rev/deploy/base-meta/
 train/local-pack/*.safetensors
+
+# Windows 保留设备名残留（重定向误创建，非真实文件）
+nul
+
+# 评测数据集（单文件 172MB，超 GitHub 100MB 单文件硬限制，仅本地保留）
+train/eval/sra-g1.0/
