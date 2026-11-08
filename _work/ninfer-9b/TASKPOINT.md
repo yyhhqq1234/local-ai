@@ -145,3 +145,29 @@ c696d37 / 38edf1d / c812a16 / 8438297 / 408a2f5 / 5009b69 / 080d134 / 139ac41
     (10240,4096) mtp attention/query(+3)
   补齐后 --vision 与 --spec mtp 才能起；⑤ 的 100 tok/s 依赖 MTP 投机
 ```
+
+## 2026-11-08 19:30 · ⑤ MTP 投机：唯一剩余阻塞点
+
+```text
+现象：--spec mtp 启动 FATAL | native input requires one contiguous parent region
+出处：src/core/weight_view.cpp:195-206 contiguous_weight_region（产物加载期，比 pair 校验更早）
+
+根因（本会话实测对照）：
+  text 的 attention 合并成 2 个 part：query(4096)+key(1024) = (5120, 4096)   ← 引擎接受
+  mtp  的 attention 合并成 4 个 part：q(8192)+k(1024)+v(1024)+… = (10240, 4096) ← 引擎拒绝
+  （转换日志：text/layers/N/attention/query (+1) (5120,4096)
+              mtp/layers/0/attention/query (+3) (10240,4096)）
+
+修法（转换器侧，tools/convert/qwen3_5.py）：
+  :987 builder.block("mtp/layers/0/", "mtp.layers.0.", base, config, "full_attention")
+  在 block 的 full_attention 分支（:765 / :857）里，group 规则需按 mtp 与 text 区分：
+    text: self.group(query, key) + self.group(value, output?)   → 2-part
+    mtp : 目前一次性 group 了 4 个 → 需拆成同样的 2 组
+  改完后重转 → --spec mtp 应能起 → 测 192 token 的 tok/s
+
+引擎侧已全部就绪（无需再改）：
+  · pair 的 k=4096 分派 + 相邻视图常量按 K 参数化
+  · projection 的 3 个形状（含 K=8192 全套）
+  · q8 swiglu 9B 形状
+  · tokenizer 缺字段早退
+```
