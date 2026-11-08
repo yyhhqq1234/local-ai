@@ -1,9 +1,9 @@
 # TASKPOINT — 项目级任务断点
 
-> 保存时间：**2026-11-08 20:30（UTC+8）**
+> 保存时间：**2026-11-08 22:00（UTC+8）**
 > 项目根目录：D:\BaiduNetdiskDownload\Local-AI
 > 分支/版本：main @ af914b6（工作区另有大量未提交改动；训练产物与引擎运行时均在 .gitignore 内）
-> 本次性质：**9B 交付形态已成立（①③④ 完成、② 视觉链路通），⑤ 投机链路连破 7 层、剩 GDN conv 的 27B 常量**
+> 本次性质：**①③④② 完成并可用；⑤ 投机链路已打通（13 层修复）但 MTP 接受率≈0，34.4 tok/s 为当前权重天花板**
 > 历史归档：旧版 2622 行（A1–A27 + §1–§26）压缩至 §13；原文见 `git log -- TASKPOINT.md`。
 
 ---
@@ -11,24 +11,26 @@
 ## ▶ 接手先读这一段
 
 ```text
-当前任务：让 ninfer-serve.exe（Windows 原生）把后训练 Oxcoder9B 跑成可交付推理服务（五项验收）。
+目标：让 ninfer-serve.exe（Windows 原生）把后训练 Oxcoder9B 跑成可交付推理服务（五项验收）。
 
-已完成（全部实测）：
+已完成（全部实测）
   ① 5 prompt × 3 轮 = 15/15（内容非空）· 长 prompt 312 token 3/3 · 失败只死单请求
-  ② --vision 启动 7 s；HTTP URL 图片走完 decode→image token→vision tower→文本，可复现
+  ② --vision 启动 7.1 s；HTTP URL 图片 → decode→image token→vision tower→文本，可复现
   ③ 普通对话（含长 prompt）正常；带 tools 内容退化属"可后续"
-  ④ 冷启 7 s、长 prompt TTFT 225 ms、前缀复用命中更快
-未完成：
-  ⑤ 34.4 tok/s（无投机）。--spec mtp 已连破 7 层、跑到 verify 的 GDN conv，
-    最后一层 = input_conv/q4_q5 三处 kValueRows=6144 / kHidden=5120（27B 常量）
+  ④ 冷启 7.1 s、长 prompt TTFT 225 ms、前缀复用命中更快
+未完成
+  ⑤ 34.4 tok/s（无投机）。投机链路已打通（--spec mtp --draft-tokens 1 → 31.4 tok/s），
+    但 --request-log-jsonl 实测 decode.rounds=191 生成 192 token
+    ⇒ MTP 的 draft 接受率 ≈ 0，投机无收益。需用 G1 量化后的 text 权重重训 MTP 头才有望突破。
 
-交付物：
+交付物
   out/kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer（7.93 GB / 738 objects / text+vision+mtp / G1=q8 gate·up）
-  启动：& _tools\run-serve.ps1        （①③④）  追加 --vision → ②   不要加 --spec mtp（当前 FATAL）
+  启动：& _tools\run-serve.ps1            → ①③④
+        追加 --vision                      → ②
+        --spec mtp 可用但不建议（31.4 tok/s，负收益）
 
-下一动作：为 input_conv/q4_q5 的 convolution.cu:19-25 / projection_mma.cu:39 /
-          projection_independent.cu:19 建 9B 实例（kHidden 4096 / kValueRows 4096 / kChannels 8192），
-          注意 gdn.cpp:94-96 记录过"曾因 workspace 冲突导致 prefill 全崩而回滚"，须配独立 arena 并回归 15/15。
+下一动作：⑤ 若要继续 —— 用 G1 量化后的 text 权重重新训练 MTP 头（对齐量化后 hidden 分布），
+          或换 dflash/dflash2 投产权重（本地无）；否则 34.4 tok/s 是本机 12 GB 卡的交付上限。
 ```
 
 ---
@@ -157,45 +159,62 @@ linear_num_key_heads=16     linear_num_value_heads=32    mamba_ssm_dtype="float3
       pair k=4096 / mtp attention 四合一 group（含 gate，10240 行）/ q8(10240,4096) / q8(4096,4096) /
       bf16(24576,4096) / gdn_replay_fold 放宽到 32 层 / slice 越界定位于 GDN conv 常量。
 
+### 6.10 ⑤ 投机链路专项（2026-11-08 21:00–22:00）—— 连破 13 层并首次跑通
+
+- [x] **pair 的 k=4096**：`pair/q8/shapes/n1024_k5120.cu` 加 `select_q8_pair_n1024_k4096`（实现本就参数化，转发即可）。
+- [x] **mtp attention 的 contiguous parent**：转换器 group 必须把 `query+gate+key+value` **四合一**（10240 行）
+      成同一 parent，且四者 format/layout/method 全同（`qwen3_5.py` 的 mtp block）。
+      验证：`[wv-parts]` 打印从「4 个不同 parent」变为「同 parent 且行区间连续」。
+- [x] **q8 两个形状**：`projection/q8` 加 `(10240,4096)`、`(4096,4096)`（K 相同转发）。
+- [x] **bf16 一个形状**：`projection/bf16` 加 `(24576,4096)`（转发 n12288_k4096）。
+- [x] **fold 的 GDN 层数**：`fold_io.cuh` 加 `FoldGeometry24x32 = FoldGeometry<24,16,32,8192>`，
+      `launch.h` 判定 `spec.layers == 24`，`fold.cu` 加对应 case。
+      **关键认知：fold spec 的 layers 是 GDN 层数（32 层里每 4 层 1 个 full-attn → 24），不是总层数。**
+- [x] **slice 三处运行期化**：`split/.../n4096_n12288_k5120/small.cu:232`、`input_conv/q4_q5/projection.cpp:18`、
+      `input_conv/q4_q5/projection_mma.cu:39` 的 `6144` 全部改为按张量实际行数/权重推导。
+- [x] **Q5 direct SIMT static K**：`convolution.cu:173`、`projection_independent.cu:117 / 170`（T=4 verify 路径）
+      按 `x.ne[0]` 分派 4096/5120 两套 schedule 实例。
+- [x] **split_bf16_features 几何**：`indexing/features.cu` 的 14336 / 256×24 / 256×4 硬编码改为
+      从输出张量推导（`hd*(2q+2k)`），27B 与 9B 通用。
+- [x] **投机首次跑通**：`--spec mtp --draft-tokens 1/3` 均可完整生成 192 token，无崩溃、无 500。
+      实测：draft=1 → 31.4 tok/s；draft=2 → 13.4；draft=3 → 10.4–16.4（均低于无投机 34.4）。
+- [x] **接受率取证**：`--request-log-jsonl` 显示 `decode.rounds = 191`、产出 192 token
+      ⇒ 每轮仅 1.0 token ⇒ **MTP draft 接受率 ≈ 0**（draft=1 时若接受应约 96 轮）。
+
 ## 7. 进行中 / 下一步（新对话先干这个）
 
-### 7.1 当前唯一卡点（⑤ 的最后一层）
+### 7.1 ⑤ 的定论（已取证，不是调度问题）
 
 ```text
-现象：--spec mtp 启动通过、进入推理后
-      FATAL | text/layers/0 verify columns=4: slice range out of bounds
-      诊断打印：[slice-miss] dim=0 start=4096 len=6144 extent=8192
-
-根因：GDN input_conv 的 27B 专用常量套件（三处 .cu）
-  src/ops/linear_attention/gated_delta_net/input_conv/q4_q5/convolution.cu:19-25
-      kHidden 5120 / kQueryRows 2048 / kKeyRows 2048 / kValueRows 6144 / kChannels 10240
-  .../q4_q5/projection_mma.cu:39          kValueRows 6144
-  .../q4_q5/projection_independent.cu:19  kValueRows 6144
-9B 应为：kHidden 4096 / kQueryRows 2048 / kKeyRows 2048 / kValueRows 4096 / kChannels 8192
-⇒ 需要为这三处建 9B 实例（模板化 or 复制实例；CMake 不 GLOB，必须原地加）
+实测：--spec mtp --draft-tokens 1，192 token 请求
+  tps = 31.4
+  decode.rounds = 191        ← 191 轮只产出 192 token
+  decode.device_wait_exposed_seconds = 6.05
+判读：draft=1 每轮 verify 2 列（target 1 + draft 1）
+      若 draft 被接受则该轮出 2 token → 192 token 只需约 96 轮
+      实际 191 轮 ⇒ **每个 draft 都被拒，接受率 ≈ 0**
+⇒ 每轮白付一次 MTP forward + fold + 2 列 verify，故比无投机更慢。
 ```
 
-### 7.2 下一步动作（可直接执行）
+**成因（按概率）**：MTP 头与 G1 量化后的 target 分布不对齐 —— 具体可能是
+① MTP 训练时的 target 未做 G1（gate/up 升 q8），分布偏移；
+② MTP 的 hidden 输入绑定到错误的层/位置（`mtp/pre_fc_norm_hidden`）；
+③ MTP 与 text 权重不是同一来源世代。
 
-```powershell
-# 1) 三处 .cu 的常量按运行期或 9B 值分派（先只改 verify 会走的那条：
-#    q4_q5/convolution.cu 的 kValueRows 与 kHidden）
-# 2) 删对应 obj → 重编（改 .cu 后 Ninja 会重编，但改 .cuh/.h 必须手删 obj）
-& D:\BaiduNetdiskDownload\Local-AI\_toolsuild_ninfer.ps1 -Action build
-# 3) 起投机
-ninfer-serve.exe <产物> --max-context 4096 --greedy --host-context-mib 2048 `
-  --prefill-chunk 128 --no-thinking --spec mtp --draft-tokens 3 --port 1830
-# 4) 测速 + 回归
-#    单流 192 token 记 tok/s（目标 ≥100；无投机基线 34.4）
-#    回归：& _tools\run-serve.ps1 跑 5×3 必须仍 15/15（prefill 不得退化）
+### 7.2 下一步动作（三选一，按成本）
+
+```text
+A（最彻底）用 G1 量化后的 text 权重重训 MTP 头 → 对齐后接受率才有意义
+B（验证成因）对比 MTP 的 hidden 输入：dump `mtp/pre_fc_norm_hidden` 的 l2，
+   与 text 最后一层 final hidden 对比，看是否取错层/错位置
+C（放弃投机）确认 34.4 tok/s 为交付上限，把 ⑤ 记为"受权重与硬件限制"
 ```
 
 ### 7.3 待验证假设
 
-- 假设 1：verify(T=4) 与 prefill 走的是**不同** conv 分派，故只改 verify 路径不会影响 prefill 的 15/15。
-- 假设 2：9B 的 conv 常量换成 (4096/2048/2048/4096/8192) 后，GDN 的 slice 不再越界。
-- 假设 3：投机开启后 tok/s 提升幅度取决于 mtp_top1（当前产物用 v3-mix600.step300，top1≈0.467；
-  本地还有 v1-reonly top1=0.8516，若需要更高接受率可注入其 15 个 mtp 张量后重转）。
+- 假设 1：若能拿到 dflash/dflash2 投产权重（本地无），可绕过 MTP 对齐问题。
+- 假设 2：34.4 tok/s 已接近 12 GB 卡的带宽上限（5.81 GiB/token × 34.4 ≈ 200 GB/s，峰值 23-26%），
+  非投机路径的优化空间有限（⑤-A 的 GEMV kernel 已实测无效）。
 ## 8. 待办步骤
 
 - [ ] dump verify 中间张量（§7.3 动作 1）
@@ -302,6 +321,26 @@ ninfer-serve.exe <产物> --max-context 4096 --greedy --host-context-mib 2048 `
 - 现象/坑：PowerShell 里 `"run$n:"` 报「变量引用无效」；正确做法：写成 `"run${n}:"` 或字符串拼接。
 - 现象/坑：`Stop-Process` 偶发「找不到进程标识符」；原因：引擎已退出；
   正确做法：`-ErrorAction SilentlyContinue`，不要当失败。
+
+### 9.9 ⑤ 专项新增雷区（2026-11-08 21:00–22:00，只增不减）
+
+- 现象/坑：改 `.h` / `.cuh` 后行为不变、报错照旧；原因：Ninja 不跟踪头文件；
+  正确做法：改头文件后手删依赖 `.obj`（本轮 `gdn/replay/launch.h` 需删 gdn/replay 全部 obj）。
+- 现象/坑：`cudaErrorIllegalAddress` 只告诉你"越界"，不给 kernel 名；
+  正确做法：`compute-sanitizer --tool memcheck --launch-timeout 300 --target-processes all <exe> <args>`，
+  它会打印 `Device Frame: <kernel<模板参数>>(…) +0x… in <文件>:<行>` —— 本轮据此定位到
+  `recurrent_fold_kernel<FoldGeometry<30,16,32,8192>> at fold_io.cuh:179`。
+- 现象/坑：fold 的 `spec.layers` 是 **GDN 层数**（32 层里 24 个 linear-attention 层），不是总层数；
+  误用 30/32 层实例会在 `recurrent_fold_kernel` 里越界读写 state slot。
+- 现象/坑：引擎报 `q8 linear: unsupported shape` / `bf16 linear: unsupported shape` 不说是哪个形状；
+  正确做法：在 `projection/q8/q8_dispatch.cpp`、`projection/bf16/bf16_dispatch.cpp`、
+  `core/tensor.cpp`（slice）、`gdn/replay/launch.h`（fold）的抛错前加 `fprintf`，一层一层剥。
+  **定位完必须删掉这些打印。**
+- 现象/坑：PowerShell 单引号字符串里的 `` `r`n `` 不展开，写进源码会变成字面反引号字符导致编译失败；
+  正确做法：用双引号字符串或 `[Environment]::NewLine`。
+- 现象/坑：`"run$n:"` 报「变量引用无效」；正确做法：`"run${n}:"`。
+- 现象/坑：`--prefill-chunk 40` 之类小值会让引擎打印 usage 直接退出；可用值是 128（实测）。
+- 现象/坑：`--request-log-jsonl` 的 `argv` 行会很长，`Select-String` 过滤时注意截断。
 
 ## 10. 关键文件与修改
 
@@ -498,3 +537,8 @@ compute-sanitizer：<CUDA>\compute-sanitizer\compute-sanitizer.exe（不在 bin\
   引擎侧新增：tokenizer 缺字段早退、q8 swiglu 9B 形状、q8/bf16 projection 各 2-3 个形状、
   pair k=4096、gdn fold 32 层、mtp k∉{2048,5120} 回退非 pair。
   详见 `_work/ninfer-9b/TASKPOINT.md`（子任务级逐层记录）与 commit af914b6。
+- 2026-11-08 22:00：**⑤ 投机链路打通并定性** —— 连破 13 层（pair k4096 / mtp attention 四合一 /
+  q8 两形状 / bf16 一形状 / fold 24 层 GDN 几何 / slice 三处 / Q5 static K 三处 / split_bf16_features 几何），
+  `--spec mtp` 可完整生成 192 token；但 `decode.rounds=191` 证明 MTP 接受率≈0，
+  投机为负收益（31.4 vs 无投机 34.4）。结论：34.4 tok/s 是当前权重的天花板，
+  突破需重训 MTP 头或换 dflash 权重。①③④② 全部完成并可用。
