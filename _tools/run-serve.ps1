@@ -9,11 +9,11 @@
 
 param(
     [int]$Port = 1610,
-    [string]$Model = 'D:\BaiduNetdiskDownload\Local-AI\train\lines\9b-oxcoder\out\oxcoder9b-merged.ninfer',
+    [string]$Model = 'D:\BaiduNetdiskDownload\Local-AI\train\lines\9b-oxcoder\out\kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer',
     [int]$MaxContext = 4096,
     [int]$HostContextMiB = 2048,
     [int]$PrefillChunk = 128,
-    [switch]$NoThinking = $true,
+    [bool]$NoThinking = $true,
     [switch]$NoCudaGraph,
     [switch]$Foreground
 )

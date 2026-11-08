@@ -116,3 +116,32 @@ c696d37 / 38edf1d / c812a16 / 8438297 / 408a2f5 / 5009b69 / 080d134 / 139ac41
 → --components text,mtp 转产物 → --spec mtp --draft-tokens 3 实测 ⑤
 ② 另需视觉塔权重（本地无 visual.*），从对应 HF 仓库取 1–2 GB 分片后与 G1 目录合并再转。
 ```
+
+## 2026-11-08 18:52 · G1 产物落地（重大更新）
+
+```text
+新产物（已可用，run-serve.ps1 默认已指向它）：
+  train/lines/9b-oxcoder/out/kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer
+  7.93 GB / 738 objects / components = text + vision + mtp
+  G1 实现：mlp.gate/up 升 **q8**（64 张量；原定 q6，因引擎无 q6 swiglu 改用 q8，精度更高）
+  实测：5x3 = 15/15（内容非空）· 冷启 7 s · 192 token 34.4 tok/s
+
+启动（唯一可行组合，已内联验证 6/6）：
+  ninfer-serve.exe <上面的产物> --max-context 4096 --greedy --host-context-mib 2048 \
+    --prefill-chunk 128 --no-thinking --port <PORT>
+
+本轮打通的四处工程：
+  1. tokenizer.cpp：tokenizer_config.json 缺 added_tokens_decoder 不再 FATAL（早退）
+  2. q8/shapes/n34816_k5120.cu：新增 9B swiglu 形状 Q8LinearGeometry<24576,4096> + select_q8_swiglu_n24576_k4096
+  3. swiglu/dispatch.{h,cpp}：9B q8 分派
+  4. resource 导出的正确 API：reader.read_object("<object id>")（不是 read_range / to_json）
+
+剩余（② 与 ⑤-投机共用一处缺口）：
+  projection 的 kShapes 表缺 5 个形状：
+    (4096,4608)  vision merger.fc2
+    (4096,8192)  mtp input_projection
+    (4096,4096)  mtp attention/output
+    (4096,12288) mtp mlp/down
+    (10240,4096) mtp attention/query(+3)
+  补齐后 --vision 与 --spec mtp 才能起；⑤ 的 100 tok/s 依赖 MTP 投机
+```
