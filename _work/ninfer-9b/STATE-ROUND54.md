@@ -32,3 +32,23 @@ LONG3  OK prompt_n=9   len=100
 ⑤ 速度：36.8 tok/s（CUDA graph 已 2.3×）；再上需 k4096 swiglu GEMV-pair kernel 或带 MTP 的产物
 ```
 
+
+## round 58 追加：严格口径 5x3 验收
+
+```text
+启动: --prefill-chunk 128 --no-thinking
+判据: HTTP 200 且 message.content 长度 > 0 才记 OK（比之前更严，空内容不算过）
+结果: ==== 5x3 => OK=15 FAIL=0 ====
+```
+
+至此 ① 达标（内容非空 15/15），加 round 56 的「长 prompt 312 token 3/3 + 前缀复用 prompt_n=9」。
+
+## 仍未达标（两条都不是调参可解）
+
+```text
+② 多模态: --vision -> FATAL missing component vision（产物缺组件）
+   需要重做 .ninfer 转换，把 vision tower 打进产物 —— 转换侧工程
+⑤ 速度: 36.8 tok/s（graph 已 2.3x）
+   A) 新写 k4096 swiglu GEMV-pair kernel（27B 版本 kN/kK/kIntermediate 为编译期常量）
+   B) 重做带 MTP 头的产物后启用投机解码（--spec mtp 当前因缺组件直接 FATAL）
+```
