@@ -125,3 +125,15 @@ nul
 
 # 评测数据集（单文件 172MB，超 GitHub 100MB 单文件硬限制，仅本地保留）
 train/eval/sra-g1.0/
+
+# 本地产物与诊断（不入库）：防止 git add -A 拖入 GB 级安装包 / 构建目录 / 运行日志
+_tools/ninfer-build/
+_tools/dist/
+_tools/cmake-*/
+_tools/curl-sdk/
+_tools/cuda_*.exe
+_tools/vs_BuildTools.exe
+_tools/*.zip
+_tools/*.txt
+_tools/*.log
+_tools/*.err
