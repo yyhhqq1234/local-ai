@@ -52,3 +52,22 @@ LONG3  OK prompt_n=9   len=100
    A) 新写 k4096 swiglu GEMV-pair kernel（27B 版本 kN/kK/kIntermediate 为编译期常量）
    B) 重做带 MTP 头的产物后启用投机解码（--spec mtp 当前因缺组件直接 FATAL）
 ```
+
+## 5-A 路线：k4096 swiglu GEMV-pair 的常量映射（round 60 读源码确认）
+
+```text
+src/ops/linear/swiglu/q4/shapes/n34816_k5120/small.cu:22-39
+  kN = 34816 -> 9B 24576      kK = 5120 -> 9B 4096
+  kIntermediate = kN/2 -> 12288    kGroupK = 64（同）
+  kGroups = kK/64 -> 27B 80, 9B 64    kGroupsPerWarpTile = 16（同）
+  kTiles = kGroups/16 -> 27B 5, 9B 4
+  kPairsPerBlock=4 / kBlockThreads=128 / kVecsPerWarpTile=32（同）
+=> 只需把 kN / kK 模板化，其余常量全部由它们推导；launch_q4_swiglu_gemv_pair 的
+   `w.n != kN || w.k != kK` 校验随之变成特化后校验。
+```
+
+实施四步：
+1. small.cu 常量包成 template<int N,int K> Config，kernel/launcher 按 Config 实例化；
+2. shape.cpp 的 k==4096 分支：tokens==1 走 q4_swiglu_gemv_pair<24576,4096>，其余 tokens 仍走 materialized；
+3. 数值对拍：同 prompt 下 GEMV 与 materialized 首 token logits 一致；
+4. 通过后用 _tools/bench_decode.ps1 -Graph 测 tok/s（从 36.8 起往上）。
