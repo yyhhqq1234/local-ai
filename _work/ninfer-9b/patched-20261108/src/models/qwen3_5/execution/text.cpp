@@ -860,9 +860,9 @@ void TextContext::attn_mix(const BlockParameters& w, Tensor& x, int fidx, Phase 
     // [9B 排障] attention 分段 NaN 定位：只看第一个全注意力层（fidx==3）、T<=4、前 400 次调用。
     // 每段都先 cudaDeviceSynchronize（引擎 kernel 在自有 stream 上，只同步默认流会读到假象）。
     // [9B 排障] 诊断开关：修好后置 false，避免逐层 cudaDeviceSynchronize 拖慢推理。
-    constexpr bool kAttnDiag = false;
+    constexpr bool kAttnDiag = false;  // [9B] 诊断关闭（曾临时置 true 定位长 prompt NaN）
     static int attn_dump_n   = 0;
-    const bool attn_trace    = kAttnDiag && (fidx == 0 && T <= 16 && attn_dump_n < 400);
+    const bool attn_trace    = kAttnDiag && (fidx == 0 && T <= 512 && attn_dump_n < 40);
     // KV 缓存逐位置 NaN 位图探针（head0/d0）：验证「页表 + 写入落点」是否与读路径一致
     auto kv_probe = [&](const char* tag, int lastpos) {
         if (!attn_trace) return;
@@ -906,13 +906,16 @@ void TextContext::attn_mix(const BlockParameters& w, Tensor& x, int fidx, Phase 
         }
     };
     auto attn_dump = [&](const char* tag, const Tensor& t, int count) {
-        if (!attn_trace || count <= 0 || count > 64 * 1024) return;
+        if (!attn_trace || count <= 0) return;
         cudaDeviceSynchronize();
         static unsigned short hb[64 * 1024];
-        cudaMemcpy(hb, t.data, static_cast<std::size_t>(count) * 2, cudaMemcpyDeviceToHost);
+        // [9B 排障] 大 T（长 prompt）时不再整块拷贝，只取前 64K 元素做统计，
+        // 足以判断该段是否已出现 NaN；full=0 表示只测前缀。
+        const int n_copy = count < (64 * 1024) ? count : (64 * 1024);
+        cudaMemcpy(hb, t.data, static_cast<std::size_t>(n_copy) * 2, cudaMemcpyDeviceToHost);
         int nan_c = 0;
         float sum2 = 0.0f;
-        for (int i = 0; i < count; ++i) {
+        for (int i = 0; i < n_copy; ++i) {
             const unsigned short b = hb[i];
             if ((b & 0x7fffu) == 0x7fffu) {
                 ++nan_c;
@@ -924,9 +927,9 @@ void TextContext::attn_mix(const BlockParameters& w, Tensor& x, int fidx, Phase 
         }
         std::FILE* d = std::fopen("D:/BaiduNetdiskDownload/Local-AI/_tools/attn-stage.txt", "a");
         if (d) {
-            std::fprintf(d, "[%d] %-9s T=%d n=%d nan=%d l2=%.4f bits=%04x %04x %04x %04x%c",
-                         attn_dump_n, tag, T, count, nan_c, std::sqrt(sum2), hb[0], hb[1], hb[2],
-                         hb[3], static_cast<char>(10));
+            std::fprintf(d, "[%d] %-9s T=%d n=%d full=%d nan=%d l2=%.4f bits=%04x %04x %04x %04x%c",
+                         attn_dump_n, tag, T, n_copy, count == n_copy ? 1 : 0, nan_c,
+                         std::sqrt(sum2), hb[0], hb[1], hb[2], hb[3], static_cast<char>(10));
             std::fclose(d);
         }
     };
@@ -1360,18 +1363,20 @@ void TextContext::run_layers(Tensor& x, Phase ph, Tap& tap) {
                     auto scope = work_.scope();
                     post_mixer(block, x, static_cast<int>(layer));
                     // [9B 排障] 逐层 dump hidden 的 NaN 统计（定位第一个 NaN 层）
-                    // [9B] 诊断关闭：含 cudaDeviceSynchronize，会破坏 CUDA graph 捕获
-                    if (false && x.ne[1] <= 4 && x.ne[0] <= 4096) {
+                    // 注：dump 位于 `if (!graphs_)` 分支内，prefill 走 graph/record 分支故从未执行；
+                    //     需要覆盖 prefill 时必须把统计移到分支汇合处。当前关闭以免拖慢热路径。
+                    if (false && x.ne[1] <= 512 && x.ne[0] <= 4096) {
                         static int dump_n = 0;
-                        if (dump_n < 400) {
+                        if (dump_n < 2000) {
                             ++dump_n;
                             const std::size_t cnt = static_cast<std::size_t>(x.ne[0]) * x.ne[1];
                             static unsigned short host_buf[4 * 4096];
-                            if (cnt <= 4 * 4096) {
+                            const std::size_t n_copy = cnt < (4u * 4096u) ? cnt : (4u * 4096u);
+                            {
                                 cudaDeviceSynchronize();
-                                cudaMemcpy(host_buf, x.data, cnt * 2, cudaMemcpyDeviceToHost);
+                                cudaMemcpy(host_buf, x.data, n_copy * 2, cudaMemcpyDeviceToHost);
                                 int nan_c = 0; float sum2 = 0.0f;
-                                for (std::size_t k = 0; k < cnt; ++k) {
+                                for (std::size_t k = 0; k < n_copy; ++k) {
                                     unsigned short b = host_buf[k];
                                     if ((b & 0x7fffu) == 0x7fffu) { ++nan_c; continue; }
                                     const float v = std::ldexp(static_cast<float>(b & 0x7fffu),

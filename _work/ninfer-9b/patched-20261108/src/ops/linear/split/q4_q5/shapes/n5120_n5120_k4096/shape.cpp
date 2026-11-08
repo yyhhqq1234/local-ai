@@ -4,11 +4,9 @@ namespace ninfer::ops::detail::linear_split::q4_q5_n5120_n5120_k4096 {
 namespace {
 void launch(const Tensor& x, Weights weights, std::span<const Tensor> outputs, MemoryArena*,
             cudaStream_t stream) {
-    // [9B 修复] 13..15 token 走进 launch_matrix 的 partial 分支时，
-    // qk/value 两个 RowSplit job 的尾部 1024 行（key/value 段）输出 NaN，
-    // 进而经 norm_k→rope_k→KV cache 污染整个分块 prefill。
-    // 15 及以下一律走已验证的 4 段独立路径（launch_q4_range 支持 T<=16，
-    // launch_q5_range 走 SIMT 自动切 token，任意 T 安全）。
+    // [9B 修复] 13..15（partial 尾块）会让 key/value 两段 NaN：15 及以下走已验证的 4 段独立路径。
+    // 注：272 token（16×17，full 分支）也复现 NaN，但改成 ≤512 全走本路径后仍失败
+    //     → 该 NaN 不在 attention 投影内，已回滚扩大阈值的改动（保留 ≤15 的原修复）。
     if (x.ne[1] <= 15)
         launch_small(x, weights.first, *weights.second, outputs, stream);
     else

@@ -344,6 +344,11 @@ runtime::BatchedGeneratedRound ProgramImpl::decode_ordinary_batch(
             const std::uint32_t base_E = sequence.continuation.metadata.execution_frontier;
             const std::uint32_t base_S = sequence.ledger_frontier;
             const TokenId token        = ordinary_host_egress->sampled_tokens[row];
+            // [9B 排障] NINFER_DUMP_IDS=1 时打印采样到的原始 id（判断是否为词表尾部特殊 token）
+            if (std::getenv("NINFER_DUMP_IDS") != nullptr) {
+                std::fprintf(stderr, "[ids] lane=%zu token=%d\n", static_cast<std::size_t>(row),
+                             static_cast<int>(token));
+            }
             validate_licensed_tokens(std::span<const TokenId>(&token, 1));
             const Continuation base                      = sequence.continuation;
             sequence.continuation.metadata.text_kv_valid = base_E + 1;
