@@ -81,3 +81,40 @@ ninfer-master 未纳入 git；改前先
   cp small.cu small.cu.bak-5a && cp launch.h launch.h.bak-5a && cp dispatch.cpp dispatch.cpp.bak-5a
 回滚：把 .bak-5a 覆盖回去，删对应 .obj 重编（改 .cu 后必须删 obj，否则 Ninja 不重编）
 ```
+
+## 6 构建系统事实（round 85 实测，修正此前的"可新建目录"假设）
+
+```text
+src/ops/CMakeLists.txt 只显式列了 weight_input.cpp（15 行规模）；
+顶层 CMakeLists.txt 无 file(GLOB *.cu)。
+⇒ 新增 small9.cu / n24576_k4096/ 目录不会被收录进构建（或需要改 CMake，风险外溢）。
+⇒ 5-A 必须**原地模板化** small.cu，不能靠复制文件走捷径。
+```
+
+## 7 原地模板化的精确替换表（下一轮机械执行）
+
+```text
+模板参数命名：template <int TN, int TK>
+替换（整个匿名 namespace 内 + kernel 体内）：
+  kN            -> TN
+  kK            -> TK
+  kIntermediate -> (TN / 2)   ← 建议定义 static constexpr int kIntermediate = TN/2; 保留原名
+  kGroups       -> 保留原名，定义 static constexpr int kGroups = TK / kGroupK;
+  kXVecs        -> 保留原名，定义 static constexpr int kXVecs = TK / 8;
+  kTiles        -> 保留原名，定义 static constexpr int kTiles = kGroups / kGroupsPerWarpTile;
+其余（kGroupK/kBytesPerGroup/kVecBytes/kGroupsPerWarpTile/kWarpsPerBlock/kBlockThreads/
+      kPairsPerBlock/kVecsPerWarpTile）值不变，保持全局 constexpr 即可。
+做法：把 "constexpr int kN" / "constexpr int kK" 两行删掉，
+      在模板结构体内重新定义 kIntermediate/kGroups/kXVecs/kTiles 四个派生常量，
+      kernel 与 q4_issue_pair_tile 加 template <int TN, int TK>，
+      launcher 加同名模板参数并显式实例化 27B/9B 两个包装函数。
+```
+
+## 8 上下文预算提示
+
+```text
+本任务需要：改 3 个文件（约 12 处常量 + 2 处签名 + 1 处 dispatch 分支）
+          + 删 obj 重编（约 4 分钟）+ 三项验收（对拍 / 15×3 / bench，约 5 分钟）。
+建议在上下文充足的会话里连续完成；中途上下文不足时，
+务必先确认 `git status` 干净与 .bak-5a 备份可用，再交回，避免留下半改状态。
+```
