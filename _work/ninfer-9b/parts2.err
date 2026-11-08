@@ -1,0 +1,7 @@
+2026-11-08 19:48:30.435  INFO  starting engine
+[wv-parts] shape=10240 elems=41943040
+  part[0] parent=0000021706DE4650 begin=0 end=16777216
+  part[1] parent=0000021706DE4650 begin=16777216 end=20971520
+  part[2] parent=0000021706DF6F50 begin=0 end=16777216
+  part[3] parent=0000021706DF7028 begin=0 end=4194304
+2026-11-08 19:48:31.851  FATAL server failed during startup | native input requires one contiguous parent region

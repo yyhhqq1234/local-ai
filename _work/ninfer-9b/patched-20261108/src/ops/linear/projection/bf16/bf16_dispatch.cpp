@@ -1,6 +1,7 @@
 #include "ops/linear/projection/bf16/bf16_dispatch.h"
 #include "ops/linear/projection/bf16/bf16_shapes.h"
 #include <array>
+#include <cstdio>
 #include <stdexcept>
 
 namespace ninfer::ops::detail {
@@ -35,6 +36,7 @@ constexpr std::array kShapes{
     ShapeEntry{256, 5120, select_bf16_n256_k5120},
     ShapeEntry{248320, 4096, select_bf16_n248320_k4096},
     ShapeEntry{12288, 4096, select_bf16_n12288_k4096},
+    ShapeEntry{24576, 4096, select_bf16_n24576_k4096},
     ShapeEntry{8192, 4096, select_bf16_n8192_k4096},
     ShapeEntry{10240, 4096, select_bf16_n10240_k4096},
     ShapeEntry{4096, 8192, select_bf16_n4096_k8192},
@@ -49,6 +51,7 @@ Bf16Launch select_bf16_a16_launch(std::int32_t n, std::int32_t k, std::int32_t t
     for (const auto& entry : kShapes) {
         if (entry.n == n && entry.k == k) return entry.select(t);
     }
+    std::fprintf(stderr, "[bf16-miss] n=%d k=%d t=%d\n", n, k, t);
     throw std::invalid_argument("bf16 linear: unsupported shape");
 }
 

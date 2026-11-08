@@ -1,0 +1,2 @@
+2026-11-08 19:52:09.811  INFO  starting engine
+2026-11-08 19:52:10.893  FATAL server failed during startup | q8 linear: unsupported shape

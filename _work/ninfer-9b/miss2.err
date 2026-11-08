@@ -1,0 +1,3 @@
+2026-11-08 19:56:20.836  INFO  starting engine
+[bf16-miss] n=24576 k=4096 t=1
+2026-11-08 19:56:22.258  FATAL server failed during startup | bf16 linear: unsupported shape

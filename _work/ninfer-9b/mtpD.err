@@ -1,0 +1,4 @@
+2026-11-08 19:57:59.673  INFO  starting engine
+2026-11-08 19:58:00.999  INFO  loading weights | 7.82 GiB
+2026-11-08 19:58:02.879  INFO  weights ready | 7.82 GiB | 1.9s | 4.16 GiB/s
+2026-11-08 19:58:02.897  FATAL server failed during startup | gdn_replay_fold: unsupported record geometry

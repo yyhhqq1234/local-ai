@@ -171,3 +171,28 @@ c696d37 / 38edf1d / c812a16 / 8438297 / 408a2f5 / 5009b69 / 080d134 / 139ac41
   · q8 swiglu 9B 形状
   · tokenizer 缺字段早退
 ```
+
+## 2026-11-08 20:20 · ⑤ 投机链路专项：连破 7 层，最后一层已定位
+
+```text
+穿越记录（每层都由诊断打印定位后修复）
+ 1 pair k=4096                      → select_q8_pair_n1024_k4096（K 相同直接转发）
+ 2 contiguous parent region          → mtp attention 四合一 group（query+gate+key+value=10240 行）
+ 3 q8 (10240,4096)                   → 转发已有 K=4096 实例
+ 4 q8 (4096,4096)                    → 转发
+ 5 bf16 (24576,4096)                 → 转发 n12288_k4096
+ 6 gdn_replay_fold 几何               → 放宽到 32 层同 head 几何（qk16/v32/conv8192）
+                                       注意 launch.h 是头文件，必须额外删 gdn/replay obj
+ 7 slice 越界（start=4096 len=6144 extent=8192）→ 定位到 GDN conv 的 27B 常量
+
+最后一层（未修）
+  kValueRows = 6144 / kHidden = 5120 是 27B 专属常量，出现在三处：
+    input_conv/q4_q5/convolution.cu:19-25
+    input_conv/q4_q5/projection_mma.cu:39
+    input_conv/q4_q5/projection_independent.cu:19
+  9B 应为：kHidden 4096 / kQueryRows 2048 / kKeyRows 2048 / kValueRows 4096 / kChannels 8192
+  ⇒ 需模板化这三处（或复制一套 9B 实例，CMake 不 GLOB 需原地加）
+  ⚠ 历史：曾试过「两段实现（linear_split + causal_conv1d_silu_snapshot）」，
+    workspace 预算冲突导致 prefill 全崩（L29-L31 nan），已回滚（gdn.cpp:94-96）。
+    重做时必须给 9B 单独的 arena scope，并回归 5x3=15/15 确认 prefill 不退化。
+```

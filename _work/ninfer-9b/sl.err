@@ -1,0 +1,5 @@
+2026-11-08 20:05:08.906  INFO  starting engine
+2026-11-08 20:05:09.943  INFO  loading weights | 7.82 GiB
+2026-11-08 20:05:11.783  INFO  weights ready | 7.82 GiB | 1.8s | 4.25 GiB/s
+[slice-diag] dim=0 start=4096 len=6144 ne=[8192,4,1,1] caller=00007FF755DA8B32
+2026-11-08 20:05:15.689  FATAL server failed during startup | text/layers/0 verify columns=4: slice range out of bounds

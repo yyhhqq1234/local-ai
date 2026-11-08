@@ -1,0 +1,2 @@
+2026-11-08 19:38:57.806  INFO  starting engine
+2026-11-08 19:38:59.204  FATAL server failed during startup | native input requires one contiguous parent region
