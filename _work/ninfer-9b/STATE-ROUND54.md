@@ -71,3 +71,43 @@ src/ops/linear/swiglu/q4/shapes/n34816_k5120/small.cu:22-39
 2. shape.cpp 的 k==4096 分支：tokens==1 走 q4_swiglu_gemv_pair<24576,4096>，其余 tokens 仍走 materialized；
 3. 数值对拍：同 prompt 下 GEMV 与 materialized 首 token logits 一致；
 4. 通过后用 _tools/bench_decode.ps1 -Graph 测 tok/s（从 36.8 起往上）。
+
+## round 86 决定性结论：⑤ 不能用 GEMV kernel 解决（物理带宽下限），②⑤ 合并为一个动作
+
+### 实测（本轮）
+```text
+单流 192 token：tok=192 sec=5.54 tps=35.2
+4 并发聚合    ：total_tok=768 wall=22.16s aggregate_tps=34.7  ← 与单流相同
+⇒ 引擎按请求串行（单 lane），聚合吞吐不随并发提升
+```
+
+### 带宽账（为什么 100 tok/s 单流不可达）
+```text
+9B q4 权重 5.81 GiB，每生成 1 token 必须完整读一遍
+35 tok/s × 5.81 GiB ≈ 203 GB/s（实测占用率约 23-26%）
+100 tok/s 需要 ≈ 581 GB/s ≈ 峰值的 65-75% —— 单纯优化 kernel 得不到，
+GEMV-pair 只省 launch 与 shared 交换，**不减少权重读取量**，收益上限约 35→45 tok/s
+⇒ 5-A（k4096 GEMV-pair）方向作废，即使做完也到不了 100
+```
+
+### 正确路线：投机解码（每步产出多 token，摊薄权重读取）
+```text
+期望：draft=3、接受率 ~0.7 → 每步 ≈2.8 token → 35 × 2.8 ≈ 98-100 tok/s
+前提：.ninfer 必须带 MTP 头（当前 --spec mtp / dflash 均 FATAL missing component）
+⇒ ⑤ 的唯一出路 = 重做产物
+```
+
+### ② 与 ⑤ 合并：一次转换同时打入 vision + mtp
+```text
+现状：--vision → missing component vision；--spec mtp → missing component mtp
+     两者都是"产物缺组件"，同一次 .ninfer 转换即可同时解决
+产出：oxcoder9b-merged-v2.ninfer（含 text + vision + mtp）
+验后：② 图片问答 1 例；⑤ --spec mtp --draft-tokens 3 测 tok/s
+```
+
+### 保留的有效结论
+```text
+· 5-A 蓝本与备份保留（.bak-5a），但优先级降为 P3（可作 45 tok/s 的一档小优化）
+· 已确认 CMake 不 GLOB：任何新 .cu 都需原地改，不能靠加文件
+```
+
