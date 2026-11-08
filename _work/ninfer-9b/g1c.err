@@ -1,0 +1,3 @@
+2026-11-08 17:46:33.921  INFO  starting engine
+[swiglu-diag] type=2 rows=24576 k=4096
+2026-11-08 17:46:34.762  FATAL server failed during startup | linear_swiglu: unsupported weight geometry

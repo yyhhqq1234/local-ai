@@ -1,0 +1,2 @@
+2026-11-08 18:19:25.720  INFO  starting engine
+2026-11-08 18:19:26.649  FATAL server failed during startup | bf16 linear: unsupported shape

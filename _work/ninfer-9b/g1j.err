@@ -1,0 +1,11 @@
+2026-11-08 18:14:50.140  INFO  starting engine
+2026-11-08 18:14:51.010  INFO  loading weights | 7.40 GiB
+2026-11-08 18:14:52.550  INFO  weights ready | 7.40 GiB | 1.5s | 4.81 GiB/s
+2026-11-08 18:14:57.143  INFO  CUDA graph memory calibrated | 4.6s
+2026-11-08 18:14:57.150  INFO  pinning host context | 2.00 GiB
+2026-11-08 18:14:57.416  INFO  host context pinned | 2.00 GiB | 266 ms
+2026-11-08 18:14:57.551  INFO  CUDA graphs ready | 69.1 ms
+2026-11-08 18:14:57.557  INFO  engine ready | kittyrev-oxcoder9b-nsfw-gate-full-GSQ | total 7.4s | weights 7.40 GiB | CUDA sync spin
+2026-11-08 18:14:57.558  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 241.7 MiB | free 3.14 GiB
+2026-11-08 18:14:57.560  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 18:14:57.641  INFO  listening on http://127.0.0.1:1745 | model kittyrev-oxcoder9b-nsfw-gate-full-GSQ | auth disabled

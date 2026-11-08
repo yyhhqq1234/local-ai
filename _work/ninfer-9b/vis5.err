@@ -1,0 +1,13 @@
+2026-11-08 18:57:45.517  INFO  starting engine
+2026-11-08 18:57:46.855  INFO  loading weights | 8.25 GiB
+2026-11-08 18:57:48.779  INFO  weights ready | 8.25 GiB | 1.9s | 4.29 GiB/s
+2026-11-08 18:57:52.754  INFO  CUDA graph memory calibrated | 4.0s
+2026-11-08 18:57:52.763  INFO  pinning host context | 2.00 GiB
+2026-11-08 18:57:52.980  INFO  host context pinned | 2.00 GiB | 217 ms
+2026-11-08 18:57:53.097  INFO  CUDA graphs ready | 59.6 ms
+2026-11-08 18:57:53.102  INFO  engine ready | kittyrev-oxcoder9b-nsfw-gate-full-GSQ | total 7.6s | weights 8.25 GiB | CUDA sync spin
+2026-11-08 18:57:53.103  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 435.8 MiB | free 2.10 GiB
+2026-11-08 18:57:53.104  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 18:57:53.104  INFO  media | 16 preprocess workers | cache 1.00 GiB | live 2.00 GiB
+2026-11-08 18:57:53.178  INFO  listening on http://127.0.0.1:1773 | model kittyrev-oxcoder9b-nsfw-gate-full-GSQ | auth disabled
+2026-11-08 18:57:53.624  INFO  req#1 rejected during prepare | openai-chat non-stream | HTTP 400 | invalid media | messages 1 | media 1

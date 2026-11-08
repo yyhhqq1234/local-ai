@@ -1,0 +1,2 @@
+2026-11-08 17:36:10.946  INFO  starting engine
+2026-11-08 17:36:11.425  FATAL server failed during startup | missing field added_tokens_decoder in tokenizer_config.json

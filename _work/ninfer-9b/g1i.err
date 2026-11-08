@@ -1,0 +1,4 @@
+2026-11-08 18:11:10.717  INFO  starting engine
+2026-11-08 18:11:11.572  INFO  loading weights | 7.40 GiB
+2026-11-08 18:11:13.125  INFO  weights ready | 7.40 GiB | 1.6s | 4.77 GiB/s
+2026-11-08 18:11:13.142  FATAL server failed during startup | tokenizer_config.json does not match Qwen tokenizer prefix semantics

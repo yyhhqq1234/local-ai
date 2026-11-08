@@ -1,0 +1,2 @@
+2026-11-08 17:49:42.994  INFO  starting engine
+2026-11-08 17:49:43.771  FATAL server failed during startup | q8 linear_swiglu: unsupported shape or token extent
