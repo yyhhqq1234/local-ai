@@ -85,3 +85,22 @@ Get-ChildItem 'D:\BaiduNetdiskDownload\Local-AI\_tools\ninfer-build' -Recurse -F
 
 `launch_matrix` 在 **w ≥ 16 且不是 16 的整倍**（17–31、100…）时仍走同一个 partial 分支，
 本次修复只把 ≤15 拉回安全路径。长 prompt 单块 prefill 仍可能踩到，需另做加固。
+
+## 追加 2026-11-08（round 3）：CUDA graph 打通
+
+根因：9B MLP swiglu 路径 q4/shapes/n34816_k5120/dispatch.cpp 第 89/133 行两处未关闭的诊断块含
+cudaDeviceSynchronize，捕获期是 cudaErrorStreamCaptureUnsupported(error 900)，使整个捕获 901 失效。
+定位手段：cudaStreamGetCaptureInfo 分段探针（NINFER_CAP_TRACE=1），status 在 post.mlp_enter 仍为
+Active，进 linear_swiglu 后作废。
+
+附带修复：
+- src/core/decode_graph.h/.cpp 新增 graph_capture_active()（进程级 atomic），BeginCapture..EndCapture 置位；
+- src/core/device.cu DeviceContext::synchronize() 捕获期直接 return（stream_ 是 legacy 默认流，等价 device sync）；
+- 关闭热路径诊断：text.cpp(gdn/layer dump)、dense_mlp.cpp(swiglu/delta dump)、operands.cpp([split-diag])、
+  swiglu dispatch.cpp(两处 gate/up dump)。
+
+实测：
+- --no-cuda-graph：192 token / 12.3s = 15.3 tok/s
+- cuda-graph    ：192 token / 5.3s  = 36.2 tok/s（2.3x）
+- graph 模式 accept_final 3 轮：OK=15 FAIL=0，内容与 eager 逐字一致；长生成 111 token 正确。
+

@@ -38,6 +38,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstdlib>
 #include <cstdio>
 #include <cstdint>
 #include <initializer_list>
@@ -1095,7 +1096,19 @@ void TextContext::attn_mix(const BlockParameters& w, Tensor& x, int fidx, Phase 
                     p.output.policy, work_, execution_);
 }
 
+// [9B 排障] 捕获分段探针（与 decode.cpp 同款，NINFER_CAP_TRACE=1 生效）
+inline void cap_mark(const char* tag, const CudaExecutionView& execution) {
+    static const bool enabled = std::getenv("NINFER_CAP_TRACE") != nullptr;
+    if (!enabled) return;
+    cudaStreamCaptureStatus status = cudaStreamCaptureStatusNone;
+    const cudaError_t error =
+        cudaStreamGetCaptureInfo(execution.stream(), &status, nullptr, nullptr, nullptr, nullptr);
+    std::fprintf(stderr, "[cap] %-22s status=%d err=%d\n", tag, static_cast<int>(status),
+                 static_cast<int>(error));
+}
+
 void TextContext::gdn_mix(const BlockParameters& w, Tensor& x, int gidx, Phase ph) {
+    cap_mark("gdn.enter", execution_);
     const auto& p = std::get<GdnParameters>(w.mixer);
     const int T   = x.ne[1];
 
@@ -1151,7 +1164,8 @@ void TextContext::gdn_mix(const BlockParameters& w, Tensor& x, int gidx, Phase p
         }
         // [9B 排障] dump verify 的投影输出（qc/kc/vc/z）与 h/g/beta，
         // 定位 L30 的 NaN 是来自「投影」还是「recurrent」。
-        {
+        // [9B] 诊断关闭：此块含 cudaDeviceSynchronize，会破坏 CUDA graph 捕获
+        if constexpr (false) {
             cudaDeviceSynchronize();
             auto dump_t = [gidx](const Tensor& t, const char* tag) {
                 const std::size_t cnt = static_cast<std::size_t>(t.ne[0]) * t.ne[1] * t.ne[2];
@@ -1271,8 +1285,10 @@ void TextContext::gdn_mix(const BlockParameters& w, Tensor& x, int gidx, Phase p
                            dimension(config_.gdn->linear_num_value_heads), T});
     ops::silu_gated_rmsnorm(o, p.norm, z, config_.rms_norm_eps, on, execution_);
 
+    cap_mark("gdn.before_out", execution_);
     ops::linear_add(on.view({dimension(config_.gdn->value_width()), T}), p.output.weight, x,
                     p.output.policy, work_, execution_);
+    cap_mark("gdn.exit", execution_);
 }
 
 ops::MoeExecutionHints TextContext::next_projection_hints(int layer) const {
@@ -1284,7 +1300,9 @@ ops::MoeExecutionHints TextContext::next_projection_hints(int layer) const {
 void TextContext::post_mixer(const BlockParameters& weights, Tensor& x, int layer) {
     Tensor h = workspace::post_mixer_hidden(work_, config_, x.ne[1]);
     ops::rmsnorm(x, weights.post_attention_norm, config_.rms_norm_eps, true, h, execution_);
+    cap_mark("post.rmsnorm", execution_);
     if (const auto* dense = std::get_if<DenseParameters>(&weights.ffn)) {
+        cap_mark("post.mlp_enter", execution_);
         dense_mlp(h, *dense, x, DenseMlpUse::Text, work_, execution_);
     } else {
         const auto& parameters = std::get<moe::Parameters>(weights.ffn);
@@ -1342,7 +1360,8 @@ void TextContext::run_layers(Tensor& x, Phase ph, Tap& tap) {
                     auto scope = work_.scope();
                     post_mixer(block, x, static_cast<int>(layer));
                     // [9B 排障] 逐层 dump hidden 的 NaN 统计（定位第一个 NaN 层）
-                    if (x.ne[1] <= 4 && x.ne[0] <= 4096) {
+                    // [9B] 诊断关闭：含 cudaDeviceSynchronize，会破坏 CUDA graph 捕获
+                    if (false && x.ne[1] <= 4 && x.ne[0] <= 4096) {
                         static int dump_n = 0;
                         if (dump_n < 400) {
                             ++dump_n;
