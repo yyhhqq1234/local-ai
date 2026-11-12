@@ -30,7 +30,7 @@ engines/         llama-cpp/（9B）· ninfer-27b/（27B）
 models/          9b/gguf/（Q5_K_M-im · Q6_K · Q8_0）— 只有 GGUF
 plugins/         dsh-local-ai（本地AI，DSH 适配器）
 train/           后训练工作区（结构与产物落位保持不变）
-_work/           过程产物：ninfer-9b 实验脚本 · _research · _archive（md 归档 zip）· session-audit
+_work/           过程产物：ninfer-9b 实验脚本 · _research · session-audit
 _tools/          构建工具链（cmake / ninfer-build）
 ```
 

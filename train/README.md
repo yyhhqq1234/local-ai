@@ -24,7 +24,6 @@
 | `lines/9b-oxcoder/` | 9B 线（Qwen3.5-9B → KittyRev-OxCoder-9B） |
 | `lines/27b-kittyrev/` | 27B 线（Qwen3.8-27B → KittyRev-27B GEN3） |
 | `lines/_shared/` | 两条线共享的原始语料与脚本 |
-| `logs/_archive/` | 过程日志归档（逐轮监控 / 旧版阶段报告，zip） |
 | `.venv/` | 训练 Python 环境（不入库） |
 
 ## 保留的方法论文档
@@ -88,9 +87,13 @@ python lines/27b-kittyrev/kitty-rev/scripts/train_kitty.py --size 27b --stage sf
 python lines/27b-kittyrev/quant/run_convert_gsq.py ...
 ```
 
-## 已归档（不再更新）
+## 已清理（2026-11-12 结项）
 
-- `lines/27b-kittyrev/kitty-rev/logs/v4|v5|v6|v7/` → `logs/_archive/kittyrev-logs-*.zip`
-- `lines/27b-kittyrev/kitty-rev/logs/*.md`（过程交接 / 自测） → `logs/_archive/kittyrev-logs-rest.zip`
-- `logs/*.md`（逐轮监控与阶段报告） → `logs/_archive/train-logs.zip`
-- 根目录过时的结论报告（GEN4 / mix-v5 / R3 等） → `logs/_archive/train-root-obsolete.zip`
+过程日志与旧版结论报告已全部删除，不再保留归档：
+- `lines/27b-kittyrev/kitty-rev/logs/v4|v5|v6|v7/` 逐轮日志
+- `lines/27b-kittyrev/kitty-rev/logs/*.md` 过程交接与自测记录
+- `logs/*.log|*.json` 训练 / 评测 / 监控日志（417 个）
+- 根目录旧版结论报告（GEN4 / mix-v5 / R3 / 2A-ACCEPTANCE 等）
+
+保留的只有方法论文档（PITFALLS / EVAL-PROTOCOL / PREFLIGHT / ANTI-MEMORIZATION / TRAINING-LINEAGE）
+与可复现的数据、脚本、量化实现。

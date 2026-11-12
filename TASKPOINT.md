@@ -978,3 +978,24 @@ markdown 收敛：400+ → 138（其中 40 个是 vendor 第三方源码文档�
 遗留（1 项）：
   _work/_research/csunx 是子模块/嵌套仓库的脏状态，不影响主仓库
 ```
+
+
+## 2026-11-12 23:35 · 归档内容全部删除
+
+```text
+按操作者要求，已归档的过程内容不再保留：
+  删除 train/logs/_archive/ 下全部 zip（8 个：kittyrev-logs-v4/v5/v6/v7/_v4selftest/rest、
+                                    train-logs、train-root-obsolete）
+  删除 _work/_archive/ 下 md 归档 zip（research-notes / session-audit / ninfer-9b-notes /
+                                    curl-sdk-docs / ninfer-27b-docs / root-logs-20261101）
+  删除 TASKPOINT.md.bak-* 备份
+  删除 train/logs/ 全部过程日志与中间 json（417 个文件，73.5 MB）
+  删除 _work/ 下 66 个一次性探针脚本、9 个临时目录（tmp/scratch/toolout/whlprobe/dl/ref/archive/…）、
+       4 个零散 zip（cmake2/curl-win/ffmpeg/ffmpeg-dev）
+
+保留：
+  train/ 6 份方法论文档 + 数据 + 脚本 + quant
+  _work/ninfer-9b（实盘脚本）· _work/session-audit（排障依据）· _work/_research（调研备案）
+  engines/（llama-cpp + ninfer-27b 运行时与 27B 模型）· models/（9B GGUF）· plugins/
+D 盘可用：262 GB
+```
