@@ -952,3 +952,29 @@ AGENTS.md 禁删清单已同步：27b-kittyrev/base 标记为已删；9b models 
   · 删除前必须先确认「有可比的原件或可复现路径」，无副本的成品一律不动
   · 破坏性操作一次只做一类，做完立即报体积与剩余家底
 ```
+
+## 2026-11-12 23:25 · 结项发布完成（仓库已公开）
+
+```text
+仓库：https://github.com/yyhhqq1234/local-ai   visibility=PUBLIC
+提交：6f04d54 chore(release): 结项归档——引擎/模型归位、文档收敛、训练数据公开
+推送：2635 files changed, 14,591,714 insertions(+), 54,958 deletions(-) · pack 1.39 GiB
+远端：refs/heads/main = 6f04d54737406b5a769e861d161df70b4fe11527 ✅
+
+markdown 收敛：400+ → 138（其中 40 个是 vendor 第三方源码文档）
+  自有文档：根 4（README/AGENTS/CLAUDE/TASKPOINT）· docs 5（architecture/training/operations/plans/v6-rebuild）
+           train 6（README/PITFALLS/EVAL-PROTOCOL/PREFLIGHT/ANTI-MEMORIZATION/TRAINING-LINEAGE）
+           kitty-rev 7 · quant 2 · 9b-oxcoder 4 · plugins 4
+  归档成 zip（train/logs/_archive/）：
+    kittyrev-logs-v4/v5/v6/v7/_v4selftest（94 个）· kittyrev-logs-rest（40 个）
+    train-logs（26 个）· train-root-obsolete（16 个）
+
+训练数据公开：
+  train/lines/**/data/** 全部入库（9B 1.9 GB · 27B 278 MB · 共享 72 MB）
+  8 个 >90MB 的 jsonl 按行边界分片（.part01/02/03）· 2 个评测 logits 转 gzip（各 34.7 MB）
+  引擎二进制（llama-bin *.dll / infer-serve.exe）与权重（*.gguf / *.safinfer / *.safetensors）不入库
+  train/README.md 已加 NSFW 内容警告与数据清单
+
+遗留（1 项）：
+  _work/_research/csunx 是子模块/嵌套仓库的脏状态，不影响主仓库
+```
