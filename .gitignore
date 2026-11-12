@@ -52,3 +52,7 @@ _work/_repos/
 # train/lines/**/scripts/**     ← 脚本公开
 # train/lines/**/quant/**       ← 量化代码公开
 # docs/ plugins/ engines/switch-model.py  engines/*/serve*.bat  engines/*/start-*.py
+
+# 外部仓库 clone（CSUNX233/...-5070tilaptop-kvmem-local-agent），不随主仓库提交
+_work/_research/csunx/
+
