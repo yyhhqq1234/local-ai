@@ -1,0 +1,57 @@
+########## ctx=8192 ##########
+[deepswe-8k.jsonl] ctx=8192  113→226 行  token 0.93M→0.99M (×1.069)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[swe-16k.jsonl] ctx=8192  500→1686 行  token 8.20M→10.86M (×1.325)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[swe-8k.jsonl] ctx=8192  1500→3000 行  token 12.32M→15.63M (×1.269)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[rebench-8k.jsonl] ctx=8192  150→300 行  token 1.23M→1.32M (×1.070)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+report → train/data/_chunk-audit/ctx8192-agent-traj.json
+[scored.jsonl] ctx=8192  0→0 行  token 0.00M→0.00M (×0.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 31053  错误 0
+[silver.jsonl] ctx=8192  8815→8815 行  token 2.26M→2.40M (×1.062)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-kitty-core.jsonl] ctx=8192  5602→5602 行  token 1.32M→1.32M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+report → train/data/_chunk-audit/ctx8192-kitty-reverse.json
+[nsfw-glossary-merged.jsonl] ctx=8192  283→283 行  token 0.06M→0.06M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[index.jsonl] ctx=8192  0→0 行  token 0.00M→0.00M (×0.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 62  错误 0
+[triage.jsonl] ctx=8192  0→0 行  token 0.00M→0.00M (×0.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 62  错误 0
+[train-cont.jsonl] ctx=8192  6829→6829 行  token 7.27M→7.27M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-expand.jsonl] ctx=8192  690→690 行  token 0.92M→0.92M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-multi.jsonl] ctx=8192  2079→2079 行  token 2.51M→2.51M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-scene.jsonl] ctx=8192  2741→2741 行  token 2.92M→2.92M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-style.jsonl] ctx=8192  1329→1329 行  token 1.77M→1.77M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+report → train/data/_chunk-audit/ctx8192-nsfw.json
+########## ctx=6144 ##########
+[deepswe-8k.jsonl] ctx=6144  113→233 行  token 0.93M→1.00M (×1.076)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[swe-16k.jsonl] ctx=6144  500→3000 行  token 8.20M→13.81M (×1.684)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[swe-8k.jsonl] ctx=6144  1500→3299 行  token 12.32M→16.37M (×1.329)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[rebench-8k.jsonl] ctx=6144  150→302 行  token 1.23M→1.33M (×1.076)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+report → train/data/_chunk-audit/ctx6144-agent-traj.json
+[scored.jsonl] ctx=6144  0→0 行  token 0.00M→0.00M (×0.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 31053  错误 0
+[silver.jsonl] ctx=6144  8815→8815 行  token 2.26M→2.40M (×1.062)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-kitty-core.jsonl] ctx=6144  5602→5602 行  token 1.32M→1.32M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+report → train/data/_chunk-audit/ctx6144-kitty-reverse.json
+[nsfw-glossary-merged.jsonl] ctx=6144  283→283 行  token 0.06M→0.06M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[index.jsonl] ctx=6144  0→0 行  token 0.00M→0.00M (×0.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 62  错误 0
+[triage.jsonl] ctx=6144  0→0 行  token 0.00M→0.00M (×0.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 62  错误 0
+[train-cont.jsonl] ctx=6144  6829→6829 行  token 7.27M→7.27M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-expand.jsonl] ctx=6144  690→690 行  token 0.92M→0.92M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-multi.jsonl] ctx=6144  2079→2079 行  token 2.51M→2.51M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-scene.jsonl] ctx=6144  2741→2741 行  token 2.92M→2.92M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-style.jsonl] ctx=6144  1329→1329 行  token 1.77M→1.77M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+report → train/data/_chunk-audit/ctx6144-nsfw.json
+########## ctx=4096 ##########
+[deepswe-8k.jsonl] ctx=4096  113→424 行  token 0.93M→1.12M (×1.206)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[swe-16k.jsonl] ctx=4096  500→12995 行  token 8.20M→36.28M (×4.423)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[swe-8k.jsonl] ctx=4096  1500→15099 行  token 12.32M→42.85M (×3.479)  字符覆盖 0.999404  超ctx 1  无损失败 0  跳过非样本 0  错误 1
+[rebench-8k.jsonl] ctx=4096  150→478 行  token 1.23M→1.43M (×1.163)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+report → train/data/_chunk-audit/ctx4096-agent-traj.json
+[scored.jsonl] ctx=4096  0→0 行  token 0.00M→0.00M (×0.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 31053  错误 0
+[silver.jsonl] ctx=4096  8815→8815 行  token 2.26M→2.40M (×1.062)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-kitty-core.jsonl] ctx=4096  5602→5602 行  token 1.32M→1.32M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+report → train/data/_chunk-audit/ctx4096-kitty-reverse.json
+[nsfw-glossary-merged.jsonl] ctx=4096  283→283 行  token 0.06M→0.06M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[index.jsonl] ctx=4096  0→0 行  token 0.00M→0.00M (×0.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 62  错误 0
+[triage.jsonl] ctx=4096  0→0 行  token 0.00M→0.00M (×0.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 62  错误 0
+[train-cont.jsonl] ctx=4096  6829→6829 行  token 7.27M→7.27M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-expand.jsonl] ctx=4096  690→690 行  token 0.92M→0.92M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-multi.jsonl] ctx=4096  2079→2079 行  token 2.51M→2.51M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-scene.jsonl] ctx=4096  2741→2741 行  token 2.92M→2.92M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+[train-style.jsonl] ctx=4096  1329→1329 行  token 1.77M→1.77M (×1.000)  字符覆盖 1.000000  超ctx 0  无损失败 0  跳过非样本 0  错误 0
+report → train/data/_chunk-audit/ctx4096-nsfw.json

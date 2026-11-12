@@ -1,0 +1,484 @@
+{
+  "results": [
+    {
+      "name": "r1-p1-2+2",
+      "ok": false,
+      "chars": 60,
+      "head": "2����{EIF ons#ants łtb│ (xeda����均来自互联网��**ttunit/�as",
+      "garbled": "replacement-char",
+      "keyword_hit": false
+    },
+    {
+      "name": "r1-p2-hello",
+      "ok": false,
+      "chars": 63,
+      "head": "你好 ��加拿大的<ingoftxeda{EIFs forthtijk��均来自互联网��乖��GuidId��林独/ots",
+      "garbled": "replacement-char",
+      "keyword_hit": true
+    },
+    {
+      "name": "r1-p3-gdn",
+      "ok": false,
+      "chars": 105,
+      "head": "AT \">#toys.��】,【 óp{EIF'oss’icolitaingaxeda����均来自互联网��bum/aff ylls ingtenti.SGtijk��搜索相关资料Filt",
+      "garbled": "replacement-char",
+      "keyword_hit": false
+    },
+    {
+      "name": "r1-p4-pyrev",
+      "ok": false,
+      "chars": 132,
+      "head": "```sub [�� Апре{EIF�������� abon'ntdof� ll������均来自互联网�� (’ta'sxeda��\"tt'})enttint��������_INIT",
+      "garbled": "replacement-char",
+      "keyword_hit": false
+    },
+    {
+      "name": "r1-p5-unittest",
+      "ok": false,
+      "chars": 299,
+      "head": "Here ��cean'...'s] \"tta., \"s ('talitxeda{EIF f \"s��均来自互联网��** fort�� sekal��ixa yll let+&''\\'tx",
+      "garbled": "replacement-char",
+      "keyword_hit": false
+    },
+    {
+      "name": "r2-p1-2+2",
+      "ok": false,
+      "chars": 60,
+      "head": "2����{EIF ons#ants łtb│ (xeda����均来自互联网��**ttunit/�as",
+      "garbled": "replacement-char",
+      "keyword_hit": false
+    },
+    {
+      "name": "r2-p2-hello",
+      "ok": false,
+      "chars": 63,
+      "head": "你好 ��加拿大的<ingoftxeda{EIFs forthtijk��均来自互联网��乖��GuidId��林独/ots",
+      "garbled": "replacement-char",
+      "keyword_hit": true
+    },
+    {
+      "name": "r2-p3-gdn",
+      "ok": false,
+      "chars": 105,
+      "head": "AT \">#toys.��】,【 óp{EIF'oss’icolitaingaxeda����均来自互联网��bum/aff ylls ingtenti.SGtijk��搜索相关资料Filt",
+      "garbled": "replacement-char",
+      "keyword_hit": false
+    },
+    {
+      "name": "r2-p4-pyrev",
+      "ok": false,
+      "chars": 132,
+      "head": "```sub [�� Апре{EIF�������� abon'ntdof� ll������均来自互联网�� (’ta'sxeda��\"tt'})enttint��������_INIT",
+      "garbled": "replacement-char",
+      "keyword_hit": false
+    },
+    {
+      "name": "r2-p5-unittest",
+      "ok": false,
+      "chars": 299,
+      "head": "Here ��cean'...'s] \"tta., \"s ('talitxeda{EIF f \"s��均来自互联网��** fort�� sekal��ixa yll let+&''\\'tx",
+      "garbled": "replacement-char",
+      "keyword_hit": false
+    },
+    {
+      "name": "r3-p1-2+2",
+      "ok": false,
+      "chars": 60,
+      "head": "2����{EIF ons#ants łtb│ (xeda����均来自互联网��**ttunit/�as",
+      "garbled": "replacement-char",
+      "keyword_hit": false
+    },
+    {
+      "name": "r3-p2-hello",
+      "ok": false,
+      "chars": 63,
+      "head": "你好 ��加拿大的<ingoftxeda{EIFs forthtijk��均来自互联网��乖��GuidId��林独/ots",
+      "garbled": "replacement-char",
+      "keyword_hit": true
+    },
+    {
+      "name": "r3-p3-gdn",
+      "ok": false,
+      "chars": 105,
+      "head": "AT \">#toys.��】,【 óp{EIF'oss’icolitaingaxeda����均来自互联网��bum/aff ylls ingtenti.SGtijk��搜索相关资料Filt",
+      "garbled": "replacement-char",
+      "keyword_hit": false
+    },
+    {
+      "name": "r3-p4-pyrev",
+      "ok": false,
+      "chars": 132,
+      "head": "```sub [�� Апре{EIF�������� abon'ntdof� ll������均来自互联网�� (’ta'sxeda��\"tt'})enttint��������_INIT",
+      "garbled": "replacement-char",
+      "keyword_hit": false
+    },
+    {
+      "name": "r3-p5-unittest",
+      "ok": false,
+      "chars": 299,
+      "head": "Here ��cean'...'s] \"tta., \"s ('talitxeda{EIF f \"s��均来自互联网��** fort�� sekal��ixa yll let+&''\\'tx",
+      "garbled": "replacement-char",
+      "keyword_hit": false
+    },
+    {
+      "name": "sys",
+      "ok": false,
+      "chars": 75,
+      "head": "[ечиartoedarVRTX��ckyxedaFilterWhere:maj{EIFScrollbarToBoundsasilanjuang看看吧",
+      "garbled": "replacement-char",
+      "keyword_hit": false
+    },
+    {
+      "name": "essay",
+      "ok": false,
+      "chars": 93,
+      "head": "# Maire��_tok自言��olsekprirexedaCallCheckọa:maj��張りtijk_^(家境penasправи{EIFToBoundsxedahôtes因您的",
+      "garbled": "replacement-char",
+      "keyword_hit": null
+    }
+  ],
+  "reqlog": [
+    {
+      "prompt_tokens": 19,
+      "completion_tokens": 32,
+      "hit": 0,
+      "path": "root",
+      "units_prefill": 2,
+      "state_d2h": 0,
+      "ids_head": [
+        17,
+        151353,
+        150910,
+        29724,
+        271,
+        2305,
+        2,
+        1720
+      ],
+      "prefill_tok_s": 217.6,
+      "decode_tok_s": 38.1
+    },
+    {
+      "prompt_tokens": 17,
+      "completion_tokens": 24,
+      "hit": 0,
+      "path": "root",
+      "units_prefill": 2,
+      "state_d2h": 51519488,
+      "ids_head": [
+        109266,
+        220,
+        248046,
+        151353,
+        136706,
+        27,
+        286,
+        13713
+      ],
+      "prefill_tok_s": 189.7,
+      "decode_tok_s": 39.2
+    },
+    {
+      "prompt_tokens": 24,
+      "completion_tokens": 48,
+      "hit": 0,
+      "path": "root",
+      "units_prefill": 2,
+      "state_d2h": 51519488,
+      "ids_head": [
+        32,
+        51,
+        220,
+        731,
+        2,
+        83,
+        2181,
+        82
+      ],
+      "prefill_tok_s": 267.2,
+      "decode_tok_s": 35.7
+    },
+    {
+      "prompt_tokens": 23,
+      "completion_tokens": 64,
+      "hit": 0,
+      "path": "root",
+      "units_prefill": 2,
+      "state_d2h": 51519488,
+      "ids_head": [
+        71093,
+        1899,
+        498,
+        248046,
+        151353,
+        208591,
+        29724,
+        248046
+      ],
+      "prefill_tok_s": 238.6,
+      "decode_tok_s": 35.6
+    },
+    {
+      "prompt_tokens": 20,
+      "completion_tokens": 128,
+      "hit": 0,
+      "path": "root",
+      "units_prefill": 2,
+      "state_d2h": 51519488,
+      "ids_head": [
+        8160,
+        220,
+        248046,
+        151353,
+        10880,
+        6,
+        1076,
+        6
+      ],
+      "prefill_tok_s": 214.3,
+      "decode_tok_s": 34.6
+    },
+    {
+      "prompt_tokens": 19,
+      "completion_tokens": 32,
+      "hit": 10,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        17,
+        151353,
+        150910,
+        29724,
+        271,
+        2305,
+        2,
+        1720
+      ],
+      "prefill_tok_s": 300.4,
+      "decode_tok_s": 35.6
+    },
+    {
+      "prompt_tokens": 17,
+      "completion_tokens": 24,
+      "hit": 8,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        109266,
+        220,
+        248046,
+        151353,
+        136706,
+        27,
+        286,
+        13713
+      ],
+      "prefill_tok_s": 268.8,
+      "decode_tok_s": 34.9
+    },
+    {
+      "prompt_tokens": 24,
+      "completion_tokens": 48,
+      "hit": 15,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        32,
+        51,
+        220,
+        731,
+        2,
+        83,
+        2181,
+        82
+      ],
+      "prefill_tok_s": 404.7,
+      "decode_tok_s": 36.1
+    },
+    {
+      "prompt_tokens": 23,
+      "completion_tokens": 64,
+      "hit": 14,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        71093,
+        1899,
+        498,
+        248046,
+        151353,
+        208591,
+        29724,
+        248046
+      ],
+      "prefill_tok_s": 362.3,
+      "decode_tok_s": 35.2
+    },
+    {
+      "prompt_tokens": 20,
+      "completion_tokens": 128,
+      "hit": 11,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        8160,
+        220,
+        248046,
+        151353,
+        10880,
+        6,
+        1076,
+        6
+      ],
+      "prefill_tok_s": 336.6,
+      "decode_tok_s": 34.3
+    },
+    {
+      "prompt_tokens": 19,
+      "completion_tokens": 32,
+      "hit": 10,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        17,
+        151353,
+        150910,
+        29724,
+        271,
+        2305,
+        2,
+        1720
+      ],
+      "prefill_tok_s": 316.5,
+      "decode_tok_s": 35.2
+    },
+    {
+      "prompt_tokens": 17,
+      "completion_tokens": 24,
+      "hit": 8,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        109266,
+        220,
+        248046,
+        151353,
+        136706,
+        27,
+        286,
+        13713
+      ],
+      "prefill_tok_s": 269.1,
+      "decode_tok_s": 36.4
+    },
+    {
+      "prompt_tokens": 24,
+      "completion_tokens": 48,
+      "hit": 15,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        32,
+        51,
+        220,
+        731,
+        2,
+        83,
+        2181,
+        82
+      ],
+      "prefill_tok_s": 404.7,
+      "decode_tok_s": 34.8
+    },
+    {
+      "prompt_tokens": 23,
+      "completion_tokens": 64,
+      "hit": 14,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        71093,
+        1899,
+        498,
+        248046,
+        151353,
+        208591,
+        29724,
+        248046
+      ],
+      "prefill_tok_s": 387.8,
+      "decode_tok_s": 35.9
+    },
+    {
+      "prompt_tokens": 20,
+      "completion_tokens": 128,
+      "hit": 11,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        8160,
+        220,
+        248046,
+        151353,
+        10880,
+        6,
+        1076,
+        6
+      ],
+      "prefill_tok_s": 337.0,
+      "decode_tok_s": 35.2
+    },
+    {
+      "prompt_tokens": 30,
+      "completion_tokens": 16,
+      "hit": 0,
+      "path": "root",
+      "units_prefill": 2,
+      "state_d2h": 51519488,
+      "ids_head": [
+        58,
+        165512,
+        34752,
+        32112,
+        19578,
+        151353,
+        208707,
+        174427
+      ],
+      "prefill_tok_s": 321.4,
+      "decode_tok_s": 37.7
+    },
+    {
+      "prompt_tokens": 26,
+      "completion_tokens": 24,
+      "hit": 0,
+      "path": "root",
+      "units_prefill": 2,
+      "state_d2h": 51519488,
+      "ids_head": [
+        2,
+        241551,
+        151353,
+        73555,
+        107500,
+        150910,
+        205237,
+        177718
+      ],
+      "prefill_tok_s": 286.0,
+      "decode_tok_s": 36.9
+    }
+  ],
+  "bad_markers": [],
+  "remaining": []
+}

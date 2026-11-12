@@ -1,0 +1,12 @@
+{
+  "profile": "build-9b",
+  "deviceKV": 36864,
+  "hostKVMiB": 7168,
+  "kvDtype": "nvfp4",
+  "prefillChunk": 128,
+  "draftTokens": 3,
+  "reasoningEffort": "none",
+  "maxContext": 262144,
+  "vision": "off",
+  "port": 1690
+}

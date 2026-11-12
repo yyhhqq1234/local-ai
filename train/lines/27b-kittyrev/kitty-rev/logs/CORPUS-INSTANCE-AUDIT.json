@@ -1,0 +1,1954 @@
+{
+ "corpus_rows": 4388,
+ "objects": 126,
+ "eval_mentions": {
+  "kitty_dump": 6,
+  "kitty_die": 15,
+  "kitty_ghidra": 5,
+  "kitty_x64dbg": 2,
+  "kitty_sym": 2,
+  "S_NEW": 16,
+  "kitty_ce": 18,
+  "P_BACK": 2,
+  "MODENUM": 3,
+  "MODBASE": 1,
+  "DBG_ATTACH": 3,
+  "PING": 2,
+  "SYNC_ARCHIVE": 1,
+  "kitty_prot": 2,
+  "S_SNAP": 1,
+  "kitty_ops": 1,
+  "kitty_settings": 1,
+  "VER": 2,
+  "kitty_jadx": 1,
+  "kitty_rea": 2,
+  "kitty_rea_trace": 1,
+  "LP": 2,
+  "OPEN": 2,
+  "kitty_pchain": 1,
+  "KM_INFO": 1,
+  "KM_PR": 1,
+  "kitty_loop_status": 1,
+  "kitty_loop": 1,
+  "BATCH": 1,
+  "DBG_BP_LIST": 1,
+  "DBG_BP_DEL": 1,
+  "DBG_WAIT": 1,
+  "DBG_STAT": 1,
+  "DBG_GO": 1,
+  "DBG_BP": 1,
+  "DBG_REGS": 1,
+  "kitty_dbg": 1,
+  "kitty_net": 1,
+  "P_BACK_RES": 1,
+  "P_WALK": 1,
+  "kitty_engines": 1,
+  "kitty_rea_method": 1,
+  "reverse_add_target": 1,
+  "CUR": 1,
+  "kitty_drvio": 1,
+  "kitty_drv": 1,
+  "DIS": 1
+ },
+ "table": [
+  {
+   "obj": "kitty_ce",
+   "rows": 698,
+   "STRICT": 743,
+   "TEMPLATE": 424,
+   "PROSE": 245,
+   "evaluated": 18,
+   "ex": {
+    "STRICT": "\"name\":\"kitty_ce\"",
+    "TEMPLATE": "kitty_ce op=\"S_GET|...\"",
+    "PROSE": "_loop。直接调 kitty_ce 也能发（op=…），专用工具会多做一步编排与判据。"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "S_NEW",
+   "rows": 138,
+   "STRICT": 46,
+   "TEMPLATE": 101,
+   "PROSE": 27,
+   "evaluated": 16,
+   "ex": {
+    "STRICT": "S_NEW|dword|9999|0x7FF700000000|0x7FF700800000\"}}",
+    "TEMPLATE": "S_NEW|dword|999|<base>|<base+size>",
+    "PROSE": "LLOC、FREE、S_NEW、S_COUNT、S_GET、S_NEXT、S_FREE、P_BACK、P_BACK_RES、P_WALK、KM_STATUS"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "kitty_die",
+   "rows": 102,
+   "STRICT": 87,
+   "TEMPLATE": 0,
+   "PROSE": 20,
+   "evaluated": 15,
+   "ex": {
+    "STRICT": "kitty_die action=scan",
+    "TEMPLATE": "",
+    "PROSE": " kitty 落地：kitty_die 先确认是 UPX；改壳头用 kitty_patch（expect 原字节）；脱壳后 kitty_sym imports "
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_dump",
+   "rows": 98,
+   "STRICT": 41,
+   "TEMPLATE": 21,
+   "PROSE": 42,
+   "evaluated": 6,
+   "ex": {
+    "STRICT": "kitty_dump action=dump，配套",
+    "TEMPLATE": "kitty_dump module=…（不用",
+    "PROSE": "**kitty_dump**（runtime）action=`unmap`：内存转储+镜像重建 关联 OP：R、MODENUM。 失败判据：看回"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_ghidra",
+   "rows": 177,
+   "STRICT": 240,
+   "TEMPLATE": 0,
+   "PROSE": 44,
+   "evaluated": 5,
+   "ex": {
+    "STRICT": "kitty_ghidra action=status",
+    "TEMPLATE": "",
+    "PROSE": "**kitty_ghidra**（static）action=`analyze`：Ghidra headless 真分析（analyze 跑 a"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "MODENUM",
+   "rows": 319,
+   "STRICT": 6,
+   "TEMPLATE": 0,
+   "PROSE": 313,
+   "evaluated": 3,
+   "ex": {
+    "STRICT": " OPEN` → `MODENUM` | ✅ **模块数 130 拿到**",
+    "TEMPLATE": "",
+    "PROSE": "建 关联 OP：R、MODENUM。 失败判据：看回包 `ERR|…`，按码改动作，不换参数连试。"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "DBG_ATTACH",
+   "rows": 67,
+   "STRICT": 4,
+   "TEMPLATE": 10,
+   "PROSE": 54,
+   "evaluated": 3,
+   "ex": {
+    "STRICT": "DBG_ATTACH|2|force → OK|attaching (1388ms)；SYNC_STAT 0→1；WER NONE",
+    "TEMPLATE": "DBG_ATTACH|<iface=2>|force|unsafe[|async]",
+    "PROSE": "调试面 关联 OP：DBG_ATTACH、DBG_WAIT、DBG_STAT、DBG_BP、DBG_BP_LIST、DBG_BP_DEL、DBG_GO、DBG_"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "kitty_sym",
+   "rows": 192,
+   "STRICT": 180,
+   "TEMPLATE": 0,
+   "PROSE": 44,
+   "evaluated": 2,
+   "ex": {
+    "STRICT": "\"name\": \"kitty_sym\"",
+    "TEMPLATE": "",
+    "PROSE": " 原字节）；脱壳后 kitty_sym imports 验证。"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_prot",
+   "rows": 149,
+   "STRICT": 124,
+   "TEMPLATE": 0,
+   "PROSE": 43,
+   "evaluated": 2,
+   "ex": {
+    "STRICT": "kitty_prot action=rwx，配套",
+    "TEMPLATE": "",
+    "PROSE": "  改内存保护要用 kitty_prot（protect=rwx 等），不要写 LUA 试 virtualprotect 白跑一次。  当前:kitty-tar"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_x64dbg",
+   "rows": 121,
+   "STRICT": 61,
+   "TEMPLATE": 0,
+   "PROSE": 74,
+   "evaluated": 2,
+   "ex": {
+    "STRICT": "kitty_x64dbg action=readdb",
+    "TEMPLATE": "",
+    "PROSE": "y_ce 断点 + kitty_x64dbg 单步；反调试强时优先 C 通道。  替代思路：静态出现三种情况就转动态：① 关键逻辑被加密/虚拟化（读不动）；没有"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "P_BACK",
+   "rows": 74,
+   "STRICT": 35,
+   "TEMPLATE": 21,
+   "PROSE": 31,
+   "evaluated": 2,
+   "ex": {
+    "STRICT": "P_BACK|0x7FF75FCD2000|0x7FF700000000|0x7FF700800000\"}}",
+    "TEMPLATE": "P_BACK|<addr>|<start>|<stop>",
+    "PROSE": "不建议。P_BACK 有 200 命中上限且必须显式窗口；开太大更难收敛。先用模块窗口，逐步扩。"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "OPEN",
+   "rows": 357,
+   "STRICT": 34,
+   "TEMPLATE": 46,
+   "PROSE": 286,
+   "evaluated": 2,
+   "ex": {
+    "STRICT": "OPEN|notepad.exe\"}}",
+    "TEMPLATE": "OPEN|<pid或进程名>",
+    "PROSE": "target` 先 OPEN、`unknown` 用 kitty_ops 查名。 `kitty_lua` 的 `decompile` 关联 OP：（该工具不直接"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "kitty_rea",
+   "rows": 38,
+   "STRICT": 12,
+   "TEMPLATE": 0,
+   "PROSE": 27,
+   "evaluated": 2,
+   "ex": {
+    "STRICT": "kitty_rea action=describe",
+    "TEMPLATE": "",
+    "PROSE": "报，不自造包装。 `kitty_rea` 的职责是：REA 全量网关（MCP stdio，上游 170 工具）。 替代路径二选一：① 用同通道里已有的工具（先 "
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "PING",
+   "rows": 243,
+   "STRICT": 10,
+   "TEMPLATE": 0,
+   "PROSE": 233,
+   "evaluated": 2,
+   "ex": {
+    "STRICT": "`PING` 回包：OK|Kitty-bridge",
+    "TEMPLATE": "",
+    "PROSE": "st` 关联 OP：PING、SYNC_ARCHIVE、SYNC_STAT、KM_ATTACH"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "VER",
+   "rows": 10,
+   "STRICT": 7,
+   "TEMPLATE": 0,
+   "PROSE": 3,
+   "evaluated": 2,
+   "ex": {
+    "STRICT": "签名：`VER`\n回包：OK|<ver>",
+    "TEMPLATE": "",
+    "PROSE": "lient.py 'VER' 2>&1 | Select-Object -First 2; python H2O-client.py 'LP' 2>&1 | S"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "LP",
+   "rows": 0,
+   "STRICT": 0,
+   "TEMPLATE": 0,
+   "PROSE": 0,
+   "evaluated": 2,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "",
+    "PROSE": ""
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "kitty_settings",
+   "rows": 71,
+   "STRICT": 78,
+   "TEMPLATE": 1,
+   "PROSE": 30,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "kitty_settings action=root-get",
+    "TEMPLATE": "kitty_settings action=task-dispatch（…[truncated",
+    "PROSE": "**kitty_settings**（reverse）action=`target-set`：逆向会话真相源（F3：对话侧直调会话动作） 失败判"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_dbg",
+   "rows": 81,
+   "STRICT": 54,
+   "TEMPLATE": 0,
+   "PROSE": 56,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "kitty_dbg action=sync，配套",
+    "TEMPLATE": "",
+    "PROSE": "`kitty_dbg` 支持的 action：attach/wait/status/bp/bp_list/bp_del/go/regs/det"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_net",
+   "rows": 46,
+   "STRICT": 33,
+   "TEMPLATE": 0,
+   "PROSE": 18,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "kitty_net action=capture",
+    "TEMPLATE": "",
+    "PROSE": "tobuf；网络侧 kitty_net capture+decode 抓包比对。  为什么这么映射：用变体差分：同一接口改一个业务字段，比对两次二进制差异位置；"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_drv",
+   "rows": 40,
+   "STRICT": 22,
+   "TEMPLATE": 0,
+   "PROSE": 18,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "kitty_drv action=ensure，配套",
+    "TEMPLATE": "",
+    "PROSE": "_ops 查名。 `kitty_drv` 的 `host` 关联 OP：PING、SYNC_ARCHIVE、SYNC_STAT、KM_ATTACH"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_jadx",
+   "rows": 31,
+   "STRICT": 20,
+   "TEMPLATE": 0,
+   "PROSE": 14,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "\"name\": \"kitty_jadx\"",
+    "TEMPLATE": "",
+    "PROSE": "/区间/位数）。 `kitty_jadx` 自身职责：APK Java decompile (jadx passthrough)。 "
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "S_SNAP",
+   "rows": 76,
+   "STRICT": 19,
+   "TEMPLATE": 46,
+   "PROSE": 15,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "S_SNAP|bytes:16|0xTEXT_BASE|0xTEXT_BASE+0x2000\"",
+    "TEMPLATE": "S_SNAP|vt|start|stop → S_CHANGED / S_UNCHANGED 交替；每次比对结果会收窄快照。",
+    "PROSE": "精确扫描，不知道走 S_SNAP 快照法。 给我这两项，我按 OPEN → MODENUM → 扫描 → 回验 四步走完。"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "kitty_ops",
+   "rows": 270,
+   "STRICT": 14,
+   "TEMPLATE": 5,
+   "PROSE": 251,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "kitty_ops action=list",
+    "TEMPLATE": "kitty_ops filter=<前缀>",
+    "PROSE": "nknown` 用 kitty_ops 查名。 `kitty_lua` 的 `decompile` 关联 OP：（该工具不直接下发 OP）"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "P_BACK_RES",
+   "rows": 36,
+   "STRICT": 12,
+   "TEMPLATE": 9,
+   "PROSE": 15,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "P_BACK_RES|10\"}}",
+    "TEMPLATE": "P_BACK_RES|<n>",
+    "PROSE": "EE、P_BACK、P_BACK_RES、P_WALK、KM_STATUS"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "kitty_drvio",
+   "rows": 24,
+   "STRICT": 11,
+   "TEMPLATE": 0,
+   "PROSE": 16,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "kitty_drvio action=surf",
+    "TEMPLATE": "",
+    "PROSE": "`kitty_drvio` 支持的 action：status/probe/open/surf。当前问的 `probe` 用途：辅助驱动面（只"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_engines",
+   "rows": 25,
+   "STRICT": 11,
+   "TEMPLATE": 4,
+   "PROSE": 10,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "\"name\": \"kitty_engines\"",
+    "TEMPLATE": "kitty_engines path=<gameDir>`",
+    "PROSE": " out=<输出>；kitty_engines 先判引擎版本。"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "P_WALK",
+   "rows": 54,
+   "STRICT": 10,
+   "TEMPLATE": 18,
+   "PROSE": 27,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "P_WALK|0x7FF700123400|0x1B0\"}}",
+    "TEMPLATE": "P_WALK|<addr>|<offset>",
+    "PROSE": "_BACK_RES、P_WALK、KM_STATUS"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "SYNC_ARCHIVE",
+   "rows": 78,
+   "STRICT": 10,
+   "TEMPLATE": 0,
+   "PROSE": 68,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "`SYNC_ARCHIVE` 的定位：同步残留归一\n签名：`SYN",
+    "TEMPLATE": "",
+    "PROSE": "BG_DETACH、SYNC_ARCHIVE、SYNC_STAT。 先用 status 类只读动作确认环境，再进写动作。"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "CUR",
+   "rows": 114,
+   "STRICT": 9,
+   "TEMPLATE": 0,
+   "PROSE": 105,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "`CUR` 的定位：进程枚举与附加\n签名：`CU",
+    "TEMPLATE": "",
+    "PROSE": "配套 OP：LUA、CUR"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "DBG_BP_LIST",
+   "rows": 47,
+   "STRICT": 9,
+   "TEMPLATE": 0,
+   "PROSE": 38,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "直接发：`DBG_BP_LIST`\n回包形态：OK|<n>|<addr>",
+    "TEMPLATE": "",
+    "PROSE": "AT、DBG_BP、DBG_BP_LIST、DBG_BP_DEL、DBG_GO、DBG_REGS、DBG_DETACH、SYNC_ARCHIVE、SYNC_ST"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "KM_INFO",
+   "rows": 43,
+   "STRICT": 9,
+   "TEMPLATE": 0,
+   "PROSE": 34,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "用 `KM_INFO`：`KM_INFO`\n回包：OK|pi",
+    "TEMPLATE": "",
+    "PROSE": "OP：KM_API、KM_INFO、KM_ATTACH、KM_R、KM_W、KM_PA"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "kitty_pchain",
+   "rows": 31,
+   "STRICT": 9,
+   "TEMPLATE": 0,
+   "PROSE": 22,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "kitty_pchain target=0x7FF75FCD2000",
+    "TEMPLATE": "",
+    "PROSE": " 偶发回 0，用 `kitty_pchain`/镜像头兜底。  当前:Notepad 模块 / 结果:典型模块清单已给 / 下一步:要真实 base 就起宿主重"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "DBG_REGS",
+   "rows": 49,
+   "STRICT": 7,
+   "TEMPLATE": 0,
+   "PROSE": 42,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "条 OP；本行写 `DBG_REGS`\n回包：OK|RAX=… RBX=… ",
+    "TEMPLATE": "",
+    "PROSE": "EL、DBG_GO、DBG_REGS、DBG_DETACH、SYNC_ARCHIVE、SYNC_STAT。 先用 status 类只读动作确认环境，再进写动作。"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "DBG_GO",
+   "rows": 36,
+   "STRICT": 5,
+   "TEMPLATE": 0,
+   "PROSE": 31,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "`DBG_GO` 回包：OK|go\n签名：`DBG_G",
+    "TEMPLATE": "",
+    "PROSE": "BG_BP_DEL、DBG_GO、DBG_REGS、DBG_DETACH、SYNC_ARCHIVE、SYNC_STAT。 先用 status 类只读动作确认环境"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "DBG_STAT",
+   "rows": 50,
+   "STRICT": 5,
+   "TEMPLATE": 0,
+   "PROSE": 45,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "`DBG_STAT` 失败口径：调试状态（实测 OK|0|",
+    "TEMPLATE": "",
+    "PROSE": "、DBG_WAIT、DBG_STAT、DBG_BP、DBG_BP_LIST、DBG_BP_DEL、DBG_GO、DBG_REGS、DBG_DETACH、SYNC"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "DBG_WAIT",
+   "rows": 50,
+   "STRICT": 5,
+   "TEMPLATE": 0,
+   "PROSE": 45,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "用 `DBG_WAIT`：`DBG_WAIT[|<ms≤300",
+    "TEMPLATE": "",
+    "PROSE": "BG_ATTACH、DBG_WAIT、DBG_STAT、DBG_BP、DBG_BP_LIST、DBG_BP_DEL、DBG_GO、DBG_REGS、DBG_DE"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "BATCH",
+   "rows": 85,
+   "STRICT": 4,
+   "TEMPLATE": 0,
+   "PROSE": 81,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "`BATCH` 失败口径：v0.2.5：一次投递多条",
+    "TEMPLATE": "",
+    "PROSE": "多行）首行 SEQ|BATCH，其后每行一条 OP` 回包形态：OK|batch|<n>|ok=<k> + 每行 `#i|…`"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "kitty_loop_status",
+   "rows": 11,
+   "STRICT": 4,
+   "TEMPLATE": 0,
+   "PROSE": 7,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "kitty_loop_status action=status",
+    "TEMPLATE": "",
+    "PROSE": "`kitty_loop_status` 支持的 action：status。当前问的 `status` 用途：Kitty夜跑状态只读 先用 s"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_rea_method",
+   "rows": 8,
+   "STRICT": 3,
+   "TEMPLATE": 0,
+   "PROSE": 5,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "kitty_rea_method action=inspect_android_method",
+    "TEMPLATE": "",
+    "PROSE": "**kitty_rea_method**（rea-mcp）action=`inspect_android_method`：REA APK 单方法"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_loop",
+   "rows": 31,
+   "STRICT": 2,
+   "TEMPLATE": 0,
+   "PROSE": 29,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "kitty_loop action=status，配套",
+    "TEMPLATE": "",
+    "PROSE": "y_acescan、kitty_loop。直接调 kitty_ce 也能发（op=…），专用工具会多做一步编排与判据。"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "MODBASE",
+   "rows": 30,
+   "STRICT": 1,
+   "TEMPLATE": 10,
+   "PROSE": 19,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "MODBASE|kitty-target.exe\"",
+    "TEMPLATE": "MODBASE|<模块名>",
+    "PROSE": "、CUR、OPEN、MODBASE、MODENUM、R、W、ALLOC、FREE、S_NEW、S_COUNT、S_GET、S_NEXT、S_FREE、P_BAC"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "kitty_rea_trace",
+   "rows": 8,
+   "STRICT": 1,
+   "TEMPLATE": 0,
+   "PROSE": 7,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "kitty_rea_trace action=trace_feature",
+    "TEMPLATE": "",
+    "PROSE": "**kitty_rea_trace**（rea-mcp）action=`trace_feature`：REA 特性级追踪 失败判据：看回包 `E"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "DBG_BP",
+   "rows": 53,
+   "STRICT": 0,
+   "TEMPLATE": 8,
+   "PROSE": 45,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "DBG_BP|<addr>|<size>[|execute|write][|int3>|force]",
+    "PROSE": "、DBG_STAT、DBG_BP、DBG_BP_LIST、DBG_BP_DEL、DBG_GO、DBG_REGS、DBG_DETACH、SYNC_ARCHIVE、"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "DBG_BP_DEL",
+   "rows": 49,
+   "STRICT": 0,
+   "TEMPLATE": 9,
+   "PROSE": 40,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "DBG_BP_DEL|<id>[|force]",
+    "PROSE": "G_BP_LIST、DBG_BP_DEL、DBG_GO、DBG_REGS、DBG_DETACH、SYNC_ARCHIVE、SYNC_STAT。 先用 statu"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "DIS",
+   "rows": 8,
+   "STRICT": 0,
+   "TEMPLATE": 7,
+   "PROSE": 1,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "DIS|<addr>",
+    "PROSE": "`DIS` 失败口径：单条反汇编，无范围 正常回包：OK|<文本>"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "KM_PR",
+   "rows": 59,
+   "STRICT": 0,
+   "TEMPLATE": 8,
+   "PROSE": 51,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "KM_PR|<pa>|<vt>",
+    "PROSE": "M_R、KM_PA、KM_PR、ALLOC、W、KM_W、FREE、SYNC_ARCHIVE、SYNC_STAT。 先用 status 类只读动作确认环境，再进"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "reverse_add_target",
+   "rows": 0,
+   "STRICT": 0,
+   "TEMPLATE": 0,
+   "PROSE": 0,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "",
+    "PROSE": ""
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_patch",
+   "rows": 307,
+   "STRICT": 400,
+   "TEMPLATE": 0,
+   "PROSE": 60,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_patch action=find",
+    "TEMPLATE": "",
+    "PROSE": "_ops 查名。 `kitty_patch` 的 `hash` 关联 OP：（该工具不直接下发 OP）"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_km",
+   "rows": 88,
+   "STRICT": 91,
+   "TEMPLATE": 0,
+   "PROSE": 38,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_km action=write，配套",
+    "TEMPLATE": "",
+    "PROSE": "_dualview、kitty_km。直接调 kitty_ce 也能发（op=…），专用工具会多做一步编排与判据。"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_ida",
+   "rows": 79,
+   "STRICT": 49,
+   "TEMPLATE": 0,
+   "PROSE": 53,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_ida action=status",
+    "TEMPLATE": "",
+    "PROSE": " kitty 落地：kitty_ida 不自动跑 FLIRT；需要时在 IDA GUI 里 File > Load file > FLIRT signature"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "S_GET",
+   "rows": 54,
+   "STRICT": 31,
+   "TEMPLATE": 9,
+   "PROSE": 18,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "S_GET|0|10\"}}",
+    "TEMPLATE": "S_GET|<start0>|<count>",
+    "PROSE": "`S_GET` 失败口径：start 为 0 基偏移 正常回包：OK|<n>\\\\n<addr>…"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "MEMDUMP_HEX",
+   "rows": 62,
+   "STRICT": 27,
+   "TEMPLATE": 38,
+   "PROSE": 8,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "MEMDUMP_HEX|0xTEXT_BASE|256\"",
+    "TEMPLATE": "MEMDUMP_HEX|<addr>|<len≤4096>",
+    "PROSE": "dule=…（不用 MEMDUMP_HEX 手拼） 3. 写回：W 前先 R 现值，写后自读校验  先做第 1 步：  <tool_call> {\"name\":"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "kitty_frida",
+   "rows": 37,
+   "STRICT": 27,
+   "TEMPLATE": 0,
+   "PROSE": 18,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_frida action=attach",
+    "TEMPLATE": "",
+    "PROSE": "nning 场景走 kitty_frida。"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_asm",
+   "rows": 39,
+   "STRICT": 22,
+   "TEMPLATE": 0,
+   "PROSE": 19,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "\"name\": \"kitty_asm\"",
+    "TEMPLATE": "",
+    "PROSE": "报，不自造包装。 `kitty_asm` 的职责是：x64迷你汇编器。 替代路径二选一：① 用同通道里已有的工具（先 kitty_ops 查 OP）；② 请你启"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_dnspy",
+   "rows": 37,
+   "STRICT": 22,
+   "TEMPLATE": 0,
+   "PROSE": 18,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_dnspy action=deobf",
+    "TEMPLATE": "",
+    "PROSE": "mono TOOL=kitty_dnspy NEXT=open logs/route-test/test.bundle => ENGINE=unity-asse"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_apktool",
+   "rows": 33,
+   "STRICT": 21,
+   "TEMPLATE": 0,
+   "PROSE": 14,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_apktool action=status",
+    "TEMPLATE": "",
+    "PROSE": "**kitty_apktool**（static）action=`status`：APK smali decode/build (apktool"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_cpp2il",
+   "rows": 38,
+   "STRICT": 21,
+   "TEMPLATE": 0,
+   "PROSE": 24,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_cpp2il action=triage",
+    "TEMPLATE": "",
+    "PROSE": " kitty 落地：kitty_cpp2il dump → kitty_ida 用 dump 出的函数表反汇编；或 kitty_ghidra 直接分析 Game"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_status",
+   "rows": 51,
+   "STRICT": 19,
+   "TEMPLATE": 0,
+   "PROSE": 32,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "\"name\": \"kitty_status\"",
+    "TEMPLATE": "",
+    "PROSE": "S 是同类只读信息；kitty_status 看桥自身状态。"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_fmodel",
+   "rows": 30,
+   "STRICT": 14,
+   "TEMPLATE": 0,
+   "PROSE": 20,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_fmodel action=status",
+    "TEMPLATE": "",
+    "PROSE": "**kitty_fmodel**（static）action=`status`：UE asset view (FModel passthroug"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_apkscan",
+   "rows": 37,
+   "STRICT": 13,
+   "TEMPLATE": 0,
+   "PROSE": 24,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_apkscan action=scan",
+    "TEMPLATE": "",
+    "PROSE": "**kitty_apkscan**（static）action=`status`：APK shell/scan (APKiD triage) 失"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_dualview",
+   "rows": 36,
+   "STRICT": 13,
+   "TEMPLATE": 7,
+   "PROSE": 18,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "\"name\": \"kitty_dualview\"",
+    "TEMPLATE": "kitty_dualview addr=0xADDR",
+    "PROSE": "轮采样 + 写回环；kitty_dualview samples=N 做连续采样。"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_variants",
+   "rows": 31,
+   "STRICT": 13,
+   "TEMPLATE": 0,
+   "PROSE": 20,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_variants action=start，配套",
+    "TEMPLATE": "",
+    "PROSE": "**kitty_variants**（infra）action=`stop`：驱动CE/DBG变体管理 关联 OP：PING。 失败判据：看回包"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "SYNC_STAT",
+   "rows": 82,
+   "STRICT": 12,
+   "TEMPLATE": 0,
+   "PROSE": 70,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "条 OP；本行写 `SYNC_STAT`\n回包：OK|<串>|djobs_pe",
+    "TEMPLATE": "",
+    "PROSE": "C_ARCHIVE、SYNC_STAT。 先用 status 类只读动作确认环境，再进写动作。"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "KM_STATUS",
+   "rows": 18,
+   "STRICT": 10,
+   "TEMPLATE": 0,
+   "PROSE": 8,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "直接发：`KM_STATUS`\n回包形态：OK|loaded / O",
+    "TEMPLATE": "",
+    "PROSE": "ES、P_WALK、KM_STATUS"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "S_COUNT",
+   "rows": 19,
+   "STRICT": 10,
+   "TEMPLATE": 0,
+   "PROSE": 9,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "用 `S_COUNT`：`S_COUNT`\n回包：OK|<n",
+    "TEMPLATE": "",
+    "PROSE": "REE、S_NEW、S_COUNT、S_GET、S_NEXT、S_FREE、P_BACK、P_BACK_RES、P_WALK、KM_STATUS"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "kitty_proto",
+   "rows": 23,
+   "STRICT": 10,
+   "TEMPLATE": 0,
+   "PROSE": 14,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_proto action=decode",
+    "TEMPLATE": "",
+    "PROSE": "`kitty_proto` 支持的 action：status/decode。当前问的 `status` 用途：serialization d"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_unpack",
+   "rows": 30,
+   "STRICT": 10,
+   "TEMPLATE": 0,
+   "PROSE": 22,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_unpack action=collect/parse",
+    "TEMPLATE": "",
+    "PROSE": "`kitty_unpack` 支持的 action：status/collect/parse。当前问的 `collect` 用途：APK un"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "BRIDGE_VER",
+   "rows": 27,
+   "STRICT": 9,
+   "TEMPLATE": 0,
+   "PROSE": 18,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "直接发：`BRIDGE_VER`\n回包形态：OK|v<版本>-<特性串",
+    "TEMPLATE": "",
+    "PROSE": "联 OP：PING、BRIDGE_VER、CUR、OPEN、MODBASE、MODENUM、R、W、ALLOC、FREE、S_NEW、S_COUNT、S_GET"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "DBG_DETACH",
+   "rows": 37,
+   "STRICT": 9,
+   "TEMPLATE": 0,
+   "PROSE": 28,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "签名：`DBG_DETACH`\n回包：OK|detached[|pe",
+    "TEMPLATE": "",
+    "PROSE": "、DBG_REGS、DBG_DETACH、SYNC_ARCHIVE、SYNC_STAT。 先用 status 类只读动作确认环境，再进写动作。"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "JOB_STAT",
+   "rows": 18,
+   "STRICT": 9,
+   "TEMPLATE": 0,
+   "PROSE": 9,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "`JOB_STAT` 失败口径：作业落定判据（none/n",
+    "TEMPLATE": "",
+    "PROSE": "看 JOB_STAT 的 state 与 n 两个字段的变化趋势，别只看一次。  判定： kitty_ce op=JOB_STAT 判读：回包形"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "KM_API",
+   "rows": 40,
+   "STRICT": 9,
+   "TEMPLATE": 0,
+   "PROSE": 31,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "nel）。\n签名：`KM_API`\n回包：OK|api=<n>/14|<",
+    "TEMPLATE": "",
+    "PROSE": "ite，配套 OP：KM_API、KM_INFO、KM_ATTACH、KM_R、KM_W、KM_PA"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "RANGE_INFO",
+   "rows": 9,
+   "STRICT": 9,
+   "TEMPLATE": 0,
+   "PROSE": 0,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "直接发：`RANGE_INFO`\n回包形态：OK|target=…|a",
+    "TEMPLATE": "",
+    "PROSE": ""
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "S_CHANGED",
+   "rows": 59,
+   "STRICT": 9,
+   "TEMPLATE": 0,
+   "PROSE": 50,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "用 `S_CHANGED`：`S_CHANGED`\n回包：OK|",
+    "TEMPLATE": "",
+    "PROSE": "rt|stop → S_CHANGED / S_UNCHANGED 交替；每次比对结果会收窄快照。  为什么这么映射：知道确切值用精确扫描（S_NEW vt+v"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "S_FREE",
+   "rows": 26,
+   "STRICT": 9,
+   "TEMPLATE": 0,
+   "PROSE": 17,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "不行。`S_FREE` 的签名是 `S_FREE`（首段 `",
+    "TEMPLATE": "",
+    "PROSE": "ET、S_NEXT、S_FREE、P_BACK、P_BACK_RES、P_WALK、KM_STATUS"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "kitty_uedump",
+   "rows": 31,
+   "STRICT": 9,
+   "TEMPLATE": 0,
+   "PROSE": 22,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_uedump action=collect，配套",
+    "TEMPLATE": "",
+    "PROSE": "_ops 查名。 `kitty_uedump` 的 `triage` 关联 OP：LUA、MODENUM、CUR"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "AL_CLEAR",
+   "rows": 15,
+   "STRICT": 8,
+   "TEMPLATE": 0,
+   "PROSE": 7,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "`AL_CLEAR` 回包：OK|…\n签名：`AL_CLE",
+    "TEMPLATE": "",
+    "PROSE": "_SET_DESC|AL_CLEAR` 回包：OK|…"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "AL_COUNT",
+   "rows": 15,
+   "STRICT": 8,
+   "TEMPLATE": 0,
+   "PROSE": 7,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "用 `AL_COUNT`：`AL_COUNT`\n回包：OK|<",
+    "TEMPLATE": "",
+    "PROSE": "EL|AL_GET|AL_COUNT|AL_SET_VAL|AL_SET_ACT|AL_SET_TYPE|AL_SET_DESC|AL_CLEAR` 回包：OK"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "KM_PROBE",
+   "rows": 8,
+   "STRICT": 8,
+   "TEMPLATE": 0,
+   "PROSE": 0,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "签名：`KM_PROBE`\n回包：OK|…",
+    "TEMPLATE": "",
+    "PROSE": ""
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "S_UNCHANGED",
+   "rows": 21,
+   "STRICT": 8,
+   "TEMPLATE": 0,
+   "PROSE": 13,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "`S_UNCHANGED` 回包：OK|<n>|unchange",
+    "TEMPLATE": "",
+    "PROSE": "CHANGED / S_UNCHANGED 交替；每次比对结果会收窄快照。  为什么这么映射：知道确切值用精确扫描（S_NEW vt+val+区间），一步收敛。"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "LUA",
+   "rows": 137,
+   "STRICT": 7,
+   "TEMPLATE": 31,
+   "PROSE": 107,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "LUA|local f=io.popen('cmd /c \\\"cd & echo @@D:\\\\\\\\APK-Reverse@@ & dir /b D:\\\\\\\\APK-Reverse & echo @@S",
+    "TEMPLATE": "LUA|<lua 源码>",
+    "PROSE": "rwx，配套 OP：LUA、CUR"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "S_ABORT",
+   "rows": 9,
+   "STRICT": 7,
+   "TEMPLATE": 0,
+   "PROSE": 2,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "`S_ABORT` 回包：OK|aborted\n签名：`",
+    "TEMPLATE": "",
+    "PROSE": "scan-* 且可 S_ABORT/S_FREE 恢复 已通知      verifier（含 t6 排布推论：A10 走 ALLOC 窗口大概率不丢；A16 "
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "THREADS",
+   "rows": 10,
+   "STRICT": 7,
+   "TEMPLATE": 0,
+   "PROSE": 3,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "直接发：`THREADS`\n回包形态：OK|<n>\\\\n<tid",
+    "TEMPLATE": "",
+    "PROSE": "P/MODENUM/THREADS 是同类只读信息；kitty_status 看桥自身状态。"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "kitty_il2cppdumper",
+   "rows": 20,
+   "STRICT": 7,
+   "TEMPLATE": 0,
+   "PROSE": 13,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "\"name\": \"kitty_il2cppdumper\"",
+    "TEMPLATE": "",
+    "PROSE": "**kitty_il2cppdumper**（static）action=`parse`：Unity IL2CPP dump (Il2CppDu"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_trail",
+   "rows": 16,
+   "STRICT": 7,
+   "TEMPLATE": 0,
+   "PROSE": 10,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_trail action=get",
+    "TEMPLATE": "",
+    "PROSE": "_ops 查名。 `kitty_trail` 的 `append` 关联 OP：（该工具不直接下发 OP）"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_ue4ss",
+   "rows": 27,
+   "STRICT": 7,
+   "TEMPLATE": 0,
+   "PROSE": 20,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_ue4ss action=collect，配套",
+    "TEMPLATE": "",
+    "PROSE": "**kitty_ue4ss**（runtime）action=`triage`：UE runtime mod (UE4SS via inject"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_assetrip",
+   "rows": 17,
+   "STRICT": 6,
+   "TEMPLATE": 0,
+   "PROSE": 11,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_assetrip action=export",
+    "TEMPLATE": "",
+    "PROSE": "sset TOOL=kitty_assetrip NEXT=list/export logs/route-test/test.uasset => ENGINE="
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_init",
+   "rows": 14,
+   "STRICT": 6,
+   "TEMPLATE": 0,
+   "PROSE": 9,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_init action=init",
+    "TEMPLATE": "",
+    "PROSE": "**kitty_init**（infra-init）action=`status`：一键双绿初始化（宿主先行+双驱验真） 失败判据：看回包 `E"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_gdre",
+   "rows": 17,
+   "STRICT": 4,
+   "TEMPLATE": 0,
+   "PROSE": 13,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_gdre action=decompile",
+    "TEMPLATE": "",
+    "PROSE": "`kitty_gdre`：Godot recovery (gdsdecomp passthrough)（通道 static）。 `kitty_"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_rea_binary",
+   "rows": 10,
+   "STRICT": 4,
+   "TEMPLATE": 0,
+   "PROSE": 6,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_rea_binary action=inspect_binary_layout",
+    "TEMPLATE": "",
+    "PROSE": "`kitty_rea_binary`：REA 二进制布局（节/段/符号/导入导出）（通道 rea-mcp）。 `kitty_ce`：直接下发 "
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_bepinex",
+   "rows": 16,
+   "STRICT": 3,
+   "TEMPLATE": 0,
+   "PROSE": 13,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_bepinex action=install",
+    "TEMPLATE": "",
+    "PROSE": "-set）→ 取数（kitty_bepinex 或 kitty_ce）→ 收口（task-dispatch finish → task-close）。 "
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_idamcp",
+   "rows": 19,
+   "STRICT": 3,
+   "TEMPLATE": 0,
+   "PROSE": 16,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_idamcp action=status",
+    "TEMPLATE": "",
+    "PROSE": "_ops 查名。 `kitty_idamcp` 的 `status` 关联 OP：（该工具不直接下发 OP）"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_inject",
+   "rows": 28,
+   "STRICT": 3,
+   "TEMPLATE": 0,
+   "PROSE": 25,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_inject action=ce，配套",
+    "TEMPLATE": "",
+    "PROSE": "报，不自造包装。 `kitty_inject` 的职责是：DLL注入（ce/ps/loaddll三档）。 替代路径二选一：① 用同通道里已有的工具（先 kitt"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_rea_android",
+   "rows": 9,
+   "STRICT": 3,
+   "TEMPLATE": 0,
+   "PROSE": 6,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_rea_android action=inspect_android_package",
+    "TEMPLATE": "",
+    "PROSE": "**kitty_rea_android**（rea-mcp）action=`inspect_android_package`：REA APK 检"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_selftest",
+   "rows": 16,
+   "STRICT": 3,
+   "TEMPLATE": 0,
+   "PROSE": 13,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_selftest action=a",
+    "TEMPLATE": "",
+    "PROSE": "`kitty_selftest` 支持的 action：a/c/e/all。当前问的 `a` 用途：回归自检（verify-all编排） 先用"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_wpb",
+   "rows": 47,
+   "STRICT": 3,
+   "TEMPLATE": 5,
+   "PROSE": 39,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_wpb action=write，配套",
+    "TEMPLATE": "kitty_wpb addr=0xADDR",
+    "PROSE": "kitty_wpb 默认写后还原 PTE（restore=true）就是为了缩小暴露窗口；permissive 模式会按 PFN 重建整组保"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_lua",
+   "rows": 13,
+   "STRICT": 2,
+   "TEMPLATE": 0,
+   "PROSE": 11,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_lua action=status",
+    "TEMPLATE": "",
+    "PROSE": "_ops 查名。 `kitty_lua` 的 `decompile` 关联 OP：（该工具不直接下发 OP）"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_uexplorer",
+   "rows": 11,
+   "STRICT": 2,
+   "TEMPLATE": 0,
+   "PROSE": 9,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_uexplorer action=status，配套",
+    "TEMPLATE": "",
+    "PROSE": "`kitty_uexplorer` 支持的 action：status/inject。当前问的 `status` 用途：Unity runti"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "PRESET_OK",
+   "rows": 1,
+   "STRICT": 1,
+   "TEMPLATE": 0,
+   "PROSE": 0,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "PRESET_OK|PRESET_FAIL|preset\\\" -SimpleMatch | Select-Object -Last 15 Line | Format-Table -Wrap | Out",
+    "TEMPLATE": "",
+    "PROSE": ""
+   },
+   "kind": "other"
+  },
+  {
+   "obj": "kitty_acescan",
+   "rows": 24,
+   "STRICT": 1,
+   "TEMPLATE": 1,
+   "PROSE": 22,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "\"name\": \"kitty_acescan\"",
+    "TEMPLATE": "kitty_acescan target=<pid>",
+    "PROSE": "用 `kitty_acescan`（通道 orch）。 签名：`FREE|<addr>` 回包：OK|true / OK|false 同族可选：k"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_rea_callpath",
+   "rows": 8,
+   "STRICT": 1,
+   "TEMPLATE": 0,
+   "PROSE": 7,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_rea_callpath action=trace_call_path",
+    "TEMPLATE": "",
+    "PROSE": "`kitty_rea_callpath`：REA 调用链追踪（通道 rea-mcp）。 `kitty_ce`：直接下发 A 通道 OP。 判据"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_rea_function",
+   "rows": 8,
+   "STRICT": 1,
+   "TEMPLATE": 0,
+   "PROSE": 7,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_rea_function action=analyze_function",
+    "TEMPLATE": "",
+    "PROSE": "/区间/位数）。 `kitty_rea_function` 自身职责：REA 函数档案（伪码/汇编/引用证据）。 "
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_rea_javascript",
+   "rows": 9,
+   "STRICT": 1,
+   "TEMPLATE": 0,
+   "PROSE": 8,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_rea_javascript action=analyze_javascript_application",
+    "TEMPLATE": "",
+    "PROSE": "`kitty_rea_javascript` 支持的 action：analyze_javascript_application。当前问的 `"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "kitty_rea_recover_js",
+   "rows": 8,
+   "STRICT": 1,
+   "TEMPLATE": 1,
+   "PROSE": 6,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "kitty_rea_recover_js action=recover_javascript_sources",
+    "TEMPLATE": "kitty_rea_recover_js path=<app.asar>",
+    "PROSE": "-set）→ 取数（kitty_rea_recover_js 或 kitty_ce）→ 收口（task-dispatch finish → task-close"
+   },
+   "kind": "tool"
+  },
+  {
+   "obj": "ALLOC",
+   "rows": 38,
+   "STRICT": 0,
+   "TEMPLATE": 8,
+   "PROSE": 30,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "ALLOC|<size>",
+    "PROSE": "_PA、KM_PR、ALLOC、W、KM_W、FREE、SYNC_ARCHIVE、SYNC_STAT。 先用 status 类只读动作确认环境，再进写动作。"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "AL_ADD",
+   "rows": 16,
+   "STRICT": 0,
+   "TEMPLATE": 15,
+   "PROSE": 1,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "AL_ADD|<描述>|<addr>|<type>",
+    "PROSE": "`AL_ADD` 失败口径：地址表：加一条（通配条目 AL_* 的具体项） 正常回包：OK|…"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "AL_DEL",
+   "rows": 16,
+   "STRICT": 0,
+   "TEMPLATE": 8,
+   "PROSE": 8,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "AL_DEL|<index>",
+    "PROSE": "`AL_DEL` 失败口径：地址表：删一条 正常回包：OK|…"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "AL_GET",
+   "rows": 15,
+   "STRICT": 0,
+   "TEMPLATE": 7,
+   "PROSE": 8,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "AL_GET|<index>",
+    "PROSE": "DD|AL_DEL|AL_GET|AL_COUNT|AL_SET_VAL|AL_SET_ACT|AL_SET_TYPE|AL_SET_DESC|AL_CLEAR"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "AL_SET_ACT",
+   "rows": 15,
+   "STRICT": 0,
+   "TEMPLATE": 7,
+   "PROSE": 8,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "AL_SET_ACT|<index>|<0|1>",
+    "PROSE": "L_SET_VAL|AL_SET_ACT|AL_SET_TYPE|AL_SET_DESC|AL_CLEAR` 回包：OK|…"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "AL_SET_DESC",
+   "rows": 15,
+   "STRICT": 0,
+   "TEMPLATE": 7,
+   "PROSE": 8,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "AL_SET_DESC|<index>|<描述>",
+    "PROSE": "_SET_TYPE|AL_SET_DESC|AL_CLEAR` 回包：OK|…"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "AL_SET_TYPE",
+   "rows": 13,
+   "STRICT": 0,
+   "TEMPLATE": 6,
+   "PROSE": 7,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "AL_SET_TYPE|<index>|<vt>",
+    "PROSE": "L_SET_ACT|AL_SET_TYPE|AL_SET_DESC|AL_CLEAR` 回包：OK|…"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "AL_SET_VAL",
+   "rows": 16,
+   "STRICT": 0,
+   "TEMPLATE": 8,
+   "PROSE": 8,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "AL_SET_VAL|<index>|<值>",
+    "PROSE": "|AL_COUNT|AL_SET_VAL|AL_SET_ACT|AL_SET_TYPE|AL_SET_DESC|AL_CLEAR` 回包：OK|…"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "BULLET_SCENE",
+   "rows": 1,
+   "STRICT": 0,
+   "TEMPLATE": 1,
+   "PROSE": 0,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "BULLET_SCENE|func (spawn_bullet|_spawn|fire)|var (hp|health|max_hp)|blue_marked_count|func (has_empt",
+    "PROSE": ""
+   },
+   "kind": "other"
+  },
+  {
+   "obj": "CT_LOAD",
+   "rows": 7,
+   "STRICT": 0,
+   "TEMPLATE": 7,
+   "PROSE": 0,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "CT_LOAD|<文件名>",
+    "PROSE": ""
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "CT_SAVE",
+   "rows": 8,
+   "STRICT": 0,
+   "TEMPLATE": 8,
+   "PROSE": 0,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "CT_SAVE|<文件名>",
+    "PROSE": ""
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "FREE",
+   "rows": 29,
+   "STRICT": 0,
+   "TEMPLATE": 12,
+   "PROSE": 17,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "FREE|<addr>",
+    "PROSE": "OC、W、KM_W、FREE、SYNC_ARCHIVE、SYNC_STAT。 先用 status 类只读动作确认环境，再进写动作。"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "KM_ATTACH",
+   "rows": 64,
+   "STRICT": 0,
+   "TEMPLATE": 8,
+   "PROSE": 56,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "KM_ATTACH|<pid>",
+    "PROSE": "I、KM_INFO、KM_ATTACH、KM_R、KM_W、KM_PA"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "KM_MODE",
+   "rows": 9,
+   "STRICT": 0,
+   "TEMPLATE": 8,
+   "PROSE": 1,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "KM_MODE|<open|mem|regions|phys|all|off>",
+    "PROSE": "`KM_MODE` 失败口径：`off` 只清标志：CE 无真正回退 API（如实回报） 正常回包：OK|mode=…|open=…,mem="
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "KM_PA",
+   "rows": 59,
+   "STRICT": 0,
+   "TEMPLATE": 8,
+   "PROSE": 51,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "KM_PA|<va>",
+    "PROSE": "KM_R、KM_W、KM_PA"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "KM_PW",
+   "rows": 49,
+   "STRICT": 0,
+   "TEMPLATE": 7,
+   "PROSE": 42,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "KM_PW|<pa>|<vt>|<val>[|force]",
+    "PROSE": "green。 注意：KM_PW（物理写）默认拒绝，实测会卡死 Lua 引擎，恢复=宿主重启，不要试。  当前:kitty-target.exe / 结果:2/3"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "KM_R",
+   "rows": 81,
+   "STRICT": 0,
+   "TEMPLATE": 9,
+   "PROSE": 72,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "KM_R|<addr>|<vt>",
+    "PROSE": "KM_ATTACH、KM_R、KM_W、KM_PA"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "KM_W",
+   "rows": 50,
+   "STRICT": 0,
+   "TEMPLATE": 9,
+   "PROSE": 41,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "KM_W|<addr>|<vt>|<val>",
+    "PROSE": "TACH、KM_R、KM_W、KM_PA"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "SPEED",
+   "rows": 10,
+   "STRICT": 0,
+   "TEMPLATE": 7,
+   "PROSE": 3,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "SPEED|<倍率>",
+    "PROSE": "rot，速度修改走 SPEED op。  kitty 落地：kitty_ce LUA|<源码> 是逃生口，返回截断 8192 字符；能力边界以 kitty_op"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "STANDBY_MSG",
+   "rows": 1,
+   "STRICT": 0,
+   "TEMPLATE": 0,
+   "PROSE": 1,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "",
+    "PROSE": "STANDBY_MSG|liveBox\"}}"
+   },
+   "kind": "other"
+  },
+  {
+   "obj": "SYNC_FAULT",
+   "rows": 1,
+   "STRICT": 0,
+   "TEMPLATE": 0,
+   "PROSE": 1,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "",
+    "PROSE": "SYNC_FAULT|pending"
+   },
+   "kind": "other"
+  },
+  {
+   "obj": "S_NEXT",
+   "rows": 31,
+   "STRICT": 0,
+   "TEMPLATE": 13,
+   "PROSE": 18,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "S_NEXT|<vt>|<val>[|<start>|<stop>]",
+    "PROSE": "/ 下一步:收窄用 S_NEXT"
+   },
+   "kind": "OP"
+  },
+  {
+   "obj": "kitty_rea_compare",
+   "rows": 7,
+   "STRICT": 0,
+   "TEMPLATE": 0,
+   "PROSE": 7,
+   "evaluated": 0,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "",
+    "PROSE": "报，不自造包装。 `kitty_rea_compare` 的职责是：REA 函数级差分（跨版本迁移）。 替代路径二选一：① 用同通道里已有的工具（先 kitty"
+   },
+   "kind": "tool"
+  }
+ ],
+ "at_risk": [
+  {
+   "obj": "LP",
+   "rows": 0,
+   "STRICT": 0,
+   "TEMPLATE": 0,
+   "PROSE": 0,
+   "evaluated": 2,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "",
+    "PROSE": ""
+   },
+   "kind": "OP",
+   "suggest": 4
+  },
+  {
+   "obj": "DBG_BP",
+   "rows": 53,
+   "STRICT": 0,
+   "TEMPLATE": 8,
+   "PROSE": 45,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "DBG_BP|<addr>|<size>[|execute|write][|int3>|force]",
+    "PROSE": "、DBG_STAT、DBG_BP、DBG_BP_LIST、DBG_BP_DEL、DBG_GO、DBG_REGS、DBG_DETACH、SYNC_ARCHIVE、"
+   },
+   "kind": "OP",
+   "suggest": 3
+  },
+  {
+   "obj": "DBG_BP_DEL",
+   "rows": 49,
+   "STRICT": 0,
+   "TEMPLATE": 9,
+   "PROSE": 40,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "DBG_BP_DEL|<id>[|force]",
+    "PROSE": "G_BP_LIST、DBG_BP_DEL、DBG_GO、DBG_REGS、DBG_DETACH、SYNC_ARCHIVE、SYNC_STAT。 先用 statu"
+   },
+   "kind": "OP",
+   "suggest": 3
+  },
+  {
+   "obj": "DIS",
+   "rows": 8,
+   "STRICT": 0,
+   "TEMPLATE": 7,
+   "PROSE": 1,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "DIS|<addr>",
+    "PROSE": "`DIS` 失败口径：单条反汇编，无范围 正常回包：OK|<文本>"
+   },
+   "kind": "OP",
+   "suggest": 3
+  },
+  {
+   "obj": "KM_PR",
+   "rows": 59,
+   "STRICT": 0,
+   "TEMPLATE": 8,
+   "PROSE": 51,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "KM_PR|<pa>|<vt>",
+    "PROSE": "M_R、KM_PA、KM_PR、ALLOC、W、KM_W、FREE、SYNC_ARCHIVE、SYNC_STAT。 先用 status 类只读动作确认环境，再进"
+   },
+   "kind": "OP",
+   "suggest": 3
+  },
+  {
+   "obj": "reverse_add_target",
+   "rows": 0,
+   "STRICT": 0,
+   "TEMPLATE": 0,
+   "PROSE": 0,
+   "evaluated": 1,
+   "ex": {
+    "STRICT": "",
+    "TEMPLATE": "",
+    "PROSE": ""
+   },
+   "kind": "tool",
+   "suggest": 3
+  }
+ ],
+ "learnable": [
+  "kitty_ce",
+  "S_NEW",
+  "kitty_die",
+  "kitty_dump",
+  "kitty_ghidra",
+  "MODENUM",
+  "DBG_ATTACH",
+  "kitty_sym",
+  "kitty_prot",
+  "kitty_x64dbg",
+  "P_BACK",
+  "OPEN",
+  "kitty_rea",
+  "PING",
+  "VER",
+  "kitty_settings",
+  "kitty_dbg",
+  "kitty_net",
+  "kitty_drv",
+  "kitty_jadx",
+  "S_SNAP",
+  "kitty_ops",
+  "P_BACK_RES",
+  "kitty_drvio",
+  "kitty_engines",
+  "P_WALK",
+  "SYNC_ARCHIVE",
+  "CUR",
+  "DBG_BP_LIST",
+  "KM_INFO",
+  "kitty_pchain",
+  "DBG_REGS",
+  "DBG_GO",
+  "DBG_STAT",
+  "DBG_WAIT",
+  "BATCH",
+  "kitty_loop_status",
+  "kitty_rea_method",
+  "kitty_loop",
+  "MODBASE",
+  "kitty_rea_trace"
+ ]
+}

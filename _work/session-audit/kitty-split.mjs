@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const R = 'D:/BaiduNetdiskDownload/Local-AI/train/data/kitty-reverse';
+const R = 'D:/BaiduNetdiskDownload/Local-AI/train/lines/9b-oxcoder/data/kitty-reverse';
 const P = (f) => path.join(R, f);
 const rows = fs.readFileSync(P('train-kitty-core.jsonl'), 'utf8').split('\n').filter(Boolean).map(JSON.parse);
 

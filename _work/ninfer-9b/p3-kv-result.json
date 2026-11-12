@@ -1,0 +1,74 @@
+{
+  "results": [
+    {
+      "name": "kv-bf16",
+      "extra": [
+        "--kv-dtype",
+        "bf16"
+      ],
+      "ready": true,
+      "sys": "[ directions_52.html, FIRST_PARSED_BY:1371",
+      "user": "2+2 equals 4."
+    },
+    {
+      "name": "kv-int8",
+      "extra": [
+        "--kv-dtype",
+        "int8"
+      ],
+      "ready": false,
+      "sys": null,
+      "user": null,
+      "error": "NOT READY exit 1",
+      "log_tail": "2026-11-10 18:11:14.081  INFO  starting engine\n2026-11-10 18:11:14.999  INFO  loading weights | 7.40 GiB\n2026-11-10 18:11:16.749  INFO  weights ready | 7.40 GiB | 1.7s | 4.23 GiB/s\n2026-11-10 18:11:21.267  FATAL server failed during startup | text/layers/3 verify columns=1: quantized causal attention: invalid operands\n"
+    },
+    {
+      "name": "kv-fp8",
+      "extra": [
+        "--kv-dtype",
+        "fp8"
+      ],
+      "ready": false,
+      "sys": null,
+      "user": null,
+      "error": "NOT READY exit 1",
+      "log_tail": "2026-11-10 18:11:23.498  INFO  starting engine\n2026-11-10 18:11:24.410  INFO  loading weights | 7.40 GiB\n2026-11-10 18:11:26.153  INFO  weights ready | 7.40 GiB | 1.7s | 4.25 GiB/s\n2026-11-10 18:11:30.611  FATAL server failed during startup | text/layers/3 verify columns=1: quantized causal attention: invalid operands\n"
+    },
+    {
+      "name": "kv-nvfp4",
+      "extra": [
+        "--kv-dtype",
+        "nvfp4"
+      ],
+      "ready": false,
+      "sys": null,
+      "user": null,
+      "error": "NOT READY exit 1",
+      "log_tail": "2026-11-10 18:11:32.850  INFO  starting engine\n2026-11-10 18:11:33.718  INFO  loading weights | 7.40 GiB\n2026-11-10 18:11:35.507  INFO  weights ready | 7.40 GiB | 1.8s | 4.14 GiB/s\n2026-11-10 18:11:40.072  FATAL server failed during startup | text/layers/3 verify columns=1: quantized causal attention: invalid operands\n"
+    },
+    {
+      "name": "kv-k8v4",
+      "extra": [
+        "--kv-dtype",
+        "k8v4"
+      ],
+      "ready": false,
+      "sys": null,
+      "user": null,
+      "error": "NOT READY exit 1",
+      "log_tail": "2026-11-10 18:11:42.302  INFO  starting engine\n2026-11-10 18:11:43.185  INFO  loading weights | 7.40 GiB\n2026-11-10 18:11:44.927  INFO  weights ready | 7.40 GiB | 1.7s | 4.25 GiB/s\n2026-11-10 18:11:49.452  FATAL server failed during startup | text/layers/3 verify columns=1: quantized causal attention: invalid operands\n"
+    },
+    {
+      "name": "lm-head-draft",
+      "extra": [
+        "--lm-head-draft"
+      ],
+      "ready": false,
+      "sys": null,
+      "user": null,
+      "error": "NOT READY exit 1",
+      "log_tail": "city beyond active lanes; --host-context-mib bounds shared Host State/KV and in-flight storage in MiB\r\n       --host-context-mib accepts decimal MiB values that resolve to whole bytes\r\n       --default-thinking-budget caps model-origin thinking for enabled requests; control tokens count toward the request output limit\r\n       --preserve-thinking retains closed-turn assistant reasoning in later prompts\r\n       sampler defaults come from the loaded model and resolved thinking mode; server flags and request fields override individual values.\r\n       --greedy forces temperature 0 (exact argmax).\r\n"
+    }
+  ],
+  "remaining": []
+}

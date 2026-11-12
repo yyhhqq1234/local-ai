@@ -1,0 +1,17 @@
+2026-11-08 21:31:43.533  INFO  starting engine
+2026-11-08 21:31:44.386  INFO  loading weights | 7.82 GiB
+2026-11-08 21:31:46.274  INFO  weights ready | 7.82 GiB | 1.9s | 4.14 GiB/s
+2026-11-08 21:31:50.515  INFO  CUDA graph memory calibrated | 4.2s
+2026-11-08 21:31:50.533  INFO  pinning host context | 2.00 GiB
+2026-11-08 21:31:50.749  INFO  host context pinned | 2.00 GiB | 216 ms
+2026-11-08 21:31:50.999  INFO  CUDA graphs ready | 193 ms
+2026-11-08 21:31:51.003  INFO  engine ready | kittyrev-oxcoder9b-nsfw-gate-full-GSQ | total 7.5s | weights 7.82 GiB | CUDA sync spin
+2026-11-08 21:31:51.004  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 262.7 MiB | free 1.61 GiB
+2026-11-08 21:31:51.005  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 21:31:51.161  INFO  listening on http://127.0.0.1:1845 | model kittyrev-oxcoder9b-nsfw-gate-full-GSQ | auth disabled
+2026-11-08 21:31:51.622  INFO  req#1 started | openai-chat non-stream | 1 message | max output 192 | thinking off
+[fold-miss] layers=24 qk=16 v=32 conv=8192
+[exc] gdn_replay_fold: unsupported record geometry
+2026-11-08 21:31:51.910  ERROR req#1 failed during generation | openai-chat | HTTP 500 | internal error
+2026-11-08 21:31:51.921  WARN  req#2 failed during prepare | openai-chat non-stream | HTTP 503 | service unavailable | messages 1
+2026-11-08 21:31:56.162  INFO  throughput | 5.0s | prefill 4.2 tok/s (21 tok) | running 0 | host 0.3% (15.4 ms)

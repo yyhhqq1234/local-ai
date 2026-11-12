@@ -1,0 +1,17 @@
+{
+ "rows": 7608,
+ "rewired": 258,
+ "unmatched": 708,
+ "call_before": 3421,
+ "call_after": 3648,
+ "by_tool": {
+  "kitty_ce": 145,
+  "kitty_ghidra": 41,
+  "kitty_trail": 18,
+  "kitty_pchain": 44,
+  "kitty_prot": 3,
+  "kitty_dualview": 3,
+  "kitty_ida": 3,
+  "kitty_drv": 1
+ }
+}

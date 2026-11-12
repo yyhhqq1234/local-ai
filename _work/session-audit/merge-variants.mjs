@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const ROOT = 'D:/BaiduNetdiskDownload/Local-AI/train/data/nsfw';
+const ROOT = 'D:/BaiduNetdiskDownload/Local-AI/train/lines/_shared/data/nsfw';
 const P = (f) => path.join(ROOT, f);
 
 // ── 归并表（显式可审计；未列入的一律不动）──

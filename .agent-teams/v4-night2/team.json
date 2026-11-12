@@ -1,0 +1,171 @@
+{
+  "name": "v4-night2",
+  "id": "v4-night2",
+  "description": "v4 夜间执行队（继承 captain 路由）。按 logs/TEAM-HANDOFF-2026-10-22.md 接手，禁止重新调研。",
+  "captainSessionId": "session-01915aa0-0e61-4ac2-b1df-6aafdd197d64",
+  "createdAt": 1792662351454,
+  "members": [
+    {
+      "id": "",
+      "name": "m-monitor",
+      "role": "训练监工",
+      "provider": "commandcode-goat-autosync",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "reasoningEffort": "high",
+      "joinedAt": 1792662351454,
+      "status": "idle",
+      "lastDispatchError": "Error: agent-teams: provider \"spawn\" cannot apply a member persona\n    at spawnMember (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/members.js:511:15)\n    at file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:305:23\n    at async withTeamLock (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/state.js:44:16)\n    at async Object.dispatchMember [as dispatch] (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:291:20)\n    at async file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/scheduler.js:333:23\n    at async serializeMember (file:///"
+    },
+    {
+      "id": "",
+      "name": "m-audit",
+      "role": "参数生效检查器",
+      "provider": "commandcode-goat-autosync",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "reasoningEffort": "high",
+      "joinedAt": 1792662351454,
+      "status": "idle",
+      "lastDispatchError": "Error: agent-teams: provider \"spawn\" cannot apply a member persona\n    at spawnMember (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/members.js:511:15)\n    at file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:305:23\n    at async withTeamLock (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/state.js:44:16)\n    at async Object.dispatchMember [as dispatch] (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:291:20)\n    at async file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/scheduler.js:333:23\n    at async serializeMember (file:///"
+    },
+    {
+      "id": "",
+      "name": "m-deliver",
+      "role": "七步预检与执行",
+      "provider": "commandcode-goat-autosync",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "reasoningEffort": "high",
+      "joinedAt": 1792662351454,
+      "status": "idle",
+      "lastDispatchError": "Error: agent-teams: provider \"spawn\" cannot apply a member persona\n    at spawnMember (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/members.js:511:15)\n    at file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:305:23\n    at async withTeamLock (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/state.js:44:16)\n    at async Object.dispatchMember [as dispatch] (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:291:20)\n    at async file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/scheduler.js:333:23\n    at async serializeMember (file:///"
+    },
+    {
+      "id": "",
+      "name": "m-judge",
+      "role": "判读落账",
+      "provider": "commandcode-goat-autosync",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "reasoningEffort": "medium",
+      "joinedAt": 1792662351454,
+      "status": "idle",
+      "lastDispatchError": "Error: agent-teams: provider \"spawn\" cannot apply a member persona\n    at spawnMember (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/members.js:511:15)\n    at file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:305:23\n    at async withTeamLock (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/state.js:44:16)\n    at async Object.dispatchMember [as dispatch] (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:291:20)\n    at async file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/scheduler.js:333:23\n    at async serializeMember (file:///"
+    },
+    {
+      "id": "",
+      "name": "m-data",
+      "role": "数据核对",
+      "provider": "commandcode-goat-autosync",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "reasoningEffort": "medium",
+      "joinedAt": 1792662351454,
+      "status": "idle",
+      "lastDispatchError": "Error: agent-teams: provider \"spawn\" cannot apply a member persona\n    at spawnMember (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/members.js:511:15)\n    at file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:305:23\n    at async withTeamLock (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/state.js:44:16)\n    at async Object.dispatchMember [as dispatch] (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:291:20)\n    at async file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/scheduler.js:333:23\n    at async serializeMember (file:///"
+    },
+    {
+      "id": "",
+      "name": "m-repo",
+      "role": "仓库提交清单",
+      "provider": "commandcode-goat-autosync",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "reasoningEffort": "medium",
+      "joinedAt": 1792662351454,
+      "status": "idle",
+      "lastDispatchError": "Error: agent-teams: provider \"spawn\" cannot apply a member persona\n    at spawnMember (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/members.js:511:15)\n    at file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:305:23\n    at async withTeamLock (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/state.js:44:16)\n    at async Object.dispatchMember [as dispatch] (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:291:20)\n    at async file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/scheduler.js:333:23\n    at async serializeMember (file:///"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "profileSeedId": "x1",
+      "subject": "训练监工：每 15 分钟采样直到 915 步",
+      "description": "读 /root/autodl-tmp/kitty-rev/logs/v4/train2.log 与 nvidia-smi，每 15 分钟一条：step/915、s/it、GPU%/显存/功耗、磁盘、ETA。红线：[ALERT] + 证据行（进程消失且 step<915、Traceback、OOM、s/it>35 两轮、显存<15G 而进程在、nan/inf、盘<20G）。到 915 报训练完成 + ls -l out-v4/。ssh 必须 AUTODL_HOST=123.127.15.155。不 kill、不起 serve。",
+      "status": "pending",
+      "assignee": "m-monitor",
+      "dependencies": [],
+      "attempt": 2,
+      "createdAt": 1792662351454,
+      "updatedAt": 1792662360996,
+      "reassigning": false
+    },
+    {
+      "id": "t2",
+      "profileSeedId": "x2",
+      "subject": "参数生效检查器 + T9 配对",
+      "description": "写 scripts/assert_params_effective.py：①n==eval_meta.limit ②max(chars)/1.7<=max_tokens*1.1（英文重时 /3.5 复核防误报）③thinking=false→answer 不以 <think> 开头 ④source 含 jsonl→list_sha16 非 n/a ⑤rows/n/limit 自洽；--pair C B 逐字段比；--selftest 3/3；FAIL 退出码 1。用现有 C 产物实测并报结论。",
+      "status": "pending",
+      "assignee": "m-audit",
+      "dependencies": [],
+      "attempt": 2,
+      "createdAt": 1792662351454,
+      "updatedAt": 1792662360998,
+      "reassigning": false
+    },
+    {
+      "id": "t3",
+      "profileSeedId": "x3",
+      "subject": "七步干跑预检",
+      "description": "只读+干跑，交 tmp/deliver/v4-sevenstep-preflight.md 与 dry-run 脚本：核 merged/gguf/iq2s/ninfer/act-cache 路径；确认 merge --base=base/Huihui；pin_arch 在 merge 后 convert 前（给行号）；imatrix calib 建议；.ninfer 体积区间；六行失败→诊断动作表。不启动真操作。",
+      "status": "pending",
+      "assignee": "m-deliver",
+      "dependencies": [],
+      "attempt": 2,
+      "createdAt": 1792662351454,
+      "updatedAt": 1792662361000,
+      "reassigning": false
+    },
+    {
+      "id": "t4",
+      "profileSeedId": "x4",
+      "subject": "判读落账 + B 组六格模板",
+      "description": "写进 logs/v4/DECISION-TREE.md：error-recovery 11/15（+2 假失败）、pe-identify saturated&loose、refusal n=100/0/MDE19.8pp（日志60/60是分母bug）。再出 tmp/plan-opt/B-JUDGE-TEMPLATE.md 六格（B1 配对 b−c≥3&b+c≥6；B2 分项；B3 bench mean_f1 vs 0.1255 + 空答 n_fixed；B4 kitty23 vs 13/23；B5 refusal 0/100→?/100 ≥4条才是信号；B6 三选一句话）。填不上写 NOT_MEASURED。",
+      "status": "pending",
+      "assignee": "m-judge",
+      "dependencies": [],
+      "attempt": 2,
+      "createdAt": 1792662351454,
+      "updatedAt": 1792662361001,
+      "reassigning": false
+    },
+    {
+      "id": "t5",
+      "profileSeedId": "x5",
+      "subject": "forge 混料核对 + v4.1 复跑",
+      "description": "交 tmp/v41/FORGE-IN-MIX.md（抽 meta.forge==r4 19 条与 r5 20 条，核六对象与 decision-chain order，各抽 3 条原文）与 tmp/v41/V41-RERUN.md（W3 后三行命令与预期 total 5378/Σ组 2604/will-nsfw 120:30/rest 46.15%）。只读。",
+      "status": "pending",
+      "assignee": "m-data",
+      "dependencies": [],
+      "attempt": 2,
+      "createdAt": 1792662351454,
+      "updatedAt": 1792662361004,
+      "reassigning": false
+    },
+    {
+      "id": "t6",
+      "profileSeedId": "x6",
+      "subject": "提交清单准备（不提交）",
+      "description": "交 logs/COMMIT-READY.md：四批（D base-meta → B deploy/cloud → A scripts+regression → C data+docs）文件数/字节/中文 message/精确 git add/回滚；列不应提交项。禁止 add/commit/push。",
+      "status": "pending",
+      "assignee": "m-repo",
+      "dependencies": [],
+      "attempt": 2,
+      "createdAt": 1792662351454,
+      "updatedAt": 1792662361006,
+      "reassigning": false
+    },
+    {
+      "id": "t7",
+      "profileSeedId": "x7",
+      "subject": "训完：pick → 七步 → 报 lead",
+      "description": "915 步完成后：读 out-v4 → 跑 deploy/cloud/v4_pick.sh → 读 [PICK] 定 adapter → merge(base=HUHUI) → pin_arch → make_imatrix → IQ2_S → .ninfer → pack_deliverables。每步报一行结果与 md5/字节。FATAL 即停并报。",
+      "status": "pending",
+      "assignee": "m-deliver",
+      "dependencies": [
+        "t1",
+        "t3"
+      ],
+      "attempt": 0,
+      "createdAt": 1792662351454,
+      "updatedAt": 1792662351454
+    }
+  ],
+  "taskSeq": 7
+}

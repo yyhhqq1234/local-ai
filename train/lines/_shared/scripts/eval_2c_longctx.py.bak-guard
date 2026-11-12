@@ -1,0 +1,221 @@
+"""2C 长上下文判据 —— 长前置上下文下的工具路由准确率
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+为什么是这个判据
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2C 训的是「长上下文不退化」。要回答的是：**同一个问题，塞进 3000 token 无关上下文后，
+模型还选得对工具吗？**
+
+对比两条路：
+  · needle-in-haystack —— 测「长文里找关键值」，与代码工程能力关联弱
+  · 跨文件一致性 —— 贴近真实工程，但构造成本高、判据模糊
+  · **长上下文下的工具路由准确率** —— 复用 36 条泛化集，只加长前缀，直接测退化量 ✅
+
+设计：同一条问题跑两次
+    A) 裸问                    → 基线命中
+    B) 前置 3000 token 真工程文本 → 长上下文命中
+    Δ = A - B 就是「长上下文损伤」。判据 Δ <= 10 个百分点。
+
+前置文本用 2A 轨迹片段（真实工程内容），不用随机垃圾 —— 垃圾会被模型直接忽略，测不出问题。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+用法
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  python eval_2c_longctx.py --adapter <path> --prefix-tokens 3000
+  python eval_2c_longctx.py --adapter ""                 # 基座对照
+  python eval_2c_longctx.py --adapter <path> --cases 12   # 只跑前 12 条（快）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+import argparse
+import io
+import json
+import os
+import random
+import re
+import sys
+
+import torch
+
+sys.stdout.reconfigure(encoding="utf-8")
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+TRAIN_ROOT = os.path.dirname(HERE)
+sys.path.insert(0, HERE)
+
+BASE = os.path.join(TRAIN_ROOT, "models", "OxCoder-9B")
+FILLER = os.path.join(TRAIN_ROOT, "data", "agent-traj", "traj-all-capped.jsonl")
+GIB = 2 ** 30
+PAT = re.compile(r"(?:kitty|reverse)_[a-z0-9_]+")
+
+
+def norm_tools(raw, tools):
+    out = set()
+    for tok in raw:
+        if tok in tools:
+            out.add(tok)
+            continue
+        pref = [k for k in tools if tok.startswith(k)]
+        out.add(max(pref, key=len) if pref else tok)
+    return out
+
+
+def load_model(adapter=None):
+    from transformers import AutoModelForImageTextToText, AutoTokenizer, BitsAndBytesConfig
+    from peft import PeftModel
+
+    bnb = BitsAndBytesConfig(
+        load_in_4bit=True, bnb_4bit_quant_type="nf4",
+        bnb_4bit_use_double_quant=True, bnb_4bit_compute_dtype=torch.bfloat16,
+    )
+    tok = AutoTokenizer.from_pretrained(BASE)
+    model = AutoModelForImageTextToText.from_pretrained(
+        BASE, device_map={"": 0}, low_cpu_mem_usage=True,
+        attn_implementation="sdpa", quantization_config=bnb,
+    )
+    if adapter:
+        model = PeftModel.from_pretrained(model, adapter)
+    for p in model.parameters():
+        if p.dtype == torch.float32:
+            p.data = p.data.to(torch.bfloat16)
+    model.eval()
+    inner = getattr(model, "model", None)
+    if inner is not None and getattr(inner, "visual", None) is not None:
+        inner.visual = None
+        torch.cuda.empty_cache()
+    print("[load] %s  allocated = %.2f GiB"
+          % ("adapter" if adapter else "基座", torch.cuda.memory_allocated() / GIB))
+    return model, tok
+
+
+@torch.no_grad()
+def gen(model, tok, system, user, max_new=200):
+    msgs = []
+    if system:
+        msgs.append({"role": "system", "content": system})
+    msgs.append({"role": "user", "content": user})
+    text = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+    ids = tok(text, return_tensors="pt", add_special_tokens=False).to(model.device)
+    if ids["input_ids"].shape[1] > 3800:
+        ids = {"input_ids": ids["input_ids"][:, :3800],
+               "attention_mask": ids["attention_mask"][:, :3800]}
+    out = model.generate(
+        **ids, max_new_tokens=max_new, do_sample=False,
+        temperature=None, top_p=None, pad_token_id=tok.eos_token_id,
+    )
+    return tok.decode(out[0][ids["input_ids"].shape[1]:], skip_special_tokens=True)
+
+
+def build_filler(tok, target_tokens, rng):
+    """从 2A 轨迹里取真实工程文本，凑到约 target_tokens"""
+    pool = []
+    with io.open(FILLER, "r", encoding="utf-8") as f:
+        for line in f:
+            if not line.strip():
+                continue
+            o = json.loads(line)
+            a = next((m["content"] for m in o.get("messages") or []
+                      if m.get("role") == "assistant"), "")
+            if len(a) > 400:
+                pool.append(a)
+    rng.shuffle(pool)
+    out, n = [], 0
+    for p in pool:
+        L = len(tok(p, add_special_tokens=False)["input_ids"])
+        out.append(p)
+        n += L
+        if n >= target_tokens:
+            break
+    return "\n\n".join(out)[:target_tokens * 4]   # 粗截，后面按 token 再验
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--adapter", default="train/out/re-stage1-r2/final")
+    ap.add_argument("--prefix-tokens", type=int, default=3000, dest="ptok")
+    ap.add_argument("--cases", type=int, default=0, help="只跑前 N 条（0=全部 36）")
+    ap.add_argument("--max-new", type=int, default=200)
+    ap.add_argument("--seed", type=int, default=7)
+    ap.add_argument("--out", default=None)
+    args = ap.parse_args()
+
+    from eval_cases_re import CASES
+    from eval_re_generalize import load_system
+
+    tools = {t["name"] for t in json.load(
+        open(os.path.join(TRAIN_ROOT, "data", "kitty-reverse",
+                          "kitty-contracts", "tools.json"), encoding="utf-8"))}
+    SYSTEM = load_system()
+    cases = CASES[:args.cases] if args.cases else CASES
+
+    rng = random.Random(args.seed)
+
+    model, tok = load_model(args.adapter)
+    filler = build_filler(tok, args.ptok, rng)
+    f_tok = len(tok(filler, add_special_tokens=False)["input_ids"])
+
+    print("=" * 80)
+    print("2C 长上下文判据 —— 工具路由退化量")
+    print("=" * 80)
+    print("adapter = %s" % (args.adapter or "基座"))
+    print("前置上下文 = %d token（来自 2A 真实轨迹片段）" % f_tok)
+    print("场景数 = %d" % len(cases))
+    print()
+
+    def run_one(user_text):
+        resp = gen(model, tok, SYSTEM, user_text, args.max_new)
+        raw = set(PAT.findall(resp or ""))
+        return norm_tools(raw, tools), resp
+
+    short_hit = long_hit = 0
+    detail = []
+    for c in cases:
+        got_s, resp_s = run_one(c["ask"])
+        ok_s = bool(got_s & c["expect"]) and not (got_s - tools)
+        # 长上下文版：前置 filler + 分隔 + 原问题（问题放末尾，测检索+保持）
+        long_ask = (
+            "[以下是另一个项目的工程记录，与本问题无关，仅供上下文参考]\n\n"
+            + filler
+            + "\n\n[无关记录结束]\n\n现在回答这个问题：\n" + c["ask"]
+        )
+        got_l, resp_l = run_one(long_ask)
+        ok_l = bool(got_l & c["expect"]) and not (got_l - tools)
+        short_hit += 1 if ok_s else 0
+        long_hit += 1 if ok_l else 0
+        flag = ""
+        if ok_s and not ok_l:
+            flag = "  ← 长上下文退化"
+        elif not ok_s and ok_l:
+            flag = "  ← 长上下文反而对了"
+        print("  %s %-3s 裸问 %s | 长上下文 %s%s"
+              % (c["id"], c["level"], "✅" if ok_s else "❌", "✅" if ok_l else "❌", flag))
+        detail.append({"id": c["id"], "level": c["level"],
+                       "short_ok": ok_s, "long_ok": ok_l,
+                       "got_short": sorted(got_s)[:4], "got_long": sorted(got_l)[:4],
+                       "resp_short_head": resp_s[:150].replace("\n", "⏎"),
+                       "resp_long_head": resp_l[:150].replace("\n", "⏎")})
+
+    n = len(cases)
+    ss, ls = short_hit / n, long_hit / n
+    print()
+    print("=" * 80)
+    print("汇总（%d 条）" % n)
+    print("=" * 80)
+    print("  裸问命中       %d/%d = %.1f%%" % (short_hit, n, ss * 100))
+    print("  长上下文命中   %d/%d = %.1f%%" % (long_hit, n, ls * 100))
+    print("  长上下文损伤   %+.1f pt（判据：损伤 <= 10 pt）" % ((ls - ss) * 100))
+    verdict = "✅ 通过" if (ss - ls) * 100 <= 10 else "❌ 不通过（长上下文损伤过大）"
+    print("  判定：%s" % verdict)
+
+    out = args.out or os.path.join(
+        TRAIN_ROOT, "out", "eval-2c-longctx.json")
+    with open(out, "w", encoding="utf-8") as f:
+        json.dump({"adapter": args.adapter, "prefix_tokens": f_tok, "n": n,
+                   "short_hit_rate": round(ss, 4), "long_hit_rate": round(ls, 4),
+                   "damage_pt": round((ls - ss) * 100, 1),
+                   "detail": detail}, f, ensure_ascii=False, indent=2)
+    print()
+    print("  明细 → %s" % out)
+
+
+if __name__ == "__main__":
+    main()

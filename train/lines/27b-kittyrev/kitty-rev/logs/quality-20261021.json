@@ -1,0 +1,237 @@
+{
+  "counts": {
+    "train": 2736,
+    "eval": 304,
+    "dpo": 48
+  },
+  "issues": [
+    {
+      "kind": "dup_near",
+      "detail": "train[28] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[227] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[463] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[490] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[494] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[549] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[552] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[569] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[634] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[690] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[786] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[807] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[838] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[896] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[897] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[901] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[922] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[958] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[989] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1064] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1168] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1175] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1177] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1218] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1231] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1247] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1255] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1310] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1318] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1339] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1353] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1442] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1445] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1470] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1477] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1482] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1525] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1532] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1548] 近似重复"
+    },
+    {
+      "kind": "dup_near",
+      "detail": "train[1549] 近似重复"
+    }
+  ],
+  "issues_count": {
+    "struct": 0,
+    "dup": 0,
+    "dup_near": 78,
+    "contract": 0,
+    "sig_mismatch": 0,
+    "toolcall_json": 0,
+    "over_ctx": 0,
+    "empty": 0
+  },
+  "cats": {
+    "tool-action": 529,
+    "op-syntax": 473,
+    "real-discipline": 383,
+    "tool-route": 292,
+    "kb-tool": 221,
+    "kb-re": 194,
+    "action-reverse": 165,
+    "trajectory": 100,
+    "guard": 87,
+    "transition-syntax": 54,
+    "error-recovery": 45,
+    "kb-guard": 43,
+    "next-action": 37,
+    "real-kitty": 36,
+    "op-tool-map": 33,
+    "real-trajectory": 17,
+    "error-trajectory": 6,
+    "closeout": 2,
+    "error-recovery-no-target": 2,
+    "dualview-gate": 1,
+    "pointer-chain": 1,
+    "kernel-view": 1,
+    "write-guard": 1,
+    "happy-path": 1,
+    "spec-compliance": 1,
+    "protocol-compression": 1,
+    "capability-boundary": 1,
+    "patch-expect": 1,
+    "error-recovery-need-range": 1,
+    "contract-conflict": 1,
+    "tool-missing-escalate": 1,
+    "op-precision-scan": 1,
+    "dual-field-gate": 1,
+    "error-recovery-transition": 1,
+    "cost-convergence": 1,
+    "host-selfheal": 1
+  },
+  "tiers": {
+    "silver": 1974,
+    "gold": 632,
+    "guard": 130
+  },
+  "coverage": {
+    "tools": "64/64",
+    "ops": "66/66",
+    "transitions": "12/12",
+    "op_missing": []
+  },
+  "length": {
+    "est_tokens_max": 1500,
+    "est_tokens_avg": 262,
+    "over_ctx": 0,
+    "ctx": 2048
+  },
+  "contamination": {
+    "eval_prompts_in_train": 0
+  }
+}

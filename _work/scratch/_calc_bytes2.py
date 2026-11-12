@@ -29,7 +29,7 @@ def size_of(shape, fname, force=None):
         return n * QBITS[key] // 8
     return None
 
-p = r"D:\BaiduNetdiskDownload\Local-AI\train\local-pack\qwen3.8-27b-kittyrev-v5-iq2s-mtp.ninfer.conversion.json"
+p = r"D:\BaiduNetdiskDownload\Local-AI\train\lines\27b-kittyrev\local-pack\qwen3.8-27b-kittyrev-v5-iq2s-mtp.ninfer.conversion.json"
 d = json.load(open(p, encoding="utf-8"))
 methods, payload = d["methods"], d["payload_bytes"]
 

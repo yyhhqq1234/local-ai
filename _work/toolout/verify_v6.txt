@@ -1,0 +1,36 @@
+[body] 128 terms (2 cross-ref)
+[action] 87 terms (4 cross-ref)
+[state] 53 terms (9 cross-ref)
+[emotion] 37 terms (0 cross-ref)
+[position] 18 terms (2 cross-ref)
+[onomatopoeia] 9 terms (0 cross-ref)
+[vocalization] 26 terms (0 cross-ref)
+[relationship] 19 terms (10 cross-ref)
+[descriptor] 14 terms (5 cross-ref)
+[genre] 21 terms (11 cross-ref)
+[identity] 93 terms (31 cross-ref)
+[personality] 30 terms (30 cross-ref)
+
+Total: 535 terms
+
+Categories with cross-ref examples:
+  [body] 雪白 -> also in ['descriptor']
+  [body] 白皙 -> also in ['descriptor']
+  [action] 抽插 -> also in ['state']
+  [action] 挺进 -> also in ['state']
+  [action] 顶弄 -> also in ['state']
+  [action] 侵犯 -> also in ['genre']
+  [state] 酥软 -> also in ['emotion']
+  [state] 瘫软 -> also in ['emotion']
+  [state] 绵软 -> also in ['emotion']
+  [state] 淫荡 -> also in ['personality']
+  [state] 淫靡 -> also in ['personality']
+  [state] 诱人 -> also in ['personality']
+  [state] 兴奋 -> also in ['emotion']
+  [state] 羞耻 -> also in ['emotion']
+  [state] 主动 -> also in ['personality']
+  [position] 骑乘 -> also in ['action']
+  [position] 狗爬 -> also in ['action']
+  [relationship] 主人 -> also in ['identity']
+  [relationship] 主人大人 -> also in ['identity']
+  [relationship] 少女 -> also in ['identity']

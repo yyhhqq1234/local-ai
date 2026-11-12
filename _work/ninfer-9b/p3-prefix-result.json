@@ -1,0 +1,212 @@
+{
+  "results": [
+    {
+      "name": "base",
+      "text": "2+2 equals 4.",
+      "ok": true
+    },
+    {
+      "name": "pre-Hi",
+      "text": "2+2 equals 4.",
+      "ok": true
+    },
+    {
+      "name": "pre-A",
+      "text": "2+2=4",
+      "ok": false
+    },
+    {
+      "name": "pre-The",
+      "text": "2+2 equals **4**.",
+      "ok": true
+    },
+    {
+      "name": "pre-Q",
+      "text": "2+2 equals **4**.",
+      "ok": true
+    },
+    {
+      "name": "pre-1",
+      "text": "2+2 equals **4**.",
+      "ok": true
+    },
+    {
+      "name": "pre-xx",
+      "text": "2+2=4",
+      "ok": false
+    },
+    {
+      "name": "pre-context",
+      "text": "2+2 equals 4.",
+      "ok": true
+    },
+    {
+      "name": "suf-Please",
+      "text": "2+2 equals 4.",
+      "ok": true
+    },
+    {
+      "name": "suf-word",
+      "text": "4",
+      "ok": false
+    },
+    {
+      "name": "suf-space",
+      "text": "2+2 equals 4.",
+      "ok": true
+    },
+    {
+      "name": "pad-end",
+      "text": "2+2 equals 4.",
+      "ok": true
+    },
+    {
+      "name": "pad-mid",
+      "text": "2+2 equals 4.",
+      "ok": true
+    }
+  ],
+  "reqlog": [
+    {
+      "prompt_tokens": 19,
+      "ids": [
+        17,
+        10,
+        17,
+        16327,
+        220,
+        19
+      ]
+    },
+    {
+      "prompt_tokens": 20,
+      "ids": [
+        17,
+        10,
+        17,
+        16327,
+        220,
+        19
+      ]
+    },
+    {
+      "prompt_tokens": 20,
+      "ids": [
+        17,
+        10,
+        17,
+        28,
+        19,
+        248046
+      ]
+    },
+    {
+      "prompt_tokens": 20,
+      "ids": [
+        17,
+        10,
+        17,
+        16327,
+        2972,
+        19
+      ]
+    },
+    {
+      "prompt_tokens": 21,
+      "ids": [
+        17,
+        10,
+        17,
+        16327,
+        2972,
+        19
+      ]
+    },
+    {
+      "prompt_tokens": 20,
+      "ids": [
+        17,
+        10,
+        17,
+        16327,
+        2972,
+        19
+      ]
+    },
+    {
+      "prompt_tokens": 20,
+      "ids": [
+        17,
+        10,
+        17,
+        28,
+        19,
+        248046
+      ]
+    },
+    {
+      "prompt_tokens": 20,
+      "ids": [
+        17,
+        10,
+        17,
+        16327,
+        220,
+        19
+      ]
+    },
+    {
+      "prompt_tokens": 20,
+      "ids": [
+        17,
+        10,
+        17,
+        16327,
+        220,
+        19
+      ]
+    },
+    {
+      "prompt_tokens": 20,
+      "ids": [
+        19,
+        248046,
+        198,
+        248044
+      ]
+    },
+    {
+      "prompt_tokens": 19,
+      "ids": [
+        17,
+        10,
+        17,
+        16327,
+        220,
+        19
+      ]
+    },
+    {
+      "prompt_tokens": 22,
+      "ids": [
+        17,
+        10,
+        17,
+        16327,
+        220,
+        19
+      ]
+    },
+    {
+      "prompt_tokens": 21,
+      "ids": [
+        17,
+        10,
+        17,
+        16327,
+        220,
+        19
+      ]
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 
-const ROOT = 'D:/BaiduNetdiskDownload/Local-AI/train/data/nsfw';
+const ROOT = 'D:/BaiduNetdiskDownload/Local-AI/train/lines/_shared/data/nsfw';
 const P = (f) => path.join(ROOT, f);
 const sha256 = (p) => crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const lines = (f) => fs.readFileSync(P(f), 'utf8').split('\n').filter(Boolean);
@@ -79,7 +79,7 @@ fs.writeFileSync(path.join(triDir, 'summary.json'), JSON.stringify(summary2, nul
 // ── 4. MANIFEST 重写 ──
 const manifest = {
   __meta: {
-    dir: 'train/data/nsfw', built: NOW,
+    dir: 'train/lines/_shared/data/nsfw', built: NOW,
     state: '清理后（过时版本与备份已删除，删除台账见 CLEANUP-REPORT.md）',
     policy: '活跃数据：train 分片 / 总词表 / 结构化词表 / 索引与报告；历史版本已清出',
   },

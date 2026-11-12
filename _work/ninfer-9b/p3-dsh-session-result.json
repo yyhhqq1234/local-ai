@@ -1,0 +1,71 @@
+{
+  "port": 1234,
+  "cases": [
+    {
+      "case": "A-compact-sys+tools",
+      "use_tools": true,
+      "ok": true,
+      "garbled": false,
+      "garbled_reason": "",
+      "status": 200,
+      "reasoning_chars": 0,
+      "reasoning_head": "",
+      "tool_calls": [],
+      "prompt_tokens": 1491,
+      "completion_tokens": 256,
+      "ttft_s": 1.7089741230010986,
+      "ttft_reasoning_s": null,
+      "total_s": 8.882849931716919,
+      "decode_tok_s": 35.54821689491297,
+      "content_head": "按行区间读文件，默认 100 行。\n\n```json\n{\"path\": \"src/main.rs\", \"offset\": 10, \"limit\": 20}\n```\n\n判据：只读不写、路径必须存在；大文件用 offset 分页取。\n\n坑：不要指望它做搜索——用 ops_grep 替代。\n\n退出：拿到指定区间的文本或明确说明越界。\n\n参数含义：path 是相对工作区的路径，offset 从 0 开始，limit 最大 1000。\n\n示例：先 `read path=README.md` 看前 100 行，再 `read path=README.md offset=500 limit=30` 取中段。\n\n判据：返回的每行都带行号，方便回查。\n\n坑：路径含空格要引起来 —— 工具层会处理，但最好统一用双引号。\n\n退出：拿到指定区间的文本或明确说明越界。\n\n参数含义：path 是相对工作区的路径，of"
+    },
+    {
+      "case": "B-long-sys+tools",
+      "use_tools": true,
+      "ok": true,
+      "garbled": false,
+      "garbled_reason": "",
+      "status": 200,
+      "reasoning_chars": 0,
+      "reasoning_head": "",
+      "tool_calls": [],
+      "prompt_tokens": 1999,
+      "completion_tokens": 102,
+      "ttft_s": 0.9301750659942627,
+      "ttft_reasoning_s": null,
+      "total_s": 3.7705605030059814,
+      "decode_tok_s": 35.90251628401133,
+      "content_head": "ops_bash 执行一条 bash 命令，返回 stdout+stderr+exit_code。\n\n```json\n{\n  \"command\": \"ls -la /target\",\n  \"description\": \"列出目标目录内容\"\n}\n```\n\n判据：先看 exit_code=0 再读 stdout；非 0 时看 stderr 定位失败点。\n\n当前/结果/下一步：已给出用法与调用示例 + 判据。按这个骨架写脚本即可。"
+    },
+    {
+      "case": "C-decode-speed",
+      "use_tools": false,
+      "ok": true,
+      "garbled": false,
+      "garbled_reason": "",
+      "status": 200,
+      "reasoning_chars": 0,
+      "reasoning_head": "",
+      "tool_calls": [],
+      "prompt_tokens": 59,
+      "completion_tokens": 66,
+      "ttft_s": 0.1435551643371582,
+      "ttft_reasoning_s": null,
+      "total_s": 1.9711472988128662,
+      "decode_tok_s": 36.13436806484072,
+      "content_head": "本地推理三好处：1）数据不出域，合规更稳；2）延迟低、吞吐高，适合高频调用；3）可离线运行，不受网络波动影响。判据：选模型时先看“是否含敏感字段”与“SLA 要求”，再定部署方式。\n"
+    }
+  ],
+  "models": {
+    "data": [
+      {
+        "created": 1794405340,
+        "id": "kittyrev-oxcoder9b-nsfw-gate-full-GSQ",
+        "max_model_len": 16384,
+        "object": "model",
+        "owned_by": "ninfer"
+      }
+    ],
+    "object": "list"
+  }
+}

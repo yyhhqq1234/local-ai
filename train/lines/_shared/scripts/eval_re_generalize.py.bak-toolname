@@ -1,0 +1,263 @@
+"""RE adapter 真泛化测试 —— 改写问题表述 + 去掉工具名提示
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+为什么需要这个脚本（2026-10-28）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+eval_re_heldout.py 从 train-kitty-core.jsonl 抽样，那是**训练集本身**（只跳过前 20 条），
+所以它测的是 in-sample 记忆，不是泛化。实测三档结果：
+    n-gram 20-gram 重合：档1 0.167 → 档2 0.515 → 档3 0.478
+    逐字重合 1.00 的条数：档1 1 条   → 档2 4 条   → 档3 4 条
+即训练遍数越多，模型把训练样本背得越牢 —— 「编造 1 → 0」是背出来的，不是学会的。
+
+本脚本换成**真正未见过的提问**：
+  · 12 条场景需求，措辞与训练集完全不重叠
+  · 需求里绝不出现 kitty_ 或任何工具名
+  · 靠语义匹配选工具（不能靠字面猜）
+  · 分 L1 直白 / L2 间接 / L3 抽象 三档难度
+
+评分四分类（比单一命中率有信息量）：
+  hit   命中：输出含期望工具之一
+  wrong 选错：输出真实工具但不在期望集（≈ 路由错，比编造轻）
+  fake  编造：输出非 64 名单内的 kitty_ 名字（最严重）
+  none  回避：没输出任何工具名
+
+用法：
+  python eval_re_generalize.py --adapter train/out/re-stage1-r2/final
+  python eval_re_generalize.py --adapter <path> --n 12 --max-new 300
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+import argparse
+import io
+import json
+import os
+import re
+import sys
+
+import torch
+
+sys.stdout.reconfigure(encoding="utf-8")
+
+TRAIN_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE = os.path.join(TRAIN_ROOT, "models", "OxCoder-9B")
+CONTRACT = os.path.join(TRAIN_ROOT, "data", "kitty-reverse", "kitty-contracts", "tools.json")
+GIB = 2 ** 30
+
+def load_system(seed_file=None):
+    """从训练集第一条样本读 system —— 不手抄，避免抄错或训练集改了这里没跟上"""
+    p = seed_file or os.path.join(
+        TRAIN_ROOT, "data", "kitty-reverse", "train-kitty-core.jsonl")
+    try:
+        with io.open(p, "r", encoding="utf-8") as f:
+            for line in f:
+                if not line.strip():
+                    continue
+                o = json.loads(line)
+                s = next((m["content"] for m in o.get("messages") or []
+                          if m.get("role") == "system"), "")
+                if s.strip():
+                    return s
+    except Exception as e:
+        print("[warn] 读不到训练集 system，用内置兜底：%s" % e)
+    return (
+        "你是 kitty 逆向工作台的执行层，直接调用 kitty_* 工具完成逆向任务。"
+        "工具的 action 取值见各自 schema 的 enum；不要先查工具清单表，按任务直接选工具并给全参数。"
+        "多步任务要看完上一步回包再决定下一步。"
+    )
+
+
+SYSTEM = load_system()
+
+# 历史已知幻觉（回归用，出现即单独计数）
+KNOWN_HALLUCINATIONS = {
+    "kitty_dbvm", "kitty_file_info", "kitty_pe_info", "kitty_debug",
+    "kitty_decompile", "kitty_search", "kitty_memdump",
+    "kitty_module_info", "kitty_read_memory", "kitty_upx_check",
+}
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 12 条场景题。铁律：ask 里不得出现 kitty_ / 任何工具名 / 训练集原措辞。
+# expect 为「可接受的正确答案集合」（同义工具可并列）。
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 场景库在独立文件里（36 条），便于轮换与泄漏检查
+# 该模块 import 时会自检：id 唯一 + ask 里无工具名 + expect 非空
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from eval_cases_re import CASES          # noqa: E402
+
+
+
+def load_kitty_tools(path=CONTRACT):
+    with io.open(path, "r", encoding="utf-8") as f:
+        tools = json.load(f)
+    return {t["name"] for t in tools if isinstance(t, dict) and t.get("name")}
+
+
+KITTY_TOOLS = load_kitty_tools()
+# ★ 2026-10-28 修正：原正则只匹配 kitty_ 前缀，漏掉 6 个 reverse_* 工具
+#   （reverse_add_target / reverse_add_intent / reverse_add_obs / reverse_add_patch
+#     / reverse_add_asset / reverse_submit）—— 模型正确输出这些名字时不会被识别，
+#   也无法判为编造。改为 kitty_|reverse_ 双前缀。
+PAT = re.compile(r"(?:kitty|reverse)_[a-z0-9_]+")
+
+
+def load_model(adapter=None):
+    from transformers import AutoModelForImageTextToText, AutoTokenizer, BitsAndBytesConfig
+    from peft import PeftModel
+
+    bnb = BitsAndBytesConfig(
+        load_in_4bit=True, bnb_4bit_quant_type="nf4",
+        bnb_4bit_use_double_quant=True, bnb_4bit_compute_dtype=torch.bfloat16,
+    )
+    tok = AutoTokenizer.from_pretrained(BASE)
+    model = AutoModelForImageTextToText.from_pretrained(
+        BASE, device_map={"": 0}, low_cpu_mem_usage=True,
+        attn_implementation="sdpa", quantization_config=bnb,
+    )
+    if adapter:
+        model = PeftModel.from_pretrained(model, adapter)
+    for p in model.parameters():
+        if p.dtype == torch.float32:
+            p.data = p.data.to(torch.bfloat16)
+    model.eval()
+    inner = getattr(model, "model", None)
+    if inner is not None and getattr(inner, "visual", None) is not None:
+        inner.visual = None
+        torch.cuda.empty_cache()
+    print("[load] %s  allocated = %.2f GiB"
+          % ("adapter" if adapter else "基座", torch.cuda.memory_allocated() / GIB))
+    return model, tok
+
+
+@torch.no_grad()
+def gen(model, tok, system, user, max_new=300):
+    msgs = []
+    if system:
+        msgs.append({"role": "system", "content": system})
+    msgs.append({"role": "user", "content": user})
+    text = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+    ids = tok(text, return_tensors="pt", add_special_tokens=False).to(model.device)
+    out = model.generate(
+        **ids, max_new_tokens=max_new, do_sample=False,
+        temperature=None, top_p=None, pad_token_id=tok.eos_token_id,
+    )
+    return tok.decode(out[0][ids["input_ids"].shape[1]:], skip_special_tokens=True).strip()
+
+
+def norm_tools(raw_tokens):
+    """正则切出的 token → 归一到 64 白名单内的真实工具名
+
+    ★ 必须做粘连拆分：模型常写 `kitty_net action=capture`，
+      正则 `kitty_[a-z0-9_]+` 会把空格后的单词连读成 `kitty_netaction`，
+      误判为编造。规则：token 若以某个已知工具名为前缀 → 归到最长的那个前缀。
+    """
+    out = set()
+    for tok in raw_tokens:
+        if tok in KITTY_TOOLS:
+            out.add(tok)
+            continue
+        pref = [k for k in KITTY_TOOLS if tok.startswith(k)]
+        if pref:
+            out.add(max(pref, key=len))   # 最长前缀 = 真实工具
+        else:
+            out.add(tok)                  # 真编造
+    return out
+
+
+def classify(resp, expect):
+    """四分类：hit / wrong / fake / none"""
+    raw = set(PAT.findall(resp or ""))
+    got = norm_tools(raw)
+    fake = got - KITTY_TOOLS
+    if fake:
+        return "fake", sorted(got), sorted(fake)
+    if got & expect:
+        return "hit", sorted(got), []
+    if got:
+        return "wrong", sorted(got), []
+    return "none", [], []
+
+
+def run(model, tok, tag, max_new):
+    stat = {"hit": 0, "wrong": 0, "fake": 0, "none": 0}
+    by_level = {}
+    detail = []
+    for c in CASES:
+        resp = gen(model, tok, SYSTEM, c["ask"], max_new)
+        kind, got, fake = classify(resp, c["expect"])
+        stat[kind] += 1
+        lv = by_level.setdefault(c["level"], {"hit": 0, "n": 0})
+        lv["n"] += 1
+        if kind == "hit":
+            lv["hit"] += 1
+        mark = {"hit": "✅", "wrong": "△", "fake": "❌", "none": "—"}[kind]
+        print("  [%s %s] %s %-5s 得到=%-32s 期望=%-24s  (%s)"
+              % (tag, c["id"], mark, c["level"],
+                 ",".join(got) or "无", ",".join(sorted(c["expect"])), c["note"]))
+        if fake:
+            print("        ⚠ 编造: %s" % ",".join(fake))
+        detail.append({
+            "id": c["id"], "level": c["level"], "kind": kind,
+            "got": got, "fake": fake, "expect": sorted(c["expect"]),
+            "note": c["note"], "resp_head": resp[:200].replace("\n", "⏎"),
+        })
+    n = len(CASES)
+    acc = stat["hit"] / n
+    print("  → %s 汇总：" % tag)
+    print("      命中 %d/%d (%.1f%%) | 选错 %d | 编造 %d | 回避 %d"
+          % (stat["hit"], n, acc * 100, stat["wrong"], stat["fake"], stat["none"]))
+    for lv in ("L1", "L2", "L3"):
+        if lv in by_level:
+            d = by_level[lv]
+            print("      %s 命中 %d/%d" % (lv, d["hit"], d["n"]))
+    return {"tag": tag, "n": n, "acc": round(acc, 4), **stat,
+            "by_level": by_level, "detail": detail}
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--adapter", default="train/out/re-stage1-r2/final")
+    ap.add_argument("--n", type=int, default=12, help="保留参数，当前固定 12 条")
+    ap.add_argument("--max-new", type=int, default=300)
+    ap.add_argument("--out", default=None, help="结果 JSON 落盘路径")
+    args = ap.parse_args()
+
+    print("=" * 84)
+    print("RE 真泛化测试 —— 改写提问 · 去工具名提示 · 12 条未见过的场景")
+    print("=" * 84)
+    print("工具白名单：%d 个（来自 tools.json）" % len(KITTY_TOOLS))
+    print("已知幻觉回归集：%d 个" % len(KNOWN_HALLUCINATIONS))
+    print("adapter：%s" % args.adapter)
+    print()
+
+    model, tok = load_model(args.adapter)
+    r = run(model, tok, "G", args.max_new)
+
+    out = args.out or "train/out/eval-generalize-%s.json" % (
+        os.path.basename(os.path.dirname(args.adapter.rstrip("/\\"))) + "-" +
+        os.path.basename(args.adapter.rstrip("/\\"))
+    )
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    with open(out, "w", encoding="utf-8") as f:
+        json.dump(r, f, ensure_ascii=False, indent=2)
+    print()
+    print("  → 明细 → %s" % out)
+
+    # 判据
+    print()
+    print("=" * 84)
+    print("判据（泛化）")
+    print("=" * 84)
+    print("  命中率 >= 70%%（12 条里 >= 9 条）   判为学到了语义映射")
+    print("  编造 == 0                           必要条件，有编造直接不通过")
+    print("  L3 命中 >= 2/4                      说明能做抽象推理而非字面匹配")
+    ok = r["acc"] >= 0.70 and r["fake"] == 0 and r["by_level"].get("L3", {}).get("hit", 0) >= 2
+    print()
+    print("  本轮判定：%s（命中 %.1f%%，编造 %d，L3 %d/4）"
+          % ("✅ 通过" if ok else "❌ 不通过", r["acc"] * 100, r["fake"],
+             r["by_level"].get("L3", {}).get("hit", 0)))
+    sys.exit(0 if ok else 1)
+
+
+if __name__ == "__main__":
+    main()

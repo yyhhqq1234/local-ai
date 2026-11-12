@@ -1,0 +1,550 @@
+{
+  "adapter": "train/out/z-2a-v2/checkpoint-600",
+  "n": 40,
+  "avg_cov": 0.4813,
+  "code_rate": 0.9,
+  "avg_ngram20": 0.0,
+  "verdict": false,
+  "detail": [
+    {
+      "id": "A01",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 999.0,
+      "resp_head": "</think>\n\nPerfect! All tests are passing.\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the `read_recent_history` method in the `memory.py` file. Here's what I accomplished"
+    },
+    {
+      "id": "A02",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 887.0,
+      "resp_head": "</think>\n\n- **Issue**: `1h30m` format caused `ValueError: Second out of range`\n- **Root Cause**: Parser treated `1h30m` as a single token instead of splitting into `1h` and `30m`\n- **Solution**: Added"
+    },
+    {
+      "id": "A03",
+      "level": "L1",
+      "cov": 0.75,
+      "miss": [
+        "sentinel"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 553.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the fix handles the edge case where someone might pass `None` as the value (which should now work correctly):\n\nExcellent! All tests pass.\n\n## Summary\n\nI have"
+    },
+    {
+      "id": "A04",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 697.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is exactly what was needed:\n\nLet me check the actual change I made to the retry.py file:\n\nLet me see the before and after of the key change"
+    },
+    {
+      "id": "A05",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 470.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made matches exactly what was requested:\n\n## Summary\n\nI have successfully implemented the required changes to fix the network hang issue in the "
+    },
+    {
+      "id": "A06",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 569.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is exactly what was requested by reviewing the diff:\n\nExcellent! The change is minimal and precisely addresses the issue:\n\n## Summary\n\nI ha"
+    },
+    {
+      "id": "A07",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 985.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the fix handles the case mentioned in the original issue properly by checking that the example code would work correctly:\n\nLet me trace through what happens "
+    },
+    {
+      "id": "A08",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1219.0,
+      "resp_head": "</think>\n\nI'll help you implement the necessary changes to fix the issue with the `--verbose` and `--quiet` flags. Let me start by following the phases you outlined.\n\n## Phase 1. READING: Understandin"
+    },
+    {
+      "id": "A09",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 729.0,
+      "resp_head": "</think>\n\nPerfect!\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the issue with the `003_add_index.sql` migration not using the `CONCURRENTLY` keyword. Here's what I accomp"
+    },
+    {
+      "id": "A10",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 2389.0,
+      "resp_head": "</think>\n\nI'll help you implement the necessary changes to support datetime serialization in the json_utils module. Let me start by following the phases you outlined.\n\n## Phase 1. READING: Understandi"
+    },
+    {
+      "id": "A11",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1375.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is exactly what was requested by reviewing the key change:\n\nExcellent! The change is minimal and precisely addresses the issue:\n\n## Summary"
+    },
+    {
+      "id": "A12",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 816.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the existing test suite still passes:\n\nExcellent! All tests pass.\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the issue describ"
+    },
+    {
+      "id": "A13",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1670.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is exactly what was requested by reviewing the requirements:\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the "
+    },
+    {
+      "id": "A14",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 877.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is exactly what was requested by reviewing it:\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the issue describe"
+    },
+    {
+      "id": "A15",
+      "level": "L2",
+      "cov": 0.5,
+      "miss": [
+        "内存",
+        "泄漏"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1018.0,
+      "resp_head": "</think>\n\n## Summary\n\nI have successfully implemented the fix for the memory leak issue in the file upload system. Here's what I accomplished:\n\n### Problem Analysis\n- **Root Cause**: The `FileChunk` c"
+    },
+    {
+      "id": "A16",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "事务",
+        "加锁顺序"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1601.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the fix is minimal and focused:\n\nExcellent! The change is indeed minimal and focused:\n\n## Summary\n\nI have successfully implemented the fix for the deadlock i"
+    },
+    {
+      "id": "A17",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "P99",
+        "N+1 查询",
+        "批量加载"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1191.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the changes I made are consistent with the existing code style and patterns:\n\nLet me check how other models in the same file handle similar scenarios:\n\nPerfe"
+    },
+    {
+      "id": "A18",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "Docker 镜像",
+        "多阶段构建"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 734.0,
+      "resp_head": "</think>\n\n## Summary\n\nI have successfully implemented the necessary changes to reduce the Docker image size from 200MB to under 100MB (achieving 83.5MB). Here's what I accomplished:\n\n### Problem Analy"
+    },
+    {
+      "id": "A19",
+      "level": "L2",
+      "cov": 0.667,
+      "miss": [
+        "连接池"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1082.0,
+      "resp_head": "</think>\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the `connection reset by peer` issue that occurred during peak traffic periods. Here's what I accomplished:\n\n### Prob"
+    },
+    {
+      "id": "A20",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "异步",
+        "渲染"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 731.0,
+      "resp_head": "</think>\n\nPerfect!\n\n## Summary\n\nI have successfully implemented the fix for the intermittent white screen issue. Here's what I accomplished:\n\n### ✅ Problem Analysis\n- **Root Cause**: The `useEffect` h"
+    },
+    {
+      "id": "A21",
+      "level": "L2",
+      "cov": 0.75,
+      "miss": [
+        "分布式锁"
+      ],
+      "code_blocks": 3,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 5363.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the lock is properly released even when exceptions occur:\n\nExcellent! The lock is properly released in all scenarios.\n\n### 8.3 Summary of Changes\n\nLet me sum"
+    },
+    {
+      "id": "A22",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "密码",
+        "失效"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1145.0,
+      "resp_head": "</think>\n\nPerfect!\n\n## Summary\n\nI have successfully implemented the necessary changes to make tokens immediately invalid upon password change. Here's what I accomplished:\n\n### ✅ Problem Analysis\n- Ide"
+    },
+    {
+      "id": "A23",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "搜索",
+        "中文",
+        "编码",
+        "分词"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 839.0,
+      "resp_head": "</think>\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the Chinese keyword search issue. Here's what I accomplished:\n\n### Problem Analysis\n- **Issue**: Search interface ret"
+    },
+    {
+      "id": "A24",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "缓存",
+        "不稳定"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 676.0,
+      "resp_head": "</think>\n\n## Summary\n\nI have successfully implemented the fix for the CI cache instability issue. Here's what I accomplished:\n\n### Problem Analysis\n- **Root Cause**: The cache key in `.github/workflow"
+    },
+    {
+      "id": "A25",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "OOMKilled",
+        "堆"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 412.0,
+      "resp_head": "</think>\n\n- **Root Cause**: JVM heap size (`-Xmx`) was set to 1.7GB instead of matching the 2GB memory limit\n- **Solution**: Changed `-Xmx1700m` to `-Xmx2048m` to match the container memory limit exac"
+    },
+    {
+      "id": "A26",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "数据库",
+        "连接"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 801.0,
+      "resp_head": "</think>\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the database connection leak issue. Here's what I accomplished:\n\n### Problem Analysis\n- **Issue**: Database connectio"
+    },
+    {
+      "id": "A27",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "消息队列",
+        "重复消费"
+      ],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1592.0,
+      "resp_head": "</think>\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the message queue duplicate consumption issue. Here's what I accomplished:\n\n### ✅ Problem Analysis\n- **Root Cause**: "
+    },
+    {
+      "id": "A28",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "灰度",
+        "旧数据",
+        "缓存",
+        "版本"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 782.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is exactly what was requested by reviewing the requirements:\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the "
+    },
+    {
+      "id": "A29",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "单测覆盖率",
+        "测试",
+        "覆盖率"
+      ],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1971.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and focused:\n\nPerfect! My change is indeed minimal and focused - I only added one line of code to the `validate_and_normalize_pa"
+    },
+    {
+      "id": "A30",
+      "level": "L3",
+      "cov": 0.667,
+      "miss": [
+        "前置"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 578.0,
+      "resp_head": "</think>\n\n## 🎯 **最终实现总结**\n\n### **核心改进**\n\n1. **移除阻塞性初始化**\n   - 删除了 `ApplicationRunListener` 中的 `onApplicationReady` 调用\n   - 移除了 `CommandLineRunner` 实现\n   - 消除了启动完成后强制执行的初始化逻辑\n\n2. **优化配置加载**\n   - 将 `@Po"
+    },
+    {
+      "id": "A31",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "try/except: pass",
+        "容错",
+        "掩盖 bug",
+        "治理"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1239.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that we haven't introduced any regressions by running one more comprehensive test to make sure the core functionality is intact:\n\nExcellent! Let me clean up the te"
+    },
+    {
+      "id": "A32",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "重试",
+        "雪崩",
+        "抖动",
+        "熔断"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1130.0,
+      "resp_head": "</think>\n\n## Summary\n\nI have successfully implemented a retry mechanism with jitter and circuit breaker functionality to address the avalanche problem during downstream peak traffic periods.\n\n### **Pr"
+    },
+    {
+      "id": "A33",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "配置",
+        "环境变量",
+        "配置文件",
+        "数据库",
+        "优先级"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 2157.0,
+      "resp_head": "</think>\n\n## 🎯 **Solution Overview**\n\nI have successfully implemented a unified configuration loading system that addresses all requirements from the issue description.\n\n### **✅ Requirements Addressed"
+    },
+    {
+      "id": "A34",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "2000 行",
+        "拆分",
+        "调用方"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 2568.0,
+      "resp_head": "</think>\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the deprecation warnings in the `fastapi-cli` module. Here's what was accomplished:\n\n### Changes Made\n\n1. **Created n"
+    },
+    {
+      "id": "A35",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "公共服务",
+        "共享库",
+        "代价"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 4710.0,
+      "resp_head": "</think>\n\n## Summary\n\nI have successfully implemented the necessary changes to support the new business rule for the \"my\" scope. Here's what was accomplished:\n\n### Changes Made\n\n1. **Added new scope c"
+    },
+    {
+      "id": "A36",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "数据库",
+        "字段",
+        "5000 万行",
+        "停服",
+        "迁移"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 961.0,
+      "resp_head": "</think>\n\n## Summary\n\nI have successfully implemented the necessary changes to add the `is_deleted` field to the `User` model with zero downtime:\n\n### Changes Made\n\n1. **Added `is_deleted` field to Us"
+    },
+    {
+      "id": "A37",
+      "level": "L3",
+      "cov": 0.333,
+      "miss": [
+        "返回结构",
+        "过渡方案"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 949.0,
+      "resp_head": "</think>\n\n## Summary\n\nI have successfully implemented the necessary changes to support the new API response structure while maintaining backward compatibility for external customers. Here's what was a"
+    },
+    {
+      "id": "A38",
+      "level": "L3",
+      "cov": 0.25,
+      "miss": [
+        "日志",
+        "采样",
+        "分级"
+      ],
+      "code_blocks": 6,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 4553.0,
+      "resp_head": "</think>\n\n## 🎯 **Log Retention Optimization Implementation**\n\n### **8.1 Requirements Addressed**\n\n✅ **Daily 2TB Log Volume**: Implemented efficient sampling that reduces storage by ~95%\n✅ **Cost Reduc"
+    },
+    {
+      "id": "A39",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "定时任务",
+        "100 万条",
+        "并行化",
+        "分片",
+        "失败重跑"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1141.0,
+      "resp_head": "</think>\n\n## Summary\n\nI have successfully implemented a parallel processing solution for the scheduled task that processes 1 million records. Here's what was accomplished:\n\n### Problem Analysis\n- **Or"
+    },
+    {
+      "id": "A40",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "单体拆微服务",
+        "调用关系",
+        "事务边界"
+      ],
+      "code_blocks": 2,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 5406.0,
+      "resp_head": "</think>\n\n## Summary\n\nI have successfully implemented the necessary changes to support microservices architecture. Here's what was accomplished:\n\n### ✅ **Changes Made**\n\n1. **Added Required Dependenci"
+    }
+  ]
+}

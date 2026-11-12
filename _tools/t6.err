@@ -1,0 +1,14 @@
+2026-11-08 11:47:45.526  INFO  starting engine
+2026-11-08 11:47:46.253  INFO  loading weights | 5.81 GiB
+2026-11-08 11:47:47.532  INFO  weights ready | 5.81 GiB | 1.3s | 4.54 GiB/s
+2026-11-08 11:47:51.507  INFO  CUDA graph memory calibrated | 4.0s
+2026-11-08 11:47:51.514  INFO  pinning host context | 2.00 GiB
+2026-11-08 11:47:51.736  INFO  host context pinned | 2.00 GiB | 222 ms
+2026-11-08 11:47:51.854  INFO  CUDA graphs ready | 60.0 ms
+2026-11-08 11:47:51.857  INFO  engine ready | oxcoder9b-merged | total 6.3s | weights 5.81 GiB | CUDA sync spin
+2026-11-08 11:47:51.858  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 318.7 MiB | free 4.65 GiB
+2026-11-08 11:47:51.859  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 11:47:51.933  INFO  listening on http://127.0.0.1:1678 | model oxcoder9b-merged | auth disabled
+2026-11-08 11:47:53.291  INFO  req#1 started | openai-chat non-stream | 1 message | max output 24 | thinking template default | tools 1
+[exc] selected token violates the request grammar
+2026-11-08 11:47:53.500  ERROR req#1 failed during generation | openai-chat | HTTP 500 | internal error

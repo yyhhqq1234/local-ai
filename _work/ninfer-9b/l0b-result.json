@@ -1,0 +1,265 @@
+{
+  "results": [
+    {
+      "variant": "b0-baseline",
+      "extra": [
+        "--host-context-mib",
+        "2048",
+        "--prefill-chunk",
+        "128",
+        "--max-context",
+        "4096",
+        "--no-prefix-reuse"
+      ],
+      "port": 1651,
+      "ready": true,
+      "requests": [
+        {
+          "label": "sys",
+          "chars": 42,
+          "head": "[ directions_52.html, FIRST_PARSED_BY:1371"
+        },
+        {
+          "label": "sys-short",
+          "chars": 20,
+          "head": "**2.5 + 0.5 = (11!34"
+        },
+        {
+          "label": "user-prefix",
+          "chars": 29,
+          "head": "(a)20CN-CANDY®(Pronounced: (S"
+        },
+        {
+          "label": "user-long",
+          "chars": 27,
+          "head": "#4.895, let's just say 2013"
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 30,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            58,
+            17425,
+            62,
+            20,
+            17,
+            2480,
+            11,
+            33660
+          ]
+        },
+        {
+          "prompt_tokens": 26,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            332,
+            17,
+            13,
+            20,
+            478,
+            220,
+            15,
+            13
+          ]
+        },
+        {
+          "prompt_tokens": 26,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            2784,
+            8,
+            17,
+            15,
+            27731,
+            7415,
+            3843,
+            56
+          ]
+        },
+        {
+          "prompt_tokens": 30,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            2,
+            19,
+            13,
+            23,
+            24,
+            20,
+            11,
+            1042
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "b1-chunk256",
+      "extra": [
+        "--host-context-mib",
+        "2048",
+        "--prefill-chunk",
+        "256",
+        "--max-context",
+        "4096",
+        "--no-prefix-reuse"
+      ],
+      "port": 1652,
+      "ready": true,
+      "requests": [
+        {
+          "label": "sys",
+          "chars": 42,
+          "head": "[ directions_52.html, FIRST_PARSED_BY:1371"
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 30,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            58,
+            17425,
+            62,
+            20,
+            17,
+            2480,
+            11,
+            33660
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "b2-ctx16384",
+      "extra": [
+        "--host-context-mib",
+        "2048",
+        "--prefill-chunk",
+        "128",
+        "--max-context",
+        "16384",
+        "--no-prefix-reuse"
+      ],
+      "port": 1653,
+      "ready": true,
+      "requests": [
+        {
+          "label": "sys",
+          "chars": 42,
+          "head": "[ directions_52.html, FIRST_PARSED_BY:1371"
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 30,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            58,
+            17425,
+            62,
+            20,
+            17,
+            2480,
+            11,
+            33660
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "b3-no-cuda-graph",
+      "extra": [
+        "--host-context-mib",
+        "2048",
+        "--prefill-chunk",
+        "128",
+        "--max-context",
+        "4096",
+        "--no-prefix-reuse",
+        "--no-cuda-graph"
+      ],
+      "port": 1654,
+      "ready": true,
+      "requests": [
+        {
+          "label": "sys",
+          "chars": 42,
+          "head": "[ directions_52.html, FIRST_PARSED_BY:1371"
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 30,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            58,
+            17425,
+            62,
+            20,
+            17,
+            2480,
+            11,
+            33660
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "b4-chunk256-nocuda",
+      "extra": [
+        "--host-context-mib",
+        "2048",
+        "--prefill-chunk",
+        "256",
+        "--max-context",
+        "4096",
+        "--no-prefix-reuse",
+        "--no-cuda-graph"
+      ],
+      "port": 1655,
+      "ready": true,
+      "requests": [
+        {
+          "label": "sys",
+          "chars": 42,
+          "head": "[ directions_52.html, FIRST_PARSED_BY:1371"
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 30,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            58,
+            17425,
+            62,
+            20,
+            17,
+            2480,
+            11,
+            33660
+          ]
+        }
+      ]
+    }
+  ],
+  "remaining_ninfer_processes": []
+}

@@ -1,0 +1,123 @@
+{
+  "src": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\local-pack",
+  "kind": "dir",
+  "members": 29,
+  "total_bytes": 14719442360,
+  "layers": 16,
+  "layer_nums": [
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63
+  ],
+  "tensors": {
+    "48": {
+      "tensors": 14,
+      "tensor_bytes": 766546368,
+      "names_ok": true
+    },
+    "49": {
+      "tensors": 14,
+      "tensor_bytes": 766546368,
+      "names_ok": true
+    },
+    "50": {
+      "tensors": 14,
+      "tensor_bytes": 766546368,
+      "names_ok": true
+    },
+    "51": {
+      "tensors": 11,
+      "tensor_bytes": 744510464,
+      "names_ok": true
+    },
+    "52": {
+      "tensors": 14,
+      "tensor_bytes": 766546368,
+      "names_ok": true
+    },
+    "53": {
+      "tensors": 14,
+      "tensor_bytes": 766546368,
+      "names_ok": true
+    },
+    "54": {
+      "tensors": 14,
+      "tensor_bytes": 766546368,
+      "names_ok": true
+    },
+    "55": {
+      "tensors": 11,
+      "tensor_bytes": 744510464,
+      "names_ok": true
+    },
+    "56": {
+      "tensors": 14,
+      "tensor_bytes": 766546368,
+      "names_ok": true
+    },
+    "57": {
+      "tensors": 14,
+      "tensor_bytes": 766546368,
+      "names_ok": true
+    },
+    "58": {
+      "tensors": 14,
+      "tensor_bytes": 766546368,
+      "names_ok": true
+    },
+    "59": {
+      "tensors": 11,
+      "tensor_bytes": 744510464,
+      "names_ok": true
+    },
+    "60": {
+      "tensors": 14,
+      "tensor_bytes": 766546368,
+      "names_ok": true
+    },
+    "61": {
+      "tensors": 14,
+      "tensor_bytes": 766546368,
+      "names_ok": true
+    },
+    "62": {
+      "tensors": 14,
+      "tensor_bytes": 766546368,
+      "names_ok": true
+    },
+    "63": {
+      "tensors": 11,
+      "tensor_bytes": 744510464,
+      "names_ok": true
+    }
+  },
+  "act": {
+    "discipline-train": 306,
+    "discipline-val": 77,
+    "forge-train": 384,
+    "forge-val": 96,
+    "gen-train": 80,
+    "gen-val": 20,
+    "re-train": 287,
+    "re-val": 72,
+    "rest": 2774,
+    "route-train": 234,
+    "route-val": 58
+  },
+  "act_pt": 4388,
+  "fails": [],
+  "warns": []
+}

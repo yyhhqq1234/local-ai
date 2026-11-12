@@ -1,6 +1,6 @@
 // 零丢失校验：v8 → v9 逐字段深比对
 import fs from 'node:fs';
-const R = 'D:/BaiduNetdiskDownload/Local-AI/train/data/nsfw';
+const R = 'D:/BaiduNetdiskDownload/Local-AI/train/lines/_shared/data/nsfw';
 const v8 = JSON.parse(fs.readFileSync(R + '/nsfw-lexicon-v8.json', 'utf8'));
 const v9 = JSON.parse(fs.readFileSync(R + '/nsfw-lexicon-v9.json', 'utf8'));
 

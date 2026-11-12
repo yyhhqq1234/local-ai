@@ -1,0 +1,248 @@
+# -*- coding: utf-8 -*-
+"""2A 泛化集 —— 40 条编程轨迹任务（OpenHands 形态）
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+为什么自造而不从训练集抽
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+r1/r2 踩过的坑：从训练集抽样却自称 held-out，测的是 in-sample 记忆。
+所以这里**全部手写新任务**，与 traj-all-capped.jsonl 无任何重叠。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+字段
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  id            A01..A40
+  level         L1 直白 / L2 间接（需先定位）/ L3 抽象（需判断取舍）
+  ask           编程任务描述（含具体文件名 / 函数名 / 错误信息）
+  must_mention  回答里必须出现的标识符（文件名/函数/变量/错误码）
+                —— 没提到 = 没读懂任务，写得再长也是跑偏
+  note          这条在测什么
+
+判据（eval_2a_code.py）：
+  实体覆盖 >=50% · 代码块完整率 >=80%
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+设计约束
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. 任务是通用的软件工程场景（Python/JS/Go/Rust 都有），不绑定 kitty 工具
+2. must_mention 里的标识符必须在 ask 里出现过（否则模型无从得知）
+3. L1/L2/L3 交错排列（--limit 截断时三档都有）
+"""
+
+CASES = [
+    # ══════════ L1 直白：单点 bug，位置已给出（14 条）══════════
+    dict(id="A01", level="L1",
+         ask="仓库里 `memory.py` 第 285 行的 `read_recent_history` 在传了 `session_key` 时读到的历史不对——"
+             "它总是返回全局历史而不是该 session 的。修掉，并说明改了哪几行。",
+         must_mention=["memory.py", "read_recent_history", "session_key"],
+         note="单文件 bug，定位已给"),
+    dict(id="A02", level="L1",
+         ask="`parser.py` 的 `parse_duration` 遇到 `\"1h30m\"` 会抛 ValueError，"
+             "但它应该返回 5400 秒。补上复合单位的解析。",
+         must_mention=["parser.py", "parse_duration", "ValueError"],
+         note="输入格式边界"),
+    dict(id="A03", level="L1",
+         ask="`cache.py` 的 `get_or_set` 在 value 为 None 时会把 None 当成缓存未命中，"
+             "导致每次都重新计算。加一个 sentinel 区分「没有」和「值是 None」。",
+         must_mention=["cache.py", "get_or_set", "sentinel"],
+         note="None 与缺省的语义区分"),
+    dict(id="A04", level="L1",
+         ask="`utils/retry.py` 的 `retry_on` 装饰器在函数抛 KeyboardInterrupt 时也会重试，"
+             "这很危险。改成只重试指定异常。",
+         must_mention=["retry.py", "retry_on", "KeyboardInterrupt"],
+         note="异常白名单"),
+    dict(id="A05", level="L1",
+         ask="`api/client.py` 的 `fetch` 没设超时，网络挂住时会永久阻塞。"
+             "加上默认 30 秒超时，并允许调用方覆盖。",
+         must_mention=["client.py", "fetch", "timeout"],
+         note="资源泄漏类"),
+    dict(id="A06", level="L1",
+         ask="`models/user.py` 的 `User.__repr__` 把 password_hash 也打出来了，日志里泄露。"
+             "改成脱敏。",
+         must_mention=["user.py", "User", "__repr__", "password_hash"],
+         note="敏感信息脱敏"),
+    dict(id="A07", level="L1",
+         ask="`concurrency/pool.py` 的 `acquire` 在拿到连接后如果后续步骤抛异常，连接不会归还。"
+             "改成 contextmanager 保证释放。",
+         must_mention=["pool.py", "acquire", "contextmanager"],
+         note="资源归还"),
+    dict(id="A08", level="L1",
+         ask="`cli.py` 的 `main` 在 `--verbose` 和 `--quiet` 同时给时行为未定义。"
+             "加互斥校验，冲突时报错退出码 2。",
+         must_mention=["cli.py", "main", "--verbose", "--quiet"],
+         note="参数互斥"),
+    dict(id="A09", level="L1",
+         ask="`db/migrations/003_add_index.sql` 建索引时没写 `CONCURRENTLY`，"
+             "大表上会锁表。改成不锁表的写法。",
+         must_mention=["003_add_index.sql", "CONCURRENTLY"],
+         note="线上安全"),
+    dict(id="A10", level="L1",
+         ask="`json_utils.py` 的 `dumps_safe` 遇到 datetime 就崩。"
+             "加一个 default 处理器把 datetime 转成 ISO 字符串。",
+         must_mention=["json_utils.py", "dumps_safe", "datetime"],
+         note="序列化兼容"),
+    dict(id="A11", level="L1",
+         ask="`graphql/schema.py` 里 `user` 字段的 resolver 对未登录用户返回 None，"
+             "但 schema 声明为非空，导致整个查询失败。改成返回明确错误。",
+         must_mention=["schema.py", "resolver", "non-null"],
+         note="契约与实现不一致"),
+    dict(id="A12", level="L1",
+         ask="`tests/test_auth.py` 的 `test_login` 用了真实时间戳，"
+             "跨天跑会失败。改成 freeze_time。",
+         must_mention=["test_auth.py", "test_login", "freeze_time"],
+         note="测试不确定性"),
+    dict(id="A13", level="L1",
+         ask="`workers/tasks.py` 的 `send_email` 任务没设 `max_retries`，"
+             "SMTP 挂了会无限重试把队列堵死。加上限和退避。",
+         must_mention=["tasks.py", "send_email", "max_retries"],
+         note="队列保护"),
+    dict(id="A14", level="L1",
+         ask="`i18n/loader.py` 的 `load_locale` 在 locale 文件缺失时直接 KeyError。"
+             "改成回退到 en 并记 warning。",
+         must_mention=["loader.py", "load_locale", "KeyError", "en"],
+         note="降级策略"),
+
+    # ══════════ L2 间接：只说现象，要先定位（14 条）══════════
+    dict(id="A15", level="L2",
+         ask="用户反馈：上传大文件后进程内存一路涨到 OOM，小文件正常。"
+             "代码在 `upload/` 目录下。找出泄漏点并修。",
+         must_mention=["upload", "OOM", "close", "file"],
+         note="需先定位到具体文件"),
+    dict(id="A16", level="L2",
+         ask="CI 上偶发失败，报 `deadlock detected`，本地跑不出来。"
+             "怀疑是事务里两个 update 顺序不一致。定位并统一加锁顺序。",
+         must_mention=["deadlock", "transaction", "update", "lock"],
+         note="并发问题定位"),
+    dict(id="A17", level="L2",
+         ask="接口 P99 从 80ms 涨到 900ms，但 CPU 和内存都正常。"
+             "怀疑是 N+1 查询。用 ORM 的日志确认并改成批量加载。",
+         must_mention=["N+1", "ORM", "eager", "eager_load"],
+         note="性能问题定位"),
+    dict(id="A18", level="L2",
+         ask="Docker 镜像从 200MB 涨到 1.8GB，构建没报错。"
+             "查 Dockerfile 找出把什么打进去了，并改成多阶段构建。",
+         must_mention=["Dockerfile", "multi-stage", "COPY"],
+         note="构建产物膨胀"),
+    dict(id="A19", level="L2",
+         ask="日志里大量 `connection reset by peer`，只在高峰期出现。"
+             "怀疑连接池上限或 keepalive 配置。定位并给出改法。",
+         must_mention=["connection reset", "pool", "keepalive"],
+         note="配置问题定位"),
+    dict(id="A20", level="L2",
+         ask="前端页面偶发白屏，控制台报 `Cannot read property of undefined`，"
+             "但只在慢网下复现。怀疑是异步数据未就绪就渲染。定位并加保护。",
+         must_mention=["undefined", "async", "loading", "null"],
+         note="时序问题"),
+    dict(id="A21", level="L2",
+         ask="定时任务偶尔跑两遍，导致重复发券。服务是多副本部署的。"
+             "找出为什么会重复，并加分布式锁。",
+         must_mention=["cron", "多副本", "lock", "idempotent"],
+         note="分布式竞态"),
+    dict(id="A22", level="L2",
+         ask="用户改密码后旧 token 还能用 24 小时。"
+             "要在改密码时让已签发 token 立刻失效。给出方案并实现。",
+         must_mention=["token", "password", "revoke", "blacklist"],
+         note="安全语义"),
+    dict(id="A23", level="L2",
+         ask="搜索接口在关键词含中文时返回空，英文正常。"
+             "怀疑编码或分词。定位问题并修。",
+         must_mention=["encoding", "utf-8", "tokenize", "search"],
+         note="编码问题"),
+    dict(id="A24", level="L2",
+         ask="CI 缓存有时命中有时不命中，构建时间忽长忽短。"
+             "查缓存 key 的构造方式，找出为什么会不稳定。",
+         must_mention=["cache", "key", "hash", "lockfile"],
+         note="缓存键设计"),
+    dict(id="A25", level="L2",
+         ask="k8s 里 pod 反复重启，事件里是 `OOMKilled`，但 limit 已经给了 2Gi。"
+             "怀疑 Java 堆参数没跟 limit 对齐。定位并改。",
+         must_mention=["OOMKilled", "limit", "heap", "Xmx"],
+         note="容器内存语义"),
+    dict(id="A26", level="L2",
+         ask="数据库连接数每天涨一点，重启后恢复。"
+             "怀疑有地方没归还连接。找出并修。",
+         must_mention=["connection", "leak", "close", "finally"],
+         note="资源泄漏定位"),
+    dict(id="A27", level="L2",
+         ask="消息队列有重复消费，业务方说不是他们重发的。"
+             "查消费者端的 ack 时机，找出为什么会重复。",
+         must_mention=["ack", "consumer", "idempotent", "redeliver"],
+         note="至少一次语义"),
+    dict(id="A28", level="L2",
+         ask="灰度发布后 5% 的用户看到旧数据，其余正常。"
+             "怀疑缓存没有按版本隔离。定位并改成带版本号的 key。",
+         must_mention=["cache", "version", "gray", "key"],
+         note="发布期一致性"),
+
+    # ══════════ L3 抽象：需要判断取舍（12 条）══════════
+    dict(id="A29", level="L3",
+         ask="这个仓库的单测覆盖率 82%，但线上还是频繁出问题。"
+             "看一下测试都在测什么，指出覆盖率的盲区在哪，并补 3 个真正有用的测试。",
+         must_mention=["coverage", "mock", "integration", "assert"],
+         note="测试质量问题"),
+    dict(id="A30", level="L3",
+         ask="服务启动要 40 秒，影响发布速度。"
+             "分析启动路径，指出哪些是可以在启动后懒加载的，哪些必须前置。",
+         must_mention=["startup", "lazy", "import", "warmup"],
+         note="启动优化取舍"),
+    dict(id="A31", level="L3",
+         ask="代码里到处 `try/except: pass`。评估一下哪些是合理的容错、哪些是掩盖 bug，"
+             "并给出分批治理的顺序。",
+         must_mention=["except", "swallow", "log", "raise"],
+         note="技术债治理"),
+    dict(id="A32", level="L3",
+         ask="现在的重试是固定 1 秒，下游高峰期会雪崩。"
+             "设计一个带抖动和熔断的重试策略，说明参数怎么定。",
+         must_mention=["retry", "jitter", "backoff", "circuit breaker"],
+         note="稳定性设计"),
+    dict(id="A33", level="L3",
+         ask="配置项散落在环境变量、配置文件、数据库三处，改一个要动三个地方。"
+             "设计一个统一的配置加载方案，说明优先级。",
+         must_mention=["config", "priority", "env", "override"],
+         note="架构收敛"),
+    dict(id="A34", level="L3",
+         ask="这个模块 2000 行，改一处要读半天。"
+             "给出拆分方案，说明先拆哪块、后拆哪块、怎么保证不破坏现有调用方。",
+         must_mention=["refactor", "interface", "facade", "compat"],
+         note="重构顺序"),
+    dict(id="A35", level="L3",
+         ask="同样的业务逻辑在三个服务里各写了一遍，现在要改规则。"
+             "评估是抽公共服务还是共享库，说明各自的代价。",
+         must_mention=["duplication", "service", "library", "coupling"],
+         note="复用方式取舍"),
+    dict(id="A36", level="L3",
+         ask="数据库要加一个字段，表有 5000 万行，不能停服。"
+             "给出迁移步骤和回滚方案。",
+         must_mention=["migration", "nullable", "backfill", "rollback"],
+         note="在线迁移"),
+    dict(id="A37", level="L3",
+         ask="API 要改返回结构，但有外部客户在用。"
+             "设计一个不影响老客户的过渡方案，说明什么时候能删旧字段。",
+         must_mention=["versioning", "deprecate", "compat", "sunset"],
+         note="接口演进"),
+    dict(id="A38", level="L3",
+         ask="日志量每天 2TB，成本太高。"
+             "分析哪些日志是必须留的、哪些可以采样、哪些可以直接删，给出分级方案。",
+         must_mention=["log", "sampling", "retention", "cost"],
+         note="成本与可观测性"),
+    dict(id="A39", level="L3",
+         ask="这个定时任务要处理 100 万条记录，现在跑 3 小时。"
+             "给出并行化方案，说明分片策略和失败重跑怎么做。",
+         must_mention=["batch", "shard", "parallel", "resume"],
+         note="批处理设计"),
+    dict(id="A40", level="L3",
+         ask="团队想把单体拆微服务，但我看现在的调用关系和事务边界很乱。"
+             "给出一个判断：现在该拆吗？如果不该拆，先做什么。",
+         must_mention=["monolith", "boundary", "transaction", "phased"],
+         note="架构判断，允许说「不该拆」"),
+]
+
+# 自检：id 唯一 / must_mention 都在 ask 里出现 / 三档齐全
+_ids = [c["id"] for c in CASES]
+assert len(_ids) == len(set(_ids)), "id 重复"
+_lv = {}
+for c in CASES:
+    _lv[c["level"]] = _lv.get(c["level"], 0) + 1
+    for m in c["must_mention"]:
+        assert m.lower() in c["ask"].lower(), \
+            "%s 的 must_mention %r 没在 ask 里出现（模型无从得知）" % (c["id"], m)
+assert set(_lv) == {"L1", "L2", "L3"}, "三档不全: %s" % _lv

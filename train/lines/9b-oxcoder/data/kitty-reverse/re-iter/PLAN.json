@@ -1,0 +1,28 @@
+{
+  "goal": "针对 kitty 逆向工作台 64 工具 × 66 OP，让模型理解：如何调用、在什么情况下选哪个工具",
+  "source_root": "D:/DrCE(26.2.16) (只读)",
+  "rounds": [
+    {"r": 1,  "theme": "工具全景与通道分工",       "src": ["kitty-toolbox/src/index.ts", "kitty-toolbox/src/tool-manifest.ts", "docs/01-overview.md"], "focus": "64 工具 × channel 分类（A/C/static/runtime/infra/kernel/orch/loop）各自能干什么、边界在哪"},
+    {"r": 2,  "theme": "A 通道 OP 精确签名",       "src": ["kitty-toolbox/src/ops-catalog.ts", "docs/05-reference.md"], "focus": "66 OP 的 sig/reply/note 三元组，参数顺序与类型"},
+    {"r": 3,  "theme": "错误码与拒绝口径",         "src": ["kitty-toolbox/src/ops-catalog.ts", "kitty-toolbox/src/bridge.ts"], "focus": "ERR|* 全表、本地早拒、闸门双层语义"},
+    {"r": 4,  "theme": "kitty_ce 参数构造",        "src": ["kitty-toolbox/src/tools/channel-tools.ts"], "focus": "单 op vs BATCH、op 白名单校验、异步落定"},
+    {"r": 5,  "theme": "内存读写与地址窗口",       "src": ["kitty-toolbox/src/tools/mem-tools.ts"], "focus": "R/W 的 vt 语义、MODENUM 窗口兜底、显式区间要求"},
+    {"r": 6,  "theme": "扫描族收敛策略",           "src": ["kitty-toolbox/src/tools/mem-tools.ts", "kitty-toolbox/src/ops-catalog.ts"], "focus": "S_NEW/S_GET/S_SNAP/S_CHANGED/S_UNCHANGED 何时用哪个、限额、会话释放"},
+    {"r": 7,  "theme": "指针链反查与回验",         "src": ["kitty-toolbox/src/pchain-snippet.ts", "kitty-toolbox/src/ops-catalog.ts"], "focus": "P_BACK 窗口限制、P_WALK 偏移、多跳收敛、重启回验"},
+    {"r": 8,  "theme": "内核面语义与拒绝",         "src": ["kitty-toolbox/src/tools/kernel-tools.ts"], "focus": "KM_API/INFO/ATTACH/R/W/PA/PR/MODE 差异，KM_PW 为何禁"},
+    {"r": 9,  "theme": "调试面 A vs C 选择",       "src": ["kitty-toolbox/src/x64dbg.ts", "kitty-toolbox/src/tools/channel-tools.ts"], "focus": "DBG_* 双层闸门风险 vs C 通道 program/seed/rununtil，何时必须换"},
+    {"r": 10, "theme": "静态族 PE 处理链",         "src": ["kitty-toolbox/src/tools/static-tools.ts", "kitty-toolbox/src/patch.ts", "kitty-toolbox/src/sym.ts"], "focus": "info→find→patch→rollback→hash 顺序，asm 用法，符号解析"},
+    {"r": 11, "theme": "转储与镜像重建",           "src": ["kitty-toolbox/src/dump.ts"], "focus": "unmap 原理、IAT 回填、一致率判据、带壳时为何低"},
+    {"r": 12, "theme": "运行时改造选型",           "src": ["kitty-toolbox/src/tools/driver-tools.ts", "kitty-toolbox/src/ops-catalog.ts"], "focus": "inject/prot/wpb 三档选择的判据与代价"},
+    {"r": 13, "theme": "对抗面编排",               "src": ["kitty-toolbox/src/tools/anti-tools.ts"], "focus": "acescan 流水、dualview 三视图判读、variants 切换"},
+    {"r": 14, "theme": "驱动宿主依赖顺序",         "src": ["kitty-toolbox/src/driver-tools.ts", "kitty-toolbox/src/init.ts"], "focus": "辅助驱→宿主→主驱 顺序、看门狗、STOP_PENDING 恢复"},
+    {"r": 15, "theme": "引擎族识别与路由",         "src": ["kitty-toolbox/src/engines.ts", "kitty-toolbox/src/unitymod.ts", "kitty-toolbox/src/unrealplus.ts"], "focus": "Unity Mono/IL2CPP vs UE vs Godot 的判据与工具链"},
+    {"r": 16, "theme": "移动族 APK 链路",          "src": ["kitty-toolbox/src/apkjadx.ts", "kitty-toolbox/src/fridaplus.ts"], "focus": "scan→unpack→jadx→apktool→frida 顺序与脱壳判据"},
+    {"r": 17, "theme": "REA/MCP 网关",             "src": ["kitty-toolbox/src/rea.ts", "kitty-toolbox/src/idamcp.ts"], "focus": "170 工具面的 list/describe/call 三段式"},
+    {"r": 18, "theme": "G3 数据模型写入规范",      "src": ["kitty-toolbox/src/reverse-tools.ts", "kitty-toolbox/src/reverse-store.ts"], "focus": "target/intent/obs/patch/asset 的父子约束与必填"},
+    {"r": 19, "theme": "会话真相源与留痕",         "src": ["kitty-toolbox/src/tools/session-tools.ts", "kitty-toolbox/src/workbench-context.ts"], "focus": "双字段分流、trail 追加、mode 状态机"},
+    {"r": 20, "theme": "跨工具选型决策树 + 反例",  "src": ["all above"], "focus": "同一任务多种解法时的取舍，选错的后果"}
+  ],
+  "output": "train/data/re-iter/r<NN>-<theme>.jsonl",
+  "each_round": ["读源→提炼事实", "生成 40-80 条样本", "质检（qc 五维打分）", "记录本轮新增覆盖"]
+}

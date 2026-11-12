@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 
-const R = 'D:/BaiduNetdiskDownload/Local-AI/train/data/kitty-reverse';
+const R = 'D:/BaiduNetdiskDownload/Local-AI/train/lines/9b-oxcoder/data/kitty-reverse';
 const P = (f) => path.join(R, f);
 const sha256 = (p) => crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const lines = (f) => fs.readFileSync(P(f), 'utf8').split('\n').filter(Boolean);
@@ -24,7 +24,7 @@ const totalMB = +(files.reduce((a, f) => a + f.bytes, 0) / 1048576).toFixed(1);
 
 const manifest = {
   __meta: {
-    dir: 'train/data/kitty-reverse', built: new Date().toISOString(),
+    dir: 'train/lines/9b-oxcoder/data/kitty-reverse', built: new Date().toISOString(),
     state: '清理后（168.4MB 已吸收/非核心件已删，台账见 CLEANUP-REPORT.md）',
     core_guarantee: 'train-kitty-core.jsonl 为五份 re 数据的去重并集，源 8448 行零丢失',
   },

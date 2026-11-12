@@ -1,0 +1,13 @@
+2026-11-08 21:01:44.419  INFO  starting engine
+2026-11-08 21:01:45.155  INFO  loading weights | 7.82 GiB
+2026-11-08 21:01:47.063  INFO  weights ready | 7.82 GiB | 1.9s | 4.10 GiB/s
+2026-11-08 21:01:51.155  INFO  CUDA graph memory calibrated | 4.1s
+2026-11-08 21:01:51.161  INFO  pinning host context | 2.00 GiB
+2026-11-08 21:01:51.383  INFO  host context pinned | 2.00 GiB | 222 ms
+2026-11-08 21:01:51.521  INFO  CUDA graphs ready | 79.0 ms
+2026-11-08 21:01:51.524  INFO  engine ready | kittyrev-oxcoder9b-nsfw-gate-full-GSQ | total 7.1s | weights 7.82 GiB | CUDA sync spin
+2026-11-08 21:01:51.525  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 262.7 MiB | free 2.70 GiB
+2026-11-08 21:01:51.526  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 21:01:51.608  INFO  listening on http://127.0.0.1:1840 | model kittyrev-oxcoder9b-nsfw-gate-full-GSQ | auth disabled
+2026-11-08 21:01:51.644  INFO  req#1 started | openai-chat non-stream | 1 message | max output 192 | thinking off
+D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-master\src\core\device.cu:247: CUDA_CHECK(cudaStreamSynchronize(stream_)) failed: cudaErrorIllegalAddress: an illegal memory access was encountered

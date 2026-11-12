@@ -1,0 +1,97 @@
+========= COMPUTE-SANITIZER
+========= Program hit cudaErrorStreamCaptureUnsupported (error 900) due to "operation not permitted when stream is capturing" on CUDA API call to cudaDeviceSynchronize.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame: NVAON_SharedMemory_Destroy [0x7ff9f0f6cf62] in nvcuda64.dll
+=========         Host Frame: _cudaGetProcAddress [0x7ff9fd9d1f7f] in nvcudart_hybrid64.dll
+=========         Host Frame:  [0x3ab1da] in ninfer-serve.exe
+=========         Host Frame:  [0x34b52d] in ninfer-serve.exe
+=========         Host Frame:  [0x25f2a3] in ninfer-serve.exe
+=========         Host Frame:  [0x28a2c3] in ninfer-serve.exe
+=========         Host Frame:  [0x280581] in ninfer-serve.exe
+=========         Host Frame:  [0x289fa1] in ninfer-serve.exe
+=========         Host Frame:  [0x274e36] in ninfer-serve.exe
+=========         Host Frame:  [0x90fcf0] in ninfer-serve.exe
+=========         Host Frame:  [0x2752ce] in ninfer-serve.exe
+=========         Host Frame:  [0x2734f3] in ninfer-serve.exe
+=========         Host Frame:  [0x2028b9] in ninfer-serve.exe
+=========         Host Frame:  [0x25bfc7] in ninfer-serve.exe
+=========         Host Frame:  [0x1c329f] in ninfer-serve.exe
+=========         Host Frame:  [0x16b7ca] in ninfer-serve.exe
+=========         Host Frame:  [0x16c9c8] in ninfer-serve.exe
+=========         Host Frame:  [0x169827] in ninfer-serve.exe
+=========         Host Frame:  [0x170f1b] in ninfer-serve.exe
+=========         Host Frame:  [0x12d0a2] in ninfer-serve.exe
+=========         Host Frame:  [0x12c65a] in ninfer-serve.exe
+=========         Host Frame:  [0x3e4f4] in ninfer-serve.exe
+=========         Host Frame:  [0x37318] in ninfer-serve.exe
+=========         Host Frame:  [0xa43954] in ninfer-serve.exe
+=========         Host Frame: BaseThreadInitThunk [0x7ffa38df257d] in KERNEL32.DLL
+=========         Host Frame: RtlUserThreadStart [0x7ffa39aaaa78] in ntdll.dll
+========= 
+========= Program hit cudaErrorStreamCaptureInvalidated (error 901) due to "operation failed due to a previous error during capture" on CUDA API call to cudaLaunchKernel.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame: NVAON_SharedMemory_Destroy [0x7ff9f0f6cf62] in nvcuda64.dll
+=========         Host Frame: _cudaGetProcAddress [0x7ff9fd9e5b30] in nvcudart_hybrid64.dll
+=========         Host Frame: _cudaGetProcAddress [0x7ff9fd9a8301] in nvcudart_hybrid64.dll
+=========         Host Frame:  [0xa3ef74] in ninfer-serve.exe
+=========         Host Frame:  [0x35f0b4] in ninfer-serve.exe
+=========         Host Frame:  [0x35e8ee] in ninfer-serve.exe
+=========         Host Frame:  [0x35ed2f] in ninfer-serve.exe
+=========         Host Frame:  [0x3ab326] in ninfer-serve.exe
+=========         Host Frame:  [0x34b52d] in ninfer-serve.exe
+=========         Host Frame:  [0x25f2a3] in ninfer-serve.exe
+=========         Host Frame:  [0x28a2c3] in ninfer-serve.exe
+=========         Host Frame:  [0x280581] in ninfer-serve.exe
+=========         Host Frame:  [0x289fa1] in ninfer-serve.exe
+=========         Host Frame:  [0x274e36] in ninfer-serve.exe
+=========         Host Frame:  [0x90fcf0] in ninfer-serve.exe
+=========         Host Frame:  [0x2752ce] in ninfer-serve.exe
+=========         Host Frame:  [0x2734f3] in ninfer-serve.exe
+=========         Host Frame:  [0x2028b9] in ninfer-serve.exe
+=========         Host Frame:  [0x25bfc7] in ninfer-serve.exe
+=========         Host Frame:  [0x1c329f] in ninfer-serve.exe
+=========         Host Frame:  [0x16b7ca] in ninfer-serve.exe
+=========         Host Frame:  [0x16c9c8] in ninfer-serve.exe
+=========         Host Frame:  [0x169827] in ninfer-serve.exe
+=========         Host Frame:  [0x170f1b] in ninfer-serve.exe
+=========         Host Frame:  [0x12d0a2] in ninfer-serve.exe
+=========         Host Frame:  [0x12c65a] in ninfer-serve.exe
+=========         Host Frame:  [0x3e4f4] in ninfer-serve.exe
+=========         Host Frame:  [0x37318] in ninfer-serve.exe
+=========         Host Frame:  [0xa43954] in ninfer-serve.exe
+=========         Host Frame: BaseThreadInitThunk [0x7ffa38df257d] in KERNEL32.DLL
+=========         Host Frame: RtlUserThreadStart [0x7ffa39aaaa78] in ntdll.dll
+========= 
+========= Program hit cudaErrorStreamCaptureInvalidated (error 901) due to "operation failed due to a previous error during capture" on CUDA API call to cudaGetLastError.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame: NVAON_SharedMemory_Destroy [0x7ff9f0f6cf62] in nvcuda64.dll
+=========         Host Frame: _cudaGetProcAddress [0x7ff9fd9d726c] in nvcudart_hybrid64.dll
+=========         Host Frame:  [0x35e8f3] in ninfer-serve.exe
+=========         Host Frame:  [0x35ed2f] in ninfer-serve.exe
+=========         Host Frame:  [0x3ab326] in ninfer-serve.exe
+=========         Host Frame:  [0x34b52d] in ninfer-serve.exe
+=========         Host Frame:  [0x25f2a3] in ninfer-serve.exe
+=========         Host Frame:  [0x28a2c3] in ninfer-serve.exe
+=========         Host Frame:  [0x280581] in ninfer-serve.exe
+=========         Host Frame:  [0x289fa1] in ninfer-serve.exe
+=========         Host Frame:  [0x274e36] in ninfer-serve.exe
+=========         Host Frame:  [0x90fcf0] in ninfer-serve.exe
+=========         Host Frame:  [0x2752ce] in ninfer-serve.exe
+=========         Host Frame:  [0x2734f3] in ninfer-serve.exe
+=========         Host Frame:  [0x2028b9] in ninfer-serve.exe
+=========         Host Frame:  [0x25bfc7] in ninfer-serve.exe
+=========         Host Frame:  [0x1c329f] in ninfer-serve.exe
+=========         Host Frame:  [0x16b7ca] in ninfer-serve.exe
+=========         Host Frame:  [0x16c9c8] in ninfer-serve.exe
+=========         Host Frame:  [0x169827] in ninfer-serve.exe
+=========         Host Frame:  [0x170f1b] in ninfer-serve.exe
+=========         Host Frame:  [0x12d0a2] in ninfer-serve.exe
+=========         Host Frame:  [0x12c65a] in ninfer-serve.exe
+=========         Host Frame:  [0x3e4f4] in ninfer-serve.exe
+=========         Host Frame:  [0x37318] in ninfer-serve.exe
+=========         Host Frame:  [0xa43954] in ninfer-serve.exe
+=========         Host Frame: BaseThreadInitThunk [0x7ffa38df257d] in KERNEL32.DLL
+=========         Host Frame: RtlUserThreadStart [0x7ffa39aaaa78] in ntdll.dll
+========= 
+========= Target application returned an error
+========= ERROR SUMMARY: 3 errors

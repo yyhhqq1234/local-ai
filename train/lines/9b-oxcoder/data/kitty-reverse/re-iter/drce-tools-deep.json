@@ -1,0 +1,2603 @@
+[
+ {
+  "name": "kitty_acescan",
+  "file": "tools/anti-tools.ts",
+  "description": "反作弊对抗日一键编排：驱动守卫→宿主探活→OPEN→KM_ATTACH→模块窗口→三视图门禁(R/KM_R/KM_PR)→写回环→落 logs\\\\acescan-<ts>.json*；gate=green 且写回全通=无拦截面",
+  "params": [
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "靶标 pid 或进程名（默认 kitty-target.exe）",
+    "enum": []
+   },
+   {
+    "name": "module",
+    "type": "string",
+    "required": false,
+    "description": "采样模块（默认随 target）",
+    "enum": []
+   },
+   {
+    "name": "addr",
+    "type": "string",
+    "required": false,
+    "description": "显式采样地址（默认模块基址）",
+    "enum": []
+   },
+   {
+    "name": "vt",
+    "type": "string",
+    "required": false,
+    "description": "byte|word|dword|qword（默认 dword）",
+    "enum": []
+   },
+   {
+    "name": "samples",
+    "type": "number",
+    "required": false,
+    "description": "三视图采样轮数（默认 3，上限 10）",
+    "enum": []
+   },
+   {
+    "name": "writeback",
+    "type": "boolean",
+    "required": false,
+    "description": "跑写回环（默认 true）",
+    "enum": []
+   },
+   {
+    "name": "attach",
+    "type": "boolean",
+    "required": false,
+    "description": "跑 KM_ATTACH（默认 true）",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "超时毫秒（默认 20000）",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_apkscan",
+  "file": "apkjadx.ts",
+  "description": "APK shell/scan (APKiD/MobSF/Quark triage)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "scan"
+  ]
+ },
+ {
+  "name": "kitty_apktool",
+  "file": "apkjadx.ts",
+  "description": "APK smali decode/build (apktool passthrough)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "decode",
+   "build"
+  ]
+ },
+ {
+  "name": "kitty_asm",
+  "file": "tools/static-tools.ts",
+  "description": "x64 迷你汇编器：assemble（多行源码→机器码，支持标签/数值 VA 跳转）· jump（单条相对跳转字节，含 rel32 修正）· ",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "assemble | jump",
+    "enum": []
+   },
+   {
+    "name": "code",
+    "type": "string",
+    "required": false,
+    "description": "assemble 的多行源码；标签写成 `name:`，跳转目标可写标签名或数值 VA",
+    "enum": []
+   },
+   {
+    "name": "base",
+    "type": "string",
+    "required": false,
+    "description": "assemble 的承载地址（VA，用于相对跳转修正），默认 0",
+    "enum": []
+   },
+   {
+    "name": "from",
+    "type": "string",
+    "required": false,
+    "description": "jump：跳转指令所在 VA",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "jump：目标 VA",
+    "enum": []
+   },
+   {
+    "name": "kind",
+    "type": "string",
+    "required": false,
+    "description": "jump：jmp | call | jz | jnz | jl | jle | jg | jge | ja | jb | js | jns …",
+    "enum": []
+   },
+   {
+    "name": "short",
+    "type": "boolean",
+    "required": false,
+    "description": "jump：用 rel8（位移超界会报错）",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "assemble",
+   "jump"
+  ]
+ },
+ {
+  "name": "kitty_assetrip",
+  "file": "assetrip.ts",
+  "description": "Unity asset export (AssetRipper/AssetStudio passthrough)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "list",
+   "export"
+  ]
+ },
+ {
+  "name": "kitty_bepinex",
+  "file": "unitymod.ts",
+  "description": "Unity mod loader (BepInEx/MelonLoader status)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "gameDir",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "install",
+   "list"
+  ]
+ },
+ {
+  "name": "kitty_ce",
+  "file": "tools/channel-tools.ts",
+  "description": "KittyCE 直控（A 通道桥 v0.2.9）：单条 OP 或 ops=[...] 批量；scan/P_BACK 异步自动等落定；拼错 OP 本地早拒；OP 表见 kitty_ops",
+  "params": [
+   {
+    "name": "op",
+    "type": "string",
+    "required": false,
+    "description": "单行桥指令，如 PING / R|0x<addr>|dword / S_NEW|dword|123|0x<start>|0x<stop>",
+    "enum": []
+   },
+   {
+    "name": "ops",
+    "type": "array",
+    "required": false,
+    "description": "BATCH 多指令（逐条投递；给了 ops 就用 ops，op 可不填，上限 40）",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "超时毫秒，默认 20000",
+    "enum": []
+   },
+   {
+    "name": "wait",
+    "type": "boolean",
+    "required": false,
+    "description": "异步作业自动轮询落定（默认 true）",
+    "enum": []
+   },
+   {
+    "name": "top",
+    "type": "number",
+    "required": false,
+    "description": "wait 取样条数（S_GET/P_BACK_RES，默认 0，上限 200）",
+    "enum": []
+   },
+   {
+    "name": "auto_free",
+    "type": "boolean",
+    "required": false,
+    "description": "扫描后自动 S_FREE（默认 false）",
+    "enum": []
+   },
+   {
+    "name": "confirm",
+    "type": "boolean",
+    "required": false,
+    "description": "W/LUA 类写 OP 须 true",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_cpp2il",
+  "file": "cpp2il.ts",
+  "description": "IL2CPP dump (Cpp2IL passthrough)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "gameDir",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "exeName",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "triage",
+   "dump",
+   "parse"
+  ]
+ },
+ {
+  "name": "kitty_dbg",
+  "file": "tools/channel-tools.ts",
+  "description": "KittyCE 调试面（DBG_*）：attach（双层闸门，须 accept_host_loss=true；实测会杀宿主）/wait/status/bp/bp_list/bp_del/go/regs/detach；真调试优先 kitty_x64dbg",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "attach|wait|status|bp|bp_list|bp_del|go|regs|detach|sync",
+    "enum": []
+   },
+   {
+    "name": "iface",
+    "type": "number",
+    "required": false,
+    "description": "attach 调试接口号（默认 2）",
+    "enum": []
+   },
+   {
+    "name": "accept_host_loss",
+    "type": "boolean",
+    "required": false,
+    "description": "attach 必须 true（随机 fail-fast 杀宿主：F-13）",
+    "enum": []
+   },
+   {
+    "name": "addr",
+    "type": "string",
+    "required": false,
+    "description": "bp 地址/符号，如 0x7FF6DADB1000 或 kernelbase.CreateFileW",
+    "enum": []
+   },
+   {
+    "name": "size",
+    "type": "number",
+    "required": false,
+    "description": "bp 监视长度（默认 4）",
+    "enum": []
+   },
+   {
+    "name": "access",
+    "type": "string",
+    "required": false,
+    "description": "bp 类型：execute|write|access（默认 access）",
+    "enum": []
+   },
+   {
+    "name": "mode",
+    "type": "string",
+    "required": false,
+    "description": "bp 实现：int3|debug|exception（默认 debug）",
+    "enum": []
+   },
+   {
+    "name": "id",
+    "type": "string",
+    "required": false,
+    "description": "bp_del 断点 id",
+    "enum": []
+   },
+   {
+    "name": "step",
+    "type": "string",
+    "required": false,
+    "description": "go：stepinto|stepover（缺省正常继续）",
+    "enum": []
+   },
+   {
+    "name": "wait_ms",
+    "type": "number",
+    "required": false,
+    "description": "轮询上限毫秒（默认 15000）",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "单指令超时毫秒（默认 20000）",
+    "enum": []
+   },
+   {
+    "name": "confirm",
+    "type": "boolean",
+    "required": false,
+    "description": "go 须 true；attach 永久拒绝",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_die",
+  "file": "staticplus.ts",
+  "description": "packer/compiler detect (DIE passthrough)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "scan"
+  ]
+ },
+ {
+  "name": "kitty_dnspy",
+  "file": "unitymod.ts",
+  "description": "Unity Mono analysis (dnSpyEx + de4dot passthrough)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "deobf",
+   "open"
+  ]
+ },
+ {
+  "name": "kitty_drv",
+  "file": "tools/channel-tools.ts",
+  "description": "驱动+宿主守护：ensure（默认，双驱 Private_Access→mhtglyts）| status | host（看门狗：单实例重拉+PING+SYNC 归一）| recover（修 STOP_PENDING）| storm",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": false,
+    "description": "ensure（默认）|status|recover|host|storm",
+    "enum": []
+   },
+   {
+    "name": "force",
+    "type": "boolean",
+    "required": false,
+    "description": "ensure 忽略 15s 成功缓存",
+    "enum": []
+   },
+   {
+    "name": "hostStart",
+    "type": "boolean",
+    "required": false,
+    "description": "recover/host 是否重拉宿主（默认 true）",
+    "enum": []
+   },
+   {
+    "name": "reset_breaker",
+    "type": "boolean",
+    "required": false,
+    "description": "host：复位看门狗熔断",
+    "enum": []
+   },
+   {
+    "name": "cycles",
+    "type": "number",
+    "required": false,
+    "description": "storm 轮次（默认 20，上限 100）",
+    "enum": []
+   },
+   {
+    "name": "pid",
+    "type": "number",
+    "required": false,
+    "description": "storm 每轮附 KM_ATTACH|<pid>",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "host",
+   "storm",
+   "ensure",
+   "recover"
+  ]
+ },
+ {
+  "name": "kitty_drvio",
+  "file": "tools/driver-tools.ts",
+  "description": "辅助驱动面（只读不启停）：DriverInject（CommIoInject/APC）· DrunkenDreamDumper（空缓冲安全探测）· 软件面清点（WKE64/VT-Debug/UE/CE插件/.dat/PDB/InjectTool/Loader）",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": false,
+    "description": "status（默认）|probe|open|surf（仅软件面）",
+    "enum": []
+   },
+   {
+    "name": "device",
+    "type": "string",
+    "required": false,
+    "description": "probe/open 设备名（默认按 spec）",
+    "enum": []
+   },
+   {
+    "name": "ioctl",
+    "type": "string",
+    "required": false,
+    "description": "单个 IOCTL，如 0x225C90",
+    "enum": []
+   },
+   {
+    "name": "ioctls",
+    "type": "array",
+    "required": false,
+    "description": "多个 IOCTL",
+    "enum": []
+   },
+   {
+    "name": "inHex",
+    "type": "string",
+    "required": false,
+    "description": "输入缓冲 hex（默认空）",
+    "enum": []
+   },
+   {
+    "name": "outSize",
+    "type": "number",
+    "required": false,
+    "description": "输出缓冲字节（默认 64）",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "surf",
+   "status",
+   "open",
+   "probe"
+  ]
+ },
+ {
+  "name": "kitty_dualview",
+  "file": "tools/kernel-tools.ts",
+  "description": "三视图门禁：同址取 R / KM_R / KM_PR（经 KM_PA），差异=视图分叉，落 logs/anti-ace-<date>.jsonl",
+  "params": [
+   {
+    "name": "addr",
+    "type": "string",
+    "required": true,
+    "description": "目标虚拟地址（0x…）",
+    "enum": []
+   },
+   {
+    "name": "vt",
+    "type": "string",
+    "required": false,
+    "description": "byte|word|dword|qword|bytes:N（默认 dword）",
+    "enum": []
+   },
+   {
+    "name": "samples",
+    "type": "number",
+    "required": false,
+    "description": "连续采样次数（默认 1，上限 20）",
+    "enum": []
+   },
+   {
+    "name": "note",
+    "type": "string",
+    "required": false,
+    "description": "本轮备注（写入证据行）",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "超时毫秒（默认 20000）",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_dump",
+  "file": "tools/mem-tools.ts",
+  "description": "内存转储 + 镜像重建：module=<名>（自动取窗口）或 addr+size → LUA 分块写盘（ASCII 路径）；unmap=true 再按节表重建为磁盘格式 PE 并给出与参考文件的逐字节一致率",
+  "params": [
+   {
+    "name": "module",
+    "type": "string",
+    "required": false,
+    "description": "模块名（与 addr/size 二选一）",
+    "enum": []
+   },
+   {
+    "name": "addr",
+    "type": "string",
+    "required": false,
+    "description": "起始地址（显式）",
+    "enum": []
+   },
+   {
+    "name": "size",
+    "type": "number",
+    "required": false,
+    "description": "长度（显式）",
+    "enum": []
+   },
+   {
+    "name": "path",
+    "type": "string",
+    "required": false,
+    "description": "输出镜像路径（ASCII，默认 logs\\\\dump-<ts>.bin）",
+    "enum": []
+   },
+   {
+    "name": "unmap",
+    "type": "boolean",
+    "required": false,
+    "description": "转储后重建为磁盘格式（默认 false）",
+    "enum": []
+   },
+   {
+    "name": "fix_iat",
+    "type": "boolean",
+    "required": false,
+    "description": "unmap 时从 ILT 回填 IAT（默认 true，导入表可再次解析）",
+    "enum": []
+   },
+   {
+    "name": "sections",
+    "type": "boolean",
+    "required": false,
+    "description": "额外做节级导出 <path>.<节名>.bin（默认 false）",
+    "enum": []
+   },
+   {
+    "name": "reference",
+    "type": "string",
+    "required": false,
+    "description": "unmap 时的参考文件（用于算一致率）",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "超时毫秒（默认 60000）",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_engines",
+  "file": "engines.ts",
+  "description": "engine router (ue/unity/godot dispatch)",
+  "params": [
+   {
+    "name": "path",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_fmodel",
+  "file": "unrealplus.ts",
+  "description": "UE asset view (FModel/UAssetGUI/umodel passthrough)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "pakDir",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "pak",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "aesKey",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "list",
+   "export",
+   "unpack"
+  ]
+ },
+ {
+  "name": "kitty_frida",
+  "file": "fridaplus.ts",
+  "description": "dynamic hook (Frida/objection/R0capture passthrough)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "pkg",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "script",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "spawn",
+   "attach",
+   "trace",
+   "capture"
+  ]
+ },
+ {
+  "name": "kitty_gdre",
+  "file": "gdre.ts",
+  "description": "Godot recovery (gdsdecomp passthrough)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "list",
+   "extract",
+   "recover",
+   "decompile"
+  ]
+ },
+ {
+  "name": "kitty_ghidra",
+  "file": "ghidra.ts",
+  "description": "Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘；functions/search/decompile 读产物；status 探针）",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "status | analyze | functions | search | decompile | strings",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "analyze/strings：目标二进制（exe/dll）",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "analyze：输出目录（默认 logs/ghidra-<name>-<ts>）；functions/search/decompile：读取已有产物目录",
+    "enum": []
+   },
+   {
+    "name": "filter",
+    "type": "string",
+    "required": false,
+    "description": "functions：函数名子串过滤",
+    "enum": []
+   },
+   {
+    "name": "name",
+    "type": "string",
+    "required": false,
+    "description": "decompile：函数名（产物内的 target）",
+    "enum": []
+   },
+   {
+    "name": "limit",
+    "type": "number",
+    "required": false,
+    "description": "functions/strings：条数上限（默认 60）",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "analyze 超时毫秒（默认 900000）",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "strings",
+   "analyze",
+   "functions",
+   "search",
+   "decompile"
+  ]
+ },
+ {
+  "name": "kitty_ida",
+  "file": "ida.ts",
+  "description": "IDA 批处理真分析（analyze 跑 idat64 -A -S ida_export.py → JSON 落盘；functions/strings|xrefs|decompile 读产物；status 探档位 Pro/Free/无）",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "status | analyze | functions | strings | imports | entries | xrefs | decompile",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "analyze：目标二进制",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "产物目录（analyze 输出 / 读取已有）",
+    "enum": []
+   },
+   {
+    "name": "filter",
+    "type": "string",
+    "required": false,
+    "description": "functions/strings/xrefs：子串过滤",
+    "enum": []
+   },
+   {
+    "name": "name",
+    "type": "string",
+    "required": false,
+    "description": "decompile：函数名",
+    "enum": []
+   },
+   {
+    "name": "limit",
+    "type": "number",
+    "required": false,
+    "description": "条数上限（默认 80）",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "analyze 超时毫秒（默认 600000）",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "analyze",
+   "functions",
+   "strings",
+   "imports",
+   "entries",
+   "xrefs",
+   "decompile"
+  ]
+ },
+ {
+  "name": "kitty_idamcp",
+  "file": "idamcp.ts",
+  "description": "status | list | describe | call",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "status | list | describe | call",
+    "enum": []
+   },
+   {
+    "name": "tool",
+    "type": "string",
+    "required": false,
+    "description": "call/describe：上游工具名（list 可见）",
+    "enum": []
+   },
+   {
+    "name": "args",
+    "type": "string",
+    "required": false,
+    "description": "call：上游参数（JSON 串或对象）",
+    "enum": []
+   },
+   {
+    "name": "limit",
+    "type": "number",
+    "required": false,
+    "description": "list 条数上限（默认 200）",
+    "enum": []
+   },
+   {
+    "name": "query",
+    "type": "string",
+    "required": false,
+    "description": "list：名字/描述子串过滤",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "list",
+   "describe",
+   "call"
+  ]
+ },
+ {
+  "name": "kitty_il2cppdumper",
+  "file": "il2cppdumper.ts",
+  "description": "Unity IL2CPP dump (Il2CppDumper passthrough)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "so",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "meta",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "dump",
+   "parse"
+  ]
+ },
+ {
+  "name": "kitty_init",
+  "file": "tools/driver-tools.ts",
+  "description": "初始化面：status（只读三层 L0/L1/L2）| init（双绿+DBVM 前置：辅助驱→宿主→主驱 START→验真→Use DBVM=1→拉 CE 等心跳；自动提权，免手打命令）| fixblocklist（须重启）；mhtglyts 禁重建",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": false,
+    "description": "status（默认）|init|fixblocklist",
+    "enum": []
+   },
+   {
+    "name": "mode",
+    "type": "string",
+    "required": false,
+    "description": "init：kernel（默认，KM 面完整）| dbvm（DBVM 优先，KM 面退化）",
+    "enum": []
+   },
+   {
+    "name": "reload",
+    "type": "boolean",
+    "required": false,
+    "description": "true=全量重建辅助驱再 START（默认 false 健康则跳过）",
+    "enum": []
+   },
+   {
+    "name": "tree",
+    "type": "string",
+    "required": false,
+    "description": "工具箱树目录（默认自动探测）",
+    "enum": []
+   },
+   {
+    "name": "preview",
+    "type": "boolean",
+    "required": false,
+    "description": "true=只回执行计划，不动服务",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "fixblocklist"
+  ]
+ },
+ {
+  "name": "kitty_inject",
+  "file": "tools/mem-tools.ts",
+  "description": "DLL 注入（A 通道 LUA injectDLL / ps 托管注入器 / loaddll）；注入后自动 MODENUM 复核",
+  "params": [
+   {
+    "name": "dll",
+    "type": "string",
+    "required": true,
+    "description": "DLL 绝对路径（ASCII）",
+    "enum": []
+   },
+   {
+    "name": "module",
+    "type": "string",
+    "required": false,
+    "description": "复核模块名（默认 DLL 文件名）",
+    "enum": []
+   },
+   {
+    "name": "via",
+    "type": "string",
+    "required": false,
+    "description": "ce（默认）| ps（.NET，不依赖 CE）| loaddll",
+    "enum": []
+   },
+   {
+    "name": "bits",
+    "type": "number",
+    "required": false,
+    "description": "loaddll 位数：64（默认）| 32",
+    "enum": []
+   },
+   {
+    "name": "pid",
+    "type": "number",
+    "required": false,
+    "description": "via=ps 目标 pid（省略取当前 OPEN）",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "超时毫秒（默认 30000）",
+    "enum": []
+   },
+   {
+    "name": "confirm",
+    "type": "boolean",
+    "required": false,
+    "description": "注入须 true",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_jadx",
+  "file": "apkjadx.ts",
+  "description": "APK Java decompile (jadx passthrough)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "decompile",
+   "search"
+  ]
+ },
+ {
+  "name": "kitty_km",
+  "file": "tools/kernel-tools.ts",
+  "description": "内核面（Dbgk）：api（枚举 dbk_*）| info | attach（内核态打开）| read/write（KM_R/KM_W）| pa（VA→PA）| pread（物理读）| pwrite（永久拒绝：卡死 Lua）",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "api|info|attach|read|write|pa|pread|pwrite",
+    "enum": []
+   },
+   {
+    "name": "pid",
+    "type": "number",
+    "required": false,
+    "description": "attach 目标 pid",
+    "enum": []
+   },
+   {
+    "name": "addr",
+    "type": "string",
+    "required": false,
+    "description": "read/write/pa 虚拟地址（0x…）",
+    "enum": []
+   },
+   {
+    "name": "pa",
+    "type": "string",
+    "required": false,
+    "description": "pread/pwrite 物理地址（0x…）",
+    "enum": []
+   },
+   {
+    "name": "vt",
+    "type": "string",
+    "required": false,
+    "description": "byte|word|dword|qword|bytes:N（默认 dword）",
+    "enum": []
+   },
+   {
+    "name": "val",
+    "type": "string",
+    "required": false,
+    "description": "write 值（十进制或 0x…）",
+    "enum": []
+   },
+   {
+    "name": "accept_engine_wedge",
+    "type": "boolean",
+    "required": false,
+    "description": "pwrite 须 true（已永久拒绝）",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "超时毫秒（默认 20000）",
+    "enum": []
+   },
+   {
+    "name": "confirm",
+    "type": "boolean",
+    "required": false,
+    "description": "write 须 true",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_loop",
+  "file": "loop.ts",
+  "description": "Kitty 夜跑一轮：8 站流水（收案→分诊→静态→定位→对抗→还原→修改→回归）+ ACE 分支 → logs/loop-<ts>.jsonl + patterns/*.json",
+  "params": [
+   {
+    "name": "mode",
+    "type": "string",
+    "required": false,
+    "description": "round（默认）|status|dry",
+    "enum": []
+   },
+   {
+    "name": "stability",
+    "type": "string",
+    "required": false,
+    "description": "restart（默认，宿主换新验稳定）|off",
+    "enum": []
+   },
+   {
+    "name": "force_red",
+    "type": "string",
+    "required": false,
+    "description": "hits|stability|handle|wedge（故障注入，复现门禁红分支）",
+    "enum": []
+   },
+   {
+    "name": "ace_branch",
+    "type": "boolean",
+    "required": false,
+    "description": "ACE 分支演练轮（默认 false）",
+    "enum": []
+   },
+   {
+    "name": "recover_hosts",
+    "type": "boolean",
+    "required": false,
+    "description": "允许接管/清理现有宿主（默认 false）",
+    "enum": []
+   },
+   {
+    "name": "host_lifecycle",
+    "type": "boolean",
+    "required": false,
+    "description": "本轮自管宿主生命周期（默认 false）",
+    "enum": []
+   },
+   {
+    "name": "host_exe",
+    "type": "string",
+    "required": false,
+    "description": "宿主路径覆盖（默认 Simple-Version）",
+    "enum": []
+   },
+   {
+    "name": "attach",
+    "type": "number",
+    "required": false,
+    "description": "attach 证据次数（0=关，默认 0）",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "单指令超时毫秒（默认 15000）",
+    "enum": []
+   },
+   {
+    "name": "confirm",
+    "type": "boolean",
+    "required": false,
+    "description": "mode=round 须 true",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "dry"
+  ]
+ },
+ {
+  "name": "kitty_loop_status",
+  "file": "loop.ts",
+  "description": "Kitty 夜跑状态：宿主/靶标/服务/红线/特征库/最近日志，只读不跑轮",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_lua",
+  "file": "fridaplus.ts",
+  "description": "Lua decompile (luadec/unluac passthrough, exe|java双档)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "decompile"
+  ]
+ },
+ {
+  "name": "kitty_net",
+  "file": "staticplus.ts",
+  "description": "traffic capture: status（探测 mitmdump/tshark）| capture（后台 mitmdump 写 pcap 到 logs/，返回 pid）| stop（按 pid 停）| decode（tshark 解析 pcap 摘要）",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "status | capture | stop | decode",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "capture/decode：pcap 路径（默认 logs/net-<ts>.pcap）",
+    "enum": []
+   },
+   {
+    "name": "port",
+    "type": "number",
+    "required": false,
+    "description": "capture：listen 端口（默认 8080）",
+    "enum": []
+   },
+   {
+    "name": "pid",
+    "type": "number",
+    "required": false,
+    "description": "stop：capture 返回的 pid",
+    "enum": []
+   },
+   {
+    "name": "filter",
+    "type": "string",
+    "required": false,
+    "description": "decode：tshark -Y 显示过滤（如 http.request）",
+    "enum": []
+   },
+   {
+    "name": "limit",
+    "type": "number",
+    "required": false,
+    "description": "decode：行数上限（默认 60）",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "capture",
+   "stop",
+   "decode"
+  ]
+ },
+ {
+  "name": "kitty_ops",
+  "file": "tools/kernel-tools.ts",
+  "description": "A 通道 OP 表（桥 v0.2.9）：默认回分片索引（约 1KB）；filter=<OP 前缀/关键字> 回签名与回包；all=true 回全表（约 10KB）",
+  "params": [
+   {
+    "name": "filter",
+    "type": "string",
+    "required": false,
+    "description": "OP 前缀或关键字，如 S_ / DBG / P_BACK / KM_",
+    "enum": []
+   },
+   {
+    "name": "all",
+    "type": "boolean",
+    "required": false,
+    "description": "true=全表（约 10KB，慎用）",
+    "enum": []
+   },
+   {
+    "name": "top",
+    "type": "number",
+    "required": false,
+    "description": "最多回 N 行（默认 0=不限）",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_patch",
+  "file": "tools/static-tools.ts",
+  "description": "PE 静态补丁：info | find（字节/ASCII/UTF16 定位）| patch（expect 校验→备份→替换→校验和）| rollback | hash；拒绝补丁 KittyCE.exe（除非 force）",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "info|find|patch|rollback|hash",
+    "enum": []
+   },
+   {
+    "name": "path",
+    "type": "string",
+    "required": true,
+    "description": "目标 PE 路径",
+    "enum": []
+   },
+   {
+    "name": "pattern",
+    "type": "string",
+    "required": false,
+    "description": "find 十六进制模式，`??` 通配，如 \"48 8B ?? 05\"",
+    "enum": []
+   },
+   {
+    "name": "str",
+    "type": "string",
+    "required": false,
+    "description": "find 字符串（ASCII；utf16=true 走 UTF-16LE）",
+    "enum": []
+   },
+   {
+    "name": "utf16",
+    "type": "boolean",
+    "required": false,
+    "description": "str 按 UTF-16LE 搜索",
+    "enum": []
+   },
+   {
+    "name": "limit",
+    "type": "number",
+    "required": false,
+    "description": "find 命中上限（默认 64）",
+    "enum": []
+   },
+   {
+    "name": "from",
+    "type": "number",
+    "required": false,
+    "description": "find 起始文件偏移",
+    "enum": []
+   },
+   {
+    "name": "to",
+    "type": "number",
+    "required": false,
+    "description": "find 结束文件偏移",
+    "enum": []
+   },
+   {
+    "name": "at",
+    "type": "string",
+    "required": false,
+    "description": "patch 位置：`0x<文件偏移>` / `va:0x<VA>` / `rva:0x<RVA>`",
+    "enum": []
+   },
+   {
+    "name": "bytes",
+    "type": "string",
+    "required": false,
+    "description": "patch 新字节，十六进制串如 \"31 C0 90\"",
+    "enum": []
+   },
+   {
+    "name": "expect",
+    "type": "string",
+    "required": false,
+    "description": "patch 期望原字节（不匹配拒写；支持 `??`）",
+    "enum": []
+   },
+   {
+    "name": "in_place",
+    "type": "boolean",
+    "required": false,
+    "description": "true=改原文件（默认，带 .bak）；false=写 <path>.patched",
+    "enum": []
+   },
+   {
+    "name": "backup",
+    "type": "boolean",
+    "required": false,
+    "description": "原地补丁前建 .bak（默认 true）",
+    "enum": []
+   },
+   {
+    "name": "fix_checksum",
+    "type": "boolean",
+    "required": false,
+    "description": "重算 PE 校验和（默认 true）",
+    "enum": []
+   },
+   {
+    "name": "dry_run",
+    "type": "boolean",
+    "required": false,
+    "description": "只算不写（默认 false）",
+    "enum": []
+   },
+   {
+    "name": "force",
+    "type": "boolean",
+    "required": false,
+    "description": "允许补丁 KittyCE.exe",
+    "enum": []
+   },
+   {
+    "name": "confirm",
+    "type": "boolean",
+    "required": false,
+    "description": "patch 写入须 true",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "info",
+   "hash",
+   "find",
+   "patch",
+   "rollback"
+  ]
+ },
+ {
+  "name": "kitty_pchain",
+  "file": "tools/channel-tools.ts",
+  "description": "多跳反查（A 通道）：P_BACK 显式窗口反查 + R 验证 + P_WALK 回验 + MODENUM 区域过滤；带候选上限与统计面",
+  "params": [
+   {
+    "name": "target",
+    "type": "string",
+    "required": true,
+    "description": "目标地址，如 0x7FF75FCD1000",
+    "enum": []
+   },
+   {
+    "name": "depth",
+    "type": "number",
+    "required": false,
+    "description": "跳数（默认 2）",
+    "enum": []
+   },
+   {
+    "name": "mod",
+    "type": "string",
+    "required": false,
+    "description": "模块名（窗口/区域过滤，默认 kitty-target.exe）",
+    "enum": []
+   },
+   {
+    "name": "max_verify",
+    "type": "number",
+    "required": false,
+    "description": "每跳验证候选上限（默认 24）",
+    "enum": []
+   },
+   {
+    "name": "frontier_cap",
+    "type": "number",
+    "required": false,
+    "description": "每跳前沿上限（默认 8）",
+    "enum": []
+   },
+   {
+    "name": "max_keep",
+    "type": "number",
+    "required": false,
+    "description": "命中上限，达到即收口（默认 32）",
+    "enum": []
+   },
+   {
+    "name": "start",
+    "type": "string",
+    "required": false,
+    "description": "扫描窗起点（覆盖模块窗口）",
+    "enum": []
+   },
+   {
+    "name": "stop",
+    "type": "string",
+    "required": false,
+    "description": "扫描窗终点",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "单指令超时毫秒（默认 20000）",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_prot",
+  "file": "tools/mem-tools.ts",
+  "description": "内存保护面：rwx（CE FullAccess）| probe（读写探针）| 外部档位 protect/query/alloc/free/extread/extwrite（.NET csc，需 pid 或先 OPEN）",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "rwx|probe|protect|query|alloc|free|extread|extwrite",
+    "enum": []
+   },
+   {
+    "name": "addr",
+    "type": "string",
+    "required": false,
+    "description": "目标地址 0x…（alloc 可忽略）",
+    "enum": []
+   },
+   {
+    "name": "size",
+    "type": "number",
+    "required": false,
+    "description": "长度（默认 4096）",
+    "enum": []
+   },
+   {
+    "name": "protect",
+    "type": "string",
+    "required": false,
+    "description": "noaccess|readonly|rw（默认）|wc|x|rx|rwx|guarded",
+    "enum": []
+   },
+   {
+    "name": "value",
+    "type": "number",
+    "required": false,
+    "description": "extwrite 的 dword 值",
+    "enum": []
+   },
+   {
+    "name": "pid",
+    "type": "number",
+    "required": false,
+    "description": "外部档位 pid（省略取当前 OPEN）",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "超时毫秒（默认 20000）",
+    "enum": []
+   },
+   {
+    "name": "confirm",
+    "type": "boolean",
+    "required": false,
+    "description": "单次确认：rwx/protect/extwrite 须 true（获用户批准后显式传入）",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "rwx",
+   "probe",
+   "extread",
+   "extwrite"
+  ]
+ },
+ {
+  "name": "kitty_proto",
+  "file": "staticplus.ts",
+  "description": "serialization decode (protoc/blackboxprotobuf/grpcurl)；decode 支持文件路径或 hex 串",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "status | decode",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "decode：序列化文件路径，或 hex 串（如 0a03616263）",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "decode"
+  ]
+ },
+ {
+  "name": "kitty_rea",
+  "file": "rea.ts",
+  "description": "status|list|describe|call|start|stop",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "status|list|describe|call|start|stop",
+    "enum": []
+   },
+   {
+    "name": "tool",
+    "type": "string",
+    "required": false,
+    "description": "REA 原始工具名，如 analyze_function / inspect_binary_layout",
+    "enum": []
+   },
+   {
+    "name": "args",
+    "type": "string",
+    "required": false,
+    "description": "call 的上游参数（JSON 串或对象）",
+    "enum": []
+   },
+   {
+    "name": "query",
+    "type": "string",
+    "required": false,
+    "description": "list 的名字/描述子串过滤",
+    "enum": []
+   },
+   {
+    "name": "limit",
+    "type": "number",
+    "required": false,
+    "description": "list 条数上限（默认 200）",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "start",
+   "stop",
+   "list",
+   "describe",
+   "call"
+  ]
+ },
+ {
+  "name": "kitty_rea_android",
+  "file": "tool-manifest.ts",
+  "description": "REA APK 检查（清单/包/SDK/权限）",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_rea_binary",
+  "file": "tool-manifest.ts",
+  "description": "REA 二进制布局（节/段/符号/导入导出）",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_rea_callpath",
+  "file": "tool-manifest.ts",
+  "description": "REA 调用链追踪",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_rea_compare",
+  "file": "tool-manifest.ts",
+  "description": "REA 函数级差分（跨版本迁移）",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_rea_function",
+  "file": "tool-manifest.ts",
+  "description": "REA 函数档案（伪码/汇编/引用证据）",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_rea_javascript",
+  "file": "tool-manifest.ts",
+  "description": "REA JS/Electron 应用静态重建",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_rea_method",
+  "file": "tool-manifest.ts",
+  "description": "REA APK 单方法反编译（smali 回退）",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_rea_recover_js",
+  "file": "tool-manifest.ts",
+  "description": "REA JS 源码恢复（打包产物重建）",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_rea_trace",
+  "file": "tool-manifest.ts",
+  "description": "REA 特性级追踪",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_selftest",
+  "file": "tools/static-tools.ts",
+  "description": "回归自检：a=桥全链 / c=x64dbg 通道 / e=红线 / all；跑 tools\\\\verify-all.ps1 并回退出码与尾部输出（C 组约 90s）",
+  "params": [
+   {
+    "name": "group",
+    "type": "string",
+    "required": false,
+    "description": "a | c | e | all（默认 a）",
+    "enum": []
+   },
+   {
+    "name": "keep_apps",
+    "type": "boolean",
+    "required": false,
+    "description": "保留 C 组启动的调试器窗口（默认 false）",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_settings",
+  "file": "tools/session-tools.ts",
+  "description": "逆向会话真相源/任务终态机：target-set 落双字段转任务态 | target-get/mode-set/mode-get/reverse-init/trail-get/root-get/host-rebind | ",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": false,
+    "description": "target-set|target-get|task-inherit|mode-set|mode-get|reverse-init|trail-get|root-get|host-rebind|task-open|task-get|task-dispatch|task-close|task-new",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "target-set=进程名/路径/URL；trail-get=过滤目标",
+    "enum": []
+   },
+   {
+    "name": "sessionGoal",
+    "type": "string",
+    "required": false,
+    "description": "target-set=会话目标",
+    "enum": []
+   },
+   {
+    "name": "shape",
+    "type": "string",
+    "required": false,
+    "description": "exe|dll|apk|unity|ue|godot|js|mix",
+    "enum": []
+   },
+   {
+    "name": "engine",
+    "type": "string",
+    "required": false,
+    "description": "ue|unreal|unity|godot（独立于形态）",
+    "enum": []
+   },
+   {
+    "name": "mode",
+    "type": "string",
+    "required": false,
+    "description": "task|standby",
+    "enum": []
+   },
+   {
+    "name": "top",
+    "type": "number",
+    "required": false,
+    "description": "trail-get 最近 N 条（默认 50，上限 200）",
+    "enum": []
+   },
+   {
+    "name": "meta",
+    "type": "string",
+    "required": false,
+    "description": "trail-get：1=计数信封，默认 0=纯数组",
+    "enum": []
+   },
+   {
+    "name": "from",
+    "type": "string",
+    "required": false,
+    "description": "task-inherit=源 sessionKey",
+    "enum": []
+   },
+   {
+    "name": "taskGeneration",
+    "type": "string",
+    "required": false,
+    "description": "task-dispatch：task-get/task-open 回包的 generation",
+    "enum": []
+   },
+   {
+    "name": "taskTransition",
+    "type": "string",
+    "required": false,
+    "description": "task-dispatch 的 JSON transition，必带 type：enter-task{sessionGoal,targetProcess,targetKind}|enter-standby|stage-start{stage}|stage-complete{stage,evidence?}|stage-fail{stage}|retry-stage{stage}|block{stage,question}|answer{questionId,answer}|complete{evidence[]}|finish{evidence[]}|abandon{reason?}|set-consent{consent}；写 {\"state\":…} 会 ERR|TASK-TRANSITION-UNKNOWN",
+    "enum": []
+   },
+   {
+    "name": "keepLock",
+    "type": "boolean",
+    "required": false,
+    "description": "host-rebind：只改 host 不改 mode/target",
+    "enum": []
+   },
+   {
+    "name": "confirm",
+    "type": "string",
+    "required": false,
+    "description": "reverse-init：yes=写盘 | no=只回显 | 缺省=写盘",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_status",
+  "file": "tools/channel-tools.ts",
+  "description": "Kitty 通道健康（只读）：通道目录、cmd/rep 时戳、最近回包、sync 根 pending 数与归档目录、KittyCE 进程",
+  "params": [
+   {
+    "name": "probe",
+    "type": "boolean",
+    "required": false,
+    "description": "true 时额外发一次 PING（默认 false，纯只读）",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_sym",
+  "file": "tools/channel-tools.ts",
+  "description": "PE 符号面：exports|imports（file=磁盘 PE / mem=内存模块）· resolve（模块+名→VA）；给断点/CHECK_FN 定位用",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "exports|imports|resolve",
+    "enum": []
+   },
+   {
+    "name": "source",
+    "type": "string",
+    "required": false,
+    "description": "file（默认，配 path）| mem（配 module）",
+    "enum": []
+   },
+   {
+    "name": "path",
+    "type": "string",
+    "required": false,
+    "description": "source=file 的 PE 路径",
+    "enum": []
+   },
+   {
+    "name": "module",
+    "type": "string",
+    "required": false,
+    "description": "source=mem 的模块名，如 kitty-target.exe",
+    "enum": []
+   },
+   {
+    "name": "name",
+    "type": "string",
+    "required": false,
+    "description": "resolve 符号名（导出名或 DLL!函数）",
+    "enum": []
+   },
+   {
+    "name": "filter",
+    "type": "string",
+    "required": false,
+    "description": "名字子串过滤",
+    "enum": []
+   },
+   {
+    "name": "limit",
+    "type": "number",
+    "required": false,
+    "description": "条数上限（默认 120）",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "单指令超时毫秒（默认 20000）",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "imports",
+   "resolve"
+  ]
+ },
+ {
+  "name": "kitty_trail",
+  "file": "tools/session-tools.ts",
+  "description": "agent探索日志道：append=每步写探索记录（工作台链路/轨迹实时跟进）/ get=按目标读记录",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": false,
+    "description": "append | get",
+    "enum": []
+   },
+   {
+    "name": "step",
+    "type": "string",
+    "required": false,
+    "description": "本步动作名（如 R / P_BACK / 判据）",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "目标（与工作台 TARGET 同串即自动跟进）",
+    "enum": []
+   },
+   {
+    "name": "shape",
+    "type": "string",
+    "required": false,
+    "description": "exe|dll|apk|unity|ue|godot|js|mix",
+    "enum": []
+   },
+   {
+    "name": "stage",
+    "type": "string",
+    "required": false,
+    "description": "1接案~8取证段名（可空）",
+    "enum": []
+   },
+   {
+    "name": "text",
+    "type": "string",
+    "required": false,
+    "description": "本步事实/回包摘要（≤2000字）",
+    "enum": []
+   },
+   {
+    "name": "top",
+    "type": "number",
+    "required": false,
+    "description": "get 最近 N 条（默认 50，上限 200）",
+    "enum": []
+   },
+   {
+    "name": "sessionGoal",
+    "type": "string",
+    "required": false,
+    "description": "本轮会话目标",
+    "enum": []
+   },
+   {
+    "name": "goal",
+    "type": "string",
+    "required": false,
+    "description": "sessionGoal 别名",
+    "enum": []
+   },
+   {
+    "name": "meta",
+    "type": "string",
+    "required": false,
+    "description": "get：1=计数信封，默认 0=纯数组",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "get"
+  ]
+ },
+ {
+  "name": "kitty_ue4ss",
+  "file": "unrealplus.ts",
+  "description": "UE runtime mod (UE4SS status/inject)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "gameDir",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "pid",
+    "type": "number",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "triage",
+   "inject",
+   "collect"
+  ]
+ },
+ {
+  "name": "kitty_uedump",
+  "file": "uedump.ts",
+  "description": "UE SDK dump (UEDumper 1.11.1 passthrough)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "gameDir",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "sdkDir",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "pid",
+    "type": "number",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "triage",
+   "collect",
+   "parse",
+   "inject"
+  ]
+ },
+ {
+  "name": "kitty_uexplorer",
+  "file": "unitymod.ts",
+  "description": "Unity runtime explorer (UnityExplorer via kitty_inject)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "pid",
+    "type": "number",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "inject"
+  ]
+ },
+ {
+  "name": "kitty_unpack",
+  "file": "fridaplus.ts",
+  "description": "APK unpack collect (BlackDex/FART output intake)",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "",
+    "enum": []
+   },
+   {
+    "name": "out",
+    "type": "string",
+    "required": false,
+    "description": "",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "status",
+   "collect",
+   "parse"
+  ]
+ },
+ {
+  "name": "kitty_variants",
+  "file": "tools/anti-tools.ts",
+  "description": "驱动/CE/DBG 变体管理：list（全部变体+检测面证据等级）| switch（切宿主，下一次调用生效）| start | stop | ensure-bridge；标注只写实测等级",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": false,
+    "description": "list（默认）|switch|start|stop|ensure-bridge",
+    "enum": []
+   },
+   {
+    "name": "variant",
+    "type": "string",
+    "required": false,
+    "description": "变体 id（list 可见，如 ws-svip-simple）",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "start 等桥就绪毫秒（默认 30000）",
+    "enum": []
+   }
+  ],
+  "action_branches": [
+   "list",
+   "dbg",
+   "ensure-bridge",
+   "switch",
+   "start",
+   "stop"
+  ]
+ },
+ {
+  "name": "kitty_wpb",
+  "file": "tools/mem-tools.ts",
+  "description": "写保护绕过（PTE 直改，高风险原语）：DTB→物理走表→定位 PTE→经 MmPteBase 自映射用 KM_W 改 R/W→写入→还原；不调保护 API、不需目标句柄；须 accept_protection_bypass=true，仅用户态地址",
+  "params": [
+   {
+    "name": "addr",
+    "type": "string",
+    "required": true,
+    "description": "目标虚拟地址（用户态；0x…）",
+    "enum": []
+   },
+   {
+    "name": "pid",
+    "type": "number",
+    "required": false,
+    "description": "目标 pid（缺省取当前 OPEN）",
+    "enum": []
+   },
+   {
+    "name": "vt",
+    "type": "string",
+    "required": false,
+    "description": "byte|word|dword|qword（默认 dword）",
+    "enum": []
+   },
+   {
+    "name": "val",
+    "type": "string",
+    "required": false,
+    "description": "写入值（十进制或 0x…）",
+    "enum": []
+   },
+   {
+    "name": "hex",
+    "type": "string",
+    "required": false,
+    "description": "按原始字节写，如 \"90 90 90\"（与 val 二选一）",
+    "enum": []
+   },
+   {
+    "name": "permissive",
+    "type": "boolean",
+    "required": false,
+    "description": "true=按 PFN 重建整组保护位（NOACCESS/换出页）",
+    "enum": []
+   },
+   {
+    "name": "restore",
+    "type": "boolean",
+    "required": false,
+    "description": "写后还原 PTE（默认 true）",
+    "enum": []
+   },
+   {
+    "name": "accept_protection_bypass",
+    "type": "boolean",
+    "required": false,
+    "description": "必须 true",
+    "enum": []
+   },
+   {
+    "name": "timeout_ms",
+    "type": "number",
+    "required": false,
+    "description": "超时毫秒（默认 20000）",
+    "enum": []
+   },
+   {
+    "name": "confirm",
+    "type": "boolean",
+    "required": false,
+    "description": "accept_protection_bypass 的别名",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "kitty_x64dbg",
+  "file": "tools/channel-tools.ts",
+  "description": "醉梦DBG 脚本通道（C）：selftest|cmd|run|seed|rununtil|readlog|readdb|collect|program；自动锁已 switch 的 -dbgExe",
+  "params": [
+   {
+    "name": "action",
+    "type": "string",
+    "required": true,
+    "description": "selftest|cmd|run|seed|rununtil|readlog|readdb|collect|program",
+    "enum": []
+   },
+   {
+    "name": "program",
+    "type": "string",
+    "required": false,
+    "description": "program：程序文件路径（每行一个动作）",
+    "enum": []
+   },
+   {
+    "name": "steps",
+    "type": "array",
+    "required": false,
+    "description": "program：行数组（写临时文件后执行）",
+    "enum": []
+   },
+   {
+    "name": "cmd",
+    "type": "string",
+    "required": false,
+    "description": "cmd：x64dbg 命令，如 bpl 或 savedata \"…\", notepad.exe, 64",
+    "enum": []
+   },
+   {
+    "name": "target",
+    "type": "string",
+    "required": false,
+    "description": "run：调试目标 exe",
+    "enum": []
+   },
+   {
+    "name": "addr",
+    "type": "string",
+    "required": false,
+    "description": "seed：断点符号/地址，如 kernelbase.CreateFileW",
+    "enum": []
+   },
+   {
+    "name": "seedCmd",
+    "type": "string",
+    "required": false,
+    "description": "seed：命中命令，如 savedata D:\\\\out.bin, notepad.exe, 64",
+    "enum": []
+   },
+   {
+    "name": "artifact",
+    "type": "string",
+    "required": false,
+    "description": "rununtil：产物路径",
+    "enum": []
+   },
+   {
+    "name": "logfile",
+    "type": "string",
+    "required": false,
+    "description": "会话日志（run/readlog/seed）",
+    "enum": []
+   },
+   {
+    "name": "script",
+    "type": "string",
+    "required": false,
+    "description": "run：脚本文件（可选）",
+    "enum": []
+   },
+   {
+    "name": "saveDb",
+    "type": "boolean",
+    "required": false,
+    "description": "seed：savedb 落库（默认 false）",
+    "enum": []
+   },
+   {
+    "name": "maxRun",
+    "type": "number",
+    "required": false,
+    "description": "rununtil 最大 run 次数（默认 20）",
+    "enum": []
+   },
+   {
+    "name": "confirm",
+    "type": "boolean",
+    "required": false,
+    "description": "cmd/run/seed/rununtil/program 须 true",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ },
+ {
+  "name": "reverse_add_asset",
+  "file": "tool-manifest.ts",
+  "description": "G3主写：记资产（parent 只引既有）",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "reverse_add_intent",
+  "file": "tool-manifest.ts",
+  "description": "G3主写：新建意图（目标/范围/方法去重）",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "reverse_add_obs",
+  "file": "tool-manifest.ts",
+  "description": "G3主写：记观察/finding（reproSteps≥1）",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "reverse_add_patch",
+  "file": "tool-manifest.ts",
+  "description": "G3主写：记补丁",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "reverse_add_target",
+  "file": "tool-manifest.ts",
+  "description": "G3主写：新建目标（会话清零，恒 target-1）",
+  "params": [],
+  "action_branches": []
+ },
+ {
+  "name": "reverse_submit",
+  "file": "tools/session-tools.ts",
+  "description": "G3子唯一写入口：子会话直写父 intent 下（findings/patches/assets，finding 必 reproSteps≥1；不经 add 通道）",
+  "params": [
+   {
+    "name": "session",
+    "type": "string",
+    "required": false,
+    "description": "父会话 id（与父 intent 同会话）",
+    "enum": []
+   },
+   {
+    "name": "intentId",
+    "type": "string",
+    "required": false,
+    "description": "父 intent id（须既有，如 intent-1）",
+    "enum": []
+   },
+   {
+    "name": "findings",
+    "type": "string",
+    "required": false,
+    "description": "finding 条目 JSON 数组（[{data,parentId?}]，reproSteps 必≥1）",
+    "enum": []
+   },
+   {
+    "name": "patches",
+    "type": "string",
+    "required": false,
+    "description": "补丁条目 JSON 数组（[{data,parentId?}]）",
+    "enum": []
+   },
+   {
+    "name": "assets",
+    "type": "string",
+    "required": false,
+    "description": "资产条目 JSON 数组（[{data,parentId?}]，只引既有）",
+    "enum": []
+   }
+  ],
+  "action_branches": []
+ }
+]

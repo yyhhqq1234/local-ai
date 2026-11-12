@@ -1,6 +1,6 @@
 import base64, json, urllib.request, time
 
-p = r"D:\BaiduNetdiskDownload\Local-AI\train\kitty-rev\logs\v6\_vtest.png"
+p = r"D:\BaiduNetdiskDownload\Local-AI\train\lines\27b-kittyrev\kitty-rev\logs\v6\_vtest.png"
 b64 = base64.b64encode(open(p, "rb").read()).decode()
 print("image b64 len =", len(b64))
 

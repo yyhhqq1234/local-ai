@@ -4,7 +4,7 @@ import json
 import re
 
 ROOT = r"D:\BaiduNetdiskDownload\Local-AI"
-contract = json.load(open(ROOT + r"\train\kitty-rev\contracts\tools.json", encoding="utf-8"))
+contract = json.load(open(ROOT + r"\train\lines\27b-kittyrev\kitty-rev\contracts\tools.json", encoding="utf-8"))
 tools = {t["name"]: set(t.get("actions") or []) for t in contract["tools"]}
 # DSH 侧无 action 参数的工具（动作即工具本身）
 NO_ACTION = {
@@ -31,7 +31,7 @@ LINE_RE = re.compile(r"^((?:kitty|reverse)_[a-z0-9_]+)\s*(.*)$")
 bad = []
 seen = 0
 ext_seen = {}
-for line in open(ROOT + r"\train\kitty-rev\data\intent3\re-sft.jsonl", encoding="utf-8"):
+for line in open(ROOT + r"\train\lines\27b-kittyrev\kitty-rev\data\intent3\re-sft.jsonl", encoding="utf-8"):
     row = json.loads(line)
     for raw in row["response"].splitlines():
         ln = raw.strip()

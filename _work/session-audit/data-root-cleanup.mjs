@@ -102,7 +102,7 @@ md.push(`| \`MANIFEST.json\` | **新建**：两条训练线总览 + 训练配比
 md.push('');
 md.push('## 依据');
 md.push('```');
-md.push('train/TRAINING-LINEAGE.md 铁律①：数据必须打快照 train/data/versions/<name>.<ts>.jsonl + .sha256');
+md.push('train/TRAINING-LINEAGE.md 铁律①：数据必须打快照 train/lines/27b-kittyrev/data/versions/<name>.<ts>.jsonl + .sha256');
 md.push('  → versions/ 是谱系锚点，不可删；本代数据此前缺快照，本次已补齐');
 md.push('scripts/dedupe_re.py · refine_re.py · build_final.py 会重新生成被删的 3 份报告');
 md.push('```');

@@ -8,7 +8,7 @@
 ## 0 铁律（每次训练前自检）
 
 ```text
-① 数据必须打快照   train/data/versions/mix-*.YYYYMMDD-HHMMSS.jsonl + .sha256
+① 数据必须打快照   train/lines/27b-kittyrev/data/versions/mix-*.YYYYMMDD-HHMMSS.jsonl + .sha256
                     数据集被改动后，旧版本从 versions/ 取，不依赖工作副本
 ② 产物必须是 adapter 或 bf16 merged，**不得只留 .ninfer**
                     .ninfer 是 v3 推理容器（量化块 + 索引），只有前向，不可训
@@ -51,11 +51,11 @@
 ### 2026-10-27 01:0x — 第 1 代：RE SFT on OxCoder-9B
 
 ```text
-基座        train/models/OxCoder-9B
+基座        train/lines/9b-oxcoder/models/OxCoder-9B
             来源 OrionLLM/OxCoder-9B，sha256 d4fca682…fcc33b，17.53 GiB，760 tensors
 架构        Qwen3_5ForConditionalGeneration，32 层（24 linear_attn + 8 full_attn）
             4096 hidden / 248320 vocab / vision 333 tensors / 无 MTP 张量
-数据        train/data/versions/mix-re.20261027-011850.jsonl
+数据        train/lines/27b-kittyrev/data/versions/mix-re.20261027-011850.jsonl
             690 条 / 684,382 B
             sha256 440988f12623eea27cceef9ccff2fd48045a50a7cc738be600c511512878499a
             构成 forge 480（decision-chain / detour-trajectory / op-semantics / pe-structure）
@@ -65,16 +65,16 @@
 LoRA 面     12 类模块，86,556,672 可训练参数（0.9115%）
             linear_attn: out_proj/in_proj_qkv/in_proj_z/in_proj_a/in_proj_b 各 24
             mlp: gate/up/down 各 32；full_attn: q/k/v/o 各 8
-产物        train/out/oxcoder9b-re-full/final/   （adapter，r=32）
+产物        train/lines/9b-oxcoder/out/oxcoder9b-re-full/final/   （adapter，r=32）
 状态        ✅ 完成 2026-10-27 02:08（01:10 启动，58 分钟）
 校验        496 张量（lora_A 248 / lora_B 248），lora_B 非零 248/248
             lora_B absmax 中位 0.004486 / max 0.052490 / min 0.002151
             （对比 30 步冒烟 0.00124，涨 3.6 倍 → 172 步确实生效）
             r=32 alpha=64；training_args.bin 已存，超参可追溯
 缺口        loss 曲线未留存（stdout 被 grep 过滤 + save_strategy="no" 无 trainer_state）
-副产品      train/out/oxcoder9b-re-full/checkpoint-132、checkpoint-176（各 353 MB，含 optimizer state）
+副产品      train/lines/9b-oxcoder/out/oxcoder9b-re-full/checkpoint-132、checkpoint-176（各 353 MB，含 optimizer state）
             → checkpoint-176 = 第 4 epoch 末 = 完整终态，**可无缝续训**（optimizer 状态未丢）
-              续训命令：--resume train/out/oxcoder9b-re-full/checkpoint-176
+              续训命令：--resume train/lines/9b-oxcoder/out/oxcoder9b-re-full/checkpoint-176
 评估        未做 —— 按操作者要求，本次训练跑完即停，不自动接续
             待评估：拒率变化 / eval_re_extended(60条) / coding·RE·logic 三探针
 环境坑      ① trl 1.16 无 warmup_ratio → warmup_steps=10
@@ -86,8 +86,8 @@ LoRA 面     12 类模块，86,556,672 可训练参数（0.9115%）
 ### 2026-10-27 02:33 — 第 2 代：joint（RE + NSFW，**中断 · 待续**）
 
 ```text
-基座        train/models/OxCoder-9B（不从第 1 代 checkpoint 续，数据分布已大改）
-数据        train/data/versions/final-joint.20261027-022747.jsonl
+基座        train/lines/9b-oxcoder/models/OxCoder-9B（不从第 1 代 checkpoint 续，数据分布已大改）
+数据        train/lines/27b-kittyrev/data/versions/final-joint.20261027-022747.jsonl
             2745 条（re 1647 / nsfw 1098）/ 2.79 M 字符
             sha256 53ff160d887baa92…（完整值见同目录 .sha256）
 超参        stage=joint → ctx 2048, r=32, alpha=64, lr 6e-5, 3 epoch, bs=1, ga=16
@@ -101,17 +101,17 @@ LoRA 面     12 类模块，86,556,672 可训练参数（0.9115%）
 损失曲线    step 5   loss 3.606  acc 0.4049
             step 165 loss 2.014  acc 0.6067
             step 170 loss 1.934  acc 0.6287     ← 单调改善，训练健康
-保住        train/out/oxcoder9b-joint-v2/checkpoint-172/
+保住        train/lines/9b-oxcoder/out/oxcoder9b-joint-v2/checkpoint-172/
             adapter 173 MB + optimizer.pt 73.9 MB → 可无损续训
 
 恢复命令（操作者定时机；当前已被告知暂不启动）：
-  train/.venv/Scripts/python.exe train/scripts/train_qlora9b.py \
-    --base train/models/OxCoder-9B \
+  train/.venv/Scripts/python.exe train/lines/_shared/scripts/train_qlora9b.py \
+    --base train/lines/9b-oxcoder/models/OxCoder-9B \
     --data train/data/final-joint.jsonl \
     --stage joint --lora-r 32 --lora-alpha 64 \
     --ctx 1792 --save-steps 50 \
-    --resume train/out/oxcoder9b-joint-v2/checkpoint-172 \
-    --out train/out/oxcoder9b-joint-v2
+    --resume train/lines/9b-oxcoder/out/oxcoder9b-joint-v2/checkpoint-172 \
+    --out train/lines/9b-oxcoder/out/oxcoder9b-joint-v2
 
 防丢进度    train_qlora9b.py 已加 --save-steps（默认 50，save_total_limit=3）
 防再崩      ctx 2048→1792（显存 ~10.5 GiB，余 1.7 GiB）；关 GameViewer 虚拟显示器；
@@ -135,16 +135,16 @@ SRA 概念引导谱残差化   残差化方向正确（cos 0.20→0.003，能量
 
 ```text
 若走 A（adapter 保留）：
-  eval 时 --adapter train/out/oxcoder9b-re-full/final
+  eval 时 --adapter train/lines/9b-oxcoder/out/oxcoder9b-re-full/final
   要接着训 → 先 merge 成 bf16（走 B）
 
 若走 B（merge 后训）：
-  1) merge bf16 基座 + 第 1 代 adapter → train/merged/oxcoder9b-gen1-bf16
-  2) train_qlora9b.py --base train/merged/oxcoder9b-gen1-bf16 --data <新一代数据>
+  1) merge bf16 基座 + 第 1 代 adapter → train/lines/27b-kittyrev/merged/oxcoder9b-gen1-bf16
+  2) train_qlora9b.py --base train/lines/27b-kittyrev/merged/oxcoder9b-gen1-bf16 --data <新一代数据>
   3) 产物记入本文件 §3
 
 若走 C（重训）：
-  train_qlora9b.py --base train/models/OxCoder-9B --data <合并后数据>
+  train_qlora9b.py --base train/lines/9b-oxcoder/models/OxCoder-9B --data <合并后数据>
 ```
 
-每次训练前把 `train/data/*.jsonl` 快照到 `train/data/versions/` 并在 §3 记 sha256 —— 这是数据集持续优化时的唯一可靠锚点。
+每次训练前把 `train/data/*.jsonl` 快照到 `train/lines/27b-kittyrev/data/versions/` 并在 §3 记 sha256 —— 这是数据集持续优化时的唯一可靠锚点。

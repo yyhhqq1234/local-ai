@@ -1,0 +1,185 @@
+{
+  "__meta": {
+    "dir": "train/data",
+    "built": "2026-10-27T12:30:50.643Z",
+    "state": "根目录已清理；两条训练线数据在 nsfw/ 与 kitty-reverse/，历史版本在 versions/",
+    "policy": "TRAINING-LINEAGE.md 铁律①：数据集必须打快照（versions/ 内 名称.时间戳.jsonl + .sha256）"
+  },
+  "training_lines": {
+    "nsfw": {
+      "dir": "nsfw/",
+      "rows": 13668,
+      "shards": [
+        {
+          "file": "nsfw/train-cont.jsonl",
+          "rows": 6829,
+          "bytes": 35281319,
+          "sha256": "e569ab2b36ab679ff097a1ddf2a2dbbd4c2942208fe21e43c1e7696450ee1d59"
+        },
+        {
+          "file": "nsfw/train-scene.jsonl",
+          "rows": 2741,
+          "bytes": 14148886,
+          "sha256": "add8490452cf6c19a66f59e08ac8efe0fa9dde7aadf43042b7b8a1a78ebf9e29"
+        },
+        {
+          "file": "nsfw/train-multi.jsonl",
+          "rows": 2079,
+          "bytes": 12082778,
+          "sha256": "f48485bc86d9549e8380246cc6df3d358c641d0a8da2be0c0d48f2ac33f22973"
+        },
+        {
+          "file": "nsfw/train-style.jsonl",
+          "rows": 1329,
+          "bytes": 8445383,
+          "sha256": "db7dd68eeaa67adeb424b051dc4cd9a08713c3f5f279a2d9943b21cd78b004f5"
+        },
+        {
+          "file": "nsfw/train-expand.jsonl",
+          "rows": 690,
+          "bytes": 4387541,
+          "sha256": "2fdd6eeb826c85214a2f331edab53d7ac8b9e0aee937f44c81b694158f9761c4"
+        }
+      ],
+      "glossary": {
+        "file": "nsfw/nsfw-glossary-merged.jsonl",
+        "rows": 283
+      },
+      "lexicon": {
+        "file": "nsfw/nsfw-lexicon-v9.json",
+        "terms": 470
+      },
+      "manifest": "nsfw/MANIFEST.json"
+    },
+    "kitty_reverse": {
+      "dir": "kitty-reverse/",
+      "rows": 5602,
+      "core": {
+        "file": "kitty-reverse/train-kitty-core.jsonl",
+        "bytes": 6075451,
+        "sha256": "356f0c00fe90aae71e6be3c415876bc11444fa823b9dcba3626babdce819e6ae"
+      },
+      "manifest": "kitty-reverse/KITTY-MANIFEST.json"
+    },
+    "total_rows": 19270
+  },
+  "train_params": {
+    "re_weight": 0.6,
+    "replay": 0.15,
+    "seed": 1337,
+    "silver_n": 0,
+    "note": "由旧 final-manifest.json 继承（该文件描述的是 re 混入 NSFW 的旧形态，已过时）"
+  },
+  "snapshots": {
+    "count": 12,
+    "current": 8,
+    "items": [
+      {
+        "file": "versions/final-joint.20261027-022747.jsonl",
+        "bytes": 7178939,
+        "sha256": "53ff160d887baa92a5ddbef535d60603df342cc2dfc0567258680127ea4db948",
+        "generation": "history"
+      },
+      {
+        "file": "versions/final-nsfw.20261027-022747.jsonl",
+        "bytes": 5586811,
+        "sha256": "73c9edfc221159fd8f127ff316426c13c1c0adba14a4112ad6c600e6b0f8dd5e",
+        "generation": "history"
+      },
+      {
+        "file": "versions/final-re.20261027-022747.jsonl",
+        "bytes": 3016410,
+        "sha256": "00575aa821bd3ce38a569cafad197a9fae95d2cb1f039f541a86b0491841cccd",
+        "generation": "history"
+      },
+      {
+        "file": "versions/kitty-reverse-train-kitty-core.20261027-203028.jsonl",
+        "bytes": 6075451,
+        "sha256": "356f0c00fe90aae71e6be3c415876bc11444fa823b9dcba3626babdce819e6ae",
+        "generation": "current(20261027-203028)"
+      },
+      {
+        "file": "versions/mix-re.20261027-011850.jsonl",
+        "bytes": 684382,
+        "sha256": "440988f12623eea27cceef9ccff2fd48045a50a7cc738be600c511512878499a",
+        "generation": "history"
+      },
+      {
+        "file": "versions/nsfw-nsfw-glossary-merged.20261027-203028.jsonl",
+        "bytes": 312635,
+        "sha256": "8e403b1ec0266556c0709deba1f4166dad67c3eef464e898b8ed4bd27cf73c11",
+        "generation": "current(20261027-203028)"
+      },
+      {
+        "file": "versions/nsfw-nsfw-lexicon-v9.20261027-203028.json",
+        "bytes": 1076599,
+        "sha256": "7ccb938a1529d9afd86378cae289d02cd3683e9e444668efb368329c758d2704",
+        "generation": "current(20261027-203028)"
+      },
+      {
+        "file": "versions/nsfw-train-cont.20261027-203028.jsonl",
+        "bytes": 35281319,
+        "sha256": "e569ab2b36ab679ff097a1ddf2a2dbbd4c2942208fe21e43c1e7696450ee1d59",
+        "generation": "current(20261027-203028)"
+      },
+      {
+        "file": "versions/nsfw-train-expand.20261027-203028.jsonl",
+        "bytes": 4387541,
+        "sha256": "2fdd6eeb826c85214a2f331edab53d7ac8b9e0aee937f44c81b694158f9761c4",
+        "generation": "current(20261027-203028)"
+      },
+      {
+        "file": "versions/nsfw-train-multi.20261027-203028.jsonl",
+        "bytes": 12082778,
+        "sha256": "f48485bc86d9549e8380246cc6df3d358c641d0a8da2be0c0d48f2ac33f22973",
+        "generation": "current(20261027-203028)"
+      },
+      {
+        "file": "versions/nsfw-train-scene.20261027-203028.jsonl",
+        "bytes": 14148886,
+        "sha256": "add8490452cf6c19a66f59e08ac8efe0fa9dde7aadf43042b7b8a1a78ebf9e29",
+        "generation": "current(20261027-203028)"
+      },
+      {
+        "file": "versions/nsfw-train-style.20261027-203028.jsonl",
+        "bytes": 8445383,
+        "sha256": "db7dd68eeaa67adeb424b051dc4cd9a08713c3f5f279a2d9943b21cd78b004f5",
+        "generation": "current(20261027-203028)"
+      }
+    ]
+  },
+  "retained": [
+    {
+      "file": "train.example.jsonl",
+      "role": "数据格式冒烟样例（3 条，_research/微调能力-备案-20261020/04-RUNBOOK.md 引用）",
+      "rows": 3
+    },
+    {
+      "dir": "versions/",
+      "role": "数据集快照锚点（TRAINING-LINEAGE.md 铁律①），旧快照保留、本代已补齐"
+    }
+  ],
+  "cleanup": {
+    "removed_files": 3,
+    "ledger": [
+      {
+        "rel": "dedupe-report.json",
+        "bytes": 28453,
+        "sha256": "00c0fd72d16dc38f93438af6bb76167e407dc42208e47d51213f8327974acd05",
+        "reason": "dedupe_re.py 的产物，针对已重构前的 final-re 去重，脚本可重跑生成"
+      },
+      {
+        "rel": "refine-report.json",
+        "bytes": 12388,
+        "sha256": "dd4b0eb19c16c294539f8c6bd8cfd4da32adee5a6df2239fb2e3051fa06b287d",
+        "reason": "refine_re.py 的产物，针对已重构前的 final-re 精炼，脚本可重跑生成"
+      },
+      {
+        "rel": "final-manifest.json",
+        "bytes": 555,
+        "sha256": "336ca0c0c3b50e442bf06e9aea5dc1cfb3aa7f6e6eedbf542deef85aa6053490",
+        "reason": "描述旧形态（final_re 1608 / final_nsfw 15276 含 re）；配比参数已继承至 MANIFEST.json"
+      }
+    ]
+  }
+}

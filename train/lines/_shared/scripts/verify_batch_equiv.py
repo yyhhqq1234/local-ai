@@ -1,0 +1,176 @@
+"""验证批量生成与逐条生成的结果是否逐字一致 —— 提速不能降质量的验收工具
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+背景
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-10-28 评测提速：唯一「不降质量」的手段是批量生成（并行跑多条，每题仍独立解码）。
+但批量会改变 kernel 选择与 reduce 顺序，**理论上可能有数值差异**，必须实测确认
+「逐条 vs 批量」输出是否逐字一致。不一致就不能用。
+
+判定：
+  ✅ 逐字一致            → 可放心用 batch
+  ⚠ 仅尾部差异（<10 字）  → 可接受（贪婪解码在极少数 token 上会分叉）
+  ❌ 工具名/参数不同      → 不可用，会改变评测结论
+
+用法：
+  python verify_batch_equiv.py --adapter train/lines/9b-oxcoder/out/re-stage1-r2/final --n 4
+  python verify_batch_equiv.py --adapter <path> --n 8 --batch 4
+"""
+
+import argparse
+import json
+import os
+import re
+import sys
+import time
+
+import torch
+
+sys.stdout.reconfigure(encoding="utf-8")
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+TRAIN_ROOT = os.path.dirname(HERE)
+try:  # 双线目录单一真相源（2026-11-01 迁移后）
+    from _dsh_paths import TRAIN as _TRAIN, L9B as _L9B, L27B as _L27B, SHARED as _SHARED
+    TRAIN_ROOT = _TRAIN
+except Exception:
+    _L9B = _L27B = _SHARED = None
+
+sys.path.insert(0, HERE)
+
+BASE = os.path.join(_L9B, "models", "OxCoder-9B")
+PAT = re.compile(r"(?:kitty|reverse)_[a-z0-9_]+")
+
+
+def load_model(adapter=None):
+    # ★ 防系统卡顿：显存硬上限 + CPU 线程限制 + BelowNormal 优先级
+    import gpu_guard; gpu_guard.apply()
+    from transformers import AutoModelForImageTextToText, AutoTokenizer, BitsAndBytesConfig
+    from peft import PeftModel
+
+    bnb = BitsAndBytesConfig(
+        load_in_4bit=True, bnb_4bit_quant_type="nf4",
+        bnb_4bit_use_double_quant=True, bnb_4bit_compute_dtype=torch.bfloat16,
+    )
+    tok = AutoTokenizer.from_pretrained(BASE)
+    model = AutoModelForImageTextToText.from_pretrained(
+        BASE, device_map={"": 0}, low_cpu_mem_usage=True,
+        attn_implementation="sdpa", quantization_config=bnb,
+    )
+    if adapter:
+        model = PeftModel.from_pretrained(model, adapter)
+    for p in model.parameters():
+        if p.dtype == torch.float32:
+            p.data = p.data.to(torch.bfloat16)
+    model.eval()
+    inner = getattr(model, "model", None)
+    if inner is not None and getattr(inner, "visual", None) is not None:
+        inner.visual = None
+        torch.cuda.empty_cache()
+    print("[load] %s  allocated = %.2f GiB"
+          % ("adapter" if adapter else "基座", torch.cuda.memory_allocated() / 2 ** 30))
+    return model, tok
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--adapter", default="train/lines/9b-oxcoder/out/re-stage1-r2/final")
+    ap.add_argument("--n", type=int, default=4, help="测几条（建议 >= batch size）")
+    ap.add_argument("--batch", type=int, default=4)
+    ap.add_argument("--max-new", type=int, default=300)
+    args = ap.parse_args()
+
+    from eval_cases_re import CASES
+    from eval_re_generalize import load_system
+
+    SYSTEM = load_system()
+    cases = [c for c in CASES if c["expect"]][:args.n]
+    print("=" * 78)
+    print("批量生成等价性验证")
+    print("=" * 78)
+    print("adapter=%s | 场景 %d 条 | batch=%d | max_new=%d"
+          % (args.adapter or "基座", len(cases), args.batch, args.max_new))
+
+    model, tok = load_model(args.adapter)
+    tok.padding_side = "left"
+    if tok.pad_token_id is None:
+        tok.pad_token = tok.eos_token
+
+    def mk(users):
+        return [tok.apply_chat_template(
+            [{"role": "system", "content": SYSTEM}, {"role": "user", "content": u}],
+            tokenize=False, add_generation_prompt=True) for u in users]
+
+    @torch.inference_mode()
+    def run(texts):
+        enc = tok(texts, return_tensors="pt", padding=True,
+                  add_special_tokens=False).to(model.device)
+        plen = enc["input_ids"].shape[1]
+        out = model.generate(**enc, max_new_tokens=args.max_new, do_sample=False,
+                             temperature=None, top_p=None,
+                             pad_token_id=tok.pad_token_id)
+        return [tok.decode(out[i][plen:], skip_special_tokens=True) for i in range(len(texts))]
+
+    users = [c["ask"] for c in cases]
+    texts = mk(users)
+
+    # ① 逐条
+    t0 = time.time()
+    single = [run([t])[0] for t in texts]
+    t_single = time.time() - t0
+
+    # ② 批量
+    t0 = time.time()
+    batched = []
+    for i in range(0, len(texts), args.batch):
+        batched.extend(run(texts[i:i + args.batch]))
+    t_batch = time.time() - t0
+
+    print()
+    print("=" * 78)
+    print("逐条 vs 批量 结果比对")
+    print("=" * 78)
+    same = 0
+    tool_diff = 0
+    for c, s, b in zip(cases, single, batched):
+        ident = (s == b)
+        # 工具名 + 参数是否一致（这才是评测真正用的）
+        ts, tb = set(PAT.findall(s)), set(PAT.findall(b))
+        args_s = set(re.findall(r"\b(action|op)\s*=\s*[^\s,，。；;]+", s))
+        args_b = set(re.findall(r"\b(action|op)\s*=\s*[^\s,，。；;]+", b))
+        key_same = (ts == tb) and (args_s == args_b)
+        if ident:
+            same += 1
+        if not key_same:
+            tool_diff += 1
+        mark = "✅逐字一致" if ident else ("⚠仅文本差异" if key_same else "❌关键信息不同")
+        print("  %s %s  单条 %d 字 / 批量 %d 字  工具(%s vs %s)"
+              % (c["id"], mark, len(s), len(b),
+                 ",".join(sorted(ts)) or "无", ",".join(sorted(tb)) or "无"))
+        if not key_same:
+            print("      单: %s" % s[:140].replace("\n", "⏎"))
+            print("      批: %s" % b[:140].replace("\n", "⏎"))
+
+    n = len(cases)
+    print()
+    print("=" * 78)
+    print("统计")
+    print("=" * 78)
+    print("  逐字一致      %d/%d" % (same, n))
+    print("  关键信息不同  %d/%d（必须为 0 才能启用 batch）" % (tool_diff, n))
+    print()
+    print("  逐条耗时 %.1f s（%.1f s/条）" % (t_single, t_single / n))
+    print("  批量耗时 %.1f s（%.1f s/条）" % (t_batch, t_batch / n))
+    if t_batch > 0:
+        print("  加速比 %.2fx" % (t_single / t_batch))
+    print()
+    if tool_diff == 0:
+        print("  ✅ 结论：批量生成可用（关键信息完全一致）")
+        sys.exit(0)
+    else:
+        print("  ❌ 结论：批量生成会改变评测结果，禁用")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

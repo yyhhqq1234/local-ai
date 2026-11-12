@@ -1,0 +1,184 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://local-ai/schemas/intent3-manifest.schema.json",
+  "title": "intent3 数据集 manifest",
+  "description": "data/intent3 各组件统一门禁清单。allOf 中 length_distribution 指向 dedup.py --stats 的输出，isolation 指向 dedup.py --json 的输出。",
+  "type": "object",
+  "required": ["dataset", "version", "forge", "generated_at", "groups", "isolation", "boundary"],
+  "additionalProperties": false,
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "description": "数据集标识，固定 data/intent3"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "语义化版本；每次增删行必须 +patch，改合同 +minor"
+    },
+    "forge": {
+      "type": "string",
+      "enum": ["r2w"],
+      "description": "生产者标识"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO8601 带时区"
+    },
+    "groups": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "path", "count", "kind"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "组名，与记录 meta.group 一致"
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^(?:train/kitty-rev/)?data/intent3/[A-Za-z0-9._-]+\\.jsonl$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": ["sft", "dpo", "eval", "probe"],
+            "description": "sft=单轮问答；dpo=chosen/rejected 对；eval=带 expected 标注；probe=拒答探针"
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "target_count": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "合同要求条数；与 count 不等即未完成"
+          },
+          "length_distribution": {
+            "$ref": "#/definitions/length_distribution"
+          },
+          "isolation": {
+            "$ref": "#/definitions/isolation_result"
+          },
+          "refusal_regex_hits": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "拒答正则命中数；除显式声明的 rejected 组外必须为 0"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "isolation": {
+      "type": "object",
+      "required": ["method", "threshold", "against", "results"],
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "type": "string",
+          "const": "full-hash|user-hash|char5gram-jaccard"
+        },
+        "threshold": {
+          "type": "number",
+          "const": 0.35
+        },
+        "against": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string"},
+          "description": "对照集路径（主训练集 / eval / intent2 / forge2）"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["target", "verdict"],
+            "additionalProperties": false,
+            "properties": {
+              "target": {"type": "string"},
+              "verdict": {"type": "string", "enum": ["PASS", "FAIL"]},
+              "full_hash_intersection": {"type": "integer", "minimum": 0},
+              "user_hash_intersection": {"type": "integer", "minimum": 0},
+              "jaccard_max": {"type": "number", "minimum": 0, "maximum": 1},
+              "pairs_over_threshold": {"type": "integer", "minimum": 0}
+            }
+          }
+        }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "required": ["statement", "excluded_topics"],
+      "additionalProperties": false,
+      "properties": {
+        "statement": {
+          "type": "string",
+          "description": "内容边界声明原文"
+        },
+        "excluded_topics": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "external_tool_rows": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "使用合同外工具的记录数；每行必须在 meta.tools_external 显式标注"
+        },
+        "external_tools": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "合同外工具清单（cdb=转储解析 / unsquashfs=文件系统），contracts 无对应能力"
+        }
+      }
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "仅生成型组的溯源信息（endpoint / model / temperature / candidates_per_prompt / seeds）"
+    }
+  },
+  "definitions": {
+    "length_distribution": {
+      "type": "object",
+      "required": ["count", "min", "max", "mean", "median", "p90", "histogram"],
+      "additionalProperties": false,
+      "properties": {
+        "count": {"type": "integer", "minimum": 0},
+        "min": {"type": "integer", "minimum": 0},
+        "max": {"type": "integer", "minimum": 0},
+        "mean": {"type": "number", "minimum": 0},
+        "median": {"type": "number", "minimum": 0},
+        "p90": {"type": "number", "minimum": 0},
+        "histogram": {
+          "type": "object",
+          "required": ["<160", "160-199", "200-299", "300-399", "400-499", ">=500"],
+          "additionalProperties": false,
+          "properties": {
+            "<160": {"type": "integer", "minimum": 0},
+            "160-199": {"type": "integer", "minimum": 0},
+            "200-299": {"type": "integer", "minimum": 0},
+            "300-399": {"type": "integer", "minimum": 0},
+            "400-499": {"type": "integer", "minimum": 0},
+            ">=500": {"type": "integer", "minimum": 0}
+          }
+        }
+      }
+    },
+    "isolation_result": {
+      "type": "object",
+      "required": ["verdict", "jaccard_max", "pairs_over_threshold"],
+      "additionalProperties": false,
+      "properties": {
+        "verdict": {"type": "string", "enum": ["PASS", "FAIL"]},
+        "jaccard_max": {"type": "number", "minimum": 0, "maximum": 1},
+        "pairs_over_threshold": {"type": "integer", "minimum": 0},
+        "full_hash_duplicates": {"type": "integer", "minimum": 0},
+        "user_hash_duplicates": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

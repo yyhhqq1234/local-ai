@@ -1,0 +1,19 @@
+2026-11-08 21:39:40.650  INFO  starting engine
+2026-11-08 21:39:41.492  INFO  loading weights | 7.82 GiB
+2026-11-08 21:39:43.324  INFO  weights ready | 7.82 GiB | 1.8s | 4.27 GiB/s
+2026-11-08 21:39:47.466  INFO  CUDA graph memory calibrated | 4.1s
+2026-11-08 21:39:47.477  INFO  pinning host context | 2.00 GiB
+2026-11-08 21:39:47.695  INFO  host context pinned | 2.00 GiB | 219 ms
+2026-11-08 21:39:47.898  INFO  CUDA graphs ready | 146 ms
+2026-11-08 21:39:47.902  INFO  engine ready | kittyrev-oxcoder9b-nsfw-gate-full-GSQ | total 7.3s | weights 7.82 GiB | CUDA sync spin
+2026-11-08 21:39:47.903  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 260.1 MiB | free 1.64 GiB
+2026-11-08 21:39:47.904  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 21:39:48.037  INFO  listening on http://127.0.0.1:1851 | model kittyrev-oxcoder9b-nsfw-gate-full-GSQ | auth disabled
+2026-11-08 21:39:48.070  INFO  req#1 started | openai-chat non-stream | 1 message | max output 192 | thinking off
+2026-11-08 21:39:53.040  INFO  throughput | 5.0s | prefill 4.2 tok/s (21 tok) | decode 16.0 tok/s (80 tok) | running 1 (decode-ready 1) | batch 1.00 | host 0.6% (27.9 ms)
+2026-11-08 21:39:58.049  INFO  throughput | 5.0s | decode 16.8 tok/s (84 tok) | running 1 (decode-ready 1) | batch 1.00 | host 0.3% (16.6 ms)
+2026-11-08 21:39:59.573  INFO  req#1 done | openai-chat | output limit | prompt 21 | output 192 | cache 0 (0.0%) | TTFT 189 ms | total 11.5s | prefill 117.8 tok/s | decode 16.9 tok/s | mtp accepted 0/190 (0.0%)
+2026-11-08 21:39:59.582  INFO  req#2 started | openai-chat non-stream | 1 message | max output 192 | thinking off
+2026-11-08 21:40:03.046  INFO  throughput | 5.0s | prefill 1.8 tok/s (9 tok) | decode 16.6 tok/s (83 tok) | running 1 (decode-ready 1) | batch 1.00 | host 0.5% (24.6 ms)
+2026-11-08 21:40:08.051  INFO  throughput | 5.0s | decode 17.0 tok/s (85 tok) | running 1 (decode-ready 1) | batch 1.00 | host 0.3% (17.4 ms)
+2026-11-08 21:40:10.819  INFO  req#2 done | openai-chat | output limit | prompt 21 | output 192 | cache 12 (57.1%, checkpoint) | TTFT 125 ms | total 11.2s | prefill 72.8 tok/s | decode 17.2 tok/s | mtp accepted 0/190 (0.0%)

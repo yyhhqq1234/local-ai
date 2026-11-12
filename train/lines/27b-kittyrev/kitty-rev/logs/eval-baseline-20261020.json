@@ -1,0 +1,214 @@
+{
+  "model": "qwen3.8-27b-ablit-swift15-iq2s",
+  "base": "http://127.0.0.1:1234",
+  "pass": 3,
+  "total": 23,
+  "byCat": {
+    "tool-route": {
+      "pass": 0,
+      "total": 9
+    },
+    "real-trajectory": {
+      "pass": 2,
+      "total": 3
+    },
+    "op-syntax": {
+      "pass": 0,
+      "total": 9
+    },
+    "error-recovery": {
+      "pass": 1,
+      "total": 1
+    },
+    "transition-syntax": {
+      "pass": 0,
+      "total": 1
+    }
+  },
+  "detail": [
+    {
+      "i": 1,
+      "cat": "tool-route",
+      "pass": false,
+      "why": "tool=kitty_jadx actions命中=['status']",
+      "calls": 0,
+      "chars": 785
+    },
+    {
+      "i": 2,
+      "cat": "tool-route",
+      "pass": false,
+      "why": "tool=kitty_rea_trace actions命中=[]",
+      "calls": 0,
+      "chars": 627
+    },
+    {
+      "i": 3,
+      "cat": "real-trajectory",
+      "pass": true,
+      "why": "kitty=2 读源码/自造=False",
+      "calls": 2,
+      "chars": 0
+    },
+    {
+      "i": 4,
+      "cat": "op-syntax",
+      "pass": false,
+      "why": "op=KM_INFO 签名=False 回包=False",
+      "calls": 2,
+      "chars": 0
+    },
+    {
+      "i": 5,
+      "cat": "op-syntax",
+      "pass": false,
+      "why": "op=VER 签名=False 回包=False",
+      "calls": 1,
+      "chars": 0
+    },
+    {
+      "i": 6,
+      "cat": "op-syntax",
+      "pass": false,
+      "why": "op=DBG_ATTACH 签名=False 回包=False",
+      "calls": 1,
+      "chars": 0
+    },
+    {
+      "i": 7,
+      "cat": "op-syntax",
+      "pass": false,
+      "why": "op=KM_PR 签名=False 回包=False",
+      "calls": 2,
+      "chars": 0
+    },
+    {
+      "i": 8,
+      "cat": "error-recovery",
+      "pass": true,
+      "why": "无调用但给出正确下一步",
+      "calls": 0,
+      "chars": 414
+    },
+    {
+      "i": 9,
+      "cat": "tool-route",
+      "pass": false,
+      "why": "tool=kitty_loop_status actions命中=['status']",
+      "calls": 0,
+      "chars": 920
+    },
+    {
+      "i": 10,
+      "cat": "real-trajectory",
+      "pass": true,
+      "why": "kitty=1 读源码/自造=False",
+      "calls": 1,
+      "chars": 0
+    },
+    {
+      "i": 11,
+      "cat": "op-syntax",
+      "pass": false,
+      "why": "op=BATCH 签名=False 回包=False",
+      "calls": 1,
+      "chars": 0
+    },
+    {
+      "i": 12,
+      "cat": "tool-route",
+      "pass": false,
+      "why": "tool=kitty_dbg actions命中=['status']",
+      "calls": 0,
+      "chars": 391
+    },
+    {
+      "i": 13,
+      "cat": "tool-route",
+      "pass": false,
+      "why": "tool=kitty_net actions命中=['status']",
+      "calls": 0,
+      "chars": 283
+    },
+    {
+      "i": 14,
+      "cat": "op-syntax",
+      "pass": false,
+      "why": "op=P_BACK_RES 签名=False 回包=False",
+      "calls": 1,
+      "chars": 0
+    },
+    {
+      "i": 15,
+      "cat": "transition-syntax",
+      "pass": false,
+      "why": "type=retry-stage type键=False evidence=False",
+      "calls": 1,
+      "chars": 0
+    },
+    {
+      "i": 16,
+      "cat": "op-syntax",
+      "pass": false,
+      "why": "op=P_WALK 签名=False 回包=False",
+      "calls": 2,
+      "chars": 0
+    },
+    {
+      "i": 17,
+      "cat": "tool-route",
+      "pass": false,
+      "why": "tool=kitty_engines actions命中=[]",
+      "calls": 0,
+      "chars": 626
+    },
+    {
+      "i": 18,
+      "cat": "tool-route",
+      "pass": false,
+      "why": "tool=kitty_rea_method actions命中=[]",
+      "calls": 0,
+      "chars": 649
+    },
+    {
+      "i": 19,
+      "cat": "tool-route",
+      "pass": false,
+      "why": "tool=reverse_add_target actions命中=['add']",
+      "calls": 0,
+      "chars": 634
+    },
+    {
+      "i": 20,
+      "cat": "op-syntax",
+      "pass": false,
+      "why": "op=CUR 签名=False 回包=False",
+      "calls": 1,
+      "chars": 0
+    },
+    {
+      "i": 21,
+      "cat": "tool-route",
+      "pass": false,
+      "why": "tool=kitty_drvio actions命中=['status']",
+      "calls": 0,
+      "chars": 638
+    },
+    {
+      "i": 22,
+      "cat": "real-trajectory",
+      "pass": false,
+      "why": "kitty=0 读源码/自造=False",
+      "calls": 0,
+      "chars": 161
+    },
+    {
+      "i": 23,
+      "cat": "op-syntax",
+      "pass": false,
+      "why": "op=DIS 签名=False 回包=False",
+      "calls": 2,
+      "chars": 0
+    }
+  ]
+}

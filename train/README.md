@@ -1,101 +1,96 @@
-# 后训练工作区（根目录版）
+# train/ · 训练线根目录（已结项归档）
 
-> 操作者约定：**后训练全部在根目录 `D:\BaiduNetdiskDownload\Local-AI\` 下展开，文件集中在根目录便于管理。**
-> 本目录即工作区内的训练根 `train\`，所有路径不再出根目录。
-
----
-
-## 1 布局（全部在根目录内）
-
-```
-D:\BaiduNetdiskDownload\Local-AI\
-├── train\                    ← 训练根（本目录）
-│   ├── .venv\                Python 3.12 虚拟环境（setup_env.ps1 建）
-│   ├── base\                 基座权重（Qwen3.8-27B 或 8B 替代）
-│   ├── data\                 训练数据（train.jsonl / eval.jsonl）
-│   ├── out\                  adapter 输出（LoRA 权重，小）
-│   ├── merged\               合并后全量权重（大，用完即删）
-│   ├── gguf\                 HF→GGUF 中间产物（大，用完即删）
-│   ├── ninfer\               ninfer-v3 converter 产出（回炉成品）
-│   ├── hf\                   HF_HOME 缓存（下载分片）
-│   ├── logs\                 训练日志 / timings / nvidia-smi 采样
-│   ├── scripts\              setup_env.ps1 · train_qlora.py · merge.py
-│   └── tmp\                  临时（下载分片、导出中间件）
-├── model 包（既有）           模型包-20260930\  ninfer-27b-...\model\   ← 部署侧，不要动
-├── _research\                分析备案（含本次评估包）
-└── _tools\                   现成工具（fastdl.py 等）
-```
+> **状态：2026-11-12 结项**。两条训练线（9B OxCoder / 27B KittyRev）的训练流程已完成，
+> 权重成品已导出为 GGUF / .ninfer 并在本机部署。本目录保留**全部训练数据、脚本与量化实现**，
+> 供复现、审计与后续重训。
 
 ---
 
-## 2 磁盘预算（关键，D 盘只剩 175.2 GB）
+## ⚠️ 内容警告
 
-| 方案 | 基座 | 合并后 | GGUF f16 | 串行峰值 | 判定 |
-|---|---|---|---|---|---|
-| **8B** | 16 GB | 16 GB | 16 GB | **32 GB** | ✓ 宽裕 |
-| **27B** | 54 GB | 54 GB | 54 GB | **108 GB** | △ 可行，必须串行删 |
+本目录的训练数据包含 **NSFW / 成人向语料**（`nsfw-gated/`、`gen7/gen8-nsfw-kitty` 等），
+用于训练"按显式授权开关决定是否放行"的门控能力。这些内容：
 
-**27B 的正确串行顺序（否则爆盘）**
-
-```powershell
-# ① 下基座（54 GB）        → 占用 54
-# ② QLoRA 训练（4-bit，不落大文件）→ 占用 54（out\adapter 只有几十 MB）
-# ③ 合并到 merged\（+54）  → 占用 108   ← 峰值
-# ④ 转 GGUF f16（+54）     → 占用 162   ← 超过则先删中间件
-#    正确顺序：③ 完成后 → 转 GGUF → **确认 GGUF 可用再删 merged**
-# ⑤ 转 .ninfer（约 9-15 GB）→ 删 gguf\ 与 base\（如不再训练）
-```
-
-**硬规则**：`base\` `merged\` `gguf\` 三者任一时间最多并存两个。每次进入下一阶段前先确认剩余空间：
-
-```powershell
-Get-PSDrive D | Select-Object @{n='FreeGB';e={[math]::Round($_.Free/1GB,1)}}
-```
+- 仅用于模型能力研究与对齐实验
+- 包含成人性描写、露骨词汇与角色扮演文本
+- 若你所在地区或平台不允许此类内容，请勿下载或使用
 
 ---
 
-## 3 云盘同步风险与规避（根目录方案的唯一代价）
+## 目录
 
-根目录在 **百度网盘同步目录**内，实测过同一路径「`Test-Path` False → `listdir` 空 → `-Recurse` 又能列出」的间歇不可见（`.ninfer`、`python.exe` 都复现过）。
+| 路径 | 内容 |
+|---|---|
+| `lines/9b-oxcoder/` | 9B 线（Qwen3.5-9B → KittyRev-OxCoder-9B） |
+| `lines/27b-kittyrev/` | 27B 线（Qwen3.8-27B → KittyRev-27B GEN3） |
+| `lines/_shared/` | 两条线共享的原始语料与脚本 |
+| `logs/_archive/` | 过程日志归档（逐轮监控 / 旧版阶段报告，zip） |
+| `.venv/` | 训练 Python 环境（不入库） |
 
-规避措施（按优先级）：
+## 保留的方法论文档
 
-1. **训练期间退出百度网盘 / 暂停该目录同步** —— 最有效；否则 54 GB 权重会被上传，且同步进程与训练抢 IO。
-2. `train\tmp`、`train\hf`、`train\base`、`train\merged`、`train\gguf` 若支持同步排除，全部加排除。
-3. 大文件操作（复制/合并/转换）前后各查一次 `Test-Path`；脚本内已内置重试。
-4. 训练产物（adapter 几十 MB）建议立即复制一份到 `_research\` 或另行备份，避免被同步中断损坏。
+| 文件 | 作用 |
+|---|---|
+| `README.md` | 本文件 |
+| `PITFALLS.md` | 66 条训练坑清单 + 开训自检 |
+| `EVAL-PROTOCOL.md` | 评测规程（判据 / 缓存 / 防卡顿） |
+| `PREFLIGHT.md` | 开工前环境检查单 |
+| `ANTI-MEMORIZATION.md` | 抗记忆化方案（数据 / 训练 / 评测三层） |
+| `TRAINING-LINEAGE.md` | 训练血缘（哪一版用什么数据、什么超参） |
 
-> 若后续仍要换盘：只改 `$TrainRoot` 一个变量（脚本内已参数化），目录结构不变。
+## 数据清单
 
----
+### 9B 线 · `lines/9b-oxcoder/data/`
 
-## 4 开跑顺序
+| 子目录 | 内容 |
+|---|---|
+| `kitty-reverse/` | kitty 逆向工具编排语料（工具名 / 参数 / 协议） |
+| `agent-traj/` | 2A 轨迹语料（含 Nemotron-SWE 派生的 8k/16k 切片） |
+| `nsfw-gated/` | 2B 成对门控集：同请求「开 / 关」两版，用于学开关 |
+| `eval/` | 固定评测集（val 85 / test 129） |
+| `_legacy/` | 早期混配数据（已被 v6/v8 取代，留作对照） |
 
-```powershell
-cd D:\BaiduNetdiskDownload\Local-AI\train
+### 27B 线 · `lines/27b-kittyrev/data/versions/`
 
-# ① 建环境（需联网，winget 装 Python 3.12 → venv → torch cu130 → 训练栈 → 自检）
-powershell -ExecutionPolicy Bypass -File .\scripts\setup_env.ps1
+| 文件 | 行数 | 用途 |
+|---|---|---|
+| `gen8-nsfw-kitty.jsonl` | 22,913 | 主 SFT 集 |
+| `gen8-gate.jsonl` | 10,221 | 门控评测集 |
+| `gen7-nsfw-kitty.jsonl` | 22,913 | 上一代 SFT 集 |
+| `gen7-text.jsonl` | 22,913 | 纯文本能力保持集 |
+| `gen3_1p6-nsfw-kitty.jsonl` | 16,783 | 早期版本（对照） |
+| `gen7-cont.jsonl` | 500 | 续训集 |
 
-# ② 取基座（默认 8B，快速验证链路；--size 27b 走大模型）
-& .\.venv\Scripts\python.exe .\scripts\fetch_base.py --size 8b
+每个 `.jsonl` 均带 `.sha256`。
 
-# ③ 训练（先 100 步冒烟）
-& .\.venv\Scripts\python.exe .\scripts\train_qlora.py --size 8b --max-steps 100
+### 共享 · `lines/_shared/data/`
 
-# ④ 正式训练
-& .\.venv\Scripts\python.exe .\scripts\train_qlora.py --size 8b --epochs 3
+NSFW 源语料（lexicon / glossary / triage 规则）与原始未切分轨迹。
 
-# ⑤ 合并 → ⑥ 转 GGUF → ⑦ 转 .ninfer → ⑧ 部署验证
-#    详见 ..\_research\微调能力-备案-20261020\04-RUNBOOK.md
+## 大文件分片说明
+
+GitHub 单文件上限 100 MB。超过 90 MB 的 `jsonl` 已按行边界切分为
+`<name>.part01.jsonl` / `.part02.jsonl` …，按序 `cat` 即可还原：
+
+```bash
+cat traj-all.part01.jsonl traj-all.part02.jsonl traj-all.part03.jsonl > traj-all.jsonl
 ```
 
----
+## 复现入口
 
-## 5 与备案包的关系
+```bash
+# 9B 线
+python lines/9b-oxcoder/tools/...            # 数据构造
+python lines/9b-oxcoder/z_train.py ...       # SFT
 
-- 判定依据 / 证据 / 路径记录：`..\_research\微调能力-备案-20261020\`（`03-FINDINGS.md` 有全部"能做/不能做"）
-- 命令细节 / 排错表：同包 `04-RUNBOOK.md`
-- 模型身份（Qwen3.8 vs `Qwen3_5*` 类名）：同包 `05-MODEL-ID.md`
+# 27B 线（详见 docs/v6-rebuild.md）
+python lines/27b-kittyrev/kitty-rev/scripts/train_kitty.py --size 27b --stage sft ...
+python lines/27b-kittyrev/quant/run_convert_gsq.py ...
+```
 
-**本目录只放运行时资产与脚本，不放分析文档。**
+## 已归档（不再更新）
+
+- `lines/27b-kittyrev/kitty-rev/logs/v4|v5|v6|v7/` → `logs/_archive/kittyrev-logs-*.zip`
+- `lines/27b-kittyrev/kitty-rev/logs/*.md`（过程交接 / 自测） → `logs/_archive/kittyrev-logs-rest.zip`
+- `logs/*.md`（逐轮监控与阶段报告） → `logs/_archive/train-logs.zip`
+- 根目录过时的结论报告（GEN4 / mix-v5 / R3 等） → `logs/_archive/train-root-obsolete.zip`

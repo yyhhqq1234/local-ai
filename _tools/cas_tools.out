@@ -1,0 +1,46 @@
+========= COMPUTE-SANITIZER
+========= Trace/breakpoint trap
+=========     at void ninfer::ops::sampling_detail::sample_row_kernel<ninfer::ops::sampling_detail::TopKSchedule<(int)256, (int)2, (int)256, (int)2, (int)25>>(const __nv_bfloat16 *, int *, const ninfer::ops::SamplingConfig *, const int *, int, int, int)+0xa70 in kernel.cuh:57
+=========     by thread (0,0,0) in block (0,0,0)
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame: cuLaunchKernel [0x7ff9f14365e8] in nvcuda64.dll
+=========         Host Frame:  [0xdc99] in nvcudart_hybrid64.dll
+=========         Host Frame: _cudaGetProcAddress [0x7ffa002c5adb] in nvcudart_hybrid64.dll
+=========         Host Frame: _cudaGetProcAddress [0x7ffa00288301] in nvcudart_hybrid64.dll
+=========         Host Frame:  [0xa3eef4] in ninfer-serve.exe
+=========         Host Frame:  [0x386354] in ninfer-serve.exe
+=========         Host Frame:  [0x386e6d] in ninfer-serve.exe
+=========         Host Frame:  [0x34600c] in ninfer-serve.exe
+=========         Host Frame:  [0x27eb06] in ninfer-serve.exe
+=========         Host Frame:  [0x28a85b] in ninfer-serve.exe
+=========         Host Frame:  [0x2177d0] in ninfer-serve.exe
+=========         Host Frame:  [0x215de8] in ninfer-serve.exe
+=========         Host Frame:  [0x215209] in ninfer-serve.exe
+=========         Host Frame:  [0x18a0ea] in ninfer-serve.exe
+=========         Host Frame:  [0x15d4e1] in ninfer-serve.exe
+=========         Host Frame:  [0x166251] in ninfer-serve.exe
+=========         Host Frame:  [0x12379e] in ninfer-serve.exe
+=========         Host Frame: recalloc [0x7ffa37249363] in ucrtbase.dll
+=========         Host Frame: BaseThreadInitThunk [0x7ffa38df257d] in KERNEL32.DLL
+=========         Host Frame: RtlUserThreadStart [0x7ffa39aaaa78] in ntdll.dll
+========= 
+========= Program hit cudaErrorUnknown (error 999) due to "unknown error" on CUDA API call to cudaStreamSynchronize.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame: NVAON_SharedMemory_Destroy [0x7ff9f154cf62] in nvcuda64.dll
+=========         Host Frame: _cudaGetProcAddress [0x7ffa002dca73] in nvcudart_hybrid64.dll
+=========         Host Frame:  [0x906fab] in ninfer-serve.exe
+=========         Host Frame:  [0x27f4bf] in ninfer-serve.exe
+=========         Host Frame:  [0x28a85b] in ninfer-serve.exe
+=========         Host Frame:  [0x2177d0] in ninfer-serve.exe
+=========         Host Frame:  [0x215de8] in ninfer-serve.exe
+=========         Host Frame:  [0x215209] in ninfer-serve.exe
+=========         Host Frame:  [0x18a0ea] in ninfer-serve.exe
+=========         Host Frame:  [0x15d4e1] in ninfer-serve.exe
+=========         Host Frame:  [0x166251] in ninfer-serve.exe
+=========         Host Frame:  [0x12379e] in ninfer-serve.exe
+=========         Host Frame: recalloc [0x7ffa37249363] in ucrtbase.dll
+=========         Host Frame: BaseThreadInitThunk [0x7ffa38df257d] in KERNEL32.DLL
+=========         Host Frame: RtlUserThreadStart [0x7ffa39aaaa78] in ntdll.dll
+========= 
+========= Target application returned an error
+========= ERROR SUMMARY: 2 errors

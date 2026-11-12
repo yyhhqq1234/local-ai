@@ -1,0 +1,65 @@
+可用工具索引（58 个，按名字排序）。选工具只看这张表，不要凭记忆发明名字：
+
+- kitty_acescan: 反作弊对抗日一键编排 | action: acescan
+- kitty_apkscan: APK shell/scan (APKiD triage) | action: status,scan
+- kitty_apktool: APK smali decode/build (apktool passthrough) | action: status,decode,build
+- kitty_asm: x64迷你汇编器 | action: assemble,jump
+- kitty_assetrip: Unity asset export (AssetRipper passthrough) | action: status,list,export
+- kitty_bepinex: Unity mod loader (BepInEx status) | action: status,install,list
+- kitty_ce: KittyCE直控透传（单条op / 多条ops BATCH） | action: op,batch
+- kitty_cpp2il: IL2CPP dump (Cpp2IL passthrough) | action: status,triage,dump,parse
+- kitty_dbg: KittyCE调试面 | action: attach,wait,status,bp,bp_list,bp_del,go,regs,detach,sync
+- kitty_die: packer detect (DIE passthrough) | action: status,scan
+- kitty_dnspy: Unity Mono analysis (dnSpyEx passthrough) | action: status,deobf,open
+- kitty_drv: 驱动+宿主守护 | action: ensure,status,recover,host,storm
+- kitty_drvio: 辅助驱动面（只读不启停） | action: status,probe,open,surf
+- kitty_dualview: 三视图取数门禁 | action: dualview
+- kitty_dump: 内存转储+镜像重建 | action: dump,unmap
+- kitty_engines: engine router (ue/unity/godot dispatch) | action: route
+- kitty_fmodel: UE asset view (FModel passthrough) | action: status,list,export,unpack
+- kitty_frida: dynamic hook (Frida passthrough) | action: status,spawn,attach,trace,capture
+- kitty_gdre: Godot recovery (gdsdecomp passthrough) | action: status,list,extract,recover,decompile
+- kitty_ghidra: Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘） | action: status,analyze,functions,search,decompile,strings
+- kitty_ida: IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档） | action: status,analyze,functions,strings,imports,entries,xrefs,decompile
+- kitty_idamcp: Hex-Rays 官方 IDA MCP 网关（uvx ida-mcp stdio · 上游工具面透传） | action: status,list,describe,call
+- kitty_il2cppdumper: Unity IL2CPP dump (Il2CppDumper passthrough) | action: status,dump,parse
+- kitty_init: 一键双绿初始化（宿主先行+双驱验真） | action: status,init
+- kitty_inject: DLL注入（ce/ps/loaddll三档） | action: ce,ps,loaddll
+- kitty_jadx: APK Java decompile (jadx passthrough) | action: status,decompile,search
+- kitty_km: 内核面（Dbgk/物理） | action: api,info,attach,read,write,pa,pread,pwrite
+- kitty_loop: Kitty夜跑一轮 | action: round,status,dry
+- kitty_loop_status: Kitty夜跑状态只读 | action: status
+- kitty_lua: Lua decompile (luadec passthrough) | action: status,decompile
+- kitty_net: traffic capture (mitmdump 真抓 / tshark 真解析) | action: status,capture,stop,decode
+- kitty_ops: A通道OP冻结表查询 | action: list
+- kitty_patch: PE静态补丁管线 | action: info,find,patch,rollback,hash
+- kitty_pchain: Kitty多跳反查 | action: pchain
+- kitty_prot: 内存保护面（CE内联+外部托管） | action: rwx,probe,protect,query,alloc,free,extread,extwrite
+- kitty_proto: serialization decode (protoc passthrough) | action: status,decode
+- kitty_rea: REA 全量网关（MCP stdio，上游 170 工具） | action: status,list,describe,call,start,stop
+- kitty_rea_android: REA APK 检查（清单/包/SDK/权限） | action: inspect_android_package
+- kitty_rea_binary: REA 二进制布局（节/段/符号/导入导出） | action: inspect_binary_layout
+- kitty_rea_callpath: REA 调用链追踪 | action: trace_call_path
+- kitty_rea_compare: REA 函数级差分（跨版本迁移） | action: compare_functions
+- kitty_rea_function: REA 函数档案（伪码/汇编/引用证据） | action: analyze_function
+- kitty_rea_javascript: REA JS/Electron 应用静态重建 | action: analyze_javascript_application
+- kitty_rea_method: REA APK 单方法反编译（smali 回退） | action: inspect_android_method
+- kitty_rea_recover_js: REA JS 源码恢复（打包产物重建） | action: recover_javascript_sources
+- kitty_rea_trace: REA 特性级追踪 | action: trace_feature
+- kitty_selftest: 回归自检（verify-all编排） | action: a,c,e,all
+- kitty_settings: 逆向会话真相源（F3：对话侧直调会话动作） | action: target-set,target-get,mode-set,mode-get,reverse-init,trail-get,root-get,host-rebind
+- kitty_status: Kitty通道健康只读快照 | action: status,probe
+- kitty_sym: PE符号面（文件/内存） | action: exports,imports,resolve
+- kitty_trail: agent探索日志道（append写/trail-get读） | action: append,get
+- kitty_ue4ss: UE runtime mod (UE4SS via inject) | action: status,triage,inject,collect
+- kitty_uedump: UE SDK dump (UEDumper passthrough) | action: status,triage,inject,collect,parse
+- kitty_uexplorer: Unity runtime explorer (UnityExplorer via inject) | action: status,inject
+- kitty_unpack: APK unpack 产物收口（collect 建目录 / parse 清点 .dex） | action: status,collect,parse
+- kitty_variants: 驱动CE/DBG变体管理 | action: list,switch,start,stop,ensure-bridge
+- kitty_wpb: 写保护绕过（PTE直改） | action: write
+- kitty_x64dbg: 醉梦DBG脚本通道 | action: selftest,cmd,run,seed,rununtil,readlog,readdb,collect,program
+
+选择纪律：
+1. 一次只给一个工具调用，拿到回包再决定下一步。
+2. 同族工具按上表的功能描述区分，不要凭名字相似度猜。
+3. 工具名与 action 必须来自本表；表里没有的名字一律不许出现。

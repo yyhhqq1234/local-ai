@@ -1,5 +1,5 @@
 import json
-d=json.load(open(r"D:\BaiduNetdiskDownload\Local-AI\train\local-pack\qwen3.8-27b-kittyrev-v5-iq2s-mtp.ninfer.conversion.json",encoding="utf-8"))
+d=json.load(open(r"D:\BaiduNetdiskDownload\Local-AI\train\lines\27b-kittyrev\local-pack\qwen3.8-27b-kittyrev-v5-iq2s-mtp.ninfer.conversion.json",encoding="utf-8"))
 print("name:", d.get("name"))
 print("provenance:", json.dumps(d.get("provenance"), ensure_ascii=False))
 print("components:", list(d.get("components",{}).keys()))

@@ -1,0 +1,35 @@
+=== relationship terms ===
+  主人
+  主人大人
+  爸爸
+  妈妈
+  姐姐
+  哥哥
+  老公
+  少女
+  女人
+  男人
+  女儿
+  孩子
+  中年肥猪
+  中年肥汉
+  中年丑汉
+  中年男人
+  骚货
+  母狗
+  人家
+
+=== descriptor terms ===
+  诱人
+  淫荡
+  淫靡
+  前凸后翘
+  晶莹剔透
+  完全暴露
+
+=== nsfw-glossary-r4.jsonl categories ===
+  action: 17
+  body: 13
+  descriptor: 6
+  emotion: 6
+  state: 12

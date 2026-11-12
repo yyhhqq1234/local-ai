@@ -9,7 +9,7 @@ param(
 $ErrorActionPreference = 'Continue'
 $Root  = 'D:\BaiduNetdiskDownload\Local-AI'
 $Exe   = Join-Path $Root '_tools\ninfer-build\apps\ninfer-serve.exe'
-$Model = Join-Path $Root 'train\lines\9b-oxcoder\out\oxcoder9b-merged.ninfer'
+$Model = Join-Path $Root 'train\lines\9b-oxcoder\out\kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer'
 $Trace = Join-Path $Root '_tools\attn-stage.txt'
 $Log   = Join-Path $Root '_tools\engine-run.log'
 $Err   = Join-Path $Root '_tools\verify-error.txt'
@@ -46,7 +46,7 @@ $sets = @(
 $ok = 0; $fail = 0
 foreach ($s in $sets) {
     $payload = @{
-        model       = 'oxcoder9b-merged'
+        model       = 'kittyrev-oxcoder9b-nsfw-gate-full-GSQ'
         messages    = @(@{ role = 'user'; content = $s.prompt })
         max_tokens  = $s.mt
         temperature = 0

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 
-const ROOT = 'D:/BaiduNetdiskDownload/Local-AI/train/data/nsfw';
+const ROOT = 'D:/BaiduNetdiskDownload/Local-AI/train/lines/_shared/data/nsfw';
 const P = (f) => path.join(ROOT, f);
 const sha256 = (p) => crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const lines = (f) => fs.readFileSync(P(f), 'utf8').split('\n').filter(Boolean);
@@ -39,7 +39,7 @@ for (const f of files) { f.bytes = fs.statSync(P(f.file)).size; f.sha256 = sha25
 
 const manifest = {
   __meta: {
-    dir: 'train/data/nsfw', built: new Date().toISOString(),
+    dir: 'train/lines/_shared/data/nsfw', built: new Date().toISOString(),
     policy: '结构调整与索引归一；重复合并覆盖；同根变体归并；原字段值逐字保留（零内容丢失）',
   },
   files,
@@ -68,7 +68,7 @@ const manifest = {
     'v7（变体归并前）': '_superseded/structure-20261027-200103/pre-variant-merge/nsfw-lexicon-v7.json',
     'v8（v9 升级前）': '_superseded/structure-20261027-200103/pre-v9/nsfw-lexicon-v8.json',
   },
-  rollback: 'cd train/data/nsfw && cp -f _superseded/structure-20261027-200103/pre-v9/nsfw-lexicon-v8.json .',
+  rollback: 'cd train/lines/_shared/data/nsfw && cp -f _superseded/structure-20261027-200103/pre-v9/nsfw-lexicon-v8.json .',
 };
 fs.writeFileSync(P('MANIFEST.json'), JSON.stringify(manifest, null, 2), 'utf8');
 

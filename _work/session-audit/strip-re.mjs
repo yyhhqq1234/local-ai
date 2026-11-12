@@ -1,4 +1,4 @@
-// 剔除 train/data/nsfw/ 全树中的"逆向相关"行（meta.__stage==="re" 或 system 为 kitty 逆向工作台话术）
+// 剔除 train/lines/_shared/data/nsfw/ 全树中的"逆向相关"行（meta.__stage==="re" 或 system 为 kitty 逆向工作台话术）
 // 用法: node strip-re.mjs dry | node strip-re.mjs apply
 import fs from 'node:fs';
 import path from 'node:path';
@@ -6,7 +6,7 @@ import crypto from 'node:crypto';
 import readline from 'node:readline';
 
 const MODE = process.argv[2] === 'apply' ? 'apply' : 'dry';
-const ROOT = 'D:/BaiduNetdiskDownload/Local-AI/train/data/nsfw';
+const ROOT = 'D:/BaiduNetdiskDownload/Local-AI/train/lines/_shared/data/nsfw';
 const TS = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
 const BACKUP = path.join(ROOT, `_re-strip-backup-${TS}`);
 

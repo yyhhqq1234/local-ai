@@ -1,0 +1,27 @@
+{
+ "mtp": "train/lines/9b-oxcoder/models/mtp/merged-2b-nsfw-mtp-tuned-v3-mix600.safetensors.step300.safetensors",
+ "base": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\lines\\9b-oxcoder\\models\\merged-2b-nsfw",
+ "results": [
+  {
+   "domain": "RE(工具调用)",
+   "n_tokens": 31093,
+   "top1": 0.7184,
+   "top3": 0.8028,
+   "top5": 0.8264
+  },
+  {
+   "domain": "门控(NSFW 训练集)",
+   "n_tokens": 43809,
+   "top1": 0.2835,
+   "top3": 0.366,
+   "top5": 0.3954
+  },
+  {
+   "domain": "创作(val gate-on)",
+   "n_tokens": 9574,
+   "top1": 0.2622,
+   "top3": 0.3435,
+   "top5": 0.3741
+  }
+ ]
+}

@@ -1,0 +1,2 @@
+file,rows,pos,neg,violations,kept,secs,R4_dup_user,R5_template,R7_repl,R8_path
+data\versions\gen3_1p4-nsfw-kitty.jsonl,32556,3518,3481,17323,0,1.2,460,16042,17,804

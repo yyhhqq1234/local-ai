@@ -1,0 +1,71 @@
+{
+  "__meta": {
+    "dir": "train/data/kitty-reverse",
+    "built": "2026-10-27T12:25:00.475Z",
+    "state": "清理 + 补答完成（27 个过时文件已删，源代码中 28 条空答案已补并入 core）"
+  },
+  "training_core": {
+    "file": "train-kitty-core.jsonl",
+    "rows": 5602,
+    "bytes": 6075451,
+    "sha256": "356f0c00fe90aae71e6be3c415876bc11444fa823b9dcba3626babdce819e6ae",
+    "sources": [
+      "final-re",
+      "final-re-final",
+      "final-re-refined",
+      "final-re-dedup",
+      "mix-re",
+      "kitty-incomplete-backfill(28)"
+    ],
+    "system_template_chars": 115,
+    "checks": {
+      "json_ok": true,
+      "all_have_system": true,
+      "all_have_user": true,
+      "all_have_assistant": true
+    }
+  },
+  "backfill": {
+    "filled": 28,
+    "added": 28,
+    "deduped": 0,
+    "missing_from_core": 0
+  },
+  "candidates": {
+    "silver": {
+      "file": "re-qc/silver.jsonl",
+      "rows": 8815,
+      "status": "候选池（未采用）"
+    },
+    "scored": {
+      "file": "re-qc/scored.jsonl",
+      "rows": 31053,
+      "status": "评分台账"
+    }
+  },
+  "contracts": {
+    "dir": "kitty-contracts/",
+    "files": [
+      "ops.json",
+      "STATS.json",
+      "tool-tasks.json",
+      "tools.json"
+    ]
+  },
+  "provenance": {
+    "dir": "re-iter/",
+    "files": [
+      "COVERAGE.json",
+      "drce-comments.json",
+      "drce-index.json",
+      "drce-pitfalls-raw.json",
+      "drce-tools-deep.json",
+      "PLAN.json"
+    ]
+  },
+  "cleanup": {
+    "removed_files": 27,
+    "removed_MB": 168.4,
+    "ledger": "CLEANUP-REPORT.md"
+  }
+}

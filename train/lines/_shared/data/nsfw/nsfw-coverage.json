@@ -1,0 +1,627 @@
+{
+  "__meta": {
+    "version": "coverage-v2",
+    "built": "2026-10-27T12:14:26.810Z",
+    "upgraded_from": "nsfw-v3-coverage.json",
+    "note": "原统计字段全部保留；新增 __meta.dataset 对齐当前 train-*.jsonl 数据集（不再指涉 nsfw-v3.jsonl 单一文件）",
+    "dataset": {
+      "train_shards": [
+        {
+          "file": "train-cont.jsonl",
+          "rows": 6829,
+          "bytes": 35281319,
+          "sha256": "e569ab2b36ab679ff097a1ddf2a2dbbd4c2942208fe21e43c1e7696450ee1d59"
+        },
+        {
+          "file": "train-scene.jsonl",
+          "rows": 2741,
+          "bytes": 14148886,
+          "sha256": "add8490452cf6c19a66f59e08ac8efe0fa9dde7aadf43042b7b8a1a78ebf9e29"
+        },
+        {
+          "file": "train-multi.jsonl",
+          "rows": 2079,
+          "bytes": 12082778,
+          "sha256": "f48485bc86d9549e8380246cc6df3d358c641d0a8da2be0c0d48f2ac33f22973"
+        },
+        {
+          "file": "train-style.jsonl",
+          "rows": 1329,
+          "bytes": 8445383,
+          "sha256": "db7dd68eeaa67adeb424b051dc4cd9a08713c3f5f279a2d9943b21cd78b004f5"
+        },
+        {
+          "file": "train-expand.jsonl",
+          "rows": 690,
+          "bytes": 4387541,
+          "sha256": "2fdd6eeb826c85214a2f331edab53d7ac8b9e0aee937f44c81b694158f9761c4"
+        }
+      ],
+      "train_rows_total": 13668,
+      "glossary_terms": 283,
+      "lexicon_terms": 470,
+      "lexicon_categories": 12,
+      "lexicon_version": "v9"
+    }
+  },
+  "files_indexed": 62,
+  "files_cut": 62,
+  "samples": 13668,
+  "src_chars_full": 18641293,
+  "src_chars_cut": 18641293,
+  "used_chars": 18404502,
+  "skipped_chars": 0,
+  "coverage_of_cut": 0.9873,
+  "coverage_of_full": 0.9873,
+  "avg_sample_chars": 1346,
+  "minor_flag_samples": 4506,
+  "minor_flag_ratio": 0.3297,
+  "sample_types": {
+    "cont": 6829,
+    "scene": 2741,
+    "multi": 2079,
+    "style": 1329,
+    "expand": 690
+  },
+  "ip_fanfic_samples": 10964,
+  "per_file": [
+    {
+      "rel": "春日野穹的淫堕（雪月樱合集）.txt",
+      "src_chars": 7597314,
+      "used_chars": 7582805,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 5683,
+      "coverage": 0.9981
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【p站作者码字姬萝莉合集】.txt",
+      "src_chars": 1404748,
+      "used_chars": 1336570,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 927,
+      "coverage": 0.9515
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【后宫催眠日记】 （1-489）作者：十六夜天.txt",
+      "src_chars": 1343279,
+      "used_chars": 1276011,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 884,
+      "coverage": 0.9499
+    },
+    {
+      "rel": "关于在色情VRMMO中收为性奴隶的美少女们在现实中也认识的事_作者：ソルティ.txt",
+      "src_chars": 788195,
+      "used_chars": 787803,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 646,
+      "coverage": 0.9995
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【从被白丝女儿夜袭开始的乱伦故事】全（1-26）作者：击空明兮溯流光.txt",
+      "src_chars": 656252,
+      "used_chars": 655426,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 508,
+      "coverage": 0.9987
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\诱导手环-MC王大锤合集.txt",
+      "src_chars": 620107,
+      "used_chars": 619476,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 445,
+      "coverage": 0.999
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【巨根正太和家族美熟女】【1-53】作者：画纯爱的JIN.txt",
+      "src_chars": 536230,
+      "used_chars": 536228,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 391,
+      "coverage": 1
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【二次元催眠调教日记】.txt",
+      "src_chars": 520695,
+      "used_chars": 520693,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 381,
+      "coverage": 1
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【诱导手环】.txt",
+      "src_chars": 362317,
+      "used_chars": 362229,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 269,
+      "coverage": 0.9998
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【碧蓝和原神coser】（完）作者：不详.txt",
+      "src_chars": 361797,
+      "used_chars": 352287,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 258,
+      "coverage": 0.9737
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\色色游戏(上+下+番外).txt",
+      "src_chars": 345260,
+      "used_chars": 330346,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 231,
+      "coverage": 0.9568
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【斗罗大陆修炼纯肉】修改版完结 作者：神梦斗灵.txt",
+      "src_chars": 273271,
+      "used_chars": 273136,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 217,
+      "coverage": 0.9995
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【斗罗众美的堕落】.txt",
+      "src_chars": 264099,
+      "used_chars": 263994,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 199,
+      "coverage": 0.9996
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【我的校花女神女友和巨乳小姨子】.txt",
+      "src_chars": 208607,
+      "used_chars": 208609,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 152,
+      "coverage": 1
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【催眠乱伦系统】（全本，未删减精校版）作者：镜欲.txt",
+      "src_chars": 201737,
+      "used_chars": 201634,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 154,
+      "coverage": 0.9995
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\美妈编辑器.txt",
+      "src_chars": 199391,
+      "used_chars": 199325,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 146,
+      "coverage": 0.9997
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【斗罗大陆女神恶堕系统】.txt",
+      "src_chars": 191266,
+      "used_chars": 171541,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 119,
+      "coverage": 0.8969
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【催眠眼镜系列-全】 作者：狼的左手.txt",
+      "src_chars": 169676,
+      "used_chars": 169287,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 131,
+      "coverage": 0.9977
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【高等基因法案】   脏鱼哥.txt",
+      "src_chars": 131578,
+      "used_chars": 131498,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 99,
+      "coverage": 0.9994
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【催眠考核】.txt",
+      "src_chars": 123232,
+      "used_chars": 123216,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 90,
+      "coverage": 0.9999
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【把丝袜御姐调教出绝望的高潮】（完本）作者：不详.txt",
+      "src_chars": 121287,
+      "used_chars": 121279,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 90,
+      "coverage": 0.9999
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【地上母猪淫国】（1-4 私人重排).txt",
+      "src_chars": 115990,
+      "used_chars": 113255,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 86,
+      "coverage": 0.9764
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【穿越成兽人，把fgo里的女英灵变成孕奴雌畜，然后统一大陆！】.txt",
+      "src_chars": 111448,
+      "used_chars": 110819,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 99,
+      "coverage": 0.9944
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【我的姐姐是大演员】.txt",
+      "src_chars": 104938,
+      "used_chars": 104902,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 79,
+      "coverage": 0.9997
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【对误入美女遍地色情城市的大肉棒强奸犯实施正义的肉穴审判吧！】.txt",
+      "src_chars": 104691,
+      "used_chars": 104663,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 79,
+      "coverage": 0.9997
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【被华人大鸡巴侵入的秀知院学园母猪学生会】.txt",
+      "src_chars": 100289,
+      "used_chars": 96882,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 76,
+      "coverage": 0.966
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【被催眠的校花母狗竟然靠着性感诱人的娇躯，淫荡开放的性格还有极品榨精嫩穴把催眠自己的人渣变态成功反杀了？】.txt",
+      "src_chars": 98148,
+      "used_chars": 98128,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 72,
+      "coverage": 0.9998
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【次元骇客】-我永远喜欢永雏塔菲.txt",
+      "src_chars": 94849,
+      "used_chars": 90524,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 64,
+      "coverage": 0.9544
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【崩坏三之精厕女武神1-3】 无绿改.txt",
+      "src_chars": 90134,
+      "used_chars": 88458,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 70,
+      "coverage": 0.9814
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【答应青梅女友婚后初夜，我却在她不知道的地方被痴女们不断榨精】（1-6）作者：不详.txt",
+      "src_chars": 87575,
+      "used_chars": 80765,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 57,
+      "coverage": 0.9222
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【穿越到异世界的上班族变成废物兽人，结果广开后宫的奇妙故事】（完）作者：不详.txt",
+      "src_chars": 87180,
+      "used_chars": 87163,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 64,
+      "coverage": 0.9998
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【建立家族后宫尽情享受老婆女儿的身体吧】（1-7）作者：不详.txt",
+      "src_chars": 86275,
+      "used_chars": 86209,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 66,
+      "coverage": 0.9992
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【华人婚伴（黑人婚伴去黑媚华版全本）】作者：江南大刀2012.txt",
+      "src_chars": 83653,
+      "used_chars": 83446,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 68,
+      "coverage": 0.9975
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【财阀的母狗们】（32）作者：锺玉.txt",
+      "src_chars": 81834,
+      "used_chars": 72862,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 50,
+      "coverage": 0.8904
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【被催眠后的妹妹真的只是性玩具吗？】.txt",
+      "src_chars": 75433,
+      "used_chars": 75423,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 55,
+      "coverage": 0.9999
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【邪恶催眠之瞳 高冷傲慢女上司】.txt",
+      "src_chars": 72287,
+      "used_chars": 72251,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 54,
+      "coverage": 0.9995
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【穿越人人拥有绝美女友的绿奴异界做黄毛】（1-12）作者：神中不二.txt",
+      "src_chars": 64426,
+      "used_chars": 64406,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 53,
+      "coverage": 0.9997
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【欲望狂想曲】.txt",
+      "src_chars": 62808,
+      "used_chars": 62806,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 46,
+      "coverage": 1
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【春节催眠女友一家后续：色气满满的腹黑毒舌小姨子同虚伪淫荡熟女伯母于淫靡清晨时的激烈肉棒争夺战】.txt",
+      "src_chars": 52499,
+      "used_chars": 52493,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 39,
+      "coverage": 0.9999
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【卷入家庭淫欲漩涡的美艳女医生】.txt",
+      "src_chars": 51294,
+      "used_chars": 51290,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 38,
+      "coverage": 0.9999
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【黑白裤袜双胞胎小穴生的校园白给性事】.txt",
+      "src_chars": 47721,
+      "used_chars": 47719,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 35,
+      "coverage": 1
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【春节催眠女友一家】.txt",
+      "src_chars": 47277,
+      "used_chars": 47269,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 35,
+      "coverage": 0.9998
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【他还只是个孩子】.txt",
+      "src_chars": 47173,
+      "used_chars": 47169,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 35,
+      "coverage": 0.9999
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【春节期间前往女友家拜年的我用催眠大法为拜金婊子女友，高贵虚伪伯母以及腹黑可爱的女友妹妹献上新年精液礼物！】.txt",
+      "src_chars": 46219,
+      "used_chars": 46217,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 34,
+      "coverage": 1
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【雌小鬼芙宁娜才不会成为囚犯的私人肉便器呢】.txt",
+      "src_chars": 38296,
+      "used_chars": 37727,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 29,
+      "coverage": 0.9851
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【获得系统的大屌少年花言巧语征服爆乳肥臀宇崎母女二人，让她们臣服胯下成为淫荡的母猪！】.txt",
+      "src_chars": 35953,
+      "used_chars": 34218,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 25,
+      "coverage": 0.9517
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【穿越到只能说真话的世界】.txt",
+      "src_chars": 35049,
+      "used_chars": 32129,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 23,
+      "coverage": 0.9167
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【把美女们收进后宫大肆享用她们的淫乱肉体吧】.txt",
+      "src_chars": 32368,
+      "used_chars": 32315,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 25,
+      "coverage": 0.9984
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【意外用俗语攻略了女友妹妹】.txt",
+      "src_chars": 29561,
+      "used_chars": 28311,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 20,
+      "coverage": 0.9577
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【金发双马尾的傲娇爆乳妹妹与黑丝裤袜肉腿实战系jk前女友】.txt",
+      "src_chars": 28328,
+      "used_chars": 28289,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 20,
+      "coverage": 0.9986
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【催眠眼镜之金丝雀 】作者：米屑尔.txt",
+      "src_chars": 24183,
+      "used_chars": 24145,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 18,
+      "coverage": 0.9984
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【为了拯救被戒色宝典洗脑的男友，漂亮骄傲的班花女友甘愿被我肆意玩弄奸淫】.txt",
+      "src_chars": 23960,
+      "used_chars": 23950,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 18,
+      "coverage": 0.9996
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【网游之奇迹大陆】.txt",
+      "src_chars": 22289,
+      "used_chars": 22279,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 17,
+      "coverage": 0.9996
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【被前女友用高价彩礼要挟后的我，第二天就被媚中黑白双美灌酒逆推？！】（完）作者：季柏初.txt",
+      "src_chars": 20780,
+      "used_chars": 19140,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 14,
+      "coverage": 0.9211
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【迷恋父亲的可爱女儿使用催眠术后的日常】.txt",
+      "src_chars": 20727,
+      "used_chars": 20723,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 16,
+      "coverage": 0.9998
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【催眠眼镜之女刑警--自整理】.txt",
+      "src_chars": 18670,
+      "used_chars": 18670,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 14,
+      "coverage": 1
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【成为天龙人买下幼年海贼女帝，将其调教成乖巧的精液肉壶】.txt",
+      "src_chars": 18594,
+      "used_chars": 17790,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 13,
+      "coverage": 0.9568
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【百年一叹】（强奸穿着白丝裤袜的女儿）.txt",
+      "src_chars": 15524,
+      "used_chars": 14520,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 11,
+      "coverage": 0.9353
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【被学生催眠修改常识的高冷黑发人妻班主任，身为高中老师的我被中国学生操的逼水直流】.txt",
+      "src_chars": 14819,
+      "used_chars": 14073,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 10,
+      "coverage": 0.9497
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【催眠死对头美女班长】.txt",
+      "src_chars": 13348,
+      "used_chars": 13348,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 10,
+      "coverage": 1
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【世间调制模式 高傲的情侣】.txt",
+      "src_chars": 7855,
+      "used_chars": 7855,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 6,
+      "coverage": 1
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【多管闲事的高中少女】.txt",
+      "src_chars": 6510,
+      "used_chars": 6508,
+      "skipped_chars": 0,
+      "skipped_windows": 0,
+      "windows_total": 5,
+      "coverage": 0.9997
+    }
+  ]
+}

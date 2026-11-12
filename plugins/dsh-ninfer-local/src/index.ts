@@ -177,6 +177,7 @@ export function apply(ctx: Context, config: Config): void {
       maxContext: { type: 'number', description: '逻辑上下文上限' },
       vision: { type: 'string', description: 'off | cpu | overlay' },
       port: { type: 'number', description: '引擎端口' },
+      profile: { type: 'string', description: '引擎档位：csunx-27b（默认，27B launcher）| build-9b（9B 直启）' },
     },
     output: { schema: { type: 'object' }, render: (_a: unknown, v: unknown) => textOut(v) },
     async execute(args: Record<string, unknown>) {
@@ -249,6 +250,7 @@ export function apply(ctx: Context, config: Config): void {
       maxContext: { type: 'number' },
       vision: { type: 'string' },
       port: { type: 'number' },
+      profile: { type: 'string' },
       restartNow: { type: 'boolean' },
     },
     output: { schema: { type: 'object' }, render: (_a: unknown, v: unknown) => textOut(v) },
@@ -259,6 +261,7 @@ export function apply(ctx: Context, config: Config): void {
       for (const k of ['deviceKV', 'hostKVMiB', 'prefillChunk', 'draftTokens', 'maxContext', 'port'] as const) {
         if (typeof args[k] === 'number') patch[k] = args[k] as never
       }
+      if (typeof args.profile === 'string') patch.profile = args.profile
       if (typeof args.kvDtype === 'string') patch.kvDtype = args.kvDtype as never
       if (typeof args.reasoningEffort === 'string') patch.reasoningEffort = args.reasoningEffort as never
       if (typeof args.vision === 'string') patch.vision = args.vision as never

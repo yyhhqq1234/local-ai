@@ -1,0 +1,558 @@
+{
+  "adapter": "train/out/z-2a-v5/final",
+  "n": 40,
+  "avg_cov": 0.4396,
+  "code_rate": 0.625,
+  "avg_ngram20": 0.0,
+  "verdict": false,
+  "detail": [
+    {
+      "id": "A01",
+      "level": "L1",
+      "cov": 0.667,
+      "miss": [
+        "memory.py"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 936.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is consistent with the pattern used in `get_history` method:\n\nLet me check the `get_history` method to see how it handles session keys:\n\nLe"
+    },
+    {
+      "id": "A02",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1304.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and correct:\n\nLet me review my change:\n\nPerfect! My change is minimal and focused:\n\n## Summary\n\nI have successfully implemented "
+    },
+    {
+      "id": "A03",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1001.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change is minimal and focused:\n\nLet me review what I've implemented against the original issue:\n\nLet me also run one final test to make sure the exact sc"
+    },
+    {
+      "id": "A04",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1476.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and correct:\n\nLet me review the change I made:\n\nPerfect! My change is minimal and focused:\n\n## Summary\n\nI have successfully impl"
+    },
+    {
+      "id": "A05",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 956.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is consistent with the existing codebase style:\n\nLet me check the exact change I made:\n\nPerfect! My change is minimal and focused:\n\n## Summ"
+    },
+    {
+      "id": "A06",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 1030.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nLet me also verify that I haven't left any debug code or test files that shouldn't be there:\n\nLet me check what test files I created:\n\nLet"
+    },
+    {
+      "id": "A07",
+      "level": "L1",
+      "cov": 0.667,
+      "miss": [
+        "contextmanager"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1148.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is consistent with the existing codebase patterns:\n\nLet me check the exact change I made:\n\nLet me also verify the change is minimal and foc"
+    },
+    {
+      "id": "A08",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1172.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and correct by reviewing it:\n\nLet me check the exact change I made:\n\nPerfect! My change is minimal and focused:\n\n## Summary\n\nI h"
+    },
+    {
+      "id": "A09",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 990.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is consistent with the pattern used in the other migration files:\n\nLet me check the other migration files to see if they also use CONCURREN"
+    },
+    {
+      "id": "A10",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1282.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and correct:\n\nLet me review the change I made:\n\nPerfect! My change is minimal and focused:\n\n## Summary\n\nI have successfully impl"
+    },
+    {
+      "id": "A11",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 3176.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nLet me also verify that I haven't left any debug code or test files that shouldn't be there:\n\nLet me check what test files I created:\n\nLet"
+    },
+    {
+      "id": "A12",
+      "level": "L1",
+      "cov": 0.667,
+      "miss": [
+        "test_auth.py"
+      ],
+      "code_blocks": 3,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 965.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and correct:\n\nLet me review what I changed:\n\n## Summary of Changes Made\n\n### 1. Added freeze_time import (line 1)\n```python\nfrom"
+    },
+    {
+      "id": "A13",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 876.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and focused:\n\nLet me check the exact change I made:\n\nPerfect! My change is minimal and focused:\n\n## Summary\n\nI have successfully"
+    },
+    {
+      "id": "A14",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 1268.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is consistent with the existing codebase patterns:\n\nLet me check the exact change I made:\n\nLet me also verify that the change is minimal an"
+    },
+    {
+      "id": "A15",
+      "level": "L2",
+      "cov": 0.25,
+      "miss": [
+        "内存",
+        "OOM",
+        "泄漏"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 823.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nLet me also verify that I haven't left any debug files around:\n\nLet me check what test files I created:\n\nLet me clean up the test files I "
+    },
+    {
+      "id": "A16",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "deadlock detected",
+        "事务",
+        "加锁顺序"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1690.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is consistent with the pattern used in the existing codebase:\n\nLet me check the actual change I made:\n\nPerfect! My change is minimal and fo"
+    },
+    {
+      "id": "A17",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "N+1 查询",
+        "批量加载"
+      ],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1937.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any syntax errors by verifying the file is valid Python:\n\nLet me also verify the exact change I made by looking at the diff:\n\nPerfect! Le"
+    },
+    {
+      "id": "A18",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "Docker 镜像",
+        "多阶段构建"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 1473.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the existing tests still pass:\n\nExcellent! All tests pass.\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the Docker image size is"
+    },
+    {
+      "id": "A19",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "connection reset by peer",
+        "连接池",
+        "keepalive"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 976.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any syntax errors by running a quick Python syntax check:\n\nExcellent! Let me also verify that the changes I made are consistent with the "
+    },
+    {
+      "id": "A20",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "异步",
+        "渲染"
+      ],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1786.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the changes I made are minimal and focused:\n\nLet me check the exact changes I made:\n\nLet me also verify the test I created passes:\n\nPerfect! Let me summarize"
+    },
+    {
+      "id": "A21",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "重复发券",
+        "多副本",
+        "幂等",
+        "分布式锁"
+      ],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1721.0,
+      "resp_head": "</think>\n\nPerfect! Let me summarize what I've implemented:\n\n## Summary\n\nI have successfully implemented a comprehensive solution to fix the duplicate coupon issuance issue. Here's what was accomplishe"
+    },
+    {
+      "id": "A22",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "密码",
+        "失效"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 1549.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nLet me also verify that I haven't left any debug code or temporary files:\n\nLet me check if there are any test files I created that should "
+    },
+    {
+      "id": "A23",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "搜索",
+        "中文",
+        "编码",
+        "分词"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1022.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nLet me also verify that I haven't left any debug files around:\n\nLet me check if there are any other test files I created:\n\nGood, I've clea"
+    },
+    {
+      "id": "A24",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "缓存",
+        "不稳定"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1822.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nLet me also verify that I haven't left any debug files:\n\nLet me check what files I've created or modified:\n\nPerfect! Let me summarize what"
+    },
+    {
+      "id": "A25",
+      "level": "L2",
+      "cov": 0.667,
+      "miss": [
+        "堆"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 5312.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nLet me also verify that I haven't left any debug files around:\n\nLet me check what test files I created:\n\nLet me clean up the test files I "
+    },
+    {
+      "id": "A26",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "数据库",
+        "连接"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1690.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nLet me also verify that I haven't left any debug files:\n\nLet me check if there are any other test files I created:\n\nLet me check what file"
+    },
+    {
+      "id": "A27",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "消息队列",
+        "重复消费"
+      ],
+      "code_blocks": 3,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1274.0,
+      "resp_head": "</think>\n\n**Root Cause**: Message was re-processed after being acknowledged but before the broker confirmed the commit.\n\n**Solution Implemented**:\n1. **Added retry logic** in the message processing lo"
+    },
+    {
+      "id": "A28",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "灰度",
+        "旧数据",
+        "缓存",
+        "版本"
+      ],
+      "code_blocks": 3,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1800.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nLet me also check if there are any other cache-related files that might need updating:\n\nLet me check the final implementation to make sure"
+    },
+    {
+      "id": "A29",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "单测覆盖率",
+        "测试",
+        "覆盖率"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 355.0,
+      "resp_head": "</think>\n\n- **边界值**：空字符串、超长字符串、特殊字符\n- **异常处理**：文件不存在、权限问题、IO 错误\n- **并发场景**：多线程同时写入\n\n### 🔧 **实现修复**\n\n**文件修改：** `/workspace/filename-sanitizer-core-1.0/filename_sanitizer.py`\n\n1. **添加导入**：`import os`\n2."
+    },
+    {
+      "id": "A30",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "启动",
+        "懒加载",
+        "前置"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 1154.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nLet me also check if there are any other test files I created:\n\nLet me clean up the test files I created:\n\nPerfect! Let me summarize what "
+    },
+    {
+      "id": "A31",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "try/except: pass",
+        "容错",
+        "掩盖 bug",
+        "治理"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 750.0,
+      "resp_head": "</think>\n\nExcellent! Let me also verify that the changes are consistent with the existing codebase style:\n\nPerfect! My changes are consistent with the existing codebase style.\n\n## Summary\n\nI have succ"
+    },
+    {
+      "id": "A32",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "重试",
+        "雪崩",
+        "抖动",
+        "熔断"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 4803.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nLet me also clean up the test files I created:\n\nLet me also clean up the test files I created:\n\nLet me also clean up the test files I crea"
+    },
+    {
+      "id": "A33",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "配置",
+        "环境变量",
+        "配置文件",
+        "数据库",
+        "优先级"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 4803.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nLet me also clean up the test files I created:\n\nLet me also clean up the test files I created:\n\nLet me also clean up the test files I crea"
+    },
+    {
+      "id": "A34",
+      "level": "L3",
+      "cov": 0.667,
+      "miss": [
+        "调用方"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 580.0,
+      "resp_head": "</think>\n\n**核心问题**：2000 行单文件导致：\n1. 修改一处需读半天\n2. 职责边界模糊\n3. 测试难以聚焦\n\n**我的方案**：按职责拆分为 4 个模块，保持接口不变\n\n### 📁 拆分结构\n\n```\nsrc/\n├── __init__.py\n├── core/\n│   ├── __init__.py\n│   ├── base.py # 基础接口\n│   ├── cache.p"
+    },
+    {
+      "id": "A35",
+      "level": "L3",
+      "cov": 0.667,
+      "miss": [
+        "代价"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 2041.0,
+      "resp_head": "</think>\n\n**公共服务**：在 `services/` 下新建模块，各服务 import\n**共享库**：在 `libs/` 下新建包，各服务 import\n\n### ✅ 最终实现（符合所有要求）\n\n**文件改动：**\n1. **新增** `services/common/rules.py` - 核心规则实现\n2. **修改** `services/api/app.py` - 导入并注册"
+    },
+    {
+      "id": "A36",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "数据库",
+        "字段",
+        "5000 万行",
+        "停服",
+        "迁移"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 1438.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the migration script is properly formatted by checking if it follows the expected structure:\n\nLet me also check the test to make sure it's comprehensive:\n\nPe"
+    },
+    {
+      "id": "A37",
+      "level": "L3",
+      "cov": 0.333,
+      "miss": [
+        "返回结构",
+        "过渡方案"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 1631.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any syntax errors by reviewing the key files:\n\nLet me also verify that the changes are minimal and focused:\n\nPerfect! Let me summarize wh"
+    },
+    {
+      "id": "A38",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "日志",
+        "2TB",
+        "采样",
+        "分级"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 1399.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the existing tests still pass:\n\nExcellent! All existing tests pass.\n\n## Summary\n\nI have successfully implemented a comprehensive log retention and cost optim"
+    },
+    {
+      "id": "A39",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "定时任务",
+        "100 万条",
+        "并行化",
+        "分片",
+        "失败重跑"
+      ],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1560.0,
+      "resp_head": "</think>\n\nPerfect! Let me summarize what I've implemented:\n\n## Summary of Changes Made\n\n### 1. **Added Parallel Processing Support** (`/workspace/task-processor-20250421.py`)\n\n**Key additions:**\n- **T"
+    },
+    {
+      "id": "A40",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "单体拆微服务",
+        "调用关系",
+        "事务边界"
+      ],
+      "code_blocks": 3,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 991.0,
+      "resp_head": "</think>\n\n**✅ 已实现**：\n- 所有微服务独立部署，通过 HTTP/gRPC 通信\n- 每个服务有独立的数据存储和生命周期\n- 服务间通过事件驱动实现最终一致性\n\n### 8.2 ✅ 架构演进路径\n\n**阶段一：单体（当前）**\n```\n单体应用\n├── Controllers\n├── Services\n├── Repositories\n└── Database (单一)\n```\n\n"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+# 用 compute-sanitizer 抓「带 tools 请求」崩溃的具体 kernel/越界
+# 用法: & _tools/cas_tools.ps1 [-Port 1671]
+
+param([int]$Port = 1671, [switch]$NoGraph)
+
+$ErrorActionPreference = 'Continue'
+$Root = 'D:\BaiduNetdiskDownload\Local-AI'
+$Exe  = Join-Path $Root '_tools\ninfer-build\apps\ninfer-serve.exe'
+$Model= Join-Path $Root 'train\lines\9b-oxcoder\out\kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer'
+$CAS  = 'C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v13.0\compute-sanitizer\compute-sanitizer.exe'
+$Out  = Join-Path $Root '_tools\cas_tools.out'
+$Err  = Join-Path $Root '_tools\cas_tools.err'
+Remove-Item -LiteralPath $Out,$Err -ErrorAction SilentlyContinue
+
+Get-Process ninfer-serve -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.Id -Force }
+Start-Sleep -Milliseconds 800
+
+# 引擎必须在 sanitizer 之下启动；客户端随后由本脚本发请求
+$engineArgs = @('--tool','memcheck','--launch-timeout','240','--target-processes','all',
+    $Exe, $Model, '--max-context','4096','--greedy','--host-context-mib','2048', '--port', "$Port")
+if ($NoGraph) { $engineArgs += '--no-cuda-graph' }
+$engine = Start-Process -FilePath $CAS -PassThru -WindowStyle Hidden -RedirectStandardOutput $Out `
+    -RedirectStandardError $Err -ArgumentList $engineArgs
+
+$ready = $false
+$sw = [System.Diagnostics.Stopwatch]::StartNew()
+while ($sw.Elapsed.TotalSeconds -lt 150) {
+    Start-Sleep -Milliseconds 500
+    try { $null = Invoke-RestMethod -Uri "http://127.0.0.1:$Port/v1/models" -TimeoutSec 2; $ready = $true; break } catch { }
+}
+"ready=$ready after $([int]$sw.Elapsed.TotalSeconds)s"
+if (-not $ready) { 'engine never became ready under sanitizer'; exit 2 }
+
+# 先打一个不带 tools 的（对照），再打带 tools 的（预期崩）
+$plain = @{ model='kittyrev-oxcoder9b-nsfw-gate-full-GSQ'; messages=@(@{role='user';content='Say hi'}); max_tokens=8 } | ConvertTo-Json -Depth 6 -Compress
+try { $r = Invoke-RestMethod -Uri "http://127.0.0.1:$Port/v1/chat/completions" -Method Post -ContentType 'application/json' -Body $plain -TimeoutSec 120; "plain=OK [$($r.choices[0].message.content)]" } catch { "plain=FAIL $($_.Exception.Message)" }
+
+$withTools = @{
+    model='kittyrev-oxcoder9b-nsfw-gate-full-GSQ'
+    messages=@(@{role='user';content='What is 1+1?'})
+    tools=@(@{ type='function'; function=@{ name='noop'; description='noop'; parameters=@{ type='object'; properties=@{} } } })
+    max_tokens=8
+} | ConvertTo-Json -Depth 8 -Compress
+try { $r2 = Invoke-RestMethod -Uri "http://127.0.0.1:$Port/v1/chat/completions" -Method Post -ContentType 'application/json' -Body $withTools -TimeoutSec 180; "tools=OK [$($r2.choices[0].message.content)]" } catch { "tools=FAIL $($_.Exception.Message)" }
+
+Start-Sleep -Seconds 6
+if (-not $engine.HasExited) { Stop-Process -Id $engine.Id -Force }
+'---- sanitizer 前 25 条错误行 ----'
+$lines = Get-Content -LiteralPath $Out -ErrorAction SilentlyContinue
+$lines | Select-String -Pattern 'Program hit|Invalid|out-of-bounds|ERROR SUMMARY' | Select-Object -First 25 | ForEach-Object { $_.Line.Trim() }
+'---- 引擎 stderr 尾部 ----'
+Get-Content -LiteralPath $Err -Tail 6

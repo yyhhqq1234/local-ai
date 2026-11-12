@@ -1,0 +1,185 @@
+{
+  "adapter": {
+    "tag": "A",
+    "hit": 5,
+    "n": 10,
+    "n_applicable": 6,
+    "hit_rate": 0.8333,
+    "fake": 0,
+    "fake_known": 0,
+    "fake_novel": 0,
+    "three_part_avg": 1.2,
+    "sim": 0.603,
+    "gram_avg": 0.478,
+    "gram_memo_cnt": 4,
+    "detail": [
+      {
+        "i": 1,
+        "inter": [
+          "kitty_rea_binary"
+        ],
+        "fake": [],
+        "hallu_known": [],
+        "hallu_novel": [],
+        "gt_tools": [
+          "kitty_rea_binary"
+        ],
+        "sim": 0.967,
+        "three_part": 3,
+        "gram_overlap": 1.0,
+        "ok": true,
+        "resp_head": "</think>⏎⏎kitty_rea_binary — action 取 inspect_binary_layout。⏎⏎选它的理由：REA 二进制布局（节/段/符号/导入导出）（通道 rea-mcp）。⏎参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次",
+        "gt_head": "kitty_rea_binary — action 取 inspect_binary_layout。⏎⏎选它的理由：REA 二进制布局（节/段/符号/导入导出）（通道 rea-mcp）。⏎参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。⏎判据"
+      },
+      {
+        "i": 2,
+        "inter": [],
+        "fake": [],
+        "hallu_known": [],
+        "hallu_novel": [],
+        "gt_tools": [],
+        "sim": 0.965,
+        "three_part": 1,
+        "gram_overlap": 1.0,
+        "ok": false,
+        "resp_head": "</think>⏎⏎写回环：ALLOC→W→KM_R→KM_W→R→还原→FREE（acescan同判据）⏎⏎落到调用上：看 ALLOC / W / KM_R / KM_W / R / FREE 的回包，⏎符合上面这条才算过；不符合别急着进下一步，先把当前步的原因查清。",
+        "gt_head": "写回环：ALLOC→W→KM_R→KM_W→R→还原→FREE（acescan同判据）⏎⏎落到调用上：看 ALLOC / W / KM_R / KM_W / R / FREE 的回包，⏎符合上面这条才算过；不符合别急着进下一步，先把当前步的原因查清。"
+      },
+      {
+        "i": 3,
+        "inter": [
+          "kitty_ghidra"
+        ],
+        "fake": [],
+        "hallu_known": [],
+        "hallu_novel": [],
+        "gt_tools": [
+          "kitty_ghidra"
+        ],
+        "sim": 0.125,
+        "three_part": 1,
+        "gram_overlap": 0.0,
+        "ok": true,
+        "resp_head": "</think>⏎⏎kitty_ghidra action=analyze target=s.exe out=logs/gh-s⏎kitty_ghidra action=functions out=logs/gh-s filter=CreateFileW⏎判据一：加载模块后依次读自身三节（.text",
+        "gt_head": "1. 找校验函数：kitty_ghidra 搜三连 —— GetModuleFileNameW（拿自身路径）→ CreateFileW（读自己）→⏎   BCryptHashData / CryptCreateHash（摘要）。这条链就是自校验；⏎   走 MapFileAndCheckSum 的是"
+      },
+      {
+        "i": 4,
+        "inter": [
+          "kitty_patch",
+          "kitty_sym"
+        ],
+        "fake": [],
+        "hallu_known": [],
+        "hallu_novel": [],
+        "gt_tools": [
+          "kitty_patch",
+          "kitty_sym"
+        ],
+        "sim": 0.41,
+        "three_part": 1,
+        "gram_overlap": 0.142,
+        "ok": true,
+        "resp_head": "</think>⏎⏎富头缺失 + MSVC 导入 = 被剥或自编译。判据是链接器版本与 CRT 特征。⏎⏎```⏎kitty_patch action=info path=SAMPLE.exe⏎```⏎判读：Data Directory 第 5 项（Security）非 0 说明有签名残留；⏎Ric",
+        "gt_head": "Rich 头被剥 = 刻意抹工具链指纹，这是「对抗归因」的成熟做法。⏎⏎```⏎kitty_patch action=find path=SAMPLE.exe str=Rich limit=2⏎```⏎判读：搜不到 Rich → 被剥。MSVC 特征可从别处确认：⏎⏎```⏎kitty_sym ac"
+      },
+      {
+        "i": 5,
+        "inter": [
+          "kitty_init"
+        ],
+        "fake": [],
+        "hallu_known": [],
+        "hallu_novel": [],
+        "gt_tools": [
+          "kitty_init"
+        ],
+        "sim": 0.955,
+        "three_part": 1,
+        "gram_overlap": 1.0,
+        "ok": true,
+        "resp_head": "</think>⏎⏎看 kitty_init action=status 的 [mode] 行与驱动行：⏎· Use DBVM Debugger=1⏎· mhtglyts imgIsVT 必须 false（即 DrDriver）⏎· 三驱 RUNNING⏎· 起 CE 后再 `dbvm-auto.p",
+        "gt_head": "看 kitty_init action=status 的 [mode] 行与驱动行：⏎· Use DBVM Debugger=1⏎· mhtglyts imgIsVT 必须 false（即 DrDriver）⏎· 三驱 RUNNING⏎· 起 CE 后再 `dbvm-auto.ps1 -Stage "
+      },
+      {
+        "i": 6,
+        "inter": [
+          "kitty_ops",
+          "kitty_trail"
+        ],
+        "fake": [],
+        "hallu_known": [],
+        "hallu_novel": [],
+        "gt_tools": [
+          "kitty_ops",
+          "kitty_trail"
+        ],
+        "sim": 0.45,
+        "three_part": 1,
+        "gram_overlap": 0.28,
+        "ok": true,
+        "resp_head": "</think>⏎⏎kitty_trail — agent探索日志道：append=每步写探索日志（默认，记录 sessionGoal/step/obs/next）；get=按目标读日志（trail-get）；clear=清空⏎⏎通道：reverse⏎action 面：append / get / ",
+        "gt_head": "kitty_trail — agent探索日志道：append=每步写探索记录（工作台链路/轨迹实时跟进）/ get=按目标读记录⏎⏎通道：reverse⏎action 面：get⏎关键参数：action / step / target / shape / stage / text / top / "
+      },
+      {
+        "i": 7,
+        "inter": [],
+        "fake": [],
+        "hallu_known": [],
+        "hallu_novel": [],
+        "gt_tools": [],
+        "sim": 0.717,
+        "three_part": 1,
+        "gram_overlap": 0.353,
+        "ok": false,
+        "resp_head": "</think>⏎⏎八站：收案 → 分诊 → 静态 → 定位 → 对抗 → 还原 → 修改 → 回归。⏎⏎末尾走 gate（三阈值）判定，红则 R3 降级 + 挂起并写 logs/blocker-<ts>.md，最后 teardown。⏎⏎logs/ 里 trail-<ts>.jsonl 记录每步 ",
+        "gt_head": "八站：收案 → 分诊 → 静态 → 定位 → 对抗 → 还原 → 修改 → 回归。⏎⏎末尾走 gate（三阈值）判定，红则 R3 降级 + 挂起并写 logs/blocker-<ts>.md，最后 teardown。⏎⏎日志：logs/loop-<ts>.jsonl，每步一行 {ts,round,s"
+      },
+      {
+        "i": 8,
+        "inter": [],
+        "fake": [],
+        "hallu_known": [],
+        "hallu_novel": [],
+        "gt_tools": [],
+        "sim": 0.969,
+        "three_part": 1,
+        "gram_overlap": 1.0,
+        "ok": false,
+        "resp_head": "</think>⏎⏎这是 KM_W 的回包。⏎⏎拆字段：首段 OK 是状态位，后面按契约 `OK|verified|回读值` 逐段对位。⏎关键约束：内核路由写 + 回读校验⏎⏎据此能做的下一步：状态 OK 就把字段里的地址/数值/数量取出来当下一步输入；出现 ERR 先按错误码修参数，不要在同一处重",
+        "gt_head": "这是 KM_W 的回包。⏎⏎拆字段：首段 OK 是状态位，后面按契约 `OK|verified|回读值` 逐段对位。⏎关键约束：内核路由写 + 回读校验⏎⏎据此能做的下一步：状态 OK 就把字段里的地址/数值/数量取出来当下一步输入；出现 ERR 先按错误码修参数，不要在同一处重试。"
+      },
+      {
+        "i": 9,
+        "inter": [],
+        "fake": [],
+        "hallu_known": [],
+        "hallu_novel": [],
+        "gt_tools": [
+          "kitty_apkscan"
+        ],
+        "sim": 0.313,
+        "three_part": 1,
+        "gram_overlap": 0.0,
+        "ok": false,
+        "resp_head": "</think>⏎⏎APKiD 输出走 **stderr**，不是 stdout。⏎⏎插件已经做了 stdout+stderr 合并，所以走工具调用是能看到的；⏎但如果你自己直接跑底层命令，必须 `2>&1`，否则看起来像\"什么都没找到\"。⏎⏎判据：区分\"真没壳\"和\"没读到输出\"—— 后者往往伴随输",
+        "gt_head": "APKiD 把结果写在 **stderr**。⏎⏎坑：自己直接跑 apkid 不加 `2>&1`，看起来像\"什么都没找到\"。⏎⏎正确做法：走 kitty_apkscan（已合并 stdout+stderr）；手跑时记得重定向。⏎⏎判据：退出码正常但输出为空 = 输出被扔到 stderr 了。"
+      },
+      {
+        "i": 10,
+        "inter": [],
+        "fake": [],
+        "hallu_known": [],
+        "hallu_novel": [],
+        "gt_tools": [],
+        "sim": 0.155,
+        "three_part": 1,
+        "gram_overlap": 0.0,
+        "ok": false,
+        "resp_head": "</think>⏎⏎三条硬线：⏎⏎1. 书面授权（范围、目标、时间、方法、数据留存）——缺任一条即未授权⏎2. 目标明确性：只能测授权范围内的资产，不能「顺藤摸瓜」测到无关系统⏎3. 方法边界：授权通常只允许非破坏性、非社会工程（除非明确约定）⏎⏎灰色区判据：⏎- 能否证明「这是授权范围内」—— 不",
+        "gt_head": "界线写在纸面上，不在口头：授权书要明确①资产范围（域名/IP/应用清单，含子域与第三方托管）②时间窗（起止时间，超出即未授权）③测试类型（是否允许社会工程/DoS/物理入侵）④数据处理规则（拿到的数据怎么存、怎么销毁）。⏎灰区判据：范围外资产（哪怕是同一公司的另一个域名）、测试中发现的第三方系统、时"
+      }
+    ]
+  },
+  "base": null
+}

@@ -1,0 +1,69 @@
+{
+  "a": "train/kitty-rev/data/intent3/re-sft.jsonl",
+  "length": {
+    "count": 120,
+    "min": 201,
+    "max": 408,
+    "mean": 266.9,
+    "median": 262.0,
+    "p90": 314,
+    "histogram": {
+      "<160": 0,
+      "160-199": 0,
+      "200-299": 98,
+      "300-399": 21,
+      "400-499": 1,
+      ">=500": 0
+    }
+  },
+  "self": {
+    "records": 120,
+    "full_hash_duplicates": 0,
+    "full_hash_duplicate_groups": [],
+    "user_hash_duplicates": 0,
+    "user_hash_duplicate_groups": [],
+    "jaccard_threshold": 0.35,
+    "jaccard_max": 0.2806,
+    "jaccard_max_pair": {
+      "a": 63,
+      "b": 74,
+      "ids": [
+        "re-064",
+        "re-075"
+      ]
+    },
+    "pairs_over_threshold": 0,
+    "top_pairs": []
+  },
+  "b": "train/kitty-rev/data/intent2/comply-subset.train.jsonl",
+  "b_length": {
+    "count": 320,
+    "min": 208,
+    "max": 651,
+    "mean": 332.8,
+    "median": 305.5,
+    "p90": 473,
+    "histogram": {
+      "<160": 0,
+      "160-199": 0,
+      "200-299": 148,
+      "300-399": 99,
+      "400-499": 50,
+      ">=500": 23
+    }
+  },
+  "cross": {
+    "a_records": 120,
+    "b_records": 320,
+    "full_hash_intersection": 0,
+    "user_hash_intersection": 0,
+    "jaccard_threshold": 0.35,
+    "jaccard_max": 0.0842,
+    "jaccard_max_pair": {
+      "a_id": "re-018",
+      "b_id": null
+    },
+    "pairs_over_threshold": 0
+  },
+  "verdict": "PASS"
+}

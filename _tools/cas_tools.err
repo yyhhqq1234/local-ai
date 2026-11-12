@@ -1,0 +1,28 @@
+2026-11-08 11:33:58.338  INFO  starting engine
+2026-11-08 11:34:01.256  INFO  loading weights | 5.81 GiB
+2026-11-08 11:34:02.533  INFO  weights ready | 5.81 GiB | 1.3s | 4.55 GiB/s
+2026-11-08 11:34:02.552  INFO  pinning host context | 2.00 GiB
+2026-11-08 11:34:02.769  INFO  host context pinned | 2.00 GiB | 217 ms
+2026-11-08 11:34:02.827  INFO  engine ready | oxcoder9b-merged | total 4.5s | weights 5.81 GiB | CUDA sync spin
+2026-11-08 11:34:02.828  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 318.7 MiB | free 4.55 GiB
+2026-11-08 11:34:02.829  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 11:34:22.526  INFO  warmup complete | 19.7s
+2026-11-08 11:34:22.527  INFO  listening on http://127.0.0.1:1673 | model oxcoder9b-merged | auth disabled
+2026-11-08 11:34:22.559  INFO  req#1 started | openai-chat non-stream | 1 message | max output 8 | thinking template default
+2026-11-08 11:34:27.538  INFO  throughput | 5.0s | prefill 1.0 tok/s (5 tok) | running 1 (prefill 1) | capture-pending 1 | host 45.2% (2.3s)
+2026-11-08 11:34:32.529  INFO  throughput | 5.0s | prefill 1.4 tok/s (7 tok) | running 1 (decode-ready 1) | host 31.7% (1.6s)
+2026-11-08 11:34:37.530  INFO  throughput | 5.0s | decode 0.4 tok/s (2 tok) | running 1 (decode-ready 1) | batch 1.00 | host 108.8% (5.4s)
+2026-11-08 11:34:42.537  INFO  throughput | 5.0s | decode 0.6 tok/s (3 tok) | running 1 (decode-ready 1) | batch 1.00 | host 43.3% (2.2s)
+2026-11-08 11:34:45.469  INFO  req#1 done | openai-chat | output limit | prompt 12 | output 8 | cache 0 (0.0%) | TTFT 7.0s | total 22.9s | prefill 1.7 tok/s | decode 0.4 tok/s
+2026-11-08 11:34:46.783  INFO  req#2 started | openai-chat non-stream | 1 message | max output 8 | thinking template default | tools 1
+2026-11-08 11:34:47.529  INFO  throughput | 5.0s | decode 0.4 tok/s (2 tok) | running 0 | materializing 1 | batch 1.00 | host 29.1% (1.5s)
+2026-11-08 11:34:52.541  INFO  throughput | 5.0s | running 0 | materializing 1 | host 0.0% (0 us)
+2026-11-08 11:34:57.532  INFO  throughput | 5.0s | running 0 | materializing 1 | host 0.0% (0 us)
+2026-11-08 11:35:02.530  INFO  throughput | 5.0s | prefill 70.8 tok/s (354 tok) | running 1 (prefill 1) | capture-pending 1 | host 171.7% (8.6s)
+2026-11-08 11:35:07.542  INFO  throughput | 5.0s | running 1 (prefill 1) | capture-pending 1 | host 0.0% (0 us)
+2026-11-08 11:35:12.533  INFO  throughput | 5.0s | running 1 (prefill 1) | capture-pending 1 | host 0.0% (0 us)
+2026-11-08 11:35:17.538  INFO  throughput | 5.0s | running 1 (prefill 1) | capture-pending 1 | host 0.0% (0 us)
+2026-11-08 11:35:22.528  INFO  throughput | 5.0s | running 1 (prefill 1) | capture-pending 1 | host 0.0% (0 us)
+2026-11-08 11:35:27.528  INFO  throughput | 5.0s | running 1 (prefill 1) | capture-pending 1 | host 0.0% (0 us)
+2026-11-08 11:35:32.539  INFO  throughput | 5.0s | running 1 (prefill 1) | capture-pending 1 | host 0.0% (0 us)
+D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-master\src\core\device.cu:247: CUDA_CHECK(cudaStreamSynchronize(stream_)) failed: cudaErrorUnknown: unknown error

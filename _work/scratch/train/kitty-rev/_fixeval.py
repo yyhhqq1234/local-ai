@@ -1,4 +1,4 @@
-p = r"D:\BaiduNetdiskDownload\Local-AI\train\kitty-rev\eval\eval_kitty_v6.py"
+p = r"D:\BaiduNetdiskDownload\Local-AI\train\lines\27b-kittyrev\kitty-rev\eval\eval_kitty_v6.py"
 s = open(p, encoding="utf-8").read()
 old = '''            user = row["messages"][0]["content"]'''
 new = '''            user = row["messages"][0]["content"]

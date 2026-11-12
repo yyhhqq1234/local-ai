@@ -1,0 +1,2 @@
+2026-11-08 11:23:29.215  INFO  starting engine
+2026-11-08 11:23:29.629  FATAL server failed during startup | Qwen3.5 config: missing component mtp

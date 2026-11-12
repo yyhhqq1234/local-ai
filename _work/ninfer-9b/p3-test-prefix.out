@@ -1,0 +1,2456 @@
+[hostsync] copy_from_host bytes=19496960 offset=0
+[hostsync] copy_from_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=10240 offset=0
+[hostsync] fill bytes=12800
+[hostsync] fill bytes=12800
+[hostsync] fill bytes=2560
+[hostsync] fill bytes=2560
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=10240 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=20480 offset=0
+[hostsync] fill bytes=25088
+[hostsync] fill bytes=25088
+[hostsync] fill bytes=4608
+[hostsync] fill bytes=4608
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=20480 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=30720 offset=0
+[hostsync] fill bytes=37376
+[hostsync] fill bytes=37376
+[hostsync] fill bytes=6656
+[hostsync] fill bytes=6656
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=30720 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=40960 offset=0
+[hostsync] fill bytes=49664
+[hostsync] fill bytes=49664
+[hostsync] fill bytes=8704
+[hostsync] fill bytes=8704
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=40960 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=51200 offset=0
+[hostsync] fill bytes=61952
+[hostsync] fill bytes=61952
+[hostsync] fill bytes=10752
+[hostsync] fill bytes=10752
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=51200 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=61440 offset=0
+[hostsync] fill bytes=74240
+[hostsync] fill bytes=74240
+[hostsync] fill bytes=12800
+[hostsync] fill bytes=12800
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=61440 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=71680 offset=0
+[hostsync] fill bytes=86528
+[hostsync] fill bytes=86528
+[hostsync] fill bytes=14848
+[hostsync] fill bytes=14848
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=71680 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=81920 offset=0
+[hostsync] fill bytes=98816
+[hostsync] fill bytes=98816
+[hostsync] fill bytes=16896
+[hostsync] fill bytes=16896
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=81920 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=92160 offset=0
+[hostsync] fill bytes=111104
+[hostsync] fill bytes=111104
+[hostsync] fill bytes=18944
+[hostsync] fill bytes=18944
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=92160 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=102400 offset=0
+[hostsync] fill bytes=123392
+[hostsync] fill bytes=123392
+[hostsync] fill bytes=20992
+[hostsync] fill bytes=20992
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=102400 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=112640 offset=0
+[hostsync] fill bytes=135680
+[hostsync] fill bytes=135680
+[hostsync] fill bytes=23040
+[hostsync] fill bytes=23040
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=112640 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=122880 offset=0
+[hostsync] fill bytes=147968
+[hostsync] fill bytes=147968
+[hostsync] fill bytes=25088
+[hostsync] fill bytes=25088
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=122880 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=133120 offset=0
+[hostsync] fill bytes=160256
+[hostsync] fill bytes=160256
+[hostsync] fill bytes=27136
+[hostsync] fill bytes=27136
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=133120 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=143360 offset=0
+[hostsync] fill bytes=172544
+[hostsync] fill bytes=172544
+[hostsync] fill bytes=29184
+[hostsync] fill bytes=29184
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=143360 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=153600 offset=0
+[hostsync] fill bytes=184832
+[hostsync] fill bytes=184832
+[hostsync] fill bytes=31232
+[hostsync] fill bytes=31232
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=153600 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=163840 offset=0
+[hostsync] fill bytes=197120
+[hostsync] fill bytes=197120
+[hostsync] fill bytes=33280
+[hostsync] fill bytes=33280
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=163840 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=174080 offset=0
+[hostsync] fill bytes=209408
+[hostsync] fill bytes=209408
+[hostsync] fill bytes=35328
+[hostsync] fill bytes=35328
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=174080 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=184320 offset=0
+[hostsync] fill bytes=221696
+[hostsync] fill bytes=221696
+[hostsync] fill bytes=37376
+[hostsync] fill bytes=37376
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=184320 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=194560 offset=0
+[hostsync] fill bytes=233984
+[hostsync] fill bytes=233984
+[hostsync] fill bytes=39424
+[hostsync] fill bytes=39424
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=194560 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=204800 offset=0
+[hostsync] fill bytes=246272
+[hostsync] fill bytes=246272
+[hostsync] fill bytes=41472
+[hostsync] fill bytes=41472
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=204800 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=215040 offset=0
+[hostsync] fill bytes=258560
+[hostsync] fill bytes=258560
+[hostsync] fill bytes=43520
+[hostsync] fill bytes=43520
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=215040 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=225280 offset=0
+[hostsync] fill bytes=270848
+[hostsync] fill bytes=270848
+[hostsync] fill bytes=45568
+[hostsync] fill bytes=45568
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=225280 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=235520 offset=0
+[hostsync] fill bytes=283136
+[hostsync] fill bytes=283136
+[hostsync] fill bytes=47616
+[hostsync] fill bytes=47616
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=235520 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=245760 offset=0
+[hostsync] fill bytes=295424
+[hostsync] fill bytes=295424
+[hostsync] fill bytes=49664
+[hostsync] fill bytes=49664
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=245760 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=256000 offset=0
+[hostsync] fill bytes=307712
+[hostsync] fill bytes=307712
+[hostsync] fill bytes=51712
+[hostsync] fill bytes=51712
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256000 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=266240 offset=0
+[hostsync] fill bytes=320000
+[hostsync] fill bytes=320000
+[hostsync] fill bytes=53760
+[hostsync] fill bytes=53760
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=266240 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=276480 offset=0
+[hostsync] fill bytes=332288
+[hostsync] fill bytes=332288
+[hostsync] fill bytes=55808
+[hostsync] fill bytes=55808
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=276480 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=286720 offset=0
+[hostsync] fill bytes=344576
+[hostsync] fill bytes=344576
+[hostsync] fill bytes=57856
+[hostsync] fill bytes=57856
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=286720 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=296960 offset=0
+[hostsync] fill bytes=356864
+[hostsync] fill bytes=356864
+[hostsync] fill bytes=59904
+[hostsync] fill bytes=59904
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=296960 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=307200 offset=0
+[hostsync] fill bytes=369152
+[hostsync] fill bytes=369152
+[hostsync] fill bytes=61952
+[hostsync] fill bytes=61952
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=307200 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=317440 offset=0
+[hostsync] fill bytes=381440
+[hostsync] fill bytes=381440
+[hostsync] fill bytes=64000
+[hostsync] fill bytes=64000
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=317440 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=327680 offset=0
+[hostsync] fill bytes=393728
+[hostsync] fill bytes=393728
+[hostsync] fill bytes=66048
+[hostsync] fill bytes=66048
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=327680 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=337920 offset=0
+[hostsync] fill bytes=406016
+[hostsync] fill bytes=406016
+[hostsync] fill bytes=68096
+[hostsync] fill bytes=68096
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=337920 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=348160 offset=0
+[hostsync] fill bytes=418304
+[hostsync] fill bytes=418304
+[hostsync] fill bytes=70144
+[hostsync] fill bytes=70144
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=348160 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=358400 offset=0
+[hostsync] fill bytes=430592
+[hostsync] fill bytes=430592
+[hostsync] fill bytes=72192
+[hostsync] fill bytes=72192
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=358400 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=368640 offset=0
+[hostsync] fill bytes=442880
+[hostsync] fill bytes=442880
+[hostsync] fill bytes=74240
+[hostsync] fill bytes=74240
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=368640 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=378880 offset=0
+[hostsync] fill bytes=455168
+[hostsync] fill bytes=455168
+[hostsync] fill bytes=76288
+[hostsync] fill bytes=76288
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=378880 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=389120 offset=0
+[hostsync] fill bytes=467456
+[hostsync] fill bytes=467456
+[hostsync] fill bytes=78336
+[hostsync] fill bytes=78336
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=389120 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=399360 offset=0
+[hostsync] fill bytes=479744
+[hostsync] fill bytes=479744
+[hostsync] fill bytes=80384
+[hostsync] fill bytes=80384
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=399360 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=409600 offset=0
+[hostsync] fill bytes=492032
+[hostsync] fill bytes=492032
+[hostsync] fill bytes=82432
+[hostsync] fill bytes=82432
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=409600 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=419840 offset=0
+[hostsync] fill bytes=504320
+[hostsync] fill bytes=504320
+[hostsync] fill bytes=84480
+[hostsync] fill bytes=84480
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=419840 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=430080 offset=0
+[hostsync] fill bytes=516608
+[hostsync] fill bytes=516608
+[hostsync] fill bytes=86528
+[hostsync] fill bytes=86528
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=430080 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=440320 offset=0
+[hostsync] fill bytes=528896
+[hostsync] fill bytes=528896
+[hostsync] fill bytes=88576
+[hostsync] fill bytes=88576
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=440320 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=450560 offset=0
+[hostsync] fill bytes=541184
+[hostsync] fill bytes=541184
+[hostsync] fill bytes=90624
+[hostsync] fill bytes=90624
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=450560 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=460800 offset=0
+[hostsync] fill bytes=553472
+[hostsync] fill bytes=553472
+[hostsync] fill bytes=92672
+[hostsync] fill bytes=92672
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=460800 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=471040 offset=0
+[hostsync] fill bytes=565760
+[hostsync] fill bytes=565760
+[hostsync] fill bytes=94720
+[hostsync] fill bytes=94720
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=471040 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=481280 offset=0
+[hostsync] fill bytes=578048
+[hostsync] fill bytes=578048
+[hostsync] fill bytes=96768
+[hostsync] fill bytes=96768
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=481280 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=491520 offset=0
+[hostsync] fill bytes=590336
+[hostsync] fill bytes=590336
+[hostsync] fill bytes=98816
+[hostsync] fill bytes=98816
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=491520 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=501760 offset=0
+[hostsync] fill bytes=602624
+[hostsync] fill bytes=602624
+[hostsync] fill bytes=100864
+[hostsync] fill bytes=100864
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=501760 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=512000 offset=0
+[hostsync] fill bytes=614912
+[hostsync] fill bytes=614912
+[hostsync] fill bytes=102912
+[hostsync] fill bytes=102912
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=512000 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=522240 offset=0
+[hostsync] fill bytes=627200
+[hostsync] fill bytes=627200
+[hostsync] fill bytes=104960
+[hostsync] fill bytes=104960
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=522240 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=532480 offset=0
+[hostsync] fill bytes=639488
+[hostsync] fill bytes=639488
+[hostsync] fill bytes=107008
+[hostsync] fill bytes=107008
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=532480 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=542720 offset=0
+[hostsync] fill bytes=651776
+[hostsync] fill bytes=651776
+[hostsync] fill bytes=109056
+[hostsync] fill bytes=109056
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=542720 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=552960 offset=0
+[hostsync] fill bytes=664064
+[hostsync] fill bytes=664064
+[hostsync] fill bytes=111104
+[hostsync] fill bytes=111104
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=552960 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=563200 offset=0
+[hostsync] fill bytes=676352
+[hostsync] fill bytes=676352
+[hostsync] fill bytes=113152
+[hostsync] fill bytes=113152
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=563200 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=573440 offset=0
+[hostsync] fill bytes=688640
+[hostsync] fill bytes=688640
+[hostsync] fill bytes=115200
+[hostsync] fill bytes=115200
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=573440 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=583680 offset=0
+[hostsync] fill bytes=700928
+[hostsync] fill bytes=700928
+[hostsync] fill bytes=117248
+[hostsync] fill bytes=117248
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=583680 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=593920 offset=0
+[hostsync] fill bytes=713216
+[hostsync] fill bytes=713216
+[hostsync] fill bytes=119296
+[hostsync] fill bytes=119296
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=593920 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=604160 offset=0
+[hostsync] fill bytes=725504
+[hostsync] fill bytes=725504
+[hostsync] fill bytes=121344
+[hostsync] fill bytes=121344
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=604160 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=614400 offset=0
+[hostsync] fill bytes=737792
+[hostsync] fill bytes=737792
+[hostsync] fill bytes=123392
+[hostsync] fill bytes=123392
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=614400 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=624640 offset=0
+[hostsync] fill bytes=750080
+[hostsync] fill bytes=750080
+[hostsync] fill bytes=125440
+[hostsync] fill bytes=125440
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=624640 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=634880 offset=0
+[hostsync] fill bytes=762368
+[hostsync] fill bytes=762368
+[hostsync] fill bytes=127488
+[hostsync] fill bytes=127488
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=634880 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=645120 offset=0
+[hostsync] fill bytes=774656
+[hostsync] fill bytes=774656
+[hostsync] fill bytes=129536
+[hostsync] fill bytes=129536
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=645120 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=655360 offset=0
+[hostsync] fill bytes=786944
+[hostsync] fill bytes=786944
+[hostsync] fill bytes=131584
+[hostsync] fill bytes=131584
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=655360 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=665600 offset=0
+[hostsync] fill bytes=799232
+[hostsync] fill bytes=799232
+[hostsync] fill bytes=133632
+[hostsync] fill bytes=133632
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=665600 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=675840 offset=0
+[hostsync] fill bytes=811520
+[hostsync] fill bytes=811520
+[hostsync] fill bytes=135680
+[hostsync] fill bytes=135680
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=675840 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=686080 offset=0
+[hostsync] fill bytes=823808
+[hostsync] fill bytes=823808
+[hostsync] fill bytes=137728
+[hostsync] fill bytes=137728
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=686080 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=696320 offset=0
+[hostsync] fill bytes=836096
+[hostsync] fill bytes=836096
+[hostsync] fill bytes=139776
+[hostsync] fill bytes=139776
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=696320 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=706560 offset=0
+[hostsync] fill bytes=848384
+[hostsync] fill bytes=848384
+[hostsync] fill bytes=141824
+[hostsync] fill bytes=141824
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=706560 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=716800 offset=0
+[hostsync] fill bytes=860672
+[hostsync] fill bytes=860672
+[hostsync] fill bytes=143872
+[hostsync] fill bytes=143872
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=716800 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=727040 offset=0
+[hostsync] fill bytes=872960
+[hostsync] fill bytes=872960
+[hostsync] fill bytes=145920
+[hostsync] fill bytes=145920
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=727040 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=737280 offset=0
+[hostsync] fill bytes=885248
+[hostsync] fill bytes=885248
+[hostsync] fill bytes=147968
+[hostsync] fill bytes=147968
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=737280 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=747520 offset=0
+[hostsync] fill bytes=897536
+[hostsync] fill bytes=897536
+[hostsync] fill bytes=150016
+[hostsync] fill bytes=150016
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=747520 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=757760 offset=0
+[hostsync] fill bytes=909824
+[hostsync] fill bytes=909824
+[hostsync] fill bytes=152064
+[hostsync] fill bytes=152064
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=757760 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=768000 offset=0
+[hostsync] fill bytes=922112
+[hostsync] fill bytes=922112
+[hostsync] fill bytes=154112
+[hostsync] fill bytes=154112
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=768000 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=778240 offset=0
+[hostsync] fill bytes=934400
+[hostsync] fill bytes=934400
+[hostsync] fill bytes=156160
+[hostsync] fill bytes=156160
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=778240 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=788480 offset=0
+[hostsync] fill bytes=946688
+[hostsync] fill bytes=946688
+[hostsync] fill bytes=158208
+[hostsync] fill bytes=158208
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=788480 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=798720 offset=0
+[hostsync] fill bytes=958976
+[hostsync] fill bytes=958976
+[hostsync] fill bytes=160256
+[hostsync] fill bytes=160256
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=798720 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=808960 offset=0
+[hostsync] fill bytes=971264
+[hostsync] fill bytes=971264
+[hostsync] fill bytes=162304
+[hostsync] fill bytes=162304
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=808960 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=819200 offset=0
+[hostsync] fill bytes=983552
+[hostsync] fill bytes=983552
+[hostsync] fill bytes=164352
+[hostsync] fill bytes=164352
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=819200 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=829440 offset=0
+[hostsync] fill bytes=995840
+[hostsync] fill bytes=995840
+[hostsync] fill bytes=166400
+[hostsync] fill bytes=166400
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=829440 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=839680 offset=0
+[hostsync] fill bytes=1008128
+[hostsync] fill bytes=1008128
+[hostsync] fill bytes=168448
+[hostsync] fill bytes=168448
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=839680 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=849920 offset=0
+[hostsync] fill bytes=1020416
+[hostsync] fill bytes=1020416
+[hostsync] fill bytes=170496
+[hostsync] fill bytes=170496
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=849920 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=860160 offset=0
+[hostsync] fill bytes=1032704
+[hostsync] fill bytes=1032704
+[hostsync] fill bytes=172544
+[hostsync] fill bytes=172544
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=860160 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=870400 offset=0
+[hostsync] fill bytes=1044992
+[hostsync] fill bytes=1044992
+[hostsync] fill bytes=174592
+[hostsync] fill bytes=174592
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=870400 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=880640 offset=0
+[hostsync] fill bytes=1057280
+[hostsync] fill bytes=1057280
+[hostsync] fill bytes=176640
+[hostsync] fill bytes=176640
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=880640 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=890880 offset=0
+[hostsync] fill bytes=1069568
+[hostsync] fill bytes=1069568
+[hostsync] fill bytes=178688
+[hostsync] fill bytes=178688
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=890880 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=901120 offset=0
+[hostsync] fill bytes=1081856
+[hostsync] fill bytes=1081856
+[hostsync] fill bytes=180736
+[hostsync] fill bytes=180736
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=901120 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=911360 offset=0
+[hostsync] fill bytes=1094144
+[hostsync] fill bytes=1094144
+[hostsync] fill bytes=182784
+[hostsync] fill bytes=182784
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=911360 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=921600 offset=0
+[hostsync] fill bytes=1106432
+[hostsync] fill bytes=1106432
+[hostsync] fill bytes=184832
+[hostsync] fill bytes=184832
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=921600 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=931840 offset=0
+[hostsync] fill bytes=1118720
+[hostsync] fill bytes=1118720
+[hostsync] fill bytes=186880
+[hostsync] fill bytes=186880
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=931840 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=942080 offset=0
+[hostsync] fill bytes=1131008
+[hostsync] fill bytes=1131008
+[hostsync] fill bytes=188928
+[hostsync] fill bytes=188928
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=942080 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=952320 offset=0
+[hostsync] fill bytes=1143296
+[hostsync] fill bytes=1143296
+[hostsync] fill bytes=190976
+[hostsync] fill bytes=190976
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=952320 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=962560 offset=0
+[hostsync] fill bytes=1155584
+[hostsync] fill bytes=1155584
+[hostsync] fill bytes=193024
+[hostsync] fill bytes=193024
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=962560 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=972800 offset=0
+[hostsync] fill bytes=1167872
+[hostsync] fill bytes=1167872
+[hostsync] fill bytes=195072
+[hostsync] fill bytes=195072
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=972800 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=983040 offset=0
+[hostsync] fill bytes=1180160
+[hostsync] fill bytes=1180160
+[hostsync] fill bytes=197120
+[hostsync] fill bytes=197120
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=983040 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=993280 offset=0
+[hostsync] fill bytes=1192448
+[hostsync] fill bytes=1192448
+[hostsync] fill bytes=199168
+[hostsync] fill bytes=199168
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=993280 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1003520 offset=0
+[hostsync] fill bytes=1204736
+[hostsync] fill bytes=1204736
+[hostsync] fill bytes=201216
+[hostsync] fill bytes=201216
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1003520 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1013760 offset=0
+[hostsync] fill bytes=1217024
+[hostsync] fill bytes=1217024
+[hostsync] fill bytes=203264
+[hostsync] fill bytes=203264
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1013760 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1024000 offset=0
+[hostsync] fill bytes=1229312
+[hostsync] fill bytes=1229312
+[hostsync] fill bytes=205312
+[hostsync] fill bytes=205312
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1024000 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1034240 offset=0
+[hostsync] fill bytes=1241600
+[hostsync] fill bytes=1241600
+[hostsync] fill bytes=207360
+[hostsync] fill bytes=207360
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1034240 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1044480 offset=0
+[hostsync] fill bytes=1253888
+[hostsync] fill bytes=1253888
+[hostsync] fill bytes=209408
+[hostsync] fill bytes=209408
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1044480 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1054720 offset=0
+[hostsync] fill bytes=1266176
+[hostsync] fill bytes=1266176
+[hostsync] fill bytes=211456
+[hostsync] fill bytes=211456
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1054720 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1064960 offset=0
+[hostsync] fill bytes=1278464
+[hostsync] fill bytes=1278464
+[hostsync] fill bytes=213504
+[hostsync] fill bytes=213504
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1064960 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1075200 offset=0
+[hostsync] fill bytes=1290752
+[hostsync] fill bytes=1290752
+[hostsync] fill bytes=215552
+[hostsync] fill bytes=215552
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1075200 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1085440 offset=0
+[hostsync] fill bytes=1303040
+[hostsync] fill bytes=1303040
+[hostsync] fill bytes=217600
+[hostsync] fill bytes=217600
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1085440 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1095680 offset=0
+[hostsync] fill bytes=1315328
+[hostsync] fill bytes=1315328
+[hostsync] fill bytes=219648
+[hostsync] fill bytes=219648
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1095680 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1105920 offset=0
+[hostsync] fill bytes=1327616
+[hostsync] fill bytes=1327616
+[hostsync] fill bytes=221696
+[hostsync] fill bytes=221696
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1105920 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1116160 offset=0
+[hostsync] fill bytes=1339904
+[hostsync] fill bytes=1339904
+[hostsync] fill bytes=223744
+[hostsync] fill bytes=223744
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1116160 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1126400 offset=0
+[hostsync] fill bytes=1352192
+[hostsync] fill bytes=1352192
+[hostsync] fill bytes=225792
+[hostsync] fill bytes=225792
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1126400 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1136640 offset=0
+[hostsync] fill bytes=1364480
+[hostsync] fill bytes=1364480
+[hostsync] fill bytes=227840
+[hostsync] fill bytes=227840
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1136640 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1146880 offset=0
+[hostsync] fill bytes=1376768
+[hostsync] fill bytes=1376768
+[hostsync] fill bytes=229888
+[hostsync] fill bytes=229888
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1146880 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1157120 offset=0
+[hostsync] fill bytes=1389056
+[hostsync] fill bytes=1389056
+[hostsync] fill bytes=231936
+[hostsync] fill bytes=231936
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1157120 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1167360 offset=0
+[hostsync] fill bytes=1401344
+[hostsync] fill bytes=1401344
+[hostsync] fill bytes=233984
+[hostsync] fill bytes=233984
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1167360 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1177600 offset=0
+[hostsync] fill bytes=1413632
+[hostsync] fill bytes=1413632
+[hostsync] fill bytes=236032
+[hostsync] fill bytes=236032
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1177600 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1187840 offset=0
+[hostsync] fill bytes=1425920
+[hostsync] fill bytes=1425920
+[hostsync] fill bytes=238080
+[hostsync] fill bytes=238080
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1187840 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1198080 offset=0
+[hostsync] fill bytes=1438208
+[hostsync] fill bytes=1438208
+[hostsync] fill bytes=240128
+[hostsync] fill bytes=240128
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1198080 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1208320 offset=0
+[hostsync] fill bytes=1450496
+[hostsync] fill bytes=1450496
+[hostsync] fill bytes=242176
+[hostsync] fill bytes=242176
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1208320 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1218560 offset=0
+[hostsync] fill bytes=1462784
+[hostsync] fill bytes=1462784
+[hostsync] fill bytes=244224
+[hostsync] fill bytes=244224
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1218560 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1228800 offset=0
+[hostsync] fill bytes=1475072
+[hostsync] fill bytes=1475072
+[hostsync] fill bytes=246272
+[hostsync] fill bytes=246272
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1228800 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1239040 offset=0
+[hostsync] fill bytes=1487360
+[hostsync] fill bytes=1487360
+[hostsync] fill bytes=248320
+[hostsync] fill bytes=248320
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1239040 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1249280 offset=0
+[hostsync] fill bytes=1499648
+[hostsync] fill bytes=1499648
+[hostsync] fill bytes=250368
+[hostsync] fill bytes=250368
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1249280 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1259520 offset=0
+[hostsync] fill bytes=1511936
+[hostsync] fill bytes=1511936
+[hostsync] fill bytes=252416
+[hostsync] fill bytes=252416
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1259520 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1269760 offset=0
+[hostsync] fill bytes=1524224
+[hostsync] fill bytes=1524224
+[hostsync] fill bytes=254464
+[hostsync] fill bytes=254464
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1269760 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1280000 offset=0
+[hostsync] fill bytes=1536512
+[hostsync] fill bytes=1536512
+[hostsync] fill bytes=256512
+[hostsync] fill bytes=256512
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1280000 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1290240 offset=0
+[hostsync] fill bytes=1548800
+[hostsync] fill bytes=1548800
+[hostsync] fill bytes=258560
+[hostsync] fill bytes=258560
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1290240 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1300480 offset=0
+[hostsync] fill bytes=1561088
+[hostsync] fill bytes=1561088
+[hostsync] fill bytes=260608
+[hostsync] fill bytes=260608
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1300480 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1310720 offset=0
+[hostsync] fill bytes=1573376
+[hostsync] fill bytes=1573376
+[hostsync] fill bytes=262656
+[hostsync] fill bytes=262656
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1310720 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1320960 offset=0
+[hostsync] fill bytes=1585664
+[hostsync] fill bytes=1585664
+[hostsync] fill bytes=264704
+[hostsync] fill bytes=264704
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1320960 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1955840 offset=0
+[hostsync] fill bytes=2347520
+[hostsync] fill bytes=2347520
+[hostsync] fill bytes=391680
+[hostsync] fill bytes=391680
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1955840 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1966080 offset=0
+[hostsync] fill bytes=2359808
+[hostsync] fill bytes=2359808
+[hostsync] fill bytes=393728
+[hostsync] fill bytes=393728
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1966080 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1976320 offset=0
+[hostsync] fill bytes=2372096
+[hostsync] fill bytes=2372096
+[hostsync] fill bytes=395776
+[hostsync] fill bytes=395776
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1976320 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=2621440 offset=0
+[hostsync] fill bytes=3146240
+[hostsync] fill bytes=3146240
+[hostsync] fill bytes=524800
+[hostsync] fill bytes=524800
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=2621440 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=2631680 offset=0
+[hostsync] fill bytes=3158528
+[hostsync] fill bytes=3158528
+[hostsync] fill bytes=526848
+[hostsync] fill bytes=526848
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=2631680 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=2938880 offset=0
+[hostsync] fill bytes=3527168
+[hostsync] fill bytes=3527168
+[hostsync] fill bytes=588288
+[hostsync] fill bytes=588288
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=2938880 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=2949120 offset=0
+[hostsync] fill bytes=3539456
+[hostsync] fill bytes=3539456
+[hostsync] fill bytes=590336
+[hostsync] fill bytes=590336
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=2949120 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=2959360 offset=0
+[hostsync] fill bytes=3551744
+[hostsync] fill bytes=3551744
+[hostsync] fill bytes=592384
+[hostsync] fill bytes=592384
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=2959360 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=3921920 offset=0
+[hostsync] fill bytes=4706816
+[hostsync] fill bytes=4706816
+[hostsync] fill bytes=784896
+[hostsync] fill bytes=784896
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=3921920 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=3932160 offset=0
+[hostsync] fill bytes=4719104
+[hostsync] fill bytes=4719104
+[hostsync] fill bytes=786944
+[hostsync] fill bytes=786944
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=3932160 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=3942400 offset=0
+[hostsync] fill bytes=4731392
+[hostsync] fill bytes=4731392
+[hostsync] fill bytes=788992
+[hostsync] fill bytes=788992
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=3942400 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=5242880 offset=0
+[hostsync] fill bytes=6291968
+[hostsync] fill bytes=6291968
+[hostsync] fill bytes=1049088
+[hostsync] fill bytes=1049088
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=5242880 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=5253120 offset=0
+[hostsync] fill bytes=6304256
+[hostsync] fill bytes=6304256
+[hostsync] fill bytes=1051136
+[hostsync] fill bytes=1051136
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=5253120 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=10485760 offset=0
+[hostsync] fill bytes=12583424
+[hostsync] fill bytes=12583424
+[hostsync] fill bytes=2097664
+[hostsync] fill bytes=2097664
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=10485760 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=10496000 offset=0
+[hostsync] fill bytes=12595712
+[hostsync] fill bytes=12595712
+[hostsync] fill bytes=2099712
+[hostsync] fill bytes=2099712
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=10496000 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=10240 offset=0
+[hostsync] fill bytes=12800
+[hostsync] fill bytes=12800
+[hostsync] fill bytes=2560
+[hostsync] fill bytes=2560
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=10240 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=10240 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=10240 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=71680 offset=0
+[hostsync] fill bytes=86528
+[hostsync] fill bytes=86528
+[hostsync] fill bytes=14848
+[hostsync] fill bytes=14848
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=71680 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=71680 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=71680 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=81920 offset=0
+[hostsync] fill bytes=98816
+[hostsync] fill bytes=98816
+[hostsync] fill bytes=16896
+[hostsync] fill bytes=16896
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=81920 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=81920 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=81920 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=92160 offset=0
+[hostsync] fill bytes=111104
+[hostsync] fill bytes=111104
+[hostsync] fill bytes=18944
+[hostsync] fill bytes=18944
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=92160 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=92160 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=92160 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=122880 offset=0
+[hostsync] fill bytes=147968
+[hostsync] fill bytes=147968
+[hostsync] fill bytes=25088
+[hostsync] fill bytes=25088
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=122880 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=122880 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=122880 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=133120 offset=0
+[hostsync] fill bytes=160256
+[hostsync] fill bytes=160256
+[hostsync] fill bytes=27136
+[hostsync] fill bytes=27136
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=133120 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=133120 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=133120 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=163840 offset=0
+[hostsync] fill bytes=197120
+[hostsync] fill bytes=197120
+[hostsync] fill bytes=33280
+[hostsync] fill bytes=33280
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=163840 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=163840 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=163840 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=327680 offset=0
+[hostsync] fill bytes=393728
+[hostsync] fill bytes=393728
+[hostsync] fill bytes=66048
+[hostsync] fill bytes=66048
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=327680 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=327680 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=327680 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=645120 offset=0
+[hostsync] fill bytes=774656
+[hostsync] fill bytes=774656
+[hostsync] fill bytes=129536
+[hostsync] fill bytes=129536
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=645120 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=645120 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=645120 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=655360 offset=0
+[hostsync] fill bytes=786944
+[hostsync] fill bytes=786944
+[hostsync] fill bytes=131584
+[hostsync] fill bytes=131584
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=655360 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=655360 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=655360 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=665600 offset=0
+[hostsync] fill bytes=799232
+[hostsync] fill bytes=799232
+[hostsync] fill bytes=133632
+[hostsync] fill bytes=133632
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=665600 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=665600 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=665600 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=983040 offset=0
+[hostsync] fill bytes=1180160
+[hostsync] fill bytes=1180160
+[hostsync] fill bytes=197120
+[hostsync] fill bytes=197120
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=983040 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=983040 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=983040 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1064960 offset=0
+[hostsync] fill bytes=1278464
+[hostsync] fill bytes=1278464
+[hostsync] fill bytes=213504
+[hostsync] fill bytes=213504
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1064960 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=1064960 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1064960 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1075200 offset=0
+[hostsync] fill bytes=1290752
+[hostsync] fill bytes=1290752
+[hostsync] fill bytes=215552
+[hostsync] fill bytes=215552
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1075200 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=1075200 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1075200 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1300480 offset=0
+[hostsync] fill bytes=1561088
+[hostsync] fill bytes=1561088
+[hostsync] fill bytes=260608
+[hostsync] fill bytes=260608
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1300480 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=1300480 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1300480 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1310720 offset=0
+[hostsync] fill bytes=1573376
+[hostsync] fill bytes=1573376
+[hostsync] fill bytes=262656
+[hostsync] fill bytes=262656
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1310720 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=1310720 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1310720 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1320960 offset=0
+[hostsync] fill bytes=1585664
+[hostsync] fill bytes=1585664
+[hostsync] fill bytes=264704
+[hostsync] fill bytes=264704
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1320960 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=1320960 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1320960 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1966080 offset=0
+[hostsync] fill bytes=2359808
+[hostsync] fill bytes=2359808
+[hostsync] fill bytes=393728
+[hostsync] fill bytes=393728
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1966080 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=1966080 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1966080 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=1976320 offset=0
+[hostsync] fill bytes=2372096
+[hostsync] fill bytes=2372096
+[hostsync] fill bytes=395776
+[hostsync] fill bytes=395776
+[hostsync] fill bytes=513
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1976320 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_from_host bytes=1976320 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=1976320 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=19496960 offset=0
+[hostsync] copy_to_host bytes=24084480 offset=0
+[hostsync] copy_from_host bytes=11141120 offset=0
+[hostsync] copy_from_host bytes=13762560 offset=0
+[hostsync] copy_from_host bytes=8192 offset=0
+[hostsync] fill bytes=8704
+[hostsync] fill bytes=2560
+[hostsync] fill bytes=8704
+[hostsync] fill bytes=2560
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=8192 offset=0
+[hostsync] copy_to_host bytes=11141120 offset=0
+[hostsync] copy_to_host bytes=13762560 offset=0
+[hostsync] copy_from_host bytes=122880 offset=0
+[hostsync] fill bytes=123392
+[hostsync] fill bytes=31232
+[hostsync] fill bytes=123392
+[hostsync] fill bytes=31232
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=256 offset=0
+[hostsync] copy_to_host bytes=122880 offset=0
+[hostsync] copy_to_host bytes=11141120 offset=0
+[hostsync] copy_to_host bytes=13762560 offset=0
+[hostsync] copy_from_host bytes=131072 offset=0
+[hostsync] fill bytes=131584
+[hostsync] fill bytes=33280
+[hostsync] fill bytes=131584
+[hostsync] fill bytes=33280

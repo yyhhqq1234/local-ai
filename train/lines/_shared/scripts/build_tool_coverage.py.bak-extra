@@ -1,0 +1,522 @@
+"""为覆盖不足的工具补训练样本 —— 修「工具覆盖空洞」
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+为什么要补（2026-10-28 实测）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+train-kitty-core.jsonl 5602 条，64 个工具里：
+  · 6 个完全 0 覆盖：reverse_add_target / reverse_add_intent / reverse_add_asset
+                     reverse_add_obs / reverse_add_patch / reverse_submit
+  · 28 个覆盖 <50（kitty_loop_status 15、kitty_rea_callpath 18、kitty_bepinex 18 …）
+  · kitty_ce 独占 1317 条（23.5%）→ 模型有强烈「什么都先想 kitty_ce」的偏置
+
+泛化测试 G06 三档全错（应 kitty_pchain，全给 kitty_ce）就是这个偏置的表现。
+
+本脚本：对低覆盖工具，用「意图库 + description」生成三段式问答，补进训练集。
+user 侧刻意覆盖多种自然表述（不含工具名），让模型学「语义 → 工具」。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+用法
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  python build_tool_coverage.py --target 30          # 覆盖 <30 的工具
+  python build_tool_coverage.py --target 50 --per 6  # 覆盖 <50，每个补 6 条
+  python build_tool_coverage.py --out train/data/kitty-reverse/train-kitty-coverage.jsonl
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+import argparse
+import io
+import json
+import os
+import re
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")
+
+TRAIN_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CORE = os.path.join(TRAIN_ROOT, "data", "kitty-reverse", "train-kitty-core.jsonl")
+CONTRACT = os.path.join(TRAIN_ROOT, "data", "kitty-reverse", "kitty-contracts", "tools.json")
+DEFAULT_OUT = os.path.join(TRAIN_ROOT, "data", "kitty-reverse", "train-kitty-coverage.jsonl")
+
+SYSTEM = (
+    "你是 kitty 逆向工作台的执行层，直接调用 kitty_* 工具完成逆向任务。"
+    "工具的 action 取值见各自 schema 的 enum；不要先查工具清单表，按任务直接选工具并给全参数。"
+    "多步任务要看完上一步回包再决定下一步。"
+)
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 手写意图库：user 侧自然表述，**不含工具名**，覆盖多种说法
+# 键 = 工具名；值 = 意图列表（每条会生成一条样本）
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INTENTS = {
+    # ── 6 个 0 覆盖：G3 记录写入系列 ──
+    "reverse_add_target": [
+        "这轮要开个新目标，之前的上下文全清掉，从头开始记",
+        "新接一个样本，想在知识库里单独建一条目标记录",
+        "换了台机器要重新分析，想先立一个干净的目标节点",
+        "这次评估的对象和上次不是同一个，怎么起一条新的",
+    ],
+    "reverse_add_intent": [
+        "想把这次的意图记下来：要做什么、在哪个范围、用什么方法",
+        "同一个目标下面又要开一条新的分析意图",
+        "这次任务的目标、范围、方法三样都想归档",
+        "如何给当前目标追加一条待办性质的意图",
+    ],
+    "reverse_add_obs": [
+        "分析出结论了，想把这条发现连同复现步骤一起记下来",
+        "观察到一组值得留档的事实，怎么归档",
+        "这条漏洞要记成正式发现，必须带复现步骤",
+        "把刚才那次异常现象写进记录，后面要能复现",
+    ],
+    "reverse_add_patch": [
+        "改好的那几个字节想存进记录，连同原始字节和回滚信息",
+        "这个补丁要归档，得记清楚改在哪里、改前改后是什么",
+        "把刚才那次二进制修补正式登记下来",
+        "想把补丁的地址、字节、还原方式一起存进去",
+    ],
+    "reverse_add_asset": [
+        "这次分析产出的文件想挂到记录里，作为资产",
+        "样本、转储、日志这些产物怎么登记成资产",
+        "把生成的镜像文件归档，挂到已有的目标下",
+        "产出的 artifact 要和对应的记录关联起来",
+    ],
+    "reverse_submit": [
+        "子任务跑完了，想把结果统一提交到父级意图下面",
+        "作为一个下游节点，怎么把发现和补丁一起上报",
+        "子会话的产出要合并进父记录，走哪个入口",
+        "把这一批结果一次性交到上级意图里",
+    ],
+    # ── 覆盖 15-25 的重点缺口 ──
+    "kitty_loop_status": [
+        "夜跑现在跑到第几站了，只看状态不起跑",
+        "想确认夜跑进程还在不在、卡在哪一步",
+        "只看夜间自动跑批的当前进度，不要动它",
+        "夜跑的历史日志和当前状态在哪看",
+    ],
+    "kitty_rea_recover_js": [
+        "从打包后的前端产物里把可读源码恢复出来",
+        "有个 minified 的 bundle，想把原始模块结构还原",
+        "前端代码被压过，想要能读的版本",
+        "把混淆过的 JS 包恢复成接近源码的形态",
+    ],
+    "kitty_rea_callpath": [
+        "想知道从入口函数到目标函数之间是怎么调过去的",
+        "把两个函数之间的调用链完整追出来",
+        "分析某个功能调用路径上的中间环节",
+        "从 A 到 B 到底经过了哪些函数",
+    ],
+    "kitty_bepinex": [
+        "这个 Unity 游戏装了 mod 加载器没有",
+        "想确认 BepInEx 或 MelonLoader 是不是已经就位",
+        "Unity 游戏想打 mod，先看看加载器状态",
+        "检查游戏目录里的 mod 框架装没装",
+    ],
+    "kitty_rea_javascript": [
+        "这是个 Electron 应用，想把里面的模块和 IPC 关系理出来",
+        "分析 asar 包里的前端结构、路由和原生扩展",
+        "JS 应用被打包了，想看它有哪些模块和入口",
+        "Electron 程序的源码结构怎么静态还原",
+    ],
+    "kitty_rea_trace": [
+        "按一个具体的字面量，把它在整个引用面里的链路追出来",
+        "想从一个字符串出发，追到它被谁用、又调了什么",
+        "某个特征值在代码里的完整传播路径怎么查",
+        "给定一个常量，追出所有涉及它的位置和调用",
+    ],
+    "kitty_uexplorer": [
+        "Unity 游戏跑起来后，想在运行时看对象和类结构",
+        "想在游戏进程里实时浏览 GameObject 和组件",
+        "Unity 运行时想动态改字段值，用什么",
+        "游戏跑着的时候查看内存里的 Unity 对象树",
+    ],
+    "kitty_rea_method": [
+        "想单独反编译 APK 里的某一个方法",
+        "只关心某个类的某个方法，不想整包反编译",
+        "APK 里指定方法看它的 smali 或 Java 代码",
+        "定位到具体方法后，只反编译它一个",
+    ],
+    "kitty_idamcp": [
+        "想通过 IDA 的 MCP 接口批量拿函数信息",
+        "IDA 那边有工具面，想直接透传调用",
+        "已经有 IDA 在跑，想程序化地查符号和反编译",
+        "用 IDA 的官方 MCP 网关做批量分析",
+    ],
+    "kitty_rea_compare": [
+        "两个版本的同一个函数，想把差异对比出来",
+        "软件更新了，想知道某个函数改了什么",
+        "跨版本做函数级差分，方便迁移符号",
+        "新版旧版同名函数逐条比差异",
+    ],
+    "kitty_assetrip": [
+        "Unity 游戏想把美术资源批量导出成通用格式",
+        "把 assets 包里的贴图、模型、音频都扒出来",
+        "想拿到 Unity 游戏的原始资源文件",
+        "资源包里的素材怎么导出成能直接用的格式",
+    ],
+    "kitty_selftest": [
+        "想确认整套工具链本身是好的，跑一遍自检",
+        "回归验证一下所有通道是否正常",
+        "环境刚配好，想把各条链路都验一遍",
+        "怀疑某个工具坏了，跑全套自检定位",
+    ],
+    "kitty_rea_android": [
+        "先看 APK 的清单、包名、SDK 版本和权限声明",
+        "安卓包的基本信息想一次性拿到",
+        "分析 APK 之前先做清单级检查",
+        "想知道这个 app 申请了哪些权限、targetSdk 多少",
+    ],
+    "kitty_ue4ss": [
+        "UE 游戏想挂运行时 mod 框架",
+        "虚幻引擎游戏想在运行时注入脚本扩展",
+        "UE 项目想动态改游戏逻辑，装什么",
+        "给 UE 游戏加运行时 mod 支持",
+    ],
+    "kitty_lua": [
+        "游戏脚本是 Lua 编的字节码，想反编译回源码",
+        "有个 luac 编译过的文件，想还原可读代码",
+        "Lua 脚本被编译成字节码了，怎么反编译",
+        "把 Lua 的字节码文件转回源码形态",
+    ],
+    "kitty_gdre": [
+        "Godot 游戏的 pck 包想解出来",
+        "Godot 项目资源被打包了，想还原工程",
+        "把 Godot 游戏的脚本和资源提取出来",
+        "Godot 打包产物怎么反解成项目文件",
+    ],
+    "kitty_rea_function": [
+        "想看某个函数的伪代码、汇编和它被谁引用",
+        "针对单个函数做完整档案：反编译 + 交叉引用",
+        "深挖一个函数，要把调用者和被调用者都列出来",
+        "这个函数具体干什么，拿它的伪码和引用证据",
+    ],
+    "kitty_uedump": [
+        "UE 游戏想把 SDK 结构导出来",
+        "把虚幻引擎的类、属性、函数签名 dump 成头文件",
+        "需要 UE 的完整 SDK 才能继续写 mod",
+        "导出虚幻引擎项目的反射信息",
+    ],
+    "kitty_fmodel": [
+        "UE 的 pak 包想浏览和导出里面的资源",
+        "虚幻引擎的资源包怎么打开看内容",
+        "想把 UE 游戏里的模型贴图导出来",
+        "pak 文件里的资产想预览和提取",
+    ],
+    "kitty_il2cppdumper": [
+        "Unity 的 IL2CPP 版本想把 C# 结构还原出来",
+        "游戏用了 il2cpp，想把类和方法签名 dump 出来",
+        "IL2CPP 编译的 Unity 游戏怎么拿到原始类型信息",
+        "把 libil2cpp 里的元数据还原成可读结构",
+    ],
+    "kitty_trail": [
+        "每一步的分析过程想留个记录，方便后面回看",
+        "想把这次探索的链路写进轨迹日志",
+        "按目标读回之前的分析记录",
+        "扫尾的时候要能查到自己走过哪些步",
+    ],
+    "kitty_unpack": [
+        "脱壳产物散落各处，想统一收口到目录里",
+        "把 dump 出来的 dex 清点一遍看有几个",
+        "壳脱完了，产物需要整理归档",
+        "把脱壳输出按规范归拢，方便后续分析",
+    ],
+    "kitty_engines": [
+        "不确定这个游戏是 Unity 还是 UE，先让路由判断",
+        "拿到一个游戏目录，想自动识别引擎类型",
+        "引擎类型不明，想按目录结构自动分派",
+        "游戏用的哪个引擎，交给路由去判",
+    ],
+    "kitty_cpp2il": [
+        "IL2CPP 的 dump 想做得更完整，用另一套工具",
+        "想拿到 IL2CPP 的完整程序集和伪代码",
+        "Unity il2cpp 需要更彻底的结构还原",
+        "把 il2cpp 的元数据和代码一起还原出来",
+    ],
+    "kitty_variants": [
+        "想看看有哪些驱动和调试器的变体可以切换",
+        "当前用的这套容易被检测，想换一个变体",
+        "列出所有可用的宿主变体和它们的检测面",
+        "驱动被拦了，想切到另一个变体试试",
+    ],
+    "kitty_drvio": [
+        "辅助驱动那边有什么设备接口可以读",
+        "想只读地探一下驱动的 IOCTL 面",
+        "看看软件面上有哪些驱动相关的东西",
+        "不动服务的前提下，清点驱动暴露的接口",
+    ],
+    "kitty_proto": [
+        "抓到的二进制包是 protobuf 的，想解出字段",
+        "有个序列化过的请求体，想知道里面是什么结构",
+        "gRPC 的报文想按 proto 定义拆开看",
+        "不确定编码格式，先试 protobuf 解码",
+    ],
+    "kitty_apktool": [
+        "APK 想解开成 smali 再改，然后重新打包",
+        "想把改过的 smali 重新编回 APK",
+        "需要修改安卓应用的资源或清单文件",
+        "重打包 APK，走反编译到回编译的流程",
+    ],
+    # ── 覆盖 50-80 但泛化仍弱的 ──
+    "kitty_pchain": [
+        "不知道跳数，只有一个动态地址要一路推到模块基址那条链上",
+        "指针链层级不确定，想从终点一个地址反推到静态基址",
+        "跨模块存指针，想按模块过滤后一路追上去",
+        "要自动完成「每跳反查 + 回验」，不想手写循环",
+        "多级指针不知道有几级，让工具自己探到底",
+    ],
+    "kitty_dualview": [
+        "三处不同来源读同一个地址的值对不上，想同时取数比对",
+        "怀疑某个地址有视图分叉，想做一致性校验",
+        "用户态读、内核读、物理读三路结果不一样，怎么判",
+        "想知道目标地址有没有被做手脚，三视图一起看",
+    ],
+    # ══ 专项补强 2026-10-28（36 条泛化集实测的四档共同错）══════════════
+    # G16/G17 互为混淆：模型知道「要反编译」，但分不清免费/开源 vs 商业/批处理
+    "kitty_ghidra": [
+        "手上没有任何商业反编译授权，想免费把一个函数反编译出来看看",
+        "想用开源工具做无界面批量分析，不需要图形界面",
+        "机器上只装了 JDK，没买商业套件，还能不能做反编译",
+        "想把整个二进制丢给开源反编译器，用脚本批量跑",
+        "预算为零但需要看伪代码，该用哪个",
+        "想在自己写的 Python 脚本里调用反编译器，要开源的",
+        "团队不允许采购商业工具，反编译需求怎么满足",
+        "想复现别人公开的分析过程，只用免费工具怎么做",
+        "需要一个能跑在无头服务器上的开源反编译后端",
+        "开源反编译器怎么做多函数批量导出",
+    ],
+    "kitty_ida": [
+        "有正版反汇编器授权，想把整个二进制的函数列表批量导成 JSON",
+        "想用命令行无界面模式（idat64）跑完整分析",
+        "需要写脚本批量处理几百个样本的反汇编结果",
+        "拿到 Pro 版了，想程序化提取所有函数的伪代码",
+        "想一次性分析整个目录的样本，导出结构化结果",
+        "团队买的是商业套件，怎么把它集成进自动化流水线",
+        "想用成熟商业工具的输出做后续二进制 diff",
+        "需要一个能稳定跑批的商业反汇编后端",
+        "商业反汇编器的免费版和 Pro 版能力差在哪",
+        "已授权环境里怎么让反汇编器自动跑脚本",
+    ],
+    "kitty_idamcp": [
+        "想让 AI 助手直接调反汇编器的能力，不用人肉点菜单",
+        "已经有反汇编器在跑，想通过标准协议把它的工具面暴露出去",
+        "想程序化地问符号和反编译结果，走 MCP 接口",
+        "想让 agent 自己决定调哪个分析能力，需要一层网关",
+        "手上有反汇编器的 MCP 服务，想把上游工具原样透传",
+    ],
+    # G35：档1 编造、档2/3 选错 —— 需要更多「换一套等价实现」的表述
+    "kitty_variants": [
+        "现在这套运行时容易被对面识别出来，想在几个等价方案之间换一个",
+        "想看看有哪些驱动和调试器的变体可以切换",
+        "当前宿主被拦了，想换另一个试试",
+        "列出所有可用变体，以及每个会被怎么检测到",
+        "想在不重启整个环境的前提下切到另一套运行时",
+        "有两套等价实现，想知道哪套更不容易被发现",
+        "变体管理在哪里配，怎么确认切换生效",
+        "换变体之后需要重新验证哪些东西",
+        "同一套能力有多个宿主可选，怎么按场景挑",
+        "现在用的这套被标记了，有没有别的等价路径",
+    ],
+    # reverse_* 系列：36 条里 G27 仍编造（应 reverse_submit），覆盖是最弱环
+    "reverse_add_target": [
+        "这轮要开个新目标，之前的上下文全清掉，从头开始记",
+        "新接一个样本，想在知识库里单独建一条目标记录",
+        "换了台机器要重新分析，想先立一个干净的目标节点",
+        "这次评估的对象和上次不是同一个，怎么起一条新的",
+        "想给一个全新的分析任务开个独立起点",
+        "多目标并行时，怎么保证各条记录不串",
+        "上次的目标已经归档了，这次要开新的",
+        "新建目标时会不会把已有记录清掉",
+    ],
+    "reverse_add_intent": [
+        "想把这次的意图记下来：要做什么、在哪个范围、用什么方法",
+        "同一个目标下面又要开一条新的分析意图",
+        "这次任务的目标、范围、方法三样都想归档",
+        "如何给当前目标追加一条待办性质的意图",
+        "同一目标下多条意图会不会互相覆盖",
+        "意图里的范围和方法怎么填才不会被去重合并",
+        "想标记一条意图是「待办」还是「已完成」",
+        "两条意图目标和范围都一样，会被合并吗",
+    ],
+    "reverse_add_obs": [
+        "分析出结论了，想把这条发现连同复现步骤一起记下来",
+        "观察到一组值得留档的事实，怎么归档",
+        "这条漏洞要记成正式发现，必须带复现步骤",
+        "把刚才那次异常现象写进记录，后面要能复现",
+        "记一条发现时，复现步骤最少要几步",
+        "发现和普通观察在记录上有什么区别",
+        "想把一批观察一次性归档，怎么组织",
+        "同一现象反复出现，要不要记多条",
+    ],
+    "reverse_add_patch": [
+        "改好的那几个字节想存进记录，连同原始字节和回滚信息",
+        "这个补丁要归档，得记清楚改在哪里、改前改后是什么",
+        "把刚才那次二进制修补正式登记下来",
+        "想把补丁的地址、字节、还原方式一起存进去",
+        "补丁记录里为什么要留原始字节",
+        "多个补丁作用在同一处，怎么记",
+        "补丁要能回滚，记录里该包含什么",
+        "临时试验性的改动要不要也登记",
+    ],
+    "reverse_add_asset": [
+        "这次分析产出的文件想挂到记录里，作为资产",
+        "样本、转储、日志这些产物怎么登记成资产",
+        "把生成的镜像文件归档，挂到已有的目标下",
+        "产出的 artifact 要和对应的记录关联起来",
+        "资产能不能挂在某条具体发现下面",
+        "同一份文件被多次引用，记一次还是多次",
+        "资产引用要写路径还是哈希",
+        "产出的中间文件算不算资产",
+    ],
+    "reverse_submit": [
+        "子任务跑完了，想把结果统一提交到父级意图下面",
+        "作为一个下游节点，怎么把发现和补丁一起上报",
+        "子会话的产出要合并进父记录，走哪个入口",
+        "把这一批结果一次性交到上级意图里",
+        "子节点能不能直接写父级的记录",
+        "提交时父记录还不存在会怎样",
+        "一批发现和补丁能不能一个动作全交上去",
+        "子任务提交后父级会看到什么",
+        "和逐条写记录相比，统一提交有什么不同",
+        "下游跑完必须在父级登记一次吗",
+    ],
+    "kitty_acescan": [
+        "想一次性判断反作弊有没有拦我，把门禁和写回环都跑一遍",
+        "对抗日想做个完整的可写性验证，一步到位",
+        "怀疑写内存被拦，想跑全套检测拿结论",
+        "想拿到「能不能写、写了会不会被发现」的完整判定",
+    ],
+}
+
+# ── 回答模板（三段式，与训练集一致；按 channel 区分参数要点）──────────
+TPL_A = (
+    "{tool} — action 取 {action}。\n"
+    "\n"
+    "选它的理由：{desc}（通道 {ch}）。\n"
+    "参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，"
+    "动手类一次给全参数再发。\n"
+    "判据：回包先看首段 OK/ERR，再取关键字段决定下一步；"
+    "ERR 不要原地重试，按错误码修参数。"
+)
+
+# G3 记录写入通道：参数要点是「父记录 + 行数据 + 必填字段」，不是 pid/模块
+TPL_G3 = (
+    "{tool} — action 取 {action}。\n"
+    "\n"
+    "选它的理由：{desc}（通道 {ch}）。\n"
+    "参数要点：parentId 只能引既有记录（不存在的父会拒写）；行数据一次给全，"
+    "缺字段按占位符补齐再发，别分多次补。\n"
+    "判据：回包给出新记录 id 即写入成功；出现 ERR 先看是父记录不存在还是必填项缺失，"
+    "改完再发一次，不要原地重试。"
+)
+
+# 引擎/外部分析工具：参数要点是「目标路径 + 输出目录」
+TPL_TOOL = (
+    "{tool} — action 取 {action}。\n"
+    "\n"
+    "选它的理由：{desc}（通道 {ch}）。\n"
+    "参数要点：目标路径（游戏目录 / 包文件 / APK）必须显式给全，输出目录一次定好；"
+    "只读类先 status 探一次，确认外部工具在位再动手。\n"
+    "判据：回包给出产物路径或清单即成功；报「工具未安装」先补依赖，"
+    "报「格式不支持」再换等价路径。"
+)
+
+
+def pick_tpl(channel):
+    ch = channel or ""
+    if ch.startswith("reverse"):
+        return TPL_G3
+    if ch in ("rea-mcp", "ue", "unity", "godot", "engine", "apk", "mobile", "drce"):
+        return TPL_TOOL
+    # 引擎类的 channel 名不统一，用描述兜底
+    return TPL_A
+
+
+def render(tool, action, desc, ch):
+    tpl = pick_tpl(ch)
+    # 引擎类工具（名字里带 ue/unity/godot/rea/apk 且 channel 不是 A）用 TPL_TOOL
+    if tpl is TPL_A and re.search(r"_(ue|unity|godot|rea|apk|il2cpp|cpp2il|fmodel|lua|assetrip|bepinex)", tool):
+        tpl = TPL_TOOL
+    return tpl.format(tool=tool, action=action, desc=desc, ch=ch)
+
+
+
+def count_coverage(core_path):
+    """统计每个工具在现有训练集里的 assistant 覆盖数"""
+    tools = {t["name"] for t in json.load(open(CONTRACT, encoding="utf-8"))}
+    cnt = {}
+    with io.open(core_path, "r", encoding="utf-8") as f:
+        for line in f:
+            if not line.strip():
+                continue
+            o = json.loads(line)
+            msgs = o.get("messages") or []
+            a = next((m["content"] for m in msgs if m.get("role") == "assistant"), "")
+            for t in set(re.findall(r"kitty_[a-z0-9_]+", a)):
+                if t in tools:
+                    cnt[t] = cnt.get(t, 0) + 1
+    return tools, cnt
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--target", type=int, default=30, help="覆盖低于此值的工具才补")
+    ap.add_argument("--per", type=int, default=0,
+                    help="每个工具最多生成几条（0=用满意图库）")
+    ap.add_argument("--force", default="",
+                    help="强制补这些工具（逗号分隔），不受 --target 阈值限制。"
+                         "例：--force kitty_pchain,kitty_dualview,kitty_acescan")
+    ap.add_argument("--out", default=DEFAULT_OUT)
+    args = ap.parse_args()
+
+    tools, cnt = count_coverage(CORE)
+    tool_meta = {t["name"]: t for t in json.load(open(CONTRACT, encoding="utf-8"))}
+
+    need = [t for t in tools if cnt.get(t, 0) < args.target]
+    if args.force:
+        for t in args.force.split(","):
+            t = t.strip()
+            if t and t in tools and t not in need:
+                need.append(t)
+    need.sort(key=lambda t: cnt.get(t, 0))
+    print("=" * 74)
+    print("工具覆盖补强 —— 阈值 < %d，需补 %d 个工具" % (args.target, len(need)))
+    print("=" * 74)
+
+    os.makedirs(os.path.dirname(args.out), exist_ok=True)
+    n_out = 0
+    missing_intents = []
+    with io.open(args.out, "w", encoding="utf-8") as fo:
+        for t in need:
+            intents = INTENTS.get(t)
+            if not intents:
+                missing_intents.append(t)
+                continue
+            if args.per:
+                intents = intents[:args.per]
+            meta = tool_meta[t]
+            actions = meta.get("actions") or ["status"]
+            for i, u in enumerate(intents):
+                act = actions[i % len(actions)]
+                rec = {
+                    "messages": [
+                        {"role": "system", "content": SYSTEM},
+                        {"role": "user", "content": u},
+                        {"role": "assistant", "content": render(
+                            t, act, meta.get("description", ""), meta.get("channel", "?"),
+                        )},
+                    ],
+                    "_coverage": {"tool": t, "was": cnt.get(t, 0)},
+                }
+                fo.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                n_out += 1
+            print("  %-24s 现有 %3d → 补 %d 条" % (t, cnt.get(t, 0), len(intents)))
+
+    print()
+    print("生成 %d 条 → %s" % (n_out, args.out))
+    if missing_intents:
+        print()
+        print("⚠ 以下工具在 INTENTS 里没有手写意图（需补）：")
+        for t in missing_intents:
+            print("  %-24s 现有 %d" % (t, cnt.get(t, 0)))
+    print("=" * 74)
+
+
+if __name__ == "__main__":
+    main()

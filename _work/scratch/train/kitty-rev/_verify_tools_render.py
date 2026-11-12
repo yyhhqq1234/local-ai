@@ -3,7 +3,7 @@ try:
     import jinja2
 except ImportError:
     print("jinja2 不可用，跳过本地模拟"); raise SystemExit(0)
-p = r"D:\BaiduNetdiskDownload\Local-AI\train\kitty-rev\data\intent3\v6-mix\train.final.jsonl"
+p = r"D:\BaiduNetdiskDownload\Local-AI\train\lines\27b-kittyrev\kitty-rev\data\intent3\v6-mix\train.final.jsonl"
 row = json.loads(open(p, encoding="utf-8").readline())
 # 极简模拟 template 的 |items 用法
 tpl = jinja2.Template("{% for m in messages %}{% if m.tool_calls %}{% for tc in m.tool_calls %}<call>{{ tc['function']['name'] }}({% for k,v in tc['function']['arguments']|items %}{{k}}={{v}}{% endfor %})</call>{% endfor %}{% endif %}{% endfor %}")

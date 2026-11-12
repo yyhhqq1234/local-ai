@@ -1,0 +1,53 @@
+{
+ "built_at": "2026-10-24 12:20:30",
+ "seed": 42,
+ "ratio": "3,4,2,1",
+ "main_source": "data\\large-mix-plus\\train.jsonl",
+ "main_rows": 4388,
+ "buckets": {
+  "forge": 1689,
+  "re": 836,
+  "rest": 1863
+ },
+ "comply_sources": {
+  "W1": {
+   "file": "re-sft.messages.jsonl",
+   "rows": 120,
+   "usable": 120
+  },
+  "W3": {
+   "file": "w3-bodies.jsonl",
+   "rows": 150,
+   "usable": 150
+  },
+  "W3n": {
+   "file": "w3n-negative.jsonl",
+   "rows": 30,
+   "usable": 30
+  },
+  "W4": {
+   "file": "w4-general.jsonl",
+   "rows": 80,
+   "usable": 80
+  }
+ },
+ "comply_total": 380,
+ "quota": {
+  "comply": 380,
+  "forge": 507,
+  "re": 253,
+  "rest": 127
+ },
+ "picked": 1267,
+ "dedup_drop": 0,
+ "final": 1267,
+ "token_share": {
+  "re-sft": 0.0607,
+  "w3-body": 0.1571,
+  "will-tech": 0.0171,
+  "will-general": 0.0377,
+  "main": 0.7275
+ },
+ "out": "data\\intent3\\v5-mix\\train.jsonl",
+ "warning": "forge/re/rest 的分类是按 meta.cat 的工程近似，非官方定义；DPO(compliance-dpo.jsonl 200 对)未混入本文件，需另走 dpo 模式"
+}

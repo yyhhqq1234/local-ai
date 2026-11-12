@@ -1,0 +1,15 @@
+row=0 extent=1 accepted=0 count=1 anchor=42750 target=367 | draft=25 
+row=0 extent=1 accepted=0 count=1 anchor=367 target=1157 | draft=25 
+row=0 extent=1 accepted=0 count=1 anchor=1157 target=512 | draft=1510 
+row=0 extent=1 accepted=0 count=1 anchor=512 target=954 | draft=4181 
+row=0 extent=1 accepted=0 count=1 anchor=954 target=369 | draft=25 
+row=0 extent=1 accepted=0 count=1 anchor=369 target=264 | draft=1510 
+row=0 extent=1 accepted=0 count=1 anchor=264 target=24057 | draft=12847 
+row=0 extent=1 accepted=0 count=1 anchor=24057 target=1332 | draft=12847 
+row=0 extent=1 accepted=0 count=1 anchor=1332 target=1330 | draft=1510 
+row=0 extent=1 accepted=0 count=1 anchor=1330 target=466 | draft=1510 
+row=0 extent=1 accepted=0 count=1 anchor=466 target=777 | draft=1510 
+row=0 extent=1 accepted=0 count=1 anchor=777 target=18167 | draft=11069 
+row=0 extent=1 accepted=0 count=1 anchor=18167 target=3512 | draft=1510 
+row=0 extent=1 accepted=0 count=1 anchor=3512 target=10278 | draft=1510 
+row=0 extent=0 accepted=0 count=1 anchor=10278 target=303 | draft=

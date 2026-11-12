@@ -1,0 +1,189 @@
+{
+  "results": [
+    {
+      "variant": "d0-q4q5-nothink",
+      "extra": [
+        "--host-context-mib",
+        "2048",
+        "--prefill-chunk",
+        "128",
+        "--max-context",
+        "4096",
+        "--no-prefix-reuse",
+        "--no-thinking"
+      ],
+      "port": 1671,
+      "ready": true,
+      "requests": [
+        {
+          "label": "user",
+          "chars": 20,
+          "head": "2 + 2 equals **4**.",
+          "reason_chars": 0,
+          "reason_head": ""
+        },
+        {
+          "label": "sys",
+          "chars": 32,
+          "head": "The question is: - ⚒️ Is 2 -",
+          "reason_chars": 0,
+          "reason_head": ""
+        },
+        {
+          "label": "user-prefix",
+          "chars": 22,
+          "head": "世界是简单的，还是人太渺小？ 🌟 其实啊，",
+          "reason_chars": 0,
+          "reason_head": ""
+        },
+        {
+          "label": "sys-short",
+          "chars": 22,
+          "head": "2 <zenspice> 0.354822",
+          "reason_chars": 0,
+          "reason_head": ""
+        },
+        {
+          "label": "essay",
+          "chars": 85,
+          "head": "I'm sorry, but I think there might be some misunderstanding. 😸 （Here at once丕onseema",
+          "reason_chars": 0,
+          "reason_head": ""
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 19,
+          "units_prefill": 1,
+          "ids_head": [
+            17,
+            478,
+            220,
+            17,
+            16327,
+            2972,
+            19,
+            159034
+          ]
+        },
+        {
+          "prompt_tokens": 30,
+          "units_prefill": 1,
+          "ids_head": [
+            760,
+            3296,
+            369,
+            25,
+            271,
+            12,
+            2765,
+            248
+          ]
+        },
+        {
+          "prompt_tokens": 26,
+          "units_prefill": 1,
+          "ids_head": [
+            96748,
+            95761,
+            101829,
+            3709,
+            96984,
+            95765,
+            96378,
+            134699
+          ]
+        },
+        {
+          "prompt_tokens": 26,
+          "units_prefill": 1,
+          "ids_head": [
+            17,
+            271,
+            27,
+            17991,
+            79,
+            543,
+            29,
+            198
+          ]
+        },
+        {
+          "prompt_tokens": 26,
+          "units_prefill": 1,
+          "ids_head": [
+            40,
+            2688,
+            14169,
+            11,
+            694,
+            353,
+            1683,
+            1017
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "d1-q4q5-think",
+      "extra": [
+        "--host-context-mib",
+        "2048",
+        "--prefill-chunk",
+        "128",
+        "--max-context",
+        "4096",
+        "--no-prefix-reuse"
+      ],
+      "port": 1672,
+      "ready": true,
+      "requests": [
+        {
+          "label": "user",
+          "chars": 0,
+          "head": "",
+          "reason_chars": 59,
+          "reason_head": "Thinking Process: 1. **Analyze the Request:** The user is"
+        },
+        {
+          "label": "sys",
+          "chars": 0,
+          "head": "",
+          "reason_chars": 77,
+          "reason_head": "Thinking, looking for the context: The user is asking a ques"
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 17,
+          "units_prefill": 1,
+          "ids_head": [
+            90700,
+            8340,
+            25,
+            271,
+            16,
+            13,
+            220,
+            2972
+          ]
+        },
+        {
+          "prompt_tokens": 28,
+          "units_prefill": 1,
+          "ids_head": [
+            90700,
+            11,
+            3221,
+            364,
+            279,
+            2193,
+            25,
+            561
+          ]
+        }
+      ]
+    }
+  ],
+  "remaining_ninfer_processes": []
+}

@@ -1,0 +1,39 @@
+<|im_start|>user
+hi<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+=====REQ=====<|im_start|>user
+用中文一句话回答：1+1 等于几？<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+=====REQ=====<|im_start|>system
+你是助手，中文简短。<|im_end|>
+<|im_start|>user
+用中文一句话回答：1+1 等于几？<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+=====REQ=====<|im_start|>user
+你好<|im_end|>
+<|im_start|>assistant
+你好，我在。<|im_end|>
+<|im_start|>user
+用中文一句话回答：1+1 等于几？<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+
+
+=====REQ=====

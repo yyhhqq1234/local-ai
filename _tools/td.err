@@ -1,0 +1,27 @@
+2026-11-08 12:17:07.407  INFO  starting engine
+2026-11-08 12:17:08.229  INFO  loading weights | 5.81 GiB
+2026-11-08 12:17:09.507  INFO  weights ready | 5.81 GiB | 1.3s | 4.55 GiB/s
+2026-11-08 12:17:09.527  INFO  pinning host context | 2.00 GiB
+2026-11-08 12:17:09.741  INFO  host context pinned | 2.00 GiB | 214 ms
+2026-11-08 12:17:09.798  INFO  engine ready | oxcoder9b-merged | total 2.4s | weights 5.81 GiB | CUDA sync spin
+2026-11-08 12:17:09.801  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 318.7 MiB | free 4.66 GiB
+2026-11-08 12:17:09.802  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 12:17:13.776  INFO  warmup complete | 4.0s
+2026-11-08 12:17:13.778  INFO  listening on http://127.0.0.1:1687 | model oxcoder9b-merged | auth disabled
+2026-11-08 12:17:15.116  INFO  req#1 started | openai-chat non-stream | 1 message | max output 16 | thinking template default | tools 1
+[ids] lane=0 token=94
+[ids] lane=0 token=94
+[ids] lane=0 token=94
+[ids] lane=0 token=94
+[ids] lane=0 token=94
+[ids] lane=0 token=94
+[ids] lane=0 token=94
+[ids] lane=0 token=94
+[ids] lane=0 token=94
+[ids] lane=0 token=94
+[ids] lane=0 token=94
+[ids] lane=0 token=94
+[ids] lane=0 token=94
+[ids] lane=0 token=94
+[ids] lane=0 token=94
+2026-11-08 12:17:15.762  INFO  req#1 done | openai-chat | output limit | prompt 358 | output 16 | cache 0 (0.0%) | TTFT 1.5s | total 2.0s | prefill 1.80k tok/s | decode 34.8 tok/s

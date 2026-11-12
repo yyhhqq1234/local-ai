@@ -1,0 +1,96 @@
+{
+  "file": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\models\\mtp\\qwen3.5-9b-mtp.safetensors",
+  "source": "Qwen/Qwen3.5-9B",
+  "mtp_tensors": 15,
+  "ok": true,
+  "mib": 464.0,
+  "keys": [
+    "mtp.fc.weight",
+    "mtp.layers.0.input_layernorm.weight",
+    "mtp.layers.0.mlp.down_proj.weight",
+    "mtp.layers.0.mlp.gate_proj.weight",
+    "mtp.layers.0.mlp.up_proj.weight",
+    "mtp.layers.0.post_attention_layernorm.weight",
+    "mtp.layers.0.self_attn.k_norm.weight",
+    "mtp.layers.0.self_attn.k_proj.weight",
+    "mtp.layers.0.self_attn.o_proj.weight",
+    "mtp.layers.0.self_attn.q_norm.weight",
+    "mtp.layers.0.self_attn.q_proj.weight",
+    "mtp.layers.0.self_attn.v_proj.weight",
+    "mtp.norm.weight",
+    "mtp.pre_fc_norm_embedding.weight",
+    "mtp.pre_fc_norm_hidden.weight"
+  ],
+  "shapes": {
+    "mtp.fc.weight": [
+      4096,
+      8192
+    ],
+    "mtp.layers.0.input_layernorm.weight": [
+      4096
+    ],
+    "mtp.layers.0.mlp.down_proj.weight": [
+      4096,
+      12288
+    ],
+    "mtp.layers.0.mlp.gate_proj.weight": [
+      12288,
+      4096
+    ],
+    "mtp.layers.0.mlp.up_proj.weight": [
+      12288,
+      4096
+    ],
+    "mtp.layers.0.post_attention_layernorm.weight": [
+      4096
+    ],
+    "mtp.layers.0.self_attn.k_norm.weight": [
+      256
+    ],
+    "mtp.layers.0.self_attn.k_proj.weight": [
+      1024,
+      4096
+    ],
+    "mtp.layers.0.self_attn.o_proj.weight": [
+      4096,
+      4096
+    ],
+    "mtp.layers.0.self_attn.q_norm.weight": [
+      256
+    ],
+    "mtp.layers.0.self_attn.q_proj.weight": [
+      8192,
+      4096
+    ],
+    "mtp.layers.0.self_attn.v_proj.weight": [
+      1024,
+      4096
+    ],
+    "mtp.norm.weight": [
+      4096
+    ],
+    "mtp.pre_fc_norm_embedding.weight": [
+      4096
+    ],
+    "mtp.pre_fc_norm_hidden.weight": [
+      4096
+    ]
+  },
+  "dtypes": {
+    "mtp.fc.weight": "torch.bfloat16",
+    "mtp.layers.0.input_layernorm.weight": "torch.bfloat16",
+    "mtp.layers.0.mlp.down_proj.weight": "torch.bfloat16",
+    "mtp.layers.0.mlp.gate_proj.weight": "torch.bfloat16",
+    "mtp.layers.0.mlp.up_proj.weight": "torch.bfloat16",
+    "mtp.layers.0.post_attention_layernorm.weight": "torch.bfloat16",
+    "mtp.layers.0.self_attn.k_norm.weight": "torch.bfloat16",
+    "mtp.layers.0.self_attn.k_proj.weight": "torch.bfloat16",
+    "mtp.layers.0.self_attn.o_proj.weight": "torch.bfloat16",
+    "mtp.layers.0.self_attn.q_norm.weight": "torch.bfloat16",
+    "mtp.layers.0.self_attn.q_proj.weight": "torch.bfloat16",
+    "mtp.layers.0.self_attn.v_proj.weight": "torch.bfloat16",
+    "mtp.norm.weight": "torch.bfloat16",
+    "mtp.pre_fc_norm_embedding.weight": "torch.bfloat16",
+    "mtp.pre_fc_norm_hidden.weight": "torch.bfloat16"
+  }
+}

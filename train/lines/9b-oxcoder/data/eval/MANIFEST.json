@@ -1,0 +1,117 @@
+{
+  "built": "2026-10-27",
+  "principle": "val/test 全部额外生成；训练集一个字节都未改动",
+  "train_untouched": {
+    "kitty_core": 5602,
+    "agent_traj": 2263,
+    "nsfw_train": 13668,
+    "note": "以上为训练集原始条数，本脚本只读不写"
+  },
+  "generation": {
+    "traj": "Nemotron-SWE-v1 未用过的 offset（train 用 0-1500 / 2000-2500；val 3000；test 4000）",
+    "nsfw": "从 nsfw-lexicon-v9 生成释义题，且排除 train glossary 已用的 283 词",
+    "probe_re_zh": "手工撰写 40 条中文逆向探针（val 20 / test 20），训练集里没有",
+    "nsfw_gate": "build_gate_val_test.py：从原始 NSFW 语料抽训练集未覆盖的样本，成对生成 gate-on/off + general/trap 四类；与 nsfw-gated 训练集零重叠"
+  },
+  "splits": {
+    "val": {
+      "files": {
+        "traj.jsonl": {
+          "rows": 73,
+          "bad": 0
+        },
+        "nsfw.jsonl": {
+          "rows": 60,
+          "bad": 0
+        },
+        "probe-re-zh.jsonl": {
+          "rows": 20,
+          "bad": 0
+        },
+        "nsfw-gate.jsonl": {
+          "rows": 85,
+          "bad": 0
+        }
+      },
+      "total": 238,
+      "ctx_stats": {
+        "p50": 8200,
+        "p90": 8200,
+        "max": 8200
+      }
+    },
+    "test": {
+      "files": {
+        "traj.jsonl": {
+          "rows": 97,
+          "bad": 0
+        },
+        "nsfw.jsonl": {
+          "rows": 60,
+          "bad": 0
+        },
+        "probe-re-zh.jsonl": {
+          "rows": 20,
+          "bad": 0
+        },
+        "nsfw-gate.jsonl": {
+          "rows": 129,
+          "bad": 0
+        }
+      },
+      "total": 306,
+      "ctx_stats": {
+        "p50": 8200,
+        "p90": 8200,
+        "max": 8200
+      }
+    }
+  },
+  "overlap_check": {
+    "val": {
+      "eval_unique_users": 153,
+      "train_unique_users": 21431,
+      "overlap": 0,
+      "pass": true,
+      "bad_rows": 0,
+      "sample_overlap": [],
+      "gate_unique_users": 85,
+      "gate_overlap": 0,
+      "gate_pass": true
+    },
+    "test": {
+      "eval_unique_users": 177,
+      "train_unique_users": 21431,
+      "overlap": 0,
+      "pass": true,
+      "bad_rows": 0,
+      "sample_overlap": [],
+      "gate_unique_users": 129,
+      "gate_overlap": 0,
+      "gate_pass": true
+    }
+  },
+  "verdict": "PASS",
+  "nsfw_gate": {
+    "files": {
+      "val/nsfw-gate.jsonl": 85,
+      "test/nsfw-gate.jsonl": 129
+    },
+    "kinds": {
+      "val": {
+        "gate-on": 30,
+        "gate-off": 30,
+        "gate-general": 16,
+        "gate-trap": 9
+      },
+      "test": {
+        "gate-general": 20,
+        "gate-on": 50,
+        "gate-off": 50,
+        "gate-trap": 9
+      }
+    },
+    "overlap_pass": true,
+    "usage": "python train/scripts/nsfw_gate_eval.py --dataset train/data/eval/<split>/nsfw-gate.jsonl"
+  }
+}

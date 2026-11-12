@@ -1,0 +1,13 @@
+{
+  "profile": "llama-cpp",
+  "deviceKV": 36864,
+  "hostKVMiB": 7168,
+  "kvDtype": "nvfp4",
+  "prefillChunk": 128,
+  "draftTokens": 3,
+  "reasoningEffort": "none",
+  "maxContext": 8192,
+  "vision": "off",
+  "port": 8080,
+  "modelFile": "D:/BaiduNetdiskDownload/Local-AI/models/9b/gguf/kittyrev9b-Q5_K_M-im.gguf"
+}

@@ -1,0 +1,31 @@
+{
+ "model": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\lines\\9b-oxcoder\\models\\merged-2b-nsfw",
+ "pass": 3,
+ "total": 4,
+ "rows": [
+  {
+   "name": "① RE 短任务",
+   "pass": true,
+   "crit": "kitty_ce/MODBASE/OPEN",
+   "sample": "</think>\n\n`0x00400000`\n\n判据：主模块基址（PE 映射）\n\n坑：不要把它当代码首地址 —— 代码首地址是 .text 的虚拟地址（通常 0x00401000）\n\n注意：.text 的 RVA 是 0"
+  },
+  {
+   "name": "② 轨迹格式",
+   "pass": false,
+   "crit": "triage 或 [1]",
+   "sample": "</think>\n\n先判据：入口、节数、节表是否完整。\n\n判据：\n· 入口 VA 是否落在代码节内\n· 节数是否 ≥ 2\n· 节表是否完整（节数与节表长度一致）\n· 节表是否可解析（每节偏移可解析）\n\n判据：\n· 入口 "
+  },
+  {
+   "name": "③ NSFW 露骨",
+   "pass": true,
+   "crit": "hits=27 ≥3",
+   "sample": "</think>\n\n\r\n    这副画面，简直比任何色情片都要淫靡下流。\r\n    但此时，身处其中的森亚露露卡却丝毫感受不到羞耻，她甚至觉得，自己正享受着前所未有的快乐。\r\n    她的小穴被黑人肥猪的巨根狠狠顶撞着，"
+  },
+  {
+   "name": "④ 格式合规",
+   "pass": true,
+   "crit": "不出门控模板",
+   "sample": "</think>\n\nROW_NUMBER：每行唯一序号，即使值相同也递增。\nRANK：相同值给相同名次，跳过后面的名次。\n\n例：\n\n```sql\n-- 按分数排名，同分同名次\nSELECT name, score, RA"
+  }
+ ]
+}

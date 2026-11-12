@@ -1,0 +1,98 @@
+{
+ "samples_scanned": 3043,
+ "sources": [
+  "iter-all.jsonl",
+  "sft-kitty.jsonl",
+  "gold.jsonl"
+ ],
+ "tools": {
+  "total": 64,
+  "grades": {
+   "deep": 64
+  },
+  "weighted_score": 1,
+  "gaps": []
+ },
+ "ops": {
+  "total": 66,
+  "grades": {
+   "mid": 12,
+   "deep": 54
+  },
+  "weighted_score": 0.927,
+  "gaps": [
+   {
+    "op": "SPEED",
+    "group": "a-channel",
+    "hits": 1,
+    "grade": "mid"
+   },
+   {
+    "op": "KM_PROBE",
+    "group": "a-channel",
+    "hits": 1,
+    "grade": "mid"
+   },
+   {
+    "op": "AL_CLEAR",
+    "group": "a-channel",
+    "hits": 2,
+    "grade": "mid"
+   },
+   {
+    "op": "AL_SET_VAL",
+    "group": "a-channel",
+    "hits": 2,
+    "grade": "mid"
+   },
+   {
+    "op": "AL_SET_ACT",
+    "group": "a-channel",
+    "hits": 2,
+    "grade": "mid"
+   },
+   {
+    "op": "AL_SET_TYPE",
+    "group": "a-channel",
+    "hits": 2,
+    "grade": "mid"
+   },
+   {
+    "op": "AL_SET_DESC",
+    "group": "a-channel",
+    "hits": 2,
+    "grade": "mid"
+   },
+   {
+    "op": "THREADS",
+    "group": "a-channel",
+    "hits": 3,
+    "grade": "mid"
+   },
+   {
+    "op": "KM_STATUS",
+    "group": "a-channel",
+    "hits": 3,
+    "grade": "mid"
+   },
+   {
+    "op": "AL_DEL",
+    "group": "a-channel",
+    "hits": 3,
+    "grade": "mid"
+   },
+   {
+    "op": "DIS",
+    "group": "a-channel",
+    "hits": 4,
+    "grade": "mid"
+   },
+   {
+    "op": "AL_ADD",
+    "group": "a-channel",
+    "hits": 4,
+    "grade": "mid"
+   }
+  ]
+ }
+}

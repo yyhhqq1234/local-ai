@@ -1,0 +1,43 @@
+usage: __main__.py [-h] --model MODEL --recipe RECIPE [--override OVERRIDE]
+                   [--source NAME=PATH] [--components COMPONENTS]
+                   [--resource ROLE=PATH] [--layers A..B] [--proposal]
+                   [--proposal-rows PROPOSAL_ROWS] [--ranking RANKING]
+                   [--name NAME] --out OUT [--device DEVICE]
+                   [--rows-per-chunk ROWS_PER_CHUNK]
+                   [--max-file-bytes MAX_FILE_BYTES]
+
+Convert explicitly selected local weights into a NInfer v3 artifact.
+
+options:
+  -h, --help            show this help message and exit
+  --model MODEL         primary checkpoint/config and default resources
+  --recipe RECIPE       official name or Python file[:function]; defaults to
+                        configure in a file
+  --override OVERRIDE   Python configuration applied after the selected recipe
+                        and proposal
+  --source NAME=PATH    named source such as quantized, dflash, dflash2, or
+                        mtp (replaces the base MTP head)
+  --components COMPONENTS
+                        comma-separated text,vision,mtp,dflash,dflash2
+                        (default text); for Qwen3.8-Flash-Next text,ngram (the
+                        default: the model with its n-gram table), text (the
+                        model alone, its table read from a table artifact at
+                        run time) or ngram (that table artifact), and vision
+                        or mtp (from --source mtp=MTP.gguf or an HF
+                        safetensors subset) beside text
+  --resource ROLE=PATH  override a final frontend resource; Flash-Next also
+                        accepts ngram.hot=PROFILE to embed a hot-row profile
+                        with the stored n-gram table
+  --layers A..B         Flash-Next qualification slice: source layers A
+                        through B-1, rebased to zero; retains embedding and
+                        head, omits the table when the slice has no PLE
+  --proposal            include the existing indexed proposal head
+  --proposal-rows PROPOSAL_ROWS
+  --ranking RANKING
+  --name NAME           public instance name saved in metadata
+  --out OUT
+  --device DEVICE
+  --rows-per-chunk ROWS_PER_CHUNK
+  --max-file-bytes MAX_FILE_BYTES
+                        split the artifact into an entry and .part-NNNN files
+                        of at most this many bytes (default: one file)

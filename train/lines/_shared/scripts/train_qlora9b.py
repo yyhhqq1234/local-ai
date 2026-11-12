@@ -1,0 +1,518 @@
+#!/usr/bin/env python
+"""train_qlora9b.py — 9B 双能力（RE + NSFW）QLoRA，12 GB 专用。
+
+与 train_qlora.py 的区别：
+  · 支持 9B 档（Qwen3.5 / OxCoder-9B，多模态基座，走 ImageTextToText）
+  · 支持 stage 预设（re / nsfw / joint），LR/r/ctx 按段差异化
+  · LoRA target 自动探测：列出实际命中的 Linear 名，避免 qwen3_5 混合线性层命名差异踩空
+  · 显存烟囱检查：启动即报预算，OOM 前一档降配
+
+用法:
+  python train_qlora9b.py --base train/lines/9b-oxcoder/models/OxCoder-9B-abliterated \
+      --data train/lines/9b-oxcoder/data/_legacy/mix-re.jsonl --stage re   --dry-run
+  python train_qlora9b.py --base ... --data train/lines/9b-oxcoder/data/_legacy/mix-re.jsonl   --stage re
+  python train_qlora9b.py --base ... --data train/lines/9b-oxcoder/data/_legacy/mix-nsfw.jsonl --stage nsfw
+"""
+import argparse
+import json
+import os
+import sys
+
+TRAIN_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.environ.setdefault("HF_ENDPOINT", "https://hf-mirror.com")
+
+# ── CPU 线程限制（必须在 import torch 之前设）─────────────────────────────
+# 本机 20 核 20 线程；PyTorch 默认 set_num_threads(20)，训练时 CPU 侧算子
+# （embedding lookup / RMSNorm / linear_attn 参考实现 / bnb 反量化）会打满全部核，
+# 在 Windows 上与 GUI 线程抢核心 → 系统间歇性卡顿、鼠标掉帧。
+# 限到 8 线程：CPU 峰值从 100% 降到 ~40-60%，训练速度仅降 5-10%。
+_CPU_THREADS = int(os.environ.get("TRAIN_CPU_THREADS", "8"))
+os.environ.setdefault("OMP_NUM_THREADS", str(_CPU_THREADS))
+os.environ.setdefault("MKL_NUM_THREADS", str(_CPU_THREADS))
+os.environ.setdefault("TORCH_NUM_THREADS", str(_CPU_THREADS))
+os.environ.setdefault("HF_HOME", os.path.join(TRAIN_ROOT, "hf"))
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
+
+# ── causal_conv1d 替身（Qwen3.5 GDN 的卷积核；详见 train/CAUSAL-CONV1D.md）──────
+# 必须在 import transformers 之前把 train/lines/_shared/scripts 放进 sys.path：
+# `use_kernel_func_from_hub_with_fallback` 是在 modeling_qwen3_5 **导入时**解析实现的，
+# 晚一步就只能退回 PyTorch 参考实现（更慢，且 transformers 会直接拒绝 packing）。
+_SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPTS_DIR)
+try:
+    import causal_conv1d as _cc1d                                          # noqa: E402
+
+    _d = _cc1d.diagnostics()
+    print("[causal_conv1d] 替身已挂载: fwd=%s upd=%s has_fla=%s"
+          % (_d["fwd_path"], _d["upd_path"], _d["has_fla"]))
+except Exception as _e:                                                    # noqa: BLE001
+    print("[causal_conv1d] 替身缺失 → PyTorch 回退（慢，且不能 packing）:", _e)
+
+# stage 预设：三段的差异是刻意的，不要统一
+PRESETS = {
+    # RE：要长上下文看伪代码/反汇编，r 高一些吃下工具语法
+    "re":    dict(ctx=2048, r=32, alpha=64, lr=1e-4, epochs=4.0, ga=16),
+    # NSFW：低 LR + 低 r，目标是注入分布而不重排权重
+    "nsfw":  dict(ctx=2048, r=16, alpha=32, lr=5e-5, epochs=2.0, ga=16),
+    # joint：一次性混训，lr 更低求稳
+    "joint": dict(ctx=2048, r=24, alpha=48, lr=6e-5, epochs=3.0, ga=16),
+}
+
+# 优先挂 attention / mlp 的投影层；显式排除 Qwen3.5 的线性注意力(GDN)与卷积参数
+TARGET_CANDIDATES = [
+    "q_proj", "k_proj", "v_proj", "o_proj",
+    "gate_proj", "up_proj", "down_proj",
+    # qwen3_5 linear-attention 层常见命名（存在即挂，不存在自动跳过）
+    "in_proj_qkv", "in_proj_z", "in_proj_a", "in_proj_b", "out_proj",
+]
+EXCLUDE_SUBSTR = ("a_log", "dt_bias", "convolution", "conv1d", "vision", "visual")
+
+
+def parse():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--base", required=True)
+    ap.add_argument("--data", required=True)
+    ap.add_argument("--stage", choices=list(PRESETS), default="re")
+    ap.add_argument("--out", default=None)
+    ap.add_argument("--ctx", type=int, default=None)
+    ap.add_argument("--epochs", type=float, default=None)
+    ap.add_argument("--max-steps", type=int, default=-1)
+    ap.add_argument("--bs", type=int, default=1)
+    ap.add_argument("--ga", type=int, default=None)
+    ap.add_argument("--lr", type=float, default=None)
+    ap.add_argument("--lora-r", type=int, default=None)
+    ap.add_argument("--lora-alpha", type=int, default=None)
+    ap.add_argument("--no-4bit", action="store_true")
+    ap.add_argument("--resume", default=None)
+    ap.add_argument("--init-adapter", default=None, dest="init_adapter",
+                    help="从已有 LoRA adapter 目录继续训（加载权重 → 全新 optimizer + 新 cosine scheduler）。"
+                         "与 --resume 的区别：--resume 恢复优化器/scheduler 状态（lr 已退火到 0 时等于不学）；"
+                         "--init-adapter 只搬权重，lr 重新预热衰减，适合「补 N 个 epoch」")
+    ap.add_argument("--save-total-limit", type=int, default=8, dest="save_total_limit", help="保留最近 N 个 checkpoint（默认 8，避免长训练早期点被轮转删光）")
+    ap.add_argument("--save-steps", type=int, default=50,
+                    help="每 N 步存一次 checkpoint（防 BSOD/断电丢进度；0=按 epoch）")
+    ap.add_argument("--lora-dropout", type=float, default=0.05, dest="lora_dropout",
+                    help="LoRA dropout。抗记忆化建议 0.10（2026-10-28 实测：0.05 时 in-sample "
+                         "n-gram 重合 0.5、4/10 条逐字复现）")
+    ap.add_argument("--weight-decay", type=float, default=0.0, dest="weight_decay",
+                    help="权重衰减。抗记忆化建议 0.01")
+    ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--optim", default="paged_adamw_8bit", help="optimizer: paged_adamw_8bit / adamw_torch / adamw_bnb_8bit")
+    ap.add_argument("--skip-samples", type=int, default=0, dest="skip_samples",
+                    help="★ 分段续训专用：跳过数据集前 N 条，从第 N 条开始训。"
+                         "背景（2026-11-05 实测）：--init-adapter 只搬 LoRA 权重，不搬数据游标；"
+                         "每段新建 Trainer + 固定 --seed 42 → RandomSampler 序列每段完全相同，"
+                         "多段 400 步会反复训同一批 1600 条（24970 的 6.4%），其余数据永不参与。"
+                         "编排须按 N = 已训步数 × ga × bs 递增。")
+    ap.add_argument("--seed", type=int, default=42,
+                    help="全局随机种子（torch/numpy/random/cuda + dataloader shuffle）；"
+                         "不设时同数据同超参两次跑结果可差 15pt cov（2026-11-01 实测 z-2a-v7 0.6462 vs 0.4958）")
+    ap.add_argument("--use-liger-ce", action="store_true",
+                    help="用 liger fused linear CE 替代原生 CE：logits 不落地，ctx 8192 可跑"
+                         "（实测省 90%% CE 显存；注意 argparse 会把单个 %% 当格式符，故写作 %%%%）")
+    return ap.parse_args()
+
+
+def discover_targets(model):
+    """返回实际存在的 target 模块名集合 + 命中计数（用于诊断命名差异）"""
+    import torch.nn as nn
+    names, hits = set(), {}
+    for name, mod in model.named_modules():
+        if not isinstance(mod, nn.Linear) or not name:
+            continue
+        leaf = name.split(".")[-1]
+        if any(s in name for s in EXCLUDE_SUBSTR):
+            continue
+        if leaf in TARGET_CANDIDATES:
+            names.add(leaf)
+            hits[leaf] = hits.get(leaf, 0) + 1
+    return sorted(names), hits
+
+
+def main():
+    a = parse()
+    # 全局种子：模型 LoRA 初始化 / dropout / dataloader shuffle 全部可复现
+    try:
+        from transformers import set_seed as _set_seed
+        _set_seed(a.seed)
+        print(f"[seed] {a.seed}（torch/numpy/random/cuda 已固定）")
+    except Exception as _e:
+        print(f"[seed] set_seed 失败（{_e}），退回手工设置")
+        import random as _r
+        import torch as _t
+        _r.seed(a.seed)
+        _t.manual_seed(a.seed)
+        _t.cuda.manual_seed_all(a.seed)
+    p = PRESETS[a.stage]
+    ctx = a.ctx or p["ctx"]
+    ga = a.ga or p["ga"]
+    lr = a.lr if a.lr is not None else p["lr"]
+    r = a.lora_r or p["r"]
+    alpha = a.lora_alpha or p["alpha"]
+    epochs = a.epochs if a.epochs is not None else p["epochs"]
+    out = a.out or os.path.join(TRAIN_ROOT, "out", f"oxcoder9b-{a.stage}")
+
+    if not os.path.isdir(a.base):
+        sys.exit(f"[FATAL] 基座不存在: {a.base}")
+    if not os.path.isfile(a.data):
+        sys.exit(f"[FATAL] 数据不存在: {a.data}")
+
+    import torch
+    # ── CPU 线程收敛（环境变量已设，这里再显式钉住，防被库覆盖）──
+    try:
+        torch.set_num_threads(_CPU_THREADS)
+        torch.set_num_interop_threads(1)
+    except Exception:
+        pass
+    # 进程优先级降到 BelowNormal：Windows 上让 GUI 线程优先拿核心，消除系统卡顿
+    try:
+        import psutil
+        psutil.Process().nice(psutil.BELOW_NORMAL_PRIORITY_CLASS)
+    except Exception:
+        pass
+    print(f"[cpu] threads={_CPU_THREADS} (env OMP/MKL) | 优先级 BelowNormal")
+    vram = torch.cuda.get_device_properties(0).total_memory / 2**30 if torch.cuda.is_available() else 0
+    w_gb = 9e9 * (0.5 if not a.no_4bit else 2) / 2**30
+
+    with open(a.data, "r", encoding="utf-8") as f:
+        n_samples = sum(1 for line in f if line.strip())
+
+    print("=" * 62)
+    print(f"base      = {a.base}")
+    print(f"data      = {a.data}  ({n_samples} 条)")
+    print(f"stage     = {a.stage}  → ctx={ctx} r={r} alpha={alpha} lr={lr} ep={epochs} ga={ga}")
+    print(f"正则化    = lora_dropout={a.lora_dropout}  weight_decay={a.weight_decay}"
+          f"  （抗记忆化建议 0.10 / 0.01）")
+    print(f"out       = {out}")
+    print(f"VRAM      = {vram:.1f} GiB   权重估算 = {w_gb:.1f} GiB ({'4bit' if not a.no_4bit else 'bf16'})")
+    act = 2.2 if ctx <= 2048 else 3.6
+    print(f"激活估算  = {act:.1f} GiB (ctx={ctx}, gc on)")
+    print(f"预算合计  = {w_gb + act + 0.9:.1f} GiB  / {vram:.1f} GiB")
+    if w_gb + act + 0.9 > vram * 0.94:
+        print("[WARN] 预算贴近上限 → 先降 ctx 或改 --no-4bit 关掉（关掉反而更吃显存，仅诊断用）")
+    print("=" * 62)
+    if a.dry_run:
+        print("[dry-run] 退出")
+        return
+
+    from transformers import (
+        AutoConfig, AutoModelForImageTextToText, AutoModelForCausalLM,
+        AutoTokenizer, BitsAndBytesConfig,
+    )
+    from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+    from datasets import load_dataset
+    from trl import SFTTrainer, SFTConfig
+
+    bnb = None if a.no_4bit else BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_compute_dtype=torch.bfloat16,
+        bnb_4bit_use_double_quant=True,
+    )
+
+    tok = AutoTokenizer.from_pretrained(a.base, trust_remote_code=True)
+    if tok.pad_token is None:
+        tok.pad_token = tok.eos_token
+
+    cfg = AutoConfig.from_pretrained(a.base, trust_remote_code=True)
+    arch = (getattr(cfg, "architectures", None) or [""])[0]
+    loader = AutoModelForImageTextToText if "ConditionalGeneration" in arch else AutoModelForCausalLM
+    print(f"[load] arch={arch or '?'} loader={loader.__name__}")
+
+    model = loader.from_pretrained(
+        a.base, quantization_config=bnb, dtype=torch.bfloat16,
+        device_map={"": 0}, trust_remote_code=True,
+        # ★ low_cpu_mem_usage：不加的话 bf16 全量 18.8 GB 先落 CPU 再逐层量化，
+        #   CPU 峰值实测 19.6 GB（27.5/31.5 GB，只剩 3.8 GB）。加上后逐层加载→量化→释放，峰值 ~3 GB。
+        low_cpu_mem_usage=True,
+    )
+    if not a.no_4bit:
+        model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
+        # ★ prepare_model_for_kbit_training 会把非量化层（含 lm_head / embed_tokens）cast 成 fp32。
+        #   这两个是 vocab×hidden 的大表：248320×4096×4B = 3.79 GiB 各一份，合计 7.6 GiB。
+        #   ctx 8192 时叠加激活必然 OOM（实测 allocated 10.91 GiB 加载完就没余量）。
+        #   它们在训练中冻结，用 bf16 足够 → 省 3.8 GiB，ctx 8192 才跑得动。
+        # ★★ 2026-10-28 实测修正：不止 lm_head/embed_tokens ——
+        #    prepare_model_for_kbit_training 会把**全部 179 个**非量化参数 cast 成 fp32，
+        #    包括每层的 conv1d.weight / A_log / dt_bias / input_layernorm.weight /
+        #    post_attention_layernorm.weight / linear_attn.norm.weight 等。
+        #    这些参数每次 forward 都要做 fp32→bf16 转换，实测 aten::_to_copy 被调
+        #    896 次、aten::copy_ 1256 次、aten::add 1078 次，合计占 52% 的耗时。
+        #
+        #    实测对比（ctx 2048 / bs 1 / 4bit NF4 / 无 checkpoint）：
+        #      保持 fp32 → forward 6.616 s，峰值 13.02 GiB，alloc 10.92 GiB
+        #      全转 bf16 → forward 1.144 s，峰值  8.20 GiB，alloc  7.13 GiB
+        #    → **提速 5.8×，省 3.79 GiB**
+        #
+        #    原始权重本来就是 bf16，转回是恢复原状，不是降精度。
+        import torch as _t
+
+        _cast = 0
+        for _p in model.parameters():
+            if _p.dtype == _t.float32:
+                _p.data = _p.data.to(_t.bfloat16)
+                _cast += 1
+        _t.cuda.synchronize()
+        print(f"[vram] {_cast} 个 fp32 参数转回 bf16，allocated = {_t.cuda.memory_allocated()/2**30:.2f} GiB")
+
+        # ★★ 2026-10-28 显存排查结论（60 步实测）：
+        #   alloc 恒定 7.848 GiB（无泄漏），但 reserved 从 8.66 单调涨到 10.92，
+        #   且 peak 达 13.043 GiB —— **超过物理 11.91 GiB**。
+        #   Windows WDDM 会把系统内存当显存后备，数据走 PCIe 往返 →
+        #   训练单步从 2.5s 掉到 68-124s，同时整个系统间歇性卡顿。
+        #   解法：硬限制 PyTorch 的显存上限，超了明确 OOM，不拖垮系统。
+        _frac = float(os.environ.get("VRAM_FRAC", "0.93"))
+        _t.cuda.set_per_process_memory_fraction(_frac)
+        print(f"[vram] 显存硬上限 = {_frac:.2f} × 物理（防 WDDM 换页拖垮系统）")
+
+        # ★ 卸载视觉塔：纯文本训练用不上。27 层 / 411M 参数 / 0.77 GiB（bf16）
+        #   loader 是 AutoModelForImageTextToText，默认会加载它白占显存。
+        if os.environ.get("KEEP_VISION", "0") != "1":
+            _inner = getattr(model, "model", None)
+            _vis = getattr(_inner, "visual", None) if _inner is not None else None
+            if _vis is not None:
+                n_vis = sum(p.numel() for p in _vis.parameters())
+                _inner.visual = None
+                del _vis
+                import gc as _gc
+                _gc.collect()
+                _t.cuda.empty_cache()
+                print(f"[vram] 视觉塔已卸载（{n_vis/1e6:.0f} M 参数），"
+                      f"allocated = {_t.cuda.memory_allocated()/2**30:.2f} GiB")
+    model.config.use_cache = False
+
+    targets, hits = discover_targets(model)
+    if not targets:
+        sys.exit("[FATAL] 未探测到任何 target 模块 —— 该基座 Linear 命名不在候选表内，"
+                 "先跑 --dry-run 前的命中诊断或把命名加进 TARGET_CANDIDATES")
+    print(f"[lora] targets = {targets}")
+    print(f"[lora] 命中数   = {hits}")
+
+    if a.init_adapter:
+        # ★ 补训模式：只搬 LoRA 权重，不搬 optimizer/scheduler 状态。
+        #   原因：cosine 退火到底后 lr ≈ 5e-10，resume 等于空转。
+        if not os.path.isdir(a.init_adapter):
+            sys.exit(f"[FATAL] --init-adapter 目录不存在: {a.init_adapter}")
+        from peft import PeftModel
+        print(f"[lora] 从已有 adapter 继续：{a.init_adapter}")
+        model = PeftModel.from_pretrained(model, a.init_adapter, is_trainable=True)
+    else:
+        model = get_peft_model(model, LoraConfig(
+            r=r, lora_alpha=alpha, lora_dropout=a.lora_dropout, bias="none",
+            task_type="CAUSAL_LM", target_modules=targets,
+        ))
+    model.print_trainable_parameters()
+
+    ds = load_dataset("json", data_files=a.data, split="train")
+
+    # ★ 2026-11-05：分段续训的数据游标推进
+    #   修「每段重新起 Trainer → RandomSampler 同 seed → 反复训同一批样本」的致命缺陷
+    _skip = getattr(a, "skip_samples", 0) or 0
+    if _skip > 0:
+        _n0 = min(_skip, len(ds))
+        if _n0 >= len(ds):
+            print(f"[data] ★ skip_samples={_skip} 已达末尾（len={len(ds)}）→ 本轮从 0 开始（进入下一 epoch）")
+            _n0 = 0
+        ds = ds.select(range(_n0, len(ds)))
+        print(f"[data] skip_samples={_skip}（实跳 {_n0} 条）→ 剩余 {len(ds)} 条可用")
+    else:
+        print(f"[data] 全量 {len(ds)} 条（skip_samples=0）")
+
+    keep = {"messages"}
+
+    # ★★ 2026-10-28 修正（坑 A）：原来把 messages 渲染成单列 text 交给 SFTTrainer，
+    #    SFTTrainer 会**对全部 token 算 loss** —— 包括 system 和 user。模型会学着去
+    #    生成用户提问和系统提示，严重污染训练。
+    #    Qwen3.5 的 chat_template 又没有 {% generation %} 标记，assistant_only_loss 不可用。
+    #    → 改用 prompt/completion 双列 + SFTConfig(completion_only_loss=True)，
+    #      trl 只在 completion 段算 loss，等价于 label_builder 的手工 labels。
+    def to_text(ex):
+        msgs = ex.get("messages") or []
+        if not msgs and "instruction" in ex:
+            msgs = [{"role": "user", "content": ex["instruction"]},
+                    {"role": "assistant", "content": ex["output"]}]
+        if not msgs:
+            return {"prompt": "", "completion": ""}
+        # 最后一个 assistant 之前作为 prompt（含 system/user/前序轮次）
+        cut = len(msgs)
+        for i in range(len(msgs) - 1, -1, -1):
+            if msgs[i].get("role") == "assistant":
+                cut = i
+                break
+        prompt_msgs = msgs[:cut]
+        comp_msgs = msgs[cut:]
+        prompt = (
+            tok.apply_chat_template(prompt_msgs, tokenize=False, add_generation_prompt=True)
+            if prompt_msgs
+            else ""
+        )
+        # ★ 坑 A3：add_generation_prompt=True 会补 "<|im_start|>assistant\n<think>\n"，
+        #   若 completion 直接接正文，就缺少 </think> 闭合，格式非法（模型会学到永不结束思考）。
+        #   实测 'True 比 False 多出: <|im_start|>assistant\n<think>\n'。
+        #   → 数据无自带思考过程时，补一个空思考块 "</think>\n\n"，与 Qwen3 非思考模式一致。
+        raw = "\n".join(m["content"] for m in comp_msgs)
+        if raw.lstrip().startswith("<think>"):
+            completion = raw  # 数据自带思考过程，原样保留
+        else:
+            completion = "</think>\n\n" + raw
+        return {"prompt": prompt, "completion": completion}
+
+    ds = ds.map(
+        to_text,
+        remove_columns=[c for c in ds.column_names if c not in keep and c not in ("prompt", "completion")],
+    )
+    if "messages" in ds.column_names:
+        ds = ds.remove_columns(["messages"])
+
+    # ── packing 三开关（causal_conv1d varlen 的消费端）─────────────────────────
+    # 依据 train/CAUSAL-CONV1D.md §3.4：拼包必须让 collator 同时产出
+    #   ① padding_free      → 批量扁平化成一条，并算出 cu_seq_lens_q/k
+    #   ② return_position_ids → 每段 position_ids 复位（varlen 用它推段边界）
+    #   ③ seq_idx           → 每个 token 属于哪一段（GDN 短卷积靠它分隔）
+    # 少任意一个：dense attention / GDN 会跨样本串味 —— loss 看着正常，梯度是错的
+    # （实测后段样本 logits 差 1.1~2.8，loss 只差 1e-3）。
+    _pack = os.environ.get("SFT_PACKING", "0") == "1"
+    _pad_mult = int(os.environ.get("SFT_PAD_TO_MULTIPLE_OF", "0") or 0) or None
+    _collator = None
+    if _pack:
+        from trl.trainer.sft_trainer import DataCollatorForLanguageModeling as _DC
+
+        _pad_id = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
+        _collator = _DC(
+            pad_token_id=_pad_id,
+            padding_free=True,              # ① 扁平化 + cu_seq_lens_*/seq_idx
+            return_position_ids=True,       # ② 逐段 position_ids 复位
+            pad_to_multiple_of=_pad_mult,   # ③ 可选：对齐到 8/16，TensorCore 友好
+        )
+        print("[packing] padding_free=True return_position_ids=True "
+              "pad_to_multiple_of=%s（seq_idx/cu_seq_lens 随 batch 下发）" % _pad_mult)
+
+    args = SFTConfig(
+        output_dir=out,
+        seed=a.seed,
+        num_train_epochs=epochs,
+        max_steps=a.max_steps,
+        per_device_train_batch_size=a.bs,
+        gradient_accumulation_steps=ga,
+        gradient_checkpointing=True,
+        gradient_checkpointing_kwargs={"use_reentrant": False},
+        learning_rate=lr,
+        lr_scheduler_type="cosine",
+        warmup_steps=10,          # trl 1.16 的 SFTConfig 已无 warmup_ratio
+        completion_only_loss=True,  # ★ 只在 completion（assistant 正文）算 loss
+        bf16=True, fp16=False,
+        optim=a.optim,
+        weight_decay=a.weight_decay,   # ★ 抗记忆化：抑制大权重（建议 0.01）
+        max_length=ctx,
+        # Qwen3.5 linear_attention 拼包要靠 causal_conv1d 的 cu_seqlens 逐段分隔；
+        # train/lines/_shared/scripts/causal_conv1d.py（FLA+Triton 替身）已打通，见 train/CAUSAL-CONV1D.md。
+        # 默认关；验证过再开：SFT_PACKING=1（同时会挂 padding_free + return_position_ids）
+        packing=_pack,
+        packing_strategy="bfd",
+        padding_free=_pack,
+        pad_to_multiple_of=_pad_mult,
+        logging_steps=5,
+        save_strategy="steps" if a.save_steps > 0 else ("epoch" if a.max_steps < 0 else "no"),
+        save_steps=a.save_steps if a.save_steps > 0 else 500,
+        save_total_limit=a.save_total_limit,
+        report_to="none",
+        resume_from_checkpoint=a.resume,
+    )
+
+    if getattr(a, "use_liger_ce", False):
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from liger_ce import make_liger_trainer_class
+        TrainerCls = make_liger_trainer_class(SFTTrainer)
+        print("[liger] fused linear CE 已启用（logits 不落地）")
+    else:
+        TrainerCls = SFTTrainer
+
+    # ★ 2026-10-28：tqdm 的 stderr 在重定向到文件时会被块缓冲，
+    #   长跑时日志几十/上百分钟不更新，看不到 loss。这里挂一个 JSONL 回调，
+    #   每 logging_steps 追加一行，落盘后 tail 就能实时看曲线。
+    import json as _json
+    from transformers import TrainerCallback as _TrainerCallback
+
+    class _JsonlLog(_TrainerCallback):
+        def __init__(self, path):
+            self.path = path
+
+        def on_log(self, args_, state, control, logs=None, **kwargs):
+            if not logs:
+                return
+            rec = {"step": state.global_step}
+            for k, v in logs.items():
+                if isinstance(v, (int, float)):
+                    rec[k] = v
+            try:
+                with open(self.path, "a", encoding="utf-8") as f:
+                    f.write(_json.dumps(rec, ensure_ascii=False) + "\n")
+                    f.flush()
+            except Exception:
+                pass
+
+    class _MemTrace(_TrainerCallback):
+        """每步记录显存，用于区分「泄漏」（单调增长）与「碎片」（阶梯跳变）"""
+
+        def __init__(self, path):
+            self.path = path
+
+        def on_step_end(self, args_, state, control, **kwargs):
+            try:
+                import torch as _t
+
+                rec = {
+                    "step": state.global_step,
+                    "alloc_gib": round(_t.cuda.memory_allocated() / 2**30, 3),
+                    "reserved_gib": round(_t.cuda.memory_reserved() / 2**30, 3),
+                    "peak_gib": round(_t.cuda.max_memory_allocated() / 2**30, 3),
+                    "free_gib": round(_t.cuda.mem_get_info()[0] / 2**30, 3),
+                }
+                with open(self.path, "a", encoding="utf-8") as f:
+                    f.write(_json.dumps(rec) + "\n")
+                    f.flush()
+                # ★ 抗碎片（2026-11-05 实测）：Windows 无 expandable_segments，
+                #    reserved 会因碎片虚高 —— b3 实测 peak 8.84 GiB 而 reserved 10.23 GiB，
+                #    差 1.39 GiB 全是无法复用的小空洞。每 50 步主动归还一次，
+                #    代价约 1–2% 步速，换来 reserved 贴回 peak、远离 VRAM_FRAC 硬上限。
+                if os.environ.get("MEM_EMPTY_EVERY", "50").isdigit():
+                    _ev = int(os.environ.get("MEM_EMPTY_EVERY", "50"))
+                    if _ev > 0 and state.global_step % _ev == 0:
+                        _t.cuda.empty_cache()
+            except Exception:
+                pass
+
+    log_path = os.path.join(out, "train-log.jsonl")
+    mem_path = os.path.join(out, "mem-trace.jsonl")
+    os.makedirs(out, exist_ok=True)
+    for p_ in (log_path, mem_path):
+        with open(p_, "w", encoding="utf-8"):
+            pass
+    print(f"[log] 指标 → {log_path}")
+    print(f"[log] 显存 → {mem_path}")
+
+    trainer = TrainerCls(
+        model=model, args=args, train_dataset=ds, processing_class=tok,
+        data_collator=_collator,          # None 时 trl 自建；SFT_PACKING=1 时用三开关版
+        callbacks=[_JsonlLog(log_path), _MemTrace(mem_path)],
+    )
+    # ★ peak 统计要重置：否则 max_memory_allocated 会一直返回 from_pretrained
+    #   加载 18.8 GB 权重时的瞬时峰值（实测 13.045 GiB），掩盖真实训练峰值，
+    #   导致误判成"峰值超物理显存"。
+    try:
+        import torch as _t0
+        _t0.cuda.reset_peak_memory_stats()
+        _t0.cuda.empty_cache()
+        print(f"[vram] 训练前重置峰值统计，当前 allocated = {_t0.cuda.memory_allocated()/2**30:.2f} GiB")
+    except Exception:
+        pass
+    trainer.train(resume_from_checkpoint=a.resume)
+    trainer.save_model(os.path.join(out, "final"))
+    tok.save_pretrained(os.path.join(out, "final"))
+    print(f"[OK] adapter → {os.path.join(out, 'final')}")
+
+
+if __name__ == "__main__":
+    main()

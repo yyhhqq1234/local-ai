@@ -1,0 +1,156 @@
+2026-11-08 10:50:53.137  INFO  starting engine
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+2026-11-08 10:50:54.371  INFO  loading weights | 5.81 GiB
+2026-11-08 10:50:55.643  INFO  weights ready | 5.81 GiB | 1.3s | 4.57 GiB/s
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 8192 4096 | expected segments = 8192 4096 | first_rows=4096 input_rows=4096 second_rows=8192
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+[split-diag] actual rows = 4096 1024 4096 1024 | expected segments = 4096 1024 4096 1024 | first_rows=5120 input_rows=4096 second_rows=5120
+D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-master\src\ops\linear_attention\gated_delta_net\recurrence\recurrent.cu:55: CUDA_CHECK(cudaGetLastError()) failed: cudaErrorStreamCaptureInvalidated: operation failed due to a previous error during capture

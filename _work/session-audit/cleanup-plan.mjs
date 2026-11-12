@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 
-const ROOT = 'D:/BaiduNetdiskDownload/Local-AI/train/data/nsfw';
+const ROOT = 'D:/BaiduNetdiskDownload/Local-AI/train/lines/_shared/data/nsfw';
 const sha256 = (p) => crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const walk = (d, out = []) => {
   for (const e of fs.readdirSync(d, { withFileTypes: true })) {

@@ -5,135 +5,50 @@ ninfer-27b-kv-stream-3arch-20261019/
 *.safetensors
 *.bin
 *.pth
+*.pt
 
-# ── 引擎运行时（含 exe/zip，2.7G）──────────────────────────
-ninfer-csunx/runtime/
-ninfer-csunx/models/
-ninfer-csunx/engine.zip
-ninfer-csunx/logs/
-ninfer-csunx/run/
-ninfer-csunx/config/*.local.json
+# ── 引擎运行时（含 exe/zip）──────────────────────────────────
+**/runtime/
+**/engines/sm86/
+**/engines/sm89/
+**/engines/sm120a/
+**/llama-bin/
+*.zip
+*.7z
+*.tar
+*.dll
+*.exe
 
-# ── 后训练大文件（train/README.md 保留，产物全部忽略）────
-train/base/
-train/models/
-train/merged/
-train/gguf/
-train/hf/
-train/out/
-train/ninfer/
-train/tmp/
+# ── 训练环境与产物（2026-11-12 结项：训练数据公开，环境与权重不入库）──
 train/.venv/
 train/logs/
-# build_mix.py 生成物（每次重新合成，不入库）
-train/data/mix-*.jsonl
-
-# ── 本地语料与训练数据集（不入库）────────────────────────
-# 原始语料：成人向文本原始素材，仅本地保留
-user-temp/NSFW小说/
-# 训练数据集：体积大（含 13668+5602 条样本与 94MB 快照）
-# 数据集谱系以 train/data/versions/*.sha256 为锚点，工作副本无需入库
-train/data/
-
-# ── 运行时产物与审计日志（体积大，随时间增长）──────────────
-_work/toolout/
-_work/session-audit/*.jsonl
-_work/session-audit/*.log
-_work/session-audit/prefix.txt
-_work/*.json
-_work/PATH-backup-*.json
-
-# ── 测试产物 ──────────────────────────────────────────────
-Local-AI-testarea/
-
-# ── 依赖与外部仓库缓存 ────────────────────────────────────
-node_modules/
-_repos/
-_research/csunx/
-
-# ── 日志与临时 ────────────────────────────────────────────
-*.log
-logs/
-temp/
-tmp/
-*.tmp
-
-# ── 环境与凭据 ────────────────────────────────────────────
-.env
-.env.*
-*.local
-*.secret
-credentials*.json
-
-# ── 个人备份（体积大、无版本价值）────────────────────────
-*.bak-think*
-*.bak-armor
-*.bak-*
-
-# kitty-rev 训练数据派生物（可重建，不入库）
-train/kitty-rev/data/reasoning/
-train/kitty-rev/data/distill/
-train/kitty-rev/eval/bench/data/
-train/kitty-rev/logs/
-train/kitty-rev/out/
-
-# ── 2026-10-21 本轮后训练工程（大件与派生物）────────────────
-.agent-teams/
-
-# ── 2026-10-22 补齐：v3 交付包本体 / 激活缓存 / 字节码 / 清盘临时件 ──
-# tar 24.5G（tar -xf 可复原，绝不入库；谁跑 git add -A 都不能带上它）
-train/local-pack/*.tar
-train/local-pack/merged-layers/
-train/local-pack/act-cache/
-# 激活缓存张量（.pth 已有规则，.pt 之前漏了；收窄到 train/ 下避免误伤别处小 .pt）
-train/**/*.pt
-# Python 字节码：66 个未跟踪 .pyc；已跟踪的 9 个保持原状（不动仓库内容）
-__pycache__/
-*.pyc
-# 一次性清盘脚本（本轮 disk-janitor，无版本价值）
-_work/disk-janitor/
-
-train/tools/ninfer-master/.venv-convert/
-train/tools/ninfer-convert/.venv*/
-train/tools/**/*.gguf
-train/tools/**/*.zip
-train/kitty-rev/tmp/
-train/kitty-rev/out/
-train/kitty-rev/out-*/
-train/kitty-rev/deploy/*.tar.gz
-train/kitty-rev/base/
-train/base/
-
-# 日志目录整体排除，但保留状态/交接类 markdown
-train/kitty-rev/logs/*
-!train/kitty-rev/logs/*.md
-
-# 第三方源码（可重新获取，不入库；本地补丁见 logs/CONVERTER-STATUS.md §10）
-train/tools/ninfer-master/
-train/tools/ninfer-convert/
-
-# AutoDL 凭据（勿提交）
-train/kitty-rev/deploy/.autodl_token
-train/kitty-rev/deploy/.autodl_uuid
+**/checkpoint-*/
+**/optimizer.pt
 **/__pycache__/
-train/kitty-rev/data/intent3/
-train/kitty-rev/deploy/base-meta/
-train/local-pack/*.safetensors
+**/*.pyc
 
-# Windows 保留设备名残留（重定向误创建，非真实文件）
-nul
+# ── 过程垃圾 ────────────────────────────────────────────────
+_work/_misc/
+_work/archive/
+_work/scratch/
+.agent-teams/archive/
+**/.agent-tmp/
+**/tmp/
+**/*.log
+**/*.log.err
+**/*.tmp
+_work/**/imatrix-corpus.txt
+_work/**/tune.log
 
-# 评测数据集（单文件 172MB，超 GitHub 100MB 单文件硬限制，仅本地保留）
-train/eval/sra-g1.0/
-
-# 本地产物与诊断（不入库）：防止 git add -A 拖入 GB 级安装包 / 构建目录 / 运行日志
-_tools/ninfer-build/
-_tools/dist/
-_tools/cmake-*/
+# ── 大体积中间件 ────────────────────────────────────────────
+_tools/cmake-4.1.2-windows-x86_64/
 _tools/curl-sdk/
-_tools/cuda_*.exe
-_tools/vs_BuildTools.exe
-_tools/*.zip
-_tools/*.txt
-_tools/*.log
-_tools/*.err
+_tools/dist/
+_tools/cuda-compat/
+_work/_repos/
+
+# ── 保留（公开）─────────────────────────────────────────────
+# train/lines/**/data/**        ← 训练数据全部公开
+# train/lines/**/scripts/**     ← 脚本公开
+# train/lines/**/quant/**       ← 量化代码公开
+# docs/ plugins/ engines/switch-model.py  engines/*/serve*.bat  engines/*/start-*.py

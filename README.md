@@ -1,3 +1,39 @@
+## 结项状态（2026-11-12）
+
+```text
+项目状态：结项（本地部署成立，训练线归档）
+仓库规模：32.12 GB · 74,000 文件 → 清理后（原 286.92 GB，两轮共删 236.9 GB）
+```
+
+| 交付物 | 形态 | 体积 | 状态 |
+|---|---|---|---|
+| 9B 主模型 | `models/9b/gguf/kittyrev9b-Q5_K_M-im.gguf` | 6.19 GB | ✅ 生产（llama.cpp CUDA，decode 70–75，PPL 3.708） |
+| 27B 保底模型 | `engines/ninfer-27b/…/Huihui-…-Swift-1.5-IQ2_S-mtp.ninfer` | 9.55 GB | ✅ 可用（NInfer，decode 68，MTP 75%） |
+| DSH 适配器 | `plugins/dsh-local-ai/` | ~0 GB | ✅ 双引擎接入（8080 复用，`engines/switch-model.py` 切换） |
+| 训练线 | `train/lines/` | 10.88 GB | 归档（数据 / 脚本 / 校准集 / imatrix 全留） |
+| v6 权重 | — | — | ❌ 2026-11-12 误删，见 `docs/v6-rebuild.md` |
+
+```text
+引擎：engines/llama-cpp（9B，llama-server 8080）· engines/ninfer-27b（27B，start-27b.py 8080）
+切换：python engines/switch-model.py {status|9b [fast|128k|256k]|27b|stop}
+      9B 三档：fast 8k/75 tok/s · 128k/44 tok/s · 256k 主机KV/20 tok/s
+```
+
+---
+
+## 目录结构（2026-11-12）
+
+```text
+AGENTS.md CLAUDE.md README.md TASKPOINT.md     入口与断点（根下只留这 4 个 md）
+docs/            architecture.md · training.md · operations.md · plans.md
+engines/         llama-cpp/（9B）· ninfer-27b/（27B）
+models/          9b/gguf/（Q5_K_M-im · Q6_K · Q8_0）— 只有 GGUF
+plugins/         dsh-local-ai（本地AI，DSH 适配器）
+train/           后训练工作区（结构与产物落位保持不变）
+_work/           过程产物：ninfer-9b 实验脚本 · _research · _archive（md 归档 zip）· session-audit
+_tools/          构建工具链（cmake / ninfer-build）
+```
+
 # Local-AI · 本地大模型推理与后训练工作区
 
 > 本仓库是操作者自建（SHIYI-WORKSPACE）的**本地模型工程**：把 Qwen3.8-27B（IQ2 量化）跑在单张 12G 笔记本显卡上，
@@ -15,7 +51,7 @@
 | 硬件 | RTX 5070 Ti Laptop 12,227 MiB · 有效带宽实测 ≈ 675 GiB/s · 驱动 CUDA sm120 |
 | 模型 | `Huihui-Qwen3.8-27B-abliterated-Swift-1.5-GSQ-RCO-IQ2_S-mtp.ninfer`（9.53 GiB，MTP head 已开） |
 | 推理引擎 | NInfer（`ninfer-csunx`，v0.6.0，OpenAI 兼容 `/v1/chat/completions`） |
-| 宿主 | DeepSeek Harness（DSH），通过自建插件 `plugins/dsh-ninfer-local` 接入 |
+| 宿主 | DeepSeek Harness（DSH），通过自建插件 `plugins/dsh-local-ai` 接入 |
 | 联动方 | `D:\DrCE(26.2.16)`（逆向工作台 kitty-toolbox）——**只读 + 复制，禁止写入** |
 
 ---
@@ -24,7 +60,7 @@
 
 ```
 Local-AI/
-├── plugins/dsh-ninfer-local/     ★ 核心代码（入库）：DSH 的 ninfer provider 适配器
+├── plugins/dsh-local-ai/     ★ 核心代码（入库）：DSH 的 ninfer provider 适配器
 │   ├── lib/index.js              运行时产物（所有补丁落在这里）
 │   ├── src/                      源码（与 lib 同步）
 │   ├── PATCHES.md                逐轮改动记录（含"为什么没做"）
@@ -33,7 +69,7 @@ Local-AI/
 │   ├── README.md                 磁盘预算与串行流程（27B 需串行删，峰值 162G）
 │   ├── data/                     训练数据（train.jsonl / eval.jsonl）
 │   └── scripts/                  setup_env / train_qlora / merge
-├── _research/                    模型调研与选型备案（md 入库，hf 缓存不入库）
+├── _work/_research/                    模型调研与选型备案（md 入库，hf 缓存不入库）
 ├── _work/session-audit/          会话审计脚本与解帧产物（脚本入库，大 jsonl 不入库）
 │   ├── *.mjs                     解帧 / TTFT / 瘦身模拟 / 校验脚本
 │   ├── KITTY-ISSUE-BACKLOG.md    kitty 适配问题的备案（供后训练）
@@ -50,7 +86,7 @@ Local-AI/
 
 ```powershell
 # 1) 引擎（ninfer-csunx 内自带 run-engine.ps1）
-cd D:\BaiduNetdiskDownload\Local-AI\ninfer-csunx
+cd D:\BaiduNetdiskDownload\Local-AI\engines\ninfer-9b\ninfer-csunx
 .\run-engine.ps1            # 监听 127.0.0.1:1234
 
 # 2) 健康检查
@@ -112,7 +148,7 @@ Get-Content D:\BaiduNetdiskDownload\Local-AI\_work\session-audit\ninfer-stats.js
 
 ## 5 后训练
 
-见 [`train/README.md`](train/README.md) 与 [`docs/03-posttraining.md`](docs/03-posttraining.md)。
+见 [`train/README.md`](train/README.md) 与 [`docs/training.md`](docs/training.md)。
 
 数据来源：`_work/session-audit/` 下已解帧的会话日志（`s7`–`s11.jsonl`），含正负样本：
 
@@ -152,13 +188,13 @@ D:\DrCE(26.2.16)  ← 只读源
 
 | 文档 | 内容 |
 |---|---|
-| [`docs/01-architecture.md`](docs/01-architecture.md) | 组件关系、数据流、端口与进程 |
-| [`docs/02-local-model-adapter.md`](docs/02-local-model-adapter.md) | 适配器契约、chunk 类型、易踩坑点 |
-| [`docs/03-posttraining.md`](docs/03-posttraining.md) | 后训练计划、数据格式、显存与磁盘预算 |
-| [`docs/04-drce-linkage.md`](docs/04-drce-linkage.md) | 与 DrCE 的只读联动规范 |
-| [`docs/05-optimization-log.md`](docs/05-optimization-log.md) | 30 轮优化纪实（含失败路径与原因） |
-| [`docs/06-posttraining-feasibility.md`](docs/06-posttraining-feasibility.md) | 后训练可行性指南（能不能训 / 决策树 / 版本锁定 / 挂载红线） |
-| [`plugins/dsh-ninfer-local/PATCHES.md`](plugins/dsh-ninfer-local/PATCHES.md) | 逐轮补丁清单与回滚点 |
+| [`docs/architecture.md`](docs/architecture.md) | 组件关系、数据流、端口与进程 |
+| [`docs/architecture.md`](docs/architecture.md) | 适配器契约、chunk 类型、易踩坑点 |
+| [`docs/training.md`](docs/training.md) | 后训练计划、数据格式、显存与磁盘预算 |
+| [`docs/operations.md`](docs/operations.md) | 与 DrCE 的只读联动规范 |
+| [`docs/architecture.md`](docs/architecture.md) | 30 轮优化纪实（含失败路径与原因） |
+| [`docs/training.md`](docs/training.md) | 后训练可行性指南（能不能训 / 决策树 / 版本锁定 / 挂载红线） |
+| [`plugins/dsh-local-ai/PATCHES.md`](plugins/dsh-local-ai/PATCHES.md) | 逐轮补丁清单与回滚点 |
 | [`_work/session-audit/KITTY-ISSUE-BACKLOG.md`](_work/session-audit/KITTY-ISSUE-BACKLOG.md) | kitty 适配问题备案（后训练输入） |
 
 ---
@@ -172,4 +208,15 @@ D:\DrCE(26.2.16)  ← 只读源
   & 'C:\Program Files (x86)\PowerShell\7\pwsh.exe' -NoLogo -NoProfile -Command '<cmd>'
 · D 盘空间紧张（后训练前先看 Get-PSDrive D）
 · 根目录在百度网盘同步目录内，出现过间歇性"文件不可见"，大批量操作前先确认
+```
+
+## 本地模型服务（2026-11-12 起）
+
+```text
+主用：llama.cpp CUDA（llama-server，GPU 全量 offload，端口 8080）
+      模型：_work/ninfer-9b/gguf/kittyrev9b-Q5_K_M-im.gguf（6.19 GB，Q5_K_M + imatrix）
+      启动：_work/ninfer-9b/p3_llama_serve.bat
+      实测：decode 中位 ~70 tok/s，17/17 回归通过，PPL 3.708（Q8_0 基线 3.692，+0.43%）
+适配器：plugins/dsh-local-ai（本地AI），profile=llama-cpp 指向 127.0.0.1:8080/v1
+备用：NInfer 引擎（build-9b，35 tok/s，保留 27B 路线与对照）
 ```

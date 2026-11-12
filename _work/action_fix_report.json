@@ -1,0 +1,28 @@
+{
+  "rows": 7562,
+  "touched": 204,
+  "fixed": {
+    "kitty_die|detect": 173,
+    "kitty_frida|script": 22,
+    "kitty_unpack|scan": 7,
+    "kitty_dnspy|decompile": 16,
+    "kitty_wpb|query": 4,
+    "kitty_uedump|dump": 4,
+    "kitty_status|ensure-bridge": 4,
+    "kitty_fmodel|extract": 3,
+    "kitty_ghidra|xrefs": 3,
+    "kitty_dnspy|import": 1,
+    "kitty_dnspy|types": 1,
+    "kitty_unpack|probe": 4,
+    "kitty_unpack|extract": 4
+  },
+  "fixed_total": 246,
+  "skipped": {
+    "kitty_ce|find": 5,
+    "kitty_settings|task-dispatch": 1,
+    "kitty_ida|search": 1,
+    "kitty_ce|pread": 2
+  },
+  "unmapped": {},
+  "bad_after": 9
+}

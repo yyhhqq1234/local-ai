@@ -1,0 +1,95 @@
+=== 1) 词表 v6 ===
+Total terms: 502
+Issues: 21
+  [action] 反骑: freq=0 (not found in raw data)
+  [emotion] 餍足感: freq=0 (not found in raw data)
+  [emotion] 餍足的笑意: freq=0 (not found in raw data)
+  [emotion] 餍足地笑: freq=0 (not found in raw data)
+  [emotion] 餍足地叹了口气: freq=0 (not found in raw data)
+  [emotion] 餍足地叹息: freq=0 (not found in raw data)
+  [emotion] 餍足地喘息: freq=0 (not found in raw data)
+  [emotion] 餍足地呻吟: freq=0 (not found in raw data)
+  [emotion] 餍足地呢喃: freq=0 (not found in raw data)
+  [emotion] 餍足地低语: freq=0 (not found in raw data)
+  [emotion] 餍足地呢喃着: freq=0 (not found in raw data)
+  [emotion] 餍足地低语着: freq=0 (not found in raw data)
+  [emotion] 餍足地呢喃道: freq=0 (not found in raw data)
+  [emotion] 餍足地低语道: freq=0 (not found in raw data)
+  [position] reverse: freq=0 (not found in raw data)
+  [position] 背对背: freq=0 (not found in raw data)
+  [genre] 低龄向: freq=0 (not found in raw data)
+  [genre] 虚拟游戏: freq=0 (not found in raw data)
+  [genre] 调伏: freq=0 (not found in raw data)
+  [identity] 萝莉: freq=0 (not found in raw data)
+  [identity] 不死族: freq=0 (not found in raw data)
+
+=== 2) 训练数据文件 ===
+final-nsfw.jsonl: first record keys = ['messages', 'meta']
+  messages count = 2
+  msg[0] role = user
+  msg[1] role = assistant
+  meta = {'cat': 'kb-tool', 'tier': 'gold', 'tool': 'Cpp2IL', '__stage': 're', '__batch': 'qc-silver'}
+final-nsfw.jsonl: 1292 lines
+nsfw-train-v4.jsonl: 9653 lines
+  first record keys = ['id', 'messages', 'meta']
+  messages count = 2
+  msg[0] content preview = 以下是故事的前文背景：
+
+淫笑，肉棒又
+顶住了妈妈的大白腿内侧，也就是所谓的神秘领域。
+
+「歪，歪了啦！是，是妈妈中间的小洞洞，里面流了好多水，嗯，宝贝～把
+，把大肉棒放进去，嗯啊，帮妈咪，堵住，嗯，堵住那些水水，好，好吗？」
+
+妈妈一改之前的焦急，语气变得温柔起来，好似在哄骗初生的婴儿，让其不
+要胡闹一般，虞芷兰的轻柔话语像是晴天里最白的那朵云彩，让人生不出一丝违
+逆，拒绝的心思。
+
+张扬本就有
+  meta = {'__stage': 'nsfw', '__src': '纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\诱导手环-MC王大锤合集.txt', 'win': 182, 'chars': 1481, 'stype': 'multi', 'topic': ['近亲', '调教', '催眠', '婚恋', '低龄向', '露出', '束缚', '异世界', '后宫', 'NTR', '百合'], 'level': 'L3', 'form': '多篇合集', 'pov': '混合', 'dialogue': '高', 'author': 'MC王大锤', 'ip_fanfic': False}
+
+nsfw-coverage.json keys = ['files_indexed', 'files_cut', 'files_minor_flagged_left_in_index', 'samples', 'src_chars_full', 'src_chars_cut', 'used_chars', 'skipped_chars', 'coverage_of_cut', 'coverage_of_full']
+  files_indexed = 62
+  files_cut = 62
+  files_minor_flagged_left_in_index = 0
+  samples = 9253
+  src_chars_full = 18641293
+nsfw-glossary.jsonl: 252 lines
+nsfw-glossary-v2.jsonl: 252 lines
+nsfw-glossary-v3-new.jsonl: 39 lines
+nsfw-glossary-r4.jsonl: 54 lines
+
+=== 3) 训练数据分布 ===
+Train v4 total: 9653
+stype distribution: {'multi': 937, 'scene': 1926, 'cont': 5043, 'style': 877, 'expand': 470, '?': 252}
+level distribution: {'L3': 7873, 'L2': 541, 'L1': 839, '?': 252}
+topic distribution (top 20):
+  露出: 9253
+  调教: 9124
+  近亲: 8997
+  束缚: 8562
+  婚恋: 8347
+  催眠: 8137
+  低龄向: 8107
+  后宫: 7790
+  NTR: 7460
+  异世界: 7175
+  同人: 6904
+  非人: 6801
+  百合: 6128
+  虚拟游戏: 478
+  ?: 252
+
+=== 4) 词表与训练数据一致性 ===
+Category markers in first 10 train records: ['作者mc王大锤合集', '作者mc王大锤合集', '我的姐姐是大演员', '作者mc王大锤合集', '欲望狂想曲', '后宫催眠日记']
+Lexicon v6 categories: ['body', 'action', 'state', 'emotion', 'position', 'onomatopoeia', 'vocalization', 'relationship', 'descriptor', 'genre', 'identity', 'personality']
+
+High-freq words (>=100): 399
+High-freq words not found in first 100 raw lines: 0
+
+=== 5) 潜在问题 ===
+1. nsfw-train-v4.jsonl 生成时间 vs 词表 v6 更新时间：需确认训练数据是否基于 v6 词表
+2. nsfw-coverage.json 可能未反映 v6 新增词（genre/identity/personality 三大类）
+3. cross_ref 机制在训练数据中如何体现？（训练数据中是否有跨类别引用？）
+4. 词表 v6 的 502 词中，有多少在训练数据的 system prompt 中被实际引用？
+5. 长尾词（freq < 10）是否需要进入训练数据？还是只作为参考？

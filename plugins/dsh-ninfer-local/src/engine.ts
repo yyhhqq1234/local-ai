@@ -6,9 +6,14 @@
  *   （不可用 detached：Windows 的 DETACHED_PROCESS 会让 pwsh 秒退 code=0）
  * - 所有读写都限制在 engineDir 内（模型目录、配置文件、日志）
  * - 参数以 JSON 落盘（config/engine.json），启动时渲染成 PowerShell 调用
+ *
+ * 2026-11-08 多档位（ENGINE_PROFILES）：
+ *   csunx-27b —— 27B，走 ninfer-csunx/run-engine.ps1（原逻辑逐字保留）
+ *   build-9b  —— 9B，直启 _tools/ninfer-build/apps/ninfer-serve.exe（实测可用配置）
+ *   两档互斥运行，共用 params.port，故 baseURL 不变。
  */
 import { spawn } from 'node:child_process'
-import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, openSync, closeSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { request } from 'node:http'
 
@@ -40,6 +45,8 @@ function resolvePwsh(): string {
 }
 
 export interface EngineParams {
+  /** 引擎档位：csunx-27b（默认）| build-9b */
+  profile: string
   /** GPU 页池 token 数（DeviceKV） */
   deviceKV: number
   /** Host KV（MiB） */
@@ -58,9 +65,61 @@ export interface EngineParams {
   vision: 'off' | 'cpu' | 'overlay'
   /** 引擎端口 */
   port: number
+  /** 显式指定的模型文件名（可选） */
+  modelFile?: string
 }
 
+/** 引擎档位定义 */
+interface EngineProfile {
+  label: string
+  kind: 'launcher' | 'exe'
+  /** 该档位真实引擎可执行（27B 与 9B 进程同名 ninfer-serve.exe，只能靠路径区分） */
+  engineExe?: string
+  engineDir: string
+  /** launcher 模式：run-engine.ps1 所在目录；exe 模式：exe 所在目录（cwd） */
+  exe?: string
+  modelDirs: string[]
+  defaultModel?: string
+  /** exe 模式：强制覆盖 maxContext（引擎实际容量） */
+  maxContext?: number
+  /** exe 模式：固定附加参数 */
+  extraArgs?: string[]
+  /** exe 模式：视觉开关参数名 */
+  visionFlag?: string
+}
+
+export const ENGINE_PROFILES: Record<string, EngineProfile> = {
+  'csunx-27b': {
+    label: '27B · csunx launcher（原路径，行为不变）',
+    kind: 'launcher',
+    engineDir: 'D:/BaiduNetdiskDownload/Local-AI/ninfer-csunx',
+    engineExe: 'D:/BaiduNetdiskDownload/Local-AI/ninfer-csunx/runtime/engine/ninfer-serve.exe',
+    modelDirs: [
+      'D:/BaiduNetdiskDownload/Local-AI/ninfer-csunx/model',
+      'D:/BaiduNetdiskDownload/Local-AI/ninfer-27b-kv-stream-3arch-20261019/model',
+    ],
+    defaultModel: '',
+  },
+  'build-9b': {
+    label: '9B · ninfer-build 直启（chunk128 + no-thinking）',
+    kind: 'exe',
+    exe: 'D:/BaiduNetdiskDownload/Local-AI/_tools/ninfer-build/apps/ninfer-serve.exe',
+    engineExe: 'D:/BaiduNetdiskDownload/Local-AI/_tools/ninfer-build/apps/ninfer-serve.exe',
+    engineDir: 'D:/BaiduNetdiskDownload/Local-AI/_tools/ninfer-build/apps',
+    modelDirs: ['D:/BaiduNetdiskDownload/Local-AI/train/lines/9b-oxcoder/out'],
+    defaultModel: 'kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer',
+    maxContext: 4096,
+    // 实测：prefill 块宽 >128 时 L03 proj_k/proj_v（1024 行段）NaN → 500 → 503；
+    //      缺 --no-thinking 时内容全落 reasoning_content、message.content 为空。
+    extraArgs: ['--greedy', '--host-context-mib', '2048', '--prefill-chunk', '128', '--no-thinking'],
+    visionFlag: '--vision',
+  },
+}
+
+const DEFAULT_PROFILE = 'csunx-27b'
+
 export const DEFAULT_PARAMS: EngineParams = {
+  profile: DEFAULT_PROFILE,
   deviceKV: 36864,
   hostKVMiB: 7168,
   kvDtype: 'nvfp4',
@@ -80,6 +139,8 @@ export interface EngineState {
   model?: string
   contextWindow?: number
   params: EngineParams
+  profile: string
+  profiles: Record<string, string>
   modelFile?: string
   logs: string[]
 }
@@ -98,6 +159,10 @@ function httpJson(url: string, timeoutMs = 3000): Promise<unknown> {
     req.on('error', rej)
     req.end()
   })
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((r) => setTimeout(r, ms))
 }
 
 export class NinferManager {
@@ -131,33 +196,73 @@ export class NinferManager {
     return next
   }
 
-  // ---------- 模型 ----------
-  listModels(): Array<{ file: string; bytes: number; path: string }> {
-    const modelDir = join(this.dir, 'model')
-    if (!existsSync(modelDir)) return []
-    return readdirSync(modelDir)
-      .filter((f) => f.endsWith('.ninfer'))
-      .map((f) => {
-        const p = join(modelDir, f)
-        return { file: f, bytes: statSync(p).size, path: p }
-      })
-      .sort((a, b) => a.file.localeCompare(b.file))
+  // ---------- 档位 ----------
+  profileOf(name: string): EngineProfile {
+    return ENGINE_PROFILES[name] ?? ENGINE_PROFILES[DEFAULT_PROFILE]
   }
 
-  /** launcher 语义：取排序第一个；这里显式指定优先文件 */
-  activeModelFile(): string | undefined {
-    const params = this.readParams() as EngineParams & { modelFile?: string }
+  // ---------- 模型 ----------
+  listModels(): Array<{ file: string; bytes: number; path: string; dir: string; profile: string }> {
+    const out: Array<{ file: string; bytes: number; path: string; dir: string; profile: string }> = []
+    for (const [name, prof] of Object.entries(ENGINE_PROFILES)) {
+      for (const d of prof.modelDirs) {
+        if (!existsSync(d)) continue
+        for (const f of readdirSync(d)) {
+          if (!f.endsWith('.ninfer')) continue
+          const p = join(d, f)
+          out.push({ file: f, bytes: statSync(p).size, path: p, dir: d, profile: name })
+        }
+      }
+    }
+    return out.sort((a, b) => a.file.localeCompare(b.file) || a.profile.localeCompare(b.profile))
+  }
+
+  /** 当前档位下的模型对象（带绝对 path，直启模式要用） */
+  activeModel(): { file: string; bytes: number; path: string; dir: string; profile: string } | undefined {
+    const params = this.readParams()
+    const prof = this.profileOf(params.profile)
     const models = this.listModels()
-    if (models.length === 0) return undefined
-    if (params.modelFile && models.some((m) => m.file === params.modelFile)) return params.modelFile
-    return models[0].file
+    if (!models.length) return undefined
+    const mine = models.filter((m) => m.profile === params.profile)
+    if (params.modelFile) {
+      const hit = mine.find((m) => m.file === params.modelFile)
+      if (hit) return hit
+    }
+    if (prof.defaultModel) {
+      const d = mine.find((m) => m.file === prof.defaultModel)
+      if (d) return d
+    }
+    return mine[0] ?? models[0]
+  }
+
+  activeModelFile(): string | undefined {
+    const m = this.activeModel()
+    return m ? m.file : undefined
   }
 
   switchModel(file: string): string {
     const models = this.listModels()
     if (!models.some((m) => m.file === file)) throw new Error(`model not found: ${file}`)
-    this.writeParams({ modelFile: file } as Partial<EngineParams>)
+    this.writeParams({ modelFile: file })
     return file
+  }
+
+  // ---------- 引擎身份 ----------
+  engineInfo(): { profile: string; label: string; kind: string; exe: string; exists: boolean; bytes?: number; modelDirs: string[] } {
+    const params = this.readParams()
+    const prof = this.profileOf(params.profile)
+    const exe = prof.engineExe ?? prof.exe ?? ''
+    let bytes: number | undefined
+    try { bytes = statSync(exe).size } catch { bytes = undefined }
+    return {
+      profile: params.profile,
+      label: prof.label,
+      kind: prof.kind,
+      exe,
+      exists: bytes !== undefined,
+      bytes,
+      modelDirs: prof.modelDirs,
+    }
   }
 
   // ---------- 进程 ----------
@@ -174,7 +279,7 @@ export class NinferManager {
         running = true
         model = String(first.id ?? '')
         const meta = (first.meta ?? {}) as Record<string, unknown>
-        contextWindow = Number(first.context_window ?? meta.n_ctx ?? 0) || undefined
+        contextWindow = Number(first.context_window ?? first.max_model_len ?? meta.n_ctx ?? 0) || undefined
       }
     } catch { /* not running */ }
     const logs = this.tailLogs(8)
@@ -186,6 +291,9 @@ export class NinferManager {
       model,
       contextWindow,
       params,
+      profile: params.profile,
+      profiles: Object.fromEntries(Object.entries(ENGINE_PROFILES).map(([k, v]) => [k, v.label])),
+      engine: this.engineInfo(),
       modelFile: this.activeModelFile(),
       logs,
     }
@@ -208,68 +316,94 @@ export class NinferManager {
     if (st.running) return st
     const params = { ...this.readParams(), ...overrides }
     if (Object.keys(overrides).length) this.writeParams(overrides)
-    const modelFile = this.activeModelFile()
-    if (!modelFile) throw new Error('no .ninfer model in model/ — 先把模型放进 ' + join(this.dir, 'model'))
+    const model = this.activeModel()
+    if (!model) throw new Error(`no .ninfer model in profile=${params.profile}`)
+    const prof = this.profileOf(params.profile)
+    // 硬约束：27B 与 9B 引擎一一对应，模型必须落在本档位的模型目录里
+    const allowed = prof.modelDirs ?? []
+    if (allowed.length && !allowed.includes(model.dir)) {
+      throw new Error('模型 ' + model.file + ' 不属于档位 ' + params.profile +
+        ' 的引擎（应在 ' + allowed.join(' | ') + '）')
+    }
+    const logDir = join(this.dir, 'logs')
 
-    const script = join(this.dir, 'run-engine.ps1')
-    if (!existsSync(script)) throw new Error('run-engine.ps1 missing: ' + script)
+    let child: ReturnType<typeof spawn> | undefined
+    let exe = ''
+    let engineDir: string
 
-    const args = [
-      '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', script,
-      '-DeviceKV', String(params.deviceKV),
-      '-HostKVMiB', String(params.hostKVMiB),
-      '-KVDType', params.kvDtype,
-      '-PrefillChunk', String(params.prefillChunk),
-      '-DraftTokens', String(params.draftTokens),
-      '-ReasoningEffort', params.reasoningEffort,
-      '-MaxContext', String(params.maxContext),
-      '-EnginePort', String(params.port),
-      '-ModelFile', modelFile,
-    ]
-    if (params.vision === 'off') args.push('-NoVision')
-    else if (params.vision === 'cpu') args.push('-VisionCpu')
+    if (prof.kind === 'exe') {
+      // 直启：exe 自身即服务端（不经 pwsh、不经 run-engine.ps1）
+      if (!prof.exe) throw new Error('profile ' + params.profile + ' has no exe')
+      if (!existsSync(prof.exe)) throw new Error('engine exe missing: ' + prof.exe)
+      const args: string[] = [model.path,
+        '--max-context', String(prof.maxContext ?? params.maxContext),
+        '--port', String(params.port)]
+      for (const a of prof.extraArgs ?? []) args.push(a)
+      if (prof.visionFlag && params.vision !== 'off') args.push(prof.visionFlag)
+      exe = prof.exe
+      engineDir = prof.engineDir
+      child = spawn(exe, args, { cwd: engineDir, windowsHide: true, stdio: 'ignore' })
+    } else {
+      engineDir = prof.engineDir
+      const script = join(engineDir, 'run-engine.ps1')
+      if (!existsSync(script)) throw new Error('run-engine.ps1 missing: ' + script)
+      const args = [
+        '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', script,
+        '-DeviceKV', String(params.deviceKV),
+        '-HostKVMiB', String(params.hostKVMiB),
+        '-KVDType', params.kvDtype,
+        '-PrefillChunk', String(params.prefillChunk),
+        '-DraftTokens', String(params.draftTokens),
+        '-ReasoningEffort', params.reasoningEffort,
+        '-MaxContext', String(params.maxContext),
+        '-EnginePort', String(params.port),
+        '-ModelFile', model.file,
+      ]
+      if (params.vision === 'off') args.push('-NoVision')
+      else if (params.vision === 'cpu') args.push('-VisionCpu')
+      exe = resolvePwsh()
+      child = spawn(exe, args, { cwd: engineDir, windowsHide: true, stdio: 'ignore' })
+    }
 
-    const exe = resolvePwsh()
-    this.child = spawn(exe, args, {
-      cwd: this.dir,
-      detached: false,
-      windowsHide: true,
-      stdio: 'ignore',
-    })
-    // 必须有 error 监听者：ENOENT/EACCES 否则变 uncaught，把宿主进程打穿
-    this.child.on('error', (e: Error) => {
+    this.child = child
+    child.on('error', (e: Error) => {
       console.error(`[dsh-ninfer-local] engine spawn failed (exe=${exe}):`, e.message)
     })
-    this.child.unref?.()
-    if (this.child.pid) writeFileSync(this.pidPath, String(this.child.pid), 'utf8')
+    child.unref?.()
+    if (child.pid) writeFileSync(this.pidPath, String(child.pid), 'utf8')
 
-    // 等就绪（最多 120s）
-    const deadline = Date.now() + 120_000
+    const deadline = Date.now() + 150_000
     while (Date.now() < deadline) {
-      await new Promise((r) => setTimeout(r, 1500))
+      await sleep(1500)
       const s = await this.status()
       if (s.running) return s
     }
-    throw new Error('engine did not become ready within 120s — 检查 logs/ 与显存占用')
+    throw new Error(`engine did not become ready within 150s (profile=${params.profile}, model=${model.file}) — 检查 ${logDir}`)
   }
 
   async stop(): Promise<void> {
-    const params = this.readParams()
     try {
       const pidRaw = readFileSync(this.pidPath, 'utf8').trim()
       if (pidRaw) spawn('taskkill', ['/F', '/T', '/PID', pidRaw], { windowsHide: true, stdio: 'ignore' })
     } catch { /* no pid file */ }
-    // 兜底：按镜像名杀（本插件独占的引擎实例）
-    spawn('taskkill', ['/F', '/IM', 'ninfer-serve.exe'], { windowsHide: true, stdio: 'ignore' })
+    // 兜底：只杀「可执行路径 == 本档位引擎」的进程。
+    // 绝不能用 taskkill /IM ninfer-serve.exe —— 27B 与 9B 进程名完全相同，会误杀另一个引擎。
+    const info = this.engineInfo()
+    if (info.exe) {
+      const esc = info.exe.replace(/'/g, "''")
+      const ps = "Get-Process -Name ninfer-serve -ErrorAction SilentlyContinue | " +
+        "Where-Object { $_.Path -and $_.Path.ToLower() -eq '" + esc.toLowerCase() + "' } | " +
+        "ForEach-Object { Stop-Process -Id $_.Id -Force }"
+      spawn('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', ps], { windowsHide: true, stdio: 'ignore' })
+    }
     try { rmSync(this.pidPath) } catch { /* ignore */ }
-    // 等端口释放
-    const deadline = Date.now() + 20_000
+    const deadline = Date.now() + 25_000
     while (Date.now() < deadline) {
-      await new Promise((r) => setTimeout(r, 800))
+      await sleep(800)
       const s = await this.status()
       if (!s.running) return
     }
-    void params
+    throw new Error('engine still answering after kill')
   }
 
   async restart(overrides: Partial<EngineParams> = {}): Promise<EngineState> {

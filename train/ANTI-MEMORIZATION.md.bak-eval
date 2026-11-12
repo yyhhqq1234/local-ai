@@ -1,0 +1,272 @@
+# 抗「背答案」训练方案（RE / 后训练通用）
+
+> 2026-10-28 立 · 基于 RE 补训 r2 的实测证据
+> 适用：RE 阶段续训、2A 轨迹、2B NSFW、2C 长上下文，以及 MTP 对齐
+
+---
+
+## 0. 一句话
+
+**train loss 下降 + in-sample 命中不变 ≠ 学到了东西。** 必须用「改写提问」的泛化集验收，
+并把 n-gram 重合率当成和 loss 同等重要的指标盯着。
+
+---
+
+## 1. 问题量化（实测，不是推测）
+
+### 1.1 三档权重在 in-sample 集上的表现
+
+| 指标 | 档1（1 遍） | 档2（2 遍） | 档3（3 遍） |
+|---|---|---|---|
+| 工具命中 | 5/6 | 5/6 | 5/6 |
+| 编造 | 1（`kitty_dbvm`） | 0 | 0 |
+| **n-gram 20-gram 重合** | **0.167** | **0.515** | **0.478** |
+| **逐字重合 1.00 的条数** | **1 条** | **4 条** | **4 条** |
+| 文本相似（SequenceMatcher） | 0.336 | 0.637 | 0.603 |
+
+### 1.2 关键归因
+
+`eval_re_heldout.py` 的 docstring 写的是「用训练集真实样本做 held-out 续写对比」——
+**训练集样本不可能是 held-out**。它从 `train-kitty-core.jsonl`（就是训练用的 5602 条）抽样，
+只跳过前 20 条，所以 10 条里有 4 条模型能逐字复现。
+
+结论链：
+
+```
+「编造 1 → 0」不是幻觉被消除，是训练第 2 遍时把那条样本背牢了
+「train_loss 1.110 → 0.3731」是 3 遍同一批数据的必然，不是能力提升
+背答案条数 1 → 4 直接量化了记忆化程度随遍数上升
+```
+
+### 1.3 为什么这个数据集特别容易背
+
+```
+user  平均 14 字符（极短，信息量低，字面命中容易）
+assistant 模板化三段式（同工具的回答高度雷同，整段可整块记忆）
+同一工具在同一 intent 下的回答措辞几乎不变
+```
+
+---
+
+## 2. 三层对策
+
+### 2.A 数据层（根本解，优先做）
+
+#### A1 user 提问同义改写增广 ★核心
+
+```bash
+# 5602 → 22408（K=4）
+./train/.venv/Scripts/python.exe -u train/scripts/augment_user_queries.py \
+  --k 4 --out train/data/kitty-reverse/train-kitty-aug.jsonl
+```
+
+**原理**：同一意图 × K 种表述，`assistant` 保持**完全不变**。
+模型要同时满足 K 种提问，就只能学「语义 → 工具」映射，无法靠字面命中。
+副作用：同一答案被 K 条不同 prompt 指向 = 对「答案串」施加了正则化。
+
+产出脚本已就位：`train/scripts/augment_user_queries.py`
+- 10 种前缀（「遇到个情况：」「问一下，」…）
+- 9 种后缀（「该怎么走？」「给个具体做法。」…）
+- 21 组领域同义词（`已加载→加载好的`、`导入表→import 表`…）
+- 4 种结构模板（陈述→疑问 / 求助 / 场景 / 确认）
+- 按 `(新 user, 消息数)` 去重，不会产出完全相同的样本
+
+**质量要求**（已自测通过）：
+```
+原句: 要看内存里已加载模块的导入表
+v0: 要看内存里已加载模块的导入表
+v1: 要看内存里加载好的模块的import 表，有推荐的做法吗？
+v2: 要看内存里已加载模块的导入表，帮我处理一下。
+v3: 问一下，要看内存里已加载模块的import 表，给个具体做法。
+```
+
+#### A2 输出模板变异（可选，A1 不够时再上）
+
+同一工具的 assistant 回答准备 2–3 套措辞（三段式的顺序、连接词、详略变化），
+交错分配。降低「整段串」的可记忆性。成本高，先看 A1 效果。
+
+#### A3 近重复去重
+
+对 assistant 正文做 minhash/SimHash，相似度 >0.92 的归并保留一条。
+5602 条里已知有 286 条原始重复（见 PITFALLS B 段），去重后样本更「稀」。
+
+---
+
+### 2.B 训练层（参数调整）
+
+| 参数 | 当前 r2 | 建议 | 依据 |
+|---|---|---|---|
+| `--epochs` | 2.0 | **1.0** | 1 遍背 1 条，2 遍背 4 条；epoch2 后 1000 步横盘 0.21–0.24 收益饱和 |
+| `--lr` | 5e-05 | **3e-05** | 续训起点 loss 已 0.69，偏高 |
+| `lora_dropout` | 0.05 | **0.10** | 直接对抗记忆化（当前硬编码在脚本里，需加参数） |
+| `weight_decay` | 未设（0） | **0.01** | 抑制大权重，弱化记忆特征 |
+| `eval_strategy` | `no`（只有 train loss） | **`steps` 每 200 步** | 用泛化集盯着，不靠猜 |
+| `load_best_model_at_end` | 无 | **True + metric_for_best_model=gen_acc** | 早停，取泛化最优而非 loss 最优 |
+| `--save-total-limit` | 8 | **8（不变）** | 但关键节点手工快照（见 §3.3） |
+
+需要给 `train_qlora9b.py` 补的参数：
+
+```python
+ap.add_argument("--lora-dropout", type=float, default=0.05, dest="lora_dropout")
+ap.add_argument("--weight-decay", type=float, default=0.0, dest="weight_decay")
+ap.add_argument("--eval-steps", type=int, default=0, dest="eval_steps",
+                help=">0 时启用 eval_strategy=steps + 每 N 步评泛化集")
+```
+
+---
+
+### 2.C 评测层（把 in-sample 降级，泛化集升为主判据）
+
+| 脚本 | 定位 | 用途 |
+|---|---|---|
+| `eval_re_generalize.py` | **主判据** | 12 条改写提问、去工具名、L1/L2/L3 三档难度 |
+| `eval_re_heldout.py` | 记忆度基线 | 保留，但只用来**测记忆化程度**（看 n-gram 重合），不用来验收能力 |
+
+#### 泛化集判据（已写进脚本 exit code）
+
+```
+命中率 >= 70%（12 条里 >= 9 条）   判为学到语义映射
+编造 == 0                          必要条件，有编造直接不通过
+L3 命中 >= 2/4                     说明能做抽象推理而非字面匹配
+```
+
+#### 记忆化红线（每 200 步记录）
+
+```
+n-gram 20-gram 平均重合 < 0.40      健康
+0.40 ~ 0.60                        警告，考虑降 epoch 或加大 dropout
+> 0.60                             停止，这是纯记忆
+逐字重合(1.00) 条数 == 0            理想；>=3 条必须停
+```
+
+---
+
+## 3. 执行顺序
+
+### 3.1 立即可做（不依赖新训练）
+
+```bash
+# 1) 生成增广集
+./train/.venv/Scripts/python.exe -u train/scripts/augment_user_queries.py --k 4
+
+# 2) 按长度分桶（消除显存碎片，见 PITFALLS D 段）
+./train/.venv/Scripts/python.exe -u train/scripts/bucket_by_length.py \
+  --in train/data/kitty-reverse/train-kitty-aug.jsonl \
+  --out train/data/kitty-reverse/train-kitty-aug-bucketed.jsonl --bucket 64
+
+# 3) 用泛化集测现有三档，确定当前真实水平
+bash train/scripts/run_eval_generalize.sh
+```
+
+### 3.2 下一轮 RE 训练配方
+
+```bash
+export PYTORCH_ALLOC_CONF=max_split_size_mb:64,garbage_collection_threshold:0.80
+export VRAM_FRAC=0.93
+
+./train/.venv/Scripts/python.exe -u train/scripts/train_qlora9b.py \
+  --base train/models/OxCoder-9B \
+  --data train/data/kitty-reverse/train-kitty-aug-bucketed.jsonl \
+  --stage re \
+  --out train/out/re-stage1-r3 \
+  --ctx 2048 --bs 1 --ga 4 \
+  --epochs 1 \
+  --lr 3e-5 \
+  --lora-dropout 0.10 \
+  --weight-decay 0.01 \
+  --optim adamw_torch --use-liger-ce \
+  --save-steps 200 --save-total-limit 8
+```
+
+**样本量变化**：5602 → 22408（K=4），1 epoch 的步数 = 22408/4 = 5602 步，
+时长约 5602 × 2.11 s ≈ **3.3 h**（比 r2 的 2 epoch / 2802 步慢，但见过的是 4 倍表达多样性）。
+
+### 3.3 checkpoint 纪律（r2 踩过的坑）
+
+`save_total_limit=8` + 末尾额外存一个 `checkpoint-<final>`，会**挤掉**本来以为保住的早期点。
+r2 实测：理论上 ckpt-1400 能保住，实际被删（因为多了一个 ckpt-2802 占位）。
+
+**规则**：训练开始后，任何**语义上有意义的整点**（epoch 边界、步数整数千）立即
+`cp adapter_model.safetensors + adapter_config.json` 到独立目录，不等训练结束。
+
+```bash
+mkdir -p train/out/<run>-ckpt<step>-snapshot
+cp train/out/<run>/checkpoint-<step>/{adapter_model.safetensors,adapter_config.json} \
+   train/out/<run>-ckpt<step>-snapshot/
+md5sum 两个文件确认一致
+```
+
+---
+
+## 4. 与四阶段计划的关系
+
+| 阶段 | 数据 | 抗记忆化要点 |
+|---|---|---|
+| RE（已完成 r2） | kitty-core 5602 | **r3 用增广集**，epoch 1，lr 3e-5 |
+| 2A 轨迹 | traj-all 17553 | 轨迹本身长且多样，背不动；但仍每 200 步记 n-gram |
+| 2B NSFW | nsfw-gated 22197 | 成对正负样本已天然抗记忆；注意 PITFALLS B6 的长度耦合 |
+| 2C 长上下文 | mix-2c 14280 | 长文本更难整段背，但模板化 chunk 头部要注意 |
+
+---
+
+## 5. 自检清单（每轮训练前后）
+
+```
+[ ] 泛化集（eval_re_generalize.py）已跑，知道基线命中率
+[ ] in-sample 集（eval_re_heldout.py）记录了 n-gram 重合，作为记忆度基线
+[ ] 数据已 user 增广（K>=3）或已确认文本多样性足够
+[ ] epoch <= 1（除非有明确证据说明需要更多）
+[ ] lora_dropout >= 0.10（抗记忆化）
+[ ] eval_strategy=steps 已开，每 200 步有泛化分
+[ ] 语义整点已手工快照，不依赖 save_total_limit
+[ ] 训练后必跑：泛化集判据（命中>=70% + 编造=0 + L3>=2/4）
+[ ] 训练后必看：n-gram 重合 <0.40，逐字重合条数 == 0
+```
+
+---
+
+## 6. 工具清单（2026-10-28 建，全部可跑）
+
+| 脚本 | 作用 | 关键参数 |
+|---|---|---|
+| `eval_cases_re.py` | RE 泛化场景库 **40 条**（36 正向含 args 参数约束 + 4 负向「不该调工具」，L1/L2/L3 交错） | 改动后必须跑 `check_eval_leak.py` |
+| `eval_re_generalize.py` | 泛化测试主判据（四分类 hit/wrong/fake/none） | `--adapter` / `--out` |
+| `eval_re_heldout.py` | in-sample **记忆度**基线（只看 n-gram 重合） | `--n 10 --seed 7` |
+| `check_eval_leak.py` | 场景 vs 训练集表述重叠（阈值 0.55） | exit 1 = 有泄漏 |
+| `eval_multi_adapter.py` | **多档单次加载**对比（set_adapter 切换） | `--adapters "标签=路径,..."` |
+| `select_best_ckpt.py` | 遍历 checkpoint 跑泛化集选优 | `--run <out目录>` |
+| `health_check.py` | 一键体检（6 类检查） | `--skip-leak` / `--skip-script` |
+| `toolname.py` | 工具名提取唯一真相源 | `extract()` / `extract_seq()` |
+| `augment_user_queries.py` | user 提问增广（长度 guard + 隔离清单） | `--min-user-chars 4 --max-user-chars 600` |
+| `build_tool_coverage.py` | 低覆盖工具补强（三套模板按 channel 分） | `--target 50 --force <工具>` |
+| `check_tool_coverage.py` | 双前缀覆盖核查 | — |
+| `fix_typo_toolnames.py` | 修工具名错拼（词边界正则 + 备份） | `--apply` |
+| `cap_traj_fragments.py` | 2A 轨迹片段数上限（均匀采样） | `--max-per-task 40` |
+| `dedup_exact.py` | 精确去重（同 user+assistant 留一条） | `--in <路径> --apply` |
+| `eval_2a_sequence.py` | **2A 判据**：工具序列 LCS | `--n 20 --max-new 1200` |
+| `eval_2c_longctx.py` | **2C 判据**：长上下文路由退化 | `--prefix-tokens 3000` |
+
+### 6.1 判据定义（2026-10-28 定）
+
+| 阶段 | 判据 | 阈值 |
+|---|---|---|
+| RE | 泛化命中率（**工具+参数都对**）/ 编造 / 负向题正确率 | ≥70% / ==0 / ≥3-of-4 |
+| **2A** | 首工具命中率 / 前3工具交集 / 序列 LCS 覆盖 | ≥70% / ≥1.5 / ≥40% |
+| 2B | GateRecall / GateLeak / GateFPR | ≥90% / ≤5% / ≤5% |
+| **2C** | 长上下文命中 vs 裸问命中的**损伤** | 损伤 ≤10 pt |
+| 记忆度（全程） | n-gram 20-gram 重合 | <0.40 健康，>0.60 停 |
+
+### 6.2 开训前标准动作
+
+```bash
+# ① 一键体检（数据 + 泛化集 + 脚本）
+./train/.venv/Scripts/python.exe -u train/scripts/health_check.py
+
+# ② 记下当前基线（多档单次加载，省 4.5 分钟）
+./train/.venv/Scripts/python.exe -u train/scripts/eval_multi_adapter.py   --adapters "基座=,现有档=<path>"
+
+# ③ 开跑（必须同时起监控子 agent）
+```
+
+**注意**：`eval_multi_adapter.py` 的 `--cases N` 取的是**交错后**的前 N 条，
+三档难度都有代表（2026-10-28 修：原来按难度分组排列，`--cases 12` 只跑到 L1）。

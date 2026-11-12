@@ -4,7 +4,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import readline from 'node:readline';
 
-const R = 'D:/BaiduNetdiskDownload/Local-AI/train/data/kitty-reverse';
+const R = 'D:/BaiduNetdiskDownload/Local-AI/train/lines/9b-oxcoder/data/kitty-reverse';
 const md5 = (s) => crypto.createHash('md5').update(s).digest('hex');
 
 async function load(file) {

@@ -1,0 +1,17 @@
+2026-11-08 11:36:31.913  INFO  starting engine
+2026-11-08 11:36:33.384  INFO  loading weights | 5.81 GiB
+2026-11-08 11:36:34.656  INFO  weights ready | 5.81 GiB | 1.3s | 4.57 GiB/s
+2026-11-08 11:36:38.594  INFO  CUDA graph memory calibrated | 3.9s
+2026-11-08 11:36:38.601  INFO  pinning host context | 2.00 GiB
+2026-11-08 11:36:38.820  INFO  host context pinned | 2.00 GiB | 219 ms
+2026-11-08 11:36:38.937  INFO  CUDA graphs ready | 60.0 ms
+2026-11-08 11:36:38.940  INFO  engine ready | oxcoder9b-merged | total 7.0s | weights 5.81 GiB | CUDA sync spin
+2026-11-08 11:36:38.941  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 318.7 MiB | free 4.65 GiB
+2026-11-08 11:36:38.942  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 11:36:39.014  INFO  listening on http://127.0.0.1:1674 | model oxcoder9b-merged | auth disabled
+2026-11-08 11:36:39.045  INFO  req#1 started | openai-chat non-stream | 1 message | max output 8 | thinking template default
+2026-11-08 11:36:39.336  INFO  req#1 done | openai-chat | output limit | prompt 12 | output 8 | cache 0 (0.0%) | TTFT 102 ms | total 292 ms | prefill 138.5 tok/s | decode 37.0 tok/s
+2026-11-08 11:36:39.345  INFO  req#2 started | openai-chat non-stream | 1 message | max output 8 | thinking template default
+2026-11-08 11:36:39.600  INFO  req#2 done | openai-chat | output limit | prompt 12 | output 8 | cache 5 (41.7%, checkpoint) | TTFT 65.7 ms | total 255 ms | prefill 122.3 tok/s | decode 37.0 tok/s
+2026-11-08 11:36:40.908  INFO  req#3 started | openai-chat non-stream | 1 message | max output 8 | thinking template default | tools 1
+D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-master\src\core\device.cu:247: CUDA_CHECK(cudaStreamSynchronize(stream_)) failed: cudaErrorLaunchFailure: unspecified launch failure

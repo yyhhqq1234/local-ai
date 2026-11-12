@@ -1,0 +1,542 @@
+{
+  "adapter": "train/out/z-2a-v3/checkpoint-900",
+  "n": 40,
+  "avg_cov": 0.5067,
+  "code_rate": 0.925,
+  "avg_ngram20": 0.0,
+  "verdict": true,
+  "detail": [
+    {
+      "id": "A01",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 753.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and focused:\n\n## Summary\n\nI have successfully implemented the fix for the `read_recent_history` function. Here's what I accompli"
+    },
+    {
+      "id": "A02",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 891.0,
+      "resp_head": "</think>\n\nPerfect! Everything works correctly.\n\n## Summary\n\nI have successfully implemented the fix for the composite duration parsing issue. Here's what I accomplished:\n\n### **Problem Identified**\nTh"
+    },
+    {
+      "id": "A03",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 984.0,
+      "resp_head": "</think>\n\nPerfect! Everything is working correctly.\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the issue with `cache.py`'s `get_or_set` method treating `None` values as "
+    },
+    {
+      "id": "A04",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 710.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any issues with the existing tests by running a broader test:\n\nLet me also verify the exact change I made:\n\n## Summary\n\nI have successful"
+    },
+    {
+      "id": "A05",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 478.0,
+      "resp_head": "</think>\n\nPerfect! Everything looks good.\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the network hang issue in the `api/client.py` file:\n\n### Changes Made\n\n**File Modifi"
+    },
+    {
+      "id": "A06",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 766.0,
+      "resp_head": "</think>\n\nPerfect! Let me review what I've implemented against the original requirements:\n\n## Summary\n\nI have successfully implemented the fix for the password hash exposure issue in the User model. H"
+    },
+    {
+      "id": "A07",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 845.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any issues with the existing tests by running a broader test:\n\nExcellent! Let me also verify that the change is minimal and focused:\n\nPer"
+    },
+    {
+      "id": "A08",
+      "level": "L1",
+      "cov": 0.75,
+      "miss": [
+        "main"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 562.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change is minimal and focused:\n\n## Summary\n\nI have successfully implemented the required changes to make `--verbose` and `--quiet` mutually exclusive in "
+    },
+    {
+      "id": "A09",
+      "level": "L1",
+      "cov": 0.0,
+      "miss": [
+        "003_add_index.sql",
+        "CONCURRENTLY"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 548.0,
+      "resp_head": "</think>\n\nPerfect! Everything looks good.\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the table locking issue in the migration script. Here's what was accomplished:\n\n### "
+    },
+    {
+      "id": "A10",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 501.0,
+      "resp_head": "</think>\n\nPerfect! Everything is working correctly.\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the `datetime` serialization issue in `json_utils.py`. Here's what I did:\n"
+    },
+    {
+      "id": "A11",
+      "level": "L1",
+      "cov": 0.667,
+      "miss": [
+        "schema.py"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 715.0,
+      "resp_head": "</think>\n\nPerfect! Everything is working correctly.\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the GraphQL schema issue. Here's what I accomplished:\n\n### **Problem Ident"
+    },
+    {
+      "id": "A12",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1993.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and focused:\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the authentication tests. Here's what I a"
+    },
+    {
+      "id": "A13",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 517.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and focused:\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the issue with the `send_email` task not "
+    },
+    {
+      "id": "A14",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 655.0,
+      "resp_head": "</think>\n\nPerfect! My change is minimal and focused:\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the issue described in the bug report:\n\n### **Changes Made**\n\n**File Modi"
+    },
+    {
+      "id": "A15",
+      "level": "L2",
+      "cov": 0.25,
+      "miss": [
+        "内存",
+        "OOM",
+        "泄漏"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 972.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any issues with the existing tests by running a broader test:\n\nLet me check what tests exist:\n\nGreat! There are 10 tests. Let me run them"
+    },
+    {
+      "id": "A16",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "deadlock detected",
+        "事务",
+        "加锁顺序"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 850.0,
+      "resp_head": "</think>\n\nPerfect! Everything is working correctly.\n\n## Summary\n\nI have successfully implemented a fix for the deadlock issue in the `update_user_status` function. Here's what I did:\n\n### **Problem Id"
+    },
+    {
+      "id": "A17",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "N+1 查询",
+        "批量加载"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1197.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any issues with the existing tests by running them one more time:\n\nLet me also verify the exact change I made:\n\nPerfect! Let me summarize"
+    },
+    {
+      "id": "A18",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "Docker 镜像",
+        "多阶段构建"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1079.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the multi-stage build is correctly structured by checking that both stages are present and complete:\n\nExcellent! Let me also verify that the final image is a"
+    },
+    {
+      "id": "A19",
+      "level": "L2",
+      "cov": 0.667,
+      "miss": [
+        "连接池"
+      ],
+      "code_blocks": 3,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 4427.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any issues with the existing tests by running a broader test:\n\n## Phase 8. FINAL REVIEW\n\nLet me review what I've done against the origina"
+    },
+    {
+      "id": "A20",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "异步",
+        "渲染"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1021.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and focused:\n\n## Summary\n\nI have successfully implemented a fix for the intermittent white screen issue. Here's what I accomplis"
+    },
+    {
+      "id": "A21",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "重复发券",
+        "多副本",
+        "幂等",
+        "分布式锁"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1738.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nWait, I should NOT clean up test files that are part of the solution. Let me revert:\n\n## Final Summary\n\nI have successfully implemented a "
+    },
+    {
+      "id": "A22",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "密码",
+        "失效"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 852.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any issues with the existing tests by running a broader test:\n\n## Phase 8. FINAL REVIEW\n\nLet me review my changes against the original re"
+    },
+    {
+      "id": "A23",
+      "level": "L2",
+      "cov": 0.75,
+      "miss": [
+        "编码"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 463.0,
+      "resp_head": "</think>\n\n**问题**：搜索接口在关键词含中文时返回空，英文正常。\n\n**根因**：分词器未正确处理中文，导致中文关键词无法匹配。\n\n**修复**：\n\n1. **定位问题**：发现 `ChineseTokenizer` 的 `tokenize()` 方法未实现，直接返回空列表。\n2. **实现分词逻辑**：添加基于 Unicode 中文范围判断的简单分词实现。\n3. **验证修复**：\n"
+    },
+    {
+      "id": "A24",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "缓存",
+        "不稳定"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 574.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any issues with the existing tests by running a quick summary of what was changed:\n\n## Summary\n\nI have successfully implemented the fix f"
+    },
+    {
+      "id": "A25",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "OOMKilled",
+        "limit"
+      ],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 407.0,
+      "resp_head": "</think>\n\nJava 堆默认只用到物理内存，但 GC 停顿和元数据开销会让实际占用超出堆大小。\n\n```bash\n# 1. 确认容器实际内存使用\nkubectl top pod <pod-name>\n\n# 2. 进入容器查看 Java 进程内存\nkubectl exec <pod-name> -- ps -o etime=,pid=,args=\n\n# 3. 在容器内执行\njmap -dum"
+    },
+    {
+      "id": "A26",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "数据库",
+        "连接"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 855.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any issues with the existing tests by running a quick summary:\n\n## Summary\n\nI have successfully implemented the fix for the database conn"
+    },
+    {
+      "id": "A27",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "消息队列",
+        "重复消费"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 868.0,
+      "resp_head": "</think>\n\n**Root Cause**: Consumer was acknowledging messages before confirming downstream processing completion.\n\n**Fix Applied**:\n1. **Moved ack logic** to the end of the business processing functio"
+    },
+    {
+      "id": "A28",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "灰度",
+        "旧数据",
+        "缓存",
+        "版本"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 405.0,
+      "resp_head": "</think>\n\nPerfect! Everything is working correctly.\n\n## Summary\n\nI have successfully implemented the fix for the cache versioning issue. Here's what I accomplished:\n\n### **Problem Identified**\nThe ori"
+    },
+    {
+      "id": "A29",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "单测覆盖率",
+        "测试",
+        "覆盖率"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1069.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created since they were just for exploration:\n\nWait, I should keep the test files since they contain valuable test cases that demonstrate the fix. L"
+    },
+    {
+      "id": "A30",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "启动",
+        "懒加载",
+        "前置"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 954.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nWait, I should not delete test files that were part of the original repository. Let me check what I created:\n\n## Summary\n\nI have successfu"
+    },
+    {
+      "id": "A31",
+      "level": "L3",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 2923.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\n## Final Summary\n\n### ✅ **Task Completion**\n\nI have successfully implemented a comprehensive fix for the issue \"代码里到处 `try/except: pass`。评"
+    },
+    {
+      "id": "A32",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "重试",
+        "雪崩",
+        "抖动",
+        "熔断"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 1418.0,
+      "resp_head": "</think>\n\nPerfect! Let me summarize what I've implemented:\n\n## Summary\n\nI have successfully implemented a retry mechanism with exponential backoff, jitter, and circuit breaker functionality. Here's wh"
+    },
+    {
+      "id": "A33",
+      "level": "L3",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1325.0,
+      "resp_head": "</think>\n\n**问题**：配置项散落在环境变量、配置文件、数据库三处，改一个要动三个地方。\n\n**解决**：\n\n**1. 统一配置加载器**\n\n```python\n# config_loader.py\nimport os\nfrom pathlib import Path\nfrom typing import Any, Dict, Optional\n\nclass ConfigLoader:\n"
+    },
+    {
+      "id": "A34",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "2000 行",
+        "拆分",
+        "调用方"
+      ],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1352.0,
+      "resp_head": "</think>\n\n**Phase 1. Core Logic Extraction** (Done)\n- Extracted `get_qualified_name` into standalone function\n- Made it accept both strings and objects (dual interface)\n- Used it in both places where "
+    },
+    {
+      "id": "A35",
+      "level": "L3",
+      "cov": 0.333,
+      "miss": [
+        "公共服务",
+        "代价"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 724.0,
+      "resp_head": "</think>\n\n**选择：共享库（更优）**\n\n**理由：**\n1. **改动最小**：只需在 `order-service` 的 `order-service-logic` 里加一行配置\n2. **影响可控**：三个服务互不影响，各自独立升级\n3. **符合现有架构**：项目已有 `order-service-logic` 这个模式，顺势扩展即可\n\n**实现：**\n\n```java\n// o"
+    },
+    {
+      "id": "A36",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "数据库",
+        "字段",
+        "5000 万行",
+        "停服",
+        "迁移"
+      ],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 5190.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any issues with the existing tests by running them one more time:\n\nLet me check what tests exist:\n\nGreat! Everything is working perfectly"
+    },
+    {
+      "id": "A37",
+      "level": "L3",
+      "cov": 0.333,
+      "miss": [
+        "返回结构",
+        "过渡方案"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1666.0,
+      "resp_head": "</think>\n\n**Phase 2.0 (v2.0.0)**: New structure with `data` wrapper and `meta` field\n\n### 8.2 Implementation Details\n\n**Key Changes Made:**\n1. **Added `data` wrapper** around all response payloads\n2. "
+    },
+    {
+      "id": "A38",
+      "level": "L3",
+      "cov": 0.25,
+      "miss": [
+        "日志",
+        "采样",
+        "分级"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1723.0,
+      "resp_head": "</think>\n\nPerfect! Let me summarize what I've implemented:\n\n## Summary\n\nI have successfully implemented a comprehensive log retention and cost optimization system. Here's what was accomplished:\n\n### ✅"
+    },
+    {
+      "id": "A39",
+      "level": "L3",
+      "cov": 0.6,
+      "miss": [
+        "定时任务",
+        "失败重跑"
+      ],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 904.0,
+      "resp_head": "</think>\n\n100 万条记录 × 3 小时 = 33 毫秒/条，说明单条处理耗时很大。并行化可以带来线性加速。\n\n## 方案一：分片并行（推荐）\n\n```python\nfrom concurrent.futures import ProcessPoolExecutor, as_completed\n\ndef process_batch(batch_data):\n # 处理一批数据\n retu"
+    },
+    {
+      "id": "A40",
+      "level": "L3",
+      "cov": 0.333,
+      "miss": [
+        "单体拆微服务",
+        "调用关系"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 728.0,
+      "resp_head": "</think>\n\n**判据**：\n1. **事务跨度**：跨模块的事务 = 强耦合，必须拆分或改用最终一致性。\n2. **数据所有权**：模块 A 直接写模块 B 的表 = 反模式，数据应归属单一模块。\n3. **调用链深度**：同步调用超过 2 层 = 性能风险，需改为事件驱动。\n\n**当前代码**：\n- `OrderService` 直接 `db.session` 写 `Inventory`"
+    }
+  ]
+}

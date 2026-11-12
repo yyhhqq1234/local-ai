@@ -1,0 +1,67 @@
+{
+  "adapter": "train/out/z-2a-v7/final",
+  "n": 5,
+  "avg_cov": 0.95,
+  "code_rate": 1.0,
+  "avg_ngram20": 0.0,
+  "verdict": true,
+  "detail": [
+    {
+      "id": "A01",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 2130.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that the test I created is comprehensive:\n\n## Summary\n\nI have successfully implemented the fix for the `read_recent_history` issue in the `memory.py` file. Here's "
+    },
+    {
+      "id": "A02",
+      "level": "L1",
+      "cov": 0.75,
+      "miss": [
+        "parser.py"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 2664.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the existing tests still pass:\n\n## Phase 8. FINAL REVIEW\n\nLet me review what I've implemented against the original requirements:\n\n### ✅ Requirements Met:\n\n1."
+    },
+    {
+      "id": "A03",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 4200.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the existing tests still pass:\n\n## Phase 8. FINAL REVIEW\n\nLet me review what I've implemented against the original requirements:\n\n### ✅ Requirements Met:\n\n1."
+    },
+    {
+      "id": "A04",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1393.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the existing tests still pass to make sure I haven't broken anything:\n\n## Phase 8. FINAL REVIEW\n\nLet me review my changes against the original requirements:\n"
+    },
+    {
+      "id": "A05",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1811.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change is minimal and focused:\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the network timeout issue in the `api/client.py`"
+    }
+  ]
+}

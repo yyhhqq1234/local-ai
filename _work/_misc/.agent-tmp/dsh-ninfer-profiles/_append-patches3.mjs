@@ -1,0 +1,47 @@
+import fs from 'node:fs'
+const P = 'D:/BaiduNetdiskDownload/Local-AI/plugins/dsh-ninfer-local/PATCHES.md'
+const BT = String.fromCharCode(96)   // 反引号
+const FENCE = BT + BT + BT
+const lines = [
+  '',
+  '## think-engx3 · 2026-11-08 23:4x · 设置页改造（双档位 UI + 引擎身份 + 日志取最新）',
+  '',
+  '**问题**：旧面板只有一套 27B 参数（池/HostKV/KV 编码/chunk/端口）+ 一个模型下拉，看不出 27B 与 9B 是两套引擎；',
+  '而且日志尾按文件名排序，会显示 2026-10-23 那次 ' + BT + 'startup failed | missing component mtp' + BT + ' 的旧失败日志，误导以为当前坏着。',
+  '',
+  '**改动**',
+  '',
+  FENCE,
+  'lib/client.js（重写，198 → 约 300 行）',
+  '  新增「引擎档位」下拉（csunx-27b / build-9b）+「应用档位」按钮',
+  '  新增引擎身份行：label · kind · 可执行大小 · 完整 exe 路径（缺失时提示）',
+  '  字段按档位适用性置灰：',
+  '    deviceKV / hostKVMiB / kvDtype / draftTokens / reasoningEffort → 仅 27B',
+  '    prefillChunk / maxContext → 9B 只读（固定 128 / 4096，实测依据写在 title）',
+  '    vision / port → 两档通用',
+  '  模型下拉按当前档位过滤；切换档位即时重排',
+  '  所有请求带 profile（/params  /engine），切档位即时可见',
+  '',
+  'lib/index.js',
+  '  GET /state 增加 profile / profiles / engine，models 每条带 profile',
+  '  ninfer_status 同步增加 profile / profiles / engine，modelFiles 前缀带档位',
+  '  tailLogs() 改为按 mtime 取最新文件（原来按文件名排序 → 显示 10-23 旧日志）',
+  FENCE,
+  '',
+  '**验证**',
+  '',
+  FENCE,
+  'node --check lib/index.js  → 0',
+  'node --check lib/client.js → 0',
+  '_state 载荷（_work/dsh-adapter-test/verify-state-payload.mjs）：',
+  '  profile=build-9b · profiles 两项 · engine.exe=.../ninfer-build/apps/ninfer-serve.exe (275,430,400 B)',
+  '  models 4 条且每条带 profile（27B x2 / 9B x2）',
+  '  logs 取到 2026-11-08 23:29 的最新 8 行（engine ready | kittyrev-... | 6.9s）',
+  FENCE,
+  '',
+  '**生效**：client bundle 与 lib/index.js 在宿主页面/进程加载时读取，需重启 DSH 并刷新页面。',
+  '',
+  '**回滚**：' + BT + 'Copy-Item lib\\client.js.bak-engx3 lib\\client.js -Force' + BT,
+]
+fs.appendFileSync(P, lines.join('\n') + '\n', 'utf8')
+console.log('PATCHES.md bytes =', fs.statSync(P).size)

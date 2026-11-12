@@ -1,5 +1,5 @@
 import sys
-p = r"D:\BaiduNetdiskDownload\Local-AI\train\kitty-rev\deploy\v6_s5_fetch.ps1"
+p = r"D:\BaiduNetdiskDownload\Local-AI\train\lines\27b-kittyrev\kitty-rev\deploy\v6_s5_fetch.ps1"
 s = open(p, encoding="utf-8-sig").read()
 old = r"awk '{print \$1}'"
 new = "cut -d' ' -f1"

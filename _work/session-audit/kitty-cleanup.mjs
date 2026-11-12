@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 
-const R = 'D:/BaiduNetdiskDownload/Local-AI/train/data/kitty-reverse';
+const R = 'D:/BaiduNetdiskDownload/Local-AI/train/lines/9b-oxcoder/data/kitty-reverse';
 const P = (f) => path.join(R, f);
 const sha256 = (p) => crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const lines = (f) => fs.readFileSync(P(f), 'utf8').split('\n').filter(Boolean);

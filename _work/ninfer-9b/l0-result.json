@@ -1,0 +1,386 @@
+{
+  "results": [
+    {
+      "variant": "a-baseline",
+      "extra": [
+        "--host-context-mib",
+        "2048"
+      ],
+      "port": 1641,
+      "ready": true,
+      "requests": [
+        {
+          "label": "user",
+          "chars": 62,
+          "head": "2+2 equals **4**. This is a fundamental arithmetic fact: when"
+        },
+        {
+          "label": "sys",
+          "chars": 43,
+          "head": "[ directions_52nd.json, line base-nlbiank-"
+        },
+        {
+          "label": "essay",
+          "chars": 32,
+          "head": "#liw2aioTSg/1+Z4OBYDwDgoRirLvwog"
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 19,
+          "computed_prefill_tokens": 19,
+          "prefix_cache_hit_tokens": 0,
+          "prefix_reuse_path": "root",
+          "completion_tokens": 16,
+          "ids_head": [
+            17,
+            10,
+            17,
+            16327,
+            2972,
+            19,
+            159034,
+            271
+          ],
+          "state_d2h_bytes": 0,
+          "state_d2d_bytes": 0,
+          "units_prefill": 2,
+          "prefill_seconds": 0.09118899999999999,
+          "sched_d2h": 0
+        },
+        {
+          "prompt_tokens": 30,
+          "computed_prefill_tokens": 30,
+          "prefix_cache_hit_tokens": 0,
+          "prefix_reuse_path": "root",
+          "completion_tokens": 16,
+          "ids_head": [
+            58,
+            17425,
+            62,
+            20,
+            17,
+            302,
+            4182,
+            11
+          ],
+          "state_d2h_bytes": 51519488,
+          "state_d2d_bytes": 0,
+          "units_prefill": 2,
+          "prefill_seconds": 0.094127,
+          "sched_d2h": 51519488
+        },
+        {
+          "prompt_tokens": 26,
+          "computed_prefill_tokens": 26,
+          "prefix_cache_hit_tokens": 0,
+          "prefix_reuse_path": "root",
+          "completion_tokens": 24,
+          "ids_head": [
+            2,
+            719,
+            86,
+            17,
+            64,
+            789,
+            9657,
+            70
+          ],
+          "state_d2h_bytes": 51519488,
+          "state_d2d_bytes": 0,
+          "units_prefill": 2,
+          "prefill_seconds": 0.0914256,
+          "sched_d2h": 51519488
+        }
+      ]
+    },
+    {
+      "variant": "b-no-prefix-reuse",
+      "extra": [
+        "--host-context-mib",
+        "2048",
+        "--no-prefix-reuse"
+      ],
+      "port": 1642,
+      "ready": true,
+      "requests": [
+        {
+          "label": "user",
+          "chars": 14,
+          "head": "2+2 equals 4."
+        },
+        {
+          "label": "sys",
+          "chars": 42,
+          "head": "[ directions_52.html, FIRST_PARSED_BY:1371"
+        },
+        {
+          "label": "essay",
+          "chars": 98,
+          "head": "#stages: 1. **Single Responsibility Principle** – Each module has ONE clear purpose and one mai"
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 19,
+          "computed_prefill_tokens": 19,
+          "prefix_cache_hit_tokens": 0,
+          "prefix_reuse_path": "root",
+          "completion_tokens": 10,
+          "ids_head": [
+            17,
+            10,
+            17,
+            16327,
+            220,
+            19,
+            13,
+            248046
+          ],
+          "state_d2h_bytes": 0,
+          "state_d2d_bytes": 0,
+          "units_prefill": 1,
+          "prefill_seconds": 0.0595113,
+          "sched_d2h": 0
+        },
+        {
+          "prompt_tokens": 30,
+          "computed_prefill_tokens": 30,
+          "prefix_cache_hit_tokens": 0,
+          "prefix_reuse_path": "root",
+          "completion_tokens": 16,
+          "ids_head": [
+            58,
+            17425,
+            62,
+            20,
+            17,
+            2480,
+            11,
+            33660
+          ],
+          "state_d2h_bytes": 0,
+          "state_d2d_bytes": 0,
+          "units_prefill": 1,
+          "prefill_seconds": 0.0627055,
+          "sched_d2h": 0
+        },
+        {
+          "prompt_tokens": 26,
+          "computed_prefill_tokens": 26,
+          "prefix_cache_hit_tokens": 0,
+          "prefix_reuse_path": "root",
+          "completion_tokens": 24,
+          "ids_head": [
+            2,
+            267,
+            1098,
+            25,
+            198,
+            220,
+            220,
+            16
+          ],
+          "state_d2h_bytes": 0,
+          "state_d2d_bytes": 0,
+          "units_prefill": 1,
+          "prefill_seconds": 0.0636115,
+          "sched_d2h": 0
+        }
+      ]
+    },
+    {
+      "variant": "c-slots0-host0",
+      "extra": [
+        "--host-context-mib",
+        "0",
+        "--device-state-slots",
+        "0"
+      ],
+      "port": 1643,
+      "ready": true,
+      "requests": [
+        {
+          "label": "user",
+          "chars": 14,
+          "head": "2+2 equals 4."
+        },
+        {
+          "label": "sys",
+          "chars": 42,
+          "head": "[ directions_52.html, FIRST_PARSED_BY:1371"
+        },
+        {
+          "label": "essay",
+          "chars": 98,
+          "head": "#stages: 1. **Single Responsibility Principle** – Each module has ONE clear purpose and one mai"
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 19,
+          "computed_prefill_tokens": 19,
+          "prefix_cache_hit_tokens": 0,
+          "prefix_reuse_path": "root",
+          "completion_tokens": 10,
+          "ids_head": [
+            17,
+            10,
+            17,
+            16327,
+            220,
+            19,
+            13,
+            248046
+          ],
+          "state_d2h_bytes": 0,
+          "state_d2d_bytes": 0,
+          "units_prefill": 1,
+          "prefill_seconds": 0.0592018,
+          "sched_d2h": 0
+        },
+        {
+          "prompt_tokens": 30,
+          "computed_prefill_tokens": 30,
+          "prefix_cache_hit_tokens": 0,
+          "prefix_reuse_path": "root",
+          "completion_tokens": 16,
+          "ids_head": [
+            58,
+            17425,
+            62,
+            20,
+            17,
+            2480,
+            11,
+            33660
+          ],
+          "state_d2h_bytes": 0,
+          "state_d2d_bytes": 0,
+          "units_prefill": 1,
+          "prefill_seconds": 0.0625865,
+          "sched_d2h": 0
+        },
+        {
+          "prompt_tokens": 26,
+          "computed_prefill_tokens": 26,
+          "prefix_cache_hit_tokens": 0,
+          "prefix_reuse_path": "root",
+          "completion_tokens": 24,
+          "ids_head": [
+            2,
+            267,
+            1098,
+            25,
+            198,
+            220,
+            220,
+            16
+          ],
+          "state_d2h_bytes": 0,
+          "state_d2d_bytes": 0,
+          "units_prefill": 1,
+          "prefill_seconds": 0.0634742,
+          "sched_d2h": 0
+        }
+      ]
+    },
+    {
+      "variant": "d-slots0-host2048",
+      "extra": [
+        "--host-context-mib",
+        "2048",
+        "--device-state-slots",
+        "0"
+      ],
+      "port": 1644,
+      "ready": true,
+      "requests": [
+        {
+          "label": "user",
+          "chars": 62,
+          "head": "2+2 equals **4**. This is a fundamental arithmetic fact: when"
+        },
+        {
+          "label": "sys",
+          "chars": 43,
+          "head": "[ directions_52nd.json, line base-nlbiank-"
+        },
+        {
+          "label": "essay",
+          "chars": 32,
+          "head": "#liw2aioTSg/1+Z4OBYDwDgoRirLvwog"
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 19,
+          "computed_prefill_tokens": 19,
+          "prefix_cache_hit_tokens": 0,
+          "prefix_reuse_path": "root",
+          "completion_tokens": 16,
+          "ids_head": [
+            17,
+            10,
+            17,
+            16327,
+            2972,
+            19,
+            159034,
+            271
+          ],
+          "state_d2h_bytes": 51519488,
+          "state_d2d_bytes": 0,
+          "units_prefill": 2,
+          "prefill_seconds": 0.0876943,
+          "sched_d2h": 51519488
+        },
+        {
+          "prompt_tokens": 30,
+          "computed_prefill_tokens": 30,
+          "prefix_cache_hit_tokens": 0,
+          "prefix_reuse_path": "root",
+          "completion_tokens": 16,
+          "ids_head": [
+            58,
+            17425,
+            62,
+            20,
+            17,
+            302,
+            4182,
+            11
+          ],
+          "state_d2h_bytes": 51519488,
+          "state_d2d_bytes": 0,
+          "units_prefill": 2,
+          "prefill_seconds": 0.0924345,
+          "sched_d2h": 51519488
+        },
+        {
+          "prompt_tokens": 26,
+          "computed_prefill_tokens": 26,
+          "prefix_cache_hit_tokens": 0,
+          "prefix_reuse_path": "root",
+          "completion_tokens": 24,
+          "ids_head": [
+            2,
+            719,
+            86,
+            17,
+            64,
+            789,
+            9657,
+            70
+          ],
+          "state_d2h_bytes": 51519488,
+          "state_d2d_bytes": 0,
+          "units_prefill": 2,
+          "prefill_seconds": 0.0908255,
+          "sched_d2h": 51519488
+        }
+      ]
+    }
+  ],
+  "remaining_ninfer_processes": []
+}

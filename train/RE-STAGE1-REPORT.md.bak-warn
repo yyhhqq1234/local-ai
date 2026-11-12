@@ -1,0 +1,126 @@
+# RE 阶段训练 · 最终验证报告
+
+> 2026-10-28 · adapter: `train/out/re-stage1-fixed/final`
+
+## 1 训练结果
+
+| 项 | 值 |
+|---|---|
+| 数据 | kitty core 5602 条（按长度分桶） |
+| 参数 | ctx 2048 / ga 4 / adamw_torch / epochs 1 |
+| 步数 | **1401 / 1401 完成** |
+| 耗时 | **3397 s（56 分 37 秒）** |
+| train_loss | **1.1102**（全程平均），末步 0.8186 |
+| loss 曲线 | 3.835(5) → 1.509(200) → 0.969(400) → 0.749(1000) → 0.819(1400) |
+| 速度 | 2.13–2.42 s/步，**全程无掉速** |
+| 显存 | alloc 恒定 7.622 / reserved 9.41 / free 最低 1.024 GiB |
+| 异常 | error / traceback / NaN / OOM = **0** |
+| 产物 | `final/adapter_model.safetensors`（173 MB）+ checkpoint-1200/1400/1401 |
+
+## 2 验证过程中的两次误判（记录以示严谨）
+
+| 轮次 | 脚本 | 结果 | 误判原因 |
+|---|---|---|---|
+| 1 | `eval_re_adapter.py` 自造 5 场景 | 0/5 PASS | system prompt 与训练数据不一致（"直接调用" vs "具体调用"），且没给工具 schema |
+| 2 | `eval_re_heldout.py` 但用 `AutoModelForCausalLM` | adapter 与基座完全相同 | **加载器不匹配**：训练用 `AutoModelForImageTextToText`（3 层嵌套 `.model.model.layers`），测试用 `AutoModelForCausalLM`（2 层 `.model.layers`）→ **LoRA key 全 missing，adapter 一条没生效** |
+| 3 | 改用 `AutoModelForImageTextToText` | adapter 生效 | ✅ 0 个 missing keys |
+| 4 | 评分逻辑 | 仍有白名单 bug | 白名单漏了 `kitty_rea_binary`/`kitty_trail`/`kitty_apkscan`/`kitty_loop` 等真实工具，把正确输出判成"编造" |
+
+## 3 真实结论（按训练集出现次数校正后）
+
+### 3.1 工具名真实性
+
+| 工具 | 训练集出现次数 | 判定 |
+|---|---|---|
+| `kitty_rea_binary` | 57 | ✅ 真实 |
+| `kitty_apkscan` | 76 | ✅ 真实 |
+| `kitty_trail` | 75 | ✅ 真实 |
+| `kitty_loop` | 159 | ✅ 真实 |
+| `kitty_apktool` | 存在 | ✅ 真实 |
+| `kitty_dbvm` | **0** | ❌ 编造 |
+| `kitty_file_info` | **0** | ❌ 编造 |
+| `kitty_pe_info` | **0** | ❌ 编造 |
+| `kitty_debug` | **0** | ❌ 编造 |
+| `kitty_decompile` | **0** | ❌ 编造 |
+| `kitty_search` | **0** | ❌ 编造 |
+
+### 3.2 adapter vs 基座
+
+| 指标 | adapter | 基座 | 变化 |
+|---|---|---|---|
+| 工具命中（10 条中） | **5** | 4 | +1 |
+| **真编造工具总数** | **1**（`kitty_dbvm`） | **6**（file_info/imports/pe_info/debug/decompile/search） | **-5（降 83%）** |
+| 正文与真实对齐度 | 逐字接近 | 泛泛而谈 | 显著 |
+
+### 3.3 逐字对比证据（样本 1）
+
+```
+真实：kitty_rea_binary — action 取 inspect_binary_layout。
+
+      选它的理由：REA 二进制布局（节/段/符号/导入导出）（通道 rea-mcp）。
+      参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，
+                动手类一次给全参数再发。
+      判据：...
+
+生成：kitty_rea_binary — action 取 inspect_binary_layout。
+
+      选它的理由：REA 二进制布局（节/段/符号/字符串）（通道 rea-mcp）。
+      参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，
+                动手类一次给全参数再发。
+```
+
+只差两个词（"导入导出" → "字符串"），**句式、工具名、参数要点、判据结构完全一致**。
+
+### 3.4 样本 3（工具链编排）
+
+```
+真实：1. 找校验函数：kitty_ghidra 搜三连 —— GetModuleFileNameW → CreateFileW →
+      BCryptHashData / CryptCreateHash。这条链就是自校验；...
+
+生成：kitty_ghidra action=analyze target=SAMPLE.exe
+      kitty_ghidra action=functions out=logs\ghidra-<name>-<ts> filter=IsDebuggerPresent
+```
+
+生成的是**可执行的工具调用序列**（工具名 + action + 参数格式全对），真实是文字描述。方向一致、粒度更细。
+
+## 4 判定
+
+**训练有效**，核心证据：
+
+1. **adapter 完整加载**（0 missing keys，alloc 7.51 vs 基座 7.35 GiB）
+2. **编造工具从 6 个降到 1 个（-83%）** —— 这是最硬的能力提升信号，说明模型学会了"只用见过的工具"
+3. **正文结构逐字对齐** —— 学到了 kitty 输出的固定三段式（工具+理由 / 参数要点 / 判据）
+4. **工具调用格式正确** —— `action=xxx target=xxx out=xxx` 参数齐全
+
+**不足**：
+- 工具命中率只 +1（5 vs 4），因为 10 条里有 5 条的 GT 工具本就罕见或表达不唯一
+- 1 epoch 不够充分，建议 3–5 epoch
+- `kitty_dbvm` 仍有编造，可能是 `kitty_drv` 的变体联想
+
+## 5 下一步建议
+
+| 优先级 | 动作 |
+|---|---|
+| 高 | RE 阶段训 3–5 epoch（当前 1），loss 目标 < 0.5 |
+| 高 | 修好 `eval_re_heldout.py` 的白名单（已确认真实工具清单）与 think-strip 逻辑 |
+| 中 | 用 `--save-total-limit 8` 保留更多 checkpoint |
+| 中 | 进 2A（轨迹 + kitty 混比，用 `mix-2a-bucketed.jsonl`） |
+| 低 | 视觉塔卸载已在训练脚本内置，eval 脚本也需同步（已做） |
+
+## 6 复现命令
+
+```powershell
+# 训练
+$env:PYTORCH_ALLOC_CONF="max_split_size_mb:64,garbage_collection_threshold:0.80"
+$env:VRAM_FRAC="0.93"
+train\.venv\Scripts\python.exe -u train\scripts\train_qlora9b.py `
+  --base train\models\OxCoder-9B `
+  --data train\data\kitty-reverse\kitty-core-bucketed.jsonl `
+  --stage re --ctx 2048 --ga 4 --optim adamw_torch --bs 1 --epochs 1 `
+  --use-liger-ce --save-steps 200 --save-total-limit 8 `
+  --out train\out\re-stage1-fixed
+
+# 验证
+train\.venv\Scripts\python.exe -u train\scripts\eval_re_heldout.py `
+  --adapter train\out\re-stage1-fixed\final --n 10 --compare-base
+```

@@ -1,0 +1,23 @@
+2026-11-08 21:02:42.731  INFO  starting engine
+2026-11-08 21:02:45.908  INFO  loading weights | 7.82 GiB
+2026-11-08 21:02:47.745  INFO  weights ready | 7.82 GiB | 1.8s | 4.26 GiB/s
+2026-11-08 21:03:12.378  INFO  CUDA graph memory calibrated | 24.6s
+2026-11-08 21:03:12.385  INFO  pinning host context | 2.00 GiB
+2026-11-08 21:03:12.612  INFO  host context pinned | 2.00 GiB | 227 ms
+2026-11-08 21:03:17.015  INFO  CUDA graphs ready | 4.3s
+2026-11-08 21:03:17.019  INFO  engine ready | kittyrev-oxcoder9b-nsfw-gate-full-GSQ | total 34.3s | weights 7.82 GiB | CUDA sync spin
+2026-11-08 21:03:17.020  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 262.7 MiB | free 2.59 GiB
+2026-11-08 21:03:17.021  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 21:03:28.404  INFO  warmup complete | 11.4s
+2026-11-08 21:03:28.404  INFO  listening on http://127.0.0.1:1841 | model kittyrev-oxcoder9b-nsfw-gate-full-GSQ | auth disabled
+2026-11-08 21:03:28.975  INFO  req#1 started | openai-chat non-stream | 1 message | max output 16 | thinking off
+2026-11-08 21:03:33.418  INFO  throughput | 5.0s | prefill 2.0 tok/s (10 tok) | running 1 (prefill 1) | capture-pending 1 | host 36.5% (1.8s)
+2026-11-08 21:03:38.415  INFO  throughput | 5.0s | running 1 (prefill 1) | capture-pending 1 | host 0.0% (0 us)
+2026-11-08 21:03:43.410  INFO  throughput | 5.0s | prefill 1.8 tok/s (9 tok) | running 1 (decode-ready 1) | host 148.6% (7.4s)
+2026-11-08 21:03:48.418  INFO  throughput | 5.0s | running 1 (decode-ready 1) | host 0.0% (0 us)
+2026-11-08 21:03:53.417  INFO  throughput | 5.0s | running 1 (decode-ready 1) | host 0.0% (0 us)
+2026-11-08 21:03:58.408  INFO  throughput | 5.0s | running 1 (decode-ready 1) | host 0.0% (0 us)
+2026-11-08 21:04:03.410  INFO  throughput | 5.0s | running 1 (decode-ready 1) | host 0.0% (0 us)
+2026-11-08 21:04:08.416  INFO  throughput | 5.0s | running 1 (decode-ready 1) | host 0.0% (0 us)
+2026-11-08 21:04:13.408  INFO  throughput | 5.0s | running 1 (decode-ready 1) | host 0.0% (0 us)
+D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-master\src\core\device.cu:247: CUDA_CHECK(cudaStreamSynchronize(stream_)) failed: cudaErrorUnknown: unknown error

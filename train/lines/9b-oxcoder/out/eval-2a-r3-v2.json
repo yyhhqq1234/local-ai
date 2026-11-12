@@ -1,0 +1,537 @@
+{
+  "adapter": "train/out/re-stage1-r3/final",
+  "n": 40,
+  "avg_cov": 0.5996,
+  "code_rate": 0.4,
+  "avg_ngram20": 0.0,
+  "verdict": false,
+  "detail": [
+    {
+      "id": "A01",
+      "level": "L1",
+      "cov": 0.333,
+      "miss": [
+        "read_recent_history",
+        "session_key"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 145.0,
+      "resp_head": "</think>\n\n<tool_call>\n{\"name\": \"read_file\", \"arguments\": {\"file_path\": \"D:\\\\AION-LEGACY\\\\aion\\\\src\\\\aion\\\\memory.py\", \"point\": 285}}\n</tool_call>"
+    },
+    {
+      "id": "A02",
+      "level": "L1",
+      "cov": 0.75,
+      "miss": [
+        "parser.py"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 480.0,
+      "resp_head": "</think>\n\n根因：`parse_duration` 只支持单单位（h/m/s/d），遇到 `1h30m` 直接抛。\n\n改法：先按 `h`/`m`/`s`/`d` 拆分，再累加：\n```python\ndef parse_duration(s: str) -> int:\n    total = 0\n    for u in ('h', 'm', 's', 'd'):\n        if u "
+    },
+    {
+      "id": "A03",
+      "level": "L1",
+      "cov": 0.75,
+      "miss": [
+        "sentinel"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 431.0,
+      "resp_head": "</think>\n\n根因：`get_or_set` 的判据是 `key not in cache`，而 `None` 会被写入并命中。\n\n正确做法：引入一个「未设置」哨兵，写入时区分「没设」与「设为 None」。\n\n```python\n# cache.py\n_UNSET = object()\n\ndef get_or_set(key, factory, default=_UNSET):\n    if"
+    },
+    {
+      "id": "A04",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 270.0,
+      "resp_head": "</think>\n\n根因：装饰器内部用 `except Exception` 捕获了所有异常，把中断当失败重试。\n\n改法：把捕获范围缩到指定异常类：\n```python\n# utils/retry.py\nasync def retry_on(*exceptions):\n    ...\n    try:\n        return await coro()\n    except exception"
+    },
+    {
+      "id": "A05",
+      "level": "L1",
+      "cov": 0.667,
+      "miss": [
+        "client.py"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 205.0,
+      "resp_head": "</think>\n\nroot cause: `fetch` 没有超时参数，网络失败时线程一直等\n\nfix: 默认 30 秒，可覆盖\n```python\ndef fetch(url: str, timeout: int | None = 30) -> bytes:\n    ...\n```\n调用方：`fetch(url, timeout=10)`\n\nverify: 网络不可达时 30 秒内应抛出，而不"
+    },
+    {
+      "id": "A06",
+      "level": "L1",
+      "cov": 0.667,
+      "miss": [
+        "User.__repr__"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 380.0,
+      "resp_head": "</think>\n\n<tool_call>\n{\"name\": \"edit\", \"arguments\": {\"file_path\": \"models/user.py\", \"new_code\": \"    def __repr__(self):\\n        return f\\\"User(id={self.id}, username={self.username!r})\\\"\", \"old_code"
+    },
+    {
+      "id": "A07",
+      "level": "L1",
+      "cov": 0.333,
+      "miss": [
+        "pool.py",
+        "contextmanager"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1368.0,
+      "resp_head": "</think>\n\n根因：持有路径上没有 `finally`，异常会永久占着连接。\n\n改法：把 acquire 封装成上下文管理器，使用者只写 `with`：\n```python\nclass ConnectionPool:\n    def __init__(self, max_size, acquire_timeout):\n        self.max_size = max_size\n    "
+    },
+    {
+      "id": "A08",
+      "level": "L1",
+      "cov": 0.5,
+      "miss": [
+        "cli.py",
+        "main"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 227.0,
+      "resp_head": "</think>\n\n根因：缺少互斥校验，两条标志同时命中时行为未定义。\n\n改法：在解析完两个标志后加一条校验：\n```python\nif verbose and quiet:\n    print(\"ERROR: --verbose and --quiet are mutually exclusive\", file=sys.stderr)\n    sys.exit(2)\n```\n判据：同时给两个参数"
+    },
+    {
+      "id": "A09",
+      "level": "L1",
+      "cov": 0.5,
+      "miss": [
+        "003_add_index.sql"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 375.0,
+      "resp_head": "</think>\n\n根因：裸 `CREATE INDEX` 在 PostgreSQL 上会阻塞表（exclusive lock）。\n\n正确写法（按序）：\n1) 先建索引（不锁）：`CREATE INDEX CONCURRENTLY idx_users_email ON users (email);`\n2) 再建约束索引（必须锁，但约束本身不保证唯一性）：\n   `ALTER TABLE users"
+    },
+    {
+      "id": "A10",
+      "level": "L1",
+      "cov": 0.75,
+      "miss": [
+        "json_utils.py"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 442.0,
+      "resp_head": "</think>\n\n`dumps_safe` 没有 `default` 参数，遇到 `datetime` 会抛 `TypeError`。\n\n```python\nimport json\nfrom datetime import datetime\n\ndef dumps_safe(obj, **kwargs):\n    def default(o):\n        if isinstance(o, d"
+    },
+    {
+      "id": "A11",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 519.0,
+      "resp_head": "</think>\n\n根因：`user` 的 resolver 对未登录用户返回 `None`，而 schema 上 `User` 是 `!User`，执行时抛 `TypeError: Cannot return null for non-nullable field`。\n\n改法：resolver 必须返回显式错误对象或抛受控异常，不能返回 null。\n```python\n# graphql/sch"
+    },
+    {
+      "id": "A12",
+      "level": "L1",
+      "cov": 0.667,
+      "miss": [
+        "test_auth.py"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 293.0,
+      "resp_head": "</think>\n\n根因：测试里直接比较 `datetime.now()`，跨天或时区变化时值会变，用例本身不稳定。\n\n改法：用 `freeze_time` 固定时间，把断言改成依赖冻结时间而不是真实时间。\n\n```python\nfrom freezegun import freeze_time\nfrom datetime import datetime\n\n@freeze_time(\"2024-0"
+    },
+    {
+      "id": "A13",
+      "level": "L1",
+      "cov": 0.667,
+      "miss": [
+        "tasks.py"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 152.0,
+      "resp_head": "</think>\n\n往返：\n· 缺 `max_retries` → 默认 3 次\n· 缺 `retry_delay` → 默认 0 秒\n\n判据：`send_email` 的装饰器里两项都有值，且 `retry_delay` ≥ 1s。\n验证：SMTP 不可达时观察队列深度是否仍上升；队列稳定说明有上限。"
+    },
+    {
+      "id": "A14",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 189.0,
+      "resp_head": "</think>\n\n根因：缺少降级路径。\n\n改法：`i18n/loader.py` `load_locale` 找不到文件时抛 `KeyError` → 改为回退到 `en` 并记 `logger.warning('locale <code> missing, falling back to en')`。\n\n验证：删掉一个 locale 文件，程序不应崩，日志里应有回退记录。"
+    },
+    {
+      "id": "A15",
+      "level": "L2",
+      "cov": 0.5,
+      "miss": [
+        "OOM",
+        "泄漏"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 314.0,
+      "resp_head": "</think>\n\n根因：流式上传时把整个分片缓存到内存再写盘，大分片（>64MB）直接顶满堆。\n\n定位：\n1) 找流式写入的缓存点 —— `upload/stream.go` 里的 `buf := make([]byte, 8*1024*1024)` 每次循环都新建大缓冲，\n   且上一轮缓冲未 `nil` 化就进入下一轮。\n2) 日志里 `heap.Alloc` 随分片数线性增长，而 `hea"
+    },
+    {
+      "id": "A16",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "deadlock detected",
+        "加锁顺序"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 188.0,
+      "resp_head": "</think>\n\n根因：同一事务内两条 UPDATE 的扫描顺序不同，导致 P1 先锁住 A 行、P2 先锁住 B 行，各自等待对方释放 → 死锁。\n\n现象：同一查询在并发下偶发失败，本地单实例不触发。\n\n修复：把两条 UPDATE 合并成一次扫描 + 逐行更新，或按主键升序统一扫描顺序。\n\n验证：在压测下连续 100 次无死锁；单实例也能复现死锁场景（用两条并发会话）。"
+    },
+    {
+      "id": "A17",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "P99",
+        "N+1 查询",
+        "批量加载"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 134.0,
+      "resp_head": "</think>\n\n<tool_call>\n{\"name\": \"grep\", \"arguments\": {\"pattern\": \"SELECT.*FROM\", \"path\": \"app/models.py\", \"output\": \"20\"}}\n</tool_call>"
+    },
+    {
+      "id": "A18",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "Docker 镜像",
+        "Dockerfile",
+        "多阶段构建"
+      ],
+      "code_blocks": 5,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 501.0,
+      "resp_head": "</think>\n\n根因：`apk add --no-cache` 把 1.6GB 的 `nodejs` 全量打入，且没有清理构建产物。\n\n```\ndocker history <镜像> | grep node\n```\n判读：出现 `nodejs` 且层大小 >1.5GB → 确认。\n\n```\ndocker build --target=builder -t t1 .\ndocker build -"
+    },
+    {
+      "id": "A19",
+      "level": "L2",
+      "cov": 0.667,
+      "miss": [
+        "connection reset by peer"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 386.0,
+      "resp_head": "</think>\n\n根因：keepalive 超时短于上游断开时间，空闲连接被上游静默关闭，客户端重连时读到 RESET。\n\n现象：只在高峰期（连接数接近上限）出现；低峰期正常。\n\n定位：\n1) 客户端 keepalive 间隔 vs 上游 timeout 设置\n2) 连接池最大空闲数 vs 实际并发需求\n3) 上游是否返回半开连接（TIME_WAIT 堆积）\n\n判据：`netstat -an |"
+    },
+    {
+      "id": "A20",
+      "level": "L2",
+      "cov": 0.667,
+      "miss": [
+        "异步"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 348.0,
+      "resp_head": "</think>\n\n根因：组件在数据未就绪时就把 `data` 当非 null 使用，慢网下才暴露。\n\n修复：渲染前判空，判空时给占位内容而不是报错：\n```tsx\nconst [data, setData] = useState(null);\nconst [loading, setLoading] = useState(true);\n\nif (loading) return <Skeleton "
+    },
+    {
+      "id": "A21",
+      "level": "L2",
+      "cov": 0.5,
+      "miss": [
+        "重复发券",
+        "多副本"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 323.0,
+      "resp_head": "</think>\n\n[root]/src/app/scheduler.ts 的 cron 任务没有跨副本去重。\n\n根因：同一 cron 表达式在多个 pod 上同时执行，且没有「只有一条实例能跑」的机制。\n\n修复：\n1) 用 Redis 做分布式锁：`redis-cli SET scheduler-lock <pid> NX EX 60`，只有拿到锁的实例才发券；\n2) 或改用「单点调度」架构：只"
+    },
+    {
+      "id": "A22",
+      "level": "L2",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 170.0,
+      "resp_head": "</think>\n\n不能靠\"等 24 小时\"，必须让持有者立刻失效。\n\n机制：改密码时把 access_token 的 `jti` 记入 `revoked_tokens` 集合（Redis 的 set），下次校验时命中即拒。\n\n判据：改密码后，用旧 token 请求应返回 401，且响应体含 `error: invalid_token`。"
+    },
+    {
+      "id": "A23",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "搜索",
+        "中文",
+        "编码",
+        "分词"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 349.0,
+      "resp_head": "</think>\n\n<tool_call>\n{\"name\": \"pwsh\", \"arguments\": {\"command\": \"cd D:\\\\v\\\\projects\\\\ai-search; $env:PYTHONUTF8='1'; python -c \\\"\\nimport sys; print('py:',sys.version_file); \\nimport unicodedata; prin"
+    },
+    {
+      "id": "A24",
+      "level": "L2",
+      "cov": 0.667,
+      "miss": [
+        "不稳定"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 175.0,
+      "resp_head": "</think>\n\n根因：key 里包含了 `node_modules` 的 hash —— 每次 `npm install` 后 key 都变，缓存永远 miss。\n\n现象：同一代码不同构建时间差异大，且差异与依赖版本相关。\n\n修复：key 只依赖源码与锁定文件，不依赖已安装的依赖树。\n\n验证：`npm install` 前后两次构建时间应接近。"
+    },
+    {
+      "id": "A25",
+      "level": "L2",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 617.0,
+      "resp_head": "</think>\n\n根因：堆上限被 Xmx 顶到 2Gi，而 JVM 自身开销（元空间、线程、GC 结构）再占 10-15%，实际可用给业务的数据面内存不足。\n\n现象：`kubectl describe` 里 LastKnownState=OOMKilled，`kubectl get events` 有 OOMKilled 事件。\n\n为什么 limit 给了还不够：limit 是容器总内存，JVM"
+    },
+    {
+      "id": "A26",
+      "level": "L2",
+      "cov": 0.5,
+      "miss": [
+        "数据库"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 351.0,
+      "resp_head": "</think>\n\n[troubleshooting] 1) 先确认「连接数」到底在数什么：`SHOW STATUS LIKE 'Threads_connected'` 是线程数，`SHOW STATUS LIKE 'Aborted_connections'` 是断连数，`SHOW STATUS LIKE 'Max_usedallowed_connections'` 是上限。 2) 再确认「归还」"
+    },
+    {
+      "id": "A27",
+      "level": "L2",
+      "cov": 0.667,
+      "miss": [
+        "消息队列"
+      ],
+      "code_blocks": 5,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 644.0,
+      "resp_head": "</think>\n\n重复消费的本质是「ack 在业务完成前发出」或「业务失败但消息被 ack」。\n\n```text\n判据一：业务失败路径是否 ack 了 —— 失败分支必须不 ack，或先 rollback 再 ack\n判据二：幂等键是否覆盖 —— 同键同值必须覆盖旧记录，而不是忽略\n判据三：重试是否带 idempotent 语义 —— 重试必须能识别「已处理过」\n```\n\n```sql\n-- 幂"
+    },
+    {
+      "id": "A28",
+      "level": "L2",
+      "cov": 0.75,
+      "miss": [
+        "旧数据"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 238.0,
+      "resp_head": "</think>\n\n根因：缓存 key 只含用户 id，没有版本字段。灰度期间同一用户可能同时命中旧缓存（旧分片）和新缓存。\n\n改动：key 必须包含版本标识，如 `user:<id>:v<ver>` 或 `user:<id>:shard:<shardId>`。\n\n```\n# 旧 key\nget(\"user:1001\")\n\n# 新 key\nget(\"user:1001:v1\")\n```\n\n判据：5"
+    },
+    {
+      "id": "A29",
+      "level": "L3",
+      "cov": 0.667,
+      "miss": [
+        "单测覆盖率"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 295.0,
+      "resp_head": "</think>\n\n覆盖率测的是「代码被执行过」，不是「边界被验证过」。\n\n盲区：\n1) 异常分支（除以零、空指针）—— 正常路径覆盖率 100% 但异常分支没跑\n2) 边界值（刚好等于上限、刚好小于下限）—— 中间值覆盖到了\n3) 并发时序 —— 单测环境跑一次就过，真实并发下才暴露\n\n补 3 个：\n1) 边界值测试：输入 min-1、min、max、max+1，看越界是否被拒\n2) 异常路径测"
+    },
+    {
+      "id": "A30",
+      "level": "L3",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 270.0,
+      "resp_head": "</think>\n\n启动慢通常来自「顺序等待 + 阻塞式初始化」。\n\n1. 先量：`time -p` 分段计时（入口 → 健康 → 业务就绪），看卡在哪个阶段\n2. 懒加载候选：\n   - 非必需插件/子进程（只在调用时才起）\n   - 大文件/大配置（按需读）\n   - 定时任务（启动后延迟注册）\n3. 必须前置：健康检查、关键依赖、证书/密钥加载\n4. 判据：懒加载后启动 < 10 秒，且「首"
+    },
+    {
+      "id": "A31",
+      "level": "L3",
+      "cov": 0.5,
+      "miss": [
+        "try/except: pass",
+        "掩盖 bug"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 280.0,
+      "resp_head": "</think>\n\n判据是「异常后是否改变状态」。\n\n· 合理：读配置/读文件/网络，失败后状态不变，继续下一条\n· 掩盖：业务逻辑里吞掉异常，状态被错误地设为「成功」\n\n识别方法：\n1) 看异常后是否写字段（写了 = 掩盖）\n2) 看是否有重试或降级（有 = 容错）\n3) 看日志：吞异常且无日志 = 高危\n\n治理顺序（由易到难）：\n1) 先改「无日志的吞」—— 至少加一句「未处理异常：…」\n2)"
+    },
+    {
+      "id": "A32",
+      "level": "L3",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 576.0,
+      "resp_head": "</think>\n\n往返 140 次、耗时 12 秒 —— 固定间隔重试在下游高峰期会雪崩。\n\n根因：重试间隔是常数，没有抖动，没有熔断。\n\n正确做法：指数退避 + 抖动 + 熔断。\n\n代码：\n```python\nimport random, math, time\n\ndef retry_with_jitter(max_attempts=5, base_delay=0.1, max_delay=5."
+    },
+    {
+      "id": "A33",
+      "level": "L3",
+      "cov": 0.8,
+      "miss": [
+        "数据库"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 202.0,
+      "resp_head": "</think>\n\n根因：配置源分散且无优先级，每次修改都要权衡三处。\n\n统一做法：\n1) 单入口加载：ConfigLoader 按优先级顺序拉取\n2) 优先级（从高到低）：环境变量 > 配置中心 > 配置文件 > 默认值\n3) 落盘：只写配置文件，环境变量与配置中心作为运行期覆盖\n4) 类型安全：所有配置项走 schema 校验，缺键即报错\n\n判据：改一个值只需改一处（配置文件），其他两处自动生"
+    },
+    {
+      "id": "A34",
+      "level": "L3",
+      "cov": 0.667,
+      "miss": [
+        "拆分"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 381.0,
+      "resp_head": "</think>\n\n[1] 先画依赖图：\n   2000 行 → 按函数/类统计调用次数，找出「被 3 处以上调用」的公共入口\n   判据：Top 5 公共入口覆盖 80% 调用\n[2] 按「职责」而不是「行数」切：\n   把「输入校验 / 业务逻辑 / 副作用 / 返回构造」各自抽出来\n   判据：每个模块只负责一个职责，且职责边界能用「输入输出类型」描述\n[3] 导出契约：\n   每个模块的「"
+    },
+    {
+      "id": "A35",
+      "level": "L3",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 280.0,
+      "resp_head": "</think>\n\n抽公共服务代价高（跨语言、跨部署、运维成本），共享库代价低但耦合强。\n\n**判据：跨语言/跨服务边界 → 公共服务；同语言同集群 → 库**。\n\n判据：库放在 `pkg/` 下，服务 `go build` 直接导入；公共服务走 gRPC 暴露 `GetRule`。\n\n坑：库里的规则常量（如 `MAX_RETRY=3`）被多个服务硬引用，改一个服务会拖另一个 —— 这就是「库耦合"
+    },
+    {
+      "id": "A36",
+      "level": "L3",
+      "cov": 0.167,
+      "miss": [
+        "数据库",
+        "字段",
+        "5000 万行",
+        "停服",
+        "迁移"
+      ],
+      "code_blocks": 3,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 487.0,
+      "resp_head": "</think>\n\n分三阶段，每阶段可回滚。\n\n**阶段一：加列（nullable）**\n```sql\nALTER TABLE t ADD COLUMN new_col VARCHAR(64) DEFAULT NULL;\n```\n零停机，无数据写入影响。\n\n**阶段二：分批回填**\n```sql\n-- 建临时表存进度\nCREATE TABLE t_backfill (id BIGINT PRIMA"
+    },
+    {
+      "id": "A37",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "API",
+        "返回结构",
+        "过渡方案"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 409.0,
+      "resp_head": "</think>\n\n分阶段迁移，不是一次切换。\n\n1. 先加新字段（不删旧字段）：\n   - 返回 `{ oldField, newField }`\n   - 客户端可以只读 newField，不影响现有逻辑\n2. 给旧字段加 deprecation 声明：\n   - 返回 `{ oldField, newField, _meta: { deprecated: true, since: 'v1.0"
+    },
+    {
+      "id": "A38",
+      "level": "L3",
+      "cov": 0.75,
+      "miss": [
+        "2TB"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 341.0,
+      "resp_head": "</think>\n\n按「观测价值 × 合规要求」分级，按级定策略。\n\n| 级别 | 判定条件 | 保留策略 | 采样 |\n|------|----------|----------|------|\n| A | 故障定位必需（含 trace 字段、错误码、调用链） | 全量，短期（1-7 天） | 不采样 |\n| B | 业务监控必需（关键指标、告警相关） | 全量，中期（7-30 天） | 不采样"
+    },
+    {
+      "id": "A39",
+      "level": "L3",
+      "cov": 0.6,
+      "miss": [
+        "定时任务",
+        "并行化"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 468.0,
+      "resp_head": "</think>\n\n根因：单线程顺序处理 100 万条，每条约 1 秒 → 3 小时是必然。\n\n分片策略：按时间窗或按主键范围切 N 份，每份独立作业。\n判据：每份有 `start_id / end_id` 字段，失败只重跑该份。\n\n失败重跑：记录每份的 `last_run_at`，下次只重跑 `last_run_at` 之后的分片。\n\n代码：\n```python\ndef split_jobs(t"
+    },
+    {
+      "id": "A40",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "单体拆微服务",
+        "调用关系",
+        "事务边界"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 168.0,
+      "resp_head": "</think>\n\n先算三笔账：\n· 跨服务调用占比（现在都在一个进程里，拆了会增加网络开销）\n· 事务跨边界比例（拆后必须改Saga/补偿，成本大）\n· 团队能同时维护的服务数（每个服务要独立部署/监控/测试）\n\n判据：三笔账里有两笔不支持，先做「服务化」而不是「微服务化」—— 把模块边界理清楚、接口稳定、数据归属明确，再考虑拆分。"
+    }
+  ]
+}

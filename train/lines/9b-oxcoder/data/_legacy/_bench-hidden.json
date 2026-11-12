@@ -1,0 +1,28 @@
+[
+  {
+    "ctx": 4096,
+    "mode": "fwd-bwd",
+    "ckpt": true,
+    "cast_bf16": true,
+    "sec": 26.9,
+    "peak_gib": 12.56,
+    "ok": true
+  },
+  {
+    "ctx": 8192,
+    "mode": "fwd-bwd",
+    "ckpt": true,
+    "cast_bf16": true,
+    "sec": 1149.54,
+    "peak_gib": 25.98,
+    "ok": true
+  },
+  {
+    "ctx": 9216,
+    "mode": "fwd-bwd",
+    "ckpt": true,
+    "cast_bf16": true,
+    "ok": false,
+    "err": "OOM"
+  }
+]

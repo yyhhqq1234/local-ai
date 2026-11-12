@@ -1,0 +1,337 @@
+{
+  "results": [
+    {
+      "variant": "c0-gsq-orig-tpl",
+      "model": "kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer",
+      "extra": [
+        "--host-context-mib",
+        "2048",
+        "--prefill-chunk",
+        "128",
+        "--max-context",
+        "4096",
+        "--no-prefix-reuse"
+      ],
+      "port": 1661,
+      "ready": true,
+      "requests": [
+        {
+          "label": "user",
+          "chars": 14,
+          "head": "2+2 equals 4."
+        },
+        {
+          "label": "sys",
+          "chars": 42,
+          "head": "[ directions_52.html, FIRST_PARSED_BY:1371"
+        },
+        {
+          "label": "essay",
+          "chars": 98,
+          "head": "#stages: 1. **Single Responsibility Principle** – Each module has ONE clear purpose and one mai"
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 19,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            17,
+            10,
+            17,
+            16327,
+            220,
+            19,
+            13,
+            248046
+          ]
+        },
+        {
+          "prompt_tokens": 30,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            58,
+            17425,
+            62,
+            20,
+            17,
+            2480,
+            11,
+            33660
+          ]
+        },
+        {
+          "prompt_tokens": 26,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            2,
+            267,
+            1098,
+            25,
+            198,
+            220,
+            220,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "c1-gsq-min-tpl",
+      "model": "kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer",
+      "extra": [
+        "--host-context-mib",
+        "2048",
+        "--prefill-chunk",
+        "128",
+        "--max-context",
+        "4096",
+        "--no-prefix-reuse",
+        "--chat-template",
+        "D:\\BaiduNetdiskDownload\\Local-AI\\_work\\ninfer-9b\\min-qwen.jinja"
+      ],
+      "port": 1662,
+      "ready": true,
+      "requests": [
+        {
+          "label": "user",
+          "chars": 38,
+          "head": "<think> </think> 2+2 equals **4**."
+        },
+        {
+          "label": "sys",
+          "chars": 31,
+          "head": "<think>ierted晖 \\nusP4(2)(::-1"
+        },
+        {
+          "label": "essay",
+          "chars": 101,
+          "head": "<think> </think> - **What it is**: The act of loading a large language model (like an AI assist"
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 13,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            198,
+            248068,
+            271,
+            248069,
+            271,
+            17,
+            10,
+            17
+          ]
+        },
+        {
+          "prompt_tokens": 23,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            198,
+            248068,
+            16530,
+            290,
+            248046,
+            107747,
+            271,
+            1639
+          ]
+        },
+        {
+          "prompt_tokens": 20,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            198,
+            248068,
+            271,
+            248069,
+            271,
+            12,
+            2972,
+            3710
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "c2-q4q5-orig-tpl",
+      "model": "oxcoder-9b-Q4Q5.ninfer",
+      "extra": [
+        "--host-context-mib",
+        "2048",
+        "--prefill-chunk",
+        "128",
+        "--max-context",
+        "4096",
+        "--no-prefix-reuse"
+      ],
+      "port": 1663,
+      "ready": true,
+      "requests": [
+        {
+          "label": "user",
+          "chars": 20,
+          "head": "2 + 2 equals **4**."
+        },
+        {
+          "label": "sys",
+          "chars": 32,
+          "head": "The question is: - ⚒️ Is 2 -"
+        },
+        {
+          "label": "essay",
+          "chars": 85,
+          "head": "I'm sorry, but I think there might be some misunderstanding. 😸 （Here at once丕onseema"
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 19,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            17,
+            478,
+            220,
+            17,
+            16327,
+            2972,
+            19,
+            159034
+          ]
+        },
+        {
+          "prompt_tokens": 30,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            760,
+            3296,
+            369,
+            25,
+            271,
+            12,
+            2765,
+            248
+          ]
+        },
+        {
+          "prompt_tokens": 26,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            40,
+            2688,
+            14169,
+            11,
+            694,
+            353,
+            1683,
+            1017
+          ]
+        }
+      ]
+    },
+    {
+      "variant": "c3-q4q5-min-tpl",
+      "model": "oxcoder-9b-Q4Q5.ninfer",
+      "extra": [
+        "--host-context-mib",
+        "2048",
+        "--prefill-chunk",
+        "128",
+        "--max-context",
+        "4096",
+        "--no-prefix-reuse",
+        "--chat-template",
+        "D:\\BaiduNetdiskDownload\\Local-AI\\_work\\ninfer-9b\\min-qwen.jinja"
+      ],
+      "port": 1664,
+      "ready": true,
+      "requests": [
+        {
+          "label": "user",
+          "chars": 40,
+          "head": "<think> </think> 2 + 2 equals **4**."
+        },
+        {
+          "label": "sys",
+          "chars": 73,
+          "head": "<think> *Warning: The user has provided **no other information** beyond"
+        },
+        {
+          "label": "essay",
+          "chars": 144,
+          "head": "<think> </think> **Note:** The following response is generated for educational purposes to expl"
+        }
+      ],
+      "reqlog": [
+        {
+          "prompt_tokens": 13,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            198,
+            248068,
+            271,
+            248069,
+            271,
+            17,
+            478,
+            220
+          ]
+        },
+        {
+          "prompt_tokens": 23,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            198,
+            248068,
+            271,
+            9,
+            11743,
+            25,
+            561,
+            1156
+          ]
+        },
+        {
+          "prompt_tokens": 20,
+          "prefix_cache_hit_tokens": 0,
+          "state_d2h_bytes": 0,
+          "units_prefill": 1,
+          "ids_head": [
+            198,
+            248068,
+            271,
+            248069,
+            271,
+            332,
+            8839,
+            64700
+          ]
+        }
+      ]
+    }
+  ],
+  "remaining_ninfer_processes": []
+}

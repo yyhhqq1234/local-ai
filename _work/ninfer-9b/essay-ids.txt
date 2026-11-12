@@ -1,0 +1,47 @@
+starting engine
+loading weights | 7.40 GiB
+weights ready | 7.40 GiB | 1.7s | 4.27 GiB/s
+CUDA graph memory calibrated | 4.3s
+CUDA graphs ready | 66.5 ms
+engine ready | kittyrev-oxcoder9b-nsfw-gate-full-GSQ | total 6.7s | weights 7.40 GiB | CUDA sync spin
+#stages:
+  1. **Single Responsibility Principle** – Each module has ONE clear purpose and one main
+phase       detail                      elapsed/progress
+tokens      generated ids             2 267 1098 25 198 220 220 16 13 2972 10570 74956 78193 332 1317 8618 4536 682 23287 2708 7193 321 799 1822
+prepare     request preparation             546 us
+generate    vision                            0 us
+generate    text prefill                   67.0 ms
+generate    decode                          652 ms
+generate    total                           734 ms
+summary     sampling                  greedy (temperature 0)
+summary     finish reason             output-limit
+summary     prompt tokens             26
+summary     reused prompt tokens      0
+summary     generated tokens          24
+summary     model elapsed             719 ms
+summary     prefill speed             388.1 tok/s
+summary     decode speed              35.3 tok/s
+summary     throughput (overall)      33.4 tok/s
+summary     device                    0
+summary     max context               4096
+summary     prefill chunk             128
+summary     device budget             10.8 GiB
+summary     KV capacity policy        explicit
+summary     KV capacity               4096
+summary     KV page groups            64 / 64
+summary     gpu weights used          7.40 GiB / 7.40 GiB
+summary     gpu sequence used         180.1 MiB / 180.1 MiB
+summary     kv cache dtype            bf16
+summary     kv cache payload          128.0 MiB
+summary     gpu workspace peak        12.5 MiB / 12.5 MiB
+summary     runtime reservation       192.6 MiB
+summary     free after weights        3.38 GiB
+summary     free after startup        3.18 GiB
+summary     KV capacity headroom      1.00 GiB
+summary     planned slack             2.19 GiB
+summary     graph rebuild estimate    0 B
+summary     graph prepare increment   0 B
+summary     graph calibration growth  4194304 B
+summary     graph calibration retained4194304 B
+summary     startup retained          4945920 B
+summary     planned device total      7.60 GiB

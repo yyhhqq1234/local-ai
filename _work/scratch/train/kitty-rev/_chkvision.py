@@ -7,7 +7,7 @@ def get_json(path, limit=2000000):
     txt = data[i:].decode("utf-8", "ignore")
     obj, _ = json.JSONDecoder().raw_decode(txt)
     return obj
-p = r"D:\BaiduNetdiskDownload\Local-AI\train\local-pack\qwen3.8-27b-kittyrev-v6-iq2s-mtp.ninfer"
+p = r"D:\BaiduNetdiskDownload\Local-AI\train\lines\27b-kittyrev\local-pack\qwen3.8-27b-kittyrev-v6-iq2s-mtp.ninfer"
 d = get_json(p)
 comp = d.get("components") or {}
 print("components keys =", list(comp.keys()))

@@ -1,0 +1,140 @@
+{
+  "cases_per_adapter": 5,
+  "results": [
+    {
+      "label": "zre",
+      "n": 5,
+      "hit": 4,
+      "noarg": 1,
+      "wrong": 0,
+      "fake": 0,
+      "none": 0,
+      "acc": 0.8,
+      "by_level": {
+        "L1": {
+          "hit": 2,
+          "n": 2
+        },
+        "L2": {
+          "hit": 2,
+          "n": 2
+        },
+        "L3": {
+          "hit": 0,
+          "n": 1
+        }
+      },
+      "detail": [
+        {
+          "id": "G01",
+          "kind": "hit",
+          "got": [
+            "kitty_die"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_die"
+          ],
+          "level": "L1",
+          "note": "packer 识别 → die/scan",
+          "expect_args": {
+            "action": [
+              "scan",
+              "status"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_die action=scan\n\n选它的理由：packer detect (DIE passthrough)（通道 static）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G05",
+          "kind": "hit",
+          "got": [
+            "kitty_dump"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_dump"
+          ],
+          "level": "L2",
+          "note": "转储 + unmap 重建 → dump",
+          "expect_args": {
+            "action": [
+              "dump",
+              "unmap"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_dump action=dump\n（action 可取 dump / unmap；本次走 dump）\n\n选它的理由：内存转储+镜像重建（通道 runtime）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G09",
+          "kind": "noarg",
+          "got": [
+            "kitty_ce",
+            "kitty_dualview",
+            "kitty_km",
+            "kitty_prot"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_dualview"
+          ],
+          "level": "L3",
+          "note": "三视图分叉 → dualview",
+          "expect_args": {
+            "action": [
+              "dualview"
+            ]
+          },
+          "missing": [
+            "action∈{dualview}"
+          ],
+          "resp": "</think>\n\n三读分叉本身就是证据，先定性再修值。\n\n```\nkitty_dualview addr=0xADDR samples=3\n```\n判读：返回每份视图的 hex 与来源。\n注意：本 build 的 vt 分支对 mhtglyss 的读取路径与官方不同，\n预期 R 与 KM_R 可能不一致，KM 侧可能读到缓存值 —— 以用户态 R 为准。\n\n```\nkitty_ce op=\"R|0xADDR|bytes:16\"\nkitty_km action=read addr=0xADDR vt=dword\n```\n判读：两读一致则问题在视图层；不一致则先确认哪一侧是缓存。\n\n```\nkitty_prot action=query addr=0xADDR\n```\n判读：Type 与保护状态决定可信度（换页/写保护会改变观测）。\n\n退出：给出「哪一侧可信 + 差异原因」，不强行对齐。"
+        },
+        {
+          "id": "G02",
+          "kind": "hit",
+          "got": [
+            "kitty_apkscan"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_apkscan"
+          ],
+          "level": "L1",
+          "note": "APKiD 分诊 → apkscan/scan",
+          "expect_args": {
+            "action": [
+              "scan",
+              "status"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_apkscan action=scan\n\n选它的理由：APK shell/scan (APKiD triage)（通道 static）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G06",
+          "kind": "hit",
+          "got": [
+            "kitty_pchain"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_pchain"
+          ],
+          "level": "L2",
+          "note": "多跳反查 → pchain（原题有歧义已改写）",
+          "expect_args": {
+            "action": [
+              "pchain"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_pchain action=pchain\n\n选它的理由：Kitty多跳反查（通道 A）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        }
+      ],
+      "level_str": "2/2/0"
+    }
+  ]
+}

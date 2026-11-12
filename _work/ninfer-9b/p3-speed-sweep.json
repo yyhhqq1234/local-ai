@@ -1,0 +1,107 @@
+{
+  "prompt": "Explain why local inference is useful. Give a detailed answer with examples.",
+  "max_tokens": 256,
+  "rows": [
+    {
+      "config": "base",
+      "extra": [],
+      "concurrency": 1,
+      "ready": true,
+      "wall": 7.296,
+      "prompt_tokens": 27,
+      "completion_tokens": 256,
+      "ttft": 0.091,
+      "prefill_tok_s": 295.70440073860385,
+      "decode_tok_s": 35.459406578904684
+    },
+    {
+      "config": "kv-int8",
+      "extra": [
+        "--kv-dtype",
+        "int8"
+      ],
+      "concurrency": 1,
+      "ready": false,
+      "died": true
+    },
+    {
+      "config": "kv-fp8",
+      "extra": [
+        "--kv-dtype",
+        "fp8"
+      ],
+      "concurrency": 1,
+      "ready": false,
+      "died": true
+    },
+    {
+      "config": "kv-k8v4",
+      "extra": [
+        "--kv-dtype",
+        "k8v4"
+      ],
+      "concurrency": 1,
+      "ready": false,
+      "died": true
+    },
+    {
+      "config": "chunk-256",
+      "extra": [
+        "--prefill-chunk",
+        "256"
+      ],
+      "concurrency": 1,
+      "ready": true,
+      "wall": 7.34,
+      "prompt_tokens": 27,
+      "completion_tokens": 256,
+      "ttft": 0.091,
+      "prefill_tok_s": 295.375082595625,
+      "decode_tok_s": 35.24461615682864
+    },
+    {
+      "config": "chunk-512",
+      "extra": [
+        "--prefill-chunk",
+        "512"
+      ],
+      "concurrency": 1,
+      "ready": true,
+      "wall": 7.331,
+      "prompt_tokens": 27,
+      "completion_tokens": 256,
+      "ttft": 0.092,
+      "prefill_tok_s": 295.0581045904484,
+      "decode_tok_s": 35.30703000212798
+    },
+    {
+      "config": "no-prefix-reuse",
+      "extra": [
+        "--no-prefix-reuse"
+      ],
+      "concurrency": 1,
+      "ready": true,
+      "wall": 7.313,
+      "prompt_tokens": 27,
+      "completion_tokens": 256,
+      "ttft": 0.076,
+      "prefill_tok_s": 355.4792518609997,
+      "decode_tok_s": 35.30244707010663
+    },
+    {
+      "config": "concurrency-4",
+      "extra": [],
+      "concurrency": 4,
+      "ready": true,
+      "wall": 7.439,
+      "completion_tokens": 256,
+      "aggregate_tok_s": 34.41,
+      "per_stream_tok_s": [
+        35.1,
+        35.1,
+        35.9,
+        35.1
+      ]
+    }
+  ]
+}

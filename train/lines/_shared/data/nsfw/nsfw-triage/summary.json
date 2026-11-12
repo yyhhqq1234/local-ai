@@ -1,0 +1,303 @@
+{
+  "__meta": {
+    "built": "2026-10-27T12:14:26.810Z",
+    "note": "原 tag_dist 为旧标签体系；新增 tag_mapping 映射到当前 14 类主题，未破坏原字段",
+    "topic_system": [
+      "露出",
+      "调教",
+      "近亲",
+      "束缚",
+      "婚恋",
+      "催眠",
+      "低龄向",
+      "后宫",
+      "NTR",
+      "异世界",
+      "同人",
+      "非人",
+      "百合",
+      "虚拟游戏"
+    ],
+    "tag_mapping": [
+      {
+        "old_tag": "露出",
+        "count": 59,
+        "current_topic": "露出"
+      },
+      {
+        "old_tag": "乱伦",
+        "count": 48,
+        "current_topic": "近亲"
+      },
+      {
+        "old_tag": "调教",
+        "count": 46,
+        "current_topic": "调教"
+      },
+      {
+        "old_tag": "幼齿",
+        "count": 35,
+        "current_topic": "低龄向"
+      },
+      {
+        "old_tag": "SM",
+        "count": 35,
+        "current_topic": "束缚"
+      },
+      {
+        "old_tag": "催眠",
+        "count": 34,
+        "current_topic": "催眠"
+      },
+      {
+        "old_tag": "婚恋",
+        "count": 31,
+        "current_topic": "婚恋"
+      },
+      {
+        "old_tag": "同人",
+        "count": 31,
+        "current_topic": "同人"
+      },
+      {
+        "old_tag": "后宫",
+        "count": 23,
+        "current_topic": "后宫"
+      },
+      {
+        "old_tag": "NTR",
+        "count": 22,
+        "current_topic": "NTR"
+      },
+      {
+        "old_tag": "兽人",
+        "count": 19,
+        "current_topic": "非人"
+      },
+      {
+        "old_tag": "女同",
+        "count": 17,
+        "current_topic": "百合"
+      },
+      {
+        "old_tag": "异世界",
+        "count": 17,
+        "current_topic": "异世界"
+      },
+      {
+        "old_tag": "VR/游戏",
+        "count": 4,
+        "current_topic": "虚拟游戏"
+      }
+    ],
+    "unmapped_tags": [],
+    "dataset": {
+      "train_shards": [
+        {
+          "file": "train-cont.jsonl",
+          "rows": 6829,
+          "bytes": 35281319,
+          "sha256": "e569ab2b36ab679ff097a1ddf2a2dbbd4c2942208fe21e43c1e7696450ee1d59"
+        },
+        {
+          "file": "train-scene.jsonl",
+          "rows": 2741,
+          "bytes": 14148886,
+          "sha256": "add8490452cf6c19a66f59e08ac8efe0fa9dde7aadf43042b7b8a1a78ebf9e29"
+        },
+        {
+          "file": "train-multi.jsonl",
+          "rows": 2079,
+          "bytes": 12082778,
+          "sha256": "f48485bc86d9549e8380246cc6df3d358c641d0a8da2be0c0d48f2ac33f22973"
+        },
+        {
+          "file": "train-style.jsonl",
+          "rows": 1329,
+          "bytes": 8445383,
+          "sha256": "db7dd68eeaa67adeb424b051dc4cd9a08713c3f5f279a2d9943b21cd78b004f5"
+        },
+        {
+          "file": "train-expand.jsonl",
+          "rows": 690,
+          "bytes": 4387541,
+          "sha256": "2fdd6eeb826c85214a2f331edab53d7ac8b9e0aee937f44c81b694158f9761c4"
+        }
+      ],
+      "train_rows_total": 13668,
+      "glossary_terms": 283,
+      "lexicon_terms": 470,
+      "lexicon_categories": 12,
+      "lexicon_version": "v9"
+    }
+  },
+  "files": 62,
+  "total_chars": 19119804,
+  "total_mb": 54.7,
+  "dup_files": 0,
+  "level_dist": {
+    "L3": 53,
+    "L2": 5,
+    "L0": 3,
+    "L1": 1
+  },
+  "tag_dist": [
+    [
+      "露出",
+      59
+    ],
+    [
+      "乱伦",
+      48
+    ],
+    [
+      "调教",
+      46
+    ],
+    [
+      "幼齿",
+      35
+    ],
+    [
+      "SM",
+      35
+    ],
+    [
+      "催眠",
+      34
+    ],
+    [
+      "婚恋",
+      31
+    ],
+    [
+      "同人",
+      31
+    ],
+    [
+      "后宫",
+      23
+    ],
+    [
+      "NTR",
+      22
+    ],
+    [
+      "兽人",
+      19
+    ],
+    [
+      "女同",
+      17
+    ],
+    [
+      "异世界",
+      17
+    ],
+    [
+      "VR/游戏",
+      4
+    ]
+  ],
+  "top10_by_chars": [
+    {
+      "rel": "春日野穹的淫堕（雪月樱合集）.txt",
+      "chars": 7597314,
+      "level": "L3",
+      "tags": [
+        "幼齿",
+        "乱伦",
+        "同人"
+      ]
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【p站作者码字姬萝莉合集】.txt",
+      "chars": 1404748,
+      "level": "L3",
+      "tags": [
+        "乱伦",
+        "幼齿",
+        "调教"
+      ]
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【后宫催眠日记】 （1-489）作者：十六夜天.txt",
+      "chars": 1343279,
+      "level": "L1",
+      "tags": [
+        "乱伦",
+        "幼齿",
+        "NTR"
+      ]
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\诱导手环-MC王大锤合集.txt",
+      "chars": 965266,
+      "level": "L0",
+      "tags": [
+        "NTR"
+      ]
+    },
+    {
+      "rel": "关于在色情VRMMO中收为性奴隶的美少女们在现实中也认识的事_作者：ソルティ.txt",
+      "chars": 788195,
+      "level": "L3",
+      "tags": [
+        "兽人",
+        "幼齿",
+        "调教"
+      ]
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【从被白丝女儿夜袭开始的乱伦故事】全（1-26）作者：击空明兮溯流光.txt",
+      "chars": 656252,
+      "level": "L3",
+      "tags": [
+        "乱伦",
+        "幼齿",
+        "调教"
+      ]
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【巨根正太和家族美熟女】【1-53】作者：画纯爱的JIN.txt",
+      "chars": 536230,
+      "level": "L3",
+      "tags": [
+        "幼齿",
+        "乱伦",
+        "婚恋"
+      ]
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【二次元催眠调教日记】.txt",
+      "chars": 520695,
+      "level": "L3",
+      "tags": [
+        "幼齿",
+        "同人",
+        "乱伦"
+      ]
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【作者mc王大锤合集】（23部合集）\\【诱导手环】.txt",
+      "chars": 362317,
+      "level": "L2",
+      "tags": [
+        "乱伦",
+        "调教",
+        "催眠"
+      ]
+    },
+    {
+      "rel": "纯爱赛高的枪文集合1\\【碧蓝和原神coser】（完）作者：不详.txt",
+      "chars": 361797,
+      "level": "L3",
+      "tags": [
+        "同人",
+        "乱伦",
+        "调教"
+      ]
+    }
+  ],
+  "dups": []
+}

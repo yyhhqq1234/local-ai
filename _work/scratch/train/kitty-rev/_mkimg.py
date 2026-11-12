@@ -6,5 +6,5 @@ try:
 except Exception:
     font = ImageFont.load_default()
 d.text((60, 30), "7391", fill=(0, 0, 0), font=font)
-img.save(r"D:\BaiduNetdiskDownload\Local-AI\train\kitty-rev\logs\v6\_vtest.png")
+img.save(r"D:\BaiduNetdiskDownload\Local-AI\train\lines\27b-kittyrev\kitty-rev\logs\v6\_vtest.png")
 print("saved _vtest.png")

@@ -1,0 +1,65 @@
+{
+  "src": "train-2b-gated-v3.jsonl",
+  "out": "train-2b-gated-v3b.jsonl",
+  "in_rows": 29281,
+  "out_rows": 28814,
+  "removed": 467,
+  "rules": {
+    "R4_chapter_lines_stripped": 1195,
+    "R3_ad_invalid": 166,
+    "R2_c1_control": 57,
+    "R3_ad_lines_stripped": 1167,
+    "R1_eval_leak": 42,
+    "R5_ctl_truncated": 380,
+    "R5_drop_user_fills_ctx": 163,
+    "R6_ctl_has_trigger": 38,
+    "R8_dup_pair": 1
+  },
+  "groups": {
+    "pos": {
+      "n": 13903,
+      "asst_chars": {
+        "p50": 1377,
+        "p90": 1446,
+        "max": 2232
+      },
+      "tokens": 14326567
+    },
+    "neg3": {
+      "n": 8362,
+      "asst_chars": {
+        "p50": 526,
+        "p90": 577,
+        "max": 684
+      },
+      "tokens": 4408256
+    },
+    "ctl": {
+      "n": 6549,
+      "asst_chars": {
+        "p50": 293,
+        "p90": 2097,
+        "max": 3118
+      },
+      "tokens": 3998476
+    }
+  },
+  "token_share": {
+    "pos": 0.6302,
+    "neg3": 0.1939,
+    "ctl": 0.1759
+  },
+  "pos_soft": 1580,
+  "pos_explicit": 12323,
+  "eval_files": [
+    "nsfw-gate.jsonl",
+    "nsfw.jsonl",
+    "probe-re-zh.jsonl",
+    "traj.jsonl",
+    "nsfw-gate.jsonl",
+    "nsfw.jsonl",
+    "probe-re-zh.jsonl",
+    "traj.jsonl"
+  ],
+  "eval_user_hashes": 544
+}

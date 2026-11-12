@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import json, glob, os
 cands = glob.glob(r"D:\BaiduNetdiskDownload\Local-AI\ninfer-27b-kv-stream-3arch-20261019\model\*.conversion.json")
-cands += glob.glob(r"D:\BaiduNetdiskDownload\Local-AI\train\local-pack\*.conversion.json")
+cands += glob.glob(r"D:\BaiduNetdiskDownload\Local-AI\train\lines\27b-kittyrev\local-pack\*.conversion.json")
 for p in cands:
     try:
         d = json.load(open(p, encoding="utf-8"))

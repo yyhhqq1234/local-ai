@@ -1,0 +1,63 @@
+{
+  "seed": 42,
+  "total": 29281,
+  "groups": {
+    "pos": {
+      "n": 13951,
+      "assistant_median_chars": 1378,
+      "assistant_mean_chars": 1324.2,
+      "approx_tokens_sum": 11546128,
+      "uniq_assistant": 13883
+    },
+    "neg3": {
+      "n": 8411,
+      "assistant_median_chars": 526,
+      "assistant_mean_chars": 530.5,
+      "approx_tokens_sum": 2788626,
+      "uniq_assistant": 8411
+    },
+    "ctl_old": {
+      "n": 3433,
+      "assistant_median_chars": 720,
+      "assistant_mean_chars": 1316.6,
+      "approx_tokens_sum": 2824993,
+      "uniq_assistant": 2930
+    },
+    "ctl_kitty": {
+      "n": 2774,
+      "assistant_median_chars": 179,
+      "assistant_mean_chars": 200.2,
+      "approx_tokens_sum": 347095,
+      "uniq_assistant": 790
+    },
+    "ctl_traj": {
+      "n": 1134,
+      "assistant_median_chars": 884,
+      "assistant_mean_chars": 798.8,
+      "approx_tokens_sum": 566118,
+      "uniq_assistant": 325
+    },
+    "ctl_write": {
+      "n": 800,
+      "assistant_median_chars": 293,
+      "assistant_mean_chars": 295.1,
+      "approx_tokens_sum": 147536,
+      "uniq_assistant": 97
+    }
+  },
+  "token_share": {
+    "pos": 0.6409,
+    "neg": 0.1548,
+    "ctl": 0.2043
+  },
+  "token_balance_ok": true,
+  "neg_token_ratio_vs_pos": 0.2415,
+  "group_counts": {
+    "pos": 13951,
+    "neg3": 8411,
+    "ctl_old": 3433,
+    "ctl_kitty": 2774,
+    "ctl_traj": 1134,
+    "ctl_write": 800
+  }
+}

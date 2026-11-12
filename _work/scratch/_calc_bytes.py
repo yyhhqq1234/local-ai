@@ -5,7 +5,7 @@ fp = r"D:\BaiduNetdiskDownload\Local-AI\_research\csunx\engine\tools\artifact\fo
 spec = importlib.util.spec_from_file_location("formats", fp)
 F = importlib.util.module_from_spec(spec); spec.loader.exec_module(F)
 
-p = r"D:\BaiduNetdiskDownload\Local-AI\train\local-pack\qwen3.8-27b-kittyrev-v5-iq2s-mtp.ninfer.conversion.json"
+p = r"D:\BaiduNetdiskDownload\Local-AI\train\lines\27b-kittyrev\local-pack\qwen3.8-27b-kittyrev-v5-iq2s-mtp.ninfer.conversion.json"
 d = json.load(open(p, encoding="utf-8"))
 methods = d["methods"]
 payload = d["payload_bytes"]

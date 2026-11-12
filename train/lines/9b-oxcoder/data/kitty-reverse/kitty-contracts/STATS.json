@@ -1,0 +1,119 @@
+{
+  "generated_at": "2026-10-26T16:58:39.857Z",
+  "source": {
+    "ops_catalog": "D:/DrCE(26.2.16)/kitty-toolbox/src/ops-catalog.ts",
+    "tool_manifest": "D:/DrCE(26.2.16)/kitty-toolbox/src/tool-manifest.ts"
+  },
+  "ops_total": 66,
+  "ops_kernel": 9,
+  "ops_achannel": 57,
+  "tools_total": 64,
+  "ops_declared_by_tools": 39,
+  "gate_ops": 5,
+  "channels": [
+    [
+      "infra",
+      2
+    ],
+    [
+      "A",
+      2
+    ],
+    [
+      "A-readonly",
+      1
+    ],
+    [
+      "C",
+      1
+    ],
+    [
+      "A-debug",
+      1
+    ],
+    [
+      "static",
+      20
+    ],
+    [
+      "runtime",
+      8
+    ],
+    [
+      "runtime-kernel",
+      1
+    ],
+    [
+      "orch",
+      1
+    ],
+    [
+      "infra-aux",
+      1
+    ],
+    [
+      "infra-init",
+      1
+    ],
+    [
+      "orch-view",
+      1
+    ],
+    [
+      "kernel",
+      1
+    ],
+    [
+      "meta",
+      1
+    ],
+    [
+      "test",
+      1
+    ],
+    [
+      "reverse",
+      8
+    ],
+    [
+      "loop",
+      1
+    ],
+    [
+      "loop-readonly",
+      1
+    ],
+    [
+      "ida-mcp",
+      1
+    ],
+    [
+      "rea-mcp",
+      10
+    ]
+  ],
+  "ops_missing_signature": [],
+  "ops_not_in_tool_list": 27,
+  "gate_samples": [
+    {
+      "op": "KM_MODE",
+      "note": "`off` 只清标志：CE 无真正回退 API（如实回报）"
+    },
+    {
+      "op": "KM_PW",
+      "note": "**默认拒绝**：实测物理写会卡死 Lua 引擎（宿主活着但 tick 停摆），恢复＝宿主重启"
+    },
+    {
+      "op": "S_NEW",
+      "note": "**必须显式区间**，缺 → ERR|need-range；窗 ≤16MB、总 ≤64MB、≤4 窗"
+    },
+    {
+      "op": "P_BACK",
+      "note": "**必须显式窗口**（同样 ERR|need-range），命中上限 200"
+    },
+    {
+      "op": "DBG_ATTACH",
+      "note": "**双层闸门（v0.2.5c）**：force 只解默认拒绝，unsafe 才真调——本 build 的 debugProcess 会随机 fail-fast 杀宿主（F-13）；"
+    }
+  ]
+}

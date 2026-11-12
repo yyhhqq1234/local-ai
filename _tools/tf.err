@@ -1,0 +1,19 @@
+2026-11-08 12:18:15.769  INFO  starting engine
+2026-11-08 12:18:16.842  INFO  loading weights | 5.81 GiB
+2026-11-08 12:18:18.114  INFO  weights ready | 5.81 GiB | 1.3s | 4.57 GiB/s
+2026-11-08 12:18:22.027  INFO  CUDA graph memory calibrated | 3.9s
+2026-11-08 12:18:22.035  INFO  pinning host context | 2.00 GiB
+2026-11-08 12:18:22.256  INFO  host context pinned | 2.00 GiB | 221 ms
+2026-11-08 12:18:22.373  INFO  CUDA graphs ready | 60.5 ms
+2026-11-08 12:18:22.377  INFO  engine ready | oxcoder9b-merged | total 6.6s | weights 5.81 GiB | CUDA sync spin
+2026-11-08 12:18:22.380  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 318.7 MiB | free 4.65 GiB
+2026-11-08 12:18:22.382  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 12:18:22.448  INFO  listening on http://127.0.0.1:1689 | model oxcoder9b-merged | auth disabled
+2026-11-08 12:18:22.489  INFO  req#1 started | openai-chat non-stream | 1 message | max output 8 | thinking template default
+2026-11-08 12:18:22.788  INFO  req#1 done | openai-chat | output limit | prompt 60 | output 8 | cache 0 (0.0%) | TTFT 109 ms | total 299 ms | prefill 580.2 tok/s | decode 36.9 tok/s
+2026-11-08 12:18:22.798  INFO  req#2 started | openai-chat non-stream | 1 message | max output 8 | thinking template default
+2026-11-08 12:18:23.157  INFO  req#2 done | openai-chat | output limit | prompt 260 | output 8 | cache 53 (20.4%, checkpoint) | TTFT 169 ms | total 360 ms | prefill 1.35k tok/s | decode 36.9 tok/s
+2026-11-08 12:18:23.161  INFO  req#3 started | openai-chat non-stream | 1 message | max output 8 | thinking template default
+[exc] target returned a token outside the public token domain
+2026-11-08 12:18:23.416  ERROR req#3 failed during generation | openai-chat | HTTP 500 | internal error
+2026-11-08 12:18:23.428  WARN  req#4 failed during prepare | openai-chat non-stream | HTTP 503 | service unavailable | messages 1

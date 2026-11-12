@@ -1,0 +1,4 @@
+2026-11-08 20:50:58.772  INFO  starting engine
+2026-11-08 20:50:59.968  INFO  loading weights | 7.82 GiB
+2026-11-08 20:51:01.877  INFO  weights ready | 7.82 GiB | 1.9s | 4.10 GiB/s
+2026-11-08 20:51:05.869  FATAL server failed during startup | split_bf16_features: invalid shape for source

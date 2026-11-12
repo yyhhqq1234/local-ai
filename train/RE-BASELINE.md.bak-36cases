@@ -1,0 +1,136 @@
+# RE 阶段基线定档（2026-10-28）
+
+> 结论先行：**RE 基线 = `train/out/re-r2-ckpt1400-snapshot`**（累计 2 遍数据，MD5 `101b901a…`）
+> 不用 3 遍的 `re-stage1-r2/final`（实测更差）。
+
+---
+
+## 1. 三份候选权重
+
+| 档 | 路径 | 数据遍历 | 训练步数 | MD5 |
+|---|---|---|---|---|
+| 档1 | `train/out/re-stage1-fixed/final` | 1 遍 | 1401 | `27b4d956…43fb7` |
+| **档2** | **`train/out/re-r2-ckpt1400-snapshot`** | **2 遍** | 1400（r2 的 epoch 1.0 终点） | **`101b901a…5a7d`** |
+| 档3 | `train/out/re-stage1-r2/final` | 3 遍 | 2802 | `e41a8923…da68` |
+
+档2 来源：r2 训练跑的 `checkpoint-1400`（= epoch 1.0 精确终点），在训练中途手工快照到独立目录。
+**事后证实这步是必需的** —— 训练目录里的 `checkpoint-1400` 已被 `save_total_limit=8` 轮转删除。
+
+---
+
+## 2. 真泛化测试（主判据）
+
+脚本：`train/scripts/eval_re_generalize.py`
+方法：12 条改写提问 · 全程无 `kitty_` 提示 · L1 直白 / L2 间接 / L3 抽象
+
+| 档 | 命中率 | 选错 | 编造 | 回避 | L1 | L2 | L3 |
+|---|---|---|---|---|---|---|---|
+| 基座 | **0.0%**（0/12） | 0 | **10** | 2 | 0/4 | 0/4 | 0/4 |
+| 档1（1 遍） | 50.0%（6/12） | 6 | 0 | 0 | 3/4 | 1/4 | 2/4 |
+| **档2（2 遍）** | **91.7%（11/12）** | **1** | **0** | 0 | **4/4** | 3/4 | **4/4** |
+| 档3（3 遍） | 83.3%（10/12） | 2 | 0 | 0 | 4/4 | 3/4 | 3/4 |
+
+**档2 > 档3**（91.7% > 83.3%，L3 4/4 > 3/4）。第 3 遍不只零增益，是**负增益**。
+
+### 2.1 基座的编造清单（23 个，全部不存在于 tools.json）
+
+```
+kitty_enum_exports        kitty_module_info          kitty_process_dump
+kitty_dump_memory         kitty_export_module        kitty_callgraph
+kitty_disasm              kitty_trace                kitty_who_points
+kitty_hook_process        kitty_scan_memory          kitty_check_dbvm_status
+kitty_check_driver_status kitty_get_status           kitty_list_processes
+kitty_get_app_info        kitty_capture              kitty_disassemble
+kitty_protocol            kitty_debugger_breakpoint  kitty_debugger_registers
+kitty_debugger_start      kitty_debugger_step
+```
+
+这些都是「真实概念 + 错误工具名」型幻觉，命名风格与真工具高度相似。
+
+### 2.2 in-sample 对照（反例，说明为何不能用它验收）
+
+脚本：`train/scripts/eval_re_heldout.py`（从训练集抽样，实为 in-sample）
+
+| 数据集 | 基座 | 档1 | 档2 | 档3 |
+|---|---|---|---|---|
+| in-sample（训练集原句） | — | 5/6 | 5/6 | 5/6 |
+| **out-of-sample（改写提问）** | **0/12** | **6/12** | **11/12** | **10/12** |
+
+in-sample 三档全打平（都背下来了），只有 out-of-sample 有判别力。
+
+---
+
+## 3. 已知弱点（进 r3 数据补强清单）
+
+### G06 指针链反查 —— 三档全错
+
+```
+问：「手上只有一个地址，想知道是谁指向它，还要往上追两跳」
+期望：kitty_pchain
+实际：kitty_ce（档1/档2/档3 一致）
+```
+
+`kitty_ce` 是真实工具（内存读写主力），不是编造，属**路由错误**。
+说明训练集里 `kitty_pchain` 的表述没有把「反查 / 谁指向它 / 往上追」这个语义突出来。
+
+**补强方式**：在 `train-kitty-core.jsonl` 里为 `kitty_pchain` 补 30-50 条变体，
+user 侧必须出现「反查 / 谁指向 / 引用者 / 指针链 / 往上追」这些词。
+
+### G09 三视图分叉 —— 档3 退化
+
+```
+问：「三处不同来源读同一个地址给出的值不一样，怎么判断哪个才是真的」
+期望：kitty_dualview
+档2：✅ 命中
+档3：❌ 给 kitty_km,kitty_prot
+```
+
+这是档3 比档2 差的那一条，也是 3 遍数据造成退化的直接证据。
+
+---
+
+## 4. 训练侧结论（供 r3 参考）
+
+| 项 | r2 实际 | r3 建议 | 依据 |
+|---|---|---|---|
+| epoch | 2.0 | **1.0** | 2 遍 = 91.7%，3 遍 = 83.3%，第 3 遍负增益 |
+| lr | 5e-05 | **3e-05** | 续训起点 loss 已 0.69 |
+| 数据 | 5602 条原句 | **22319 条增广**（`train-kitty-aug.jsonl`，4.03x 表述多样性） | 抗字面记忆，逼模型学语义 |
+| lora_dropout | 0.05 | **0.10** | 抗记忆化 |
+| 评测 | 只有 train loss | **每 200 步跑泛化集** | in-sample 无判别力 |
+
+详见 `train/ANTI-MEMORIZATION.md`。
+
+---
+
+## 5. 复现命令
+
+```bash
+# 泛化测试（主判据）
+bash train/scripts/run_eval_generalize.sh
+
+# 单档
+./train/.venv/Scripts/python.exe -u train/scripts/eval_re_generalize.py \
+  --adapter train/out/re-r2-ckpt1400-snapshot \
+  --out train/out/eval-gen-档2.json
+
+# 记忆度基线（in-sample，只看 n-gram 重合，不看命中）
+./train/.venv/Scripts/python.exe -u train/scripts/eval_re_heldout.py \
+  --adapter train/out/re-r2-ckpt1400-snapshot --n 10 --seed 7
+```
+
+---
+
+## 6. 产物清单
+
+| 文件 | 说明 |
+|---|---|
+| `train/out/re-r2-ckpt1400-snapshot/` | **RE 基线（4 个文件，173,189,008 B）** |
+| `train/out/re-stage1-fixed/final/` | 1 遍对照 |
+| `train/out/re-stage1-r2/final/` | 3 遍（已证明更差，保留备查） |
+| `train/out/eval-gen-*.json` | 泛化测试明细 |
+| `train/logs/eval-gen-*.log` | 泛化测试原始日志 |
+| `train/scripts/eval_re_generalize.py` | 真泛化测试 |
+| `train/scripts/eval_re_heldout.py` | in-sample 记忆度基线 |
+| `train/scripts/augment_user_queries.py` | 提问增广（r3 用） |
+| `train/ANTI-MEMORIZATION.md` | 抗记忆化方案 |

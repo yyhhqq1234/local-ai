@@ -1,0 +1,23 @@
+{
+ "src": "mix-z-re-v4.jsonl",
+ "out": "mix-z-re-v8.jsonl",
+ "rows": 7608,
+ "rewired": 966,
+ "skipped": 0,
+ "call_before": 3421,
+ "call_after": 4356,
+ "by_tool": {
+  "kitty_ce": 650,
+  "kitty_ida": 27,
+  "kitty_dualview": 43,
+  "kitty_settings": 48,
+  "kitty_ghidra": 53,
+  "kitty_trail": 20,
+  "kitty_pchain": 47,
+  "kitty_init": 21,
+  "kitty_drv": 25,
+  "kitty_prot": 15,
+  "reverse_add_target": 11,
+  "reverse_add_obs": 6
+ }
+}

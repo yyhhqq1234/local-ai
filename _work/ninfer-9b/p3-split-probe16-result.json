@@ -1,0 +1,67 @@
+{
+  "results": [
+    {
+      "limit": 15,
+      "ready": true,
+      "cases": [
+        {
+          "name": "u19",
+          "chars": 13,
+          "garbled": false,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "u20",
+          "chars": 13,
+          "garbled": false,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "sys",
+          "chars": 13,
+          "garbled": false,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "essay",
+          "chars": 166,
+          "garbled": false,
+          "head": "Local inference matters because it fundamentally shifts the paradigm of artificial intelligence from"
+        }
+      ],
+      "all_clean": true
+    },
+    {
+      "limit": 16,
+      "ready": true,
+      "cases": [
+        {
+          "name": "u19",
+          "chars": 13,
+          "garbled": false,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "u20",
+          "chars": 13,
+          "garbled": false,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "sys",
+          "chars": 13,
+          "garbled": false,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "essay",
+          "chars": 166,
+          "garbled": false,
+          "head": "Local inference matters because it fundamentally shifts the paradigm of artificial intelligence from"
+        }
+      ],
+      "all_clean": true
+    }
+  ],
+  "remaining": []
+}

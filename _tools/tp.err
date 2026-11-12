@@ -1,0 +1,14 @@
+2026-11-08 12:43:09.874  INFO  starting engine
+2026-11-08 12:43:10.618  INFO  loading weights | 5.81 GiB
+2026-11-08 12:43:11.891  INFO  weights ready | 5.81 GiB | 1.3s | 4.56 GiB/s
+2026-11-08 12:43:15.821  INFO  CUDA graph memory calibrated | 3.9s
+2026-11-08 12:43:15.829  INFO  pinning host context | 2.00 GiB
+2026-11-08 12:43:16.051  INFO  host context pinned | 2.00 GiB | 222 ms
+2026-11-08 12:43:16.167  INFO  CUDA graphs ready | 60.5 ms
+2026-11-08 12:43:16.172  INFO  engine ready | oxcoder9b-merged | total 6.3s | weights 5.81 GiB | CUDA sync spin
+2026-11-08 12:43:16.174  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 318.7 MiB | free 4.65 GiB
+2026-11-08 12:43:16.176  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 12:43:16.241  INFO  listening on http://127.0.0.1:1700 | model oxcoder9b-merged | auth disabled
+2026-11-08 12:43:16.276  INFO  req#1 started | openai-chat non-stream | 1 message | max output 4 | thinking template default
+[exc] target returned a token outside the public token domain
+2026-11-08 12:43:16.480  ERROR req#1 failed during generation | openai-chat | HTTP 500 | internal error

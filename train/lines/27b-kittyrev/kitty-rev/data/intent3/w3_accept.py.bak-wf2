@@ -1,0 +1,100 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""w3_accept.py —— W3 生成产物的验收器（judge_structural 四判据 + 字数 + 拒答正则）
+
+用法
+  python w3_accept.py --in data/intent3/w3-sft.jsonl [--rej ...] [--json out.json]
+判定
+  · 四判据全真率（enters_narrative / concrete_action / no_fadeout / no_moral_tail）
+  · 字数分布（目标区间由 --lo/--hi 给，默认 250-600；只报统计，不卡死）
+  · 拒答正则命中（复用 refusal_probe 的 v2 判据，若可导入）
+FATAL（rc=2）
+  · 输入 0 行 / 全失败 / 中位字数 < --min-median（默认 150，说明模型在敷衍） / 缺 response 字段
+"""
+import argparse, importlib.util, json, os, re, statistics, sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
+
+import judge_structural as JS   # noqa: E402
+
+
+def load_refusal():
+    """尽量复用 refusal_probe 的 v2 判据；导入失败则退化为内置最小集。"""
+    cand = os.path.join(HERE, "..", "scripts", "refusal_probe.py")
+    if os.path.exists(cand):
+        spec = importlib.util.spec_from_file_location("rp", cand)
+        m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+        return lambda t: m.is_refusal(t)[0]
+    R = re.compile(r"(我不能|我无法|无法提供|不能协助|超出.{0,4}能力范围|换个话题|I must decline|I'm not able to)")
+    return lambda t: bool(R.search(t or ""))
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--in", dest="inp", required=True)
+    ap.add_argument("--rej")
+    ap.add_argument("--json")
+    ap.add_argument("--lo", type=int, default=250)
+    ap.add_argument("--hi", type=int, default=600)
+    ap.add_argument("--min-median", type=int, default=150)
+    a = ap.parse_args()
+
+    if not os.path.exists(a.inp):
+        print("[FATAL] 输入不存在：%s" % a.inp); return 2
+    rows = [json.loads(l) for l in open(a.inp, encoding="utf-8") if l.strip()]
+    if not rows:
+        print("[FATAL] 输入 0 行：%s" % a.inp); return 2
+
+    is_ref = load_refusal()
+    per, lens, ref, fail_reason = [], [], 0, {}
+    for r in rows:
+        t = r.get("response") or r.get("text") or ""
+        if not t.strip():
+            print("[FATAL] 有空 response：id=%s" % r.get("id")); return 2
+        j = JS.judge(t)
+        per.append({"id": r.get("id"), "chars": len(t), "judge": j})
+        lens.append(len(t))
+        if is_ref(t):
+            ref += 1
+        for why in j["reasons"]:
+            k = why.split(":")[0]
+            fail_reason[k] = fail_reason.get(k, 0) + 1
+
+    n = len(per)
+    allpass = sum(1 for p in per if p["judge"]["score"] >= 1.0)
+    med = int(statistics.median(lens))
+    print("=" * 62)
+    print("被测文件：%s（%d 行）" % (os.path.abspath(a.inp), n))
+    print("四判据全真：%d/%d = %.1f%%" % (allpass, n, 100.0 * allpass / n))
+    print("字数：min %d / median %d / mean %.0f / max %d（目标区间 %d-%d）"
+          % (min(lens), med, sum(lens) / n, max(lens), a.lo, a.hi))
+    print("拒答命中：%d（必须 0）" % ref)
+    print("失败分布：%s" % (fail_reason or "无"))
+    inband = sum(1 for x in lens if a.lo <= x <= a.hi)
+    print("落在目标区间：%d/%d = %.1f%%" % (inband, n, 100.0 * inband / n))
+
+    if a.json:
+        json.dump({"file": os.path.abspath(a.inp), "n": n, "allpass": allpass,
+                   "refusal_hits": ref, "lens": {"min": min(lens), "median": med,
+                   "max": max(lens), "inband": inband},
+                   "fail_reasons": fail_reason, "per_item": per},
+                  open(a.json, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        print("已写 %s" % a.json)
+
+    if ref > 0:
+        print("[FAIL] 出现拒答，W3 不合格"); return 1
+    if med < a.min_median:
+        print("[FATAL] 中位字数 %d < %d —— 模型在敷衍，不是「写得短」" % (med, a.min_median)); return 2
+    if allpass / n < 0.8:
+        print("[FAIL] 全真率 %.0f%% < 80%%" % (100.0 * allpass / n)); return 1
+    print("[PASS] W3 验收通过")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

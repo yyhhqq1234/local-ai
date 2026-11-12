@@ -6,14 +6,16 @@ param([int]$Port = 1630, [int]$Rounds = 3)
 $ErrorActionPreference = 'Continue'
 $Root  = 'D:\BaiduNetdiskDownload\Local-AI'
 $Exe   = Join-Path $Root '_tools\ninfer-build\apps\ninfer-serve.exe'
-$Model = Join-Path $Root 'train\lines\9b-oxcoder\out\oxcoder9b-merged.ninfer'
+if (-not (Test-Path -LiteralPath $Exe)) { $Exe = Join-Path $Root '_tools\ninfer-build\apps\infer-serve.exe' }
+$Model = Join-Path $Root 'train\lines\9b-oxcoder\out\kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer'
+if (-not (Test-Path -LiteralPath $Model)) { $Model = Join-Path $Root 'train\lines\9b-oxcoder\out\kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer' }
 $Log   = Join-Path $Root '_tools\engine-final.log'
 
 Get-Process ninfer-serve -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.Id -Force }
 Start-Sleep -Milliseconds 800
 
-$eargs = @($Model, '--max-context', '4096', '--greedy', '--no-cuda-graph',
-           '--host-context-mib', '2048', '--port', "$Port")
+$eargs = @($Model, '--max-context', '4096', '--greedy', '--host-context-mib', '2048',
+           '--prefill-chunk', '128', '--no-thinking', '--port', "$Port")
 $proc = Start-Process -FilePath $Exe -ArgumentList $eargs -PassThru -WindowStyle Hidden `
     -RedirectStandardOutput $Log -RedirectStandardError ($Log + '.err')
 $ready = $false
@@ -24,6 +26,8 @@ for ($i = 0; $i -lt 180; $i++) {
 }
 if (-not $ready) { "ENGINE NOT READY"; exit 2 }
 "engine ready pid=$($proc.Id)"
+$script:ModelId = (Invoke-RestMethod -Uri "http://127.0.0.1:$Port/v1/models" -TimeoutSec 5).data[0].id
+"served model id = $script:ModelId"
 
 $sets = @(
     @{ name = 'p1-2+2';      prompt = 'What is 2+2?';                                           mt = 32  },
@@ -34,7 +38,7 @@ $sets = @(
 )
 
 function Invoke-Chat([string]$prompt, [int]$mt) {
-    $payload = @{ model = 'oxcoder9b-merged'; messages = @(@{ role = 'user'; content = $prompt })
+    $payload = @{ model = $script:ModelId; messages = @(@{ role = 'user'; content = $prompt })
                   max_tokens = $mt; temperature = 0; stream = $false }
     $body = $payload | ConvertTo-Json -Depth 6 -Compress
     $resp = Invoke-RestMethod -Uri "http://127.0.0.1:$Port/v1/chat/completions" -Method Post `

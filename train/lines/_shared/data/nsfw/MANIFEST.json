@@ -1,0 +1,148 @@
+{
+  "__meta": {
+    "dir": "train/data/nsfw",
+    "built": "2026-10-27T12:14:26.810Z",
+    "state": "清理后（过时版本与备份已删除，删除台账见 CLEANUP-REPORT.md）",
+    "policy": "活跃数据：train 分片 / 总词表 / 结构化词表 / 索引与报告；历史版本已清出"
+  },
+  "dataset": {
+    "train_shards": [
+      {
+        "file": "train-cont.jsonl",
+        "rows": 6829,
+        "bytes": 35281319,
+        "sha256": "e569ab2b36ab679ff097a1ddf2a2dbbd4c2942208fe21e43c1e7696450ee1d59"
+      },
+      {
+        "file": "train-scene.jsonl",
+        "rows": 2741,
+        "bytes": 14148886,
+        "sha256": "add8490452cf6c19a66f59e08ac8efe0fa9dde7aadf43042b7b8a1a78ebf9e29"
+      },
+      {
+        "file": "train-multi.jsonl",
+        "rows": 2079,
+        "bytes": 12082778,
+        "sha256": "f48485bc86d9549e8380246cc6df3d358c641d0a8da2be0c0d48f2ac33f22973"
+      },
+      {
+        "file": "train-style.jsonl",
+        "rows": 1329,
+        "bytes": 8445383,
+        "sha256": "db7dd68eeaa67adeb424b051dc4cd9a08713c3f5f279a2d9943b21cd78b004f5"
+      },
+      {
+        "file": "train-expand.jsonl",
+        "rows": 690,
+        "bytes": 4387541,
+        "sha256": "2fdd6eeb826c85214a2f331edab53d7ac8b9e0aee937f44c81b694158f9761c4"
+      }
+    ],
+    "train_rows_total": 13668,
+    "glossary_terms": 283,
+    "lexicon_terms": 470,
+    "lexicon_categories": 12,
+    "lexicon_version": "v9"
+  },
+  "files": [
+    {
+      "file": "train-cont.jsonl",
+      "rows": 6829,
+      "bytes": 35281319,
+      "sha256": "e569ab2b36ab679ff097a1ddf2a2dbbd4c2942208fe21e43c1e7696450ee1d59",
+      "role": "训练分片（按 meta.stype 拆分）"
+    },
+    {
+      "file": "train-scene.jsonl",
+      "rows": 2741,
+      "bytes": 14148886,
+      "sha256": "add8490452cf6c19a66f59e08ac8efe0fa9dde7aadf43042b7b8a1a78ebf9e29",
+      "role": "训练分片（按 meta.stype 拆分）"
+    },
+    {
+      "file": "train-multi.jsonl",
+      "rows": 2079,
+      "bytes": 12082778,
+      "sha256": "f48485bc86d9549e8380246cc6df3d358c641d0a8da2be0c0d48f2ac33f22973",
+      "role": "训练分片（按 meta.stype 拆分）"
+    },
+    {
+      "file": "train-style.jsonl",
+      "rows": 1329,
+      "bytes": 8445383,
+      "sha256": "db7dd68eeaa67adeb424b051dc4cd9a08713c3f5f279a2d9943b21cd78b004f5",
+      "role": "训练分片（按 meta.stype 拆分）"
+    },
+    {
+      "file": "train-expand.jsonl",
+      "rows": 690,
+      "bytes": 4387541,
+      "sha256": "2fdd6eeb826c85214a2f331edab53d7ac8b9e0aee937f44c81b694158f9761c4",
+      "role": "训练分片（按 meta.stype 拆分）"
+    },
+    {
+      "file": "nsfw-glossary-merged.jsonl",
+      "role": "总词表（345 行 → 合并覆盖 313 → 变体归并 283）",
+      "rows": 283,
+      "bytes": 312635,
+      "sha256": "8e403b1ec0266556c0709deba1f4166dad67c3eef464e898b8ed4bd27cf73c11"
+    },
+    {
+      "file": "nsfw-lexicon-v9.json",
+      "role": "结构化词表 v9（schema/stats/categories）",
+      "words": 470,
+      "bytes": 1076599,
+      "sha256": "7ccb938a1529d9afd86378cae289d02cd3683e9e444668efb368329c758d2704"
+    },
+    {
+      "file": "nsfw-coverage.json",
+      "role": "覆盖报告（原 nsfw-v3-coverage.json 更新）",
+      "bytes": 20771,
+      "sha256": "a1f9e869875b37dd7182a42ecec4c741e8b8d8219b2aebbf23df20984d285c83"
+    },
+    {
+      "file": "nsfw-index/",
+      "role": "源语料索引（62 文件；facets 已补 topic_system）"
+    },
+    {
+      "file": "nsfw-triage/",
+      "role": "源语料初筛（summary 已补 tag_mapping）"
+    },
+    {
+      "file": "CLEANUP-REPORT.md",
+      "role": "清理台账（18 个被删文件的路径/大小/sha256/理由）"
+    }
+  ],
+  "lexicon_v9": {
+    "total_terms": 470,
+    "categories": 12,
+    "by_cat": {
+      "body": 130,
+      "action": 84,
+      "state": 18,
+      "emotion": 26,
+      "position": 18,
+      "descriptor": 11,
+      "relationship": 18,
+      "identity": 91,
+      "personality": 29,
+      "genre": 21,
+      "onomatopoeia": 7,
+      "vocalization": 17
+    },
+    "with_glossary": 283,
+    "with_variants": 14,
+    "variants_absorbed": 32,
+    "freq_zero": 8,
+    "examples_total": 922
+  },
+  "cleanup": {
+    "removed_files": 18,
+    "removed_MB": 712.5,
+    "ledger": "CLEANUP-REPORT.md",
+    "scope": [
+      "_superseded/",
+      "_re-strip-backup-20261027115222/"
+    ]
+  }
+}

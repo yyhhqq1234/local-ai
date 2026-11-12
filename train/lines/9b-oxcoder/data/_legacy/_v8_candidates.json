@@ -1,0 +1,1724 @@
+[
+ {
+  "idx": 25,
+  "tool": "kitty_ce",
+  "user": "看 dbk_* 有几条可用，A 通道怎么发。",
+  "asst_head": "kitty_ce op=KM_API\n\n判读：回包形态是 `OK|api=n/14|name=function|nil|err,…`。先看首段是不是 OK，再按"
+ },
+ {
+  "idx": 30,
+  "tool": "kitty_ce",
+  "user": "把一段内存导出来看原始字节，A 通道怎么发？",
+  "asst_head": "kitty_ce op=MEMDUMP_HEX|0x7FF6DADB01A0|64\n\n判读：回包形态是 `OK\\\\naddr: 16B hex…`。先看首段是不"
+ },
+ {
+  "idx": 83,
+  "tool": "kitty_ce",
+  "user": "核实没有残留，A 通道如何发，该怎么走？",
+  "asst_head": "kitty_ce op=SYNC_STAT\n\n判读：回包形态是 `OK|串|djobs_pending=n|oldest_pending_age_ms=ms|s"
+ },
+ {
+  "idx": 119,
+  "tool": "kitty_pchain",
+  "user": "链反查命中太多，想收敛候选。",
+  "asst_head": "kitty_pchain action=pchain\n\n选它的理由：Kitty多跳反查（通道 A）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先"
+ },
+ {
+  "idx": 148,
+  "tool": "kitty_ida",
+  "user": "按工作台规范做一次「IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档）」（analyze），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"analyze\"}}\n</tool_cal"
+ },
+ {
+  "idx": 153,
+  "tool": "kitty_ida",
+  "user": "如何找某个字符串在哪里被用，这块怎么处理比较稳？",
+  "asst_head": "kitty_ida action=strings out=logs/ida-app filter=<关键字> limit=20\nkitty_ida action"
+ },
+ {
+  "idx": 183,
+  "tool": "kitty_ce",
+  "user": "写一个调用kitty_ce去分析记事本模块的文件",
+  "asst_head": "<tool_call>\n{\"name\": \"ops_bash\", \"arguments\": {\"command\": \"which kitty_ce 2>/dev"
+ },
+ {
+  "idx": 191,
+  "tool": "kitty_ce",
+  "user": "继续收敛候选，A 通道怎么发？",
+  "asst_head": "kitty_ce op=S_UNCHANGED\n\n判读：回包形态是 `OK|n|unchanged`。先看首段是不是 OK，再按位取后面的字段。\n注意：v0.2"
+ },
+ {
+  "idx": 301,
+  "tool": "kitty_ghidra",
+  "user": "完整性自校验怎么定位",
+  "asst_head": "1. 找校验函数：kitty_ghidra 搜三连 —— GetModuleFileNameW（拿自身路径）→ CreateFileW（读自己）→\n   BCr"
+ },
+ {
+  "idx": 314,
+  "tool": "kitty_ce",
+  "user": "取 64 字节十六进制，A 通道怎么发。",
+  "asst_head": "kitty_ce op=MEMDUMP_HEX|0x2C1B7F40200|64\n\n判读：回包形态是 `OK\\\\naddr: 16B hex…`。先看首段是不是"
+ },
+ {
+  "idx": 344,
+  "tool": "kitty_ce",
+  "user": "确认扫描落定了没，A 通道怎么发？",
+  "asst_head": "kitty_ce op=JOB_STAT\n\n判读：回包形态是 `OK|state|kind=…|mode=…|n=…|wi=…|age_ms=…`。先看首段是不"
+ },
+ {
+  "idx": 424,
+  "tool": "kitty_ce",
+  "user": "调整 km 标志，A 通道怎么发，该怎么走？",
+  "asst_head": "kitty_ce op=KM_MODE|open|mem|regions|phys|all|off\n\n判读：回包形态是 `OK|mode=…|open=…,me"
+ },
+ {
+  "idx": 437,
+  "tool": "kitty_ghidra",
+  "user": "要\"证据包\"还是\"原始输出\"",
+  "asst_head": "判断标准：交付物给谁看。\n\n· 给自己快速看 → 本地工具原始输出（kitty_ghidra / kitty_ida）\n· 要给结论/做对比/进报告 → REA"
+ },
+ {
+  "idx": 484,
+  "tool": "kitty_ce",
+  "user": "有个疑问，物理地址写，A 通道如何发，该怎么走？",
+  "asst_head": "kitty_ce op=KM_PW|0x1A4F2C00400|dword|100[|force]\n\n判读：回包形态是 `OK|verified|… / ERR"
+ },
+ {
+  "idx": 499,
+  "tool": "kitty_drv",
+  "user": "跑批之前要清什么，下一步动哪个？",
+  "asst_head": "SYNC_ARCHIVE + SYNC_STAT，四项归零。\n\n为什么：残留指令会让新一批指令顶到旧队列上，结果对不上。\n\n正确做法：kitty_drv act"
+ },
+ {
+  "idx": 578,
+  "tool": "kitty_ce",
+  "user": "我要写一个 qword，但只改低 4 字节。",
+  "asst_head": "读-改-写，不能直接写 qword（会覆盖高位）。\n\n```\nkitty_ce op=\"R|0xADDR|qword\"\n```\n判读：记 V0。高位 = V0 "
+ },
+ {
+  "idx": 618,
+  "tool": "kitty_ce",
+  "user": "怎么处置「样本依赖特定显卡驱动」。",
+  "asst_head": "1. 判据：导入 nvapi64.dll / atiadlxx.dll / vulkan-1.dll，或字符串里有显卡型号\n2. 目的：常见于「硬件指纹」或「G"
+ },
+ {
+  "idx": 620,
+  "tool": "reverse_add_target",
+  "user": "想给一个全新的分析任务开个独立起点",
+  "asst_head": "reverse_add_target action=add\n\n选它的理由：G3主写：新建目标（会话清零，恒 target-1）（通道 reverse）。\n参数要"
+ },
+ {
+  "idx": 628,
+  "tool": "kitty_ida",
+  "user": "IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档） —— 用工具跑起来（动作 xrefs），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"xrefs\"}}\n</tool_call>"
+ },
+ {
+  "idx": 635,
+  "tool": "kitty_drv",
+  "user": "跑批之前要清什么",
+  "asst_head": "SYNC_ARCHIVE + SYNC_STAT，四项归零。\n\n为什么：残留指令会让新一批指令顶到旧队列上，结果对不上。\n\n正确做法：kitty_drv act"
+ },
+ {
+  "idx": 649,
+  "tool": "kitty_trail",
+  "user": "要把一次分析过程留痕，便于工作台跟进。",
+  "asst_head": "用 trail + G3 两条道。\n\n过程留痕（每步）：\nkitty_trail action=append sessionGoal=<目标> target=<"
+ },
+ {
+  "idx": 667,
+  "tool": "kitty_settings",
+  "user": "kitty_settings 能干什么",
+  "asst_head": "只放行 14 个会话动作：\ntarget-set / target-get / task-inherit / mode-set / mode-get / rev"
+ },
+ {
+  "idx": 720,
+  "tool": "kitty_ce",
+  "user": "确认通道是否活着，A 通道怎么发？",
+  "asst_head": "kitty_ce op=PING\n\n判读：回包形态是 `OK|Kitty-bridge v0.2.5`。先看首段是不是 OK，再按位取后面的字段。\n注意：存活判"
+ },
+ {
+  "idx": 742,
+  "tool": "kitty_ce",
+  "user": "这里卡住了：建立内核路由，A 通道怎么发。",
+  "asst_head": "kitty_ce op=KM_ATTACH|7412\n\n判读：回包形态是 `OK|pid=n|peProcess=0x…|open=…|mem=…|region"
+ },
+ {
+  "idx": 754,
+  "tool": "kitty_ce",
+  "user": "要在两个进程间对齐一个结构体。",
+  "asst_head": "[1] triage —— 两侧是否同架构\nkitty_ce op=MODENUM\n判据：is64 一致才谈对齐。\n退出：不一致则结构布局必然不同。\n\n[2] "
+ },
+ {
+  "idx": 756,
+  "tool": "kitty_ce",
+  "user": "按偏移回验一条链，A 通道怎么发？",
+  "asst_head": "kitty_ce op=P_WALK|0x2C1B7F40200|offset\n\n判读：回包形态是 `OK|addr`。先看首段是不是 OK，再按位取后面的字段"
+ },
+ {
+  "idx": 825,
+  "tool": "kitty_ce",
+  "user": "要判断某个值是「服务端下发的」还是「本地算的」。",
+  "asst_head": "[1] triage —— 值出现的时机\nkitty_ce op=\"S_SNAP|bytes:16|0xTARGET|0xTARGET+0x1000\"\n判据：联"
+ },
+ {
+  "idx": 859,
+  "tool": "kitty_ce",
+  "user": "问一下，访问违例的地址如何分类，有推荐的做法吗？",
+  "asst_head": "cdb -z crash-c.dmp -c \".ecxr; !analyze -v; q\"\nkitty_ce op=\"MEMDUMP_HEX|<fault_ad"
+ },
+ {
+  "idx": 943,
+  "tool": "kitty_ce",
+  "user": "手上这个场景：想给目标加速。该动什么？",
+  "asst_head": "kitty_ce op=SPEED|<倍率>\n\n回包：`OK`。\n\n注意：这是 CE 的 speedhack，改的是**时间流速**不是 CPU 频率。\n\n判据"
+ },
+ {
+  "idx": 976,
+  "tool": "kitty_drv",
+  "user": "按工作台规范做一次「驱动+宿主守护」（recover），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_drv\", \"arguments\": {\"action\": \"recover\"}}\n</tool_cal"
+ },
+ {
+  "idx": 979,
+  "tool": "reverse_add_target",
+  "user": "想给一个全新的分析任务开个独立起点，该怎么走？",
+  "asst_head": "reverse_add_target action=add\n\n选它的理由：G3主写：新建目标（会话清零，恒 target-1）（通道 reverse）。\n参数要"
+ },
+ {
+  "idx": 1012,
+  "tool": "kitty_ce",
+  "user": "按这个思路反复试，直到扫到为止，用哪个工具？",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ce\", \"arguments\": {\"op\": \"OPEN|kitty-target.exe\"}}\n<"
+ },
+ {
+  "idx": 1013,
+  "tool": "kitty_ce",
+  "user": "如何改地址表某条的值，有推荐的做法吗？",
+  "asst_head": "kitty_ce op=AL_SET_VAL|<index>|<val>\n\n它改的是**地址表里记录的目标值**（CE 会把值写下去），不是改描述。\n\n判据：改"
+ },
+ {
+  "idx": 1019,
+  "tool": "kitty_ida",
+  "user": "多模块共享校验结果，怎么确认边界？",
+  "asst_head": "kitty_ida action=analyze target=main.exe out=logs/ida-main\nkitty_ida action=func"
+ },
+ {
+  "idx": 1039,
+  "tool": "kitty_ce",
+  "user": "把残留指令归档，A 通道怎么发，帮我处理一下。",
+  "asst_head": "kitty_ce op=SYNC_ARCHIVE\n\n判读：回包形态是 `OK|archived|…`。先看首段是不是 OK，再按位取后面的字段。\n注意：归档 s"
+ },
+ {
+  "idx": 1047,
+  "tool": "kitty_ce",
+  "user": "目标进程暂停时 R 还能读吗，需要注意什么？",
+  "asst_head": "能。R 走的是内存读写，不依赖目标线程调度。\n\n```\nkitty_ce op=PING\nkitty_ce op=\"R|0xADDR|dword\"\n```\n判读"
+ },
+ {
+  "idx": 1112,
+  "tool": "kitty_trail",
+  "user": "按工作台规范做一次「agent探索日志道（append写/trail-get读）」（append），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_trail\", \"arguments\": {\"action\": \"append\"}}\n</tool_ca"
+ },
+ {
+  "idx": 1129,
+  "tool": "kitty_ce",
+  "user": "要一次发多条指令省往返，需要注意什么？",
+  "asst_head": "用 BATCH。\n\nkitty_ce ops=[\"PING\",\"CUR\",\"MODENUM\",\"R|0x7FF6DADB2450|dword\"]\n\n回包是 OK"
+ },
+ {
+  "idx": 1157,
+  "tool": "kitty_drv",
+  "user": "要跑多轮启停压稳测试，需要注意什么？",
+  "asst_head": "kitty_drv action=ensure\n（action 可取 ensure / recover / host / storm；本次走 ensure）\n\n"
+ },
+ {
+  "idx": 1172,
+  "tool": "kitty_ida",
+  "user": "这里卡住了：许可校验函数如何定位，下一步动哪个？",
+  "asst_head": "kitty_ida action=analyze target=app.exe out=logs/ida-lic\nkitty_ida action=functi"
+ },
+ {
+  "idx": 1175,
+  "tool": "kitty_ghidra",
+  "user": "需要一个能跑在无头服务器上的开源反编译后端",
+  "asst_head": "kitty_ghidra action=functions\n\n选它的理由：Ghidra headless 真分析（analyze 跑 analyzeHeadle"
+ },
+ {
+  "idx": 1177,
+  "tool": "kitty_ce",
+  "user": "取反查结果，A 通道怎么发？",
+  "asst_head": "kitty_ce op=P_BACK_RES|20\n\n判读：回包形态是 `OK|n\\\\naddr…`。先看首段是不是 OK，再按位取后面的字段。\n注意：取最近一"
+ },
+ {
+  "idx": 1252,
+  "tool": "kitty_prot",
+  "user": "怎么确认某个页确实是只读，而不是被临时改成可写？",
+  "asst_head": "查保护位与 PTE：`kitty_prot action=query addr=0x...` 返回 Protect=R（或 RX）；再用 `KM_PA` 取 p"
+ },
+ {
+  "idx": 1261,
+  "tool": "kitty_ce",
+  "user": "绕开页表读一次，A 通道怎么发？",
+  "asst_head": "kitty_ce op=KM_PR|0x1A4F2C00400|dword\n\n判读：回包形态是 `OK|值 / OK|十六进制字节`。先看首段是不是 OK，再按"
+ },
+ {
+  "idx": 1287,
+  "tool": "kitty_ce",
+  "user": "直接改物理内存，A 通道怎么发？",
+  "asst_head": "kitty_ce op=KM_PW|0x1A4F2C00400|qword|3500[|force]\n\n判读：回包形态是 `OK|verified|… / ER"
+ },
+ {
+  "idx": 1326,
+  "tool": "kitty_ghidra",
+  "user": "要判断一个函数返回值是不是「被硬编码的」。",
+  "asst_head": "[1] triage —— 看函数体\nkitty_ghidra action=analyze target=SAMPLE.exe\nkitty_ghidra ac"
+ },
+ {
+  "idx": 1343,
+  "tool": "kitty_prot",
+  "user": "我想确认某个地址是不是在模块内，别再手动算了。",
+  "asst_head": "用 query 让加载器回答，不要拿 base+size 心算。\n\n```\nkitty_prot action=query addr=0xADDR\n```\n判读"
+ },
+ {
+  "idx": 1350,
+  "tool": "kitty_drv",
+  "user": "跑批之前要清什么，帮我处理一下。",
+  "asst_head": "SYNC_ARCHIVE + SYNC_STAT，四项归零。\n\n为什么：残留指令会让新一批指令顶到旧队列上，结果对不上。\n\n正确做法：kitty_drv act"
+ },
+ {
+  "idx": 1373,
+  "tool": "kitty_trail",
+  "user": "按工作台规范做一次「agent探索日志道（append写/trail-get读）」（get），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_trail\", \"arguments\": {\"action\": \"get\"}}\n</tool_call>"
+ },
+ {
+  "idx": 1379,
+  "tool": "kitty_pchain",
+  "user": "多跳指针链一次反查到底，别一跳一跳手搓",
+  "asst_head": "kitty_pchain action=pchain target=0x7FF75FCD1000 depth=3 mod=kitty-target.exe\n\n选"
+ },
+ {
+  "idx": 1385,
+  "tool": "kitty_dualview",
+  "user": "三视图的采样顺序会影响结论吗，有推荐的做法吗？",
+  "asst_head": "会。顺序固定为 R → KM_R → KM_PA/KM_PR，且记录每步时间戳。判据：`kitty_dualview` 的 jsonl 每行含三值，若某轮 `R"
+ },
+ {
+  "idx": 1419,
+  "tool": "kitty_ce",
+  "user": "我要在一段代码里找所有 call 指令的目标。",
+  "asst_head": "静态做，不要在 OP 层扫。\n\n```\nkitty_ce op=MODENUM\nkitty_dump module=SAMPLE.exe path=logs\\m"
+ },
+ {
+  "idx": 1461,
+  "tool": "kitty_drv",
+  "user": "按工作台规范做一次「驱动+宿主守护」（status），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_drv\", \"arguments\": {\"action\": \"status\"}}\n</tool_call"
+ },
+ {
+  "idx": 1462,
+  "tool": "kitty_ce",
+  "user": "kitty_ce 有什么要特别小心的地方？",
+  "asst_head": "kitty_ce 任意代码 OP → 单次确认 + inject 风险。\n\n处置：碰到这个边界先停，按上面写的原因判断能不能绕；\n涉及这类操作时宁可用更保守的等"
+ },
+ {
+  "idx": 1497,
+  "tool": "kitty_ce",
+  "user": "批量省往返，A 通道怎么发？",
+  "asst_head": "kitty_ce ops=[\"PING\",\"CUR\",\"MODENUM\"]\n\n判读：回包形态是 `OK|batch|n|ok=k + 每行 `#i|…``。先看"
+ },
+ {
+  "idx": 1501,
+  "tool": "kitty_ce",
+  "user": "怎么启用/禁用某条",
+  "asst_head": "kitty_ce op=AL_SET_ACT|<index>|<on|off>\n\n用途：临时停掉某条（不删），比如调试时先禁掉一个改写，看行为变化。\n\n判据：A"
+ },
+ {
+  "idx": 1516,
+  "tool": "kitty_trail",
+  "user": "现在的问题是：trail 怎么记。",
+  "asst_head": "kitty_trail action=append，参数：\n· sessionGoal —— 本轮目标（与工作台 TARGET 同串会自动跟进）\n· targe"
+ },
+ {
+  "idx": 1517,
+  "tool": "kitty_ce",
+  "user": "用 S_UNCHANGED 之后结果反而变多了。",
+  "asst_head": "UNCHANGED 保留「没变的」，若基线本身噪声大，保留的就多。\n\n```\nkitty_ce op=\"S_SNAP|bytes:16|0xSTART|0xST"
+ },
+ {
+  "idx": 1573,
+  "tool": "kitty_ce",
+  "user": "跑一段 Lua 做组合操作，A 通道怎么发。",
+  "asst_head": "kitty_ce op=LUA|lua 源码\n\n判读：回包形态是 `OK|返回串(≤8192 字符) / ERR|compile:… / ERR|run:…`。"
+ },
+ {
+  "idx": 1585,
+  "tool": "kitty_ce",
+  "user": "下断点，A 通道如何发。",
+  "asst_head": "kitty_ce op=DBG_BP|0x7FF75FCD1040|size[|execute|write][|int3|force]\n\n判读：回包形态是 `O"
+ },
+ {
+  "idx": 1589,
+  "tool": "kitty_ce",
+  "user": "两个同名进程，MODENUM 拿到的是谁的？",
+  "asst_head": "拿到的是你当前 OPEN 的那个，不是你以为的那个 —— 同名进程必须按 pid 钉死。\n\n先看当前锚点：\nkitty_ce op=CUR\n判读：返回当前打开的"
+ },
+ {
+  "idx": 1594,
+  "tool": "kitty_dualview",
+  "user": "怀疑某个地址有视图分叉，想做一致性校验",
+  "asst_head": "kitty_dualview action=dualview\n\n选它的理由：三视图取数门禁（通道 orch-view）。\n参数要点：先把目标定死（pid 或模块"
+ },
+ {
+  "idx": 1604,
+  "tool": "kitty_ce",
+  "user": "找指针来源，A 通道怎么发？",
+  "asst_head": "kitty_ce op=P_BACK|0x7FF6DADB2450|0x7FF6DADB0000|0x7FF6DAEB0000\n\n判读：回包形态是 `OK|n["
+ },
+ {
+  "idx": 1609,
+  "tool": "kitty_ghidra",
+  "user": "按工作台规范做一次「Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘）」（analyze），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ghidra\", \"arguments\": {\"action\": \"analyze\"}}\n</tool_"
+ },
+ {
+  "idx": 1695,
+  "tool": "kitty_ce",
+  "user": "撤掉某个断点，A 通道怎么发，用哪个工具？",
+  "asst_head": "kitty_ce op=DBG_BP_DEL|id[|force]\n\n判读：回包形态是 `OK|…`。先看首段是不是 OK，再按位取后面的字段。\n注意：删断点\n"
+ },
+ {
+  "idx": 1719,
+  "tool": "kitty_settings",
+  "user": "会话状态错了怎么回正",
+  "asst_head": "按顺序查三层：\n1) kitty_settings action=mode-get —— 当前模式\n2) kitty_settings action=targe"
+ },
+ {
+  "idx": 1725,
+  "tool": "kitty_dualview",
+  "user": "要连续多次采样看是否间歇性分叉",
+  "asst_head": "kitty_dualview action=dualview\n\n选它的理由：三视图取数门禁（通道 orch-view）。\n参数要点：先把目标定死（pid 或模块"
+ },
+ {
+  "idx": 1762,
+  "tool": "kitty_ce",
+  "user": "找主机名配置，扫描类型选错三次，下一步动哪个？",
+  "asst_head": "往返1｜动作：按 dword 扫短字符串编码\nkitty_ce op=\"S_NEW|dword|0x74736F68|0x7FF6DADB1000|0x7FF6"
+ },
+ {
+  "idx": 1788,
+  "tool": "kitty_drv",
+  "user": "驱动掉线了，宿主也不响应，有推荐的做法吗？",
+  "asst_head": "按依赖顺序拉，别乱重启。\n\n1) 看状态：kitty_drv action=status\n2) 自愈（单实例重拉 + PING + SYNC 归一）：kitty"
+ },
+ {
+  "idx": 1826,
+  "tool": "reverse_add_target",
+  "user": "这次评估的对象和上次不是同一个，怎么起一条新的",
+  "asst_head": "reverse_add_target action=add\n\n选它的理由：G3主写：新建目标（会话清零，恒 target-1）（通道 reverse）。\n参数要"
+ },
+ {
+  "idx": 1864,
+  "tool": "kitty_ghidra",
+  "user": "Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘） —— 用工具跑起来（动作 status），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ghidra\", \"arguments\": {\"action\": \"status\"}}\n</tool_c"
+ },
+ {
+  "idx": 1868,
+  "tool": "kitty_ce",
+  "user": "确认当前挂的是哪个进程，A 通道怎么发？",
+  "asst_head": "kitty_ce op=CUR\n\n判读：回包形态是 `OK|pid`。先看首段是不是 OK，再按位取后面的字段。\n注意：未附加 → OK|0\n下一步按回包决定："
+ },
+ {
+  "idx": 1896,
+  "tool": "kitty_ida",
+  "user": "按工作台规范做一次「IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档）」（xrefs），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"xrefs\"}}\n</tool_call>"
+ },
+ {
+  "idx": 1907,
+  "tool": "kitty_settings",
+  "user": "任务做完收尾。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_settings\", \"arguments\": {\"action\": \"task-dispatch\", "
+ },
+ {
+  "idx": 1936,
+  "tool": "kitty_ce",
+  "user": "读一段内存，A 通道如何发，这块怎么处理比较稳？",
+  "asst_head": "kitty_ce op=R|0x1A4F2C00400|byte|word|dword|qword|bytes:len|string:N\n\n判读：回包形态是 `"
+ },
+ {
+  "idx": 1958,
+  "tool": "kitty_ce",
+  "user": "想给目标加速，下一步动哪个？",
+  "asst_head": "kitty_ce op=SPEED|<倍率>\n\n回包：`OK`。\n\n注意：这是 CE 的 speedhack，改的是**时间流速**不是 CPU 频率。\n\n判据"
+ },
+ {
+  "idx": 1966,
+  "tool": "kitty_ce",
+  "user": "按流程扫描区太大报错了，怎么处理，帮我处理一下。",
+  "asst_head": "S_NEW 必须给显式区间，全地址空间扫会被桥拒（也会把宿主拖死）。\n\n[1] 拿真实窗口\nkitty_ce op=\"MODENUM\"\n判据：每行 name/b"
+ },
+ {
+  "idx": 1976,
+  "tool": "kitty_drv",
+  "user": "什么情况下要重启宿主。",
+  "asst_head": "三个信号：\n· PING 连续丢失且看门狗拉不回来\n· 出现过 engine-wedge（KM 写超时）\n· DBG_ATTACH 之后（本 build 会杀宿"
+ },
+ {
+  "idx": 1999,
+  "tool": "kitty_ce",
+  "user": "遇到个情况：反查谁指向这个地址，A 通道如何发。",
+  "asst_head": "kitty_ce op=P_BACK|0x1A4F2C00400|0x7FF6DADB0000|0x7FF6DAEB0000\n\n判读：回包形态是 `OK|n[|"
+ },
+ {
+  "idx": 2024,
+  "tool": "kitty_ce",
+  "user": "VA 转 PA，A 通道怎么发？",
+  "asst_head": "kitty_ce op=KM_PA|va\n\n判读：回包形态是 `OK|va=0x…|pa=0x…|via=pid,va|va`。先看首段是不是 OK，再按位取后"
+ },
+ {
+  "idx": 2087,
+  "tool": "kitty_ce",
+  "user": "写内存有四档，怎么选，下一步动哪个？",
+  "asst_head": "按风险从低到高：\n1) kitty_ce op=W —— 用户态写 + 回读校验（首选）\n2) kitty_prot action=protect + W ——"
+ },
+ {
+  "idx": 2118,
+  "tool": "kitty_ce",
+  "user": "现在的问题是：建立内核路由，A 通道怎么发。",
+  "asst_head": "kitty_ce op=KM_ATTACH|18804\n\n判读：回包形态是 `OK|pid=n|peProcess=0x…|open=…|mem=…|regio"
+ },
+ {
+  "idx": 2125,
+  "tool": "kitty_dualview",
+  "user": "gate=writeblocked 怎么继续",
+  "asst_head": "说明写得进去但读不回来，或反过来。继续查三步：\n1) 看 ⑦ 那行 slot 和被吞步数\n2) 用 kitty_dualview 单独验那个槽位地址\n3) 换 "
+ },
+ {
+  "idx": 2144,
+  "tool": "kitty_pchain",
+  "user": "按工作台规范做一次「Kitty多跳反查」（pchain），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_pchain\", \"arguments\": {\"action\": \"pchain\"}}\n</tool_c"
+ },
+ {
+  "idx": 2185,
+  "tool": "kitty_ce",
+  "user": "怎么看地址表有多少条",
+  "asst_head": "kitty_ce op=AL_COUNT → 回包 `OK|<n>`（实测空表回 `OK|0`）。\n\n判据：AL_ADD 之后条数应该 +1；没变说明那条没加进"
+ },
+ {
+  "idx": 2192,
+  "tool": "kitty_ce",
+  "user": "我改了结构体指针，程序立刻崩，忘了还有别处引用。",
+  "asst_head": "往返1｜动作：改指针字段\nkitty_ce op=\"W|0xOBJ+0x8|qword|<新指针>\" confirm=true\n回包：程序崩溃\n判读：第一次失败"
+ },
+ {
+  "idx": 2204,
+  "tool": "kitty_drv",
+  "user": "按工作台规范做一次「驱动+宿主守护」（ensure），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_drv\", \"arguments\": {\"action\": \"ensure\"}}\n</tool_call"
+ },
+ {
+  "idx": 2230,
+  "tool": "kitty_ce",
+  "user": "我按 PVOID 读结构体指针，读成了 0。",
+  "asst_head": "往返1｜动作：在错误偏移读指针\nkitty_ce op=\"R|0xOBJ+0x0|qword\"\n回包：0\n判读：第一次失败。\n\n往返2｜动作：以为指针为空\nki"
+ },
+ {
+  "idx": 2270,
+  "tool": "kitty_ce",
+  "user": "释放刚分配的内存，A 通道怎么发，下一步动哪个？",
+  "asst_head": "kitty_ce op=FREE|0x2C1B7F40200\n\n判读：回包形态是 `OK|true / OK|false`。先看首段是不是 OK，再按位取后面的"
+ },
+ {
+  "idx": 2297,
+  "tool": "kitty_ce",
+  "user": "看同步队列是否归零，A 通道怎么发？",
+  "asst_head": "kitty_ce op=SYNC_STAT\n\n判读：回包形态是 `OK|串|djobs_pending=n|oldest_pending_age_ms=ms|s"
+ },
+ {
+  "idx": 2308,
+  "tool": "kitty_ce",
+  "user": "问一下，如何改某条的描述，一次做对的路径是什么？",
+  "asst_head": "kitty_ce op=AL_SET_DESC|<index>|<描述>\n\n用途：给自己看的标签，不影响读写行为。\n\n判据：AL_GET 里 descripti"
+ },
+ {
+  "idx": 2311,
+  "tool": "kitty_ce",
+  "user": "收敛候选，A 通道如何发，给个具体做法。",
+  "asst_head": "kitty_ce op=S_CHANGED\n\n判读：回包形态是 `OK|n|changed`。先看首段是不是 OK，再按位取后面的字段。\n注意：v0.2.5：与"
+ },
+ {
+  "idx": 2319,
+  "tool": "reverse_add_obs",
+  "user": "现在要记一条观察，带至少一步复现，走哪条路？",
+  "asst_head": "reverse_add_obs action=add kind=obs text=模块基址读回一致 reproSteps=[PING, MODENUM]\n\n选择"
+ },
+ {
+  "idx": 2359,
+  "tool": "kitty_ce",
+  "user": "直接改物理内存，A 通道怎么发，用哪个工具？",
+  "asst_head": "kitty_ce op=KM_PW|0x1A4F2C00400|qword|3500[|force]\n\n判读：回包形态是 `OK|verified|… / ER"
+ },
+ {
+  "idx": 2396,
+  "tool": "kitty_ghidra",
+  "user": "PE 里如何找全局变量，这块怎么处理比较稳？",
+  "asst_head": "三条路：\n1) **.data / .bss 节**：初始化的在 .data，未初始化在 .bss\n2) **重定位表**：绝对地址引用会出现在 .reloc\n"
+ },
+ {
+  "idx": 2398,
+  "tool": "kitty_ce",
+  "user": "把值写回去验证，A 通道怎么发，有推荐的做法吗？",
+  "asst_head": "kitty_ce op=W|0x1A4F2C00400|type|60\n\n判读：回包形态是 `OK`。先看首段是不是 OK，再按位取后面的字段。\n注意：写完自读"
+ },
+ {
+  "idx": 2409,
+  "tool": "kitty_ida",
+  "user": "按工作台规范做一次「IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档）」（decompile），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"decompile\"}}\n</tool_c"
+ },
+ {
+  "idx": 2410,
+  "tool": "kitty_ida",
+  "user": "不太确定这块：怎么采样找热点函数。",
+  "asst_head": "kitty_x64dbg action=cmd cmd=\"pause\" confirm=true\nkitty_x64dbg action=cmd cmd=\"r\""
+ },
+ {
+  "idx": 2414,
+  "tool": "kitty_ce",
+  "user": "找主机名配置，扫描类型选错三次。",
+  "asst_head": "往返1｜动作：按 dword 扫短字符串编码\nkitty_ce op=\"S_NEW|dword|0x74736F68|0x7FF6DADB1000|0x7FF6"
+ },
+ {
+  "idx": 2450,
+  "tool": "kitty_ce",
+  "user": "样本会在运行期改写自己的import 表。",
+  "asst_head": "[1] triage —— 观测 IAT 是否变化\nkitty_ce op=MODENUM\nkitty_ce op=\"S_SNAP|bytes:16|0xBAS"
+ },
+ {
+  "idx": 2510,
+  "tool": "kitty_ce",
+  "user": "如何改某条的描述，该怎么走？",
+  "asst_head": "kitty_ce op=AL_SET_DESC|<index>|<描述>\n\n用途：给自己看的标签，不影响读写行为。\n\n判据：AL_GET 里 descripti"
+ },
+ {
+  "idx": 2521,
+  "tool": "kitty_prot",
+  "user": "这块内存写不进去，试试写保护绕过。",
+  "asst_head": "写绕过的前提先确认，否则白跑一趟：\n\n1. 地址是用户态地址吗（wpb 只支持用户态，内核地址它会拒）\n2. 普通 W 的报错原文是什么（ERR| 后的码决定走"
+ },
+ {
+  "idx": 2538,
+  "tool": "kitty_ce",
+  "user": "按上面的 OP 表把这三件事做完，帮我处理一下。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ce\", \"arguments\": {\"op\": \"MODENUM\"}}\n</tool_call>"
+ },
+ {
+  "idx": 2550,
+  "tool": "kitty_ida",
+  "user": "怎么找某个字符串在哪里被用？",
+  "asst_head": "kitty_ida action=strings out=logs/ida-app filter=<关键字> limit=20\nkitty_ida action"
+ },
+ {
+  "idx": 2651,
+  "tool": "kitty_ce",
+  "user": "核对通道协议版本，A 通道如何发。",
+  "asst_head": "kitty_ce op=BRIDGE_VER\n\n判读：回包形态是 `OK|v版本-特性串`。先看首段是不是 OK，再按位取后面的字段。\n注意：桥版本（PING "
+ },
+ {
+  "idx": 2703,
+  "tool": "kitty_ida",
+  "user": "团队买的是商业套件，怎么把它集成进自动化流水线",
+  "asst_head": "kitty_ida action=entries\n\n选它的理由：IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；"
+ },
+ {
+  "idx": 2708,
+  "tool": "kitty_ida",
+  "user": "两个版本的函数怎么对齐做差分。",
+  "asst_head": "kitty_ida action=analyze target=v1.dll out=logs/ida-v1\nkitty_ida action=analyze "
+ },
+ {
+  "idx": 2744,
+  "tool": "kitty_ce",
+  "user": "要在内存里找「所有指向某个模块的指针」。",
+  "asst_head": "[1] triage —— 先定搜索范围\nkitty_ce op=MODENUM\n判据：目标模块 base/size。\n退出：确定被指向的范围。\n\n[2] st"
+ },
+ {
+  "idx": 2762,
+  "tool": "kitty_trail",
+  "user": "把这一步的发现写进探索日志道，便于工作台跟进",
+  "asst_head": "kitty_trail action=append\n（action 可取 append / get；本次走 append）\n\n选它的理由：agent探索日志道（"
+ },
+ {
+  "idx": 2785,
+  "tool": "kitty_settings",
+  "user": "收口，别折腾了，帮我处理一下。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_settings\", \"arguments\": {\"action\": \"task-dispatch\", "
+ },
+ {
+  "idx": 2827,
+  "tool": "kitty_init",
+  "user": "按工作台规范做一次「一键双绿初始化（宿主先行+双驱验真）」（init），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_init\", \"arguments\": {\"action\": \"init\"}}\n</tool_call>"
+ },
+ {
+  "idx": 2850,
+  "tool": "kitty_prot",
+  "user": "防护绕过写失败，先查什么？",
+  "asst_head": "先 kitty_prot action=query 看保护位，再决定是否 kitty_wpb permissive；不复用自造名。"
+ },
+ {
+  "idx": 2897,
+  "tool": "kitty_drv",
+  "user": "按工作台规范做一次「驱动+宿主守护」（storm），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_drv\", \"arguments\": {\"action\": \"storm\"}}\n</tool_call>"
+ },
+ {
+  "idx": 2951,
+  "tool": "kitty_ghidra",
+  "user": "Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘） —— 用工具跑起来（动作 search），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ghidra\", \"arguments\": {\"action\": \"search\"}}\n</tool_c"
+ },
+ {
+  "idx": 2952,
+  "tool": "kitty_ida",
+  "user": "按工作台规范做一次「IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档）」（status），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"status\"}}\n</tool_call"
+ },
+ {
+  "idx": 2957,
+  "tool": "kitty_ce",
+  "user": "核对通道协议版本，A 通道怎么发？",
+  "asst_head": "kitty_ce op=BRIDGE_VER\n\n判读：回包形态是 `OK|v版本-特性串`。先看首段是不是 OK，再按位取后面的字段。\n注意：桥版本（PING "
+ },
+ {
+  "idx": 2967,
+  "tool": "kitty_dualview",
+  "user": "要在同一地址上对比用户态和内核态读。",
+  "asst_head": "kitty_dualview action=dualview\n\n选它的理由：三视图取数门禁（通道 orch-view）。\n参数要点：先把目标定死（pid 或模块"
+ },
+ {
+  "idx": 3023,
+  "tool": "kitty_drv",
+  "user": "驱动+宿主守护 —— 用工具跑起来（动作 ensure），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_drv\", \"arguments\": {\"action\": \"ensure\"}}\n</tool_call"
+ },
+ {
+  "idx": 3036,
+  "tool": "kitty_ida",
+  "user": "按工作台规范做一次「IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档）」（imports），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"imports\"}}\n</tool_cal"
+ },
+ {
+  "idx": 3097,
+  "tool": "kitty_ce",
+  "user": "脱调试器，A 通道如何发，下一步动哪个？",
+  "asst_head": "kitty_ce op=DBG_DETACH\n\n判读：回包形态是 `OK|detached[|pending]`。先看首段是不是 OK，再按位取后面的字段。\n注"
+ },
+ {
+  "idx": 3129,
+  "tool": "kitty_ce",
+  "user": "把残留指令归档，A 通道怎么发？",
+  "asst_head": "kitty_ce op=SYNC_ARCHIVE\n\n判读：回包形态是 `OK|archived|…`。先看首段是不是 OK，再按位取后面的字段。\n注意：归档 s"
+ },
+ {
+  "idx": 3136,
+  "tool": "kitty_init",
+  "user": "只想看三层依赖现在什么状态，不动手。",
+  "asst_head": "kitty_init action=init\n\n选它的理由：一键双绿初始化（宿主先行+双驱验真）（通道 infra-init）。\n参数要点：先把目标定死（pid"
+ },
+ {
+  "idx": 3179,
+  "tool": "kitty_ce",
+  "user": "ERR|need-range 反复出现",
+  "asst_head": "两个 OP 硬要求显式区间：\n· S_NEW（扫描）—— 缺 → need-range；窗 ≤16MB、总 ≤64MB、≤4 窗\n· P_BACK（反查）—— "
+ },
+ {
+  "idx": 3231,
+  "tool": "kitty_ce",
+  "user": "S_GET 如何取？一次能拿多少，给个具体做法。",
+  "asst_head": "S_GET|<start0>|<count>，注意 **start 是 0 基偏移**，不是地址。\n\n取前 20 条：kitty_ce op=S_GET|0|2"
+ },
+ {
+  "idx": 3262,
+  "tool": "kitty_ce",
+  "user": "堆破坏在转储里有什么特征？",
+  "asst_head": "cdb -z crash-d.dmp -c \"!heap -s; q\"\nkitty_ce op=\"MEMDUMP_HEX|<heap_region>|256\"\n"
+ },
+ {
+  "idx": 3264,
+  "tool": "kitty_settings",
+  "user": "换一个新的宿主进程，但锁定目标和模式都保持不变",
+  "asst_head": "kitty_settings action=host-rebind keepLock=true\n\n选择理由：先按语义把 action 定死，不要拿同工具别的 a"
+ },
+ {
+  "idx": 3277,
+  "tool": "kitty_ghidra",
+  "user": "要判断某个函数是不是「只在这条路径上被调用」。",
+  "asst_head": "[1] triage —— 先数 xref\nkitty_ghidra action=analyze target=SAMPLE.exe\nkitty_ghidra"
+ },
+ {
+  "idx": 3301,
+  "tool": "kitty_ida",
+  "user": "按工作台规范做一次「IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档）」（functions），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"functions\"}}\n</tool_c"
+ },
+ {
+  "idx": 3331,
+  "tool": "kitty_ce",
+  "user": "要在无符号的情况下恢复一个结构体数组的步长。",
+  "asst_head": "[1] triage —— 找数组基址\nkitty_ce op=\"S_NEW|dword|<已知字段值>|0xSTART|0xSTOP\" wait=true t"
+ },
+ {
+  "idx": 3339,
+  "tool": "kitty_ghidra",
+  "user": "Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘） —— 用工具跑起来（动作 strings），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ghidra\", \"arguments\": {\"action\": \"strings\"}}\n</tool_"
+ },
+ {
+  "idx": 3344,
+  "tool": "kitty_ida",
+  "user": "IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档） —— 用工具跑起来（动作 functions），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"functions\"}}\n</tool_c"
+ },
+ {
+  "idx": 3405,
+  "tool": "kitty_ce",
+  "user": "取变了的地址，A 通道如何发，给个具体做法。",
+  "asst_head": "kitty_ce op=S_CHANGED\n\n判读：回包形态是 `OK|n|changed`。先看首段是不是 OK，再按位取后面的字段。\n注意：v0.2.5：与"
+ },
+ {
+  "idx": 3421,
+  "tool": "kitty_ce",
+  "user": "我改了 IAT 想重定向，结果目标程序崩溃。",
+  "asst_head": "往返1｜动作：改 IAT 指向自建函数\nkitty_ce op=\"W|0xIAT_SLOT|qword|<自建地址>\" confirm=true\n回包：崩溃\n判"
+ },
+ {
+  "idx": 3452,
+  "tool": "kitty_settings",
+  "user": "看一眼当前是待命还是任务态，别在待命里白跑指令",
+  "asst_head": "kitty_settings action=mode-get\n\n选择理由：先按语义把 action 定死，不要拿同工具别的 action 试\n操作要点：目标先定"
+ },
+ {
+  "idx": 3458,
+  "tool": "kitty_ghidra",
+  "user": "如何从资源里拿版本信息做样本聚类，需要注意什么？",
+  "asst_head": "kitty_ghidra action=strings out=logs/gh-r limit=300\nkitty_patch action=find path"
+ },
+ {
+  "idx": 3459,
+  "tool": "kitty_pchain",
+  "user": "Kitty多跳反查 —— 用工具跑起来（动作 pchain），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_pchain\", \"arguments\": {\"action\": \"pchain\"}}\n</tool_c"
+ },
+ {
+  "idx": 3516,
+  "tool": "kitty_ida",
+  "user": "两个版本的函数怎么对齐做差分？",
+  "asst_head": "kitty_ida action=analyze target=v1.dll out=logs/ida-v1\nkitty_ida action=analyze "
+ },
+ {
+  "idx": 3599,
+  "tool": "kitty_ce",
+  "user": "手上这个场景：要一次发多条指令省往返。该动什么？",
+  "asst_head": "用 BATCH。\n\nkitty_ce ops=[\"PING\",\"CUR\",\"MODENUM\",\"R|0x7FF6DADB2450|dword\"]\n\n回包是 OK"
+ },
+ {
+  "idx": 3607,
+  "tool": "kitty_ghidra",
+  "user": "Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘） —— 用工具跑起来（动作 decompile），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ghidra\", \"arguments\": {\"action\": \"decompile\"}}\n</too"
+ },
+ {
+  "idx": 3612,
+  "tool": "kitty_ghidra",
+  "user": "要\"证据包\"还是\"原始输出\"，该怎么走？",
+  "asst_head": "判断标准：交付物给谁看。\n\n· 给自己快速看 → 本地工具原始输出（kitty_ghidra / kitty_ida）\n· 要给结论/做对比/进报告 → REA"
+ },
+ {
+  "idx": 3658,
+  "tool": "kitty_ce",
+  "user": "扫到的候选地址，第二次启动全变了，帮我处理一下。",
+  "asst_head": "ASLR 下堆地址每次都变，这是设计不是错误。存偏移不存绝对地址。\n\n```\nkitty_ce op=MODENUM\n```\n判读：记录 base。把候选转成「"
+ },
+ {
+  "idx": 3726,
+  "tool": "kitty_ce",
+  "user": "同一个值有四种读法，如何选，有推荐的做法吗？",
+  "asst_head": "四种读法及取舍：\n\n1) kitty_ce op=R —— 用户态读，最快，**可能被 hook 骗**\n2) kitty_km action=read（KM_"
+ },
+ {
+  "idx": 3742,
+  "tool": "kitty_ce",
+  "user": "怎么清空地址表，一次做对的路径是什么？",
+  "asst_head": "kitty_ce op=AL_CLEAR\n\n用途：开始新一轮分析前清干净，避免旧条目干扰。\n\n判据：清完 AL_COUNT 回 `OK|0`。"
+ },
+ {
+  "idx": 3763,
+  "tool": "kitty_ce",
+  "user": "取反查结果，A 通道怎么发，给个具体做法。",
+  "asst_head": "kitty_ce op=P_BACK_RES|20\n\n判读：回包形态是 `OK|n\\\\naddr…`。先看首段是不是 OK，再按位取后面的字段。\n注意：取最近一"
+ },
+ {
+  "idx": 3766,
+  "tool": "kitty_ce",
+  "user": "物理地址写，A 通道怎么发？",
+  "asst_head": "kitty_ce op=KM_PW|0x1A4F2C00400|byte|60[|force]\n\n判读：回包形态是 `OK|verified|… / ERR|k"
+ },
+ {
+  "idx": 3787,
+  "tool": "kitty_ce",
+  "user": "扫完不释放会怎样？",
+  "asst_head": "会一直占着上一次的候选集，下一次扫描顶着旧状态跑，结果不可信。\n\n清理：\n· kitty_ce op=S_FREE —— 清扫描状态（正常收尾）\n· kitty"
+ },
+ {
+  "idx": 3811,
+  "tool": "kitty_ghidra",
+  "user": "按工作台规范做一次「Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘）」（functions），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ghidra\", \"arguments\": {\"action\": \"functions\"}}\n</too"
+ },
+ {
+  "idx": 3817,
+  "tool": "kitty_prot",
+  "user": "写完要把保护属性还原回去",
+  "asst_head": "kitty_prot action=rwx\n（action 可取 rwx / probe / protect / query；本次走 rwx）\n\n选它的理由：内"
+ },
+ {
+  "idx": 3897,
+  "tool": "reverse_add_obs",
+  "user": "想把一批观察一次性归档，如何组织。",
+  "asst_head": "reverse_add_obs action=add\n\n选它的理由：G3主写：记观察/finding（reproSteps≥1）（通道 reverse）。\n参数"
+ },
+ {
+  "idx": 3904,
+  "tool": "reverse_add_target",
+  "user": "上次的目标已经归档了，这次要开新的，用哪个工具？",
+  "asst_head": "reverse_add_target action=add\n\n选它的理由：G3主写：新建目标（会话清零，恒 target-1）（通道 reverse）。\n参数要"
+ },
+ {
+  "idx": 3949,
+  "tool": "kitty_prot",
+  "user": "gate=alloc-failed 怎么办",
+  "asst_head": "ALLOC|64 拿不到槽位，写回环保不住。\n\n原因：目标地址空间里没有空闲可分配区（罕见），或 CE 的分配路径被拦。\n\n处置：\n1) kitty_prot "
+ },
+ {
+  "idx": 4012,
+  "tool": "kitty_ce",
+  "user": "地址表如何加一条，该怎么走？",
+  "asst_head": "kitty_ce op=AL_ADD|<描述>|<addr>|<type>\n\n例：\nkitty_ce op=AL_ADD|血量|0x7FF6DADB2450|d"
+ },
+ {
+  "idx": 4026,
+  "tool": "kitty_prot",
+  "user": "页 guard 位导致的假分叉怎么排除？",
+  "asst_head": "guard 页首次访问会成功并清位，第二次才正常。判据：`kitty_prot action=query` 报 PAGE_GUARD 时，连续三次 `R` 的结"
+ },
+ {
+  "idx": 4051,
+  "tool": "kitty_ce",
+  "user": "释放刚分配的内存，A 通道怎么发？",
+  "asst_head": "kitty_ce op=FREE|0x1A4F2C00400\n\n判读：回包形态是 `OK|true / OK|false`。先看首段是不是 OK，再按位取后面的"
+ },
+ {
+  "idx": 4080,
+  "tool": "kitty_ce",
+  "user": "建立调试会话，A 通道怎么发？",
+  "asst_head": "kitty_ce op=DBG_ATTACH|iface=2|force|unsafe[|async]\n\n判读：回包形态是 `OK|attached / OK|"
+ },
+ {
+  "idx": 4090,
+  "tool": "reverse_add_obs",
+  "user": "把刚才的异常现象连同 repro 步骤记下来",
+  "asst_head": "reverse_add_obs action=add\n\n选它的理由：G3主写：记观察/finding（reproSteps≥1）（通道 reverse）。\n参数"
+ },
+ {
+  "idx": 4142,
+  "tool": "kitty_ida",
+  "user": "IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档） —— 用工具跑起来（动作 imports），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"imports\"}}\n</tool_cal"
+ },
+ {
+  "idx": 4195,
+  "tool": "kitty_dualview",
+  "user": "dualview 降级是什么意思",
+  "asst_head": "kitty_dualview 每轮取三路：R / KM_R / KM_PR。如果 KM_R 没回包，它会：\n1) 计数 kmDegraded\n2) 用 R 再取"
+ },
+ {
+  "idx": 4223,
+  "tool": "kitty_ida",
+  "user": "IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档） —— 用工具跑起来（动作 strings），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"strings\"}}\n</tool_cal"
+ },
+ {
+  "idx": 4237,
+  "tool": "kitty_ce",
+  "user": "把残留指令归档，A 通道怎么发。",
+  "asst_head": "kitty_ce op=SYNC_ARCHIVE\n\n判读：回包形态是 `OK|archived|…`。先看首段是不是 OK，再按位取后面的字段。\n注意：归档 s"
+ },
+ {
+  "idx": 4250,
+  "tool": "reverse_add_target",
+  "user": "记一个新的逆向目标进来，会话计数清零",
+  "asst_head": "reverse_add_target action=add uri=kitty-target.exe shape=exe\n\n选择理由：先按语义把 action "
+ },
+ {
+  "idx": 4263,
+  "tool": "kitty_init",
+  "user": "一键到满血的三步是什么",
+  "asst_head": "1) **驱动层**：开机自愈任务\n   Get-ScheduledTaskInfo -TaskName KittyDrvBootHeal → LastTask"
+ },
+ {
+  "idx": 4345,
+  "tool": "kitty_ida",
+  "user": "试用期逻辑怎么找，时钟回拨怎么防，用哪个工具？",
+  "asst_head": "kitty_ida action=functions out=logs/ida-app filter=GetSystemTime\nkitty_patch act"
+ },
+ {
+  "idx": 4376,
+  "tool": "kitty_ce",
+  "user": "我改了内存里的常量，程序重算覆盖了。",
+  "asst_head": "往返1｜动作：直接改常量\nkitty_ce op=\"W|0xADDR|dword|99\" confirm=true\nkitty_ce op=\"R|0xADDR|"
+ },
+ {
+  "idx": 4452,
+  "tool": "kitty_ghidra",
+  "user": "Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘） —— 用工具跑起来（动作 functions），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ghidra\", \"arguments\": {\"action\": \"functions\"}}\n</too"
+ },
+ {
+  "idx": 4503,
+  "tool": "kitty_ce",
+  "user": "与用户态读做对照，A 通道怎么发？",
+  "asst_head": "kitty_ce op=KM_R|0x7FF6DADB2450|qword\n\n判读：回包形态是 `OK|值`。先看首段是不是 OK，再按位取后面的字段。\n注意："
+ },
+ {
+  "idx": 4550,
+  "tool": "kitty_ce",
+  "user": "这个地址的指针链怎么反查，帮我处理一下。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ce\", \"arguments\": {\"op\": \"P_BACK|0x7FF75FCD2000|0x7F"
+ },
+ {
+  "idx": 4554,
+  "tool": "kitty_ce",
+  "user": "不太确定这块：读模块头四个字节，A 通道如何发。",
+  "asst_head": "kitty_ce op=R|0x7FF75FCD1040|byte|word|dword|qword|bytes:len|string:N\n\n判读：回包形态是 "
+ },
+ {
+  "idx": 4560,
+  "tool": "kitty_ce",
+  "user": "想确认一下，怎么改某条的类型。",
+  "asst_head": "kitty_ce op=AL_SET_TYPE|<index>|<type>\n\ntype 同 vt：byte/word/dword/qword。\n\n坑：改类型不"
+ },
+ {
+  "idx": 4561,
+  "tool": "kitty_dualview",
+  "user": "做反作弊对照前，基线该采哪些点？",
+  "asst_head": "三点：模块只读页（.text+0x1000）、堆对象、栈地址。判据：每个点 `kitty_dualview samples=3` 全绿才算干净基线；三点里任一点"
+ },
+ {
+  "idx": 4581,
+  "tool": "kitty_ce",
+  "user": "我只是想验证一次写入成功，被两个假象骗了。",
+  "asst_head": "往返1｜动作：写完立刻回读\nkitty_ce op=\"W|0x7FF6DAE12340|dword|100\" confirm=true\nkitty_ce op="
+ },
+ {
+  "idx": 4605,
+  "tool": "kitty_drv",
+  "user": "驱动和宿主都挂了，要拉回来。",
+  "asst_head": "kitty_drv action=ensure\n（action 可取 ensure / recover / host / storm；本次走 ensure）\n\n"
+ },
+ {
+  "idx": 4610,
+  "tool": "kitty_dualview",
+  "user": "分叉要采几次才算证据，帮我处理一下。",
+  "asst_head": "至少 3 轮且覆盖 ≥2 s。判据：`kitty_dualview samples=3` 每轮三视图落 `logs/anti-ace-<date>.jsonl`"
+ },
+ {
+  "idx": 4622,
+  "tool": "kitty_ce",
+  "user": "继续执行，A 通道如何发，需要注意什么？",
+  "asst_head": "kitty_ce op=DBG_GO[|stepinto|stepover]\n\n判读：回包形态是 `OK|go`。先看首段是不是 OK，再按位取后面的字段。\n注"
+ },
+ {
+  "idx": 4666,
+  "tool": "kitty_ce",
+  "user": "怎么看地址表有多少条，用哪个工具？",
+  "asst_head": "kitty_ce op=AL_COUNT → 回包 `OK|<n>`（实测空表回 `OK|0`）。\n\n判据：AL_ADD 之后条数应该 +1；没变说明那条没加进"
+ },
+ {
+  "idx": 4686,
+  "tool": "kitty_ida",
+  "user": "按工作台规范做一次「IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档）」（entries），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"entries\"}}\n</tool_cal"
+ },
+ {
+  "idx": 4688,
+  "tool": "kitty_ce",
+  "user": "样本加载了 3 个同名 DLL，路径不同。",
+  "asst_head": "同名不同路径 = DLL 侧加载或私有目录加载，判据是模块表里的完整路径。\n\n```\nkitty_ce op=OPEN|<pid> → MODENUM\n```\n"
+ },
+ {
+  "idx": 4714,
+  "tool": "reverse_add_obs",
+  "user": "观察到一组值得留档的事实，如何归档。",
+  "asst_head": "reverse_add_obs action=add\n\n选它的理由：G3主写：记观察/finding（reproSteps≥1）（通道 reverse）。\n参数"
+ },
+ {
+  "idx": 4721,
+  "tool": "kitty_trail",
+  "user": "按目标读回之前的分析记录",
+  "asst_head": "kitty_trail action=append\n\n选它的理由：agent探索日志道（append写/trail-get读）（通道 reverse）。\n参数要"
+ },
+ {
+  "idx": 4749,
+  "tool": "kitty_ce",
+  "user": "看是不是已附加，A 通道怎么发，需要注意什么？",
+  "asst_head": "kitty_ce op=DBG_STAT[|quick]\n\n判读：回包形态是 `OK|n|paused`。先看首段是不是 OK，再按位取后面的字段。\n注意：调试"
+ },
+ {
+  "idx": 4774,
+  "tool": "kitty_ce",
+  "user": "一次投多条指令，先探活再读两个地址，别分三次等",
+  "asst_head": "kitty_ce action=batch ops=[PING, R|0x7FF75FCD1000|dword, R|0x7FF75FCD2000|dword]"
+ },
+ {
+  "idx": 4776,
+  "tool": "kitty_ce",
+  "user": "收敛候选，A 通道怎么发？",
+  "asst_head": "kitty_ce op=S_CHANGED\n\n判读：回包形态是 `OK|n|changed`。先看首段是不是 OK，再按位取后面的字段。\n注意：v0.2.5：与"
+ },
+ {
+  "idx": 4796,
+  "tool": "kitty_ce",
+  "user": "在 CE 里执行脚本，A 通道如何发。",
+  "asst_head": "kitty_ce op=LUA|lua 源码\n\n判读：回包形态是 `OK|返回串(≤8192 字符) / ERR|compile:… / ERR|run:…`。"
+ },
+ {
+  "idx": 4839,
+  "tool": "kitty_ce",
+  "user": "结束调试会话，A 通道怎么发？",
+  "asst_head": "kitty_ce op=DBG_DETACH\n\n判读：回包形态是 `OK|detached[|pending]`。先看首段是不是 OK，再按位取后面的字段。\n注"
+ },
+ {
+  "idx": 4852,
+  "tool": "kitty_ce",
+  "user": "建立内核路由，A 通道怎么发，有推荐的做法吗？",
+  "asst_head": "kitty_ce op=KM_ATTACH|7412\n\n判读：回包形态是 `OK|pid=n|peProcess=0x…|open=…|mem=…|region"
+ },
+ {
+  "idx": 4863,
+  "tool": "kitty_ce",
+  "user": "手上这个场景：访问违例的地址怎么分类。该动什么？",
+  "asst_head": "cdb -z crash-c.dmp -c \".ecxr; !analyze -v; q\"\nkitty_ce op=\"MEMDUMP_HEX|<fault_ad"
+ },
+ {
+  "idx": 4922,
+  "tool": "kitty_ce",
+  "user": "R 和 W 的参数类型都有哪些，帮我处理一下。",
+  "asst_head": "vt 取值五种：byte | word | dword | qword | bytes:N\n\n· byte   1 字节，0x00-0xFF\n· word   "
+ },
+ {
+  "idx": 4936,
+  "tool": "kitty_ida",
+  "user": "问一下，异常地址在模块里，怎么换算成函数。",
+  "asst_head": "cdb -z crash-f.dmp -c \".ecxr; ln; q\"\nkitty_ida action=functions out=logs/ida-app"
+ },
+ {
+  "idx": 4941,
+  "tool": "kitty_init",
+  "user": "init 需要提权怎么办，给个具体做法。",
+  "asst_head": "kitty_init action=init 内部走计划任务 `KittyInitElev` 自动提权，不需要你手打命令。\n\nmode=dbvm 时还有 VT "
+ },
+ {
+  "idx": 4951,
+  "tool": "kitty_ghidra",
+  "user": "按工作台规范做一次「Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘）」（search），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ghidra\", \"arguments\": {\"action\": \"search\"}}\n</tool_c"
+ },
+ {
+  "idx": 4961,
+  "tool": "kitty_pchain",
+  "user": "跨模块存指针，想按模块过滤后一路追上去",
+  "asst_head": "kitty_pchain action=pchain\n\n选它的理由：Kitty多跳反查（通道 A）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先"
+ },
+ {
+  "idx": 4981,
+  "tool": "reverse_add_target",
+  "user": "开工前先把这次的分析对象登记进工作台，怎么发？",
+  "asst_head": "`reverse_add_target(uri=\"sample-2026-1022-a\", kind=\"binary\")` → 回记录对象 `{\"id\":\"ta"
+ },
+ {
+  "idx": 5013,
+  "tool": "reverse_add_obs",
+  "user": "有个疑问，想把一批观察一次性归档，怎么组织。",
+  "asst_head": "reverse_add_obs action=add\n\n选它的理由：G3主写：记观察/finding（reproSteps≥1）（通道 reverse）。\n参数"
+ },
+ {
+  "idx": 5051,
+  "tool": "kitty_ce",
+  "user": "这里卡住了：绕开页表读一次，A 通道怎么发。",
+  "asst_head": "kitty_ce op=KM_PR|0x1A4F2C00400|byte\n\n判读：回包形态是 `OK|值 / OK|十六进制字节`。先看首段是不是 OK，再按位"
+ },
+ {
+  "idx": 5054,
+  "tool": "kitty_trail",
+  "user": "怎么把一次运行做成时间线，帮我处理一下。",
+  "asst_head": "kitty_trail action=append step=start text=\"proc start\" target=app.exe\nkitty_x64d"
+ },
+ {
+  "idx": 5123,
+  "tool": "kitty_ce",
+  "user": "遇到个情况：靶标地址能否写死，有推荐的做法吗？",
+  "asst_head": "不能。ASLR 每次启动都换基址。\n\n正确做法：一律动态解析 ——\n1) kitty_ce op=OPEN|<pid>\n2) kitty_ce op=MODEN"
+ },
+ {
+  "idx": 5134,
+  "tool": "kitty_ce",
+  "user": "怎么启用/禁用某条，一次做对的路径是什么？",
+  "asst_head": "kitty_ce op=AL_SET_ACT|<index>|<on|off>\n\n用途：临时停掉某条（不删），比如调试时先禁掉一个改写，看行为变化。\n\n判据：A"
+ },
+ {
+  "idx": 5149,
+  "tool": "kitty_ce",
+  "user": "为什么「检测绕过」要先做「检测点测绘」",
+  "asst_head": "因为绕过一个未知的检测点是不可能的，测绘是前置条件。\n\n1. 测绘内容：进程里有哪些 hook（ntdll/win32u/kernel32 的函数头是否被改）、"
+ },
+ {
+  "idx": 5194,
+  "tool": "kitty_ida",
+  "user": "商业反汇编器的免费版和 Pro 版能力差在哪",
+  "asst_head": "kitty_ida action=status\n\n选它的理由：IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；P"
+ },
+ {
+  "idx": 5204,
+  "tool": "kitty_ce",
+  "user": "有个疑问，内核路由写验证，A 通道怎么发。",
+  "asst_head": "kitty_ce op=KM_W|0x7FF6DADB01A0|dword|100\n\n判读：回包形态是 `OK|verified|回读值`。先看首段是不是 OK"
+ },
+ {
+  "idx": 5255,
+  "tool": "kitty_ce",
+  "user": "接下来要做的：怎么取地址表里的某一条，该怎么走？",
+  "asst_head": "kitty_ce op=AL_GET|<index>\n\nindex 是 0 基还是 1 基要看实回：先 AL_COUNT 拿总数，再试 AL_GET|0 和 A"
+ },
+ {
+  "idx": 5314,
+  "tool": "kitty_ida",
+  "user": "拿到 Pro 版了，想程序化提取所有函数的伪代码",
+  "asst_head": "kitty_ida action=strings\n\n选它的理由：IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；"
+ },
+ {
+  "idx": 5322,
+  "tool": "kitty_drv",
+  "user": "按工作台规范做一次「驱动+宿主守护」（host），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_drv\", \"arguments\": {\"action\": \"host\"}}\n</tool_call>\n"
+ },
+ {
+  "idx": 5333,
+  "tool": "kitty_drv",
+  "user": "驱动+宿主守护 —— 用工具跑起来（动作 host），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_drv\", \"arguments\": {\"action\": \"host\"}}\n</tool_call>\n"
+ },
+ {
+  "idx": 5339,
+  "tool": "kitty_ce",
+  "user": "列出模块窗口，A 通道怎么发。",
+  "asst_head": "kitty_ce op=MODENUM[|18804]\n\n判读：回包形态是 `OK|n\\\\nname|base-hex|is64|size-hex…`。先看首段"
+ },
+ {
+  "idx": 5413,
+  "tool": "kitty_init",
+  "user": "一键双绿初始化（宿主先行+双驱验真） —— 用工具跑起来（动作 init），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_init\", \"arguments\": {\"action\": \"init\"}}\n</tool_call>"
+ },
+ {
+  "idx": 5428,
+  "tool": "kitty_ce",
+  "user": "如何删地址表里的一条，有推荐的做法吗？",
+  "asst_head": "kitty_ce op=AL_DEL|<index>\n\n坑：删完后续 index 会顺移（列表语义），所以批量删要从**大到小**删。\n\n判据：删完 AL_CO"
+ },
+ {
+  "idx": 5429,
+  "tool": "kitty_drv",
+  "user": "改桥之后必须做什么，用哪个工具？",
+  "asst_head": "**必须重启宿主**。\n\n原因：桥是 Lua 脚本，注入在宿主进程里；改了磁盘上的桥文件，运行中的宿主还在用旧版本。\n\n正确做法：kitty_drv actio"
+ },
+ {
+  "idx": 5434,
+  "tool": "kitty_ce",
+  "user": "按流程扫描区太大报错了，怎么处理",
+  "asst_head": "S_NEW 必须给显式区间，全地址空间扫会被桥拒（也会把宿主拖死）。\n\n[1] 拿真实窗口\nkitty_ce op=\"MODENUM\"\n判据：每行 name/b"
+ },
+ {
+  "idx": 5454,
+  "tool": "kitty_prot",
+  "user": "ALLOC 失败怎么处理？",
+  "asst_head": "先看错误码：`ALLOC|0x1000` 返回 `ERR|alloc-failed` 常见于目标进程无可用 VA 或句柄权限不足。判据：`kitty_prot "
+ },
+ {
+  "idx": 5465,
+  "tool": "kitty_ce",
+  "user": "阻塞等事件，A 通道怎么发？",
+  "asst_head": "kitty_ce op=DBG_WAIT[|ms≤3000]\n\n判读：回包形态是 `OK|attached / OK|attaching / ERR|attac"
+ },
+ {
+  "idx": 5487,
+  "tool": "kitty_prot",
+  "user": "目标页是只读，写不进去，该怎么走？",
+  "asst_head": "两条路，先走轻的。\n\n路一：改保护属性再写\nkitty_prot action=protect addr=0x7FF6DADB2450 size=4096 pr"
+ },
+ {
+  "idx": 5510,
+  "tool": "kitty_ida",
+  "user": "按工作台规范做一次「IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档）」（strings），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"strings\"}}\n</tool_cal"
+ },
+ {
+  "idx": 5512,
+  "tool": "kitty_ghidra",
+  "user": "PE 里怎么找全局变量",
+  "asst_head": "三条路：\n1) **.data / .bss 节**：初始化的在 .data，未初始化在 .bss\n2) **重定位表**：绝对地址引用会出现在 .reloc\n"
+ },
+ {
+  "idx": 5515,
+  "tool": "kitty_ce",
+  "user": "读栈上的参数，R 一直读失败。",
+  "asst_head": "栈顶附近常有 guard page，越界读会整段失败。\n\n```\nkitty_ce op=\"R|0xRSP|bytes:16\"\nkitty_prot actio"
+ },
+ {
+  "idx": 5562,
+  "tool": "kitty_prot",
+  "user": "改保护位做写入后，怎么保证没留下痕迹，该怎么走？",
+  "asst_head": "先存旧值再还原：`kitty_prot action=query` 记 OldProtect，写完 `action=protect protect=<旧值>`。"
+ },
+ {
+  "idx": 5564,
+  "tool": "kitty_ghidra",
+  "user": "按工作台规范做一次「Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘）」（status），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ghidra\", \"arguments\": {\"action\": \"status\"}}\n</tool_c"
+ },
+ {
+  "idx": 5566,
+  "tool": "kitty_ida",
+  "user": "IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档） —— 用工具跑起来（动作 status），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"status\"}}\n</tool_call"
+ },
+ {
+  "idx": 5591,
+  "tool": "kitty_ce",
+  "user": "扫描初值建候选集，A 通道怎么发？",
+  "asst_head": "kitty_ce op=S_NEW|dword|100|0x7FF6DADB0000|0x7FF6DAEB0000\n\n判读：回包形态是 `OK|scan|ran"
+ },
+ {
+  "idx": 5647,
+  "tool": "kitty_ida",
+  "user": "IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档） —— 用工具跑起来（动作 decompile），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"decompile\"}}\n</tool_c"
+ },
+ {
+  "idx": 5679,
+  "tool": "kitty_ghidra",
+  "user": "Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘） —— 用工具跑起来（动作 analyze），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ghidra\", \"arguments\": {\"action\": \"analyze\"}}\n</tool_"
+ },
+ {
+  "idx": 5683,
+  "tool": "kitty_ida",
+  "user": "IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档） —— 用工具跑起来（动作 analyze），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"analyze\"}}\n</tool_cal"
+ },
+ {
+  "idx": 5711,
+  "tool": "kitty_ce",
+  "user": "目标进程暂停时 R 还能读吗？",
+  "asst_head": "能。R 走的是内存读写，不依赖目标线程调度。\n\n```\nkitty_ce op=PING\nkitty_ce op=\"R|0xADDR|dword\"\n```\n判读"
+ },
+ {
+  "idx": 5759,
+  "tool": "kitty_drv",
+  "user": "要跑多轮启停压稳测试",
+  "asst_head": "kitty_drv action=ensure\n（action 可取 ensure / recover / host / storm；本次走 ensure）\n\n"
+ },
+ {
+  "idx": 5869,
+  "tool": "kitty_init",
+  "user": "按工作台规范做一次「一键双绿初始化（宿主先行+双驱验真）」（status），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_init\", \"arguments\": {\"action\": \"status\"}}\n</tool_cal"
+ },
+ {
+  "idx": 5901,
+  "tool": "kitty_ce",
+  "user": "我改了内存里的常量，程序重算覆盖了，用哪个工具？",
+  "asst_head": "往返1｜动作：直接改常量\nkitty_ce op=\"W|0xADDR|dword|99\" confirm=true\nkitty_ce op=\"R|0xADDR|"
+ },
+ {
+  "idx": 5944,
+  "tool": "kitty_ce",
+  "user": "未知初值扫描的第一步，A 通道怎么发？",
+  "asst_head": "kitty_ce op=S_SNAP|word|0x7FF6DADB0000|0x7FF6DAEB0000[|cap≤20000]\n\n判读：回包形态是 `OK|"
+ },
+ {
+  "idx": 5953,
+  "tool": "kitty_ce",
+  "user": "多阶段 loader 怎么一层层剥",
+  "asst_head": "1. 第一层（外层 exe）：只看它分配内存 + 写 + 跳转三步 —— VirtualAlloc(RWX) → memcpy → call\n2. 抓第一层载荷"
+ },
+ {
+  "idx": 5983,
+  "tool": "kitty_ida",
+  "user": "异常处理里又崩了，怎么分诊？",
+  "asst_head": "cdb -z crash-g.dmp -c \".exr -2; .exr -1; q\"\nkitty_ida action=functions out=logs/"
+ },
+ {
+  "idx": 6035,
+  "tool": "kitty_drv",
+  "user": "驱动+宿主守护 —— 用工具跑起来（动作 recover），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_drv\", \"arguments\": {\"action\": \"recover\"}}\n</tool_cal"
+ },
+ {
+  "idx": 6039,
+  "tool": "kitty_dualview",
+  "user": "怀疑有 hook 导致读写视图不一致，怎么验",
+  "asst_head": "kitty_dualview action=dualview\n\n选它的理由：三视图取数门禁（通道 orch-view）。\n参数要点：先把目标定死（pid 或模块"
+ },
+ {
+  "idx": 6061,
+  "tool": "kitty_drv",
+  "user": "drvio 和 drv 的区别",
+  "asst_head": "· kitty_drv —— 会**启停**：ensure/recover/host/storm 都会动服务\n· kitty_drvio —— **只读不启停*"
+ },
+ {
+  "idx": 6103,
+  "tool": "kitty_ce",
+  "user": "确认扫描落定了没，A 通道怎么发，用哪个工具？",
+  "asst_head": "kitty_ce op=JOB_STAT\n\n判读：回包形态是 `OK|state|kind=…|mode=…|n=…|wi=…|age_ms=…`。先看首段是不"
+ },
+ {
+  "idx": 6104,
+  "tool": "kitty_ce",
+  "user": "取扫描结果，A 通道怎么发？",
+  "asst_head": "kitty_ce op=S_GET|start0|count\n\n判读：回包形态是 `OK|n\\\\naddr…`。先看首段是不是 OK，再按位取后面的字段。\n注意"
+ },
+ {
+  "idx": 6122,
+  "tool": "kitty_init",
+  "user": "一键把宿主和双驱都拉起来并验真，下一步动哪个？",
+  "asst_head": "kitty_init action=init\n\n选它的理由：一键双绿初始化（宿主先行+双驱验真）（通道 infra-init）。\n参数要点：先把目标定死（pid"
+ },
+ {
+  "idx": 6146,
+  "tool": "kitty_trail",
+  "user": "agent探索日志道（append写/trail-get读） —— 用工具跑起来（动作 append），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_trail\", \"arguments\": {\"action\": \"append\"}}\n</tool_ca"
+ },
+ {
+  "idx": 6175,
+  "tool": "kitty_prot",
+  "user": "rwx 一把梭有什么代价，需要注意什么？",
+  "asst_head": "kitty_prot action=rwx 走 CE 的 FullAccess，把页改成可读写执行。\n\n代价：\n1) 可执行+可写页是完整性检查的重点目标（很多"
+ },
+ {
+  "idx": 6183,
+  "tool": "reverse_add_target",
+  "user": "新建一个逆向目标，会话计数清零，用哪个工具？",
+  "asst_head": "reverse_add_target action=add\n\n选它的理由：G3主写：新建目标（会话清零，恒 target-1）（通道 reverse）。\n参数要"
+ },
+ {
+  "idx": 6185,
+  "tool": "kitty_ce",
+  "user": "挂调试器，A 通道怎么发，给个具体做法。",
+  "asst_head": "kitty_ce op=DBG_ATTACH|iface=2|force|unsafe[|async]\n\n判读：回包形态是 `OK|attached / OK|"
+ },
+ {
+  "idx": 6263,
+  "tool": "kitty_ida",
+  "user": "两个版本的函数怎么对齐做差分，帮我处理一下。",
+  "asst_head": "kitty_ida action=analyze target=v1.dll out=logs/ida-v1\nkitty_ida action=analyze "
+ },
+ {
+  "idx": 6264,
+  "tool": "kitty_trail",
+  "user": "agent探索日志道（append写/trail-get读） —— 用工具跑起来（动作 get），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_trail\", \"arguments\": {\"action\": \"get\"}}\n</tool_call>"
+ },
+ {
+  "idx": 6292,
+  "tool": "kitty_ce",
+  "user": "把这条 jz 改成 jmp。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ce\", \"arguments\": {\"op\": \"R|0x7FF6DADB2345|bytes:6\"}"
+ },
+ {
+  "idx": 6352,
+  "tool": "kitty_settings",
+  "user": "定下这次会话的目标和靶标进程，转任务态",
+  "asst_head": "kitty_settings action=target-set\n（action 可取 target-set / target-get / mode-set /"
+ },
+ {
+  "idx": 6361,
+  "tool": "kitty_ghidra",
+  "user": "按工作台规范做一次「Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘）」（strings），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ghidra\", \"arguments\": {\"action\": \"strings\"}}\n</tool_"
+ },
+ {
+  "idx": 6374,
+  "tool": "kitty_ghidra",
+  "user": "要判断一个函数是不是「解密器」，用哪个工具？",
+  "asst_head": "[1] triage —— 静态特征\nkitty_ghidra action=analyze target=SAMPLE.exe\nkitty_ghidra ac"
+ },
+ {
+  "idx": 6465,
+  "tool": "kitty_ghidra",
+  "user": "许可级别和功能开关怎么映射？",
+  "asst_head": "kitty_ghidra action=strings out=logs/gh-app limit=500\nkitty_ida action=functions"
+ },
+ {
+  "idx": 6467,
+  "tool": "kitty_ida",
+  "user": "团队买的是商业套件，怎么把它集成进自动化流水线。",
+  "asst_head": "kitty_ida action=entries\n\n选它的理由：IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；"
+ },
+ {
+  "idx": 6470,
+  "tool": "kitty_ce",
+  "user": "看当前上下文，A 通道怎么发？",
+  "asst_head": "kitty_ce op=DBG_REGS\n\n判读：回包形态是 `OK|RAX=… RBX=… … EFLAGS=…`。先看首段是不是 OK，再按位取后面的字段。"
+ },
+ {
+  "idx": 6533,
+  "tool": "kitty_ghidra",
+  "user": "按工作台规范做一次「Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘）」（decompile），给出工具调用与判据。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ghidra\", \"arguments\": {\"action\": \"decompile\"}}\n</too"
+ },
+ {
+  "idx": 6632,
+  "tool": "kitty_ce",
+  "user": "结束调试会话，A 通道怎么发，需要注意什么？",
+  "asst_head": "kitty_ce op=DBG_DETACH\n\n判读：回包形态是 `OK|detached[|pending]`。先看首段是不是 OK，再按位取后面的字段。\n注"
+ },
+ {
+  "idx": 6656,
+  "tool": "kitty_ce",
+  "user": "要一次发多条指令省往返。",
+  "asst_head": "用 BATCH。\n\nkitty_ce ops=[\"PING\",\"CUR\",\"MODENUM\",\"R|0x7FF6DADB2450|dword\"]\n\n回包是 OK"
+ },
+ {
+  "idx": 6659,
+  "tool": "kitty_prot",
+  "user": "这块内存写不进去，能做写保护绕过吗？",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_prot\", \"arguments\": {\"action\": \"probe\", \"addr\": \"0x7"
+ },
+ {
+  "idx": 6678,
+  "tool": "kitty_init",
+  "user": "一键双绿初始化（宿主先行+双驱验真） —— 用工具跑起来（动作 status），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_init\", \"arguments\": {\"action\": \"status\"}}\n</tool_cal"
+ },
+ {
+  "idx": 6694,
+  "tool": "kitty_ce",
+  "user": "要把一组操作打包一次投递省往返，给个具体做法。",
+  "asst_head": "kitty_ce action=op\n（action 可取 op / batch；本次走 op）\n\n选它的理由：KittyCE直控透传（单条op / 多条ops"
+ },
+ {
+  "idx": 6728,
+  "tool": "kitty_ce",
+  "user": "读出来的值每次都不一样，是加密还是随机数？",
+  "asst_head": "每次不同 = 每次重新生成；要区分「随机」与「加密计数器」。\n\n```\nkitty_ce op=\"LUA|local t={} for i=1,10 do t["
+ },
+ {
+  "idx": 6741,
+  "tool": "kitty_dualview",
+  "user": "dualview 和 acescan 该用哪个",
+  "asst_head": "· 只想验一个地址的视图一致性 → kitty_dualview（轻，4 次往返/轮）\n· 要完整对抗结论（含驱动/宿主/写入能力）→ kitty_acesca"
+ },
+ {
+  "idx": 6781,
+  "tool": "kitty_ce",
+  "user": "申请远程缓冲，A 通道如何发，给个具体做法。",
+  "asst_head": "kitty_ce op=ALLOC|size\n\n判读：回包形态是 `OK|addr`。先看首段是不是 OK，再按位取后面的字段。\n注意：CE allocateM"
+ },
+ {
+  "idx": 6796,
+  "tool": "kitty_ce",
+  "user": "改内存里的数值，A 通道怎么发？",
+  "asst_head": "kitty_ce op=W|0x7FF75FCD1040|type|3500\n\n判读：回包形态是 `OK`。先看首段是不是 OK，再按位取后面的字段。\n注意：写"
+ },
+ {
+  "idx": 6914,
+  "tool": "kitty_ghidra",
+  "user": "帮我看看，想先看某个函数的调用引用关系。",
+  "asst_head": "kitty_ghidra action=analyze\n（action 可取 analyze / functions / search / decompile；"
+ },
+ {
+  "idx": 6964,
+  "tool": "kitty_trail",
+  "user": "按目标把这轮探索记录读回来，最近 30 条就够",
+  "asst_head": "kitty_trail action=get target=kitty-target.exe top=30\n\n选择理由：这条需求要的动作就是它，同工具的其它 a"
+ },
+ {
+  "idx": 6974,
+  "tool": "kitty_init",
+  "user": "只想看三层依赖现在什么状态，不动手",
+  "asst_head": "kitty_init action=init\n\n选它的理由：一键双绿初始化（宿主先行+双驱验真）（通道 infra-init）。\n参数要点：先把目标定死（pid"
+ },
+ {
+  "idx": 6979,
+  "tool": "kitty_ghidra",
+  "user": "我把 .so 当 x86 反汇编，全是垃圾。",
+  "asst_head": "往返1｜动作：kitty_ghidra action=analyze target=libnative.so\n回包：反汇编满屏无效指令\n判读：第一次失败。语言选"
+ },
+ {
+  "idx": 6997,
+  "tool": "kitty_prot",
+  "user": "读 0x7FF7A1203400 的一个字节。",
+  "asst_head": "直接读，不用扫描：`R|0x7FF7A1203400|byte`。\n判据：回包 `OK|144`（数值回包是十进制，不是 hex）；若回 `ERR|read-f"
+ },
+ {
+  "idx": 7001,
+  "tool": "kitty_ce",
+  "user": "我 attach 到错误进程，写了一天数据全废。",
+  "asst_head": "往返1｜动作：按进程名 OPEN\nkitty_ce op=OPEN|TARGET.exe\n回包：成功\n判读：看着对，但同名有两份。\n\n往返2｜动作：写值并回读\n"
+ },
+ {
+  "idx": 7019,
+  "tool": "kitty_prot",
+  "user": "要判定「这个地址是代码还是数据」，需要注意什么？",
+  "asst_head": "[1] triage —— 权限\nkitty_prot action=query addr=0xADDR\n判据：Protect 含 EXECUTE → 可能是代"
+ },
+ {
+  "idx": 7054,
+  "tool": "reverse_add_obs",
+  "user": "把刚才那次异常现象写进记录，后面要能复现",
+  "asst_head": "reverse_add_obs action=add\n\n选它的理由：G3主写：记观察/finding（reproSteps≥1）（通道 reverse）。\n参数"
+ },
+ {
+  "idx": 7060,
+  "tool": "kitty_ce",
+  "user": "我想拿一个函数的调用次数，用来确认是不是热路径。",
+  "asst_head": "OP 层没有计数器，只能用断点或采样。\n\n```\nkitty_x64dbg action=seed addr=<函数VA> seedCmd=log\n```\n判读"
+ },
+ {
+  "idx": 7064,
+  "tool": "kitty_ghidra",
+  "user": "这里卡住了：预算为零但需要看伪代码，该用哪个。",
+  "asst_head": "kitty_ghidra action=decompile\n\n选它的理由：Ghidra headless 真分析（analyze 跑 analyzeHeadle"
+ },
+ {
+  "idx": 7088,
+  "tool": "kitty_ce",
+  "user": "实际跑的时候，结束调试会话，A 通道如何发。",
+  "asst_head": "kitty_ce op=DBG_DETACH\n\n判读：回包形态是 `OK|detached[|pending]`。先看首段是不是 OK，再按位取后面的字段。\n注"
+ },
+ {
+  "idx": 7134,
+  "tool": "kitty_prot",
+  "user": "目标页是只读，写不进去。",
+  "asst_head": "两条路，先走轻的。\n\n路一：改保护属性再写\nkitty_prot action=protect addr=0x7FF6DADB2450 size=4096 pr"
+ },
+ {
+  "idx": 7183,
+  "tool": "kitty_ida",
+  "user": "想确认一下，异常处理里又崩了，怎么分诊。",
+  "asst_head": "cdb -z crash-g.dmp -c \".exr -2; .exr -1; q\"\nkitty_ida action=functions out=logs/"
+ },
+ {
+  "idx": 7217,
+  "tool": "kitty_ida",
+  "user": "IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档） —— 用工具跑起来（动作 entries），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_ida\", \"arguments\": {\"action\": \"entries\"}}\n</tool_cal"
+ },
+ {
+  "idx": 7235,
+  "tool": "kitty_ce",
+  "user": "切换当前目标，A 通道怎么发，用哪个工具？",
+  "asst_head": "kitty_ce op=OPEN|7412\n\n判读：回包形态是 `OK|pid[|already-open]`。先看首段是不是 OK，再按位取后面的字段。\n注意"
+ },
+ {
+  "idx": 7256,
+  "tool": "kitty_ce",
+  "user": "找指针来源，A 通道怎么发，帮我处理一下。",
+  "asst_head": "kitty_ce op=P_BACK|0x7FF6DADB01A0|0x7FF6DADB0000|0x7FF6DAEB0000\n\n判读：回包形态是 `OK|n["
+ },
+ {
+  "idx": 7265,
+  "tool": "kitty_ce",
+  "user": "看是否已附加，A 通道怎么发？",
+  "asst_head": "kitty_ce op=DBG_STAT[|quick]\n\n判读：回包形态是 `OK|n|paused`。先看首段是不是 OK，再按位取后面的字段。\n注意：调试"
+ },
+ {
+  "idx": 7295,
+  "tool": "kitty_dualview",
+  "user": "确认 0x7FF75FCD1000 有没有被拦。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_dualview\", \"arguments\": {\"addr\": \"0x7FF75FCD1000\", \""
+ },
+ {
+  "idx": 7331,
+  "tool": "kitty_ce",
+  "user": "建立内核路由，A 通道怎么发，帮我处理一下。",
+  "asst_head": "kitty_ce op=KM_ATTACH|18804\n\n判读：回包形态是 `OK|pid=n|peProcess=0x…|open=…|mem=…|regio"
+ },
+ {
+  "idx": 7343,
+  "tool": "kitty_ce",
+  "user": "下断点，A 通道怎么发。",
+  "asst_head": "kitty_ce op=DBG_BP|0x2C1B7F40200|size[|execute|write][|int3|force]\n\n判读：回包形态是 `OK"
+ },
+ {
+  "idx": 7368,
+  "tool": "kitty_ghidra",
+  "user": "想复现别人公开的分析过程，只用免费工具怎么做",
+  "asst_head": "kitty_ghidra action=analyze\n\n选它的理由：Ghidra headless 真分析（analyze 跑 analyzeHeadless"
+ },
+ {
+  "idx": 7404,
+  "tool": "kitty_drv",
+  "user": "驱动+宿主守护 —— 用工具跑起来（动作 storm），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_drv\", \"arguments\": {\"action\": \"storm\"}}\n</tool_call>"
+ },
+ {
+  "idx": 7420,
+  "tool": "kitty_ce",
+  "user": "不太确定这块：物理地址读，A 通道怎么发。",
+  "asst_head": "kitty_ce op=KM_PR|0x1A4F2C00400|qword\n\n判读：回包形态是 `OK|值 / OK|十六进制字节`。先看首段是不是 OK，再按"
+ },
+ {
+  "idx": 7471,
+  "tool": "kitty_ce",
+  "user": "等断点命中，A 通道如何发，下一步动哪个？",
+  "asst_head": "kitty_ce op=DBG_WAIT[|ms≤3000]\n\n判读：回包形态是 `OK|attached / OK|attaching / ERR|attac"
+ },
+ {
+  "idx": 7475,
+  "tool": "kitty_ce",
+  "user": "不太确定这块：释放扫描会话，A 通道如何发。",
+  "asst_head": "kitty_ce op=S_FREE\n\n判读：回包形态是 `OK`。先看首段是不是 OK，再按位取后面的字段。\n注意：清扫描状态\n下一步按回包决定：ERR 就按"
+ },
+ {
+  "idx": 7488,
+  "tool": "kitty_ghidra",
+  "user": "许可级别和功能开关如何映射，有推荐的做法吗？",
+  "asst_head": "kitty_ghidra action=strings out=logs/gh-app limit=500\nkitty_ida action=functions"
+ },
+ {
+  "idx": 7516,
+  "tool": "kitty_prot",
+  "user": "写保护地址改完之后怎么确认改成功了？",
+  "asst_head": "kitty_prot action=query 回读保护位，再用 kitty_ce 的 R 读回目标值比对。"
+ },
+ {
+  "idx": 7523,
+  "tool": "kitty_drv",
+  "user": "驱动+宿主守护 —— 用工具跑起来（动作 status），参数一次给全。",
+  "asst_head": "<tool_call>\n{\"name\": \"kitty_drv\", \"arguments\": {\"action\": \"status\"}}\n</tool_call"
+ },
+ {
+  "idx": 7601,
+  "tool": "kitty_ce",
+  "user": "KM_PROBE 是干什么的",
+  "asst_head": "kitty_ce op=KM_PROBE → 回包 `OK|…`\n\n它是**探针**（dbk 初始化面），用来确认内核面能不能通，不是真正的初始化动作。\n\n和 "
+ }
+]

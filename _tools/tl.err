@@ -1,0 +1,4 @@
+2026-11-08 12:25:56.557  INFO  starting engine
+2026-11-08 12:25:57.345  INFO  loading weights | 5.81 GiB
+2026-11-08 12:25:58.615  INFO  weights ready | 5.81 GiB | 1.3s | 4.57 GiB/s
+D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-master\src\ops\rope\apply\dispatch.cu:93: CUDA_CHECK(cudaGetLastError()) failed: cudaErrorStreamCaptureInvalidated: operation failed due to a previous error during capture

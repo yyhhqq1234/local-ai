@@ -1,0 +1,87 @@
+{
+ "ts": "2026-10-31 10:53:20",
+ "stage": "| 2026-10-31 09:24:43 | Z-2A v3 完成 · z-2a-v3（cov=0.5754） |",
+ "artifacts": {
+  "zre_final": true,
+  "2a_v1_final": true,
+  "2a_v2_final": true,
+  "eval_re_zre": true,
+  "eval_2a_z2a_v2": true,
+  "report": true
+ },
+ "progress": {
+  "cur": 760,
+  "total": 760,
+  "pct": 100.0
+ },
+ "re_eval": [
+  {
+   "label": "r3",
+   "n": 40,
+   "hit": 30,
+   "acc": 0.75,
+   "fake": 0,
+   "wrong": 7,
+   "noarg": 3
+  },
+  {
+   "label": "zre",
+   "n": 40,
+   "hit": 28,
+   "acc": 0.7,
+   "fake": 0,
+   "wrong": 6,
+   "noarg": 6
+  },
+  {
+   "label": "zbv2",
+   "n": 40,
+   "hit": 21,
+   "acc": 0.525,
+   "fake": 4,
+   "wrong": 7,
+   "noarg": 8
+  },
+  {
+   "label": "zbv3",
+   "n": 40,
+   "hit": 30,
+   "acc": 0.75,
+   "fake": 1,
+   "wrong": 6,
+   "noarg": 2
+  },
+  {
+   "label": "zbv4",
+   "n": 40,
+   "hit": 30,
+   "acc": 0.75,
+   "fake": 0,
+   "wrong": 6,
+   "noarg": 4
+  }
+ ],
+ "aa_eval": {
+  "adapter": "train/out/z-2a-v2/checkpoint-600",
+  "n": 40,
+  "avg_cov": 0.4813,
+  "code_rate": 0.9,
+  "avg_ngram20": 0.0,
+  "verdict": false
+ },
+ "aa_base": {
+  "avg_cov": 0.5996,
+  "code_rate": 0.4
+ },
+ "gates": {
+  "eval": 0,
+  "toolname": 0,
+  "notool": 0
+ },
+ "recent": [
+  "[2026-10-31 04:33:10] STEP6 汇总报告",
+  "[aggregate_z] 写出 train/logs\\z-final-report.md · RE=FAIL · 2A=FAIL",
+  "[2026-10-31 04:33:10] STEP6 OK",
+  "[2026-10-31 04:33:10] ================ 接管结束 2026-10-31 04:33:10 ================"
+ ]
+}

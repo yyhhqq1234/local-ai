@@ -1,0 +1,115 @@
+{
+  "__meta": {
+    "dir": "train/data/agent-traj",
+    "built": "2026-10-27T13:39:44.550Z",
+    "purpose": "顶尖模型的长程 agent 推理链（工具编排轨迹），用于给 OxCoder-9B 注入长上下文代码工程能力",
+    "format": "本项目 SFT：messages=[system,user,assistant]，assistant 为完整工具执行链（[CALL x] + 【observation】交替）",
+    "note": "train/data/ 整体已在 .gitignore 内；本目录不参与版本控制，属本地训练资产",
+    "cleanup": "已剔除不可训练源（codex-otel 空目录、raw 预留目录）；sources 仅列可用源，被剔除者移入 rejected_sources"
+  },
+  "sources": {
+    "nemotron-swe": {
+      "repo": "nvidia/Nemotron-SWE-v1",
+      "license": "CC BY 4.0（可商用）",
+      "producer": "OpenHands 采集 / Qwen3-Coder-480B 合成 / issue 源自 SWE-Gym + R2E-Gym-Subset",
+      "total_rows": 51029,
+      "status": "usable",
+      "files": [
+        {
+          "file": "nemotron-swe/swe-8k.jsonl",
+          "rows": 1500,
+          "ctx": "8192 目标, p50=8200",
+          "built_by": "train/scripts/build_agent_traj.py --limit 1500 --target-ctx 8192"
+        },
+        {
+          "file": "nemotron-swe/swe-16k.jsonl",
+          "rows": 500,
+          "ctx": "16384 目标, p50=16392",
+          "built_by": "build_agent_traj.py --limit 500 --offset 2000 --target-ctx 16384"
+        }
+      ]
+    },
+    "swe-rebench": {
+      "repo": "ibragim-bad/swe_rebench_07_2026_trajectories",
+      "license": "见数据集卡",
+      "producer": "SWE-rebench 2026-07 真实 PR 任务；轨迹模型 claude-fable-5 / scaffold claude-code / effort=high",
+      "status": "usable",
+      "files": [
+        {
+          "file": "swe-rebench/rebench-8k.jsonl",
+          "rows": 150,
+          "ctx": "8192 目标, p50=8200",
+          "built_by": "train/scripts/build_traj_multi.py --src swe-rebench --limit 150"
+        }
+      ],
+      "sample_meta": {
+        "roles": "system(250) user(2203) assistant(26823)",
+        "turns": 34,
+        "tool_calls": 15,
+        "repo": "ArcadeData/arcadedb"
+      }
+    },
+    "deepswe": {
+      "repo": "kaitchup/DeepSWE1.1-trajectories-Qwen3.8-27B",
+      "license": "见数据集卡",
+      "producer": "Muse-Glimmer-30B + mini-swe-agent 2.4.6，791 个 task 轨迹",
+      "status": "usable",
+      "files": [
+        {
+          "file": "deepswe/deepswe-8k.jsonl",
+          "rows": 113,
+          "ctx": "8192 目标, p50=8200",
+          "built_by": "train/scripts/build_deepswe.py --limit 150 --target-ctx 8192"
+        },
+        {
+          "file": "deepswe/_raw/",
+          "note": "trajectory.json.gz 原件缓存（直下 fallback，供重跑免二次下载）"
+        }
+      ],
+      "structure": "{steps:[{step,source:system|user|agent,message|reasoning_content+tool_calls+observation}], final_metrics:{peak_context_tokens,total_steps,...}}",
+      "err_note": "150 试 / 113 成 / 37 败 —— 败因是 HF 镜像 429 限流与个别 gz 下载中断；脚本已带 requests 直下 fallback，重跑会跳过已缓存件"
+    }
+  },
+  "mix_guidance": {
+    "domain_shift_warning": "上述轨迹是英文 web-SWE 域（pandas/arcadedb 等仓库，Bash/Grep/Edit 工具），与 kitty 中文逆向域不同。可迁移的是『工具编排形状』（读→判→改→验闭环、最小 diff、失败重试），不是领域知识。",
+    "recommended_ratio": "轨迹 30% : kitty core 70%（60/40 会稀释中文逆向域）",
+    "train_side": {
+      "kitty": "train/data/kitty-reverse/train-kitty-core.jsonl  5602 条",
+      "traj_8k": "nemotron-swe 1500 + swe-rebench 150 = 1650 条",
+      "traj_16k": "nemotron-swe 500 条（长上下文档，配 ctx 16384 训练阶段）"
+    },
+    "available_rows": 2263
+  },
+  "reproduce": {
+    "probe_all": "python train/scripts/probe_traj_datasets.py",
+    "nemotron": "HF_ENDPOINT=https://hf-mirror.com python train/scripts/build_agent_traj.py --limit 1500 --target-ctx 8192 --out train/data/agent-traj/nemotron-swe/swe-8k.jsonl",
+    "rebench": "HF_ENDPOINT=https://hf-mirror.com python train/scripts/build_traj_multi.py --src swe-rebench --limit 150 --target-ctx 8192 --out train/data/agent-traj/swe-rebench/rebench-8k.jsonl",
+    "note": "HF 镜像会 429 限流，脚本自动重试；大样本建议分批 --offset"
+  },
+  "verification": {
+    "json_parse": "全部 JSONL 可解析",
+    "ctx_control": "p50 精确命中目标（8192 → 8200）",
+    "truncation_policy": "超长轨迹保留头 72% + 尾 28%，中段标『……（中段省略）……』"
+  },
+  "rejected_sources": {
+    "__note": "已从数据目录剔除；此处仅保留判定依据供追溯",
+    "claude-code-direct": {
+      "repo": "PotatoHD/agent-coding-traces-public",
+      "status": "rejected",
+      "reason": "text 字段只含 1 个 <|im_start|>system 块（24013 字符全是 Claude Code 的 system prompt），不含 user/assistant 对话 → 是 system prompt 集合，不是轨迹集。已产出 1 条后废弃。"
+    },
+    "codex-otel": {
+      "repo": "ibm-research/codex_swebenchpro_traces_Otel",
+      "status": "not_trainable",
+      "reason": "OTel span 里 gen_ai.input.messages 是真实内容（Codex 系统提示 + 对话），但 gen_ai.output.messages 全部被替换成 'Lorem ipsum dolor sit amet…' 占位符。实测抽查 3 条 trace 共 54 个 span：output 含 Lorem ipsum 54 / 真实内容 0。没有真实助手输出 → 无法做 SFT。",
+      "salvage": "若只取 input.messages 做『上下文理解』任务（非生成）可用，但训练价值低，暂不纳入",
+      "next": "等上游移除脱敏，或改用 codex 的其它轨迹源"
+    },
+    "cc-traces-weka": {
+      "repo": "DiscoPosse/cc-traces-weka-with-subagents-051826",
+      "status": "not_trainable",
+      "reason": "96 条真实 Claude Code 生产轨迹，但只有 KV block hash + 请求元数据（in/out/api_time/hash_ids），无对话正文（隐私脱敏）。",
+      "use_for": "推理侧性能仿真：ISL p50=100,902 / p90=443,856 / p99=803,019 tokens → 用于校准 ninfer 的 hostKVMiB 与 deviceKV 配比"
+    }
+  }
+}

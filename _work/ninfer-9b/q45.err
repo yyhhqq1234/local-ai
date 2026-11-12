@@ -1,0 +1,44 @@
+starting engine
+loading weights | 5.81 GiB
+weights ready | 5.81 GiB | 1.5s | 3.99 GiB/s
+CUDA graph memory calibrated | 4.0s
+CUDA graphs ready | 58.4 ms
+engine ready | kittyrev-oxcoder9b-q45 | total 6.2s | weights 5.81 GiB | CUDA sync spin
+phase       detail                      elapsed/progress
+prepare     request preparation             516 us
+generate    vision                            0 us
+generate    text prefill                   61.2 ms
+generate    decode                            5.2s
+generate    total                             5.3s
+summary     sampling                  greedy (temperature 0)
+summary     finish reason             output-limit
+summary     prompt tokens             27
+summary     reused prompt tokens      0
+summary     generated tokens          192
+summary     model elapsed             5.3s
+summary     prefill speed             441.3 tok/s
+summary     decode speed              36.6 tok/s
+summary     throughput (overall)      36.4 tok/s
+summary     device                    0
+summary     max context               4096
+summary     prefill chunk             128
+summary     device budget             10.8 GiB
+summary     KV capacity policy        explicit
+summary     KV capacity               4096
+summary     KV page groups            64 / 64
+summary     gpu weights used          5.81 GiB / 5.81 GiB
+summary     gpu sequence used         180.1 MiB / 180.1 MiB
+summary     kv cache dtype            bf16
+summary     kv cache payload          128.0 MiB
+summary     gpu workspace peak        13.5 MiB / 13.5 MiB
+summary     runtime reservation       193.6 MiB
+summary     free after weights        4.97 GiB
+summary     free after startup        4.78 GiB
+summary     KV capacity headroom      1.00 GiB
+summary     planned slack             3.78 GiB
+summary     graph rebuild estimate    0 B
+summary     graph prepare increment   0 B
+summary     graph calibration growth  4194304 B
+summary     graph calibration retained4194304 B
+summary     startup retained          4945920 B
+summary     planned device total      6.00 GiB

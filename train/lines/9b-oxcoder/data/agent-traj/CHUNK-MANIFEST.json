@@ -1,0 +1,106 @@
+{
+  "name": "agent-traj ctx4096 chunked",
+  "created": "2026-10-28",
+  "purpose": "把超过 ctx 4096 的轨迹样本按自然边界切分成多段，零内容丢失，用于 OxCoder-9B 后训练 2A/2C 阶段",
+  "generator": "train/scripts/chunk_train_samples.py",
+  "params": {
+    "ctx": 4096,
+    "overlap_tokens": 256,
+    "carry_chars": 800,
+    "base_overhead": 64,
+    "split_prefs": ["\\n[CALL ", "\\n\\n", "\\n"],
+    "min_advance": "max(16, budget//4)"
+  },
+  "why_ctx_4096": {
+    "measured_step_time_ctx4096": "26.9 s (iter2 steady 15.1 s)",
+    "measured_step_time_ctx8192": "1149.5 s — reserved 25.98 GiB 超出 11.91 GiB 显存，Windows WDDM 把系统内存当后备存储，数据经 PCIe 往返，慢 42×",
+    "measured_ctx9216": "OOM",
+    "conclusion": "ctx 4096 是 RTX 5070 Ti Laptop 12GB 的硬上限；checkpoint 不可关闭（关掉立即 OOM）"
+  },
+  "validation": {
+    "char_coverage": "1.000000 (区间无缝覆盖 [0,len)，允许 overlap)",
+    "over_ctx_rows": 0,
+    "lossless_fail": 0,
+    "all_ignore_rows": 0,
+    "empty_assistant": 0,
+    "label_check": "train/scripts/label_builder.py --scan"
+  },
+  "datasets": [
+    {
+      "name": "nemotron-swe/swe-8k",
+      "path": "train/data/agent-traj/nemotron-swe/swe-8k-chunk4096.jsonl",
+      "source": "train/data/agent-traj/nemotron-swe/swe-8k.jsonl",
+      "rows_before": 1500,
+      "rows_after": 16651,
+      "tokens_before_m": 12.32,
+      "tokens_after_m": 47.19,
+      "inflation": 3.83,
+      "trainable_ratio_p50": 0.268,
+      "license": "BSD-3-Clause",
+      "upstream": "nvidia/Nemotron-SWE-v1"
+    },
+    {
+      "name": "nemotron-swe/swe-16k",
+      "path": "train/data/agent-traj/nemotron-swe/swe-16k-chunk4096.jsonl",
+      "source": "train/data/agent-traj/nemotron-swe/swe-16k.jsonl",
+      "rows_before": 500,
+      "rows_after": 14280,
+      "tokens_before_m": 8.2,
+      "tokens_after_m": 39.9,
+      "inflation": 4.866,
+      "trainable_ratio_p50": 0.272,
+      "license": "BSD-3-Clause",
+      "note": "原 16k 上下文数据，在 ctx 4096 下切得最碎，膨胀最大"
+    },
+    {
+      "name": "deepswe/deepswe-8k",
+      "path": "train/data/agent-traj/deepswe/deepswe-8k-chunk4096.jsonl",
+      "source": "train/data/agent-traj/deepswe/deepswe-8k.jsonl",
+      "rows_before": 113,
+      "rows_after": 424,
+      "tokens_before_m": 0.93,
+      "tokens_after_m": 1.14,
+      "inflation": 1.227,
+      "trainable_ratio_p50": 0.829,
+      "note": "system 只有 12 token，窗口利用率最高"
+    },
+    {
+      "name": "swe-rebench/rebench-8k",
+      "path": "train/data/agent-traj/swe-rebench/rebench-8k-chunk4096.jsonl",
+      "source": "train/data/agent-traj/swe-rebench/rebench-8k.jsonl",
+      "rows_before": 150,
+      "rows_after": 478,
+      "tokens_before_m": 1.23,
+      "tokens_after_m": 1.46,
+      "inflation": 1.185,
+      "trainable_ratio_p50": 0.869
+    }
+  ],
+  "totals": {
+    "rows_before": 2263,
+    "rows_after": 31833,
+    "tokens_before_m": 22.68,
+    "tokens_after_m": 89.69,
+    "inflation": 3.954,
+    "steps_at_ctx4096_accum16": 1368,
+    "eta_hours_at_15s": 5.7,
+    "eta_hours_at_26_9s": 10.2
+  },
+  "cost_note": "膨胀 ×3.95 意味着训练时约 79% 的 token 是重复的 system+user 模板（Nemotron 的 system 固定 1694 token、user 固定 1274 token）。这是 ctx 4096 下的固有代价：提示词底噪 2968 token 占了窗口 72%。",
+  "not_chunked": [
+    {
+      "file": "train/data/kitty-reverse/train-kitty-core.jsonl",
+      "rows": 5602,
+      "reason": "p99 = 574 token，远低于 4096，无需切分"
+    },
+    {
+      "file": "train/data/nsfw/train-{cont,scene,multi,style,expand}.jsonl",
+      "rows": 13668,
+      "reason": "p99 = 1437 token，远低于 4096，无需切分"
+    }
+  ],
+  "usage": {
+    "training": "直接作为 SFTTrainer 的 train_file；labels 用 train/scripts/label_builder.py 的 build_labels 构造（chat_template 无 {% generation %} 标记，不能用 assistant_only_loss=True）",
+    "rebuild": "train/.venv/Scripts/python.exe train/scripts/chunk_train_samples.py --in <src> --out <dst> --ctx 4096 --overlap 256"
+  }
+}

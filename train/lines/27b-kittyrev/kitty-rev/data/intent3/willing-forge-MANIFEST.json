@@ -1,0 +1,136 @@
+{
+  "dataset": "train/kitty-rev/data/intent3",
+  "version": "0.1.1",
+  "forge": "r2w",
+  "generated_at": "2026-10-22T11:24:46+08:00",
+  "groups": [
+    {
+      "name": "re-sft",
+      "path": "train/kitty-rev/data/intent3/re-sft.jsonl",
+      "kind": "sft",
+      "count": 120,
+      "target_count": 120,
+      "length_distribution": {
+        "count": 120,
+        "min": 201,
+        "max": 408,
+        "mean": 266.9,
+        "median": 262.0,
+        "p90": 314,
+        "histogram": {
+          "<160": 0,
+          "160-199": 0,
+          "200-299": 98,
+          "300-399": 21,
+          "400-499": 1,
+          ">=500": 0
+        }
+      },
+      "isolation": {
+        "verdict": "PASS",
+        "jaccard_max": 0.2806,
+        "pairs_over_threshold": 0,
+        "full_hash_duplicates": 0,
+        "user_hash_duplicates": 0
+      },
+      "refusal_regex_hits": 0,
+      "notes": "逆向技术 SFT：静态分诊/壳指纹/固件/转储/协议/许可互操作/移动-引擎/只读动态/符号差分"
+    },
+    {
+      "name": "overrefusal-40",
+      "path": "train/kitty-rev/data/intent3/overrefusal-40.jsonl",
+      "kind": "eval",
+      "count": 40,
+      "target_count": 40,
+      "length_distribution": {
+        "count": 40,
+        "min": 24,
+        "max": 63,
+        "mean": 35.5,
+        "median": 34.0,
+        "p90": 42,
+        "histogram": {
+          "<160": 40,
+          "160-199": 0,
+          "200-299": 0,
+          "300-399": 0,
+          "400-499": 0,
+          ">=500": 0
+        }
+      },
+      "isolation": {
+        "verdict": "PASS",
+        "jaccard_max": 0.0,
+        "pairs_over_threshold": 0,
+        "full_hash_duplicates": 0,
+        "user_hash_duplicates": 0
+      },
+      "refusal_regex_hits": 0,
+      "notes": "双向过度拒答评测：answer 20（防御/取证/合规/学术）+ refuse 20（真实第三方伤害）"
+    }
+  ],
+  "isolation": {
+    "method": "full-hash|user-hash|char5gram-jaccard",
+    "threshold": 0.35,
+    "against": [
+      "train/kitty-rev/data/large-mix-plus/train.jsonl",
+      "train/kitty-rev/data/eval_re_extended.jsonl",
+      "train/kitty-rev/data/intent2/comply-subset.train.jsonl",
+      "train/kitty-rev/data/forge2/train.jsonl"
+    ],
+    "results": [
+      {
+        "target": "train/kitty-rev/data/large-mix-plus/train.jsonl",
+        "verdict": "PASS",
+        "full_hash_intersection": 0,
+        "user_hash_intersection": 0,
+        "jaccard_max": 0.2088,
+        "pairs_over_threshold": 0
+      },
+      {
+        "target": "train/kitty-rev/data/eval_re_extended.jsonl",
+        "verdict": "PASS",
+        "full_hash_intersection": 0,
+        "user_hash_intersection": 0,
+        "jaccard_max": 0.107,
+        "pairs_over_threshold": 0
+      },
+      {
+        "target": "train/kitty-rev/data/intent2/comply-subset.train.jsonl",
+        "verdict": "PASS",
+        "full_hash_intersection": 0,
+        "user_hash_intersection": 0,
+        "jaccard_max": 0.0842,
+        "pairs_over_threshold": 0
+      },
+      {
+        "target": "train/kitty-rev/data/forge2/train.jsonl",
+        "verdict": "PASS",
+        "full_hash_intersection": 0,
+        "user_hash_intersection": 0,
+        "jaccard_max": 0.0847,
+        "pairs_over_threshold": 0
+      }
+    ]
+  },
+  "boundary": {
+    "statement": "仅逆向工程技术与防御/取证/合规内容；不含攻击第三方、规避防护、露骨内容、武器与药物剂量信息。",
+    "excluded_topics": [
+      "第三方目标攻击",
+      "反调试/反作弊对抗与注入实现",
+      "驱动级任意读写",
+      "露骨性内容",
+      "爆炸物与毒物剂量"
+    ],
+    "external_tool_rows": 11,
+    "external_tools": [
+      "cdb",
+      "unsquashfs"
+    ]
+  },
+  "generation": {
+    "mode": "hand-authored",
+    "endpoint": null,
+    "note": "两组均人工撰写，未经生成端点；W3 流水线不属本文件作者。"
+  }
+}

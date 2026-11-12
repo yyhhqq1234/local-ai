@@ -238,3 +238,472 @@ node --check index.js
 ```
 
 **残留待办**：GUI 侧再跑一次 compact 做端到端确认（本轮已过契约探针与热重载，未跑真实压缩）。
+
+## think-engx1 · 2026-11-08 23:2x · 多引擎档位（9B 接入，27B 不动）
+
+**动机**：ngineDir 单一指向 
+infer-csunx（27B 专用 launcher 链）。9B 用的是自建的
+_tools/ninfer-build/apps/ninfer-serve.exe + G1 三组件产物，参数语义完全不同
+（--prefill-chunk 128 --no-thinking --greedy --host-context-mib 2048，无 DeviceKV/HostKVMiB 概念）。
+27B 线已冻结，但不能丢：两档必须并存可切。
+
+**改动**（lib/index.js 为运行时产物，src/engine.ts 与 src/index.ts 已同步镜像）
+
+`
+新增 ENGINE_PROFILES 档位表（默认 csunx-27b，行为逐字保留）
+  csunx-27b  kind=launcher  engineDir=ninfer-csunx        modelDirs=[csunx/model, 27b/model]
+  build-9b   kind=exe       exe=_tools/ninfer-build/apps/ninfer-serve.exe
+                            modelDirs=[train/lines/9b-oxcoder/out]
+                            defaultModel=kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer
+                            maxContext=4096（引擎实际 KV 容量）
+                            extraArgs=--greedy --host-context-mib 2048 --prefill-chunk 128 --no-thinking
+新增 spawnExe()：直启进程（windowsHide + 日志 fd + error 监听，与 spawnEngine 同款保护）
+listModels()   改为按档位汇总，每条带 profile 标签（27B 2 个 + 9B 2 个 = 4）
+activeModel()  新增：按当前档位过滤，返回带绝对 path 的对象；activeModelFile() 复用它
+start()        按 prof.kind 分流；launcher 分支参数与原来逐字一致（仅 -ModelFile 传文件名）
+status()       新增 profile / profiles 字段；contextWindow 兼容 max_model_len（9B 引擎返回该字段）
+pickParams()   接受 profile；ninfer_engine / ninfer_params 参数表补 profile
+`
+
+**验证**（_work/dsh-adapter-test/verify-profiles.mjs，独立 dir，不动 live 
+infer-csunx/config）
+
+`
+默认档位           csunx-27b
+模型枚举           4 个：csunx-27b ×2（9.55/9.88 GiB）· build-9b ×2（8.69/5.83 GiB）
+档位隔离           csunx-27b → Huihui-...-IQ2_S-mtp.ninfer
+                   build-9b  → kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer
+直启 9B            start ok=true ready 7.1-7.5s  model=kittyrev-oxcoder9b-nsfw-gate-full-GSQ  ctx=4096
+真实对话           content_len=43 finish=length tok=24
+                   "本地推理引擎负责在用户设备上直接执行模型推理，无需联网即可提供低延迟、高隐私的 AI"
+stop()             running=false（端口释放）
+`
+
+**回滚**
+
+`powershell
+cd D:\BaiduNetdiskDownload\Local-AI\plugins\dsh-ninfer-local
+Copy-Item lib\index.js.bak-engx1 lib\index.js -Force
+node --check lib\index.js
+`
+
+**坑（本轮踩到并修）**
+
+1. _tools 下目录名是 
+infer-build（不是 infer-build）；exe 是 
+infer-serve.exe。
+   首次写档位表写成 infer-build → start() 报 ngine exe missing，已在补丁 engx1d 修正。
+2. lib/index.js 用 LF，ead 工具输出也是 LF；但整块多处替换仍易断，改用「小块锚点 + 函数式
+   s.replace(from, () => to)」避免 $&/$' 语义与缩进漂移。
+3. 直启模式必须自带 windowsHide，否则会弹控制台窗口（操作者明确要求不弹）。
+
+**生效条件**：lib/index.js 是运行时产物，DSH 宿主需重启（或 dev_reload_package）才加载新代码。
+本插件目录没有 node_modules，无法 ash scripts/build.sh（缺 tsc），故 lib 手改、src 手镜像。
+
+## think-engx2 · 2026-11-08 23:3x · 双引擎区分加固（27B / 9B 同名进程，按路径区分）
+
+**背景**：本地确有两套引擎，进程名都叫 `ninfer-serve.exe`：
+
+| 档位 | 引擎可执行 | 大小 | 启动方式 | 模型 |
+|---|---|---|---|---|
+| 27B | `ninfer-csunx/runtime/engine/ninfer-serve.exe` | 1.29 GB | `ninfer-csunx/run-engine.ps1`（CSUNX233 配方，KV ring/window + host-pageable） | `ninfer-27b-kv-stream-3arch-20261019/model/*.ninfer`（9.55 / 9.88 GiB） |
+| 9B | `_tools/ninfer-build/apps/ninfer-serve.exe` | 262.7 MB | 直启（自建 ninfer-master 构建） | `train/lines/9b-oxcoder/out/*.ninfer`（G1 三组件 8.69 GiB / 旧 5.83 GiB） |
+
+物理上不能同时跑（9.55 + 8.69 = 18.2 GiB > 12 GB 显存），所以仍共用 `params.port`；
+但**必须能分辨谁是谁**，否则一次 stop 就会误杀另一个引擎。
+
+**本轮改动**
+
+```
+ENGINE_PROFILES 每档新增 engineExe（真实可执行路径，用于身份识别与精准 kill）
+engineInfo()    新增：返回 {profile,label,kind,exe,exists,bytes,modelDirs}
+status()        新增 engine 字段（面板/工具里可直接看出当前是哪套引擎）
+stop()          删除 taskkill /IM ninfer-serve.exe（会连同另一个引擎一起杀）
+                改为：先按 pid 杀 → 兜底用 PowerShell 只杀 Path == 本档位 engineExe 的进程
+```
+
+**验证**（`_work/dsh-adapter-test/verify-identity.mjs`）
+
+```
+csunx-27b  exe = ninfer-csunx/runtime/engine/ninfer-serve.exe   exists=true  1,348,151,296 B
+build-9b   exe = _tools/ninfer-build/apps/ninfer-serve.exe      exists=true    275,430,400 B
+模型归属    csunx-27b ×2（9.55 / 9.88 GiB）· build-9b ×2（8.69 / 5.83 GiB）
+起 9B      running=true profile=build-9b model=kittyrev-oxcoder9b-nsfw-gate-full-GSQ
+stop()     engine answering=false；进程表 running_count=0（无残留、无误杀）
+```
+
+**回滚**
+
+```powershell
+Copy-Item lib\index.js.bak-engx2 lib\index.js -Force   # 回到含档位但不含身份加固的版本
+Copy-Item lib\index.js.bak-engx1 lib\index.js -Force   # 回到单引擎版本
+```
+
+## think-engx3 · 2026-11-08 23:4x · 设置页改造（双档位 UI + 引擎身份 + 日志取最新）
+
+**问题**：旧面板只有一套 27B 参数（池/HostKV/KV 编码/chunk/端口）+ 一个模型下拉，看不出 27B 与 9B 是两套引擎；
+而且日志尾按文件名排序，会显示 2026-10-23 那次 `startup failed | missing component mtp` 的旧失败日志，误导以为当前坏着。
+
+**改动**
+
+```
+lib/client.js（重写，198 → 约 300 行）
+  新增「引擎档位」下拉（csunx-27b / build-9b）+「应用档位」按钮
+  新增引擎身份行：label · kind · 可执行大小 · 完整 exe 路径（缺失时提示）
+  字段按档位适用性置灰：
+    deviceKV / hostKVMiB / kvDtype / draftTokens / reasoningEffort → 仅 27B
+    prefillChunk / maxContext → 9B 只读（固定 128 / 4096，实测依据写在 title）
+    vision / port → 两档通用
+  模型下拉按当前档位过滤；切换档位即时重排
+  所有请求带 profile（/params  /engine），切档位即时可见
+
+lib/index.js
+  GET /state 增加 profile / profiles / engine，models 每条带 profile
+  ninfer_status 同步增加 profile / profiles / engine，modelFiles 前缀带档位
+  tailLogs() 改为按 mtime 取最新文件（原来按文件名排序 → 显示 10-23 旧日志）
+```
+
+**验证**
+
+```
+node --check lib/index.js  → 0
+node --check lib/client.js → 0
+_state 载荷（_work/dsh-adapter-test/verify-state-payload.mjs）：
+  profile=build-9b · profiles 两项 · engine.exe=.../ninfer-build/apps/ninfer-serve.exe (275,430,400 B)
+  models 4 条且每条带 profile（27B x2 / 9B x2）
+  logs 取到 2026-11-08 23:29 的最新 8 行（engine ready | kittyrev-... | 6.9s）
+```
+
+**生效**：client bundle 与 lib/index.js 在宿主页面/进程加载时读取，需重启 DSH 并刷新页面。
+
+**回滚**：`Copy-Item lib\client.js.bak-engx3 lib\client.js -Force`
+
+## think-engx4 · 2026-11-08 23:5x · 修「build-9b 会话一开就失败」的两处真因
+
+**现象**（操作者截图，DSH 会话 Local-AI-testarea）：
+```
+本轮运行失败  working-directory: directory does not exist:
+              "D:\BaiduNetdiskDownload\Local-AI\Local-AI-testarea"
+（底部模型选择器显示 Qwen3.8-27B 无审查 · IQ2_S · MTP）
+```
+
+**真因 1：会话工作目录不存在**（与引擎无关）
+```
+D:\BaiduNetdiskDownload\Local-AI\Local-AI-testarea  → Test-Path = False
+修：New-Item -ItemType Directory -Force 建出该目录（已建，Test-Path=True）
+```
+
+**真因 2：模型下拉硬给了 27B 兜底 id**
+```
+引擎没起时 listModels() 直接返回 profile.fallbackModels（写死 qwen3.8-27b-ablit-swift15-iq2s）
+而 9B 引擎只认 kittyrev-oxcoder9b-nsfw-gate-full-GSQ
+实测：POST /v1/chat/completions model=kittyrev-...GSQ → 200 OK
+      POST /v1/chat/completions model=qwen3.8-27b-ablit-swift15-iq2s → 404 model_not_found
+```
+
+**改动**
+```
+lib/index.js  listModels()：引擎在跑且返回非空 → 一律用引擎的 id 列表；
+              引擎没起 → 返回「当前档位的现行模型」（manager.activeModelFile() 去掉 .ninfer），
+              不再落回硬编码 fallbackModels
+lib/index.js  apply(): 给 adapter 传 activeModelId 回调（闭包读 manager）
+```
+
+**验证**（_work/dsh-adapter-test/verify-model-id.mjs）
+```
+csunx-27b → activeModelId = Huihui-Qwen3.8-27B-abliterated-Swift-1.5-GSQ-RCO-IQ2_S-mtp
+build-9b  → activeModelId = kittyrev-oxcoder9b-nsfw-gate-full-GSQ
+端口 1234 实跑引擎 /v1/models → id=kittyrev-oxcoder9b-nsfw-gate-full-GSQ, max_model_len=4096
+node --check lib/index.js → 0
+```
+
+**回滚**：`Copy-Item lib\index.js.bak-engx4 lib\index.js -Force`
+
+## think-engx5 · 2026-11-09 00:0x · 模型下拉列全量（27B+9B）+ 两档都支持思考档位
+
+**需求**：模型选择里 9B 与 27B 都要出现；两档都要能选思考强度。
+
+**实测前提**（先验证再改代码）
+```
+9B 引擎接受 reasoning_effort / enable_thinking / thinking_budget（均 200，不报错）
+9B 去掉 --no-thinking 重新起（同模型、端口 1652）：
+  plain                → content=49 reasoning=0 tok=31「梯度下降是…」✅ 正文正常
+  reasoning_effort=high→ content=49 reasoning=0 tok=31 ✅ 不报错
+  enable_thinking=false→ content=43 reasoning=0 tok=27 ✅ 被引擎尊重
+⇒ 结论：9B 不必永久 --no-thinking；短问题即便开思考也不会把正文吃空
+```
+
+**改动**
+```
+lib/index.js
+  listModels()  合并「本地模型目录（27B+9B 全量）」+「引擎正在跑的 id（置顶）」
+                → 选择器永远能看到 4 个模型，不再只显示当前引擎那一个
+  apply()       新增 modelCatalog()（给每个模型名后缀档位标签 + 体积）
+                新增 ensureModel(modelId)：选中的模型与当前引擎不一致 → 切档位/模型并重启；
+                已一致且没跑 → 拉起；不在目录里（引擎自报名）→ 不动
+  stream()      请求前 await ensureModel(options.model)
+  effort        除 body.reasoning_effort 外，再发 chat_template_kwargs.enable_thinking = (eff !== none)
+  build-9b 启动 --no-thinking 改为条件：仅当 reasoningEffort === none 时加
+                （其余档位保留思考通道，由 enable_thinking 逐请求控制）
+
+lib/client.js
+  模型下拉不再按档位过滤 → [27B]/[9B] 标签 + 文件名 + 体积，一次看全
+  选模型时自动同步「引擎档位」下拉（按 option 的 data-p）
+  思考强度字段从「仅 27B」改为两档通用
+```
+
+**验证**
+```
+node --check lib/index.js  → 0
+node --check lib/client.js → 0
+目录全量 = 4：
+  [27B] Huihui-Qwen3.8-27B-abliterated-Swift-1.5-GSQ-RCO-IQ2_S-mtp  9.55 GiB
+  [9B ] kittyrev-oxcoder9b-nsfw-gate-full-GSQ                        8.69 GiB
+  [9B ] oxcoder9b-merged                                             5.83 GiB
+  [27B] qwen3.8-27b-kittyrev-v6-iq2s-mtp                             9.88 GiB
+端口 1234 在跑：["kittyrev-oxcoder9b-nsfw-gate-full-GSQ"]
+```
+
+**注意**：选到另一档的模型时，首次请求会触发一次引擎重启（27B 冷启较慢）。
+
+**回滚**：`Copy-Item lib\index.js.bak-engx5 lib\index.js -Force`
+
+## think-engx7 · 2026-11-09 00:2x · 9B 上下文从 4096 → 16384 + prompt 预算裁剪（修 context_length_exceeded）
+
+**现象**：DSH 里发「你好」→ `ninfer 400 context_length_exceeded: prepared prompt exceeds Engine max_context 4096`。
+
+**实测定位**
+```
+DSH 实际请求体量（_work/session-audit/ninfer-stats.jsonl）：
+  model=kittyrev-...GSQ tools=14 systemChars=35398 totalChars=54284 payload=66KB
+  ⇒ 约 2 万 token，4096 窗口装不下
+tokenizer 实测比（同一引擎，读日志 prompt N）：
+  中文 1700 字 → 1012 tok（1.68 字/token）
+  英文 3540 字 →  672 tok（5.27 字/token）
+  混合 3960 字 → 1632 tok（2.43 字/token）
+上下文上限实测（阶梯，--max-context 16384）：
+  24000 字(14727 tok)+512 out → 200 ✅
+  规则：prompt_tokens + max_tokens ≤ max_context
+显存实测（9B 8.69 GiB 权重，12 GB 卡）：
+  4096  → KV 64 pages  / 242 MiB / free 2.63 GiB
+  16384 → KV 256 pages / 626 MiB / free 2.76 GiB  ✅ 选用
+  16384 + --vision → KV runtime 1.41 GiB / free 1.12 GiB（vision 吃约 800 MiB）
+  32768 → free 0 B、启动 1m58s、主机内存被撑满（爆内存）  ❌ 禁用
+  65536 → FATAL Device budget cannot hold model weights  ❌
+```
+
+**改动**
+```
+lib/index.js  build-9b profile: maxContext 4096 → 16384
+              新增 contextBudget { window: 16384, maxOutput: 2048, reserve: 512 }
+              apply(): contextBudget 以函数形式随当前档位动态取
+              stream(): 发送前按预算裁剪
+                - system 自身超预算 → 保留头 60% + 尾 40%，中间插截断标记（压到预算 85%）
+                - 其余消息从最新往回填，超出的旧消息丢弃并插一条说明
+                - max_tokens 压到 min(请求值, 2048)
+_tools/run-serve.ps1  $MaxContext 4096 → 16384
+```
+
+**踩到的 bug（已修）**：裁剪只回写了「有消息被丢弃」的分支，system 被压缩但没丢消息时不生效，
+导致 body 仍是原始 25200 字符 → 依旧 400。改为无条件回写 messages。
+
+**验证**
+```
+node --check lib/index.js → 0
+ladder：4000/12000/16000/20000/24000 字 prompt + 512 out 全 200
+DSH 体量复刻（system 25200 字 + 你好，max_tokens 2048）：
+  修前 400 context_length_exceeded；修后 200（system 压到 ≈11785 tokens）
+引擎当前（1234）：--max-context 16384，KV 256 pages / 626 MiB / free 2.76 GiB / ready 8s
+```
+
+**代价**：9B 会话的 system prompt 会被压掉约一半（DSH 约定段实测 35K 字符），
+长对话的早期消息会被丢弃。需要完整约定/长上下文时改用 27B（262144）。
+
+**回滚**：`Copy-Item lib\index.js.bak-engx6 lib\index.js -Force`
+
+## think-engx10 · 2026-11-09 01:0x · 9B 退化根因定性（负结果）：system 角色 / 多轮结构不可用
+
+**现象**：DSH 里 9B 输出乱码（随机拉丁串、URL 片段）。
+
+**排除项（逐项实测，同一产物 kittyrev-oxcoder9b-nsfw-gate-full-GSQ）**
+```
+max-context 4096 vs 16384      → 输出逐字相同，与上下文大小无关
+关思考 vs 开思考               → 都是乱码
+prefill-chunk 120/112/96       → 引擎起不来（只接受 16 的倍数：64/128/256…）
+chat-template 换成外部 jinja   → 与自带模板逐字相同，模板不是变量
+G1 产物 vs Q4Q5 产物           → 两代都乱码，不是 G1 转换的问题
+temperature 0 / 0.3 / 0.7+topP → 都乱码，不是 greedy 坍缩
+system 压缩到 32 字符          → 仍乱码，不是"system 太长"
+```
+
+**决定性对照（唯一变量 = 消息结构）**
+```
+[user-only]  "用中文一句话回答：1+1 等于几？"  → "1+1 等于 2。"        ✅ 稳定
+[system+user] "你是助手，中文简短。"+同一问题   → "<.TO_LOL_jpDFULL,..." ❌
+[merged]      设定并进同一条 user            → 仍然乱码             ❌
+[multi-turn]  user/assistant/user 无 system  → 乱码                 ❌
+```
+
+**结论**：该引擎对 9B 产物的 `system` 角色与多轮消息结构的模板化是坏的
+（不是模型能力问题：单条 user 消息稳定正确）。DSH 每轮必带 system + 多轮，
+所以在引擎侧修好之前，9B 无法用于 DSH 会话。
+
+**本轮同时修掉的 adapt​er bug**（保留，仍然有用）
+```
+trimToBudget 无裁剪时返回同一数组引用 → 回写时"清空再遍历自身" → messages 变空 → 400
+  修法：early return 返回 messages.slice()；回写前再判一眼引用
+  证据：修前 [dbg] messages.length=0；修后 =2 / =4 正常发出
+```
+
+**当前 9B 的可用范围**：单条 user 短问答（accept_final 5×3=15/15 就属于这一类）。
+
+**回滚**：`Copy-Item lib\index.js.bak-engx9 lib\index.js -Force`
+
+## think-engx11 · 2026-11-09 01:3x · 27B / 9B 引擎一一对应（禁止跨引擎混用）
+
+**操作者约束**：27B 与 9B 的引擎必须一一对应，不能混着用。
+
+**配对表（硬编码在档位里，代码层面校验）**
+```
+27B → csunx 引擎：ninfer-csunx/runtime/engine/ninfer-serve.exe
+      模型目录：ninfer-csunx/model · ninfer-27b-kv-stream-3arch-20261019/model
+9B  → 自建引擎：_tools/ninfer-build/apps/ninfer-serve.exe
+      模型目录：train/lines/9b-oxcoder/out
+```
+
+**本轮改动**
+```
+lib/index.js  start()：模型必须落在本档位 modelDirs 内，否则抛错（不再"随便拿个模型喂给当前引擎"）
+              ensureModel()：请求的模型若属于另一个档位 → 直接拒绝并提示先切档位，
+                             不再自动改 profile + 重启（那等于跨引擎调度）
+              （stop() 已在 engx2 改为只杀本档位 exe，不会误杀另一台引擎）
+src/engine.ts  同步镜像 start() 的目录校验
+```
+
+**为什么这样定**：实测两套引擎能力集不重叠，混用必失败——
+```
+27B 产物 + 自建引擎 → FATAL weight/000184: unknown tensor layout: gguf_blocks_v1
+9B 产物 + csunx 引擎 → FATAL text/layers/0: input projection: unsupported logical projection geometry
+```
+
+**验证**：node --check lib/index.js = 0；两处守卫静态命中（L349/L1395 附近）。
+
+**回滚**：`Copy-Item lib\index.js.bak-engx11 lib\index.js -Force`
+
+## think-engx12 · 2026-11-11 11:15–12:20 · 9B 文本工具调用 shim（tool_calls 通道打通）
+
+**问题（实测）**：9B 的 SFT 语料是文本形态（`kitty_ce op=AL_DEL|<index>`），
+三组对照（训练格式 system / 强约束 JSON / OpenAI tools）都不产结构化 `tool_calls`
+（`tool_calls=null|{}`，无 `<tool_call>` 标记）→ DSH agent loop 拿不到可执行调用，只能聊。
+
+**本轮改动（只加不删；27B 档位零影响）**
+```
+lib/index.js
+  ENGINE_PROFILES['build-9b']  + textToolCalls: true          # 只有 9B 开
+  textToolProtocol()           新增：注入 system 尾部的调用协议（带工具名清单）
+  parseTextToolCall()          新增（export，便于单测）：四种确定性形态
+     1 <tool_call>{"name","arguments"}</tool_call>
+     2 ```json {"name","arguments"} ```
+     3 裸 JSON 行 {"name","arguments"} / {"op":"read",...}（op 当工具名，SFT 泄漏形态）
+     4 kitty_ce op=MODENUM（SFT 原生文本形态）
+     工具名不在白名单/参数不是对象 → 返回 null（绝不猜，不执行编造的工具名）
+  stream()  + profileFlags 读取（按当前档位动态取，不写进 config）
+            + 协议注入放在 compactSystem / trimToBudget 之后（否则会被 compact 重建 system 时丢掉）
+            + holdText：正文可能整段就是标记 → 首字符是 < ` { 时先压住，确认是正文立刻放行
+            + 收尾把标记转成 tool-call 块（block-end 带剥掉标记的正文），并补一条 tool-call-delta
+            + kind 优先级修正：toolCalls.size>0 一律 tool-calls（9B 常在调用行后继续写正文撞 max_tokens，
+              按 length 收口会让 DSH 当"被截断的纯文本"，工具不执行）
+  apply()   + profileFlags: () => ({ textToolCalls: ENGINE_PROFILES[当前档位].textToolCalls === true })
+lib/index.js.bak-engx12      本轮基线备份
+```
+
+**关键发现（引擎侧，非适配器）**：引擎自身就能解析 `<tool_call>{"name":..,"arguments":..}</tool_call>`
+并直接下发 OpenAI 形态的 `tool_calls` delta（实测 HTTP 200，`tool_calls[{name:"read",arguments:"{\"path\":\"README.md\",\"limit\":20}"}]`）。
+所以 shim 的主要作用是**协议注入**（教会模型发这个标记），解析器只是兜底。
+
+**验证（可复现）**
+```
+node --check lib/index.js                                → 0
+node _work\ninfer-9b\shim-unit.mjs                       → 11/11 pass（四种形态 + 白名单拒绝 + 不误判）
+node _work\ninfer-9b\p3_adapter_shim_e2e.mjs             → 3/3 pass（走适配器真实 stream()）
+  T1 工具任务：finish=tool-calls，read{"path":"README.md","limit":20}
+  T2 普通问答：finish=max-tokens，正文 80 tok，无 tool-call（不误判）
+  T3 kitty 任务：finish=tool-calls，kitty_ce{"op":"R|0xMODENUM|dword"}
+```
+
+**已知残留**
+```
+· 9B 复读：一次可能连发 3 条相同调用（T1 实测 3×read）→ DSH 会重复执行同一读取；
+  protocol 已写"一次只发一个"，模型仍偶发。去重会破坏 delta/block-end 配对，暂不做。
+· 模型仍会偶发凭记忆编造（未调用工具就写内存值/文件内容）→ 属模型能力，非 shim 问题。
+```
+
+**生效方式（重要）**：`dev_reload_package dsh-ninfer-local` 会把 DSH 卡死（实测两次：工具消失 / 整个 web 无响应）。
+**必须用重启 DSH 的方式加载新代码。**
+
+**回滚**：`Copy-Item lib\index.js.bak-engx12 lib\index.js -Force` 然后重启 DSH。
+
+### think-engx12 补录 · 2026-11-11 21:3x · 真实形态两处修正（长 system / 协议措辞 / 去重）
+
+**1) 9B 必须开极简 system（本来就在档位里，但 live 配置没把它传进适配器）**
+```
+实测（p3_ctx_matrix.py，同任务/同 14 工具，只看 system 长度）：
+  短 system(210 字符) + 3 工具   → calls=3
+  短 system(210 字符) + 14 工具  → calls=4   （工具数量不是变量）
+  长 system(6541 字符) + 3 工具  → calls=0   （直接改写成编造的 README）
+  长 system(6541 字符) + 14 工具 → calls=0
+修法：profileFlags 里补 compactSystem / compactSystemText / compactHistoryMessages，
+      stream() 用 `this.profile.compactSystem || profileFlags.compactSystem` 判定。
+DSH 真实 system 是 35,398 字符 → 不压必然全丢工具能力。
+```
+
+**2) 协议措辞：不能写"禁止凭记忆编造文件内容/内存数值"**
+```
+p3_proto_ab.py（同任务/同 14 工具，只换措辞）：
+  含"禁止编造文件内容"句 → calls=0（模型转而直接写 README 内容）
+  只讲格式/粒度（3 名单/14 名单/显式示例/极简一行）→ calls=3 / 4 / 4 / 4
+ ⇒ 协议只描述输出格式与粒度，不写"不要编造"。
+   同时撤掉 user 尾部提醒（同样的措辞副作用）。
+```
+
+**3) 工具 delta 缓冲 + 同参调用去重**
+```
+9B 一轮会连发 2–4 条相同调用（实测 3×read），重复的 ops_bash 会被执行两遍。
+textToolCalls 档位：tool-call-delta 先缓冲、收尾按 name|arguments 去重，再统一补 delta + block-end。
+非 9B 档位保持原样（流式 delta 不变）。
+```
+
+**验证（重启 DSH 后跑）**
+```
+node _work\ninfer-9b\shim-unit.mjs                 → 11/11
+node _work\ninfer-9b\p3_adapter_shim_e2e.mjs       → 3/3（T1 read / T2 不误判 / T3 两条 kitty_ce）
+node _work\ninfer-9b\p3_realshape_probe.mjs        → 2/2（8660 字符 system + 14 工具，压到 32 字符后仍能发调用）
+```
+
+## think-llamacpp · 2026-11-12 08:40 · 新增外部档 llama-cpp（llama.cpp/Ollama 端点）
+
+**动机**：实测同机同模型，llama.cpp Q4_K_M 中位 98.75 tok/s、17/17 回归、**原生 tool_calls**；
+自研 ninfer 35.4–36.2 tok/s 且不产结构化调用。
+
+**改动（lib/index.js，备份 lib/index.js.bak-llamacpp）**
+```
+ENGINE_PROFILES['llama-cpp']  新增：kind='external'、baseURL=http://127.0.0.1:11434/v1、
+                              defaultModel='kittyrev9b-q4km'、textToolCalls=false、compactSystem=false
+status()      baseURL 取 prof.baseURL（外部档）否则按 port 拼
+start()       外部档不 spawn，直接报"端点未就绪"（提示启动 ollama/llama-server）
+stop()        外部档直接返回，不杀进程
+listModels()  外部档补一条 defaultModel 伪目录项，供模型选择器显示
+NinferAdapter.baseUrl()  新增：优先 profileBaseUrl()（apply 里按当前档位动态返回）
+              /models 与 /chat/completions 三处改用 this.baseUrl()
+apply()       + profileBaseUrl: 返回 ENGINE_PROFILES[当前档位].baseURL
+```
+**验证**
+```
+node --check = 0
+node _work\ninfer-9b\p3_llamacpp_adapter_test.mjs
+→ tool_calls=[{name:"read",args:"{\"path\":\"README.md\"}"}]，finish=tool-calls，wall 581 ms  ✅
+（走的是适配器真实 stream()，请求被 profileBaseUrl 正确转发到 :11434）
+```
+**生效**：需重启 DSH（dev_reload_package 会卡死）。切换档位：ninfer_params set profile=llama-cpp
+**回滚**：Copy-Item lib\index.js.bak-llamacpp lib\index.js -Force
+**不影响**：csunx-27b / build-9b 两档行为不变（新增键只在 llama-cpp 档出现）

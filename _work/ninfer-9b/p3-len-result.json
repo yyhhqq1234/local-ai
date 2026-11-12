@@ -1,0 +1,262 @@
+{
+  "results": [
+    {
+      "k": 0,
+      "text": "2+2 equals 4.",
+      "has4": true
+    },
+    {
+      "k": 1,
+      "text": "[liking-for-this-context-window-l",
+      "has4": false
+    },
+    {
+      "k": 2,
+      "text": "**Short answer:** 2.",
+      "has4": false
+    },
+    {
+      "k": 3,
+      "text": "It’s only **one** to add",
+      "has4": false
+    },
+    {
+      "k": 4,
+      "text": "Iodine-127 (",
+      "has4": false
+    },
+    {
+      "k": 5,
+      "text": "**Short answer:** 10.",
+      "has4": false
+    },
+    {
+      "k": 6,
+      "text": "**Short answer:** 10.",
+      "has4": false
+    },
+    {
+      "k": 7,
+      "text": "**B. 10,4",
+      "has4": true
+    },
+    {
+      "k": 8,
+      "text": "**B. 10,4",
+      "has4": true
+    },
+    {
+      "k": 9,
+      "text": "**B. 10,4",
+      "has4": true
+    },
+    {
+      "k": 10,
+      "text": "**I'll go with Adderall",
+      "has4": false
+    },
+    {
+      "k": 11,
+      "text": "**I.1, so 2",
+      "has4": false
+    },
+    {
+      "k": 12,
+      "text": "**B. 10,4",
+      "has4": true
+    },
+    {
+      "k": 13,
+      "text": "**B. 10,4",
+      "has4": true
+    },
+    {
+      "k": 14,
+      "text": "**I'll go with Sub-2",
+      "has4": false
+    }
+  ],
+  "reqlog": [
+    {
+      "prompt_tokens": 19,
+      "units": 1,
+      "ids": [
+        17,
+        10,
+        17,
+        16327,
+        220,
+        19
+      ]
+    },
+    {
+      "prompt_tokens": 20,
+      "units": 1,
+      "ids": [
+        58,
+        7394,
+        286,
+        14751,
+        58162,
+        61485
+      ]
+    },
+    {
+      "prompt_tokens": 21,
+      "units": 1,
+      "ids": [
+        332,
+        12115,
+        4087,
+        64700,
+        220,
+        17
+      ]
+    },
+    {
+      "prompt_tokens": 22,
+      "units": 1,
+      "ids": [
+        2064,
+        725,
+        1132,
+        2972,
+        588,
+        332
+      ]
+    },
+    {
+      "prompt_tokens": 23,
+      "units": 1,
+      "ids": [
+        40,
+        342,
+        472,
+        12,
+        16,
+        17
+      ]
+    },
+    {
+      "prompt_tokens": 24,
+      "units": 1,
+      "ids": [
+        332,
+        12115,
+        4087,
+        64700,
+        220,
+        16
+      ]
+    },
+    {
+      "prompt_tokens": 25,
+      "units": 1,
+      "ids": [
+        332,
+        12115,
+        4087,
+        64700,
+        220,
+        16
+      ]
+    },
+    {
+      "prompt_tokens": 26,
+      "units": 1,
+      "ids": [
+        332,
+        33,
+        13,
+        220,
+        16,
+        15
+      ]
+    },
+    {
+      "prompt_tokens": 27,
+      "units": 1,
+      "ids": [
+        332,
+        33,
+        13,
+        220,
+        16,
+        15
+      ]
+    },
+    {
+      "prompt_tokens": 28,
+      "units": 1,
+      "ids": [
+        332,
+        33,
+        13,
+        220,
+        16,
+        15
+      ]
+    },
+    {
+      "prompt_tokens": 29,
+      "units": 1,
+      "ids": [
+        332,
+        40,
+        3172,
+        708,
+        440,
+        2604
+      ]
+    },
+    {
+      "prompt_tokens": 30,
+      "units": 1,
+      "ids": [
+        332,
+        40,
+        13,
+        16,
+        11,
+        748
+      ]
+    },
+    {
+      "prompt_tokens": 31,
+      "units": 1,
+      "ids": [
+        332,
+        33,
+        13,
+        220,
+        16,
+        15
+      ]
+    },
+    {
+      "prompt_tokens": 32,
+      "units": 1,
+      "ids": [
+        332,
+        33,
+        13,
+        220,
+        16,
+        15
+      ]
+    },
+    {
+      "prompt_tokens": 33,
+      "units": 1,
+      "ids": [
+        332,
+        40,
+        3172,
+        708,
+        440,
+        3593
+      ]
+    }
+  ],
+  "remaining": []
+}

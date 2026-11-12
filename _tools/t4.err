@@ -1,0 +1,13 @@
+2026-11-08 11:39:19.302  INFO  starting engine
+2026-11-08 11:39:20.654  INFO  loading weights | 5.81 GiB
+2026-11-08 11:39:21.990  INFO  weights ready | 5.81 GiB | 1.3s | 4.35 GiB/s
+2026-11-08 11:39:25.973  INFO  CUDA graph memory calibrated | 4.0s
+2026-11-08 11:39:25.980  INFO  pinning host context | 2.00 GiB
+2026-11-08 11:39:26.197  INFO  host context pinned | 2.00 GiB | 217 ms
+2026-11-08 11:39:26.313  INFO  CUDA graphs ready | 60.1 ms
+2026-11-08 11:39:26.316  INFO  engine ready | oxcoder9b-merged | total 7.0s | weights 5.81 GiB | CUDA sync spin
+2026-11-08 11:39:26.317  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 318.7 MiB | free 4.65 GiB
+2026-11-08 11:39:26.318  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 11:39:26.394  INFO  listening on http://127.0.0.1:1675 | model oxcoder9b-merged | auth disabled
+2026-11-08 11:39:27.741  INFO  req#1 started | openai-chat non-stream | 1 message | max output 8 | thinking template default | tools 1
+D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-master\src\core\device.cu:247: CUDA_CHECK(cudaStreamSynchronize(stream_)) failed: cudaErrorLaunchFailure: unspecified launch failure

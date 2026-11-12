@@ -1,0 +1,73 @@
+[
+  {
+    "config": "no-spec",
+    "flags": [],
+    "wall_s": 7.424,
+    "http": 200,
+    "completion_tokens": 256,
+    "decode_tok_s": 34.84,
+    "draft_n": null,
+    "draft_accepted": null,
+    "accept_rate": null,
+    "garbled": false,
+    "garbled_reason": "",
+    "text_head": "Local inference is useful because it addresses critical limitations of cloud-based AI systems, particularly ar"
+  },
+  {
+    "config": "mtp-d1",
+    "flags": [
+      "--spec",
+      "mtp",
+      "--draft-tokens",
+      "1"
+    ],
+    "wall_s": 7.897,
+    "http": 200,
+    "completion_tokens": 256,
+    "decode_tok_s": 32.8,
+    "draft_n": 238,
+    "draft_accepted": 16,
+    "accept_rate": 0.067,
+    "garbled": false,
+    "garbled_reason": "",
+    "text_head": "Local inference is useful because it brings AI capabilities directly to the data and users, eliminating the ne"
+  },
+  {
+    "config": "mtp-d2",
+    "flags": [
+      "--spec",
+      "mtp",
+      "--draft-tokens",
+      "2"
+    ],
+    "wall_s": 8.696,
+    "http": 200,
+    "completion_tokens": 256,
+    "decode_tok_s": 29.71,
+    "draft_n": 473,
+    "draft_accepted": 17,
+    "accept_rate": 0.036,
+    "garbled": false,
+    "garbled_reason": "",
+    "text_head": "Local inference is useful because it brings AI capabilities directly to the data and users, eliminating the ne"
+  },
+  {
+    "config": "mtp-d3",
+    "flags": [
+      "--spec",
+      "mtp",
+      "--draft-tokens",
+      "3"
+    ],
+    "wall_s": 10.33,
+    "http": 200,
+    "completion_tokens": 256,
+    "decode_tok_s": 24.98,
+    "draft_n": 756,
+    "draft_accepted": 1,
+    "accept_rate": 0.001,
+    "garbled": true,
+    "garbled_reason": "replacement-char",
+    "text_head": "Local- in (\n\n局部 � at\n\n... on amaan‎ of Casas哲 Minist Fort for\n\n\n for\n\n�� for延时考虑到\n\n庆),ored.\n\n) T族\n\n\n\n\n\n\n (mart"
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "armor-allow-all": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node C:\\Users\\Administrator\\.dsh\\_work\\antigravity-armor\\state\\hooks\\pretooluse-allow.cjs",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "armor-pre-invocation": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "node C:\\Users\\Administrator\\.dsh\\_work\\antigravity-armor\\state\\hooks\\preinvocation-armor.cjs",
+        "timeout": 10
+      }
+    ]
+  },
+  "armor-post-invocation": {
+    "PostInvocation": [
+      {
+        "type": "command",
+        "command": "node C:\\Users\\Administrator\\.dsh\\_work\\antigravity-armor\\state\\hooks\\postinvocation-recover.cjs",
+        "timeout": 10
+      }
+    ]
+  },
+  "armor-stop-recovery": {
+    "Stop": [
+      {
+        "type": "command",
+        "command": "node C:\\Users\\Administrator\\.dsh\\_work\\antigravity-armor\\state\\hooks\\stop-recover.cjs",
+        "timeout": 10
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+starting engine
+loading weights | 7.40 GiB
+weights ready | 7.40 GiB | 2.0s | 3.73 GiB/s
+CUDA graph memory calibrated | 4.0s
+CUDA graphs ready | 58.2 ms
+engine ready | kittyrev-oxcoder9b-nsfw-gate-full-GSQ | total 6.8s | weights 7.40 GiB | CUDA sync spin
+phase       detail                      elapsed/progress
+prepare     request preparation             524 us
+generate    vision                            0 us
+generate    text prefill                   61.8 ms
+generate    decode                            7.2s
+generate    total                             7.3s
+summary     sampling                  greedy (temperature 0)
+summary     finish reason             output-limit
+summary     prompt tokens             27
+summary     reused prompt tokens      0
+summary     generated tokens          256
+summary     model elapsed             7.3s
+summary     prefill speed             437.1 tok/s
+summary     decode speed              35.4 tok/s
+summary     throughput (overall)      35.3 tok/s
+summary     device                    0
+summary     max context               4096
+summary     prefill chunk             128
+summary     device budget             10.8 GiB
+summary     KV capacity policy        explicit
+summary     KV capacity               4096
+summary     KV page groups            64 / 64
+summary     gpu weights used          7.40 GiB / 7.40 GiB
+summary     gpu sequence used         180.1 MiB / 180.1 MiB
+summary     kv cache dtype            bf16
+summary     kv cache payload          128.0 MiB
+summary     gpu workspace peak        12.5 MiB / 12.5 MiB
+summary     runtime reservation       192.6 MiB
+summary     free after weights        3.38 GiB
+summary     free after startup        3.18 GiB
+summary     KV capacity headroom      1.00 GiB
+summary     planned slack             2.19 GiB
+summary     graph rebuild estimate    0 B
+summary     graph prepare increment   0 B
+summary     graph calibration growth  4194304 B
+summary     graph calibration retained4194304 B
+summary     startup retained          4945920 B
+summary     planned device total      7.60 GiB

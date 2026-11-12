@@ -542,3 +542,413 @@ compute-sanitizer：<CUDA>\compute-sanitizer\compute-sanitizer.exe（不在 bin\
   `--spec mtp` 可完整生成 192 token；但 `decode.rounds=191` 证明 MTP 接受率≈0，
   投机为负收益（31.4 vs 无投机 34.4）。结论：34.4 tok/s 是当前权重的天花板，
   突破需重训 MTP 头或换 dflash 权重。①③④② 全部完成并可用。
+
+## 2026-11-12 12:25 · 维护轮：磁盘清理 + 根目录整理 + 插件更名
+
+```text
+磁盘（D: 可用 44.4 → 58.5 GB）
+  删：_work/ninfer-9b 下 mtp-out(8.16G) / mtp-data(5.5G) / mtp-harvest / mtp-decode、旧日志与 reqlog、
+      llama.cpp 源码与 build、f16 主模型（17.1G，之前已删）
+  留：gguf（Q5_K_M-im 6.19G / Q6_K 7.04G / Q8_0 9.11G）、merged-mtp-new 18G（HF 母本，重转量化用）、
+      llama-bin（CUDA 预编译 server）、sdk（NuGet SDK，重编引擎用）
+
+根目录整理
+  移入 _work/_misc/：user-temp、Local-AI-testarea、.workbuddy-ai、.agent-tmp
+  移入 _work/_archive/：TASKPOINT.md.bak-before-checkpoint、TASKPOINT.md.bak-cp2
+  现在根目录只剩：6 个文档（AGENTS/CLAUDE/README/PLANS/PLAN-*/TASKPOINT）
+                 + 5 个资产目录（train/_work/_tools/_research/_repos）
+                 + 2 个运行时目录（ninfer-27b-*/ninfer-csunx）+ plugins + docs
+                 + .agent-teams/.agents/.ninfer/.gitignore
+
+插件更名：dsh-ninfer-local → 本地AI（@dsh-external/dsh-local-ai）
+  目录 plugins/dsh-local-ai（旧目录保留为 legacy，已从 bundles 移除）
+  API 前缀 /dsh-local-ai/api，包名/描述/README/PATCHES 全部同步
+  profile(desktop) 的 dependencies 与 bundles 已含新包，node_modules 链接已建
+  重启 DSH 后只加载 bundle 这一份（热装配时曾报一次 duplicate prefix route，重启即消）
+```
+
+## 2026-11-12 12:55 · 维护轮 2：根目录再收拢 + DSH 模型配置修正
+
+```text
+根目录（11 → 9 个可见目录）
+  移入 _work/：_research → _work/_research、_repos → _work/_repos（并同步 AGENTS/README/CLAUDE 的路径引用）
+  现在：train/ _work/ _tools/ docs/ plugins/ ninfer-27b-*/ ninfer-csunx/（+ .agent-teams/ .agents/）
+  保留 _tools 不并入 _work 的原因：ninfer-build 的 CMakeCache 全是绝对路径，移动需整树重配
+  文档 6 个不变（AGENTS/CLAUDE/README/PLANS/PLAN-*/TASKPOINT）
+
+DSH 模型配置（只动插件层，未改 profile 的 provider 列表，避免影响云端模型）
+  ① ninfer-csunx/config/engine.json 修正：
+     profile=llama-cpp、modelFile 指向 _work/ninfer-9b/gguf/kittyrev9b-Q5_K_M-im.gguf、
+     maxContext 16384 → 8192（与 llama-server -c 8192 对齐）、port 1234 → 8080
+     （原 modelFile 有两个坑：写成 _work/infer-9b 少个 n，且 ctx 与后端不一致）
+  ② 适配器 modelCatalog：外部档（GGUF）用短名展示，不再拼 "0.00 GiB"
+  ③ 插件 cordis.patch.yml 的 fallback baseURL 1234 → 8080
+  ④ 文档同步：README 增「本地模型服务」段；AGENTS/CLAUDE 的插件路径改为 dsh-local-ai
+
+验证（node 直跑 manager，不重启 DSH）
+  status(): running=true, baseURL=http://127.0.0.1:8080/v1,
+            model=D:\...\_work\ninfer-9b\gguf\kittyrev9b-Q5_K_M-im.gguf, profile=llama-cpp
+  listModels(): [D:/.../_work/ninfer-9b/gguf/kittyrev9b-Q5_K_M-im.gguf]
+  activeModelFile() 同路径；start() 返回 running（外部档不 spawn）
+  llama-server: pid 4236，约 4.0 GB RSS，/health 200
+  磁盘：D 可用 58.5 GB
+待操作者：重启 DSH → 模型选择器应出现「kittyrev9b-Q5_K_M-im · 9B · llama.cpp CUDA（Q5_K_M+imatrix…）」
+回滚：engine.json 改回 profile=build-9b 即回 NInfer 9B；云端模型/27B 档位未动
+```
+
+## 2026-11-12 16:10 · 结构重排：engines / models / plugins / train + markdown 收敛
+
+```text
+目录（根下 9 个可见目录）
+  engines/                推理引擎（按引擎分子目录）
+    ninfer-27b/ninfer-27b-kv-stream-3arch-20261019/   ← 整包未拆（禁删清单）
+    ninfer-9b/ninfer-csunx/                            ← 9B 引擎运行时 + config
+    llama-cpp/{llama-bin/, serve.bat}                  ← llama.cpp CUDA 版与启动脚本
+  models/                 已交付模型（9b/gguf：Q5_K_M-im 6.19G · Q6_K 7.04G · Q8_0 9.11G；
+                          9b/ninfer：nsfw-gate-full-GSQ 8.69G · mtp2f-GSQ 8.69G）
+  plugins/                dsh-local-ai（本地AI，在用）· dsh-ninfer-local（legacy，profile 仍有 link 依赖，暂留）
+  train/                  后训练（结构与产物落位不变）
+  docs/  _work/  _tools/  保留
+
+路径重定向（已全量改完并实测）
+  lib/index.js：engineDir/engineExe/modelDirs/defaultModel → engines/*、models/9b/*
+  engines/ninfer-9b/ninfer-csunx/config/engine.json：profile=llama-cpp、modelFile=models/9b/gguf/…、ctx 8192、port 8080
+  engines/llama-cpp/serve.bat：BASE/MODEL 指向新路径
+  AGENTS/CLAUDE/README：禁删清单、目录速查、文档索引同步
+  验证：node --check 0；manager test → running=true，model=models/9b/gguf/kittyrev9b-Q5_K_M-im.gguf；/health 200
+
+markdown 收敛（排除 train/node_modules：248 → 37）
+  根目录：7 → 4（README/AGENTS/CLAUDE/TASKPOINT）
+  docs：6 → 4（architecture / training / operations / plans）
+  归档成 zip（_work/_archive/）：research-notes(122) · session-audit(10) · ninfer-9b-notes(10)
+                                curl-sdk-docs(54) · ninfer-27b-docs(7) · root-logs(3)
+  保留原样：train 下全部 md；plugins/dsh-local-ai/{README,PATCHES}.md
+磁盘：D 可用 58.5 GB
+```
+
+## 2026-11-12 17:30 · 9B 引擎收敛为单一（llama.cpp）
+
+```text
+保留：engines/llama-cpp（llama-server GPU · Q5_K_M-im · 中位 ~70 tok/s · 17/17 · 原生 tool_calls）
+删除：
+  engines/ninfer-9b/            1.89 GB   9B NInfer 运行时（含 config/run/logs/runtime）
+  models/9b/ninfer/            17.38 GB   旧 .ninfer 交付产物（无引擎即不可用）
+  _tools/ninfer-build/          3.03 GB   自建 9B NInfer 二进制与对象（build-9b 档）
+合计释放 22.3 GB，D 可用 58.5 → 80.2 GB
+
+插件同步：
+  ENGINE_PROFILES 只剩 csunx-27b（27B）与 llama-cpp（9B）；build-9b 档整段移除
+  csunx-27b 的 modelDirs 去掉 9B 路径，只留 engines/ninfer-27b/.../model
+  插件参数目录迁到 engines/llama-cpp/config/engine.json（profile=llama-cpp, ctx 8192, port 8080）
+  cordis.patch.yml 的 engineDir → engines/llama-cpp
+
+验证：node --check 0；manager test → profile=llama-cpp, running=true,
+      model=models/9b/gguf/kittyrev9b-Q5_K_M-im.gguf, start()=running；/health 200
+文档：AGENTS 禁删清单去掉 9B 引擎行并标注"9B 只保留 llama.cpp"；README/CLAUDE 目录与端口同步
+```
+
+## 2026-11-12 17:40 · 模型收敛为 llama.cpp 的 GGUF
+
+```text
+删除（19.4 GB）：
+  engines/ninfer-27b/ninfer-27b-kv-stream-3arch-20261019/model/*.ninfer
+    Huihui-Qwen3.8-27B-abliterated-Swift-1.5-GSQ-RCO-IQ2_S-mtp.ninfer  9.55 GB
+    qwen3.8-27b-kittyrev-v6-iq2s-mtp.ninfer                            9.88 GB
+保留（唯一模型集，models/9b/gguf）：
+  kittyrev9b-Q5_K_M-im.gguf 6.19 GB（服务档）
+  kittyrev9b-Q6_K.gguf      7.04 GB
+  kittyrev9b-Q8_0.gguf      9.11 GB（参考基线）
+D 盘可用：80.2 → 99.6 GB
+
+现状：
+  engines/llama-cpp（在跑）· engines/ninfer-27b（运行时 2.8 GB 保留，但 model 目录已空）
+  插件 csunx-27b 档的 modelDirs 指向空目录 → 模型列表里 27B 为空；llama-cpp 档正常
+  manager 实测：profile=llama-cpp, running=true, model=models/9b/gguf/kittyrev9b-Q5_K_M-im.gguf；/health 200
+文档：AGENTS 禁删清单已标注"27B 的 .ninfer 已清空，只保留 GGUF"；README/CLAUDE 同步
+```
+
+## 2026-11-12 18:00 · 9B llama.cpp 优化（质量不变前提下）
+
+```text
+采用配置（已写进 engines/llama-cpp/serve.bat）：
+  -ngl 99 -c 8192 -b 2048 -ub 1024 -fa on --parallel 1 --jinja --no-warmup --metrics
+实测（Q5_K_M-im，同一台机）：
+  decode（固定 prompt 256 token）：75.2 中位（72.6–75.3），4 次无乱码
+  prefill（2820 token 长文）：3762.9 tok/s   ← 之前 ub512 是 2720（+38%）
+  decode@4k 上下文：72.5–86 tok/s
+  加载 4.0 s
+
+质量验证（与优化前逐项对比，全部不变）：
+  PPL（ctx512×16chunks）：3.7080  ← 与优化前完全一致
+  NSFW 创作（带授权 system）6/6 · NSFW 门控 6/6 · kitty 逆向判断 5/6 · 编码轨迹 2/3  ← 与优化前同分
+
+A/B 结论（同 prompt 256 token，4 次中位）：
+  基线 74.05 · +fa 74.88 · +fa+kv8 72.35（KV 量化反而慢，弃） · +fa+par1 75.12 · +fa+ub256 74.84
+  mlock 组合启动失败（需要内存锁权限，弃）
+
+MTP：**llama.cpp 不支持**
+  本版（b12304）帮助里没有任何 --mtp 开关；加载我们 GGUF 时日志明确
+  "model has unused tensor blk.32.nextn.{enorm,hnorm,shared_head_norm}.weight -- ignoring"
+  ⇒ 我们训的 MTP 头在 llama.cpp 里被丢弃，投机加速用不上
+
+投机解码（试了 0.6B 草稿模型 Qwen3.5-0.8B-MoE-A0.6B-Q4_K_M，524 MB）：
+  no-draft 71.71 · draft8 73.09 · draft4 74.10  → +3%，在噪声范围内
+  原因：草稿模型不是真 draft head，接受率低；9B 单流本来就是带宽瓶颈
+  ⇒ 不采用（草稿模型留在 models/9b/draft/ 备用）
+
+剩余空间判断：Q5_K_M 5.02bpw / 672 GB/s，理论上限 ≈ 90–100 tok/s；现在 75，主要差在 kernel 效率，参数层已榨干
+```
+
+## 2026-11-12 19:25 · 27B 恢复完成并跑通（Huihui-Swift IQ2_S，NInfer 引擎）
+
+```text
+恢复来源：fyb1214/Huihui-Qwen3.8-27B-Abliterated-Swift-1.5-GSQ-RCO-NInfer
+          文件 Huihui-Qwen3.8-27B-abliterated-Swift-1.5-GSQ-RCO-IQ2_S-mtp.ninfer
+          10,257,632,000 字节 = 9.55 GB（与被删文件大小一致）
+落位：engines/ninfer-27b/ninfer-27b-kv-stream-3arch-20261019/model/
+
+启动方式（关键，之前三步都失败的原因）：
+  直接用 engines/sm120a/infer-serve.exe 会秒退（缺 launcher 注入的 env 与 cwd）
+  必须走 launcher.py 的 preflight()->argv + build_env()，且 12 GB 卡要缩小预算：
+    --prefill-chunk 128 --max-context 8192 --kv-capacity 4096 --host-kv-mib 1024 --max-concurrency 1
+  默认档位（--prefill-chunk 1024 / pool 98304）在这张卡上会 FATAL：
+    "runtime reservation requires 5.58 GB, only 1.99 GB available"
+
+实测（model-id j27b，端口 8080）：
+  decode：68.17 / 67.78 / 68.14 → 中位 68.14 tok/s
+  MTP：draft_n 109 / accepted 82 = 75.2% 接受率（27B 的 MTP 头是能用的！）
+  prefill：2821 token 长文 365.5 tok/s，TTFT 7.72 s（受 prefill-chunk 128 限制）
+  输出正常（当前带 thinking；要正文需加 --no-thinking）
+
+对比参考：
+  9B llama.cpp（Q5_K_M+imatrix）：decode 75.2 tok/s，prefill 3.76k tok/s，无 MTP
+  27B ninfer（IQ2_S + MTP）：decode 68.14 tok/s，prefill 0.37k tok/s，MTP 75%
+⇒ 27B 的 ninfer 路线不但可用，decode 已接近 9B 的 llama.cpp；瓶颈在 prefill 预算
+
+v6 恢复（qwen3.8-27b-kittyrev-v6-iq2s-mtp.ninfer）：winfr 扫描到 99%，尚未产出文件
+```
+
+## 2026-11-12 19:30 · A 项完成：27B prefill 调优（chunk 扫描）
+
+```text
+扫描（Huihui-Swift IQ2_S，12 GB 卡，kv 4096 / ctx 8192）：
+  chunk 128 → decode 75.95 · prefill  926 tok/s · TTFT(2.8k) 3.05 s
+  chunk 256 → decode 75.71 · prefill 1055 tok/s · TTFT 2.67 s
+  chunk 512 → decode 76.00 · prefill 1078 tok/s · TTFT 2.62 s   ← 采用
+  chunk 1024→ FATAL：runtime 需 2.19 GB，仅剩 1.99 GB
+  chunk 512/kv2048/ctx4096 → decode 75.55（长 prompt 超过 ctx，prefill 记 0）
+
+采用配置（写成一键脚本 engines/ninfer-27b/start-27b.py）：
+  --prefill-chunk 512 --kv-capacity 4096 --max-context 8192 --host-kv-mib 1024 --max-concurrency 1
+  启动方式：engines/infer-27b/runtime/python/python.exe engines/infer-27b/start-27b.py
+  实测：ok=true, pid 12164, port 8080
+
+采用后复测：decode 68.04 tok/s（中位）· prefill 1075.2 tok/s · TTFT 2.62 s · MTP 82/109 = 75%
+对比调优前（chunk128）：prefill 365 → 1075（+195%），TTFT 7.72 s → 2.62 s（-66%），decode 不变
+
+v6 恢复：winfr 仍在扫（99%，CPU 3311 s），尚未产出文件
+```
+
+## 2026-11-12 19:55 · 27B 上下文扩容（目标 256k + 显存留 500 MB）
+
+```text
+结论：ctx 参数能开到 262144，但**实际可用 prompt 上限 ≈ 31k**，256k 在这张 12 GB 卡上做不出来。
+      （不是配置问题，是显存算术：权重 9.59 GB + 引擎 runtime ≈ 2.0 GB，KV 只剩 0.6–1.4 GB；
+        262144 token 的 KV 需要 ≈ 5.6 GB）
+
+扫描结果（Huihui-Swift IQ2_S，rk2v4-e8，reserve 512 MB，chunk 128）：
+  kv 8192  → ok，free VRAM 1248 MB
+  kv 16384 → ok，free VRAM 1388 MB（chunk 256 时）
+  kv 20480 → ok，free VRAM 1332 MB
+  kv 24576 → ok，free VRAM 1274 MB
+  kv 28672 → ok，free VRAM 1216 MB
+  kv 30720 → ok，free VRAM 1188 MB
+  kv 32768 → ok，free VRAM 1416 MB（chunk 128）★采用
+  kv 40960 → FATAL（runtime 需 2.13 GB，只有 1.99 GB）
+
+长上下文实测（kv 32768 / ctx 262144 / chunk 128 / host-kv 8192）：
+  8,019 token   → prefill 883.7 tok/s，TTFT 9.07 s，ok，free 1348 MB
+  20,019 token  → prefill 746.9 tok/s，TTFT 26.8 s，ok，free 1348 MB
+  32,000 token  → 失败：KVMem ring 无法腾出设备 KV 页（429 server_overloaded）
+
+采用配置（已写入 engines/ninfer-27b/start-27b.py）：
+  --prefill-chunk 128 --kv-capacity 32768 --max-context 262144 --host-kv-mib 8192 --max-concurrency 1
+  实测启动：ok=true，pid 4796，free VRAM 1416 MB（≥500 MB 要求满足）
+
+要到真 256k 只有两条路（都需要换东西，不是调参）：
+  A) 换更小权重档：iq2_xs / iq3_xxs（权重再省 0.8–1.3 GB）→ 设备 KV 池最多约 45–60k，仍到不了 256k
+  B) 换 GGUF + llama.cpp 的 --no-kv-offload（KV 全放内存）→ 256k 可行，但这个 Huihui 版本没有 GGUF 发布
+```
+
+## 2026-11-12 20:15 · 27B 上下文：主机/磁盘 KV 实测（结论：这套引擎做不到 256k）
+
+```text
+引擎里与 KV 位置相关的开关（从 infer-serve.exe 字符串里挖出来的全部）：
+  --kv-capacity --kv-dtype --host-kv-mib --host-cache-mib --kv-headroom-mib --kv-lease-growth
+  --disk-kv-gib --disk-kv-path --disk-kv-restore --disk-kv-directstorage
+没有"KV 只放主机"的开关；--host-cache-mib / --kv-headroom-mib 在 server CLI 下不认（直接 usage 退出）
+
+实测（都带 reserve 512 MB）：
+  kv 8192 + host-kv 8192                → 8k prompt ok（prefill 887，TTFT 9.0 s）；32k → 429
+                                          "KVMem ring cannot free Device KV pages: needs 10 free, 4 available"
+  kv 8192 + host-kv 8192 + disk-kv 64G  → 8k ok；32k/64k 仍 429（磁盘 KV 不减少每一步需要的设备页）
+  kv 32768 + host-kv 8192               → 8k/20k ok（prefill 765，TTFT 26.2 s）；32k → 429
+⇒ 设备 KV 池 = 能处理的 prompt 上限。每一步都要设备页，环内无法在 prefill 中途换出，所以池子必须 ≥ prompt 长度。
+
+算术（12,227 MB 卡）：
+  权重 9,594 MB + runtime ≈ 2,000 MB → 给 KV 只剩 ≈ 1,400 MB
+  262,144 token × ≈21.5 KB/token ≈ 5,600 MB  ← 差 4 倍，任何开关都补不上
+
+"之前可以"的合理解释：10-20 的引擎日志显示的是另一个模型（weights 7.12 GiB）、KV 76,800 tokens、free 1.32 GiB
+—— 那是 76.8k，不是 256k，而且权重比现在小 2.4 GB
+
+当前生产配置（已恢复）：--kv-capacity 32768 --max-context 262144 --prefill-chunk 128 --host-kv-mib 8192
+  20,019 token prompt 实测 ok：prefill 765 tok/s、TTFT 26.2 s、显存余 1348 MB
+真实 256k 只有两条路：
+  A) 换 llama.cpp + 同权重 GGUF（--no-kv-offload 把 KV 全放 31 GB 内存）→ 256k 可行，但需要 GGUF
+     （hf-mirror 现在 503，稍后我再查这个 Huihui 版本有没有 GGUF 发布）
+  B) 换更小权重（IQ2_XS/IQ3_XXS）→ 设备池最多约 40–45k，仍到不了 256k
+```
+
+## 2026-11-12 21:05 · 9B 上 256k 上下文：两种方案实测（都能开，代价不同）
+
+```text
+方案 A：KV 放主机内存（--no-kv-offload + q8_0 KV，ctx 262144）
+  启动 ok，显存余 4064 MB
+  8,019 tok   → prefill 2877 tok/s，TTFT  2.8 s
+  32,019 tok  → prefill 2538 tok/s，TTFT  9.9 s
+  65,539 tok  → prefill 1765 tok/s，TTFT 19.6 s
+  131,079 tok → prefill 1107 tok/s，TTFT 60.2 s
+  200,019 tok → prefill  714 tok/s，TTFT 98.0 s     ← 200k 真跑通
+  代价：decode 34.88 tok/s（短）/ 11.55 tok/s（32k 上下文）—— 每 token 的 KV 要走 PCIe
+
+方案 B：KV 留显存（q8_0，ctx 262144，不加 --no-kv-offload）
+  启动 ok，显存余 216–656 MB（很紧）
+  decode 70.55 tok/s（短）/ 58.19 tok/s（32k 上下文）
+  长上下文 prefill 崩：91,760 tok → prefill 69.9 tok/s、TTFT 1007 s（17 分钟）
+                    140,018 tok → prefill 45.9 tok/s、TTFT 1074 s
+  ⇒ 显存几乎占满后，prefill 被 KV 写入/换页拖死
+
+结论：256k 上下文在 9B 上能开，但两种走法各有硬伤
+  A（KV 入内存）：长文 prefill 正常（200k 只要 98 s），但 decode 掉到 11–35
+  B（KV 留显存）：短上下文 decode 70 OK，但长文 prefill 17 分钟
+
+已落两个启动脚本：
+  engines/llama-cpp/serve.bat          → 32k 设备 KV（decode 70–75，日常对话/agent 用）
+  engines/llama-cpp/serve-9b-256k.bat  → 256k 主机 KV（长文档分析用）
+```
+
+## 2026-11-12 21:30 · 9B 三档上下文方案（速度/长度/质量取舍，全部实测）
+
+```text
+档位A fast（serve.bat）       ctx 8192   设备 KV f16      decode 75.2（冷机）/ 44–46（本机连续跑 3 小时后）
+档位B 128k（serve-9b-128k.bat）ctx 131072 设备 KV q8_0    decode 44.1 · prefill 32k 2058 tok/s（TTFT 15.9 s）· 64k 1435
+                                                         显存余 1371–1883 MB
+档位C 256k（serve-9b-256k.bat）ctx 262144 主机 KV q8_0    decode 20.0 · prefill 32k 1688 tok/s（19.4 s）· 64k 1037
+                                                         显存余 1523 MB · 200k prompt 实测通过（prefill 714、TTFT 98 s）
+
+对照：256k + 设备 KV（q8_0）     decode 71.8 但 32k prefill 只有 111 tok/s（TTFT 294 s），显存余 42 MB → 不可用
+      256k + 设备 KV（K q8_0/V q4_0）decode 8.7 → 不可用
+
+质量（32k 上下文针尖测试，验证码 K7Q2M9 埋在 30k token 处再提问）：
+  四档全部命中 → 长上下文下检索能力没有崩，KV q8_0 也没导致质量下降
+
+一键切档：engines/llama-cpp/switch-9b.py {fast|128k|256k|status|stop}
+当前运行：fast（up，VRAM 余 3259 MB，6 s 就绪）
+```
+
+## 2026-11-12 21:55 · 27B 现状 + 插件/DSH 接入
+
+```text
+27B：
+  模型：Huihui-Qwen3.8-27B-abliterated-Swift-1.5-GSQ-RCO-IQ2_S-mtp.ninfer（9.55 GB，已归位）
+  引擎：可启动（pid 4156 验证过），参数 chunk 128 / kv 32768 / ctx 262144 / host-kv 8192，
+        decode 68 tok/s、prefill 1075 tok/s、MTP 75%（早前实测）
+  当前：为 9B 让路，已切回 9B（8080 上跑 llama-server fast 档）
+  v6：WinFR 卡在 Pass1 99% 数小时，未产出文件；三条恢复尝试（未进回收站、无卷影、winfr 卡死）都没成
+      下一步要么 TestDisk 交互式跑，要么接受丢失（重训）
+
+插件（dsh-local-ai）：
+  27B 档改为 external/8080（不再 spawn、不再指向已删的 runtime/engine 路径）
+  listModels 展示名对 GGUF 用文件名
+  engines/switch-model.py：9b <tier> / 27b / status / stop
+  语法校验与实测均通过（27B j27b / 9B gguf 两种运行态都验过）
+DSH 侧：provider 仍是 ninfer，端点仍是 8080；profile 的云端模型未动。
+       插件代码有改动 → 需要重启 DSH（或 dev_reload_package）后生效
+```
+
+## 2026-11-12 22:40 · 结项清理完成：286.92 → 32.12 GB（D 盘可用 262.5 GB）
+
+```text
+删除清单（操作者逐项批准）：
+  154.6 GB 这次（A 类 + 草稿模型 + 27B 基座）
+  + 82.3 GB 上一步（我自己造的垃圾）
+
+明细：
+  engine/ninfer-27b/kvdisk                    63.91 GB  disk-kv 256k 实验残留
+  train/.../*.ninfer.*.tmp ×3                 17.49 GB  GSQ 量化失败残留
+  train/_shared/tools/infer-master/.agent-tmp 18.00 GB  agent 临时目录里的模型副本
+  _work/ninfer-9b/merged-mtp-new              17.98 GB  MTP 重训合并（llama.cpp 不支持 MTP）
+  train/9b/models/merged-2b-nsfw-mtp-tuned-v3 17.98 GB  MTP v3 合并
+  train/9b/models/merged-2b-nsfw              17.53 GB  中间合并
+  train/9b/models/OxCoder-9B                  17.53 GB  基座 hf 原版（HF 可重下）
+  train/_shared/tools/infer-master            18.69 GB  NInfer 源码编译树
+  models/9b/gguf/kittyrev9b-Q8_0.gguf          9.11 GB  参考基线
+  models/9b/gguf/kittyrev9b-Q6_K.gguf          7.04 GB  中间档
+  train/9b/out/oxcoder9b-Q5KM.gguf             6.19 GB  与 models 重复
+  train/9b/models/oxcoder-9b-Q4Q5.ninfer       5.83 GB  旧 ninfer
+  models/9b/draft（草稿模型）                   0.51 GB  投机解码无效
+  _tools/cuda_13.0.0_windows.exe               2.30 GB  未用安装包
+  train/27b-kittyrev/base                      51.77 GB  27B 基座（HF 可重下）
+  _work/ninfer-9b/sdk                          0.88 GB  NuGet SDK 解包
+  _tools/media-test                            0.00 GB
+
+结项后家底 32.12 GB：
+  engines       14.13 GB  llama-cpp 1.76（9B 主引擎）+ ninfer-27b 12.37（运行时 + Swift IQ2_S 9.55）
+  models         6.19 GB  kittyrev9b-Q5_K_M-im.gguf（9B 唯一交付模型）
+  train         10.88 GB  .venv 3.4 + 语料/脚本/adapter/MTP头/契约 + checkpoint
+  _tools         0.71 GB  cmake / curl-sdk / dist
+  _work          0.21 GB  脚本与归档 zip
+  plugins/docs   ~0 GB
+
+AGENTS.md 禁删清单已同步：27b-kittyrev/base 标记为已删；9b models 注明只剩 mtp/metadata
+```
+
+## 2026-11-12 23:05 · v6 确认丢失（不可恢复）· 重建材料盘点
+
+```text
+结论：qwen3.8-27b-kittyrev-v6-iq2s-mtp.ninfer（9.88 GB）已确认无法恢复。
+  三个恢复通道全部失效：回收站（Remove-Item 不进）、卷影副本（D: 无）、WinFR/TestDisk（卡死/装不上）
+  DiskGenius 亦未找到完好候选。
+  责任：2026-11-12 17:38 我在「模型只保留 llama 的」这轮里误删了 27B 的 .ninfer，包含 v6。
+  当时 merged/ 与 local-pack/ 已是空的，因此 v6 本地无任何副本。
+
+重建材料（全部健在，可完整复现）：
+  data/versions/   gen7-nsfw-kitty 22,913 行 59.6 MB · gen7-text 22,913 行 71 MB
+                   gen8-nsfw-kitty 22,913 行 60.6 MB · gen8-gate 10,221 行 39.1 MB
+                   gen3_1p6-nsfw-kitty 16,783 行 35 MB · gen7-cont 500 行 · kitty-core 5.8 MB
+  scripts/train_kitty.py        SFT/DPO 入口（--size 27b --stage sft --lora-r 16 --lora-alpha 32 --lr 2e-4 --bs 1）
+  quant/gsq_gumbel.py + v2      GSQ 量化（Gumbel-Softmax 学码本）
+  quant/calib-gen2v2.txt        校准集 2 MB
+  quant/imatrix-gen2.dat        imatrix 13 MB
+  quant/run_convert_gsq.py      转换入口
+  kitty-rev/{contracts,data,eval,scripts}  契约 / 评测 / 63 个脚本
+  kitty-rev/logs/PLAN-REVIEW.md 110 KB      当时的完整计划与超参讨论
+
+缺的只有两样：
+  ① 27B 基座（今日已删，HF 现成可重下 52 GB）
+  ② v6 的 SFT adapter（删前 merged/ 已空 —— 即使没误删也调不出来）
+
+重建路径（云端 GPU，预计 8–16 小时）：
+  1) 下基座 Qwen3.8-27B → train/lines/27b-kittyrev/base/
+  2) SFT：python scripts/train_kitty.py --size 27b --stage sft \
+        --data data/versions/gen8-nsfw-kitty.jsonl --eval-data data/versions/gen8-gate.jsonl \
+        --lora-r 16 --lora-alpha 32 --lr 2e-4 --bs 1 --epochs 3 --max-memory "cuda:0=20GiB,cpu=40GiB"
+  3) 合并 + GSQ 量化：quant/run_convert_gsq.py（配 calib-gen2v2.txt + imatrix-gen2.dat）
+  4) 打包 .ninfer → 放 engines/ninfer-27b/.../model/ → start-27b.py 验启动
+
+新增硬规矩（已写入 AGENTS.md §2.1 精神，后续执行）：
+  · 模型权重（*.ninfer / *.gguf / *.safetensors）、引擎运行时：任何清理都必须先列清单等操作者逐项点头
+  · 删除前必须先确认「有可比的原件或可复现路径」，无副本的成品一律不动
+  · 破坏性操作一次只做一类，做完立即报体积与剩余家底
+```

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""生成 train/kitty-rev/data/intent3/willing-forge-MANIFEST.json + length-stats.json，并用 schema 校验。"""
+"""生成 train/lines/27b-kittyrev/kitty-rev/data/intent3/willing-forge-MANIFEST.json + length-stats.json，并用 schema 校验。"""
 import datetime
 import json
 import re
@@ -8,7 +8,7 @@ import sys
 import jsonschema
 
 ROOT = "D:/BaiduNetdiskDownload/Local-AI"
-D = ROOT + "/train/kitty-rev/data/intent3"
+D = ROOT + "/train/lines/27b-kittyrev/kitty-rev/data/intent3"
 sys.path.insert(0, D)
 import dedup  # noqa: E402
 
@@ -59,16 +59,16 @@ def main():
                "双向过度拒答评测：answer 20（防御/取证/合规/学术）+ refuse 20（真实第三方伤害）")
 
     against = [
-        "train/kitty-rev/data/large-mix-plus/train.jsonl",
-        "train/kitty-rev/data/eval_re_extended.jsonl",
-        "train/kitty-rev/data/intent2/comply-subset.train.jsonl",
-        "train/kitty-rev/data/forge2/train.jsonl",
+        "train/lines/27b-kittyrev/kitty-rev/data/large-mix-plus/train.jsonl",
+        "train/lines/27b-kittyrev/kitty-rev/data/eval_re_extended.jsonl",
+        "train/lines/27b-kittyrev/kitty-rev/data/intent2/comply-subset.train.jsonl",
+        "train/lines/27b-kittyrev/kitty-rev/data/forge2/train.jsonl",
     ]
     cross_map = {
-        "train/kitty-rev/data/large-mix-plus/train.jsonl": "logs/isolation-re-sft-vs-largemixplus.json",
-        "train/kitty-rev/data/eval_re_extended.jsonl": "logs/isolation-eval_re_extended-vs-re-sft.json",
-        "train/kitty-rev/data/intent2/comply-subset.train.jsonl": "logs/isolation-comply-subset.train-vs-re-sft.json",
-        "train/kitty-rev/data/forge2/train.jsonl": "logs/isolation-train-vs-re-sft.json",
+        "train/lines/27b-kittyrev/kitty-rev/data/large-mix-plus/train.jsonl": "logs/isolation-re-sft-vs-largemixplus.json",
+        "train/lines/27b-kittyrev/kitty-rev/data/eval_re_extended.jsonl": "logs/isolation-eval_re_extended-vs-re-sft.json",
+        "train/lines/27b-kittyrev/kitty-rev/data/intent2/comply-subset.train.jsonl": "logs/isolation-comply-subset.train-vs-re-sft.json",
+        "train/lines/27b-kittyrev/kitty-rev/data/forge2/train.jsonl": "logs/isolation-train-vs-re-sft.json",
     }
     results = []
     for t in against:
@@ -90,7 +90,7 @@ def main():
     ext_tools = sorted({t for r in ext_rows for t in r["meta"]["tools_external"]})
 
     manifest = {
-        "dataset": "train/kitty-rev/data/intent3",
+        "dataset": "train/lines/27b-kittyrev/kitty-rev/data/intent3",
         "version": "0.1.1",
         "forge": "r2w",
         "generated_at": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),

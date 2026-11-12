@@ -1,0 +1,38 @@
+{
+  "results": [
+    {
+      "limit": 12,
+      "ready": true,
+      "wall_s": 1.88,
+      "text": "That's the classic pangram used to",
+      "prompt_tokens": 612,
+      "prefill_s": 1.677,
+      "prefill_tok_s": 365.0,
+      "decode_tok_s": 41.7,
+      "units": 5
+    },
+    {
+      "limit": 15,
+      "ready": true,
+      "wall_s": 1.62,
+      "text": "That's the classic pangram used to",
+      "prompt_tokens": 612,
+      "prefill_s": 1.387,
+      "prefill_tok_s": 441.3,
+      "decode_tok_s": 40.1,
+      "units": 5
+    },
+    {
+      "limit": 128,
+      "ready": true,
+      "wall_s": 0.5,
+      "text": "That's the classic pangram used to",
+      "prompt_tokens": 612,
+      "prefill_s": 0.287,
+      "prefill_tok_s": 2133.5,
+      "decode_tok_s": 43.1,
+      "units": 5
+    }
+  ],
+  "remaining": []
+}

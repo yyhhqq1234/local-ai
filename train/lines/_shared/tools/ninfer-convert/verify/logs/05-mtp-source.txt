@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-convert\ninfer-all-master\tools\convert\__main__.py", line 316, in <module>
+    main()
+    ~~~~^^
+  File "D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-convert\ninfer-all-master\tools\convert\__main__.py", line 254, in main
+    companions["mtp"] = sources["mtp"]
+                        ~~~~~~~^^^^^^^
+  File "D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-convert\ninfer-all-master\tools\convert\__main__.py", line 58, in __getitem__
+    _open_named_source(name, self._paths[name], self._block_sources)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-convert\ninfer-all-master\tools\convert\__main__.py", line 38, in _open_named_source
+    return GGUFSource(path)
+  File "D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-convert\ninfer-all-master\tools\convert\sources\gguf_source.py", line 106, in __init__
+    self._reader = gguf.GGUFReader(self.path)
+                   ~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-master\.venv-convert\Lib\site-packages\gguf\gguf_reader.py", line 185, in __init__
+    self._build_tensors(offs, tensors_fields)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-master\.venv-convert\Lib\site-packages\gguf\gguf_reader.py", line 367, in _build_tensors
+    data = self._get(data_offs, item_type, item_count).reshape(np_dims),
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+ValueError: cannot reshape array of size 123221952 into shape (248320,2880)

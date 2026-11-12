@@ -1,0 +1,503 @@
+{
+  "adapter": "train/lines/9b-oxcoder/out/z-re-v2-cand/final",
+  "base": "train/lines/9b-oxcoder\\models\\OxCoder-9B",
+  "seed": 7,
+  "k": 12,
+  "jitter": 5,
+  "results": {
+    "e2": {
+      "mode": "e2",
+      "n": 40,
+      "hit": 33,
+      "noarg": 1,
+      "wrong": 4,
+      "fake": 0,
+      "none": 2,
+      "acc": 0.825,
+      "by_level": {
+        "L1": {
+          "hit": 10,
+          "n": 12
+        },
+        "L2": {
+          "hit": 10,
+          "n": 12
+        },
+        "L3": {
+          "hit": 13,
+          "n": 16
+        }
+      },
+      "seconds": 337.7,
+      "detail": [
+        {
+          "id": "G01",
+          "level": "L1",
+          "kind": "hit",
+          "got": [
+            "kitty_die"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_die"
+          ]
+        },
+        {
+          "id": "G05",
+          "level": "L2",
+          "kind": "hit",
+          "got": [
+            "kitty_dump"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_dump"
+          ]
+        },
+        {
+          "id": "G09",
+          "level": "L3",
+          "kind": "none",
+          "got": [],
+          "fake": [],
+          "expect": [
+            "kitty_dualview"
+          ]
+        },
+        {
+          "id": "G02",
+          "level": "L1",
+          "kind": "wrong",
+          "got": [
+            "kitty_apktool"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_apkscan"
+          ]
+        },
+        {
+          "id": "G06",
+          "level": "L2",
+          "kind": "hit",
+          "got": [
+            "kitty_pchain"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_pchain"
+          ]
+        },
+        {
+          "id": "G10",
+          "level": "L3",
+          "kind": "hit",
+          "got": [
+            "kitty_rea_compare"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_rea_compare"
+          ]
+        },
+        {
+          "id": "G03",
+          "level": "L1",
+          "kind": "hit",
+          "got": [
+            "kitty_assetrip"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_assetrip"
+          ]
+        },
+        {
+          "id": "G07",
+          "level": "L2",
+          "kind": "hit",
+          "got": [
+            "kitty_acescan"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_acescan"
+          ]
+        },
+        {
+          "id": "G11",
+          "level": "L3",
+          "kind": "hit",
+          "got": [
+            "kitty_net"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_net",
+            "kitty_proto"
+          ]
+        },
+        {
+          "id": "G04",
+          "level": "L1",
+          "kind": "hit",
+          "got": [
+            "kitty_patch",
+            "kitty_sym"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_sym"
+          ]
+        },
+        {
+          "id": "G08",
+          "level": "L2",
+          "kind": "wrong",
+          "got": [
+            "kitty_drv"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_init"
+          ]
+        },
+        {
+          "id": "G12",
+          "level": "L3",
+          "kind": "noarg",
+          "got": [
+            "kitty_x64dbg"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_x64dbg"
+          ]
+        },
+        {
+          "id": "G13",
+          "level": "L1",
+          "kind": "none",
+          "got": [],
+          "fake": [],
+          "expect": [
+            "kitty_ce"
+          ]
+        },
+        {
+          "id": "G17",
+          "level": "L2",
+          "kind": "hit",
+          "got": [
+            "kitty_ida"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_ida"
+          ]
+        },
+        {
+          "id": "G20",
+          "level": "L3",
+          "kind": "wrong",
+          "got": [
+            "kitty_ce",
+            "kitty_prot"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_wpb"
+          ]
+        },
+        {
+          "id": "G14",
+          "level": "L1",
+          "kind": "hit",
+          "got": [
+            "kitty_patch"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_patch"
+          ]
+        },
+        {
+          "id": "G19",
+          "level": "L2",
+          "kind": "hit",
+          "got": [
+            "kitty_km"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_km"
+          ]
+        },
+        {
+          "id": "G25",
+          "level": "L3",
+          "kind": "hit",
+          "got": [
+            "reverse_add_target"
+          ],
+          "fake": [],
+          "expect": [
+            "reverse_add_target"
+          ]
+        },
+        {
+          "id": "G15",
+          "level": "L1",
+          "kind": "hit",
+          "got": [
+            "kitty_ghidra",
+            "kitty_ida",
+            "kitty_sym"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_sym"
+          ]
+        },
+        {
+          "id": "G21",
+          "level": "L2",
+          "kind": "hit",
+          "got": [
+            "kitty_prot"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_prot"
+          ]
+        },
+        {
+          "id": "G26",
+          "level": "L3",
+          "kind": "hit",
+          "got": [
+            "reverse_add_obs"
+          ],
+          "fake": [],
+          "expect": [
+            "reverse_add_obs"
+          ]
+        },
+        {
+          "id": "G16",
+          "level": "L1",
+          "kind": "hit",
+          "got": [
+            "kitty_ghidra"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_ghidra"
+          ]
+        },
+        {
+          "id": "G22",
+          "level": "L2",
+          "kind": "hit",
+          "got": [
+            "kitty_loop"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_loop"
+          ]
+        },
+        {
+          "id": "G27",
+          "level": "L3",
+          "kind": "hit",
+          "got": [
+            "reverse_submit"
+          ],
+          "fake": [],
+          "expect": [
+            "reverse_submit"
+          ]
+        },
+        {
+          "id": "G18",
+          "level": "L1",
+          "kind": "hit",
+          "got": [
+            "kitty_inject"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_inject"
+          ]
+        },
+        {
+          "id": "G24",
+          "level": "L2",
+          "kind": "hit",
+          "got": [
+            "kitty_settings"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_settings"
+          ]
+        },
+        {
+          "id": "G33",
+          "level": "L3",
+          "kind": "hit",
+          "got": [
+            "kitty_asm"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_asm"
+          ]
+        },
+        {
+          "id": "G28",
+          "level": "L1",
+          "kind": "hit",
+          "got": [
+            "kitty_apkscan",
+            "kitty_jadx"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_jadx"
+          ]
+        },
+        {
+          "id": "G29",
+          "level": "L2",
+          "kind": "hit",
+          "got": [
+            "kitty_frida"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_frida"
+          ]
+        },
+        {
+          "id": "G34",
+          "level": "L3",
+          "kind": "hit",
+          "got": [
+            "kitty_ce"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_ce"
+          ]
+        },
+        {
+          "id": "G30",
+          "level": "L1",
+          "kind": "hit",
+          "got": [
+            "kitty_net",
+            "kitty_patch"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_net"
+          ]
+        },
+        {
+          "id": "G31",
+          "level": "L2",
+          "kind": "wrong",
+          "got": [
+            "kitty_engines"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_dnspy"
+          ]
+        },
+        {
+          "id": "G35",
+          "level": "L3",
+          "kind": "hit",
+          "got": [
+            "kitty_variants"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_variants"
+          ]
+        },
+        {
+          "id": "G23",
+          "level": "L1",
+          "kind": "hit",
+          "got": [
+            "kitty_selftest"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_selftest"
+          ]
+        },
+        {
+          "id": "G32",
+          "level": "L2",
+          "kind": "hit",
+          "got": [
+            "kitty_engines"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_engines"
+          ]
+        },
+        {
+          "id": "G36",
+          "level": "L3",
+          "kind": "hit",
+          "got": [
+            "kitty_trail"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_trail"
+          ]
+        },
+        {
+          "id": "N01",
+          "level": "L3",
+          "kind": "hit",
+          "got": [],
+          "fake": [],
+          "expect": []
+        },
+        {
+          "id": "N02",
+          "level": "L3",
+          "kind": "hit",
+          "got": [],
+          "fake": [],
+          "expect": []
+        },
+        {
+          "id": "N03",
+          "level": "L3",
+          "kind": "hit",
+          "got": [],
+          "fake": [],
+          "expect": []
+        },
+        {
+          "id": "N04",
+          "level": "L3",
+          "kind": "hit",
+          "got": [],
+          "fake": [],
+          "expect": []
+        }
+      ]
+    }
+  }
+}

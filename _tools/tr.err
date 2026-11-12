@@ -1,0 +1,16 @@
+2026-11-08 12:44:24.280  INFO  starting engine
+2026-11-08 12:44:25.246  INFO  loading weights | 5.81 GiB
+2026-11-08 12:44:26.523  INFO  weights ready | 5.81 GiB | 1.3s | 4.55 GiB/s
+2026-11-08 12:44:30.481  INFO  CUDA graph memory calibrated | 3.9s
+2026-11-08 12:44:30.487  INFO  pinning host context | 2.00 GiB
+2026-11-08 12:44:30.704  INFO  host context pinned | 2.00 GiB | 217 ms
+2026-11-08 12:44:30.821  INFO  CUDA graphs ready | 60.2 ms
+2026-11-08 12:44:30.825  INFO  engine ready | oxcoder9b-merged | total 6.5s | weights 5.81 GiB | CUDA sync spin
+2026-11-08 12:44:30.826  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 255.1 MiB | free 4.72 GiB
+2026-11-08 12:44:30.826  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 12:44:30.890  INFO  listening on http://127.0.0.1:1702 | model oxcoder9b-merged | auth disabled
+2026-11-08 12:44:30.927  INFO  req#1 started | openai-chat non-stream | 1 message | max output 6 | thinking template default
+[exc] text/layers/0 prefill columns=256: bad allocation
+2026-11-08 12:44:30.940  ERROR req#1 failed during generation | openai-chat | HTTP 500 | internal error
+2026-11-08 12:44:30.949  WARN  req#2 failed during prepare | openai-chat non-stream | HTTP 503 | service unavailable | messages 1
+2026-11-08 12:44:35.901  INFO  throughput | 5.0s | running 0 | host 0.0% (210 us)

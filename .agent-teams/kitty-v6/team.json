@@ -1,0 +1,164 @@
+{
+  "name": "kitty-v6",
+  "id": "kitty-v6",
+  "description": "V6 kitty 工具调用强化。方案已落盘 train/kitty-rev/logs/v5/V6-PLAN.md。链路：清盘→上传数据→训练 adapter→量化打包→同口径多数票复测→报告。判据：tool-route ≥8/9、real-trajectory ≥2/3、op-syntax 不得降。",
+  "captainSessionId": "session-03692eaa-af98-4471-a415-8286133814fd",
+  "createdAt": 1792863725850,
+  "members": [
+    {
+      "id": "",
+      "name": "watchdog",
+      "provider": "deepseek-account",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high",
+      "joinedAt": 1792863725850,
+      "status": "idle",
+      "lastDispatchError": "Error: agent-teams: provider \"spawn\" cannot apply a member persona\n    at spawnMember (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/members.js:511:15)\n    at file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:305:23\n    at async withTeamLock (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/state.js:44:16)\n    at async Object.dispatchMember [as dispatch] (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:291:20)\n    at async file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/scheduler.js:333:23\n    at async serializeMember (file:///"
+    },
+    {
+      "id": "",
+      "name": "disk-net",
+      "provider": "deepseek-account",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high",
+      "joinedAt": 1792863725850,
+      "status": "removed",
+      "lastDispatchError": "Error: agent-teams: provider \"spawn\" cannot apply a member persona\n    at spawnMember (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/members.js:511:15)\n    at file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:305:23\n    at async withTeamLock (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/state.js:44:16)\n    at async Object.dispatchMember [as dispatch] (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:291:20)\n    at async file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/scheduler.js:333:23\n    at async serializeMember (file:///"
+    },
+    {
+      "id": "",
+      "name": "chain-op",
+      "provider": "deepseek-account",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high",
+      "joinedAt": 1792863725850,
+      "status": "idle",
+      "lastDispatchError": "Error: agent-teams: provider \"spawn\" cannot apply a member persona\n    at spawnMember (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/members.js:511:15)\n    at file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:305:23\n    at async withTeamLock (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/state.js:44:16)\n    at async Object.dispatchMember [as dispatch] (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:291:20)\n    at async file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/scheduler.js:333:23\n    at async serializeMember (file:///"
+    },
+    {
+      "id": "",
+      "name": "eval-qa",
+      "provider": "deepseek-account",
+      "model": "deepseek-flash",
+      "reasoningEffort": "high",
+      "joinedAt": 1792863725850,
+      "status": "removed",
+      "lastDispatchError": "Error: agent-teams: provider \"spawn\" cannot apply a member persona\n    at spawnMember (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/members.js:511:15)\n    at file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:305:23\n    at async withTeamLock (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/state.js:44:16)\n    at async Object.dispatchMember [as dispatch] (file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/tools.js:291:20)\n    at async file:///C:/Users/Administrator/.dsh/profiles/desktop/node_modules/@nanmicoder/dsh-agent-teams/lib/scheduler.js:333:23\n    at async serializeMember (file:///"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "profileSeedId": "T1",
+      "subject": "确认远程空间 ≥65G 且关键件在位",
+      "description": "远程 /root/autodl-tmp 当前 122G 可用（已腾出，T1 在前一版团队已完成）。只需确认：df -BG /root/autodl-tmp | tail -1 输出 avail ≥65G，且 merged-v5(52G) 与 gguf/v5-iq2s.gguf(9.2G) 均在位。\n\n开机命令（如实例已关机）：cd D:\\BaiduNetdiskDownload\\Local-AI\\train\\kitty-rev\\deploy && & 'C:\\ProgramData\\anaconda3\\python.exe' autodl_power.py on\n\n判据：df avail ≥65G 且两个关键件在位。输出 df 与 ls 原文。",
+      "status": "pending",
+      "dependencies": [],
+      "attempt": 6,
+      "createdAt": 1792863725850,
+      "updatedAt": 1792863758605,
+      "reassigning": false
+    },
+    {
+      "id": "t2",
+      "profileSeedId": "T2",
+      "subject": "上传 v6 训练数据与脚本并做 md5 双端校验",
+      "description": "上传本机 D:\\BaiduNetdiskDownload\\Local-AI\\train\\kitty-rev\\ 下四个文件到远程 /root/autodl-tmp/kitty-rev/v6-mix/（先 mkdir -p）：\n  data/intent3/v6-mix/train.final.jsonl\n  data/intent3/v6-mix/tools.json\n  scripts/train_kitty.py\n  data/intent3/w3-bodies.jsonl\n\n工具：deploy/remote.py --put <local> <remote>\n注意：开机后 SSH 端点可能变（IP/端口），先用 autodl_power.py status 取实时 ssh_host/ssh_port 再连。\n\n判据（唯一）：每个文件本机与远程 md5 一致。输出 md5 对照表。",
+      "status": "pending",
+      "dependencies": [
+        "t1"
+      ],
+      "attempt": 0,
+      "createdAt": 1792863725850,
+      "updatedAt": 1792863755466,
+      "handoffId": "8fad8df1-81a9-4784-bed8-8b1925b7338e",
+      "reassigning": false
+    },
+    {
+      "id": "t3",
+      "profileSeedId": "T3",
+      "subject": "v6 数据集与判分器口径质检",
+      "description": "本机质检，产出 logs/v6/DATA-QA.md。\n\n1) train.final.jsonl 逐条：末条必须 assistant（train_kitty.py L197 会拒）、tool_call_id 一一对应、JSON 可解析\n2) 用 tools.json 真实参数校验 1,912 个 tool_call：非法键=0、缺必填=0（复用 _validate_calls.py）\n3) 统计构成分布、带 tools 行数、kitty_ops 占比（<2%）、工具频次 Top20\n4) eval_kitty_v6.py --limit 1 能跑通（需引擎在跑）\n5) 列出 V5 基线稳定失败题（题2 kitty_rea_trace / 题8 error-recovery / 题22 real-trajectory），核对 v6 数据覆盖：kitty_rea_trace ≥5 次、error-recovery 类轨迹存在\n\n判据：五项逐条 PASS/FAIL，不许只写「看起来没问题」。",
+      "status": "pending",
+      "dependencies": [],
+      "attempt": 3,
+      "createdAt": 1792863725850,
+      "updatedAt": 1792863758599,
+      "reassigning": false,
+      "handoffId": "0cfd50c6-e94c-4580-b41e-f2642e299a1e"
+    },
+    {
+      "id": "t4",
+      "profileSeedId": "T4",
+      "subject": "训练 v6 LoRA adapter（120 步）",
+      "description": "远程训练 v6 adapter。\n\nbase 用 /root/autodl-tmp/kitty-rev/merged-v5（V5 的合并权重，config=Qwen3_5ForConditionalGeneration，完整多模态；原始 HF base 已不在）\n数据用 /root/autodl-tmp/kitty-rev/v6-mix/train.final.jsonl\n脚本用 /root/autodl-tmp/kitty-rev/v6-mix/train_kitty.py\n\n注意：\n· 必须 /root/miniconda3/bin/python（云端无裸 python3）\n· 后台必须 setsid --fork bash -c \"...\" > log 2>&1（nohup & 会死）\n· 起训前 nvidia-smi 确认显存 <2048 MiB\n\n判据（三条同时）：trainable=79,691,776（与 v3/v4/v5 一致）、120/120 步无 Traceback、out-v6/adapter_model.safetensors 存在（约 300MB）。每 15 分钟落进度。",
+      "status": "pending",
+      "assignee": "chain-op",
+      "dependencies": [
+        "t2"
+      ],
+      "attempt": 0,
+      "createdAt": 1792863725850,
+      "updatedAt": 1792863725850
+    },
+    {
+      "id": "t5",
+      "profileSeedId": "T5",
+      "subject": "量化打包成 v6 .ninfer",
+      "description": "复用 tools/chain_repair.py 的 M 段：merge(merged-v5 + out-v6 adapter) → 导出 bf16 → llama-quantize IQ2_S（实际产出 IQ2_XS，已知可接受）→ splice(mtp) → convert(qwen3_8_27b_gguf, --mmproj q8_0) → .ninfer\n\n已知坑：convert_hf_to_gguf.py 须从 /root/autodl-tmp/lc 跑或 runpy.run_path；mmproj 转 q8_0 有假 ENOSPC 补丁（lazy.py.bak-enospc）；cfg-vision 须带 preprocessor_config.json；mmproj 不能低于 q8_0。\n\n判据：每步 rc=0；.ninfer magic=NINF、size<10GiB、conversion.json objects 1100-1200、components 含 text+vision+mtp。",
+      "status": "pending",
+      "assignee": "chain-op",
+      "dependencies": [
+        "t4"
+      ],
+      "attempt": 0,
+      "createdAt": 1792863725850,
+      "updatedAt": 1792863725850
+    },
+    {
+      "id": "t6",
+      "profileSeedId": "T6",
+      "subject": "回传 v6 .ninfer 并 md5 双端校验",
+      "description": "下载远程 v6 .ninfer + conversion.json 到本机 train/local-pack/。\n\ndeploy/get_multi.py --remote <remote> --local <local> --streams 48\n\n硬纪律：一个目标文件只允许一个下载进程（并发写 .part 会导致 md5 错）；判据只有 md5 双端一致；保留 v5 文件不动（md5 99d998d2a24510da9a50ebb38daef501）。\n\n输出：size、md5 双端、magic、conversion.json 的 components 与 formats 统计。",
+      "status": "pending",
+      "dependencies": [
+        "t5"
+      ],
+      "attempt": 0,
+      "createdAt": 1792863725850,
+      "updatedAt": 1792863755466,
+      "handoffId": "d1936555-0da5-45e4-8879-cc70786e53cc",
+      "reassigning": false
+    },
+    {
+      "id": "t7",
+      "profileSeedId": "T7",
+      "subject": "同口径 3 轮多数票复测 v6",
+      "description": "加载 v6 .ninfer 到本机引擎，同口径跑 23 题。\n\n切引擎：& 'C:\\Program Files (x86)\\PowerShell\\7\\pwsh.exe' -NoLogo -NoProfile -File D:\\BaiduNetdiskDownload\\Local-AI\\ninfer-csunx\\run-engine.ps1 -ModelFile <v6绝对路径>\n（Start-Process 的 -ArgumentList 必须单字符串加内嵌引号，数组会散架）\n\n复测：python eval\\eval_kitty_v6.py --rounds 4 --max-tokens 1536 --repeat 3 --out logs\\v6\\JUDGE-ALL23-V6-VOTED.json\n基线：logs\\v5\\JUDGE-ALL23-V5-VOTED.json\n\n判据：tool-route ≥8/9、real-trajectory ≥2/3、op-syntax 9/9 不得降。输出逐题对照表。",
+      "status": "pending",
+      "dependencies": [
+        "t6"
+      ],
+      "attempt": 0,
+      "createdAt": 1792863725850,
+      "updatedAt": 1792863758599,
+      "handoffId": "06873021-0a7f-4999-9b70-93e8be985434",
+      "reassigning": false
+    },
+    {
+      "id": "t8",
+      "profileSeedId": "T8",
+      "subject": "独立复核 V6 全部数字与证据链",
+      "description": "只读复核，写 logs/v6/REVIEW-V6.md。\n\n逐项独立验证：①T2 上传 md5（自己重算）②T4 trainable=79,691,776 与 120/120（grep 原文）③T5 每步 rc 与 .ninfer 头信息（自己读文件）④T6 本机 md5（自己算）⑤T7 byCat 数字与多数票算法⑥判据是否被放宽（对比 v5.py 与 v6.py 的 need 值与 tool-route 判据）。\n\n每项给 PASS/FAIL/无法验证 + 原文证据。任一 FAIL 就写「强化不成立」。不许和稀泥。",
+      "status": "pending",
+      "assignee": "watchdog",
+      "dependencies": [
+        "t7"
+      ],
+      "attempt": 0,
+      "createdAt": 1792863725850,
+      "updatedAt": 1792863725850
+    }
+  ],
+  "taskSeq": 8
+}

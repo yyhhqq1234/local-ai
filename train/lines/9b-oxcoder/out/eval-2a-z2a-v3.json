@@ -1,0 +1,532 @@
+{
+  "adapter": "train/out/z-2a-v3/checkpoint-600",
+  "n": 40,
+  "avg_cov": 0.5754,
+  "code_rate": 0.875,
+  "avg_ngram20": 0.0,
+  "verdict": true,
+  "detail": [
+    {
+      "id": "A01",
+      "level": "L1",
+      "cov": 0.667,
+      "miss": [
+        "memory.py"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 591.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and focused:\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the `read_recent_history` function. Here'"
+    },
+    {
+      "id": "A02",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1558.0,
+      "resp_head": "</think>\n\nPerfect! Everything is working correctly.\n\n## Summary\n\nI have successfully implemented the fix for the composite duration parsing issue. Here's what I accomplished:\n\n### **Problem Identified"
+    },
+    {
+      "id": "A03",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 960.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and focused:\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the issue with `get_or_set` treating `Non"
+    },
+    {
+      "id": "A04",
+      "level": "L1",
+      "cov": 0.667,
+      "miss": [
+        "retry.py"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 851.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\n## Phase 8. FINAL REVIEW\n\nLet me review what I've done against the original requirements:\n\n### ✅ Original Issue Requirements\n\n**Problem**:"
+    },
+    {
+      "id": "A05",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 637.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and focused:\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the network hang issue in the `api/client"
+    },
+    {
+      "id": "A06",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1083.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created since they were just for verification:\n\nWait, I should keep the test files since they demonstrate the fix works. But let me check if there a"
+    },
+    {
+      "id": "A07",
+      "level": "L1",
+      "cov": 0.667,
+      "miss": [
+        "contextmanager"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 797.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change is minimal and focused:\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the connection leak issue in the `concurrency/po"
+    },
+    {
+      "id": "A08",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 539.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and focused:\n\n## Summary\n\nI have successfully implemented the required changes to make `--verbose` and `--quiet` mutually exclus"
+    },
+    {
+      "id": "A09",
+      "level": "L1",
+      "cov": 0.5,
+      "miss": [
+        "CONCURRENTLY"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 436.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is exactly what was requested by reviewing the before and after:\n\n## Summary\n\nI have successfully implemented the necessary change to fix t"
+    },
+    {
+      "id": "A10",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 505.0,
+      "resp_head": "</think>\n\nPerfect! Everything is working correctly.\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the `datetime` serialization issue in `json_utils.py`. Here's what was acc"
+    },
+    {
+      "id": "A11",
+      "level": "L1",
+      "cov": 0.667,
+      "miss": [
+        "resolver"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 871.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\n## Phase 8. FINAL REVIEW\n\nLet me review what I've done against the original requirements:\n\n### ✅ Original Issue Requirements\n\n**Problem**:"
+    },
+    {
+      "id": "A12",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 6,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 5059.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and focused:\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the test failure. Here's what I did:\n\n###"
+    },
+    {
+      "id": "A13",
+      "level": "L1",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1630.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and focused:\n\n## Summary\n\nI have successfully implemented the necessary changes to fix the issue with the `send_email` task not "
+    },
+    {
+      "id": "A14",
+      "level": "L1",
+      "cov": 0.75,
+      "miss": [
+        "KeyError"
+      ],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1718.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\n## Phase 8. FINAL REVIEW\n\nLet me review what I've implemented against the original requirements:\n\n### ✅ Requirements Checklist\n\n1. **Modif"
+    },
+    {
+      "id": "A15",
+      "level": "L2",
+      "cov": 0.25,
+      "miss": [
+        "内存",
+        "OOM",
+        "泄漏"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 797.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the fix is minimal and focused:\n\n## Summary\n\nI have successfully implemented a fix for the memory leak issue in the file upload system. Here's what I accompl"
+    },
+    {
+      "id": "A16",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "deadlock detected",
+        "事务",
+        "加锁顺序"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 939.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any issues with the existing tests by running a broader test:\n\nExcellent! Let me also verify that the change I made is minimal and focuse"
+    },
+    {
+      "id": "A17",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "N+1 查询",
+        "批量加载"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1201.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any issues with the existing tests by running them one more time:\n\n## Phase 8. FINAL REVIEW\n\nLet me review my changes against the origina"
+    },
+    {
+      "id": "A18",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "Docker 镜像",
+        "多阶段构建"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 1079.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the multi-stage build is correctly structured by checking that both stages are present:\n\nExcellent! Let me also verify the final image size is reasonable:\n\nP"
+    },
+    {
+      "id": "A19",
+      "level": "L2",
+      "cov": 0.667,
+      "miss": [
+        "连接池"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1034.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check if there are any specific instructions about how to run tests:\n\nLet me check the README to understand how to run tests:\n\n## Summary\n\nI have successfully implemente"
+    },
+    {
+      "id": "A20",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "Cannot read property of undefined",
+        "异步",
+        "渲染"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 828.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the change I made is minimal and focused:\n\n## Summary\n\nI have successfully implemented a fix for the intermittent white screen issue. Here's what I accomplis"
+    },
+    {
+      "id": "A21",
+      "level": "L2",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1204.0,
+      "resp_head": "</think>\n\n定时任务偶尔跑两遍，导致重复发券。服务是多副本部署的，怀疑没做幂等。找出为什么会重复，并加分布式锁。\n\n### 原因分析\n1. **定时任务调度器问题**：多个副本同时执行相同的定时任务\n2. **缺少幂等性控制**：没有机制防止重复执行\n3. **分布式锁缺失**：没有协调多个实例的执行\n\n### 解决方案\n\n#### 1. 添加分布式锁（Redisson）\n\n```java"
+    },
+    {
+      "id": "A22",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "密码",
+        "失效"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 1595.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that I haven't introduced any issues with the existing tests by running a quick summary:\n\n## Summary\n\nI have successfully implemented the necessary changes to make"
+    },
+    {
+      "id": "A23",
+      "level": "L2",
+      "cov": 0.75,
+      "miss": [
+        "分词"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 356.0,
+      "resp_head": "</think>\n\n- 确保所有字符串统一使用 UTF-8 编码\n- 避免在字符串拼接时混用不同编码的字节串\n\n### ✅ 最终实现验证\n\n**测试用例：**\n\n```python\n# 测试中文搜索\nresult = search_index(\"中文测试\", \"test.txt\")\nprint(f\"中文搜索结果: {len(result)} 条\")\n\n# 测试英文搜索 \nresult = sear"
+    },
+    {
+      "id": "A24",
+      "level": "L2",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 270.0,
+      "resp_head": "</think>\n\n- 缓存 key 包含不稳定的中间产物（如时间戳、随机 ID、未固定的环境变量）\n- 构建脚本中某些本应固定的值实际在变化\n- 缓存目录权限问题导致写入失败，静默降级\n\n### 🔧 排查步骤\n\n```bash\n# 1. 查看实际使用的缓存 key\necho \"CACHE_KEY=$CACHE_KEY\"\n\n# 2. 确认哪些变量被包含在 key 中\n# 检查 actions/ca"
+    },
+    {
+      "id": "A25",
+      "level": "L2",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 5,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 499.0,
+      "resp_head": "</think>\n\nOOMKilled 说明容器内存真的用光了，不是重启逻辑问题。\n\n```bash\nkubectl describe pod <pod-name>\n```\n判据：Memory Limit 与 Request 是否一致（应相同）。\n\n```bash\nkubectl top pod <pod-name>\n```\n判读：Resident 是否长期接近 limit。\n\n```bash\nk"
+    },
+    {
+      "id": "A26",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "数据库",
+        "连接"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 729.0,
+      "resp_head": "</think>\n\nPerfect! Let me also verify that the changes I made are consistent with the existing codebase style:\n\nLet me check the style of the existing code to make sure my changes are consistent:\n\nGoo"
+    },
+    {
+      "id": "A27",
+      "level": "L2",
+      "cov": 0.333,
+      "miss": [
+        "消息队列",
+        "重复消费"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1536.0,
+      "resp_head": "</think>\n\n**Root Cause**: Consumer was acknowledging messages before confirming downstream processing completion.\n\n**Solution Implemented**:\n1. **Moved ack logic** to the end of the business processin"
+    },
+    {
+      "id": "A28",
+      "level": "L2",
+      "cov": 0.0,
+      "miss": [
+        "灰度",
+        "旧数据",
+        "缓存",
+        "版本"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 902.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\nWait, I should not clean up test files that are part of the solution. Let me revert:\n\n## Phase 8. FINAL REVIEW\n\nLet me review what I've im"
+    },
+    {
+      "id": "A29",
+      "level": "L3",
+      "cov": 0.667,
+      "miss": [
+        "单测覆盖率"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 241.0,
+      "resp_head": "</think>\n\n82% 的覆盖率看似很高，但**覆盖的是代码路径，不是业务正确性**。\n\n## 问题根源\n\n```python\n# 这样的测试只覆盖了分支，没覆盖真实场景\ndef test_edge_case(self):\n self.assertEqual(self.service._process_data(\"test\", 100), \"test\")\n\n# 但没测试：\n# 1. 超长输入的"
+    },
+    {
+      "id": "A30",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "启动",
+        "懒加载",
+        "前置"
+      ],
+      "code_blocks": 2,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 3483.0,
+      "resp_head": "</think>\n\nPerfect! Let me clean up the test files I created:\n\n## Phase 8. FINAL REVIEW\n\nLet me review what I've implemented against the original requirements:\n\n### 8.1 Requirements Verification\n\n**Ori"
+    },
+    {
+      "id": "A31",
+      "level": "L3",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 619.0,
+      "resp_head": "</think>\n\n**评估标准**：\n\n1. **合理容错**：外部依赖不可控（网络、文件系统、第三方 API）\n2. **掩盖 bug**：业务逻辑错误、数据问题、配置问题\n3. **性能问题**：高频执行的静默失败\n\n**分批治理**：\n\n**Phase 1 - 高风险（立即处理）**\n- 业务逻辑分支中的 `try/except: pass`\n- 用户输入处理中的静默失败\n- 数据库操作中"
+    },
+    {
+      "id": "A32",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "重试",
+        "雪崩",
+        "抖动",
+        "熔断"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1052.0,
+      "resp_head": "</think>\n\nPerfect! Let me also check that the retry logic handles the case where the first attempt succeeds:\n\n## 8.3 Final Verification\n\nLet me run one final comprehensive test to make sure everything"
+    },
+    {
+      "id": "A33",
+      "level": "L3",
+      "cov": 1.0,
+      "miss": [],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1874.0,
+      "resp_head": "</think>\n\n**方案实现**\n\n```python\nimport os\nimport json\nfrom pathlib import Path\nfrom typing import Any, Dict, Optional\n\nclass ConfigLoader:\n \"\"\"统一的配置加载器，按优先级合并多源配置\"\"\"\n \n def __init__(self):\n self.configs"
+    },
+    {
+      "id": "A34",
+      "level": "L3",
+      "cov": 0.333,
+      "miss": [
+        "2000 行",
+        "调用方"
+      ],
+      "code_blocks": 5,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 913.0,
+      "resp_head": "</think>\n\n大模块拆分需要**按依赖边界而非功能边界**进行。\n\n## 3.1 拆分原则（按你的要求严格执行）\n\n### ✅ 正确做法\n```\nlogger.py → utils/logger.py\nconfig.py → utils/config.py\nvalidators.py → utils/validators.py\n```\n**判据**：每个文件只导出一个职责，且被导入的地方不超"
+    },
+    {
+      "id": "A35",
+      "level": "L3",
+      "cov": 0.333,
+      "miss": [
+        "公共服务",
+        "代价"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 445.0,
+      "resp_head": "</think>\n\n**选择：共享库（更优）**\n\n**理由：**\n1. **改动最小**：只需在共享库中修改一次，三个服务自动生效\n2. **符合 DRY 原则**：避免重复代码\n3. **降低回归风险**：一处验证，全量生效\n\n**实现：**\n```python\n# services/common/rules.py\ndef is_valid_phone(phone: str) -> bool:"
+    },
+    {
+      "id": "A36",
+      "level": "L3",
+      "cov": 0.833,
+      "miss": [
+        "数据库"
+      ],
+      "code_blocks": 5,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1476.0,
+      "resp_head": "</think>\n\n5000 万行数据不能停服，必须用**增量迁移 + 双写方案**。\n\n## 核心思路\n\n```\n阶段1：加字段（允许 NULL）\n阶段2：后台批量填充\n阶段3：双写新字段\n阶段4：确认一致后弃用旧逻辑\n```\n\n## 具体步骤\n\n### 1. 加字段（不锁表）\n\n```sql\nALTER TABLE users ADD COLUMN new_field VARCHAR(50) "
+    },
+    {
+      "id": "A37",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "API",
+        "返回结构",
+        "过渡方案"
+      ],
+      "code_blocks": 3,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 1022.0,
+      "resp_head": "</think>\n\n**Phase 1 (Weeks 1-2): Add new fields with default values**\n\n```python\n# Add new fields with sensible defaults\ndef get_user_data(user_id):\n result = get_user_data_from_db(user_id)\n # Add new"
+    },
+    {
+      "id": "A38",
+      "level": "L3",
+      "cov": 0.0,
+      "miss": [
+        "日志",
+        "2TB",
+        "采样",
+        "分级"
+      ],
+      "code_blocks": 0,
+      "code_ok": false,
+      "ngram20": 0.0,
+      "len_ratio": 1193.0,
+      "resp_head": "</think>\n\nPerfect! Let me summarize what I've implemented:\n\n## Summary\n\nI have successfully implemented a log retention and sampling system that addresses all the requirements from the bug report:\n\n##"
+    },
+    {
+      "id": "A39",
+      "level": "L3",
+      "cov": 0.6,
+      "miss": [
+        "定时任务",
+        "失败重跑"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 459.0,
+      "resp_head": "</think>\n\n100 万条记录串行处理 3 小时，说明每条耗时约 800ms。并行化可缩短到 10-30 分钟。\n\n## 方案一：分片并行（推荐）\n\n```python\nfrom concurrent.futures import ThreadPoolExecutor, as_completed\n\ndef process_batch(batch_data):\n # 处理一批数据\n retur"
+    },
+    {
+      "id": "A40",
+      "level": "L3",
+      "cov": 0.333,
+      "miss": [
+        "单体拆微服务",
+        "调用关系"
+      ],
+      "code_blocks": 1,
+      "code_ok": true,
+      "ngram20": 0.0,
+      "len_ratio": 455.0,
+      "resp_head": "</think>\n\n**判据**：\n1. **事务边界**：跨模块的数据库操作是否在一个事务里？\n2. **调用链路**：一个用户操作是否触发大量模块调用？\n3. **数据耦合**：模块间是否直接读写对方数据库？\n\n**判定**：\n- **三条都命中** → 先重构，再考虑拆分\n- **只命中 1 条** → 直接拆分\n- **命中 2 条** → 先解决最严重的那条\n\n```python\n# ❌"
+    }
+  ]
+}

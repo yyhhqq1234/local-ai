@@ -1,0 +1,484 @@
+{
+  "results": [
+    {
+      "name": "r1-p1-2+2",
+      "ok": true,
+      "chars": 139,
+      "head": "2+2 equals **4**. This is a fundamental arithmetic fact: when you combine two items with anothe",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "r1-p2-hello",
+      "ok": true,
+      "chars": 15,
+      "head": "你好！有什么我可以帮你的吗？",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "r1-p3-gdn",
+      "ok": true,
+      "chars": 258,
+      "head": "A gated delta network is a specialized interconnection topology that combines the non-blocking ",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "r1-p4-pyrev",
+      "ok": true,
+      "chars": 22,
+      "head": "```python s[::-1] ```",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "r1-p5-unittest",
+      "ok": true,
+      "chars": 682,
+      "head": "Here are three key benefits of unit testing: 1. **Early Bug Detection**: Unit tests catch error",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "r2-p1-2+2",
+      "ok": true,
+      "chars": 139,
+      "head": "2+2 equals **4**. This is a fundamental arithmetic fact: when you combine two items with anothe",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "r2-p2-hello",
+      "ok": true,
+      "chars": 15,
+      "head": "你好！有什么我可以帮你的吗？",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "r2-p3-gdn",
+      "ok": true,
+      "chars": 258,
+      "head": "A gated delta network is a specialized interconnection topology that combines the non-blocking ",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "r2-p4-pyrev",
+      "ok": true,
+      "chars": 22,
+      "head": "```python s[::-1] ```",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "r2-p5-unittest",
+      "ok": true,
+      "chars": 682,
+      "head": "Here are three key benefits of unit testing: 1. **Early Bug Detection**: Unit tests catch error",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "r3-p1-2+2",
+      "ok": true,
+      "chars": 139,
+      "head": "2+2 equals **4**. This is a fundamental arithmetic fact: when you combine two items with anothe",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "r3-p2-hello",
+      "ok": true,
+      "chars": 15,
+      "head": "你好！有什么我可以帮你的吗？",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "r3-p3-gdn",
+      "ok": true,
+      "chars": 258,
+      "head": "A gated delta network is a specialized interconnection topology that combines the non-blocking ",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "r3-p4-pyrev",
+      "ok": true,
+      "chars": 22,
+      "head": "```python s[::-1] ```",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "r3-p5-unittest",
+      "ok": true,
+      "chars": 682,
+      "head": "Here are three key benefits of unit testing: 1. **Early Bug Detection**: Unit tests catch error",
+      "garbled": "",
+      "keyword_hit": true
+    },
+    {
+      "name": "sys",
+      "ok": true,
+      "chars": 43,
+      "head": "[ directions_52nd.json, line base-nlbiank-",
+      "garbled": "",
+      "keyword_hit": false
+    },
+    {
+      "name": "essay",
+      "ok": false,
+      "chars": 32,
+      "head": "#liw2aioTSg/1+Z4OBYDwDgoRirLvwog",
+      "garbled": "base64-like:liw2aioTSg/1+Z4OBYDwDgoR",
+      "keyword_hit": null
+    }
+  ],
+  "reqlog": [
+    {
+      "prompt_tokens": 19,
+      "completion_tokens": 32,
+      "hit": 0,
+      "path": "root",
+      "units_prefill": 2,
+      "state_d2h": 0,
+      "ids_head": [
+        17,
+        10,
+        17,
+        16327,
+        2972,
+        19,
+        159034,
+        271
+      ],
+      "prefill_tok_s": 217.2,
+      "decode_tok_s": 38.0
+    },
+    {
+      "prompt_tokens": 17,
+      "completion_tokens": 11,
+      "hit": 0,
+      "path": "root",
+      "units_prefill": 2,
+      "state_d2h": 51519488,
+      "ids_head": [
+        109266,
+        6115,
+        98691,
+        111454,
+        96598,
+        97319,
+        98179,
+        10992
+      ],
+      "prefill_tok_s": 190.4,
+      "decode_tok_s": 40.7
+    },
+    {
+      "prompt_tokens": 24,
+      "completion_tokens": 43,
+      "hit": 0,
+      "path": "root",
+      "units_prefill": 2,
+      "state_d2h": 51519488,
+      "ids_head": [
+        32,
+        81787,
+        9197,
+        3790,
+        369,
+        264,
+        26208,
+        916
+      ],
+      "prefill_tok_s": 275.7,
+      "decode_tok_s": 37.3
+    },
+    {
+      "prompt_tokens": 23,
+      "completion_tokens": 12,
+      "hit": 0,
+      "path": "root",
+      "units_prefill": 2,
+      "state_d2h": 51519488,
+      "ids_head": [
+        71093,
+        12305,
+        198,
+        82,
+        60059,
+        16,
+        60,
+        198
+      ],
+      "prefill_tok_s": 254.4,
+      "decode_tok_s": 38.4
+    },
+    {
+      "prompt_tokens": 20,
+      "completion_tokens": 128,
+      "hit": 0,
+      "path": "root",
+      "units_prefill": 2,
+      "state_d2h": 51519488,
+      "ids_head": [
+        8160,
+        513,
+        2250,
+        1328,
+        7328,
+        314,
+        4821,
+        7262
+      ],
+      "prefill_tok_s": 217.8,
+      "decode_tok_s": 34.5
+    },
+    {
+      "prompt_tokens": 19,
+      "completion_tokens": 32,
+      "hit": 10,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        17,
+        10,
+        17,
+        16327,
+        2972,
+        19,
+        159034,
+        271
+      ],
+      "prefill_tok_s": 318.8,
+      "decode_tok_s": 35.1
+    },
+    {
+      "prompt_tokens": 17,
+      "completion_tokens": 11,
+      "hit": 8,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        109266,
+        6115,
+        98691,
+        111454,
+        96598,
+        97319,
+        98179,
+        10992
+      ],
+      "prefill_tok_s": 268.1,
+      "decode_tok_s": 37.5
+    },
+    {
+      "prompt_tokens": 24,
+      "completion_tokens": 43,
+      "hit": 15,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        32,
+        81787,
+        9197,
+        3790,
+        369,
+        264,
+        26208,
+        916
+      ],
+      "prefill_tok_s": 402.3,
+      "decode_tok_s": 34.6
+    },
+    {
+      "prompt_tokens": 23,
+      "completion_tokens": 12,
+      "hit": 14,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        71093,
+        12305,
+        198,
+        82,
+        60059,
+        16,
+        60,
+        198
+      ],
+      "prefill_tok_s": 387.0,
+      "decode_tok_s": 38.5
+    },
+    {
+      "prompt_tokens": 20,
+      "completion_tokens": 128,
+      "hit": 11,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        8160,
+        513,
+        2250,
+        1328,
+        7328,
+        314,
+        4821,
+        7262
+      ],
+      "prefill_tok_s": 336.7,
+      "decode_tok_s": 34.4
+    },
+    {
+      "prompt_tokens": 19,
+      "completion_tokens": 32,
+      "hit": 10,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        17,
+        10,
+        17,
+        16327,
+        2972,
+        19,
+        159034,
+        271
+      ],
+      "prefill_tok_s": 298.6,
+      "decode_tok_s": 35.2
+    },
+    {
+      "prompt_tokens": 17,
+      "completion_tokens": 11,
+      "hit": 8,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        109266,
+        6115,
+        98691,
+        111454,
+        96598,
+        97319,
+        98179,
+        10992
+      ],
+      "prefill_tok_s": 285.7,
+      "decode_tok_s": 38.8
+    },
+    {
+      "prompt_tokens": 24,
+      "completion_tokens": 43,
+      "hit": 15,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        32,
+        81787,
+        9197,
+        3790,
+        369,
+        264,
+        26208,
+        916
+      ],
+      "prefill_tok_s": 404.5,
+      "decode_tok_s": 36.1
+    },
+    {
+      "prompt_tokens": 23,
+      "completion_tokens": 12,
+      "hit": 14,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        71093,
+        12305,
+        198,
+        82,
+        60059,
+        16,
+        60,
+        198
+      ],
+      "prefill_tok_s": 386.1,
+      "decode_tok_s": 35.4
+    },
+    {
+      "prompt_tokens": 20,
+      "completion_tokens": 128,
+      "hit": 11,
+      "path": "checkpoint",
+      "units_prefill": 1,
+      "state_d2h": 0,
+      "ids_head": [
+        8160,
+        513,
+        2250,
+        1328,
+        7328,
+        314,
+        4821,
+        7262
+      ],
+      "prefill_tok_s": 315.5,
+      "decode_tok_s": 34.1
+    },
+    {
+      "prompt_tokens": 30,
+      "completion_tokens": 16,
+      "hit": 0,
+      "path": "root",
+      "units_prefill": 2,
+      "state_d2h": 51519488,
+      "ids_head": [
+        58,
+        17425,
+        62,
+        20,
+        17,
+        302,
+        4182,
+        11
+      ],
+      "prefill_tok_s": 303.7,
+      "decode_tok_s": 34.4
+    },
+    {
+      "prompt_tokens": 26,
+      "completion_tokens": 24,
+      "hit": 0,
+      "path": "root",
+      "units_prefill": 2,
+      "state_d2h": 51519488,
+      "ids_head": [
+        2,
+        719,
+        86,
+        17,
+        64,
+        789,
+        9657,
+        70
+      ],
+      "prefill_tok_s": 267.2,
+      "decode_tok_s": 34.1
+    }
+  ],
+  "bad_markers": [],
+  "remaining": []
+}

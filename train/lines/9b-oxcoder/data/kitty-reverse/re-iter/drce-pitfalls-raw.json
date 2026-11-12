@@ -1,0 +1,3693 @@
+{
+ "total_occurrences": 316,
+ "unique_codes": 216,
+ "codes": [
+  {
+   "code": "ERR|",
+   "count": 38,
+   "files": [
+    "actions-bridge.ts",
+    "actions-diagnostics.ts",
+    "ghidra.ts",
+    "ida.ts",
+    "idamcp.ts",
+    "rea.ts",
+    "session-shards.ts",
+    "task-api-adapter.ts",
+    "tools/anti-tools.ts",
+    "tools/channel-tools.ts",
+    "tools/driver-tools.ts",
+    "tools/kernel-tools.ts",
+    "tools/mem-tools.ts",
+    "tools/static-tools.ts",
+    "uedump.ts",
+    "workbench-context.ts"
+   ],
+   "tools": [
+    "kitty_ghidra",
+    "kitty_ida",
+    "kitty_idamcp",
+    "kitty_rea",
+    "kitty_acescan",
+    "kitty_variants",
+    "kitty_dbg",
+    "kitty_sym",
+    "kitty_drvio",
+    "kitty_init",
+    "kitty_km",
+    "kitty_inject",
+    "kitty_prot",
+    "kitty_wpb",
+    "kitty_dump",
+    "kitty_patch",
+    "kitty_asm"
+   ],
+   "samples": [
+    {
+     "line": 12,
+     "cn": "",
+     "ctx": "if (act === 'sync-zero') { ⏎ let archive = '' ⏎ let stat = '' ⏎ try { archive = await bridgeCall(live.kittyDir, 'SYNC_ARCHIVE', live.timeoutMs) } catch (e) { archive = `ERR|${String((e as Error)?.message ?? e)}` } ⏎ try "
+    },
+    {
+     "line": 13,
+     "cn": "",
+     "ctx": "let archive = '' ⏎ let stat = '' ⏎ try { archive = await bridgeCall(live.kittyDir, 'SYNC_ARCHIVE', live.timeoutMs) } catch (e) { archive = `ERR|${String((e as Error)?.message ?? e)}` } ⏎ try { stat = await bridgeCall(liv"
+    },
+    {
+     "line": 51,
+     "cn": "等待失败则走S_GET轮询兜底 */ }\r           got =",
+     "ctx": "got = '' ⏎ for (let i = 0; i < 8; i++) { ⏎ await sleep(800) ⏎ try { got = await bridgeCall(live.kittyDir, `S_GET|0|${top}`, live.timeoutMs) } catch (e) { got = `ERR|${String((e as Error)?.message ?? e)}`; break } ⏎ if (!"
+    }
+   ]
+  },
+  {
+   "code": "ERR|unknown action",
+   "count": 19,
+   "files": [
+    "action-router.ts",
+    "cpp2il.ts",
+    "gdre.ts",
+    "ghidra.ts",
+    "ida.ts",
+    "idamcp.ts",
+    "il2cppdumper.ts",
+    "tools/anti-tools.ts",
+    "tools/channel-tools.ts",
+    "tools/driver-tools.ts",
+    "tools/kernel-tools.ts",
+    "tools/mem-tools.ts",
+    "tools/static-tools.ts",
+    "uedump.ts",
+    "unitymod.ts"
+   ],
+   "tools": [
+    "kitty_cpp2il",
+    "kitty_gdre",
+    "kitty_ghidra",
+    "kitty_ida",
+    "kitty_idamcp",
+    "kitty_il2cppdumper",
+    "kitty_variants",
+    "kitty_drv",
+    "kitty_x64dbg",
+    "kitty_dbg",
+    "kitty_drvio",
+    "kitty_init",
+    "kitty_km",
+    "kitty_prot",
+    "kitty_patch",
+    "kitty_asm",
+    "kitty_uedump",
+    "kitty_dnspy"
+   ],
+   "samples": [
+    {
+     "line": 71,
+     "cn": "",
+     "ctx": "const request = prepareAction(context, name, opts) ⏎ if (typeof request.ok === 'boolean') return { ok: request.ok, output: request.output! } ⏎ const handler = ACTION_ROUTES[request.act as keyof typeof ACTION_ROUTES] ⏎ re"
+    },
+    {
+     "line": 51,
+     "cn": "",
+     "ctx": "} ⏎ export function registerCpp2IL(ctx: any, defineTool: any, rootFn: () => string): void { ⏎ const reg = (o: any, tag: string) => ctx.effect(() => ctx.tools.register(defineTool(o)), tag); ⏎ reg({ name: 'kitty_cpp2il', d"
+    },
+    {
+     "line": 30,
+     "cn": "",
+     "ctx": "} ⏎ export function registerGDRE(ctx: any, defineTool: any, rootFn: () => string): void { ⏎ const reg = (o: any, tag: string) => ctx.effect(() => ctx.tools.register(defineTool(o)), tag); ⏎ reg({ name: 'kitty_gdre', descr"
+    }
+   ]
+  },
+  {
+   "code": "ERR|unknown",
+   "count": 10,
+   "files": [
+    "apkjadx.ts",
+    "assetrip.ts",
+    "fridaplus.ts",
+    "staticplus.ts",
+    "unitymod.ts",
+    "unrealplus.ts"
+   ],
+   "tools": [
+    "kitty_jadx",
+    "kitty_apktool",
+    "kitty_assetrip",
+    "kitty_frida",
+    "kitty_net",
+    "kitty_proto",
+    "kitty_bepinex",
+    "kitty_uexplorer",
+    "kitty_fmodel",
+    "kitty_ue4ss"
+   ],
+   "samples": [
+    {
+     "line": 47,
+     "cn": "",
+     "ctx": "} ⏎ export function registerApkJadx(ctx: any, defineTool: any, rootFn: () => string): void { ⏎ const reg = (o: any, tag: string) => ctx.effect(() => ctx.tools.register(defineTool(o)), tag); ⏎ reg({ name: 'kitty_jadx', de"
+    },
+    {
+     "line": 48,
+     "cn": "搜 https:// / AES / sign / SharedPreferences 定位接口与加密 (GUI手动)",
+     "ctx": "export function registerApkJadx(ctx: any, defineTool: any, rootFn: () => string): void { ⏎ const reg = (o: any, tag: string) => ctx.effect(() => ctx.tools.register(defineTool(o)), tag); ⏎ reg({ name: 'kitty_jadx', descri"
+    },
+    {
+     "line": 27,
+     "cn": "",
+     "ctx": "} ⏎ export function registerAssetRip(ctx: any, defineTool: any, rootFn: () => string): void { ⏎ const reg = (o: any, tag: string) => ctx.effect(() => ctx.tools.register(defineTool(o)), tag); ⏎ reg({ name: 'kitty_assetrip"
+    }
+   ]
+  },
+  {
+   "code": "ERR|SESSION-KEY-MISSING",
+   "count": 6,
+   "files": [
+    "actions-session.ts",
+    "session-shards.ts",
+    "setup-workflow.ts",
+    "task-api-adapter.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 46,
+     "cn": "",
+     "ctx": "} ⏎ if (act === 'task-open' || act === 'task-get' || act === 'task-dispatch' || act === 'task-new' || act === 'task-close') { ⏎ const sid = sanitizeSessionKey(opts.session) ⏎ if (!sid) return { ok: false, output: 'ERR|SE"
+    },
+    {
+     "line": 105,
+     "cn": "共享分片。 */\r export function requireSessionKey(key: unknown): { ok: boolean; key: string; reason: string } {\r   const sk = s",
+     "ctx": "* 缺键一律 DENY（ERR|SESSION-KEY-MISSING），不回落 default 共享分片。 */ ⏎ export function requireSessionKey(key: unknown): { ok: boolean; key: string; reason: string } { ⏎ const sk = sanitizeSessionKey(key) ⏎ if (!sk) return { ok: fal"
+    },
+    {
+     "line": 216,
+     "cn": "",
+     "ctx": "} ⏎ const fromArgs = sanitizeSessionKey((args as { session?: unknown } | null)?.session) ⏎ if (fromArgs) return { key: fromArgs, src: 'fallback', agentKey: fromArgs, rootKeySrc: 'steps:0', note: '' } ⏎ return { key: '', "
+    }
+   ]
+  },
+  {
+   "code": "ERR|HOST-MISMATCH-DENY",
+   "count": 5,
+   "files": [
+    "action-request.ts",
+    "actions-session.ts",
+    "session-shards.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 83,
+     "cn": "空 host 亦视为他机（旧件无 host 字段 → hostMismatch=true）→ 同样拒绝；缺件分支 hostMismatch=false 不误伤\r       if (mrG.hostMismatch || trG.hostMi",
+     "ctx": "const hostG = mrG.host || trG.host ⏎ if (mrG.hostMismatch || trG.hostMismatch || (hostG && !hostMatches(hostG))) { ⏎ return { ok: false, output: `ERR|HOST-MISMATCH-DENY:该会话状态件属他机（host=${hostG || '(空host·旧件无归属)'}，本机=${hos"
+    },
+    {
+     "line": 50,
+     "cn": "",
+     "ctx": "if (act === 'task-dispatch') { ⏎ const taskRoot = rootOf(sid).root ⏎ if (readShardMode(taskRoot, sid).hostMismatch || readShardTarget(taskRoot, sid).hostMismatch) { ⏎ return { ok: false, output: 'ERR|HOST-MISMATCH-DENY:旧"
+    },
+    {
+     "line": 124,
+     "cn": "本会话逐请求 cwd 决定根（此前 live.root 陈旧根 → 分片写错项目）\r         const RT = res.root",
+     "ctx": "try { ⏎ const res = rootOf(sk)   // t16-F1：本会话逐请求 cwd 决定根（此前 live.root 陈旧根 → 分片写错项目） ⏎ const RT = res.root ⏎ if (readShardMode(RT, sk).hostMismatch || readShardTarget(RT, sk).hostMismatch) return { ok: false, output: 'ER"
+    }
+   ]
+  },
+  {
+   "code": "ERR|变体 exe 不存在：",
+   "count": 4,
+   "files": [
+    "actions-host.ts",
+    "tools/anti-tools.ts"
+   ],
+   "tools": [
+    "kitty_variants"
+   ],
+   "samples": [
+    {
+     "line": 65,
+     "cn": "可选：${ids}",
+     "ctx": "const ids = enumerateVariants().map((s) => s.id).join(', ') ⏎ return { ok: false, output: `ERR|找不到变体 '${opts.variant ?? ''}'；可选：${ids}` } ⏎ } ⏎ if (!v.exists) return { ok: false, output: `ERR|变体 exe 不存在：${v.exe}` } ⏎ con"
+    },
+    {
+     "line": 86,
+     "cn": "可选：${ids}",
+     "ctx": "const ids = enumerateVariants().map((s) => s.id).join(', ') ⏎ return { ok: false, output: `ERR|找不到变体 '${opts.variant ?? ''}'；可选：${ids}` } ⏎ } ⏎ if (!v.exists) return { ok: false, output: `ERR|变体 exe 不存在：${v.exe}` } ⏎ /* "
+    },
+    {
+     "line": 336,
+     "cn": "变体 exe 必须落在解析 root 内\r         if (rootMiss) return rootMiss\r         if (act ===",
+     "ctx": "if (rootMiss) return rootMiss ⏎ if (act === 'ensure-bridge') return ensureVariantBridge(v) ⏎ if (act === 'switch') { ⏎ if (!v.exists) return `ERR|变体 exe 不存在：${v.exe}` ⏎ const out = [switchVariant(v)]"
+    }
+   ]
+  },
+  {
+   "code": "ERR|找不到变体",
+   "count": 3,
+   "files": [
+    "actions-host.ts",
+    "tools/anti-tools.ts"
+   ],
+   "tools": [
+    "kitty_variants"
+   ],
+   "samples": [
+    {
+     "line": 63,
+     "cn": "",
+     "ctx": "const miss = treeGuardCe(res, 'variant-switch') ⏎ if (miss) return { ok: false, output: miss } ⏎ const ids = enumerateVariants().map((s) => s.id).join(', ') ⏎ return { ok: false, output: `ERR|找不到变体 '${opts.variant ?? ''}"
+    },
+    {
+     "line": 84,
+     "cn": "",
+     "ctx": "const miss = treeGuardCe(res, 'variant-start') ⏎ if (miss) return { ok: false, output: miss } ⏎ const ids = enumerateVariants().map((s) => s.id).join(', ') ⏎ return { ok: false, output: `ERR|找不到变体 '${opts.variant ?? ''}'"
+    },
+    {
+     "line": 327,
+     "cn": "两棵树都缺：显式报 tree-missing（不再静默给空表）\r           return",
+     "ctx": "const v = pick() ⏎ if (!v) { ⏎ if (ceMiss) return ceMiss ⏎ return `ERR|找不到变体 '${args.variant ?? ''}'；先 kitty_variants action=list 看 id\\n` + ⏎ states.map((s) => `  ${s.id}  ${s.label}`).join('\\n')"
+    }
+   ]
+  },
+  {
+   "code": "ERR|预设包缺席：vendor/dsh-reverse-security 未检出",
+   "count": 3,
+   "files": [
+    "actions-packs.ts",
+    "preset-pack.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 34,
+     "cn": "双纪律：疑问必问ask_user_question选择题·分叉批量问·选定后单会话连续走完",
+     "ctx": "} ⏎ if (act === 'preset-info') { ⏎ const p = presetPackInfo() ⏎ if (!p) return { ok: false, output: 'ERR|预设包缺席：vendor/dsh-reverse-security 未检出' } ⏎ return { ok: true, output: `[preset-pack] ${p.name}\\n${p.description}\\n根"
+    },
+    {
+     "line": 99,
+     "cn": "与现用 reverse-hybrid 预设 persona 比对（只读 ~/.dsh，不写）。 */\r export function presetPackDiff(): string {\r   const persona = presetP",
+     "ctx": "/** 与现用 reverse-hybrid 预设 persona 比对（只读 ~/.dsh，不写）。 */ ⏎ export function presetPackDiff(): string { ⏎ const persona = presetPackPersona() ⏎ if (!persona) return 'ERR|预设包缺席：vendor/dsh-reverse-security 未检出' ⏎ const L = ['["
+    },
+    {
+     "line": 140,
+     "cn": "",
+     "ctx": "export function presetPackSync(): PresetSyncReceipt | { error: string } { ⏎ const root = skillPackRoot2() ⏎ if (!root) return { error: 'ERR|预设包缺席：vendor/dsh-reverse-security 未检出' } ⏎ const userDir = join(homedir(), '.dsh"
+    }
+   ]
+  },
+  {
+   "code": "ERR|TASK-DISPATCH-MISSING",
+   "count": 3,
+   "files": [
+    "actions-session.ts",
+    "task-api-adapter.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 56,
+     "cn": "旧状态来自其他宿主；先 host-rebind 再修改任务",
+     "ctx": "let transition: TaskTransition | undefined ⏎ if (act === 'task-dispatch') { ⏎ const raw = String(opts.taskTransition ?? '').trim() ⏎ if (!raw) return { ok: false, output: 'ERR|TASK-DISPATCH-MISSING: taskTransition is req"
+    },
+    {
+     "line": 24,
+     "cn": "只读内存注册表，不加载持久分片）→ 先 task-open 再 task-get",
+     "ctx": "return snapshot ? { ok: true, output: JSON.stringify(snapshot) } : { ok: false, output: 'ERR|TASK-MISSING: session is not open（task-get 只读内存注册表，不加载持久分片）→ 先 task-open 再 task-get' } ⏎ } ⏎ if (input.action === 'task-dispatc"
+    },
+    {
+     "line": 29,
+     "cn": "",
+     "ctx": "return { ok: true, output: JSON.stringify(snapshot) } ⏎ } ⏎ if (input.action === 'task-new') { ⏎ if (!input.generation) return { ok: false, output: 'ERR|TASK-DISPATCH-MISSING: generation is required' } ⏎ return { ok: tru"
+    }
+   ]
+  },
+  {
+   "code": "ERR|MODE-NEEDS-DUAL",
+   "count": 3,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 228,
+     "cn": "硬前置双字段（task 须 sessionKey+锁定TARGET 双齐；裸 task 硬拒，不回落 default）\r       if (mode ===",
+     "ctx": "if (mode === 'task') { ⏎ const skRaw = sanitizeSessionKey(opts.session) ⏎ if (!skRaw) return { ok: false, output: 'ERR|MODE-NEEDS-DUAL:缺sessionKey（mode-set task须双字段，不回落default，先ask申请单定会话键）' } ⏎ }"
+    },
+    {
+     "line": 242,
+     "cn": "",
+     "ctx": "const locked = String((tr as { targetProcess?: unknown }).targetProcess ?? '').trim() ⏎ const callT = String((opts as { target?: unknown }).target ?? (opts as { targetProcess?: unknown }).targetProcess ?? '').trim() ⏎ co"
+    },
+    {
+     "line": 254,
+     "cn": "状态件带机器身份\r         const data = { mode, ts, src, host: H }\r         if (mode ===",
+     "ctx": "if (mode === 'standby') syncLegacyTask(sk, { type: 'enter-standby' }) ⏎ else { ⏎ const targetState = readShardTarget(RT, sk) ⏎ if (!targetState.targetProcess || !targetState.sessionGoal || targetState.hostMismatch) retur"
+    }
+   ]
+  },
+  {
+   "code": "ERR|SINGLE-CONSENT-REQUIRED",
+   "count": 3,
+   "files": [
+    "session-shards.ts",
+    "setup-workflow.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 489,
+     "cn": "无TARGET不开跑/不写道；修复例: kitty_settings target-set sessionGoal=<目标> target=<进程> shape=exe",
+     "ctx": "return 'ERR|STANDBY-DENY:无TARGET不开跑/不写道；修复例: kitty_settings target-set sessionGoal=<目标> target=<进程> shape=exe' ⏎ case 'SINGLE-CONSENT-REQUIRED': ⏎ return tool === 'kitty_wpb' ⏎ ? 'ERR|SINGLE-CONSENT-REQUIRED:kitty_wpb 改 "
+    },
+    {
+     "line": 490,
+     "cn": "改 PTE 须单次确认；修复: 同一调用补 accept_protection_bypass=true（或 confirm:true）重调",
+     "ctx": "case 'SINGLE-CONSENT-REQUIRED': ⏎ return tool === 'kitty_wpb' ⏎ ? 'ERR|SINGLE-CONSENT-REQUIRED:kitty_wpb 改 PTE 须单次确认；修复: 同一调用补 accept_protection_bypass=true（或 confirm:true）重调' ⏎ : `ERR|SINGLE-CONSENT-REQUIRED:${tool} 高风险"
+    },
+    {
+     "line": 55,
+     "cn": "配置必须为对象",
+     "ctx": "if (result.ok) syncLive() ⏎ return result ⏎ } ⏎ if (opts.confirm !== 'true') return { ok: false, output: 'ERR|SINGLE-CONSENT-REQUIRED:请点击确认后执行安装操作' } ⏎ const persisted = readTaskAt(root, sid)"
+    }
+   ]
+  },
+  {
+   "code": "ERR|SETUP-CONFIG-INVALID",
+   "count": 3,
+   "files": [
+    "setup-workflow.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 16,
+     "cn": "",
+     "ctx": "export function configureSetup(root: string, patch: Record<string, unknown>): ActionResult { ⏎ const keys = Object.keys(patch) ⏎ if (!keys.length || keys.some(key => !configurationKeys.has(key))) return { ok: false, outp"
+    },
+    {
+     "line": 21,
+     "cn": "仅接受路径和超时配置",
+     "ctx": "const value = patch[key] ⏎ if (key === 'timeoutMs' ? typeof value !== 'number' || !Number.isFinite(value) || value < 2000 || value > 120000 ⏎ : typeof value !== 'string' || !value.trim() || /[\\r\\n\\0]/.test(value)) { ⏎ re"
+    },
+    {
+     "line": 50,
+     "cn": "",
+     "ctx": "const parsed: unknown = JSON.parse(opts.text || '{}') ⏎ if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error('object required') ⏎ patch = parsed as Record<string, unknown> ⏎ } catch { retur"
+    }
+   ]
+  },
+  {
+   "code": "ERR|TASK-TRANSITION-UNKNOWN",
+   "count": 2,
+   "files": [
+    "actions-session.ts",
+    "tools/session-tools.ts"
+   ],
+   "tools": [
+    "kitty_settings"
+   ],
+   "samples": [
+    {
+     "line": 64,
+     "cn": "无可照做信息 → 穷举空转。 */\r         const TYPE_SET = [",
+     "ctx": "const TYPE_SET = ['enter-task', 'enter-standby', 'stage-start', 'stage-complete', 'stage-fail', 'retry-stage', 'block', 'answer', 'complete', 'finish', 'abandon', 'set-consent'] ⏎ const tType = (transition as { type?: un"
+    },
+    {
+     "line": 75,
+     "cn": "回包的 generation",
+     "ctx": "taskGeneration: { type: 'string', description: 'task-dispatch：task-get/task-open 回包的 generation' }, ⏎ taskTransition: { ⏎ type: 'string', ⏎ description: 'task-dispatch 的 JSON transition，必带 type：enter-task{sessionGoal,tar"
+    }
+   ]
+  },
+  {
+   "code": "ERR|TASK-MIRROR-FAILED",
+   "count": 2,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 82,
+     "cn": "",
+     "ctx": "const ts = Date.now(), host = hostId() ⏎ writeTruthJson(paths.mode, { mode: 'standby', ts, host, src: 'task-new', sessionKey: sid }) ⏎ writeTruthJson(paths.target, { sessionGoal: '', targetProcess: '', shape: '', ts, hos"
+    },
+    {
+     "line": 101,
+     "cn": "",
+     "ctx": "writeTruthJson(paths.mode, { mode: transition.type === 'enter-task' ? 'task' : 'standby', ts, host, src: 'task-dispatch', sessionKey: sid }) ⏎ } catch (e) { ⏎ pauseTaskAfterMirrorFailure(sid) ⏎ return { ok: false, output"
+    }
+   ]
+  },
+  {
+   "code": "ERR|need gameDir",
+   "count": 2,
+   "files": [
+    "cpp2il.ts",
+    "uedump.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 27,
+     "cn": "",
+     "ctx": "return out; ⏎ } ⏎ export function triageIL2CPP(gameDir: string): string { ⏎ if (!gameDir) return 'ERR|need gameDir'; ⏎ let ok = false; try { ok = existsSync(gameDir); } catch { ok = false; }"
+    },
+    {
+     "line": 36,
+     "cn": "",
+     "ctx": "return out; ⏎ } ⏎ export function triageUE(gameDir: string): string { ⏎ if (!gameDir) return 'ERR|need gameDir'; ⏎ let ok = false; try { ok = existsSync(gameDir); } catch { ok = false; }"
+    }
+   ]
+  },
+  {
+   "code": "ERR|outDir unreadable",
+   "count": 2,
+   "files": [
+    "cpp2il.ts",
+    "il2cppdumper.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 46,
+     "cn": "",
+     "ctx": "} catch (e: any) { return 'ERR|' + (e?.message || String(e)); } ⏎ } ⏎ export function parseDump(outDir: string): string { ⏎ let files: string[] = []; try { files = readdirSync(outDir) as string[]; } catch { return 'ERR|o"
+    },
+    {
+     "line": 32,
+     "cn": "",
+     "ctx": "} catch (e: any) { return 'ERR|' + (e?.message || String(e)); } ⏎ } ⏎ export function parseIl2CppDump(outDir: string): string { ⏎ let files: string[] = []; try { files = readdirSync(outDir) as string[]; } catch { return "
+    }
+   ]
+  },
+  {
+   "code": "ERR|need existing target (got",
+   "count": 2,
+   "files": [
+    "ghidra.ts",
+    "ida.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 84,
+     "cn": "",
+     "ctx": "return { ok: false, outDir: '', exit: null, tail: `ERR|ghidra not ready (headless=${g.headless} script=${g.script})`, summary: null, cmd: '' } ⏎ } ⏎ if (!target || !existsSync(target)) { ⏎ return { ok: false, outDir: '',"
+    },
+    {
+     "line": 164,
+     "cn": "落盘 vendor/ida/bin/idat64.exe 后重试）\\nNEXT: kitty_ghidra action=analyze target=<同目标>（等价档，伪代码可用）",
+     "ctx": "return { ok: false, outDir: '', exit: null, tail: `ERR|ida_export.py missing: ${sc}`, data: null } ⏎ } ⏎ if (!target || !existsSync(target)) { ⏎ return { ok: false, outDir: '', exit: null, tail: `ERR|need existing target"
+    }
+   ]
+  },
+  {
+   "code": "ERR|not in sample",
+   "count": 2,
+   "files": [
+    "ghidra.ts",
+    "ida.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 167,
+     "cn": "",
+     "ctx": "const hit = blocks.find((b) => b.toLowerCase().includes(name.toLowerCase())) ⏎ if (!hit) { ⏎ const names = blocks.slice(1).map((b) => b.split(' =====')[0]).slice(0, 20) ⏎ return `ERR|not in sample: ${name}\\navailable(${n"
+    },
+    {
+     "line": 272,
+     "cn": "该目标档位无 Hex-Rays，或未选中函数）\\nNEXT: kitty_ghidra action=analyze（Ghidra 伪代码可用）",
+     "ctx": "if (!name) return txt.slice(0, 12000) ⏎ const blocks = txt.split(/^===== /m) ⏎ const hit = blocks.find((b) => b.toLowerCase().includes(name.toLowerCase())) ⏎ if (!hit) return `ERR|not in sample: ${name}` ⏎ return `===== "
+    }
+   ]
+  },
+  {
+   "code": "ERR|analyze 需要 target",
+   "count": 2,
+   "files": [
+    "ghidra.ts",
+    "ida.ts"
+   ],
+   "tools": [
+    "kitty_ghidra",
+    "kitty_ida"
+   ],
+   "samples": [
+    {
+     "line": 223,
+     "cn": "",
+     "ctx": "if (act === 'strings') return extractStrings(String(args.target || ''), 5, Math.min(args.limit ?? 400, 2000)) ⏎ if (act === 'analyze') { ⏎ const t = String(args.target || '') ⏎ if (!t) return 'ERR|analyze 需要 target' ⏎ co"
+    },
+    {
+     "line": 298,
+     "cn": "",
+     "ctx": "if (act === 'status') return idaStatus(root) ⏎ if (act === 'analyze') { ⏎ const t = String(args.target || '') ⏎ if (!t) return 'ERR|analyze 需要 target' ⏎ const run = runIdaAnalyze(root, t, String(args.out || ''), Math.min"
+    }
+   ]
+  },
+  {
+   "code": "ERR|need-range",
+   "count": 2,
+   "files": [
+    "pchain-snippet.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 5,
+     "cn": "多跳反查（P_BACK 反查 ＋ R 验证 ＋ P_WALK 回验 ＋ 模块区域过滤）。\r  *\r  * 本轮（2026-09-20 / v0.0.5）按 PLUGIN-OPTIMIZATION-20260920 §B3·§B4 重写：",
+     "ctx": "* pchain-snippet.ts — 多跳反查（P_BACK 反查 ＋ R 验证 ＋ P_WALK 回验 ＋ 模块区域过滤）。 ⏎ * ⏎ * 本轮（2026-09-20 / v0.0.5）按 PLUGIN-OPTIMIZATION-20260920 §B3·§B4 重写： ⏎ *   ① 旧实现 `P_BACK|0xADDR` **不带窗口** → 桥契约要求显式区间 → 一律 `ERR|need-range`， ⏎ *    "
+    },
+    {
+     "line": 159,
+     "cn": "窗口解析（pchain / 扫描前必备）：显式 > MODENUM(size>0) > MODENUM base + PE SizeOfImage > MODBASE + 16MB 兜底。",
+     "ctx": "/** ⏎ * 窗口解析（pchain / 扫描前必备）：显式 > MODENUM(size>0) > MODENUM base + PE SizeOfImage > MODBASE + 16MB 兜底。 ⏎ * 桥契约要求 S_NEW / P_BACK **必须给显式区间**，缺区间一律 `ERR|need-range`。 ⏎ */"
+    }
+   ]
+  },
+  {
+   "code": "ERR|WIRE-SPLIT-DENY",
+   "count": 2,
+   "files": [
+    "session-shards.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 120,
+     "cn": "禁分裂用自身键，重拉活体注册表后重试 ascendToRoot）",
+     "ctx": "} ⏎ export function denyWireSplit(up: unknown): { ok: boolean; reason: string } { ⏎ const err = String((up as { error?: unknown })?.error ?? 'unknown') ⏎ return { ok: false, reason: `ERR|WIRE-SPLIT-DENY:${err}；${refreshS"
+    },
+    {
+     "line": 415,
+     "cn": "缺sessionKey（去default共享；须显式传session，不回落default）",
+     "ctx": "} ⏎ if (String(sessionKeySrc ?? '') === 'wire-self') { ⏎ recordGate({ sessionKey: req.key, sessionKeySrc: 'wire-self', rootSrc: 'deny-wire-split', mode: 'standby', locked: false, host: '', hostMismatch: false }) ⏎ return"
+    }
+   ]
+  },
+  {
+   "code": "ERR|GATE-UNKNOWN",
+   "count": 2,
+   "files": [
+    "session-shards.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 422,
+     "cn": "",
+     "ctx": "const mr = readShardMode(root, key) ⏎ const tr = readShardTarget(root, key) ⏎ const task = readTaskAt(root, key) ⏎ if (request.requiredMode === 'task' && task.kind === 'corrupt') return 'ERR|GATE-UNKNOWN:任务状态损坏，执行已拒绝；修复:"
+    },
+    {
+     "line": 494,
+     "cn": "见 docs/03-usage.md 门禁节",
+     "ctx": "default: ⏎ return `ERR|${decision.code}:${decision.reason}；修复: ${decision.remediation ?? '见 docs/03-usage.md 门禁节'}` ⏎ } ⏎ } catch { return 'ERR|GATE-UNKNOWN:门禁自检异常，已按 fail-closed 拒绝；修复: 重试，仍红跑 WS-SELFTEST' } ⏎ }"
+    }
+   ]
+  },
+  {
+   "code": "ERR|STANDBY-DENY",
+   "count": 2,
+   "files": [
+    "session-shards.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 484,
+     "cn": "工作台已切○待命，对话侧同停；修复: kitty_settings mode-set task重锁定或切回●再跑（先mode-get对齐）",
+     "ctx": "switch (decision.code) { ⏎ case 'STANDBY-DENY': ⏎ if (mode === 'standby' && locked) return 'ERR|PAUSED-DENY:工作台已切○待命，对话侧同停；修复: kitty_settings mode-set task重锁定或切回●再跑（先mode-get对齐）' ⏎ return 'ERR|STANDBY-DENY:无TARGET不开跑/不写道"
+    },
+    {
+     "line": 486,
+     "cn": "无TARGET不开跑/不写道；修复例: kitty_settings target-set sessionGoal=<目标> target=<进程> shape=exe",
+     "ctx": "if (mode === 'standby' && locked) return 'ERR|PAUSED-DENY:工作台已切○待命，对话侧同停；修复: kitty_settings mode-set task重锁定或切回●再跑（先mode-get对齐）' ⏎ return 'ERR|STANDBY-DENY:无TARGET不开跑/不写道；修复例: kitty_settings target-set sessionGoal=<目标> t"
+    }
+   ]
+  },
+  {
+   "code": "ERR|TASK-EVENT-FAILED",
+   "count": 2,
+   "files": [
+    "tool-factory.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 86,
+     "cn": "",
+     "ctx": "} ⏎ } ⏎ } ⏎ } catch (e) { const err = new Error(`ERR|TASK-EVENT-FAILED:工具尚未执行；${String((e as Error)?.message ?? e)}`); err.name = 'KittyToolFailure'; throw err } ⏎ }"
+    },
+    {
+     "line": 99,
+     "cn": "",
+     "ctx": ": { type: 'stage-complete', stage: task.stage }, task.generation, ⏎ { toolEvent: true, tool: tname, action: failed ? 'failed' : 'finished', receipt: brief(result) }) ⏎ appendTaskTrail(task.root, task.sessionId, { stage: "
+    }
+   ]
+  },
+  {
+   "code": "ERR|ROOT-UNRESOLVED-DENY",
+   "count": 1,
+   "files": [
+    "action-request.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 72,
+     "cn": "",
+     "ctx": "const migFor = (root: string, key: string, trail = false) => (httpKeyUnregistered ? NO_MIG : migrateShard(root, key, { trail })) ⏎ const HTTP_ROOT_GATED = new Set(['reverse-init', 'mode-set', 'target-set', 'task-inherit'"
+    }
+   ]
+  },
+  {
+   "code": "ERR|op 缺失（如 R|0x..|dword）",
+   "count": 1,
+   "files": [
+    "actions-bridge.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 19,
+     "cn": "未归档(.res)=${b.syncPending}（目标 0；残留 cmd.txt 中和为 PING 后重启）",
+     "ctx": "} ⏎ if (act === 'bridge') { ⏎ const op = (opts.op ?? '').trim() ⏎ if (!op) return { ok: false, output: 'ERR|op 缺失（如 R|0x..|dword）' } ⏎ if (/^DBG_ATTACH/i.test(op)) return { ok: false, output: 'ERR|DBG_ATTACH 禁止（fail-fast"
+    }
+   ]
+  },
+  {
+   "code": "ERR|DBG_ATTACH 禁止（fail-fast 杀宿主，真调试走 C 通道 kitty_x64dbg）",
+   "count": 1,
+   "files": [
+    "actions-bridge.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 20,
+     "cn": "缺失（如 R|0x..|dword）",
+     "ctx": "if (act === 'bridge') { ⏎ const op = (opts.op ?? '').trim() ⏎ if (!op) return { ok: false, output: 'ERR|op 缺失（如 R|0x..|dword）' } ⏎ if (/^DBG_ATTACH/i.test(op)) return { ok: false, output: 'ERR|DBG_ATTACH 禁止（fail-fast 杀宿主"
+    }
+   ]
+  },
+  {
+   "code": "ERR|bridge-failed",
+   "count": 1,
+   "files": [
+    "actions-bridge.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 24,
+     "cn": "禁止（fail-fast 杀宿主，真调试走 C 通道 kitty_x64dbg）",
+     "ctx": "try { ⏎ const out = await bridgeCall(live.kittyDir, op, live.timeoutMs) ⏎ return { ok: true, output: out } ⏎ } catch (e) { return { ok: false, output: `ERR|bridge-failed: ${String((e as Error)?.message ?? e)}` } } ⏎ }"
+    }
+   ]
+  },
+  {
+   "code": "ERR|scan 缺参：vt/val/start/stop（窗≤16MB/片，多窗自动分片）",
+   "count": 1,
+   "files": [
+    "actions-bridge.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 32,
+     "cn": "",
+     "ctx": "const startS = (opts.start ?? '').trim() ⏎ const stopS = (opts.stop ?? '').trim() ⏎ const top = Math.max(1, Math.min(parseInt(opts.top ?? '32', 10) || 32, 200)) ⏎ if (!val || !startS || !stopS) return { ok: false, output"
+    }
+   ]
+  },
+  {
+   "code": "ERR|scan 窗口非法（start/stop须为0x或十进制且stop>start）",
+   "count": 1,
+   "files": [
+    "actions-bridge.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 35,
+     "cn": "缺参：vt/val/start/stop（窗≤16MB/片，多窗自动分片）",
+     "ctx": "if (!val || !startS || !stopS) return { ok: false, output: 'ERR|scan 缺参：vt/val/start/stop（窗≤16MB/片，多窗自动分片）' } ⏎ const startN = parseAddr(startS) ⏎ const stopN = parseAddr(stopS) ⏎ if (!Number.isFinite(startN) || !Number."
+    }
+   ]
+  },
+  {
+   "code": "ERR|scan 窗口为空",
+   "count": 1,
+   "files": [
+    "actions-bridge.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 37,
+     "cn": "窗口非法（start/stop须为0x或十进制且stop>start）",
+     "ctx": "const stopN = parseAddr(stopS) ⏎ if (!Number.isFinite(startN) || !Number.isFinite(stopN) || stopN <= startN) return { ok: false, output: 'ERR|scan 窗口非法（start/stop须为0x或十进制且stop>start）' } ⏎ const chunks = splitWindow(start"
+    }
+   ]
+  },
+  {
+   "code": "ERR|pback 缺参：addr/start/stop",
+   "count": 1,
+   "files": [
+    "actions-bridge.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 67,
+     "cn": "",
+     "ctx": "const startS = (opts.start ?? '').trim() ⏎ const stopS = (opts.stop ?? '').trim() ⏎ const top = Math.max(1, Math.min(parseInt(opts.top ?? '32', 10) || 32, 200)) ⏎ if (!addr || !startS || !stopS) return { ok: false, outpu"
+    }
+   ]
+  },
+  {
+   "code": "ERR|pback 窗口非法（start/stop须为0x或十进制且stop>start）",
+   "count": 1,
+   "files": [
+    "actions-bridge.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 70,
+     "cn": "缺参：addr/start/stop",
+     "ctx": "if (!addr || !startS || !stopS) return { ok: false, output: 'ERR|pback 缺参：addr/start/stop' } ⏎ const startN = parseAddr(startS) ⏎ const stopN = parseAddr(stopS) ⏎ if (!Number.isFinite(startN) || !Number.isFinite(stopN) |"
+    }
+   ]
+  },
+  {
+   "code": "ERR|skill-pack 缺席：vendor/dsh-reverse-skill 未检出（git clone 上游后重载）",
+   "count": 1,
+   "files": [
+    "actions-packs.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 9,
+     "cn": "",
+     "ctx": "const { live, defaults, syncLive, drvGuard, stateSnapshot, bridgeInfo, pickVariantForUi, evidenceList, selfcheckSix, selfcheckJs, doHostRebind, taskRegistry, logCompat, VERSION, anti, drv, act, opts, name, rootOf, syncLe"
+    }
+   ]
+  },
+  {
+   "code": "ERR|找不到 skill",
+   "count": 1,
+   "files": [
+    "actions-packs.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 19,
+     "cn": "取全文：skill-get + skill=<name>；总路由：reverse-skill-router",
+     "ctx": "} ⏎ if (act === 'skill-get') { ⏎ const s = skillPackGet(opts.skill ?? '') ⏎ if (!s) return { ok: false, output: `ERR|找不到 skill '${opts.skill ?? ''}'；先 skill-list 看名` } ⏎ return { ok: true, output: `# ${s.name}\\n${s.descr"
+    }
+   ]
+  },
+  {
+   "code": "ERR|预设包缺席或 persona 解析失败",
+   "count": 1,
+   "files": [
+    "actions-packs.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 39,
+     "cn": "全文：preset-persona / preset-rules；比对：preset-diff",
+     "ctx": "} ⏎ if (act === 'preset-persona') { ⏎ const t = presetPackPersona() ⏎ if (!t) return { ok: false, output: 'ERR|预设包缺席或 persona 解析失败' } ⏎ return { ok: true, output: t }"
+    }
+   ]
+  },
+  {
+   "code": "ERR|预设包缺席或 RULES 缺失",
+   "count": 1,
+   "files": [
+    "actions-packs.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 44,
+     "cn": "预设包缺席或 persona 解析失败",
+     "ctx": "} ⏎ if (act === 'preset-rules') { ⏎ const t = presetPackRules() ⏎ if (!t) return { ok: false, output: 'ERR|预设包缺席或 RULES 缺失' } ⏎ return { ok: true, output: t }"
+    }
+   ]
+  },
+  {
+   "code": "ERR|preset-rollback 需要 backupDir（来自 preset-sync 回执）",
+   "count": 1,
+   "files": [
+    "actions-packs.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 54,
+     "cn": "取全文：skill-get + skill=<name>",
+     "ctx": "} ⏎ if (act === 'preset-rollback') { ⏎ const backupDir = String(opts.backupDir ?? '').trim() ⏎ if (!backupDir) return { ok: false, output: 'ERR|preset-rollback 需要 backupDir（来自 preset-sync 回执）' } ⏎ const r = presetPackRol"
+    }
+   ]
+  },
+  {
+   "code": "ERR|preset-sync 需单次确认：写 ~/.dsh/.agent-presets/reverse-hybrid/（用户源）。先 preset-diff 看差异，确认后带 confirm=true 重调（用户修改过的件自动跳过不覆盖）",
+   "count": 1,
+   "files": [
+    "actions-packs.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 60,
+     "cn": "需要 backupDir（来自 preset-sync 回执）",
+     "ctx": "} ⏎ if (act === 'preset-sync') { ⏎ if ((opts.confirm as unknown) !== true && opts.confirm !== 'true') { ⏎ return { ok: false, output: 'ERR|preset-sync 需单次确认：写 ~/.dsh/.agent-presets/reverse-hybrid/（用户源）。先 preset-diff 看差异，"
+    }
+   ]
+  },
+  {
+   "code": "ERR|TASK-TRANSITION-INVALID",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 57,
+     "cn": "",
+     "ctx": "if (act === 'task-dispatch') { ⏎ const raw = String(opts.taskTransition ?? '').trim() ⏎ if (!raw) return { ok: false, output: 'ERR|TASK-DISPATCH-MISSING: taskTransition is required' } ⏎ try { transition = JSON.parse(raw)"
+    }
+   ]
+  },
+  {
+   "code": "ERR|target-set 缺参：target（对话理解到的目标，如进程名/路径/URL）",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 116,
+     "cn": "引擎维度独立于形态\r       const sessionGoal = String(opts.sessionGoal ?? opts.goal ??",
+     "ctx": "const engineRaw = String(opts.engine ?? '').trim().toLowerCase() ⏎ const engine = ['ue', 'unreal', 'unity', 'godot', ''].includes(engineRaw) ? engineRaw : ''   // F7：引擎维度独立于形态 ⏎ const sessionGoal = String(opts.sessionGoa"
+    }
+   ]
+  },
+  {
+   "code": "ERR|target-set 缺参：sessionGoal（F5 双字段门禁：单字段不落盘，先 ask 选择题定会话目标）",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 117,
+     "cn": "缺参：target（对话理解到的目标，如进程名/路径/URL）",
+     "ctx": "const engine = ['ue', 'unreal', 'unity', 'godot', ''].includes(engineRaw) ? engineRaw : ''   // F7：引擎维度独立于形态 ⏎ const sessionGoal = String(opts.sessionGoal ?? opts.goal ?? '').trim().slice(0, 512) ⏎ if (!target) return { "
+    }
+   ]
+  },
+  {
+   "code": "ERR|target-set 写入失败",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 138,
+     "cn": "硬规定（HARD-RULE-SESSION-ROOT）：不再向项目根 legacy 三件广播，跨会话零泄漏。\r         return { ok: true, output: JSON.stringify({ ...stateData,",
+     "ctx": "try { writeTruthJson(p.mode, { mode: 'task', ts, src: setSrc, sessionKey: sk, sessionKeySrc: keySrc, host: H }) } catch (e) { warn.push(`${base(p.mode)}:${String((e as Error)?.message ?? e)}`) } ⏎ return { ok: true, outp"
+    }
+   ]
+  },
+  {
+   "code": "ERR|truth-corrupt 真相源不可解析（target-state.json",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 175,
+     "cn": "隔离：分片缺件 → 新键首读空 TARGET；旧会话内容未经允许不带入新会话（无镜像展示）。\r       const hasL1 = existsSync(p.legacyTarget)\r       const hasL2 = exist",
+     "ctx": "const st = readTruthJson(p.legacyTarget) ⏎ const lg = readTruthJson(p.legacyLastTarget) ⏎ if ((hasL1 && !st.ok) || (hasL2 && !lg.ok)) { ⏎ return { ok: false, output: `ERR|truth-corrupt 真相源不可解析（target-state.json:${hasL1 ?"
+    }
+   ]
+  },
+  {
+   "code": "ERR|task-inherit 缺参：from=<源会话 sessionKey>（显式指定要继承哪个会话的任务）",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 193,
+     "cn": "读写；不做隐式继承、不读项目根全局件。 */\r       const sk = sanitizeSessionKey(opts.session) ||",
+     "ctx": "const sk = sanitizeSessionKey(opts.session) || 'default' ⏎ const from = sanitizeSessionKey((opts as { from?: unknown }).from ?? opts.text) ⏎ const keySrc = normKeySrc(opts.sessionKeySrc) ⏎ if (!from) return { ok: false, "
+    }
+   ]
+  },
+  {
+   "code": "ERR|task-inherit 自我继承无意义：from 与当前会话键相同",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 194,
+     "cn": "缺参：from=<源会话 sessionKey>（显式指定要继承哪个会话的任务）",
+     "ctx": "const from = sanitizeSessionKey((opts as { from?: unknown }).from ?? opts.text) ⏎ const keySrc = normKeySrc(opts.sessionKeySrc) ⏎ if (!from) return { ok: false, output: 'ERR|task-inherit 缺参：from=<源会话 sessionKey>（显式指定要继承哪"
+    }
+   ]
+  },
+  {
+   "code": "ERR|inherit-no-source",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 201,
+     "cn": "",
+     "ctx": "const src = shardPaths(RT, from) ⏎ const dst = shardPaths(RT, sk) ⏎ const st = readTruthJson(src.target) ⏎ if (!st.ok) return { ok: false, output: `ERR|inherit-no-source:源会话分片无 target.json（${src.target}）→ 该会话未锁定任务或分片已清；不"
+    }
+   ]
+  },
+  {
+   "code": "ERR|inherit-host-mismatch",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 204,
+     "cn": "源会话分片无 target.json（${src.target}）→ 该会话未锁定任务或分片已清；不隐式回落项目根",
+     "ctx": "if (!st.ok) return { ok: false, output: `ERR|inherit-no-source:源会话分片无 target.json（${src.target}）→ 该会话未锁定任务或分片已清；不隐式回落项目根` } ⏎ const sd = st.data as { sessionGoal?: unknown; goal?: unknown; targetProcess?: unknown; target"
+    }
+   ]
+  },
+  {
+   "code": "ERR|inherit-incomplete",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 207,
+     "cn": "本机=${hostId()}）→ 拒绝继承",
+     "ctx": "if (!hostMatches(sHost)) return { ok: false, output: `ERR|inherit-host-mismatch:源会话分片属他机（host=${sHost || '(空)'}，本机=${hostId()}）→ 拒绝继承` } ⏎ const tp = String(sd.targetProcess ?? sd.target ?? '').trim() ⏎ const goal = Stri"
+    }
+   ]
+  },
+  {
+   "code": "ERR|task-inherit 失败",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 219,
+     "cn": "已从源会话分片目录继承（只读源、只写本会话）；源会话状态未被改动",
+     "ctx": "writeTruthJson(dst.mode, { mode, ts, src: 'inherit', host: H, sessionKey: sk, sessionKeySrc: keySrc, inheritedFrom: from }) ⏎ return { ok: true, output: JSON.stringify({ ...data, mode, sessionKey: sk, sessionKeySrc: keyS"
+    }
+   ]
+  },
+  {
+   "code": "ERR|mode-set 缺参：mode=task|standby",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 224,
+     "cn": "失败: ${String((e as Error)?.message ?? e)}",
+     "ctx": "if (act === 'mode-set') { ⏎ const mRaw = String((opts as { mode?: unknown }).mode ?? opts.text ?? '').trim().toLowerCase() ⏎ const mode = mRaw === 'task' || mRaw === '●任务态' || mRaw === '任务态' ? 'task' : (mRaw === 'standby"
+    }
+   ]
+  },
+  {
+   "code": "ERR|mode-set 写入失败",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 261,
+     "cn": "硬规定：唯一真相=本会话分片（F1：无 BOM 写盘）\r         // 硬规定（HARD-RULE-SESSION-ROOT）：不写项目根 session-mode.json 镜像。\r         return { ok: tru",
+     "ctx": "writeTruthJson(p.mode, { ...data, sessionKey: sk, sessionKeySrc: keySrc })   // 硬规定：唯一真相=本会话分片（F1：无 BOM 写盘） ⏎ return { ok: true, output: JSON.stringify({ ...data, sessionKey: sk, sessionKeySrc: keySrc, rootSrc: 'shard', "
+    }
+   ]
+  },
+  {
+   "code": "ERR|truth-corrupt（不再伪装成用户待命）",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 264,
+     "cn": "写入失败: ${String((e as Error)?.message ?? e)}",
+     "ctx": "} catch (e) { pauseTaskAfterMirrorFailure(sk); return { ok: false, output: `ERR|mode-set 写入失败: ${String((e as Error)?.message ?? e)}` } } ⏎ } ⏎ if (act === 'mode-get') {"
+    }
+   ]
+  },
+  {
+   "code": "ERR|truth-corrupt mode.json 不可解析().error}) → 跑 reverse-init 重建或 mode-set 重写",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 274,
+     "cn": "下跳过迁移\r       const p = shardPaths(RT, sk)\r       if (existsSync(p.mode)) {\r         const r = readTruthJson(p.mode)",
+     "ctx": "const p = shardPaths(RT, sk) ⏎ if (existsSync(p.mode)) { ⏎ const r = readTruthJson(p.mode) ⏎ if (!r.ok) return { ok: false, output: `ERR|truth-corrupt mode.json 不可解析(${(r as { error: string }).error}) → 跑 reverse-init 重建"
+    }
+   ]
+  },
+  {
+   "code": "ERR|truth-corrupt session-mode.json 不可解析().error}) → 跑 reverse-init 重建或 mode-set 重写",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 286,
+     "cn": "新会话键未锁定（缺件=待命，旧件亦无）→ 显式 mode-set task 后进任务态（t13）",
+     "ctx": "const mp = p.legacyMode ⏎ if (!existsSync(mp)) return { ok: true, output: JSON.stringify({ mode: 'standby', ts: 0, src: 'none', sessionKey: sk, sessionKeySrc: keySrc, rootSrc: 'shard-new', host: '', hostNow: hostId(), ho"
+    }
+   ]
+  },
+  {
+   "code": "ERR|reverse-init 失败",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 368,
+     "cn": "",
+     "ctx": "} ⏎ verify.push(`verify root=${RT} rootSrc=${R0.rootSrc} candidates=[${R0.candidates.join(' ; ')}]`) ⏎ return { ok: true, output: [head, ...out, ...verify].join('\\n') } ⏎ } catch (e) { return { ok: false, output: `ERR|re"
+    }
+   ]
+  },
+  {
+   "code": "ERR|trail-append 缺参：target + action（文本走 text）",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 376,
+     "cn": "",
+     "ctx": "const text = String(opts.text ?? '').slice(0, 2000) ⏎ const stage = String((opts as { stage?: unknown }).stage ?? '').trim().slice(0, 32) ⏎ const sessionGoal = String(opts.sessionGoal ?? (opts as { goal?: unknown }).goal"
+    }
+   ]
+  },
+  {
+   "code": "ERR|trail-append 写入失败",
+   "count": 1,
+   "files": [
+    "actions-session.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 412,
+     "cn": "跳坏行 */ }\r           }\r         } catch { /* 计数失败不阻断 */ }\r         return { ok: true, output:",
+     "ctx": "} ⏎ } catch { /* 计数失败不阻断 */ } ⏎ return { ok: true, output: `trail-ok target=${target} action=${action} sessionKey=${sk} sessionKeySrc=${keySrc} agentKey=${agentKey} rootKeySrc=${rootKeySrc}${note ? ` note=${note}` : ''} "
+    }
+   ]
+  },
+  {
+   "code": "ERR|jadx missing",
+   "count": 1,
+   "files": [
+    "apkjadx.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 20,
+     "cn": "",
+     "ctx": "return { bat, sh, lib, exists, libExists }; ⏎ } ⏎ export function runJadx(root: string, target: string, out: string): string { ⏎ const b = findJadxBin(root); if (!b.exists) return 'ERR|jadx missing ' + b.bat; ⏎ if (!targ"
+    }
+   ]
+  },
+  {
+   "code": "ERR|need target (.apk/.dex)",
+   "count": 1,
+   "files": [
+    "apkjadx.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 21,
+     "cn": "",
+     "ctx": "} ⏎ export function runJadx(root: string, target: string, out: string): string { ⏎ const b = findJadxBin(root); if (!b.exists) return 'ERR|jadx missing ' + b.bat; ⏎ if (!target) return 'ERR|need target (.apk/.dex)'; ⏎ co"
+    }
+   ]
+  },
+  {
+   "code": "ERR|apktool.jar missing",
+   "count": 1,
+   "files": [
+    "apkjadx.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 40,
+     "cn": "",
+     "ctx": "export function findApktoolJar(root: string) { const jar = join(root, 'vendor', 'apktool', 'apktool.jar'); let exists = false; try { exists = existsSync(jar); } catch { exists = false; } return { jar, exists }; } ⏎ expor"
+    }
+   ]
+  },
+  {
+   "code": "ERR|need target",
+   "count": 1,
+   "files": [
+    "apkjadx.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 41,
+     "cn": "",
+     "ctx": "export function findApkidBin(root: string) { const cands = [join(root, 'vendor', 'apkid', 'apkid.exe'), join(root, 'vendor', 'apkid', 'apkid.bat')]; for (const exe of cands) { try { if (existsSync(exe)) return { exe, exi"
+    }
+   ]
+  },
+  {
+   "code": "ERR|apkid missing",
+   "count": 1,
+   "files": [
+    "apkjadx.ts"
+   ],
+   "tools": [
+    "kitty_apkscan"
+   ],
+   "samples": [
+    {
+     "line": 49,
+     "cn": "改smali->build->zipalign/apksigner(工作区内)",
+     "ctx": "const reg = (o: any, tag: string) => ctx.effect(() => ctx.tools.register(defineTool(o)), tag); ⏎ reg({ name: 'kitty_jadx', description: 'APK Java decompile (jadx passthrough)', parameters: { action: { type: 'string', req"
+    }
+   ]
+  },
+  {
+   "code": "ERR|AssetRipper.exe missing",
+   "count": 1,
+   "files": [
+    "assetrip.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 21,
+     "cn": "",
+     "ctx": "} ⏎ export function findStudioBin(root: string) { const exe = join(root, 'vendor', 'assetstudio', 'AssetStudioGUI.exe'); let exists = false; try { exists = existsSync(exe); } catch { exists = false; } return { exe, exist"
+    }
+   ]
+  },
+  {
+   "code": "ERR|need target (Data dir / .bundle / .assets)",
+   "count": 1,
+   "files": [
+    "assetrip.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 22,
+     "cn": "",
+     "ctx": "export function findStudioBin(root: string) { const exe = join(root, 'vendor', 'assetstudio', 'AssetStudioGUI.exe'); let exists = false; try { exists = existsSync(exe); } catch { exists = false; } return { exe, exists };"
+    }
+   ]
+  },
+  {
+   "code": "ERR|timeout（宿主未起 / 桥未消费 cmd.txt / 并发覆盖 / 超时——先 kitty_status 判桥死活）",
+   "count": 1,
+   "files": [
+    "bridge.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 35,
+     "cn": "多行回包的数据行（首行之后） */\r   lines: string[]\r }\r \r export const TIMEOUT_REPLY =",
+     "ctx": "} ⏎ export const TIMEOUT_REPLY = ⏎ 'ERR|timeout（宿主未起 / 桥未消费 cmd.txt / 并发覆盖 / 超时——先 kitty_status 判桥死活）'"
+    }
+   ]
+  },
+  {
+   "code": "ERR||repair=kitty_ops",
+   "count": 1,
+   "files": [
+    "bridge.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 120,
+     "cn": "",
+     "ctx": "} ⏎ function denied(cmd: string, code: string): BridgeReply { ⏎ return { cmd, reply: `ERR|${code}|repair=kitty_ops`, ms: 0, ok: false, timeout: false, code: 'ERR', payload: `${code}|repair=kitty_ops`, lines: [] } ⏎ }"
+    }
+   ]
+  },
+  {
+   "code": "ERR| 前缀、冒号后文案、_/- 差异全部归一）。 */",
+   "count": 1,
+   "files": [
+    "capability.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 80,
+     "cn": "",
+     "ctx": "DBG_MISSING: 'dbg-missing', ⏎ } as const ⏎ /** P1 全入口统一：大小写/前缀不敏感的诊断码归一（ERR| 前缀、冒号后文案、_/- 差异全部归一）。 */ ⏎ export function normalizeDiagnosticCode(code: unknown): string {"
+    }
+   ]
+  },
+  {
+   "code": "ERR|gameDir missing",
+   "count": 1,
+   "files": [
+    "cpp2il.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 29,
+     "cn": "",
+     "ctx": "export function triageIL2CPP(gameDir: string): string { ⏎ if (!gameDir) return 'ERR|need gameDir'; ⏎ let ok = false; try { ok = existsSync(gameDir); } catch { ok = false; } ⏎ if (!ok) return 'ERR|gameDir missing ' + game"
+    }
+   ]
+  },
+  {
+   "code": "ERR|Cpp2IL.exe missing",
+   "count": 1,
+   "files": [
+    "cpp2il.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 37,
+     "cn": "",
+     "ctx": "} ⏎ export function runCpp2IL(root: string, gameDir: string, out: string, exeName: string): string { ⏎ const b = findCpp2ILBin(root); ⏎ if (!b.exists) return 'ERR|Cpp2IL.exe missing ' + b.exe; ⏎ const args = ['--game-pat"
+    }
+   ]
+  },
+  {
+   "code": "ERR|need path",
+   "count": 1,
+   "files": [
+    "engines.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 16,
+     "cn": "",
+     "ctx": "} ⏎ export function routeEngine(path: string): string { ⏎ let ok = false; try { ok = existsSync(path); } catch { ok = false; } ⏎ if (!ok) return 'ERR|need path'; ⏎ let isFile = false; try { isFile = statSync(path).isFile"
+    }
+   ]
+  },
+  {
+   "code": "ERR|need pkg + script",
+   "count": 1,
+   "files": [
+    "fridaplus.ts"
+   ],
+   "tools": [
+    "kitty_frida"
+   ],
+   "samples": [
+    {
+     "line": 71,
+     "cn": "",
+     "ctx": "reg({ name: 'kitty_frida', description: 'dynamic hook (Frida/objection/R0capture passthrough)', parameters: { action: { type: 'string', required: true }, pkg: { type: 'string' }, script: { type: 'string' }, out: { type: "
+    }
+   ]
+  },
+  {
+   "code": "ERR|frida-trace missing",
+   "count": 1,
+   "files": [
+    "fridaplus.ts"
+   ],
+   "tools": [
+    "kitty_frida"
+   ],
+   "samples": [
+    {
+     "line": 72,
+     "cn": "",
+     "ctx": "const f = findFridaBin(root); const ps = findFridaTool(root, 'frida-ps'); const tr = findFridaTool(root, 'frida-trace'); ⏎ if (act === 'status') { const r = findR0Script(root); return [FRIDA_UPSTREAM + ' exe=' + f.exe + "
+    }
+   ]
+  },
+  {
+   "code": "ERR|r0capture missing",
+   "count": 1,
+   "files": [
+    "fridaplus.ts"
+   ],
+   "tools": [
+    "kitty_frida"
+   ],
+   "samples": [
+    {
+     "line": 73,
+     "cn": "",
+     "ctx": "if (act === 'status') { const r = findR0Script(root); return [FRIDA_UPSTREAM + ' exe=' + f.exe + ' exists=' + f.exists + ' source=' + f.source, 'frida-ps=' + ps.exe + ' exists=' + ps.exists + ' | frida-trace=' + tr.exe +"
+    }
+   ]
+  },
+  {
+   "code": "ERR|parse 需要 out=<脱壳产物目录>",
+   "count": 1,
+   "files": [
+    "fridaplus.ts"
+   ],
+   "tools": [
+    "kitty_unpack"
+   ],
+   "samples": [
+    {
+     "line": 75,
+     "cn": "用 tshark 收)",
+     "ctx": "if (act === 'trace') { if (!ps.exists && !tr.exists) return 'ERR|frida-trace missing ' + tr.exe; const pk = String(args.pkg || ''); if (!pk) return 'HINT frida-trace -U -f PKG -j \"*!*encrypt*\" / -i encrypt'; const r = sp"
+    }
+   ]
+  },
+  {
+   "code": "ERR|luadec missing",
+   "count": 1,
+   "files": [
+    "fridaplus.ts"
+   ],
+   "tools": [
+    "kitty_lua"
+   ],
+   "samples": [
+    {
+     "line": 76,
+     "cn": "目录内无 .dex（确认脱壳是否真正落盘）",
+     "ctx": "if (act === 'capture') { const r = findR0Script(root); if (!r.exists) return 'ERR|r0capture missing ' + r.js + ' NEXT: 放 vendor/r0capture/script.js'; const pk = String(args.pkg || ''); if (!pk) return 'HINT frida -U -f P"
+    }
+   ]
+  },
+  {
+   "code": "ERR|gdre_tools.exe missing",
+   "count": 1,
+   "files": [
+    "gdre.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 22,
+     "cn": "",
+     "ctx": "} ⏎ export function runGDRE(root: string, args: string[]): string { ⏎ const b = findGDREBin(root); ⏎ if (!b.exists) return 'ERR|gdre_tools.exe missing ' + b.exe; ⏎ try {"
+    }
+   ]
+  },
+  {
+   "code": "ERR|ghidra not ready (headless= script=)",
+   "count": 1,
+   "files": [
+    "ghidra.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 81,
+     "cn": "真跑一次 headless 分析（target → outDir 四件套） */\r export function runGhidraAnalyze(root: string, target: string, outDirIn: string",
+     "ctx": "export function runGhidraAnalyze(root: string, target: string, outDirIn: string, timeoutMs = 900000): GhidraRun { ⏎ const g = findGhidra(root) ⏎ if (!g.exists) { ⏎ return { ok: false, outDir: '', exit: null, tail: `ERR|g"
+    }
+   ]
+  },
+  {
+   "code": "ERR|no functions.csv in",
+   "count": 1,
+   "files": [
+    "ghidra.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 148,
+     "cn": "产物读取面（读 logs/ghidra-* 四件套） ---------------- */\r \r export function ghidraFunctions(outDir: string, filter: string, limit:",
+     "ctx": "export function ghidraFunctions(outDir: string, filter: string, limit: number): string { ⏎ const f = join(outDir, 'functions.csv') ⏎ if (!existsSync(f)) return `ERR|no functions.csv in ${outDir}` ⏎ let rows: string[] = ["
+    }
+   ]
+  },
+  {
+   "code": "ERR|no decompile_sample.txt in",
+   "count": 1,
+   "files": [
+    "ghidra.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 159,
+     "cn": "",
+     "ctx": "export function ghidraDecompile(outDir: string, name: string): string { ⏎ const f = join(outDir, 'decompile_sample.txt') ⏎ if (!existsSync(f)) return `ERR|no decompile_sample.txt in ${outDir}` ⏎ let txt = ''"
+    }
+   ]
+  },
+  {
+   "code": "ERR|need existing target",
+   "count": 1,
+   "files": [
+    "ghidra.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 174,
+     "cn": "从二进制提取可读字符串（不依赖 Ghidra；最小长度 5，可 ASCII/UTF-16） */\r export function extractStrings(target: string, min = 5, limit = 400, ut",
+     "ctx": "/** 从二进制提取可读字符串（不依赖 Ghidra；最小长度 5，可 ASCII/UTF-16） */ ⏎ export function extractStrings(target: string, min = 5, limit = 400, utf16 = true): string { ⏎ if (!target || !existsSync(target)) return `ERR|need existing target` "
+    }
+   ]
+  },
+  {
+   "code": "ERR|无产物目录：先 action=analyze，或用 out=<logs/ghidra-...>",
+   "count": 1,
+   "files": [
+    "ghidra.ts"
+   ],
+   "tools": [
+    "kitty_ghidra"
+   ],
+   "samples": [
+    {
+     "line": 228,
+     "cn": "需要 target",
+     "ctx": "return ghidraRunReport(root, run, t) ⏎ } ⏎ const outDir = String(args.out || '') || latestGhidraOut(root) ⏎ if (!outDir) return 'ERR|无产物目录：先 action=analyze，或用 out=<logs/ghidra-...>' ⏎ if (act === 'functions') return ghid"
+    }
+   ]
+  },
+  {
+   "code": "ERR|tree-missing（带解析 root + 候选路径清单），禁止静默用错树/错根。 */",
+   "count": 1,
+   "files": [
+    "host-utils.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 104,
+     "cn": "通道：调用 x64dbg-channel.ps1（-SelfTest/-Cmd/-Run/-SeedBp/-RunUntil/-ReadLog/-ReadDb/-Collect）",
+     "ctx": "} ⏎ /** C 通道：调用 x64dbg-channel.ps1（-SelfTest/-Cmd/-Run/-SeedBp/-RunUntil/-ReadLog/-ReadDb/-Collect） ⏎ * P2：脚本缺失一律 ERR|tree-missing（带解析 root + 候选路径清单），禁止静默用错树/错根。 */ ⏎ export function runX64dbg(scriptPath: string, psExe: "
+    }
+   ]
+  },
+  {
+   "code": "ERR|not-installed（服务已被删，无重建能力）→ 点【初始化驱动】重建",
+   "count": 1,
+   "files": [
+    "host-utils.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 687,
+     "cn": "修不成就如实报 */ }\r     }\r     aux = settle(DRV_AUX, 3000)\r   }\r   if (aux ===",
+     "ctx": "aux = settle(DRV_AUX, 3000) ⏎ } ⏎ if (aux === 'NOT_INSTALLED') { ⏎ return `[drv] ${DRV_MAIN}=${scQueryState(DRV_MAIN)} ${DRV_AUX}=NOT_INSTALLED\\n[host] KittyCE=${hostState()}\\n[recover] ERR|not-installed（服务已被删，无重建能力）→ 点【"
+    }
+   ]
+  },
+  {
+   "code": "ERR|ida-not-installed（落盘 vendor/ida/bin/idat64.exe 后重试）",
+   "count": 1,
+   "files": [
+    "ida.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 158,
+     "cn": "真跑一次 IDA 批处理分析 */\r export function runIdaAnalyze(root: string, target: string, outDirIn: string, timeoutMs = 600000): Ida",
+     "ctx": "const ida = findIda(root) ⏎ const sc = idaScript(root) ⏎ if (ida.kind === 'none') { ⏎ return { ok: false, outDir: '', exit: null, tail: `ERR|ida-not-installed（落盘 vendor/ida/bin/idat64.exe 后重试）\\nNEXT: kitty_ghidra action="
+    }
+   ]
+  },
+  {
+   "code": "ERR|ida_export.py missing",
+   "count": 1,
+   "files": [
+    "ida.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 161,
+     "cn": "落盘 vendor/ida/bin/idat64.exe 后重试）\\nNEXT: kitty_ghidra action=analyze target=<同目标>（等价档，伪代码可用）",
+     "ctx": "return { ok: false, outDir: '', exit: null, tail: `ERR|ida-not-installed（落盘 vendor/ida/bin/idat64.exe 后重试）\\nNEXT: kitty_ghidra action=analyze target=<同目标>（等价档，伪代码可用）`, data: null } ⏎ } ⏎ if (!existsSync(sc)) { ⏎ return {"
+    }
+   ]
+  },
+  {
+   "code": "ERR|no ida_export.json in",
+   "count": 1,
+   "files": [
+    "ida.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 234,
+     "cn": "产物读取面 ---------------- */\r function loadIda(outDir: string): { data: Record<string, unknown> | null; err: string } {\r   c",
+     "ctx": "/* ---------------- 产物读取面 ---------------- */ ⏎ function loadIda(outDir: string): { data: Record<string, unknown> | null; err: string } { ⏎ const jf = join(outDir, 'ida_export.json') ⏎ if (!existsSync(jf)) return { data:"
+    }
+   ]
+  },
+  {
+   "code": "ERR|no decompile_sample.txt（该目标档位无 Hex-Rays，或未选中函数）",
+   "count": 1,
+   "files": [
+    "ida.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 266,
+     "cn": "",
+     "ctx": "export function idaDecompile(outDir: string, name: string): string { ⏎ const f = join(outDir, 'decompile_sample.txt') ⏎ if (!existsSync(f)) return `ERR|no decompile_sample.txt（该目标档位无 Hex-Rays，或未选中函数）\\nNEXT: kitty_ghidra "
+    }
+   ]
+  },
+  {
+   "code": "ERR|无产物目录：先 action=analyze，或用 out=<logs/ida-...>",
+   "count": 1,
+   "files": [
+    "ida.ts"
+   ],
+   "tools": [
+    "kitty_ida"
+   ],
+   "samples": [
+    {
+     "line": 303,
+     "cn": "需要 target",
+     "ctx": "return idaRunReport(root, run, t) ⏎ } ⏎ const outDir = String(args.out || '') || latestIdaOut(root) ⏎ if (!outDir) return 'ERR|无产物目录：先 action=analyze，或用 out=<logs/ida-...>' ⏎ const lim = Math.min(args.limit ?? 80, 5000)"
+    }
+   ]
+  },
+  {
+   "code": "ERR|not found",
+   "count": 1,
+   "files": [
+    "idamcp.ts"
+   ],
+   "tools": [
+    "kitty_idamcp"
+   ],
+   "samples": [
+    {
+     "line": 279,
+     "cn": "",
+     "ctx": "if (act === 'describe') { ⏎ const tools = await cli.list() ⏎ const t = tools.find((x) => x.name === String(a.tool || '')) ⏎ if (!t) return `ERR|not found: ${a.tool}（用 action=list 取名字）` ⏎ return `# ${t.name}\\n${t.descript"
+    }
+   ]
+  },
+  {
+   "code": "ERR|call 需要 tool=<上游工具名>",
+   "count": 1,
+   "files": [
+    "idamcp.ts"
+   ],
+   "tools": [
+    "kitty_idamcp"
+   ],
+   "samples": [
+    {
+     "line": 284,
+     "cn": "用 action=list 取名字）",
+     "ctx": "} ⏎ if (act === 'call') { ⏎ const name = String(a.tool || '') ⏎ if (!name) return 'ERR|call 需要 tool=<上游工具名>' ⏎ let parsed: Record<string, unknown> = {}"
+    }
+   ]
+  },
+  {
+   "code": "ERR|args 不是合法 JSON",
+   "count": 1,
+   "files": [
+    "idamcp.ts"
+   ],
+   "tools": [
+    "kitty_idamcp"
+   ],
+   "samples": [
+    {
+     "line": 287,
+     "cn": "需要 tool=<上游工具名>",
+     "ctx": "if (!name) return 'ERR|call 需要 tool=<上游工具名>' ⏎ let parsed: Record<string, unknown> = {} ⏎ if (typeof a.args === 'string' && a.args.trim()) { ⏎ try { parsed = JSON.parse(a.args) as Record<string, unknown> } catch (e) { re"
+    }
+   ]
+  },
+  {
+   "code": "ERR|Il2CppDumper.exe missing",
+   "count": 1,
+   "files": [
+    "il2cppdumper.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 24,
+     "cn": "",
+     "ctx": "} ⏎ export function runIl2CppDumper(root: string, so: string, meta: string, out: string): string { ⏎ const b = findIl2CppDumperBin(root); ⏎ if (!b.exists) return 'ERR|Il2CppDumper.exe missing ' + b.exe; ⏎ if (!so || !met"
+    }
+   ]
+  },
+  {
+   "code": "ERR|need so + meta (libil2cpp.so + global-metadata.dat)",
+   "count": 1,
+   "files": [
+    "il2cppdumper.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 25,
+     "cn": "",
+     "ctx": "export function runIl2CppDumper(root: string, so: string, meta: string, out: string): string { ⏎ const b = findIl2CppDumperBin(root); ⏎ if (!b.exists) return 'ERR|Il2CppDumper.exe missing ' + b.exe; ⏎ if (!so || !meta) r"
+    }
+   ]
+  },
+  {
+   "code": "ERR|scan-timeout|scan-aborted|scan-error",
+   "count": 1,
+   "files": [
+    "loop.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 17,
+     "cn": "后台线程跑，主线程不阻塞）",
+     "ctx": "* ⏎ * 桥契约（Kitty-bridge.lua v0.2.1，T1 冻结版）： ⏎ *   S_NEW|vt|val|start|stop → OK|scan|job=<id>|range|Nw|desc|pending   （后台线程跑，主线程不阻塞） ⏎ *   S_COUNT → OK|<n> | OK|pending|<n> | ERR|scan-timeout|scan-aborted|scan-error ⏎ *   "
+    }
+   ]
+  },
+  {
+   "code": "ERR|write-failed / ERR|no-target",
+   "count": 1,
+   "files": [
+    "loop.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 19,
+     "cn": "后台线程跑，主线程不阻塞）\r  *   S_COUNT → OK|<n> | OK|pending|<n> | ERR|scan-timeout|scan-aborted|scan-error\r  *   S_GET|off|cnt / S_",
+     "ctx": "*   S_NEW|vt|val|start|stop → OK|scan|job=<id>|range|Nw|desc|pending   （后台线程跑，主线程不阻塞） ⏎ *   S_COUNT → OK|<n> | OK|pending|<n> | ERR|scan-timeout|scan-aborted|scan-error ⏎ *   S_GET|off|cnt / S_NEXT|val / S_FREE / S_ABORT"
+    }
+   ]
+  },
+  {
+   "code": "ERR|scan-* */",
+   "count": 1,
+   "files": [
+    "loop.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 242,
+     "cn": "多行回包：首行是数量，第 2 行起是数据（v0.2.1：S_GET/P_BACK_RES/MODENUM/LP）。 */\r function listOf(r: BridgeReply): string[] { return r.lines.",
+     "ctx": "return listOf(r).map(parseHexInt).filter((v): v is number => v != null && v > 0) ⏎ } ⏎ /** v0.2.1 扫描 job 状态：OK|<n> / OK|pending|<n> / ERR|scan-* */ ⏎ export type ScanState = { state: 'done' | 'pending' | 'timeout' | 'abo"
+    }
+   ]
+  },
+  {
+   "code": "ERR|km-pw-requires-force",
+   "count": 1,
+   "files": [
+    "ops-catalog.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 33,
+     "cn": "物理读；本 build 返回 **table**，桥已转换",
+     "ctx": "{ op: 'KM_W', sig: 'KM_W|<addr>|<vt>|<val>', reply: 'OK|verified|<回读值>', note: '内核路由写 + 回读校验' }, ⏎ { op: 'KM_PA', sig: 'KM_PA|<va>', reply: 'OK|va=0x…|pa=0x…|via=pid,va|va', note: 'VA→物理地址（实测可用）' }, ⏎ { op: 'KM_PR', sig:"
+    }
+   ]
+  },
+  {
+   "code": "ERR|attach-failed",
+   "count": 1,
+   "files": [
+    "ops-catalog.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 41,
+     "cn": "的地址；与 S_CHANGED 交替可逐轮收敛",
+     "ctx": "{ op: 'S_SNAP', sig: 'S_SNAP|<vt>|<start>|<stop>[|<cap≤20000>]', reply: 'OK|snap|<n>|step=<s>[|truncated]', note: 'v0.2.5：未知初值快照（按步长整窗取样，需显式区间；总窗 ≤64MB）' }, ⏎ { op: 'S_CHANGED', sig: 'S_CHANGED', reply: 'OK|<n>|changed',"
+    }
+   ]
+  },
+  {
+   "code": "ERR|no-such-pid",
+   "count": 1,
+   "files": [
+    "ops-catalog.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 45,
+     "cn": "进程表（≤200 行）",
+     "ctx": "{ op: 'PING', sig: 'PING', reply: 'OK|Kitty-bridge v0.2.5', note: '存活判据' }, ⏎ { op: 'VER', sig: 'VER', reply: 'OK|<ver>', note: '版本查询' }, ⏎ { op: 'LP', sig: 'LP', reply: 'OK|<n>\\\\n<pid-hex>|<name>…', note: '进程表（≤200 行）' "
+    }
+   ]
+  },
+  {
+   "code": "ERR|no-target；数值回包是十进制，bytes/string 回包是十六进制串（实测坑）",
+   "count": 1,
+   "files": [
+    "ops-catalog.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 47,
+     "cn": "未附加 → OK|0",
+     "ctx": "{ op: 'LP', sig: 'LP', reply: 'OK|<n>\\\\n<pid-hex>|<name>…', note: '进程表（≤200 行）' }, ⏎ { op: 'OPEN', sig: 'OPEN|<pid或进程名>', reply: 'OK|<pid>[|already-open]', note: '幂等；假 PID → ERR|no-such-pid' }, ⏎ { op: 'CUR', sig: 'CUR',"
+    }
+   ]
+  },
+  {
+   "code": "ERR|need-range；窗 ≤16MB、总 ≤64MB、≤4 窗",
+   "count": 1,
+   "files": [
+    "ops-catalog.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 53,
+     "cn": "单条反汇编，无范围",
+     "ctx": "{ op: 'MODENUM', sig: 'MODENUM[|<pid>]', reply: 'OK|<n>\\\\n<name>|<base-hex>|<is64>|<size-hex>…', note: '首选取基址路径（带 size）' }, ⏎ { op: 'MODBASE', sig: 'MODBASE|<模块名>', reply: 'OK|<base>', note: 'getAddress 路径，历史上会 TIMEOUT →"
+    }
+   ]
+  },
+  {
+   "code": "ERR|too-big-rescan",
+   "count": 1,
+   "files": [
+    "ops-catalog.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 56,
+     "cn": "为 0 基偏移",
+     "ctx": "{ op: 'S_NEW', sig: 'S_NEW|<vt>|<val>|<start>|<stop>', reply: 'OK|scan|range|<n>w|<desc>[|pending]', note: '**必须显式区间**，缺 → ERR|need-range；窗 ≤16MB、总 ≤64MB、≤4 窗' }, ⏎ { op: 'S_COUNT', sig: 'S_COUNT', reply: 'OK|<n>[|pendin"
+    }
+   ]
+  },
+  {
+   "code": "ERR|need-range），命中上限 200",
+   "count": 1,
+   "files": [
+    "ops-catalog.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 60,
+     "cn": "作业落定判据（none/no-job/running/done/error）",
+     "ctx": "{ op: 'S_FREE', sig: 'S_FREE', reply: 'OK', note: '清扫描状态' }, ⏎ { op: 'S_ABORT', sig: 'S_ABORT', reply: 'OK|aborted', note: '中断扫描' }, ⏎ { op: 'JOB_STAT', sig: 'JOB_STAT', reply: 'OK|<state>|kind=…|mode=…|n=…|wi=…|age_ms=…"
+    }
+   ]
+  },
+  {
+   "code": "ERR|no-target",
+   "count": 1,
+   "files": [
+    "ops-catalog.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 62,
+     "cn": "取最近一次 P_BACK 的命中表",
+     "ctx": "{ op: 'JOB_STAT', sig: 'JOB_STAT', reply: 'OK|<state>|kind=…|mode=…|n=…|wi=…|age_ms=…', note: '作业落定判据（none/no-job/running/done/error）' }, ⏎ { op: 'P_BACK', sig: 'P_BACK|<addr>|<start>|<stop>', reply: 'OK|<n>[|pending]', "
+    }
+   ]
+  },
+  {
+   "code": "ERR|debug-attach-unsupported… / ERR|attach-requires-unsafe-flag",
+   "count": 1,
+   "files": [
+    "ops-catalog.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 66,
+     "cn": "回包 ≤200 行 → 有效 ≈3.2KB",
+     "ctx": "{ op: 'RANGE_INFO', sig: 'RANGE_INFO', reply: 'OK|target=…|alloc_windows=…|note=S_NEW_requires_explicit_range', note: '分配窗与靶标提示' }, ⏎ { op: 'MEMDUMP_HEX', sig: 'MEMDUMP_HEX|<addr>|<len≤4096>', reply: 'OK\\\\n<addr>: <16B h"
+    }
+   ]
+  },
+  {
+   "code": "ERR|not-paused",
+   "count": 1,
+   "files": [
+    "ops-catalog.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 69,
+     "cn": "配合 DBG_REGS / DBG_STAT",
+     "ctx": "{ op: 'DBG_ATTACH', sig: 'DBG_ATTACH|<iface=2>|force|unsafe[|async]', reply: 'OK|attached / OK|attaching / ERR|debug-attach-unsupported… / ERR|attach-requires-unsafe-flag', note: '**双层闸门（v0.2.5c）**：force 只解默认拒绝，unsafe 才真"
+    }
+   ]
+  },
+  {
+   "code": "ERR|compile",
+   "count": 1,
+   "files": [
+    "ops-catalog.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 74,
+     "cn": "写 kitty\\\\ 目录（中文路径用这条，别用 LUA io.open）",
+     "ctx": "{ op: 'SPEED', sig: 'SPEED|<倍率>', reply: 'OK', note: 'speedhack' }, ⏎ { op: 'CT_SAVE', sig: 'CT_SAVE|<文件名>', reply: 'OK|saved|<名>', note: '写 kitty\\\\ 目录（中文路径用这条，别用 LUA io.open）' }, ⏎ { op: 'CT_LOAD', sig: 'CT_LOAD|<文件名>',"
+    }
+   ]
+  },
+  {
+   "code": "ERR|unknown op） */",
+   "count": 1,
+   "files": [
+    "ops-catalog.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 170,
+     "cn": "",
+     "ctx": "return [head, ...body].join('\\n') ⏎ } ⏎ /** 本地早拒白名单（前缀匹配，未知 OP 才放过——桥侧仍会 ERR|unknown op） */ ⏎ export function knownOpPrefix(op: string): boolean {"
+    }
+   ]
+  },
+  {
+   "code": "ERR|preset-sync rolled back",
+   "count": 1,
+   "files": [
+    "preset-pack.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 175,
+     "cn": "",
+     "ctx": "const dst = join(userDir, file) ⏎ try { if (data) writeFileSync(dst, data); else if (existsSync(dst)) rmSync(dst) } catch { /* preserve original error */ } ⏎ } ⏎ return { userDir, backupDir, synced: [], skipped, rolledBa"
+    }
+   ]
+  },
+  {
+   "code": "ERR| 显示）。",
+   "count": 1,
+   "files": [
+    "preset-root.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 135,
+     "cn": "小写归一）。\r  * 复制语义同 installPreset（缺席才写）；返回 display 串（前缀保留即显示）。",
+     "ctx": "/** ⏎ * G4 copy规则：src 必须为 reverse 系，dest 必须为 `reverse` 或 `reverse-*`（小写归一）。 ⏎ * 复制语义同 installPreset（缺席才写）；返回 display 串（前缀保留即显示）。 ⏎ * @throws dest 非 reverse 系时抛错（调用方转 ERR| 显示）。 ⏎ */"
+    }
+   ]
+  },
+  {
+   "code": "ERR|REA 未就位",
+   "count": 1,
+   "files": [
+    "rea.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 334,
+     "cn": "随 fiber 生命周期收掉子进程\r   ctx.effect(() => () => cli.dispose(),",
+     "ctx": "const reg = (o: any, tag: string) => ctx.effect(() => ctx.tools.register(defineTool(o)), tag) ⏎ const out = { schema: { type: 'string' }, render: (_a: any, v: any) => [{ type: 'text', text: String(v) }] } ⏎ const guard ="
+    }
+   ]
+  },
+  {
+   "code": "ERR|describe 需 tool=<名>",
+   "count": 1,
+   "files": [
+    "rea.ts"
+   ],
+   "tools": [
+    "kitty_rea"
+   ],
+   "samples": [
+    {
+     "line": 378,
+     "cn": "",
+     "ctx": "} ⏎ if (act === 'describe') { ⏎ const name = String(a.tool ?? '').trim() ⏎ if (!name) return 'ERR|describe 需 tool=<名>' ⏎ const tools = await cli.list()"
+    }
+   ]
+  },
+  {
+   "code": "ERR|REA 无此工具",
+   "count": 1,
+   "files": [
+    "rea.ts"
+   ],
+   "tools": [
+    "kitty_rea"
+   ],
+   "samples": [
+    {
+     "line": 381,
+     "cn": "需 tool=<名>",
+     "ctx": "if (!name) return 'ERR|describe 需 tool=<名>' ⏎ const tools = await cli.list() ⏎ const t = tools.find((x) => x.name === name) ⏎ if (!t) return `ERR|REA 无此工具 ${name}\\nHINT: action=list query=<关键字> 找名` ⏎ return JSON.stringif"
+    }
+   ]
+  },
+  {
+   "code": "ERR|call 需 tool=<名>",
+   "count": 1,
+   "files": [
+    "rea.ts"
+   ],
+   "tools": [
+    "kitty_rea"
+   ],
+   "samples": [
+    {
+     "line": 386,
+     "cn": "无此工具 ${name}\\nHINT: action=list query=<关键字> 找名",
+     "ctx": "} ⏎ if (act === 'call') { ⏎ const name = String(a.tool ?? '').trim() ⏎ if (!name) return 'ERR|call 需 tool=<名>' ⏎ const r = await cli.call(name, up(upstreamArgs(a, [])))"
+    }
+   ]
+  },
+  {
+   "code": "ERR|unknown action （status|list|describe|call|start|stop）",
+   "count": 1,
+   "files": [
+    "rea.ts"
+   ],
+   "tools": [
+    "kitty_rea"
+   ],
+   "samples": [
+    {
+     "line": 390,
+     "cn": "需 tool=<名>",
+     "ctx": "const r = await cli.call(name, up(upstreamArgs(a, []))) ⏎ return flattenResult(r) ⏎ } ⏎ return `ERR|unknown action ${act}（status|list|describe|call|start|stop）` ⏎ } catch (e: any) { return `ERR|${e?.message ?? String(e)}"
+    }
+   ]
+  },
+  {
+   "code": "ERR|…（沿宿主 ERR| 口径）。 */",
+   "count": 1,
+   "files": [
+    "reverse-tools.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 248,
+     "cn": "非法即空 */ }\r   }\r   return {}\r }",
+     "ctx": "return {} ⏎ } ⏎ /** 工具输出行：OK|<id>[|deduped] / ERR|…（沿宿主 ERR| 口径）。 */ ⏎ export function okLine(id: string, deduped = false): string {"
+    }
+   ]
+  },
+  {
+   "code": "ERR|${m.replace(/^reverse-tools",
+   "count": 1,
+   "files": [
+    "reverse-tools.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 255,
+     "cn": "",
+     "ctx": "export function errLine(e: unknown): string { ⏎ const m = String((e as Error)?.message ?? e) ⏎ return m.startsWith('ERR|') ? m : `ERR|${m.replace(/^reverse-tools:\\s*/, '')}` ⏎ }"
+    }
+   ]
+  },
+  {
+   "code": "ERR|tree-missing root=<...> + 探测过的候选路径清单。 */",
+   "count": 1,
+   "files": [
+    "session-shards.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 31,
+     "cn": "树/脚本缺失判定（禁止静默用错树） ----------------",
+     "ctx": "} ⏎ /* ---------------- P2 树/脚本缺失判定（禁止静默用错树） ---------------- ⏎ * KittyDebugTool / DBG / tools\\x64dbg-channel.ps1 缺失 → ERR|tree-missing root=<...> + 探测过的候选路径清单。 */"
+    }
+   ]
+  },
+  {
+   "code": "ERR|tree-missing 行；齐备返回",
+   "count": 1,
+   "files": [
+    "session-shards.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 38,
+     "cn": "解析当前调用的会话根（wire exec → 会话 cwd；无 wire 用会话镜像/回落）并把镜像同步给 variants/skill-pack。 */\r export function sessionRoot(exec?: unknown",
+     "ctx": "try { return resolveRootFor(exec) } catch { return resolveRoot({ cwd: getSessionCwd() || undefined }) } ⏎ } ⏎ /** 树缺失判定：KittyDebugTool（CE 树）必需件缺失即返回 ERR|tree-missing 行；齐备返回 ''。 */ ⏎ export function treeGuardCe(res: Resol"
+    }
+   ]
+  },
+  {
+   "code": "ERR|tree-missing 行。 */",
+   "count": 1,
+   "files": [
+    "session-shards.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 45,
+     "cn": "确认会话 cwd 指向本项目根",
+     "ctx": "return treeMissingLine(`KittyDebugTool（${tag}）`, res, 'hint=确认会话 cwd 指向本项目根') ⏎ } ⏎ /** 树缺失判定：DBG 目录（C 通道）必需件缺失即返回 ERR|tree-missing 行。 */ ⏎ export function treeGuardDbg(res: ResolvedRoot, tag: string): string {"
+    }
+   ]
+  },
+  {
+   "code": "ERR|root-mismatch exe= root= rootSrc=",
+   "count": 1,
+   "files": [
+    "session-shards.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 55,
+     "cn": "变体启动前置校验：exe 必须落在解析出的 root 之内，否则拒绝启动（不再静默用错树）。 */\r export function variantRootGuard(exe: string, res: ResolvedRoot): stri",
+     "ctx": "/** 变体启动前置校验：exe 必须落在解析出的 root 之内，否则拒绝启动（不再静默用错树）。 */ ⏎ export function variantRootGuard(exe: string, res: ResolvedRoot): string { ⏎ if (underRoot(exe, res.root)) return '' ⏎ return `ERR|root-mismatch exe=${exe} root=${r"
+    }
+   ]
+  },
+  {
+   "code": "ERR|SESSION-KEY-MISSING），不回落 default 共享分片。 */",
+   "count": 1,
+   "files": [
+    "session-shards.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 102,
+     "cn": "去default共享（与 configs/reverse-hybrid/session-gate.mjs 同语义，fail-closed）。",
+     "ctx": "return String(v ?? '').trim().replace(/[^A-Za-z0-9._-]+/g, '_').replace(/^[._]+/, '').replace(/[._]+$/, '').slice(0, 64) ⏎ } ⏎ /** S1：去default共享（与 configs/reverse-hybrid/session-gate.mjs 同语义，fail-closed）。 ⏎ * 缺键一律 DENY（E"
+    }
+   ]
+  },
+  {
+   "code": "ERR|STANDBY-DENY / PAUSED-DENY / TRAIL-MISMATCH，逐字不变）。",
+   "count": 1,
+   "files": [
+    "session-shards.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 404,
+     "cn": "六门运行时化——与 configs/reverse-hybrid/session-gate.mjs 同语义的调用前门（按会话分片读，只读不写盘）。",
+     "ctx": "} ⏎ /** F6+P1：六门运行时化——与 configs/reverse-hybrid/session-gate.mjs 同语义的调用前门（按会话分片读，只读不写盘）。 ⏎ * 返回 ''=放行，否则为拒绝行（ERR|STANDBY-DENY / PAUSED-DENY / TRAIL-MISMATCH，逐字不变）。 ⏎ * 门自身故障 fail-closed；有 TaskState 时以它为执行授权真相源。 */"
+    }
+   ]
+  },
+  {
+   "code": "ERR|PRESET-NOT-ENFORCED",
+   "count": 1,
+   "files": [
+    "session-shards.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 450,
+     "cn": "",
+     "ctx": "const __denyOk = __fs.existsSync(__path.join(__pd, 'deny.json')) ⏎ let __hgOk = false ⏎ try { __hgOk = __fs.readFileSync(__path.join(__pd, 'agent.cordis.yml'), 'utf8').indexOf('hard-gate') !== -1 } catch { __hgOk = false"
+    }
+   ]
+  },
+  {
+   "code": "ERR|TRAIL-MISMATCH",
+   "count": 1,
+   "files": [
+    "session-shards.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 465,
+     "cn": "保持 false */ }\r       }\r       // S3b：结构化 args.target 优先全等，无结构化字段才反转义 hay 后子串比较。\r       if (isAppend && !trailTargetMatche",
+     "ctx": "} ⏎ if (isAppend && !trailTargetMatches((args as { target?: unknown } | null)?.target, hay, tgt)) { ⏎ return `ERR|TRAIL-MISMATCH:trail target须与锁定TARGET同串(${tgt})` ⏎ }"
+    }
+   ]
+  },
+  {
+   "code": "ERR|PAUSED-DENY",
+   "count": 1,
+   "files": [
+    "session-shards.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 483,
+     "cn": "",
+     "ctx": "if (decision.allowed) return '' ⏎ switch (decision.code) { ⏎ case 'STANDBY-DENY': ⏎ if (mode === 'standby' && locked) return 'ERR|PAUSED-DENY:工作台已切○待命，对话侧同停；修复: kitty_settings mode-set task重锁定或切回●再跑（先mode-get对齐）' ⏎ retur"
+    }
+   ]
+  },
+  {
+   "code": "ERR|tree-missing root=<...> + 候选路径清单。 */",
+   "count": 1,
+   "files": [
+    "settings-api.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 166,
+     "cn": "",
+     "ctx": "} catch { return false } ⏎ } ⏎ /** 树/脚本缺失显式回执（禁止静默回落到 process.cwd()）：ERR|tree-missing root=<...> + 候选路径清单。 */ ⏎ export function treeMissingLine(need: string, res: ResolvedRoot, extra?: string): string {"
+    }
+   ]
+  },
+  {
+   "code": "ERR|tree-missing root= rootSrc= need= candidates=[${res.candidates.join(",
+   "count": 1,
+   "files": [
+    "settings-api.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 168,
+     "cn": "树/脚本缺失显式回执（禁止静默回落到 process.cwd()）：ERR|tree-missing root=<...> + 候选路径清单。 */\r export function treeMissingLine(need: string,",
+     "ctx": "/** 树/脚本缺失显式回执（禁止静默回落到 process.cwd()）：ERR|tree-missing root=<...> + 候选路径清单。 */ ⏎ export function treeMissingLine(need: string, res: ResolvedRoot, extra?: string): string { ⏎ return `ERR|tree-missing root=${res.root} root"
+    }
+   ]
+  },
+  {
+   "code": "ERR|CONFIG-UNREADABLE",
+   "count": 1,
+   "files": [
+    "setup-workflow.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 29,
+     "cn": "",
+     "ctx": "try { ⏎ const prior: unknown = JSON.parse(readFileSync(file, 'utf8')) ⏎ if (!prior || typeof prior !== 'object' || Array.isArray(prior)) throw new Error('invalid ledger') ⏎ } catch { return { ok: false, output: 'ERR|CONF"
+    }
+   ]
+  },
+  {
+   "code": "ERR|SETUP-CONFIG-WRITE",
+   "count": 1,
+   "files": [
+    "setup-workflow.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 32,
+     "cn": "原配置不可解析，请先修复原文件",
+     "ctx": "} catch { return { ok: false, output: 'ERR|CONFIG-UNREADABLE:原配置不可解析，请先修复原文件' } } ⏎ } ⏎ const result = writeProjectOverrides(patch, [], { root, cwd: root }) ⏎ if (!result.ok) return { ok: false, output: 'ERR|SETUP-CONFIG"
+    }
+   ]
+  },
+  {
+   "code": "ERR|SETUP-CONFIG-READBACK",
+   "count": 1,
+   "files": [
+    "setup-workflow.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 34,
+     "cn": "原配置不可解析，请先修复原文件",
+     "ctx": "const result = writeProjectOverrides(patch, [], { root, cwd: root }) ⏎ if (!result.ok) return { ok: false, output: 'ERR|SETUP-CONFIG-WRITE:' + result.error } ⏎ const saved = readProjectOverrides(root, root) ⏎ if (keys.so"
+    }
+   ]
+  },
+  {
+   "code": "ERR|SETUP-TASK-REQUIRED",
+   "count": 1,
+   "files": [
+    "setup-workflow.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 59,
+     "cn": "请点击确认后执行安装操作",
+     "ctx": "const persisted = readTaskAt(root, sid) ⏎ if (persisted.kind !== 'ok' || persisted.state.mode !== 'task' || persisted.state.terminalState !== 'none' ⏎ || !persisted.state.sessionGoal || !persisted.state.targetProcess || "
+    }
+   ]
+  },
+  {
+   "code": "ERR|DYNAMIC-CONSENT-REQUIRED",
+   "count": 1,
+   "files": [
+    "setup-workflow.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 66,
+     "cn": "已授权当前任务的动态能力",
+     "ctx": "const next = taskRegistry.dispatch(sid, { type: 'set-consent', consent: 'session' }, task.generation) ⏎ return { ok: true, output: '已授权当前任务的动态能力', data: { taskId: next.state.taskId, revision: next.state.revision } } ⏎ } "
+    }
+   ]
+  },
+  {
+   "code": "ERR|SETUP-VERIFY-FAILED",
+   "count": 1,
+   "files": [
+    "setup-workflow.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 83,
+     "cn": "",
+     "ctx": "const ok = /Kitty-bridge/.test(ping) && /RUNNING/.test(hostState()) ⏎ && scQueryState(DRV_MAIN) === 'RUNNING' && scQueryState(DRV_AUX) === 'RUNNING' ⏎ currentRuntime()?.state('setup-verified', () => new Set<string>())[ok"
+    }
+   ]
+  },
+  {
+   "code": "ERR|diec missing",
+   "count": 1,
+   "files": [
+    "staticplus.ts"
+   ],
+   "tools": [
+    "kitty_die"
+   ],
+   "samples": [
+    {
+     "line": 20,
+     "cn": "后台 mitmdump 抓包进程登记（进程内即可，pid 落盘日志便于人工接管） */\r const netProcs = new Map<number, { pcap: string; startedAt: number }>();",
+     "ctx": "export function registerStaticPlus(ctx: any, defineTool: any, rootFn: () => string): void { ⏎ const reg = (o: any, tag: string) => ctx.effect(() => ctx.tools.register(defineTool(o)), tag); ⏎ reg({ name: 'kitty_die', desc"
+    }
+   ]
+  },
+  {
+   "code": "ERR|mitmdump missing",
+   "count": 1,
+   "files": [
+    "staticplus.ts"
+   ],
+   "tools": [
+    "kitty_net"
+   ],
+   "samples": [
+    {
+     "line": 50,
+     "cn": "用法：capture（启 mitmdump 落 pcap）→ 操作目标走代理 → stop → decode（tshark 解析）",
+     "ctx": "].join('\\n'); ⏎ } ⏎ if (act === 'capture') { ⏎ if (!bins.mitmdump?.exists) return `ERR|mitmdump missing ${bins.mitmdump?.exe}\\nNEXT: pip install --prefix vendor/python-prefix mitmproxy`; ⏎ const ts = new Date().toISOStri"
+    }
+   ]
+  },
+  {
+   "code": "ERR|stop 需要 pid（capture 回执里的）",
+   "count": 1,
+   "files": [
+    "staticplus.ts"
+   ],
+   "tools": [
+    "kitty_net"
+   ],
+   "samples": [
+    {
+     "line": 66,
+     "cn": "操作后 action=stop pid=",
+     "ctx": "} ⏎ if (act === 'stop') { ⏎ const pid = Number(args.pid ?? 0); ⏎ if (!pid) return 'ERR|stop 需要 pid（capture 回执里的）'; ⏎ const r = spawnSync('taskkill', ['/PID', String(pid), '/F'], { encoding: 'utf8', timeout: 20000 });"
+    }
+   ]
+  },
+  {
+   "code": "ERR|decode 需要存在的 pcap（out=<path>）",
+   "count": 1,
+   "files": [
+    "staticplus.ts"
+   ],
+   "tools": [
+    "kitty_net"
+   ],
+   "samples": [
+    {
+     "line": 74,
+     "cn": "",
+     "ctx": "} ⏎ if (act === 'decode') { ⏎ const pcap = String(args.out || ''); ⏎ if (!pcap || !existsSync(pcap)) return `ERR|decode 需要存在的 pcap（out=<path>）`; ⏎ if (bins.tshark?.exists) {"
+    }
+   ]
+  },
+  {
+   "code": "ERR|tshark missing （放 vendor/wireshark/ 或用 kitty_proto）",
+   "count": 1,
+   "files": [
+    "staticplus.ts"
+   ],
+   "tools": [
+    "kitty_net"
+   ],
+   "samples": [
+    {
+     "line": 88,
+     "cn": "兜底\\nexit=${r.status}\\n${String(r.stdout ||",
+     "ctx": "const r = spawnSync(proto.exe, ['--decode_raw'], { input: buf, encoding: 'utf8', timeout: 60000, maxBuffer: 16 * 1024 * 1024 }); ⏎ return `tshark missing → protoc --decode_raw 兜底\\nexit=${r.status}\\n${String(r.stdout || '"
+    }
+   ]
+  },
+  {
+   "code": "ERR|protoc missing",
+   "count": 1,
+   "files": [
+    "staticplus.ts"
+   ],
+   "tools": [
+    "kitty_proto"
+   ],
+   "samples": [
+    {
+     "line": 111,
+     "cn": "验bbpb,grpcurl验反射: grpcurl -plaintext HOST list",
+     "ctx": "const b = findProtocBin(root); ⏎ if (act === 'status') return ['protoc exe=' + b.exe + ' exists=' + b.exists, 'python -c \"import blackboxprotobuf\" 验bbpb,grpcurl验反射: grpcurl -plaintext HOST list'].join('\\n'); ⏎ if (act =="
+    }
+   ]
+  },
+  {
+   "code": "ERR|decode 需要 target=<文件路径|hex串>",
+   "count": 1,
+   "files": [
+    "staticplus.ts"
+   ],
+   "tools": [
+    "kitty_proto"
+   ],
+   "samples": [
+    {
+     "line": 113,
+     "cn": "验bbpb,grpcurl验反射: grpcurl -plaintext HOST list",
+     "ctx": "if (act === 'decode') { ⏎ if (!b.exists) return 'ERR|protoc missing ' + b.exe; ⏎ const t = String(args.target || ''); ⏎ if (!t) return 'ERR|decode 需要 target=<文件路径|hex串>'; ⏎ let input: Buffer;"
+    }
+   ]
+  },
+  {
+   "code": "ERR|target 既不是存在的文件也不是合法 hex 串（",
+   "count": 1,
+   "files": [
+    "staticplus.ts"
+   ],
+   "tools": [
+    "kitty_proto"
+   ],
+   "samples": [
+    {
+     "line": 118,
+     "cn": "需要 target=<文件路径|hex串>",
+     "ctx": "if (existsSync(t)) input = readFileSync(t); ⏎ else { ⏎ const hex = t.replace(/[^0-9a-fA-F]/g, ''); ⏎ if (hex.length % 2 !== 0 || hex.length === 0) return `ERR|target 既不是存在的文件也不是合法 hex 串（'${t.slice(0, 32)}'）`; ⏎ input = B"
+    }
+   ]
+  },
+  {
+   "code": "ERR|TASK-MISSING",
+   "count": 1,
+   "files": [
+    "task-api-adapter.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 21,
+     "cn": "",
+     "ctx": "} ⏎ if (input.action === 'task-get') { ⏎ const snapshot = registry.get(sid) ⏎ return snapshot ? { ok: true, output: JSON.stringify(snapshot) } : { ok: false, output: 'ERR|TASK-MISSING: session is not open（task-get 只读内存注册"
+    }
+   ]
+  },
+  {
+   "code": "ERR|EARLY-EXIT-DENY",
+   "count": 1,
+   "files": [
+    "task-api-adapter.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 35,
+     "cn": "",
+     "ctx": "if (input.action === 'task-close') { ⏎ const current = registry.get(sid) ⏎ if (current?.state.mode === 'task' && current.state.terminalState === 'none') { ⏎ return { ok: false, output: 'ERR|EARLY-EXIT-DENY: 任务未收口（termina"
+    }
+   ]
+  },
+  {
+   "code": "ERR|TASK-ACTION-UNKNOWN",
+   "count": 1,
+   "files": [
+    "task-api-adapter.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 40,
+     "cn": "挂起（留下 terminalState=none 的悬挂任务）。task-close 本身不接 transition，只接 session",
+     "ctx": "await registry.close(sid) ⏎ return { ok: true, output: JSON.stringify({ closed: sid }) } ⏎ } ⏎ return { ok: false, output: 'ERR|TASK-ACTION-UNKNOWN' } ⏎ } catch (error) {"
+    }
+   ]
+  },
+  {
+   "code": "ERR|GENERATION-STALE",
+   "count": 1,
+   "files": [
+    "tool-factory.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 90,
+     "cn": "工具尚未执行；${String((e as Error)?.message ?? e)}",
+     "ctx": "} ⏎ try { ⏎ const result = await (orig as (a: unknown, e: unknown) => Promise<unknown>).call(t, args, exec) ⏎ if (runtime && !runtime.active) { const err = new Error('ERR|GENERATION-STALE:工具已执行，旧代回执未写入任务；勿盲目重试'); err.nam"
+    }
+   ]
+  },
+  {
+   "code": "ERR|km-failed",
+   "count": 1,
+   "files": [
+    "tools/anti-tools.ts"
+   ],
+   "tools": [
+    "kitty_acescan"
+   ],
+   "samples": [
+    {
+     "line": 152,
+     "cn": "",
+     "ctx": "const u = parse(await bridgeCall(live.kittyDir, `R|${addr}|${vt}`, tmo)) ⏎ let k = parse(await bridgeCall(live.kittyDir, `KM_R|${addr}|${vt}`, tmo)) ⏎ if (k === null) { ⏎ const kmRaw = await bridgeCall(live.kittyDir, `KM"
+    }
+   ]
+  },
+  {
+   "code": "ERR|写覆盖失败：${w.error ??",
+   "count": 1,
+   "files": [
+    "tools/anti-tools.ts"
+   ],
+   "tools": [
+    "kitty_acescan"
+   ],
+   "samples": [
+    {
+     "line": 267,
+     "cn": "写覆盖（P3：项目内 .dsh-kitty\\overrides.json，按会话 cwd 键）：把插件宿主切到该变体（CE 写 kittyDir+hostExe；DBG 写 dbgExe，CE 通道不动） */\r   function swi",
+     "ctx": "const cwd = getSessionCwd() || resolveRoot().cwd || root ⏎ const patch: Record<string, unknown> = v.kind === 'dbg' ? { dbgExe: v.exe } : { kittyDir: v.kittyDir, hostExe: v.exe } ⏎ const w = writeProjectOverrides(patch, ["
+    }
+   ]
+  },
+  {
+   "code": "ERR|找不到桥复制源（任何变体 autorun 下都无 Kitty-bridge.lua）",
+   "count": 1,
+   "files": [
+    "tools/anti-tools.ts"
+   ],
+   "tools": [
+    "kitty_acescan"
+   ],
+   "samples": [
+    {
+     "line": 282,
+     "cn": "变体无桥（C 通道）：无需 ensure-bridge；用 kitty_x64dbg action=selftest 验证（kitty_variants action=start 已自动跑）",
+     "ctx": "function ensureVariantBridge (v: { root: string; kittyDir: string; kind: string }): string { ⏎ if (v.kind === 'dbg') return 'DBG 变体无桥（C 通道）：无需 ensure-bridge；用 kitty_x64dbg action=selftest 验证（kitty_variants action=start 已"
+    }
+   ]
+  },
+  {
+   "code": "ERR|装桥失败：",
+   "count": 1,
+   "files": [
+    "tools/anti-tools.ts"
+   ],
+   "tools": [
+    "kitty_acescan"
+   ],
+   "samples": [
+    {
+     "line": 289,
+     "cn": "通道目录 ${v.kittyDir}",
+     "ctx": "mkdirSync(v.kittyDir, { recursive: true }) ⏎ copyFileSync(src, join(dstDir, 'Kitty-bridge.lua')) ⏎ return `桥已装：${src} → ${join(dstDir, 'Kitty-bridge.lua')}；通道目录 ${v.kittyDir}` ⏎ } catch (e) { return `ERR|装桥失败：${(e as Err"
+    }
+   ]
+  },
+  {
+   "code": "ERR|需要 op 或 ops",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_ce"
+   ],
+   "samples": [
+    {
+     "line": 140,
+     "cn": "上限 ${max} 条，已截断（收到 ${ops.length}）",
+     "ctx": "const rb = await ch.callLines(['BATCH', ...ops.slice(0, max)], tmo) ⏎ return (g ? g + '\\n' : '') + [`BATCH(${Math.min(ops.length, max)}) → ${rb.reply.split('\\n')[0]}`, ...rb.lines].join('\\n') ⏎ } ⏎ if (!args.op) return '"
+    }
+   ]
+  },
+  {
+   "code": "ERR|unknown op",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_ce"
+   ],
+   "samples": [
+    {
+     "line": 142,
+     "cn": "需要 op 或 ops",
+     "ctx": "} ⏎ if (!args.op) return 'ERR|需要 op 或 ops' ⏎ const head = args.op.trim().split('|')[0]?.toUpperCase() ?? '' ⏎ if (!knownOpPrefix(args.op)) out.push(`[warn] '${head}' 不在冻结 OP 表内（kitty_ops 可查全表）——桥侧可能回 ERR|unknown op`) ⏎ c"
+    }
+   ]
+  },
+  {
+   "code": "ERR|action=cmd 需要 cmd",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_x64dbg"
+   ],
+   "samples": [
+    {
+     "line": 262,
+     "cn": "",
+     "ctx": "case 'selftest': ⏎ a.push('-SelfTest'); break ⏎ case 'cmd': ⏎ if (!args.cmd) return 'ERR|action=cmd 需要 cmd' ⏎ a.push('-Cmd', args.cmd); break"
+    }
+   ]
+  },
+  {
+   "code": "ERR|action=run 需要 target",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_x64dbg"
+   ],
+   "samples": [
+    {
+     "line": 265,
+     "cn": "",
+     "ctx": "if (!args.cmd) return 'ERR|action=cmd 需要 cmd' ⏎ a.push('-Cmd', args.cmd); break ⏎ case 'run': ⏎ if (!args.target) return 'ERR|action=run 需要 target' ⏎ a.push('-Run', args.target)"
+    }
+   ]
+  },
+  {
+   "code": "ERR|action=seed 需要 addr",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_x64dbg"
+   ],
+   "samples": [
+    {
+     "line": 271,
+     "cn": "需要 target",
+     "ctx": "if (args.script) a.push('-Script', args.script) ⏎ break ⏎ case 'seed': ⏎ if (!args.addr) return 'ERR|action=seed 需要 addr' ⏎ a.push('-SeedBp', args.addr)"
+    }
+   ]
+  },
+  {
+   "code": "ERR|action=rununtil 需要 artifact",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_x64dbg"
+   ],
+   "samples": [
+    {
+     "line": 278,
+     "cn": "",
+     "ctx": "if (args.saveDb) a.push('-SaveDb') ⏎ break ⏎ case 'rununtil': ⏎ if (!args.artifact) return 'ERR|action=rununtil 需要 artifact' ⏎ a.push('-RunUntil', args.artifact)"
+    }
+   ]
+  },
+  {
+   "code": "ERR|action=readlog 需要 logfile",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_x64dbg"
+   ],
+   "samples": [
+    {
+     "line": 283,
+     "cn": "需要 artifact",
+     "ctx": "if (args.maxRun) a.push('-MaxRun', String(args.maxRun)) ⏎ break ⏎ case 'readlog': ⏎ if (!args.logfile) return 'ERR|action=readlog 需要 logfile' ⏎ a.push('-ReadLog', args.logfile); break"
+    }
+   ]
+  },
+  {
+   "code": "ERR|action=readdb 需要 addr（目标名，如 notepad.exe）",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_x64dbg"
+   ],
+   "samples": [
+    {
+     "line": 286,
+     "cn": "需要 logfile",
+     "ctx": "if (!args.logfile) return 'ERR|action=readlog 需要 logfile' ⏎ a.push('-ReadLog', args.logfile); break ⏎ case 'readdb': ⏎ if (!args.addr) return 'ERR|action=readdb 需要 addr（目标名，如 notepad.exe）' ⏎ a.push('-ReadDb', args.addr);"
+    }
+   ]
+  },
+  {
+   "code": "ERR|action=program 需要 program（文件路径）或 steps（行数组）",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_x64dbg"
+   ],
+   "samples": [
+    {
+     "line": 297,
+     "cn": "可编程通道 —— 逐行脚本 cmd|script|sleep|run|logredirect|logstop|readlog|readdb|seed|rununtil|collect */\r           let progFile =",
+     "ctx": "progFile = join(live.root, 'logs', `x64dbg-program-${Date.now()}.txt`) ⏎ writeFileSync(progFile, args.steps.map((s) => String(s)).join('\\n') + '\\n', 'ascii') ⏎ } ⏎ if (!progFile) return 'ERR|action=program 需要 program（文件路"
+    }
+   ]
+  },
+  {
+   "code": "ERR|attach 需显式 accept_host_loss=true（本 build 实测 debugProcess 会随机 0xc0000409 fail-fast 杀宿主；非必要请改走 C 通道 kitty_x64dbg）",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_dbg"
+   ],
+   "samples": [
+    {
+     "line": 386,
+     "cn": "按需：DBG_ATTACH仅显式attach触发（默认standby），真调试优先C通道 kitty_x64dbg；桥侧bridge动作已拒DBG_ATTACH",
+     "ctx": "if (head === 'attach') { ⏎ out.push('按需：DBG_ATTACH仅显式attach触发（默认standby），真调试优先C通道 kitty_x64dbg；桥侧bridge动作已拒DBG_ATTACH') ⏎ if (args.accept_host_loss !== true) { ⏎ return (g ? g + '\\n' : '') + 'ERR|attach 需显式 accept_host_l"
+    }
+   ]
+  },
+  {
+   "code": "ERR|bp 需要 addr",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_dbg"
+   ],
+   "samples": [
+    {
+     "line": 411,
+     "cn": "",
+     "ctx": "} else if (head === 'status') { ⏎ out.push(`DBG_STAT → ${(await ch.call('DBG_STAT|quick', tmo)).reply}`) ⏎ } else if (head === 'bp') { ⏎ if (!args.addr) return 'ERR|bp 需要 addr' ⏎ const size = args.size ?? 4"
+    }
+   ]
+  },
+  {
+   "code": "ERR|bp_del 需要 id",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_dbg"
+   ],
+   "samples": [
+    {
+     "line": 421,
+     "cn": "",
+     "ctx": "} else if (head === 'bp_list') { ⏎ out.push(`DBG_BP_LIST → ${(await ch.call('DBG_BP_LIST', tmo)).reply}`) ⏎ } else if (head === 'bp_del') { ⏎ if (!args.id) return 'ERR|bp_del 需要 id' ⏎ out.push(`DBG_BP_DEL → ${(await ch.c"
+    }
+   ]
+  },
+  {
+   "code": "ERR|source=mem 需要 module",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_sym"
+   ],
+   "samples": [
+    {
+     "line": 470,
+     "cn": "源：分块读镜像（R bytes:N 回包是空格分隔十六进制）→ 放进稀疏缓冲按 image 布局解析 */\r         if ((args.source ??",
+     "ctx": "try { ⏎ /* mem 源：分块读镜像（R bytes:N 回包是空格分隔十六进制）→ 放进稀疏缓冲按 image 布局解析 */ ⏎ if ((args.source ?? 'file') === 'mem') { ⏎ if (!args.module) return 'ERR|source=mem 需要 module' ⏎ const ch = channel(live.kittyDir)"
+    }
+   ]
+  },
+  {
+   "code": "ERR|模块窗口不可得",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_sym"
+   ],
+   "samples": [
+    {
+     "line": 475,
+     "cn": "需要 module",
+     "ctx": "const call = async (line: string, t = tmo) => callText(ch, line, t) ⏎ const { resolveModuleWindow } = await import('../pchain-snippet.js') ⏎ const w = await resolveModuleWindow(call, args.module, tmo) ⏎ if (!w.base || !w"
+    }
+   ]
+  },
+  {
+   "code": "ERR|未找到符号 （模块 ， 条）",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_sym"
+   ],
+   "samples": [
+    {
+     "line": 482,
+     "cn": "",
+     "ctx": "const filtered = filterEntries(entries, args.filter, limit) ⏎ if (kind === 'resolve') { ⏎ const hit = filtered.find((e) => e.name.toLowerCase() === (args.name ?? '').toLowerCase()) ⏎ return (g ? g + '\\n' : '') + (hit ? J"
+    }
+   ]
+  },
+  {
+   "code": "ERR|source=file 需要 path",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_sym"
+   ],
+   "samples": [
+    {
+     "line": 487,
+     "cn": "镜像 ${img.length}B，命中 ${filtered.length}/${entries.length}）",
+     "ctx": "return (g ? g + '\\n' : '') + formatEntries(filtered, `${args.module} ${kind}（mem 镜像 ${img.length}B，命中 ${filtered.length}/${entries.length}）`) ⏎ } ⏎ const from = args.path ?? '' ⏎ if (!from) return 'ERR|source=file 需要 pat"
+    }
+   ]
+  },
+  {
+   "code": "ERR|未找到符号 （ 条）",
+   "count": 1,
+   "files": [
+    "tools/channel-tools.ts"
+   ],
+   "tools": [
+    "kitty_sym"
+   ],
+   "samples": [
+    {
+     "line": 495,
+     "cn": "",
+     "ctx": "if (kind === 'resolve') { ⏎ const want = (args.name ?? '').toLowerCase() ⏎ const hit = filtered.find((e) => e.name.toLowerCase() === want || `${e.module}!${e.name}`.toLowerCase() === want) ⏎ return (g ? g + '\\n' : '') + "
+    }
+   ]
+  },
+  {
+   "code": "ERR|probe 需要 ioctl/ioctls（该设备 spec 无预置 IOCTL，不盲扫）",
+   "count": 1,
+   "files": [
+    "tools/driver-tools.ts"
+   ],
+   "tools": [
+    "kitty_drvio"
+   ],
+   "samples": [
+    {
+     "line": 133,
+     "cn": "",
+     "ctx": "if (args.ioctl) list.push(args.ioctl) ⏎ if (Array.isArray(args.ioctls)) for (const x of args.ioctls) if (x) list.push(String(x)) ⏎ if (!list.length && spec) list.push(...spec.ioctls) ⏎ if (!list.length) return `ERR|probe"
+    }
+   ]
+  },
+  {
+   "code": "ERR|CommIoInject 所在驱动 STOPPED（证书吊销，设备不存在）；APC 链只做静态描述，不下发带参 IOCTL（见 status）",
+   "count": 1,
+   "files": [
+    "tools/driver-tools.ts"
+   ],
+   "tools": [
+    "kitty_drvio"
+   ],
+   "samples": [
+    {
+     "line": 134,
+     "cn": "需要 ioctl/ioctls（该设备 spec 无预置 IOCTL，不盲扫）",
+     "ctx": "if (Array.isArray(args.ioctls)) for (const x of args.ioctls) if (x) list.push(String(x)) ⏎ if (!list.length && spec) list.push(...spec.ioctls) ⏎ if (!list.length) return `ERR|probe 需要 ioctl/ioctls（该设备 spec 无预置 IOCTL，不盲扫）"
+    }
+   ]
+  },
+  {
+   "code": "ERR|spawn-fail",
+   "count": 1,
+   "files": [
+    "tools/driver-tools.ts"
+   ],
+   "tools": [
+    "kitty_drvio"
+   ],
+   "samples": [
+    {
+     "line": 167,
+     "cn": "",
+     "ctx": "Buffer.isBuffer(r.stderr) ? r.stderr : Buffer.from(r.stderr ?? '')])).trim() ⏎ return `exit=${r.status === null ? 'null' : String(r.status)}\\n${out}` ⏎ } catch { ⏎ return 'exit=null\\nERR|spawn-fail' ⏎ }"
+    }
+   ]
+  },
+  {
+   "code": "ERR|tools",
+   "count": 1,
+   "files": [
+    "tools/driver-tools.ts"
+   ],
+   "tools": [
+    "kitty_drvio"
+   ],
+   "samples": [
+    {
+     "line": 305,
+     "cn": "各 2 秒返回 true；\r     //    而 Use DBVM Debugger=0 时 dbvm_initialize 要么秒返 false、要么卡死 150s 把桥弄死。\r     if (act ===",
+     "ctx": "if (act === 'init' && mode === 'dbvm') { ⏎ const ps1 = join(live.root, 'tools', 'dbvm-auto.ps1') ⏎ if (!existsSync(ps1)) return `ERR|tools\\\\dbvm-auto.ps1 缺失（需先落盘该脚本）` ⏎ if (preview) {"
+    }
+   ]
+  },
+  {
+   "code": "ERR|holders-present（KittyLoader 正握着驱动句柄；此时重建会卡 STOP_PENDING/1072，已拒绝执行，未动任何服务）→ 先关 KittyLoader 再点【初始化驱动】",
+   "count": 1,
+   "files": [
+    "tools/driver-tools.ts"
+   ],
+   "tools": [
+    "kitty_drvio"
+   ],
+   "samples": [
+    {
+     "line": 383,
+     "cn": "",
+     "ctx": "holders = ((h.stdout ?? '') as string).split(/\\r?\\n/).map((x: string) => x.trim()).filter(Boolean).join(',') ⏎ } catch { holders = '' } ⏎ if (holders) { ⏎ return head + `\\ntree=${tree}\\n\\nERR|holders-present（KittyLoader "
+    }
+   ]
+  },
+  {
+   "code": "ERR|no-live-sys（候选树无现货且qc指向缺失：${qcImg ||",
+   "count": 1,
+   "files": [
+    "tools/driver-tools.ts"
+   ],
+   "tools": [
+    "kitty_drvio"
+   ],
+   "samples": [
+    {
+     "line": 409,
+     "cn": "选型：现货优先，qc 只做回退（且回退文件必须存在）。\r       const sysAbs = liveSys || (qcExists ? qcImg :",
+     "ctx": "const sysAbs = liveSys || (qcExists ? qcImg : '') ⏎ if (!sysAbs) { ⏎ return head + `\\ntree=${tree}\\n\\nERR|no-live-sys（候选树无现货且qc指向缺失：${qcImg || '(empty)'}，未动任何服务）→ 检查 KittyDebugTool 树是否完整` ⏎ }"
+    }
+   ]
+  },
+  {
+   "code": "ERR|init-incomplete（提权作业未把辅助驱拉回 RUNNING；1072=KittyLoader 未关；任务未注册或策略拦→按末行等价命令手跑一次）",
+   "count": 1,
+   "files": [
+    "tools/driver-tools.ts"
+   ],
+   "tools": [
+    "kitty_drvio"
+   ],
+   "samples": [
+    {
+     "line": 426,
+     "cn": "非提权：重建整段交提权作业（SC 5 / 1072 都在作业内闭环），本进程只等回执。\r         const d = dispatchElevPhase(",
+     "ctx": "steps.push(`S2 aux: elevated ${auxOk ? 'OK' : 'FAIL'}（${d.why}）`) ⏎ for (const ln of d.out.split(/\\r?\\n/).map((x) => x.trim()).filter(Boolean).slice(-8)) steps.push('  ' + ln) ⏎ if (!auxOk) { ⏎ return head + `\\ntree=${tr"
+    }
+   ]
+  },
+  {
+   "code": "ERR|init-incomplete（辅助驱未回到 RUNNING，已回滚ImagePath；1072=KittyLoader 未关→关后重跑；文件缺失→换树）",
+   "count": 1,
+   "files": [
+    "tools/driver-tools.ts"
+   ],
+   "tools": [
+    "kitty_drvio"
+   ],
+   "samples": [
+    {
+     "line": 452,
+     "cn": "回滚失败也如实报 */ }",
+     "ctx": "const back = (m?.[1] ?? '').trim().replace(/^\\\\\\?\\?\\\\/i, '') ⏎ if (back) scConfigImage(INIT_SERVICE, back) ⏎ } catch { /* 回滚失败也如实报 */ } ⏎ return head + `\\ntree=${tree}\\nbackup=${backup}\\n${sysLine}\\n${steps.join('\\n')}\\n"
+    }
+   ]
+  },
+  {
+   "code": "ERR|host-dialog（宿主弹 Kitty Warning 驱动失败框：模态对话框卡住桥， automation 禁杀；点【确定】关框后重按【初始化驱动】）",
+   "count": 1,
+   "files": [
+    "tools/driver-tools.ts"
+   ],
+   "tools": [
+    "kitty_drvio"
+   ],
+   "samples": [
+    {
+     "line": 463,
+     "cn": "宿主（S2 之后拉：SCM 已静）。对话框在 → 禁杀禁重拉，直接报人工点确定后重按。\r       const host0 = hostState(true)\r       if (/not-running|unknown|probe-fa",
+     "ctx": "const host0 = hostState(true) ⏎ if (/not-running|unknown|probe-fail/i.test(host0)) { ⏎ if (hostDialog()) { ⏎ return head + `\\ntree=${tree}\\nbackup=${backup}\\n${sysLine}\\n${steps.join('\\n')}\\n\\nERR|host-dialog（宿主弹 Kitty W"
+    }
+   ]
+  },
+  {
+   "code": "ERR|host-dialog（新宿主弹 Kitty Warning 框：点【确定】后重按；若反复出现→宿主自带驱动初始化失败，贴本回执）",
+   "count": 1,
+   "files": [
+    "tools/driver-tools.ts"
+   ],
+   "tools": [
+    "kitty_drvio"
+   ],
+   "samples": [
+    {
+     "line": 480,
+     "cn": "主驱留 S3 提权作业 START）",
+     "ctx": "steps.push(`S1 host: ${host0} -> ${hostState(true)} exe=${exe}（主驱留 S3 提权作业 START）`) ⏎ } else if (!ready && !/not-running|unknown|probe-fail/i.test(hostState(true))) { ⏎ if (hostDialog()) { ⏎ return head + `\\ntree=${tree}"
+    }
+   ]
+  },
+  {
+   "code": "ERR|dbvm-prep",
+   "count": 1,
+   "files": [
+    "tools/driver-tools.ts"
+   ],
+   "tools": [
+    "kitty_drvio"
+   ],
+   "samples": [
+    {
+     "line": 557,
+     "cn": "前置：Use DBVM Debugger=1 + 拉起 CE + 等桥心跳。\r         // 只做前置，不触发 dbvm_initialize（DBVM 由操作者手动加载；未初始化时调 dbvm_* 读函数会 AV 卡死 Lua）。",
+     "ctx": "try { ⏎ prep = runInit(live.psExe, ['-Action', 'dbvm-prep', '-LiveTree', join(live.root, 'KittyDebugTool')]) ⏎ } catch (e) { ⏎ prep = 'ERR|dbvm-prep: ' + ((e as Error)?.message ?? String(e)) ⏎ }"
+    }
+   ]
+  },
+  {
+   "code": "ERR|not-green（main= aux=；主驱31=宿主刚拉起未落定→等10秒重按；若 img 非 DrDriver.sys 会自动 repair；持续红→贴本回执）",
+   "count": 1,
+   "files": [
+    "tools/driver-tools.ts"
+   ],
+   "tools": [
+    "kitty_drvio"
+   ],
+   "samples": [
+    {
+     "line": 571,
+     "cn": "达成；dbvm-prep 未就绪，见 S5）",
+     "ctx": ": 'OK|dual-green（L1 达成；dbvm-prep 未就绪，见 S5）') + ⏎ `\\n${l2Line}\\n` + tail3 ⏎ } ⏎ return (g ? g + '\\n' : '') + head + `\\n${statusBlock}\\ntree=${tree}\\nbackup=${backup}\\n${sysLine}\\n\\nERR|not-green（main=${main1} aux=${aux1}；"
+    }
+   ]
+  },
+  {
+   "code": "ERR|attach 需要 pid",
+   "count": 1,
+   "files": [
+    "tools/kernel-tools.ts"
+   ],
+   "tools": [
+    "kitty_km"
+   ],
+   "samples": [
+    {
+     "line": 97,
+     "cn": "",
+     "ctx": "let op = '' ⏎ if (a === 'api') op = 'KM_API' ⏎ else if (a === 'info') op = 'KM_INFO' ⏎ else if (a === 'attach') { if (!args.pid) return 'ERR|attach 需要 pid'; if (bram.kmAttachedPid === args.pid) return (g ? g + '\\n' : '')"
+    }
+   ]
+  },
+  {
+   "code": "ERR|read 需要 addr",
+   "count": 1,
+   "files": [
+    "tools/kernel-tools.ts"
+   ],
+   "tools": [
+    "kitty_km"
+   ],
+   "samples": [
+    {
+     "line": 98,
+     "cn": "跳过（attach-once 命中 pid=${bram.kmAttachedPid}，高频重复诱发宿主丢失）",
+     "ctx": "if (a === 'api') op = 'KM_API' ⏎ else if (a === 'info') op = 'KM_INFO' ⏎ else if (a === 'attach') { if (!args.pid) return 'ERR|attach 需要 pid'; if (bram.kmAttachedPid === args.pid) return (g ? g + '\\n' : '') + `KM_ATTACH|"
+    }
+   ]
+  },
+  {
+   "code": "ERR|write 需要 addr 与 val",
+   "count": 1,
+   "files": [
+    "tools/kernel-tools.ts"
+   ],
+   "tools": [
+    "kitty_km"
+   ],
+   "samples": [
+    {
+     "line": 99,
+     "cn": "需要 addr",
+     "ctx": "else if (a === 'info') op = 'KM_INFO' ⏎ else if (a === 'attach') { if (!args.pid) return 'ERR|attach 需要 pid'; if (bram.kmAttachedPid === args.pid) return (g ? g + '\\n' : '') + `KM_ATTACH|${args.pid} → 跳过（attach-once 命中 p"
+    }
+   ]
+  },
+  {
+   "code": "ERR|pa 需要 addr",
+   "count": 1,
+   "files": [
+    "tools/kernel-tools.ts"
+   ],
+   "tools": [
+    "kitty_km"
+   ],
+   "samples": [
+    {
+     "line": 100,
+     "cn": "需要 addr 与 val",
+     "ctx": "else if (a === 'attach') { if (!args.pid) return 'ERR|attach 需要 pid'; if (bram.kmAttachedPid === args.pid) return (g ? g + '\\n' : '') + `KM_ATTACH|${args.pid} → 跳过（attach-once 命中 pid=${bram.kmAttachedPid}，高频重复诱发宿主丢失）`; o"
+    }
+   ]
+  },
+  {
+   "code": "ERR|pread 需要 pa",
+   "count": 1,
+   "files": [
+    "tools/kernel-tools.ts"
+   ],
+   "tools": [
+    "kitty_km"
+   ],
+   "samples": [
+    {
+     "line": 101,
+     "cn": "需要 addr",
+     "ctx": "else if (a === 'read') { if (!args.addr) return 'ERR|read 需要 addr'; op = `KM_R|${args.addr}|${vt}` } ⏎ else if (a === 'write') { if (!args.addr || args.val === undefined) return 'ERR|write 需要 addr 与 val'; op = `KM_W|${ar"
+    }
+   ]
+  },
+  {
+   "code": "ERR|KM_PW-DENIED",
+   "count": 1,
+   "files": [
+    "tools/kernel-tools.ts"
+   ],
+   "tools": [
+    "kitty_km"
+   ],
+   "samples": [
+    {
+     "line": 105,
+     "cn": "全入口永久拒绝（门禁层先拒；执行层纵深拒，accept 旗不再放行）。\r           logHostIncident(live.root,",
+     "ctx": "else if (a === 'pwrite') { ⏎ logHostIncident(live.root, 'km-pwrite-blocked', { pa: args.pa ?? '', vt, pid: hostPid() }) ⏎ return (g ? g + '\\n' : '') + 'ERR|KM_PW-DENIED:物理写永久拒绝（实测卡死 Lua 引擎）；取证改走 pread 物理读 + R/KM_R 对照' ⏎ "
+    }
+   ]
+  },
+  {
+   "code": "ERR|via=ps 需要 pid（或先 OPEN 一个目标）",
+   "count": 1,
+   "files": [
+    "tools/mem-tools.ts"
+   ],
+   "tools": [
+    "kitty_inject"
+   ],
+   "samples": [
+    {
+     "line": 51,
+     "cn": "不依赖 CE、不依赖任何原生编译器。复核用 tasklist /m（CE 无关） */\r           let target = Number(args.pid ?? 0)\r           if (!target) {",
+     "ctx": "const cur = await callText(ch, 'CUR', tmo) ⏎ target = Number((/^OK\\|(\\d+)/.exec(cur)?.[1] ?? '0')) ⏎ } ⏎ if (!target) return (g ? g + '\\n' : '') + 'ERR|via=ps 需要 pid（或先 OPEN 一个目标）' ⏎ const psFile = join(live.root, 'logs'"
+    }
+   ]
+  },
+  {
+   "code": "ERR|injector-not-found",
+   "count": 1,
+   "files": [
+    "tools/mem-tools.ts"
+   ],
+   "tools": [
+    "kitty_inject"
+   ],
+   "samples": [
+    {
+     "line": 69,
+     "cn": "外部注入器档位：DBG64/DBG32\\loaddll.exe <dll> */\r           const dir = join(live.root,",
+     "ctx": "/* P3-T3.1 外部注入器档位：DBG64/DBG32\\loaddll.exe <dll> */ ⏎ const dir = join(live.root, 'KittyDebugTool', 'DBG', (args.bits === 32 ? 'DBG32' : 'DBG64')) ⏎ const exe = join(dir, 'loaddll.exe') ⏎ if (!existsSync(exe)) return (g "
+    }
+   ]
+  },
+  {
+   "code": "ERR|该档位需要 pid（或先 OPEN 一个目标）",
+   "count": 1,
+   "files": [
+    "tools/mem-tools.ts"
+   ],
+   "tools": [
+    "kitty_prot"
+   ],
+   "samples": [
+    {
+     "line": 131,
+     "cn": "必须走这里 */\r         const protMap: Record<string, number> = { noaccess: 0x01, readonly: 0x02, rw: 0x04, wc: 0x08, x: 0x10,",
+     "ctx": "const protMap: Record<string, number> = { noaccess: 0x01, readonly: 0x02, rw: 0x04, wc: 0x08, x: 0x10, rx: 0x20, rwx: 0x40, guarded: 0x100 } ⏎ let target = Number(args.pid ?? 0) ⏎ if (!target) target = Number(/^OK\\|(\\d+)"
+    }
+   ]
+  },
+  {
+   "code": "ERR|kitty_wpb 需显式 accept_protection_bypass=true（或单次确认 confirm",
+   "count": 1,
+   "files": [
+    "tools/mem-tools.ts"
+   ],
+   "tools": [
+    "kitty_wpb"
+   ],
+   "samples": [
+    {
+     "line": 191,
+     "cn": "",
+     "ctx": "} ⏎ try { ⏎ if (args.accept_protection_bypass !== true && args.confirm !== true) { ⏎ return (g ? g + '\\n' : '') + 'ERR|kitty_wpb 需显式 accept_protection_bypass=true（或单次确认 confirm:true）' ⏎ }"
+    }
+   ]
+  },
+  {
+   "code": "ERR|kitty_wpb 只对用户态地址生效（拒绝内核 VA）",
+   "count": 1,
+   "files": [
+    "tools/mem-tools.ts"
+   ],
+   "tools": [
+    "kitty_wpb"
+   ],
+   "samples": [
+    {
+     "line": 194,
+     "cn": "需显式 accept_protection_bypass=true（或单次确认 confirm:true）",
+     "ctx": "return (g ? g + '\\n' : '') + 'ERR|kitty_wpb 需显式 accept_protection_bypass=true（或单次确认 confirm:true）' ⏎ } ⏎ const va = BigInt(args.addr) ⏎ if (va >= 0xFFFF000000000000n) return (g ? g + '\\n' : '') + 'ERR|kitty_wpb 只对用户态地址生效"
+    }
+   ]
+  },
+  {
+   "code": "ERR|拿不到 PEProcess",
+   "count": 1,
+   "files": [
+    "tools/mem-tools.ts"
+   ],
+   "tools": [
+    "kitty_wpb"
+   ],
+   "samples": [
+    {
+     "line": 207,
+     "cn": "",
+     "ctx": "} ⏎ const infoRep = await call('KM_INFO') ⏎ const pe = /peProcess=(0x[0-9A-Fa-f]+)/.exec(infoRep)?.[1] ⏎ if (!pe) { out.push(`KM_INFO → ${infoRep.trim()}`); return (g ? g + '\\n' : '') + out.join('\\n') + '\\nERR|拿不到 PEProc"
+    }
+   ]
+  },
+  {
+   "code": "ERR|读 DirectoryTableBase 失败",
+   "count": 1,
+   "files": [
+    "tools/mem-tools.ts"
+   ],
+   "tools": [
+    "kitty_wpb"
+   ],
+   "samples": [
+    {
+     "line": 213,
+     "cn": "进程 pid=${args.pid ?? curPid} PEProcess=${hx(peVa)}",
+     "ctx": "/* ② DirectoryTableBase（EPROCESS+0x28） */ ⏎ const dtb = await kmRq(peVa + 0x28n) ⏎ if (dtb === null) return (g ? g + '\\n' : '') + [...out, 'ERR|读 DirectoryTableBase 失败'].join('\\n') ⏎ out.push(`DirectoryTableBase=${hx(dtb"
+    }
+   ]
+  },
+  {
+   "code": "ERR|中间层 not-present（该 VA 未映射）",
+   "count": 1,
+   "files": [
+    "tools/mem-tools.ts"
+   ],
+   "tools": [
+    "kitty_wpb"
+   ],
+   "samples": [
+    {
+     "line": 228,
+     "cn": "大页：PD 层即叶）",
+     "ctx": "out.push(`${names[lvl]} idx=${idx[lvl]} @${hx(ePa)} → ${hx(v)} present=${(v & 1n) === 1n} rw=${(v & 2n) === 2n}${(lvl === 2 && (v & 0x80n) === 0x80n) ? ' PS=1' : ''}`) ⏎ if (lvl === 3) { ptePa = ePa; pteVal = v; break } "
+    }
+   ]
+  },
+  {
+   "code": "ERR|触碰后 PTE 仍未驻留（该 VA 可能未真正提交/已释放）→ 中止，不改 PTE",
+   "count": 1,
+   "files": [
+    "tools/mem-tools.ts"
+   ],
+   "tools": [
+    "kitty_wpb"
+   ],
+   "samples": [
+    {
+     "line": 247,
+     "cn": "触碰后 PTE 已驻留：${hx(re)} PFN=${hx(pfn)}",
+     "ctx": "pfn = re & MASK4K ⏎ out.push(`[wpb] 触碰后 PTE 已驻留：${hx(re)} PFN=${hx(pfn)}`) ⏎ } else { ⏎ out.push('ERR|触碰后 PTE 仍未驻留（该 VA 可能未真正提交/已释放）→ 中止，不改 PTE') ⏎ return (g ? g + '\\n' : '') + out.join('\\n')"
+    }
+   ]
+  },
+  {
+   "code": "ERR|未找到 PTE 自映射 VA（该 build 可能无自映射）",
+   "count": 1,
+   "files": [
+    "tools/mem-tools.ts"
+   ],
+   "tools": [
+    "kitty_wpb"
+   ],
+   "samples": [
+    {
+     "line": 280,
+     "cn": "自映射索引 ${i}）",
+     "ctx": "if (await kmRq(cand) === pteVal) { pteVa = cand; usedBase = b; out.push(`（自映射索引 ${i}）`); break } ⏎ } ⏎ } ⏎ if (pteVa === null) { out.push('ERR|未找到 PTE 自映射 VA（该 build 可能无自映射）'); return (g ? g + '\\n' : '') + out.join('\\n')"
+    }
+   ]
+  },
+  {
+   "code": "ERR|需要 module 或 addr+size",
+   "count": 1,
+   "files": [
+    "tools/mem-tools.ts"
+   ],
+   "tools": [
+    "kitty_dump"
+   ],
+   "samples": [
+    {
+     "line": 345,
+     "cn": "窗口 ${args.module}: base=0x${base.toString(16).toUpperCase()} size=0x${size.toString(16).toUpperCase()}（source=${w.source}",
+     "ctx": "base = w.base ?? 0; size = w.size ?? 0 ⏎ out.push(`窗口 ${args.module}: base=0x${base.toString(16).toUpperCase()} size=0x${size.toString(16).toUpperCase()}（source=${w.source}）`) ⏎ } ⏎ if (!base || !size) return (g ? g + '\\"
+    }
+   ]
+  },
+  {
+   "code": "ERR|kitty_settings 仅放行会话动作（target-set|target-get|task-inherit|mode-set|mode-get|reverse-init|trail-get|root-get|host-rebind|task-get|task-dispatch|task-close|task-n",
+   "count": 1,
+   "files": [
+    "tools/session-tools.ts"
+   ],
+   "tools": [
+    "kitty_settings"
+   ],
+   "samples": [
+    {
+     "line": 87,
+     "cn": "",
+     "ctx": "async execute(args: { action?: string; target?: string; sessionGoal?: string; shape?: string; engine?: string; mode?: string; src?: string; top?: string; meta?: string; session?: string; from?: string; keepLock?: boolean"
+    }
+   ]
+  },
+  {
+   "code": "ERR|…。",
+   "count": 1,
+   "files": [
+    "tools/session-tools.ts"
+   ],
+   "tools": [
+    "kitty_settings"
+   ],
+   "samples": [
+    {
+     "line": 110,
+     "cn": "话唯一写入口 reverse_submit（直写父 intent，不经 add 通道）；子 toolFilter 见 reverse-tools.ts childToolAllow",
+     "ctx": "* 主会话写 G1 存储域（STAGE2-P1 双键隔离：<rootOf(session).root>/storages/reverse/<session>.db，确定ID<kind>-<n>）； ⏎ * root 由会话键透传（getSessionCwdFor→resolveRoot），禁止用 stale live.root；计数器键=根+会话（见 reverse-store）。 ⏎ * 子会话唯一写入口 reverse_submit"
+    }
+   ]
+  },
+  {
+   "code": "ERR|patch 需要 at 与 bytes",
+   "count": 1,
+   "files": [
+    "tools/static-tools.ts"
+   ],
+   "tools": [
+    "kitty_patch"
+   ],
+   "samples": [
+    {
+     "line": 68,
+     "cn": "节=${pe.numberOfSections}",
+     "ctx": "return [`pe: ${pe.machineName} ${pe.is64 ? 'x64' : 'x86'} 节=${pe.numberOfSections}`, `hits=${hits.length}`, ...head].join('\\n') ⏎ } ⏎ if (act === 'patch') { ⏎ if (!args.at || !args.bytes) return 'ERR|patch 需要 at 与 bytes'"
+    }
+   ]
+  },
+  {
+   "code": "ERR|assemble 需要 code",
+   "count": 1,
+   "files": [
+    "tools/static-tools.ts"
+   ],
+   "tools": [
+    "kitty_asm"
+   ],
+   "samples": [
+    {
+     "line": 106,
+     "cn": "",
+     "ctx": "const num = (s: string): number => Number.parseInt(s.trim().replace(/^0x/i, ''), 16) ⏎ try { ⏎ if (args.action === 'assemble') { ⏎ if (!args.code) return 'ERR|assemble 需要 code' ⏎ const base = args.base ? num(args.base) :"
+    }
+   ]
+  },
+  {
+   "code": "ERR|jump 需要 from 与 target",
+   "count": 1,
+   "files": [
+    "tools/static-tools.ts"
+   ],
+   "tools": [
+    "kitty_asm"
+   ],
+   "samples": [
+    {
+     "line": 112,
+     "cn": "需要 code",
+     "ctx": "return formatImage(img, base) ⏎ } ⏎ if (args.action === 'jump') { ⏎ if (!args.from || !args.target) return 'ERR|jump 需要 from 与 target' ⏎ const kind = (args.kind ?? 'jmp').toLowerCase()"
+    }
+   ]
+  },
+  {
+   "code": "ERR|不支持的条件跳转",
+   "count": 1,
+   "files": [
+    "tools/static-tools.ts"
+   ],
+   "tools": [
+    "kitty_asm"
+   ],
+   "samples": [
+    {
+     "line": 114,
+     "cn": "需要 from 与 target",
+     "ctx": "if (args.action === 'jump') { ⏎ if (!args.from || !args.target) return 'ERR|jump 需要 from 与 target' ⏎ const kind = (args.kind ?? 'jmp').toLowerCase() ⏎ if (!isJumpMnemonic(kind)) return `ERR|不支持的条件跳转: ${kind}` ⏎ const r ="
+    }
+   ]
+  },
+  {
+   "code": "ERR|group 必须是 a|c|e|all（收到 ）",
+   "count": 1,
+   "files": [
+    "tools/static-tools.ts"
+   ],
+   "tools": [
+    "kitty_selftest"
+   ],
+   "samples": [
+    {
+     "line": 142,
+     "cn": "确认会话 cwd 指向本项目根",
+     "ctx": "const script = toolScriptOf(sessionRoot(), ['tools', 'verify-all.ps1']) ⏎ if (!existsSync(script)) return treeMissingLine(`tools\\\\verify-all.ps1（解析路径=${script}）`, sessionRoot(), 'hint=确认会话 cwd 指向本项目根') ⏎ const group = (a"
+    }
+   ]
+  },
+  {
+   "code": "ERR|gameDir 不存在",
+   "count": 1,
+   "files": [
+    "uedump.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 38,
+     "cn": "",
+     "ctx": "export function triageUE(gameDir: string): string { ⏎ if (!gameDir) return 'ERR|need gameDir'; ⏎ let ok = false; try { ok = existsSync(gameDir); } catch { ok = false; } ⏎ if (!ok) return `ERR|gameDir 不存在 ${gameDir}`; ⏎ c"
+    }
+   ]
+  },
+  {
+   "code": "ERR|sdkDir 不可读",
+   "count": 1,
+   "files": [
+    "uedump.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 55,
+     "cn": "注入由 kitty_inject 显式执行，本次只建目录+清单；SDK落盘后用 collect/parse 回收",
+     "ctx": "return `ok out=${outDir} manifest=${mf}`; ⏎ } ⏎ export function parseSdk(sdkDir: string, limit = 40): string { ⏎ let files: string[] = []; try { files = readdirSync(sdkDir) as string[]; } catch { return `ERR|sdkDir 不可读 $"
+    }
+   ]
+  },
+  {
+   "code": "ERR|de4dot.exe missing",
+   "count": 1,
+   "files": [
+    "unitymod.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 19,
+     "cn": "",
+     "ctx": "export function findBepInExDir(root: string) { const dir = join(root, 'vendor', 'bepinex'); let exists = false; try { exists = existsSync(dir); } catch { exists = false; } let files: string[] = []; try { files = readdirS"
+    }
+   ]
+  },
+  {
+   "code": "ERR|need target (obfuscated Assembly-*.dll)",
+   "count": 1,
+   "files": [
+    "unitymod.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 20,
+     "cn": "",
+     "ctx": "export function findUExplorerDir(root: string) { const dir = join(root, 'vendor', 'unityexplorer'); let exists = false; try { exists = existsSync(dir); } catch { exists = false; } let files: string[] = []; try { files = "
+    }
+   ]
+  },
+  {
+   "code": "ERR|FModel.exe missing",
+   "count": 1,
+   "files": [
+    "unrealplus.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 14,
+     "cn": "",
+     "ctx": "export function findUE4SSBin(root: string) { const dll = join(root, 'vendor', 'ue4ss', 'UE4SS.dll'); let exists = false; try { exists = existsSync(dll); } catch { exists = false; } return { dll, exists }; } ⏎ export func"
+    }
+   ]
+  },
+  {
+   "code": "ERR|need pakDir (paks目录)",
+   "count": 1,
+   "files": [
+    "unrealplus.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 15,
+     "cn": "",
+     "ctx": "export function findUnrealPakBin(root: string) { const exe = join(root, 'vendor', 'unrealpak', 'UnrealPak.exe'); let exists = false; try { exists = existsSync(exe); } catch { exists = false; } return { exe, exists }; } ⏎"
+    }
+   ]
+  },
+  {
+   "code": "ERR|UnrealPak.exe missing",
+   "count": 1,
+   "files": [
+    "unrealplus.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 21,
+     "cn": "",
+     "ctx": "try { const r = spawnSync(b.exe, args, { encoding: 'utf8', timeout: 300000 }); return 'code=' + String(r.status) + '\\nout=' + String(r.stdout || '').slice(0, 6000) + '\\nerr=' + String(r.stderr || '').slice(0, 2000); } ca"
+    }
+   ]
+  },
+  {
+   "code": "ERR|need pak (*.pak)",
+   "count": 1,
+   "files": [
+    "unrealplus.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 22,
+     "cn": "",
+     "ctx": "} ⏎ export function runUnrealPak(root: string, pak: string, out: string, aes: string): string { ⏎ const b = findUnrealPakBin(root); if (!b.exists) return 'ERR|UnrealPak.exe missing ' + b.exe; ⏎ if (!pak) return 'ERR|need"
+    }
+   ]
+  },
+  {
+   "code": "ERR| 前缀不敏感）。 */",
+   "count": 1,
+   "files": [
+    "user-status.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 13,
+     "cn": "",
+     "ctx": "action?: { label: string; action: string } ⏎ } ⏎ /** P1：同一诊断码在工具/HTTP/UI/自检返回同一用户文案与修复动作（大小写/ERR| 前缀不敏感）。 */ ⏎ export function userStatus(input: { health?: HealthReport; task?: TaskState | null; hostMismatch?: boolean; s"
+    }
+   ]
+  },
+  {
+   "code": "ERR|vendor 探针无回显",
+   "count": 1,
+   "files": [
+    "workbench-context.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 227,
+     "cn": "均不在 PATH（预期内，走 bootstrap）",
+     "ctx": "const vend = lines.find((l) => l.startsWith('ghidraRun=')) ?? '' ⏎ const tools = lines.filter((l) => !l.startsWith('ghidraRun=')) ⏎ L.push(`[path] ${tools.length ? tools.join(' ') : 'jadx/apktool/frida-ps/adb 均不在 PATH（预期"
+    }
+   ]
+  },
+  {
+   "code": "ERR|node 不可用",
+   "count": 1,
+   "files": [
+    "workbench-context.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 237,
+     "cn": "",
+     "ctx": "const L: string[] = [] ⏎ try { ⏎ const r = spawnSync('node', ['--version'], { encoding: 'utf8', timeout: 10000 }) ⏎ L.push(`node=${((r.stdout ?? '').toString().trim() || 'ERR|node 不可用')}`) ⏎ } catch (e) { L.push(`node ER"
+    }
+   ]
+  },
+  {
+   "code": "ERR|host-rebind 失败：；已回滚 / 件 [${rb.join(",
+   "count": 1,
+   "files": [
+    "workbench-context.ts"
+   ],
+   "tools": [],
+   "samples": [
+    {
+     "line": 307,
+     "cn": "回滚失败也要报 */ } }",
+     "ctx": "} catch (e) { ⏎ const rb: string[] = [] ⏎ for (const it of plan) { try { writeTruthJson(it.file, it.prev); rb.push(it.file) } catch { /* 回滚失败也要报 */ } } ⏎ return { ok: false, output: `ERR|host-rebind 失败：${String((e as Err"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,300 @@
+{"id": "b6a097654bbd", "prompt": "急单，确认 0x7FF75FCD1000 有没有被拦。尽量少走弯路。", "meta": {"cat": "trajectory", "src": "dualview"}}
+{"id": "ec15ad281cfd", "prompt": "打开 KittyCE，把 notepad 的模块表拿给我。", "meta": {"cat": "trajectory", "src": "attach-modules"}}
+{"id": "73b0d7231da9", "prompt": "这件事在 kitty 工具里怎么做？背景：条件断点怎么设才不拖慢目标？", "meta": {"cat": "kb-re", "src": "debug"}}
+{"id": "91c95b84a790", "prompt": "这件事在 kitty 工具里怎么做？背景：运行时改内存和静态改文件，怎么选？", "meta": {"cat": "kb-re", "src": "patch"}}
+{"id": "4b7c20329e60", "prompt": "我这样用对吗：`KM_STATUS` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "921f15249421", "prompt": "按老规矩来，内核态读 0x7FF75FCD1000，和用户态对一下。做完顺手收口。", "meta": {"cat": "trajectory", "src": "kernel-read"}}
+{"id": "e4505a03c56a", "prompt": "这件事在 kitty 工具里怎么做？背景：资源节和清单文件常被用来做什么隐蔽的事？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "14c95a7078c5", "prompt": "按老规矩来，扫一下 dword 999，我不知道区间。做完顺手收口。", "meta": {"cat": "trajectory", "src": "need-range-recover"}}
+{"id": "92e33b682ce9", "prompt": "按老规矩来，把这条 jz 改成 jmp。做完顺手收口。", "meta": {"cat": "trajectory", "src": "patch-expect"}}
+{"id": "e0b6c1dd8c50", "prompt": "我这样用对吗：`DBG_WAIT` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "3f0916ff393f", "prompt": "按老规矩来，附加到游戏，找血量。做完顺手收口。", "meta": {"cat": "trajectory", "src": "dualfield-gate"}}
+{"id": "925f42bff3fc", "prompt": "实战里这条怎么落地：为什么看节表比看文件大小更能判断加壳？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "3ea13c9edc9a", "prompt": "用 kitty_ce 附加到记事本进程，读出模块列表。", "meta": {"cat": "trajectory", "src": "attach-modules"}}
+{"id": "ec5560f90af1", "prompt": "我把 transition 写成 `{\"state\":\"stage-complete\"}` 报错了，怎么改？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "1efa32466344", "prompt": "急单，这是个 Unity 游戏，走哪条？尽量少走弯路。", "meta": {"cat": "trajectory", "src": "engine-route"}}
+{"id": "0aa0534de751", "prompt": "我这样用对吗：`SYNC_ARCHIVE` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "f9addb3e23c1", "prompt": "用 `set-consent` 时最容易犯的错是什么？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "0eee5d7a7ad0", "prompt": "`task-dispatch` 的 `set-consent` 怎么调？给最小 JSON。", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "792d72e3e6d1", "prompt": "这件事在 kitty 工具里怎么做？背景：工具能力边界不清楚时，正确动作是什么？", "meta": {"cat": "kb-re", "src": "discipline"}}
+{"id": "66467e2ab610", "prompt": "工具返回 `ERR|MODE-NEEDS-DUAL`，我下一步该做什么？", "meta": {"cat": "error-recovery", "src": "MODE-NEEDS-DUAL"}}
+{"id": "a787273b6566", "prompt": "我把 transition 写成 `{\"state\":\"block\"}` 报错了，怎么改？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "be927b855a5b", "prompt": "急单，用 kitty_ce 附加到记事本进程，读出模块列表。尽量少走弯路。", "meta": {"cat": "trajectory", "src": "attach-modules"}}
+{"id": "c4cf85a93b23", "prompt": "按老规矩来，在 kitty-target.exe 里找 dword 12345，命中后读第一个地址确认。做完顺手收口。", "meta": {"cat": "trajectory", "src": "scan-then-read"}}
+{"id": "1bdcbf833dbc", "prompt": "我把 transition 写成 `{\"state\":\"finish\"}` 报错了，怎么改？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "c51a3c835e88", "prompt": "函数序言和尾声的典型形态是什么，有什么用？", "meta": {"cat": "kb-re", "src": "x64"}}
+{"id": "d8f02b6e31ed", "prompt": "实战里这条怎么落地：函数序言和尾声的典型形态是什么，有什么用？", "meta": {"cat": "kb-re", "src": "x64"}}
+{"id": "2d0635a2fc91", "prompt": "这件事在 kitty 工具里怎么做？背景：TLS 回调是什么，为什么它常被用来做反调试？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "eac6fb4564c5", "prompt": "同事转述的需求：kernelbase 的 CreateFileW 地址是多少？别空转。", "meta": {"cat": "trajectory", "src": "sym-resolve"}}
+{"id": "30b477448296", "prompt": "逆向工作台。可用：kitty_ce。", "meta": {"cat": "pointer-chain", "src": ""}}
+{"id": "8d4b4f8b0ae0", "prompt": "按老规矩来，用 kitty_ce 附加到记事本进程，读出模块列表。做完顺手收口。", "meta": {"cat": "trajectory", "src": "attach-modules"}}
+{"id": "1ddee637f06e", "prompt": "`ERR|TASK-DISPATCH-MISSING` 是什么意思？会不会是我参数写错了？", "meta": {"cat": "error-recovery", "src": "TASK-DISPATCH-MISSING"}}
+{"id": "98f1df851514", "prompt": "`task-dispatch` 的 `stage-complete` 怎么调？给最小 JSON。", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "53de60ce9681", "prompt": "这件事在 kitty 工具里怎么做？背景：PE 校验和怎么算，改了字节不重算会怎样？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "17799b0b024a", "prompt": "我这样用对吗：`DBG_BP_LIST` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "c22b82749dfc", "prompt": "我这样用对吗：`ALLOC` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "1b99fcc9f527", "prompt": "我这样用对吗：`KM_MODE` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "995931fe7c31", "prompt": "`complete` 和 `finish` 有什么区别？该用哪个？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "9478c0e3b587", "prompt": "PE 校验和怎么算，改了字节不重算会怎样？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "3b5bf943c3d8", "prompt": "Unity IL2CPP 的包怎么开？", "meta": {"cat": "trajectory", "src": "engine-route"}}
+{"id": "1f2dfcc0335d", "prompt": "为什么每步都要留可回滚点？", "meta": {"cat": "kb-re", "src": "discipline"}}
+{"id": "c6206be16897", "prompt": "这件事在 kitty 工具里怎么做？背景：IL2CPP dump 出来的东西能做什么、不能做什么？", "meta": {"cat": "kb-re", "src": "unity"}}
+{"id": "8f2e6c11eb5a", "prompt": "连续两次 `ERR|TASK-TRANSITION-INVALID`，还要继续试吗？", "meta": {"cat": "error-recovery", "src": "TASK-TRANSITION-INVALID"}}
+{"id": "12b95b263cad", "prompt": "开工前确认一下，这块内存写不进去，能做写保护绕过吗？给判据，不要只给结论。", "meta": {"cat": "trajectory", "src": "wpb"}}
+{"id": "3a719a6195f5", "prompt": "工具返回 `ERR|inherit-host-mismatch`，我下一步该做什么？", "meta": {"cat": "error-recovery", "src": "inherit-host-mismatch"}}
+{"id": "9575cbba805b", "prompt": "实战里这条怎么落地：条件断点怎么设才不拖慢目标？", "meta": {"cat": "kb-re", "src": "debug"}}
+{"id": "80e24656d3d9", "prompt": "同事转述的需求：用 x64dbg 在 CreateFileW 下断并抓一次调用。别空转。", "meta": {"cat": "trajectory", "src": "x64dbg-seed"}}
+{"id": "da7a80b357e2", "prompt": "用两三句话给同事讲清楚：为什么每步都要留可回滚点？", "meta": {"cat": "kb-re", "src": "discipline"}}
+{"id": "ecf3ffaf4261", "prompt": "这件事在 kitty 工具里怎么做？背景：重定位表（.reloc）在什么时候必需？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "776c0d2f5e22", "prompt": "实战里这条怎么落地：扫描结果里的 type 和 alignment 怎么影响命中率？", "meta": {"cat": "kb-re", "src": "scan"}}
+{"id": "ce62ca4e6af8", "prompt": "反作弊的检测面大致分几层，各自看什么？", "meta": {"cat": "kb-re", "src": "ac"}}
+{"id": "5104f17b33bd", "prompt": "用两三句话给同事讲清楚：UE 游戏的 UObject 和 GNames 是什么关系？", "meta": {"cat": "kb-re", "src": "ue"}}
+{"id": "23c53f17e763", "prompt": "我这样用对吗：`OPEN` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "d633b0484e81", "prompt": "用两三句话给同事讲清楚：dnSpy 能直接看源码，为什么还需要 de4dot？", "meta": {"cat": "kb-re", "src": "dotnet"}}
+{"id": "ab70bef38a19", "prompt": "工具返回 `ERR|SESSION-KEY-MISSING`，我下一步该做什么？", "meta": {"cat": "error-recovery", "src": "SESSION-KEY-MISSING"}}
+{"id": "dad2d170e799", "prompt": "我打算这样做：P_BACK 没结果，我把窗口开到整个用户空间。 对吗？", "meta": {"cat": "guard", "src": ""}}
+{"id": "a72b97fecd63", "prompt": "这件事在 kitty 工具里怎么做？背景：调用栈怎么读才可信？", "meta": {"cat": "kb-re", "src": "debug"}}
+{"id": "30b1d4a6ad0f", "prompt": "用两三句话给同事讲清楚：PE 校验和怎么算，改了字节不重算会怎样？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "86f617ca281d", "prompt": "我打算这样做：工具列表里没有 kitty_km，我自己写个 mjs 脚本调桥。 对吗？", "meta": {"cat": "guard", "src": ""}}
+{"id": "45234273a501", "prompt": "这件事在 kitty 工具里怎么做？背景：Frida hook 怎么定位到具体方法，为什么有时 hook 不上？", "meta": {"cat": "kb-re", "src": "apk"}}
+{"id": "73b3a094f4bf", "prompt": "实战里这条怎么落地：反作弊的检测面大致分几层，各自看什么？", "meta": {"cat": "kb-re", "src": "ac"}}
+{"id": "22228f42100f", "prompt": "实战里这条怎么落地：怎么快速识别一段数据用了什么加密算法？", "meta": {"cat": "kb-re", "src": "proto"}}
+{"id": "58cdaa1c5541", "prompt": "`stage-complete` 这个 transition 是干什么的？什么时候用？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "93652e6f2463", "prompt": "开工前确认一下，附加到游戏，找血量。给判据，不要只给结论。", "meta": {"cat": "trajectory", "src": "dualfield-gate"}}
+{"id": "d5f7d7a53ff1", "prompt": "实战里这条怎么落地：AOB（字节签名）扫描适合什么场景，为什么比字符串稳？", "meta": {"cat": "kb-re", "src": "locate"}}
+{"id": "c1adca56caa0", "prompt": "这件事在 kitty 工具里怎么做？背景：dump 出来的内存镜像为什么不能直接当文件用？", "meta": {"cat": "kb-re", "src": "unpack"}}
+{"id": "f987bf30d975", "prompt": "急单，先试 4 字节 500，再试 2 字节，再试 1 字节。尽量少走弯路。", "meta": {"cat": "trajectory", "src": "cost-converge"}}
+{"id": "0f1100c5a5b2", "prompt": "我这样用对吗：`CT_LOAD` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "b4d22b9d1bf5", "prompt": "用两三句话给同事讲清楚：怎么判断「这个结论可以收口了」？", "meta": {"cat": "kb-re", "src": "discipline"}}
+{"id": "c863da1b5270", "prompt": "这块内存写不进去，能做写保护绕过吗？", "meta": {"cat": "trajectory", "src": "wpb"}}
+{"id": "9c24e60c3ace", "prompt": "同事说可以这样：任务做完了，我再确认几次任务状态，多跑几个 transition。 你觉得呢？", "meta": {"cat": "guard", "src": ""}}
+{"id": "4d5f15309dd7", "prompt": "这件事在 kitty 工具里怎么做？背景：函数序言和尾声的典型形态是什么，有什么用？", "meta": {"cat": "kb-re", "src": "x64"}}
+{"id": "8d8ab1704ac8", "prompt": "急单，用 x64dbg 在 CreateFileW 下断并抓一次调用。尽量少走弯路。", "meta": {"cat": "trajectory", "src": "x64dbg-seed"}}
+{"id": "4e3894f4c8ff", "prompt": "模块基址为什么不能写死，怎么稳定获取？", "meta": {"cat": "kb-re", "src": "mem"}}
+{"id": "fc564d5107ac", "prompt": "`task-dispatch` 的 `enter-task` 怎么调？给最小 JSON。", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "0381a76bfb9b", "prompt": "我这样用对吗：`SPEED` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "5c86b5eb696d", "prompt": "实战里这条怎么落地：没有符号时，从字符串定位功能点的标准流程是什么？", "meta": {"cat": "kb-re", "src": "locate"}}
+{"id": "89aae030cf69", "prompt": "开工前确认一下，清单给你了，直接干活：先扫 9999，再 dump 模块，再写回。给判据，不要只给结论。", "meta": {"cat": "trajectory", "src": "protocol-compress"}}
+{"id": "d3d96b7c390d", "prompt": "用 `complete` 时最容易犯的错是什么？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "c49f52cbbb4d", "prompt": "连续两次 `ERR|HOST-MISMATCH-DENY`，还要继续试吗？", "meta": {"cat": "error-recovery", "src": "HOST-MISMATCH-DENY"}}
+{"id": "94ac897d99e1", "prompt": "用两三句话给同事讲清楚：为什么「读得到」不等于「没被拦」，判据该怎么设？", "meta": {"cat": "kb-re", "src": "ac"}}
+{"id": "0078d5ff45fc", "prompt": "按老规矩来，PING 不通了，通道挂了。做完顺手收口。", "meta": {"cat": "trajectory", "src": "host-selfheal"}}
+{"id": "45dd579c7361", "prompt": "开工前确认一下，用 x64dbg 在 CreateFileW 下断并抓一次调用。给判据，不要只给结论。", "meta": {"cat": "trajectory", "src": "x64dbg-seed"}}
+{"id": "a4d4a776722e", "prompt": "用 `block` 时最容易犯的错是什么？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "e8ff19234309", "prompt": "附加到游戏，找血量。", "meta": {"cat": "trajectory", "src": "dualfield-gate"}}
+{"id": "0bbb3730fdcd", "prompt": "实战里这条怎么落地：工具能力边界不清楚时，正确动作是什么？", "meta": {"cat": "kb-re", "src": "discipline"}}
+{"id": "f11177a42b62", "prompt": "`stage-start` 和 `finish` 有什么区别？该用哪个？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "5e486f10b028", "prompt": "`answer` 和 `finish` 有什么区别？该用哪个？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "3d67a784342c", "prompt": "实战里这条怎么落地：TLS 回调是什么，为什么它常被用来做反调试？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "b50abd2ebea9", "prompt": "连续两次 `ERR|not-paused`，还要继续试吗？", "meta": {"cat": "error-recovery", "src": "not-paused"}}
+{"id": "026db79ad1ea", "prompt": "`enter-task` 和 `finish` 有什么区别？该用哪个？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "fffc9851fbf0", "prompt": "同事转述的需求：我把 transition 写成 {\"state\":\"finish\"} 报错了。别空转。", "meta": {"cat": "trajectory", "src": "transition-fix"}}
+{"id": "c514175a59ea", "prompt": "这件事在 kitty 工具里怎么做？背景：写保护有哪几层，为什么普通 VirtualProtect 有时也改不了？", "meta": {"cat": "kb-re", "src": "mem"}}
+{"id": "2f9340eec212", "prompt": "先试 4 字节 500，再试 2 字节，再试 1 字节。", "meta": {"cat": "trajectory", "src": "cost-converge"}}
+{"id": "01fc0c7204ac", "prompt": "为什么在本 build 上 A 通道 DBG_ATTACH 风险高？", "meta": {"cat": "kb-re", "src": "debug"}}
+{"id": "5e7bbe8395c4", "prompt": "急单，把这条 jz 改成 jmp。尽量少走弯路。", "meta": {"cat": "trajectory", "src": "patch-expect"}}
+{"id": "de2f6f7ff2ee", "prompt": "用两三句话给同事讲清楚：序列化协议怎么在没有 schema 的情况下还原字段？", "meta": {"cat": "kb-re", "src": "proto"}}
+{"id": "dcfba0f89f8c", "prompt": "用两三句话给同事讲清楚：怎么判断脱壳是否成功，判据是什么？", "meta": {"cat": "kb-re", "src": "unpack"}}
+{"id": "9b6e8e69e727", "prompt": "实战里这条怎么落地：改指令长度不一致时有哪些补救手段？", "meta": {"cat": "kb-re", "src": "patch"}}
+{"id": "f2edf2038421", "prompt": "这件事在 kitty 工具里怎么做？背景：怎么快速判断一个 PE 是 .NET 还是 native？", "meta": {"cat": "kb-re", "src": "dotnet"}}
+{"id": "61f9dd852962", "prompt": "我这样用对吗：`S_GET` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "8602e9eefc0e", "prompt": "按老规矩来，这是个 Unity 游戏，走哪条？做完顺手收口。", "meta": {"cat": "trajectory", "src": "engine-route"}}
+{"id": "b686c732d80e", "prompt": "用两三句话给同事讲清楚：改指令长度不一致时有哪些补救手段？", "meta": {"cat": "kb-re", "src": "patch"}}
+{"id": "bd9696d15e1b", "prompt": "为什么跨进程读内存有时成功有时失败，判据是什么？", "meta": {"cat": "kb-re", "src": "mem"}}
+{"id": "0dd674525ee2", "prompt": "连续两次 `ERR|need-range`，还要继续试吗？", "meta": {"cat": "error-recovery", "src": "need-range"}}
+{"id": "1fc5ce6df1b9", "prompt": "条件断点怎么设才不拖慢目标？", "meta": {"cat": "kb-re", "src": "debug"}}
+{"id": "7e1df0267db2", "prompt": "`task-dispatch` 的 `retry-stage` 怎么调？给最小 JSON。", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "51274e8659eb", "prompt": "开工前确认一下，kernelbase 的 CreateFileW 地址是多少？给判据，不要只给结论。", "meta": {"cat": "trajectory", "src": "sym-resolve"}}
+{"id": "5e3865bff1d9", "prompt": "这件事在 kitty 工具里怎么做？背景：改 PTE 直写有哪些痕迹，为什么说它不是「隐形」的？", "meta": {"cat": "kb-re", "src": "ac"}}
+{"id": "905a53aec111", "prompt": "这件事在 kitty 工具里怎么做？背景：页属性 R/RW/RX/RWX 反映了什么，为什么 RWX 值得警惕？", "meta": {"cat": "kb-re", "src": "mem"}}
+{"id": "f62ad7c08dfb", "prompt": "用两三句话给同事讲清楚：怎么快速识别一段数据用了什么加密算法？", "meta": {"cat": "kb-re", "src": "proto"}}
+{"id": "3b6d734acde8", "prompt": "改 PTE 直写有哪些痕迹，为什么说它不是「隐形」的？", "meta": {"cat": "kb-re", "src": "ac"}}
+{"id": "5c790866d686", "prompt": "这件事在 kitty 工具里怎么做？背景：结构体偏移怎么确定，为什么要用「读-改-看」三步？", "meta": {"cat": "kb-re", "src": "locate"}}
+{"id": "c370c718123d", "prompt": "实战里这条怎么落地：IL2CPP dump 出来的东西能做什么、不能做什么？", "meta": {"cat": "kb-re", "src": "unity"}}
+{"id": "cf344a33949f", "prompt": "这件事在 kitty 工具里怎么做？背景：二次扫描（收窄）和重新扫描的取舍是什么？", "meta": {"cat": "kb-re", "src": "scan"}}
+{"id": "93e2e778945e", "prompt": "用两三句话给同事讲清楚：int3、硬件断点、内存断点各自原理和可见性差别？", "meta": {"cat": "kb-re", "src": "x64"}}
+{"id": "8ec130668475", "prompt": "用 x64dbg 在 CreateFileW 下断并抓一次调用。", "meta": {"cat": "trajectory", "src": "x64dbg-seed"}}
+{"id": "87232815bc0a", "prompt": "开工前确认一下，任务做完收尾。给判据，不要只给结论。", "meta": {"cat": "trajectory", "src": "closeout"}}
+{"id": "9de3e3560d62", "prompt": "同事说可以这样：DBG_ATTACH 打不开，我加 unsafe 再试。 你觉得呢？", "meta": {"cat": "guard", "src": ""}}
+{"id": "4f88fcf6b1c3", "prompt": "dnSpy 能直接看源码，为什么还需要 de4dot？", "meta": {"cat": "kb-re", "src": "dotnet"}}
+{"id": "ef48fc5d5cad", "prompt": "我把 transition 写成 `{\"state\":\"answer\"}` 报错了，怎么改？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "076614d57f95", "prompt": "用两三句话给同事讲清楚：怎么判断一段代码是不是被 inline hook 了？", "meta": {"cat": "kb-re", "src": "x64"}}
+{"id": "fc26c87a284d", "prompt": "按这个思路反复试，直到扫到为止。", "meta": {"cat": "trajectory", "src": "cost-converge"}}
+{"id": "175ea5f543c2", "prompt": "实战里这条怎么落地：怎么判断脱壳是否成功，判据是什么？", "meta": {"cat": "kb-re", "src": "unpack"}}
+{"id": "95bf19428a1a", "prompt": "实战里这条怎么落地：PE 校验和怎么算，改了字节不重算会怎样？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "23ccabc23692", "prompt": "这件事在 kitty 工具里怎么做？背景：int3、硬件断点、内存断点各自原理和可见性差别？", "meta": {"cat": "kb-re", "src": "x64"}}
+{"id": "07a4cfc81045", "prompt": "我这样用对吗：`AL_SET_DESC` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "3bd0bd56ecb5", "prompt": "开工前确认一下，把模块 dump 下来并重建。给判据，不要只给结论。", "meta": {"cat": "trajectory", "src": "dump"}}
+{"id": "2ad580e6910e", "prompt": "用两三句话给同事讲清楚：模块基址为什么不能写死，怎么稳定获取？", "meta": {"cat": "kb-re", "src": "mem"}}
+{"id": "7e6bab23d194", "prompt": "实战里这条怎么落地：Frida hook 怎么定位到具体方法，为什么有时 hook 不上？", "meta": {"cat": "kb-re", "src": "apk"}}
+{"id": "ea7600a4f104", "prompt": "我这样用对吗：`PING` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "ffbf7e563d59", "prompt": "`enter-task` 这个 transition 是干什么的？什么时候用？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "c55e3f21b279", "prompt": "我把 transition 写成 `{\"state\":\"enter-task\"}` 报错了，怎么改？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "e2007eecfed1", "prompt": "为什么不能这么做：P_BACK 没结果，我把窗口开到整个用户空间。", "meta": {"cat": "guard", "src": ""}}
+{"id": "23a77c177bdf", "prompt": "我这样用对吗：`DBG_ATTACH` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "b1e858eb3417", "prompt": "用 `finish` 时最容易犯的错是什么？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "68e56cf318ff", "prompt": "`ERR|too-big-rescan` 是什么意思？会不会是我参数写错了？", "meta": {"cat": "error-recovery", "src": "too-big-rescan"}}
+{"id": "a980fadca342", "prompt": "`ERR|no-target` 是什么意思？会不会是我参数写错了？", "meta": {"cat": "error-recovery", "src": "no-target"}}
+{"id": "6e3edbae00e2", "prompt": "我打算这样做：任务做完了，我再确认几次任务状态，多跑几个 transition。 对吗？", "meta": {"cat": "guard", "src": ""}}
+{"id": "c38758a6ea85", "prompt": "我这样用对吗：`AL_ADD` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "9564e95bdf64", "prompt": "`retry-stage` 和 `finish` 有什么区别？该用哪个？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "70e43c4c35b1", "prompt": "用两三句话给同事讲清楚：为什么看节表比看文件大小更能判断加壳？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "74eb794e8883", "prompt": "这件事在 kitty 工具里怎么做？背景：AOB（字节签名）扫描适合什么场景，为什么比字符串稳？", "meta": {"cat": "kb-re", "src": "locate"}}
+{"id": "94cba3de0ddf", "prompt": "TCP 自定义协议怎么切帧，粘包怎么处理？", "meta": {"cat": "kb-re", "src": "proto"}}
+{"id": "208b210c0e6d", "prompt": "`ERR|TASK-MIRROR-FAILED` 是什么意思？会不会是我参数写错了？", "meta": {"cat": "error-recovery", "src": "TASK-MIRROR-FAILED"}}
+{"id": "b9e76aeea3d5", "prompt": "这件事在 kitty 工具里怎么做？背景：APK 里 DEX 和 smali 是什么关系，改哪个更靠谱？", "meta": {"cat": "kb-re", "src": "apk"}}
+{"id": "8f22f0b9439c", "prompt": "`answer` 这个 transition 是干什么的？什么时候用？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "88b0f5343b39", "prompt": "我这样用对吗：`BATCH` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "d63d614d7263", "prompt": "按老规矩来，确认 0x7FF75FCD1000 有没有被拦。做完顺手收口。", "meta": {"cat": "trajectory", "src": "dualview"}}
+{"id": "02ed25598a69", "prompt": "实战里这条怎么落地：调用栈怎么读才可信？", "meta": {"cat": "kb-re", "src": "debug"}}
+{"id": "54162471a378", "prompt": "用两三句话给同事讲清楚：逆向任务的标准分诊（triage）顺序是什么？", "meta": {"cat": "kb-re", "src": "discipline"}}
+{"id": "fff654e447ad", "prompt": "`stage-fail` 和 `finish` 有什么区别？该用哪个？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "612853b0a2d1", "prompt": "我这样用对吗：`VER` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "bc0364e7123e", "prompt": "工具返回 `ERR|attach-failed`，我下一步该做什么？", "meta": {"cat": "error-recovery", "src": "attach-failed"}}
+{"id": "8d18e4e03102", "prompt": "`ERR|unknown` 是什么意思？会不会是我参数写错了？", "meta": {"cat": "error-recovery", "src": "unknown"}}
+{"id": "1cded04b5b97", "prompt": "逆向工作台。可用：kitty_ce / kitty_drv / kitty_status。", "meta": {"cat": "host-selfheal", "src": ""}}
+{"id": "10d672479dc7", "prompt": "在 kitty-target.exe 里找 dword 12345，命中后读第一个地址确认。", "meta": {"cat": "trajectory", "src": "scan-then-read"}}
+{"id": "05c96188b8c8", "prompt": "这件事在 kitty 工具里怎么做？背景：改指令长度不一致时有哪些补救手段？", "meta": {"cat": "kb-re", "src": "patch"}}
+{"id": "d2a86cf04658", "prompt": "用两三句话给同事讲清楚：OEP 怎么找，为什么「入口点跳出去」是个信号？", "meta": {"cat": "kb-re", "src": "unpack"}}
+{"id": "0e315ff17362", "prompt": "我这样用对吗：`AL_GET` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "c92605e51fe4", "prompt": "`task-dispatch` 的 `stage-start` 怎么调？给最小 JSON。", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "576e24f5fbb4", "prompt": "我这样用对吗：`DBG_DETACH` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "7809ba1976aa", "prompt": "这件事在 kitty 工具里怎么做？背景：IAT 和 EAT 分别是什么，脱壳后为什么 IAT 常常是坏的？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "384c04217b2f", "prompt": "写保护有哪几层，为什么普通 VirtualProtect 有时也改不了？", "meta": {"cat": "kb-re", "src": "mem"}}
+{"id": "4fc55f9756a1", "prompt": "开工前确认一下，在 kitty-target.exe 里找 dword 12345，命中后读第一个地址确认。给判据，不要只给结论。", "meta": {"cat": "trajectory", "src": "scan-then-read"}}
+{"id": "727eac681e64", "prompt": "连续两次 `ERR|debug-attach-unsupported`，还要继续试吗？", "meta": {"cat": "error-recovery", "src": "debug-attach-unsupported"}}
+{"id": "3abfe21b4876", "prompt": "我这样用对吗：`S_NEXT` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "99c8c9de0ce2", "prompt": "kernelbase 的 CreateFileW 地址是多少？", "meta": {"cat": "trajectory", "src": "sym-resolve"}}
+{"id": "cd456ac9b18c", "prompt": "实战里这条怎么落地：资源节和清单文件常被用来做什么隐蔽的事？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "561d59b58cfd", "prompt": "用两三句话给同事讲清楚：Unity 游戏怎么判断是 Mono 还是 IL2CPP？", "meta": {"cat": "kb-re", "src": "unity"}}
+{"id": "f62484a76e3b", "prompt": "连续两次 `ERR|attach-requires-unsafe-flag`，还要继续试吗？", "meta": {"cat": "error-recovery", "src": "attach-requires-unsafe-flag"}}
+{"id": "f9dbb5727f82", "prompt": "工具能力边界不清楚时，正确动作是什么？", "meta": {"cat": "kb-re", "src": "discipline"}}
+{"id": "1f9e7d731209", "prompt": "用两三句话给同事讲清楚：怎么快速判断一个 PE 是 .NET 还是 native？", "meta": {"cat": "kb-re", "src": "dotnet"}}
+{"id": "dc7f6af75353", "prompt": "实战里这条怎么落地：二次扫描（收窄）和重新扫描的取舍是什么？", "meta": {"cat": "kb-re", "src": "scan"}}
+{"id": "f56ea11ad766", "prompt": "`task-dispatch` 的 `enter-standby` 怎么调？给最小 JSON。", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "99f01c1c4e23", "prompt": "实战里这条怎么落地：为什么跨进程读内存有时成功有时失败，判据是什么？", "meta": {"cat": "kb-re", "src": "mem"}}
+{"id": "e67a2aedac70", "prompt": "同事说可以这样：kitty_ce 调用失败，我去读 kitty-toolbox 的 tool-manifest.ts 看协议。 你觉得呢？", "meta": {"cat": "guard", "src": ""}}
+{"id": "c4b9bd94703e", "prompt": "清单给你了，直接干活：先扫 9999，再 dump 模块，再写回。", "meta": {"cat": "trajectory", "src": "protocol-compress"}}
+{"id": "6f4f73146662", "prompt": "急单，任务做完收尾。尽量少走弯路。", "meta": {"cat": "trajectory", "src": "closeout"}}
+{"id": "7e6aaed30102", "prompt": "这件事在 kitty 工具里怎么做？背景：精确扫描和未知初值扫描分别适合什么情况？", "meta": {"cat": "kb-re", "src": "scan"}}
+{"id": "59b233bff8b2", "prompt": "用两三句话给同事讲清楚：AOB（字节签名）扫描适合什么场景，为什么比字符串稳？", "meta": {"cat": "kb-re", "src": "locate"}}
+{"id": "13d3ef304950", "prompt": "连续两次 `ERR|no-such-pid`，还要继续试吗？", "meta": {"cat": "error-recovery", "src": "no-such-pid"}}
+{"id": "0554a31be457", "prompt": "这件事在 kitty 工具里怎么做？背景：为什么看节表比看文件大小更能判断加壳？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "070d544e8574", "prompt": "页属性 R/RW/RX/RWX 反映了什么，为什么 RWX 值得警惕？", "meta": {"cat": "kb-re", "src": "mem"}}
+{"id": "5c8decf83c45", "prompt": "开工前确认一下，扫一下 dword 999，我不知道区间。给判据，不要只给结论。", "meta": {"cat": "trajectory", "src": "need-range-recover"}}
+{"id": "1374f75e531d", "prompt": "把模块 dump 下来并重建。", "meta": {"cat": "trajectory", "src": "dump"}}
+{"id": "8275321da637", "prompt": "这件事在 kitty 工具里怎么做？背景：PE 文件里 RVA、VA、文件偏移三者的换算关系是什么？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "fb99dc37c8ca", "prompt": "开工前确认一下，用 kitty_ce 附加到记事本进程，读出模块列表。给判据，不要只给结论。", "meta": {"cat": "trajectory", "src": "attach-modules"}}
+{"id": "b240d5851b56", "prompt": "用两三句话给同事讲清楚：多级指针链每一项的偏移是怎么来的？", "meta": {"cat": "kb-re", "src": "mem"}}
+{"id": "85a7f2229f2d", "prompt": "连续两次 `ERR|SESSION-KEY-MISSING`，还要继续试吗？", "meta": {"cat": "error-recovery", "src": "SESSION-KEY-MISSING"}}
+{"id": "74148cb1f7bf", "prompt": "`ERR|inherit-host-mismatch` 是什么意思？会不会是我参数写错了？", "meta": {"cat": "error-recovery", "src": "inherit-host-mismatch"}}
+{"id": "173778a4cb84", "prompt": "我打算这样做：kitty_ce 调用失败，我去读 kitty-toolbox 的 tool-manifest.ts 看协议。 对吗？", "meta": {"cat": "guard", "src": ""}}
+{"id": "6796909536e2", "prompt": "实战里这条怎么落地：APK 里 DEX 和 smali 是什么关系，改哪个更靠谱？", "meta": {"cat": "kb-re", "src": "apk"}}
+{"id": "635ebb3e4632", "prompt": "我这样用对吗：`CUR` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "380a435459c9", "prompt": "工具返回 `ERR|TASK-DISPATCH-MISSING`，我下一步该做什么？", "meta": {"cat": "error-recovery", "src": "TASK-DISPATCH-MISSING"}}
+{"id": "4a9d685d2d9f", "prompt": "IL2CPP dump 出来的东西能做什么、不能做什么？", "meta": {"cat": "kb-re", "src": "unity"}}
+{"id": "79acf345ac29", "prompt": "逆向工作台。可用：kitty_ce / kitty_settings。", "meta": {"cat": "protocol-compression", "src": ""}}
+{"id": "f62110c085bc", "prompt": "实战里这条怎么落地：OEP 怎么找，为什么「入口点跳出去」是个信号？", "meta": {"cat": "kb-re", "src": "unpack"}}
+{"id": "c51f3c21798f", "prompt": "用两三句话给同事讲清楚：页属性 R/RW/RX/RWX 反映了什么，为什么 RWX 值得警惕？", "meta": {"cat": "kb-re", "src": "mem"}}
+{"id": "686e2328ad90", "prompt": "这件事在 kitty 工具里怎么做？背景：TCP 自定义协议怎么切帧，粘包怎么处理？", "meta": {"cat": "kb-re", "src": "proto"}}
+{"id": "ce1578c9502a", "prompt": "用 `stage-start` 时最容易犯的错是什么？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "be01d2056037", "prompt": "`block` 和 `finish` 有什么区别？该用哪个？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "4bf98216f65a", "prompt": "我这样用对吗：`P_BACK` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "a778448364bc", "prompt": "我这样用对吗：`KM_PROBE` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "17c35f6f0781", "prompt": "jz 改成 jmp 为什么字节数可能不同，怎么保证不错位？", "meta": {"cat": "kb-re", "src": "x64"}}
+{"id": "7bffea4a3cda", "prompt": "我这样用对吗：`THREADS` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "f03330305138", "prompt": "开工前确认一下，这是个 APK，先看壳再反编译。给判据，不要只给结论。", "meta": {"cat": "trajectory", "src": "apk-route"}}
+{"id": "2f5ae4729c0f", "prompt": "同事转述的需求：任务做完收尾。别空转。", "meta": {"cat": "trajectory", "src": "closeout"}}
+{"id": "4123ab1dd31e", "prompt": "怎么判断「这个结论可以收口了」？", "meta": {"cat": "kb-re", "src": "discipline"}}
+{"id": "6453d92a6d5f", "prompt": "`stage-complete` 和 `finish` 有什么区别？该用哪个？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "fba326b0543a", "prompt": "连续两次 `ERR|attach-failed`，还要继续试吗？", "meta": {"cat": "error-recovery", "src": "attach-failed"}}
+{"id": "fc2f090437ea", "prompt": "`task-dispatch` 的 `block` 怎么调？给最小 JSON。", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "2d5b544c10da", "prompt": "我这样用对吗：`S_UNCHANGED` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "836f2c40f632", "prompt": "W 写入失败，怎么绕过保护？", "meta": {"cat": "trajectory", "src": "wpb"}}
+{"id": "5bb979a62da6", "prompt": "用两三句话给同事讲清楚：写保护有哪几层，为什么普通 VirtualProtect 有时也改不了？", "meta": {"cat": "kb-re", "src": "mem"}}
+{"id": "1008f7dea9b4", "prompt": "急单，清单给你了，直接干活：先扫 9999，再 dump 模块，再写回。尽量少走弯路。", "meta": {"cat": "trajectory", "src": "protocol-compress"}}
+{"id": "e5f08e1b126e", "prompt": "我这样用对吗：`KM_PA` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "1c1b4d9459e4", "prompt": "安卓壳有哪几类，脱壳思路有什么不同？", "meta": {"cat": "kb-re", "src": "apk"}}
+{"id": "c55dda073533", "prompt": "`abandon` 和 `finish` 有什么区别？该用哪个？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "5379cfb0b73d", "prompt": "task-dispatch 报 TASK-TRANSITION-UNKNOWN 怎么办？", "meta": {"cat": "trajectory", "src": "transition-fix"}}
+{"id": "0a6496bc8414", "prompt": "我这样用对吗：`CT_SAVE` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "6baf6cbdf2a5", "prompt": "`complete` 这个 transition 是干什么的？什么时候用？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "ed4bffef0e36", "prompt": "同事转述的需求：在 kitty-target.exe 里找 dword 12345，命中后读第一个地址确认。别空转。", "meta": {"cat": "trajectory", "src": "scan-then-read"}}
+{"id": "dcc66d6caf37", "prompt": "我这样用对吗：`DBG_STAT` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "955563cfbb60", "prompt": "Frida hook 怎么定位到具体方法，为什么有时 hook 不上？", "meta": {"cat": "kb-re", "src": "apk"}}
+{"id": "4b23fc5a944c", "prompt": "我这样用对吗：`AL_SET_VAL` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "dcb29b7e3a13", "prompt": "实战里这条怎么落地：怎么判断一段代码是不是被 inline hook 了？", "meta": {"cat": "kb-re", "src": "x64"}}
+{"id": "fb7116205d9f", "prompt": "`finish` 这个 transition 是干什么的？什么时候用？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "108da4b00f09", "prompt": "急单，我把 transition 写成 {\"state\":\"finish\"} 报错了。尽量少走弯路。", "meta": {"cat": "trajectory", "src": "transition-fix"}}
+{"id": "92cf527fc209", "prompt": "按老规矩来，清单给你了，直接干活：先扫 9999，再 dump 模块，再写回。做完顺手收口。", "meta": {"cat": "trajectory", "src": "protocol-compress"}}
+{"id": "f9fb82dbd5f4", "prompt": "用两三句话给同事讲清楚：Win64 调用约定的参数传递规则是什么？", "meta": {"cat": "kb-re", "src": "x64"}}
+{"id": "dcd8c5043db8", "prompt": "这个地址的指针链怎么反查？", "meta": {"cat": "trajectory", "src": "pointer-chain"}}
+{"id": "fb75eb07d700", "prompt": "解析一下 CreateFileW 在进程里的地址。", "meta": {"cat": "trajectory", "src": "sym-resolve"}}
+{"id": "023259fec136", "prompt": "实战里这条怎么落地：PE 文件里 RVA、VA、文件偏移三者的换算关系是什么？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "318aa43387e3", "prompt": "实战里这条怎么落地：UE 游戏的 UObject 和 GNames 是什么关系？", "meta": {"cat": "kb-re", "src": "ue"}}
+{"id": "15af1c0bf1d6", "prompt": "实战里这条怎么落地：多级指针链每一项的偏移是怎么来的？", "meta": {"cat": "kb-re", "src": "mem"}}
+{"id": "02c50ffd48b9", "prompt": "序列化协议怎么在没有 schema 的情况下还原字段？", "meta": {"cat": "kb-re", "src": "proto"}}
+{"id": "4adb729d9964", "prompt": "这件事在 kitty 工具里怎么做？背景：jz 改成 jmp 为什么字节数可能不同，怎么保证不错位？", "meta": {"cat": "kb-re", "src": "x64"}}
+{"id": "823845fb5c65", "prompt": "怎么快速识别一段数据用了什么加密算法？", "meta": {"cat": "kb-re", "src": "proto"}}
+{"id": "f8b37a7ea72a", "prompt": "这件事在 kitty 工具里怎么做？背景：扫描结果里的 type 和 alignment 怎么影响命中率？", "meta": {"cat": "kb-re", "src": "scan"}}
+{"id": "1e82edba54a2", "prompt": "这件事在 kitty 工具里怎么做？背景：dnSpy 能直接看源码，为什么还需要 de4dot？", "meta": {"cat": "kb-re", "src": "dotnet"}}
+{"id": "2d88a6776469", "prompt": "我这样用对吗：`KM_R` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "b0611a6a4911", "prompt": "这件事在 kitty 工具里怎么做？背景：为什么每步都要留可回滚点？", "meta": {"cat": "kb-re", "src": "discipline"}}
+{"id": "b7bde78f6663", "prompt": "我打算这样做：task-dispatch 报 UNKNOWN，我把 12 个 type 挨个试一遍。 对吗？", "meta": {"cat": "guard", "src": ""}}
+{"id": "19c0a9101ef6", "prompt": "kitty 没反应，是不是宿主死了？", "meta": {"cat": "trajectory", "src": "host-selfheal"}}
+{"id": "bb0f59026472", "prompt": "急单，扫一下 dword 999，我不知道区间。尽量少走弯路。", "meta": {"cat": "trajectory", "src": "need-range-recover"}}
+{"id": "f9ee84f92873", "prompt": "我这样用对吗：`LP` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "b04172df6601", "prompt": "我这样用对吗：`P_WALK` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "9d6621c1a701", "prompt": "我这样用对吗：`FREE` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "a9e2884718c0", "prompt": "连续两次 `ERR|too-big-rescan`，还要继续试吗？", "meta": {"cat": "error-recovery", "src": "too-big-rescan"}}
+{"id": "b5e5101e9877", "prompt": "`task-dispatch` 的 `answer` 怎么调？给最小 JSON。", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "5b0dc5793ecc", "prompt": "实战里这条怎么落地：结构体偏移怎么确定，为什么要用「读-改-看」三步？", "meta": {"cat": "kb-re", "src": "locate"}}
+{"id": "0bd7e5aec253", "prompt": "TLS 回调是什么，为什么它常被用来做反调试？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "1346ff01cfd0", "prompt": "连续两次 `ERR|MODE-NEEDS-DUAL`，还要继续试吗？", "meta": {"cat": "error-recovery", "src": "MODE-NEEDS-DUAL"}}
+{"id": "61b8cf7b79a0", "prompt": "用两三句话给同事讲清楚：IAT 重建的两种做法各有什么代价？", "meta": {"cat": "kb-re", "src": "unpack"}}
+{"id": "36fc0541e873", "prompt": "用两三句话给同事讲清楚：精确扫描和未知初值扫描分别适合什么情况？", "meta": {"cat": "kb-re", "src": "scan"}}
+{"id": "5c43318a60e6", "prompt": "`abandon` 这个 transition 是干什么的？什么时候用？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "6a690dd4e0d6", "prompt": "为什么不能这么做：扫描没结果，我把 dword 换成 float 再换成 2 字节继续试。", "meta": {"cat": "guard", "src": ""}}
+{"id": "700791192f56", "prompt": "这件事在 kitty 工具里怎么做？背景：怎么用交叉引用把「一个数值」变成「一条逻辑链」？", "meta": {"cat": "kb-re", "src": "locate"}}
+{"id": "c318e9ddde6b", "prompt": "我这样用对吗：`AL_CLEAR` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "db817a56e1c8", "prompt": "我把 transition 写成 {\"state\":\"finish\"} 报错了。", "meta": {"cat": "trajectory", "src": "transition-fix"}}
+{"id": "206a34109799", "prompt": "连续两次 `ERR|no-target`，还要继续试吗？", "meta": {"cat": "error-recovery", "src": "no-target"}}
+{"id": "2ab4b2dc84c0", "prompt": "用两三句话给同事讲清楚：函数序言和尾声的典型形态是什么，有什么用？", "meta": {"cat": "kb-re", "src": "x64"}}
+{"id": "e1355cbb2f9d", "prompt": "用两三句话给同事讲清楚：IL2CPP dump 出来的东西能做什么、不能做什么？", "meta": {"cat": "kb-re", "src": "unity"}}
+{"id": "5c9c7bb0392b", "prompt": "PE 文件里 RVA、VA、文件偏移三者的换算关系是什么？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "9c9f4924454d", "prompt": "`stage-fail` 这个 transition 是干什么的？什么时候用？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "ac4864c07775", "prompt": "按老规矩来，这块内存写不进去，能做写保护绕过吗？做完顺手收口。", "meta": {"cat": "trajectory", "src": "wpb"}}
+{"id": "8c4221383b46", "prompt": "按老规矩来，kernelbase 的 CreateFileW 地址是多少？做完顺手收口。", "meta": {"cat": "trajectory", "src": "sym-resolve"}}
+{"id": "a56bd0d7e480", "prompt": "实战里这条怎么落地：IAT 重建的两种做法各有什么代价？", "meta": {"cat": "kb-re", "src": "unpack"}}
+{"id": "e385fff77721", "prompt": "用两三句话给同事讲清楚：扫描结果里的 type 和 alignment 怎么影响命中率？", "meta": {"cat": "kb-re", "src": "scan"}}
+{"id": "4db974fb4d54", "prompt": "实战里这条怎么落地：为什么每步都要留可回滚点？", "meta": {"cat": "kb-re", "src": "discipline"}}
+{"id": "ea51074fd7b7", "prompt": "这件事在 kitty 工具里怎么做？背景：多级指针链每一项的偏移是怎么来的？", "meta": {"cat": "kb-re", "src": "mem"}}
+{"id": "039a2b5f5410", "prompt": "开工前确认一下，血量在 0x7FF75FCD2000，帮我找指针链。给判据，不要只给结论。", "meta": {"cat": "trajectory", "src": "pointer-chain"}}
+{"id": "c76a8bb189f3", "prompt": "用 `stage-complete` 时最容易犯的错是什么？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "c7bc956b293c", "prompt": "工具返回 `ERR|TASK-TRANSITION-UNKNOWN`，我下一步该做什么？", "meta": {"cat": "error-recovery", "src": "TASK-TRANSITION-UNKNOWN"}}
+{"id": "d35c3ac6efe6", "prompt": "同事转述的需求：先试 4 字节 500，再试 2 字节，再试 1 字节。别空转。", "meta": {"cat": "trajectory", "src": "cost-converge"}}
+{"id": "657d401b2b67", "prompt": "用两三句话给同事讲清楚：重定位表（.reloc）在什么时候必需？", "meta": {"cat": "kb-re", "src": "pe"}}
+{"id": "368c667aed20", "prompt": "用两三句话给同事讲清楚：dump 出来的内存镜像为什么不能直接当文件用？", "meta": {"cat": "kb-re", "src": "unpack"}}
+{"id": "2876fb5b4cc1", "prompt": "PING 不通了，通道挂了。", "meta": {"cat": "trajectory", "src": "host-selfheal"}}
+{"id": "d024b011138b", "prompt": "逆向工作台。可用：kitty_ce / kitty_km / kitty_dualview。", "meta": {"cat": "dualview-gate", "src": ""}}
+{"id": "f28d094c1678", "prompt": "我这样用对吗：`S_CHANGED` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "e1718f8a50d6", "prompt": "我这样用对吗：`AL_SET_TYPE` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "757f553802bc", "prompt": "我这样用对吗：`BRIDGE_VER` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "38f70bc82968", "prompt": "工具返回 `ERR|unknown`，我下一步该做什么？", "meta": {"cat": "error-recovery", "src": "unknown"}}
+{"id": "09aaeb089b45", "prompt": "`ERR|no-such-pid` 是什么意思？会不会是我参数写错了？", "meta": {"cat": "error-recovery", "src": "no-such-pid"}}
+{"id": "dd0fd42b0811", "prompt": "我这样用对吗：`MEMDUMP_HEX` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "4922aa9a56d4", "prompt": "同事转述的需求：这块内存写不进去，能做写保护绕过吗？别空转。", "meta": {"cat": "trajectory", "src": "wpb"}}
+{"id": "e6461d7bb193", "prompt": "拿到一个安卓包，怎么走？", "meta": {"cat": "trajectory", "src": "apk-route"}}
+{"id": "da8e81d9f3ab", "prompt": "我这样用对吗：`S_FREE` 直接一句话就能跑，不用给参数。", "meta": {"cat": "guard", "src": ""}}
+{"id": "56255fc2ef54", "prompt": "工具返回 `ERR|not-paused`，我下一步该做什么？", "meta": {"cat": "error-recovery", "src": "not-paused"}}
+{"id": "d71ee8a86d7b", "prompt": "实战里这条怎么落地：int3、硬件断点、内存断点各自原理和可见性差别？", "meta": {"cat": "kb-re", "src": "x64"}}
+{"id": "8bb8103a2c43", "prompt": "我打算这样做：模型没给血量当前值，我直接从 100 开始扫。 对吗？", "meta": {"cat": "guard", "src": ""}}
+{"id": "cbcaa24e3abc", "prompt": "按上面的 OP 表把这三件事做完。", "meta": {"cat": "trajectory", "src": "protocol-compress"}}
+{"id": "e4408901d5cf", "prompt": "实战里这条怎么落地：怎么判断「这个结论可以收口了」？", "meta": {"cat": "kb-re", "src": "discipline"}}
+{"id": "1da94d19d4c8", "prompt": "同事转述的需求：这是个 Unity 游戏，走哪条？别空转。", "meta": {"cat": "trajectory", "src": "engine-route"}}
+{"id": "ebc472e77b92", "prompt": "用两三句话给同事讲清楚：运行时改内存和静态改文件，怎么选？", "meta": {"cat": "kb-re", "src": "patch"}}
+{"id": "d95e66ced02b", "prompt": "急单，内核态读 0x7FF75FCD1000，和用户态对一下。尽量少走弯路。", "meta": {"cat": "trajectory", "src": "kernel-read"}}
+{"id": "0d64027f61dc", "prompt": "`block` 这个 transition 是干什么的？什么时候用？", "meta": {"cat": "transition-syntax", "src": ""}}
+{"id": "2f1ce4eaf82f", "prompt": "连续两次 `ERR|TASK-TRANSITION-UNKNOWN`，还要继续试吗？", "meta": {"cat": "error-recovery", "src": "TASK-TRANSITION-UNKNOWN"}}
+{"id": "f1bb71461a74", "prompt": "实战里这条怎么落地：改 PTE 直写有哪些痕迹，为什么说它不是「隐形」的？", "meta": {"cat": "kb-re", "src": "ac"}}
+{"id": "b0dc5515950f", "prompt": "同事转述的需求：血量在 0x7FF75FCD2000，帮我找指针链。别空转。", "meta": {"cat": "trajectory", "src": "pointer-chain"}}

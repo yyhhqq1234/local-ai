@@ -1,0 +1,2496 @@
+{
+ "generated_at": "2026-10-26T17:16:39.948Z",
+ "root": "D:/DrCE(26.2.16)",
+ "excluded_dirs": [
+  "vendor",
+  "logs",
+  "node_modules",
+  "temp",
+  "release",
+  "KittyDebugTool",
+  ".git",
+  ".agent-teams",
+  "storages",
+  "user-temp"
+ ],
+ "total_files": 1312,
+ "total_bytes": 19529095,
+ "groups": {
+  "root": {
+   "count": 6,
+   "bytes": 117066,
+   "files": [
+    {
+     "path": "README.md",
+     "size": 65734
+    },
+    {
+     "path": "AGENTS.md",
+     "size": 24186
+    },
+    {
+     "path": "TASKPOINT.md",
+     "size": 20160
+    },
+    {
+     "path": "CLAUDE.md",
+     "size": 6121
+    },
+    {
+     "path": "package.json",
+     "size": 699
+    },
+    {
+     "path": ".dsh-kitty/overrides.json",
+     "size": 166
+    }
+   ]
+  },
+  "configs": {
+   "count": 57,
+   "bytes": 1058380,
+   "files": [
+    {
+     "path": "configs/reverse-hybrid/sessions/session-2798a0ff-e045-46e1-9609-75f6cddf2dcd/task.json",
+     "size": 469795
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-c0718a10-3e6c-470c-896f-66a136260b71/task.json",
+     "size": 109075
+    },
+    {
+     "path": "configs/reverse-hybrid/session-gate.mjs",
+     "size": 70628
+    },
+    {
+     "path": "configs/controls.json",
+     "size": 66596
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-0717206b-ed3f-4758-8ced-499fe4beaa29/history/session-0717206b-ed3f-4758-8ced-499fe4beaa29.task-1792257110127-xsbnfb.json",
+     "size": 60467
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-7fdfccf4-1831-4d5d-899c-d55a1e3172c6/task.json",
+     "size": 30195
+    },
+    {
+     "path": "configs/reverse-hybrid/target-gate.mjs",
+     "size": 27520
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-0717206b-ed3f-4758-8ced-499fe4beaa29/task.json",
+     "size": 17707
+    },
+    {
+     "path": "configs/reverse-hybrid/dual-agent-gate.mjs",
+     "size": 15916
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-7fdfccf4-1831-4d5d-899c-d55a1e3172c6/history/session-7fdfccf4-1831-4d5d-899c-d55a1e3172c6.task-1792503077535-x9u1ec.json",
+     "size": 15273
+    },
+    {
+     "path": "configs/reverse-hybrid/ask-gate.mjs",
+     "size": 15092
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-c1d81704-aa26-43f2-b2cc-624c51d59f97/history/session-c1d81704-aa26-43f2-b2cc-624c51d59f97.task-1792340944846-1bn4zx.json",
+     "size": 14063
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-c1d81704-aa26-43f2-b2cc-624c51d59f97/task.json",
+     "size": 13977
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-c1d81704-aa26-43f2-b2cc-624c51d59f97/history/session-c1d81704-aa26-43f2-b2cc-624c51d59f97.task-1792326650453-latm89.json",
+     "size": 12641
+    },
+    {
+     "path": "configs/reverse-hybrid/task-state-v1.1.md",
+     "size": 11083
+    },
+    {
+     "path": "configs/reverse-hybrid/router.md",
+     "size": 10100
+    },
+    {
+     "path": "configs/reverse-hybrid/ops-gate.mjs",
+     "size": 8383
+    },
+    {
+     "path": "configs/reverse-hybrid/verify-g4-preset.mjs",
+     "size": 6969
+    },
+    {
+     "path": "configs/reverse-hybrid/platform-gate.mjs",
+     "size": 6860
+    },
+    {
+     "path": "configs/reverse-hybrid/domains.md",
+     "size": 6436
+    },
+    {
+     "path": "configs/reverse-hybrid/verify-reverse-gates.mjs",
+     "size": 6026
+    },
+    {
+     "path": "configs/reverse-hybrid/verify-domains.mjs",
+     "size": 5712
+    },
+    {
+     "path": "configs/reverse-hybrid/verify-prompt-priority.mjs",
+     "size": 4377
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-7fdfccf4-1831-4d5d-899c-d55a1e3172c6/history/session-7fdfccf4-1831-4d5d-899c-d55a1e3172c6.task-1792503029804-5jjzrw.json",
+     "size": 4321
+    },
+    {
+     "path": "configs/reverse-hybrid/ue-uedumper.md",
+     "size": 3983
+    },
+    {
+     "path": "configs/reverse-hybrid/godot-gdsdecomp.md",
+     "size": 3959
+    },
+    {
+     "path": "configs/reverse-hybrid/verify-g3-tools.mjs",
+     "size": 3873
+    },
+    {
+     "path": "configs/reverse-hybrid/unity-cpp2il.md",
+     "size": 3435
+    },
+    {
+     "path": "configs/reverse-hybrid/verify-g2-projection.mjs",
+     "size": 3300
+    },
+    {
+     "path": "configs/reverse-hybrid/verify-shield-reverse.mjs",
+     "size": 3226
+    },
+    {
+     "path": "configs/reverse-hybrid/verify-g1-store.mjs",
+     "size": 3153
+    },
+    {
+     "path": "configs/reverse-hybrid/investigator.md",
+     "size": 3101
+    },
+    {
+     "path": "configs/reverse-hybrid/task-core-gates.md",
+     "size": 2728
+    },
+    {
+     "path": "configs/reverse-hybrid/executor.md",
+     "size": 2307
+    },
+    {
+     "path": "configs/reverse-hybrid/engines/engine.schema.json",
+     "size": 2148
+    },
+    {
+     "path": "configs/reverse-hybrid/handoff-template.md",
+     "size": 2032
+    },
+    {
+     "path": "configs/reverse-hybrid/preset-pack.md",
+     "size": 1858
+    },
+    {
+     "path": "configs/reverse-hybrid/verify.mjs",
+     "size": 1638
+    },
+    {
+     "path": "configs/reverse-hybrid/skill-pack.md",
+     "size": 1457
+    },
+    {
+     "path": "configs/reverse-hybrid/engines/ue-uedumper.json",
+     "size": 1119
+    },
+    {
+     "path": "configs/reverse-hybrid/engines/unity-cpp2il.json",
+     "size": 981
+    },
+    {
+     "path": "configs/reverse-hybrid/engines/godot-gdsdecomp.json",
+     "size": 877
+    },
+    {
+     "path": "configs/reverse-hybrid/bridge-checklist.md",
+     "size": 667
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-c0718a10-3e6c-470c-896f-66a136260b71/target.json",
+     "size": 392
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-0717206b-ed3f-4758-8ced-499fe4beaa29/target.json",
+     "size": 350
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-7fdfccf4-1831-4d5d-899c-d55a1e3172c6/target.json",
+     "size": 346
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-2798a0ff-e045-46e1-9609-75f6cddf2dcd/target.json",
+     "size": 334
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-c1d81704-aa26-43f2-b2cc-624c51d59f97/target.json",
+     "size": 319
+    },
+    {
+     "path": "configs/reverse-hybrid/preset.yml",
+     "size": 236
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-2798a0ff-e045-46e1-9609-75f6cddf2dcd/mode.json",
+     "size": 200
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-c0718a10-3e6c-470c-896f-66a136260b71/mode.json",
+     "size": 200
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-c1d81704-aa26-43f2-b2cc-624c51d59f97/mode.json",
+     "size": 197
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-0717206b-ed3f-4758-8ced-499fe4beaa29/mode.json",
+     "size": 194
+    },
+    {
+     "path": "configs/reverse-hybrid/sessions/session-7fdfccf4-1831-4d5d-899c-d55a1e3172c6/mode.json",
+     "size": 175
+    },
+    {
+     "path": "configs/reverse-hybrid/last-target.json",
+     "size": 147
+    },
+    {
+     "path": "configs/reverse-hybrid/target-state.json",
+     "size": 146
+    },
+    {
+     "path": "configs/reverse-hybrid/session-mode.json",
+     "size": 90
+    }
+   ]
+  },
+  "docs": {
+   "count": 6,
+   "bytes": 68054,
+   "files": [
+    {
+     "path": "docs/02-architecture.md",
+     "size": 25781
+    },
+    {
+     "path": "docs/05-reference.md",
+     "size": 16438
+    },
+    {
+     "path": "docs/06-roadmap.md",
+     "size": 12690
+    },
+    {
+     "path": "docs/01-overview.md",
+     "size": 5015
+    },
+    {
+     "path": "docs/04-dev.md",
+     "size": 4235
+    },
+    {
+     "path": "docs/03-usage.md",
+     "size": 3895
+    }
+   ]
+  },
+  "toolbox-misc": {
+   "count": 239,
+   "bytes": 1975289,
+   "files": [
+    {
+     "path": "kitty-toolbox/client/kitty-settings.client.js",
+     "size": 210543
+    },
+    {
+     "path": "kitty-toolbox/lib/client.js",
+     "size": 210543
+    },
+    {
+     "path": "kitty-toolbox/lib/loop.js",
+     "size": 90326
+    },
+    {
+     "path": "kitty-toolbox/lib/tools/driver-tools.js",
+     "size": 46940
+    },
+    {
+     "path": "kitty-toolbox/tools/selftest-v005.mjs",
+     "size": 46150
+    },
+    {
+     "path": "kitty-toolbox/lib/host-utils.js",
+     "size": 41915
+    },
+    {
+     "path": "kitty-toolbox/lib/actions-session.js",
+     "size": 40065
+    },
+    {
+     "path": "kitty-toolbox/lib/skills.js",
+     "size": 35536
+    },
+    {
+     "path": "kitty-toolbox/lib/tools/channel-tools.js",
+     "size": 33810
+    },
+    {
+     "path": "kitty-toolbox/tools/client-module-selftest.mjs",
+     "size": 33613
+    },
+    {
+     "path": "kitty-toolbox/lib/settings-api.js",
+     "size": 32106
+    },
+    {
+     "path": "kitty-toolbox/lib/session-shards.js",
+     "size": 31304
+    },
+    {
+     "path": "kitty-toolbox/README.md",
+     "size": 30296
+    },
+    {
+     "path": "kitty-toolbox/lib/reverse-store.js",
+     "size": 28374
+    },
+    {
+     "path": "kitty-toolbox/lib/panel.js",
+     "size": 27816
+    },
+    {
+     "path": "kitty-toolbox/lib/tools/mem-tools.js",
+     "size": 26961
+    },
+    {
+     "path": "kitty-toolbox/lib/tools/anti-tools.js",
+     "size": 26942
+    },
+    {
+     "path": "kitty-toolbox/lib/rea.js",
+     "size": 26555
+    },
+    {
+     "path": "kitty-toolbox/lib/skill-pack.js",
+     "size": 21764
+    },
+    {
+     "path": "kitty-toolbox/lib/session-projection.js",
+     "size": 19391
+    },
+    {
+     "path": "kitty-toolbox/lib/workbench-context.js",
+     "size": 18213
+    },
+    {
+     "path": "kitty-toolbox/lib/ida.js",
+     "size": 17272
+    },
+    {
+     "path": "kitty-toolbox/lib/bridge.js",
+     "size": 17054
+    },
+    {
+     "path": "kitty-toolbox/lib/tools/session-tools.js",
+     "size": 16950
+    },
+    {
+     "path": "kitty-toolbox/lib/dump.js",
+     "size": 16789
+    },
+    {
+     "path": "kitty-toolbox/lib/idamcp.js",
+     "size": 15372
+    },
+    {
+     "path": "kitty-toolbox/lib/asm.js",
+     "size": 14709
+    },
+    {
+     "path": "kitty-toolbox/lib/patch.js",
+     "size": 14614
+    },
+    {
+     "path": "kitty-toolbox/lib/ops-catalog.js",
+     "size": 14489
+    },
+    {
+     "path": "kitty-toolbox/tools/verify-v006-live.mjs",
+     "size": 13100
+    },
+    {
+     "path": "kitty-toolbox/lib/plugin.js",
+     "size": 13011
+    },
+    {
+     "path": "kitty-toolbox/lib/ghidra.js",
+     "size": 12294
+    },
+    {
+     "path": "kitty-toolbox/lib/setup-service.js",
+     "size": 12066
+    },
+    {
+     "path": "kitty-toolbox/lib/types/host-utils.d.ts",
+     "size": 12061
+    },
+    {
+     "path": "kitty-toolbox/lib/pchain-snippet.js",
+     "size": 11796
+    },
+    {
+     "path": "kitty-toolbox/lib/variants.js",
+     "size": 11744
+    },
+    {
+     "path": "kitty-toolbox/lib/tool-manifest.js",
+     "size": 11562
+    },
+    {
+     "path": "kitty-toolbox/lib/gate-table.js",
+     "size": 11538
+    },
+    {
+     "path": "kitty-toolbox/lib/fridaplus.js",
+     "size": 11379
+    },
+    {
+     "path": "kitty-toolbox/lib/types/session-shards.d.ts",
+     "size": 10962
+    },
+    {
+     "path": "kitty-toolbox/lib/staticplus.js",
+     "size": 10929
+    },
+    {
+     "path": "kitty-toolbox/lib/preset-root.js",
+     "size": 10841
+    },
+    {
+     "path": "kitty-toolbox/lib/types/settings-api.d.ts",
+     "size": 10755
+    },
+    {
+     "path": "kitty-toolbox/tools/test-task-state.mjs",
+     "size": 9904
+    },
+    {
+     "path": "kitty-toolbox/lib/tools/static-tools.js",
+     "size": 9807
+    },
+    {
+     "path": "kitty-toolbox/lib/types/panel.d.ts",
+     "size": 9789
+    },
+    {
+     "path": "kitty-toolbox/lib/tools/kernel-tools.js",
+     "size": 9715
+    },
+    {
+     "path": "kitty-toolbox/lib/task-state.js",
+     "size": 9672
+    },
+    {
+     "path": "kitty-toolbox/lib/actions-diagnostics.js",
+     "size": 9660
+    },
+    {
+     "path": "kitty-toolbox/templates/reverse-hybrid/task-state-v1.1.md",
+     "size": 9378
+    },
+    {
+     "path": "kitty-toolbox/lib/task-registry.js",
+     "size": 9210
+    },
+    {
+     "path": "kitty-toolbox/lib/types/loop.d.ts",
+     "size": 9063
+    },
+    {
+     "path": "kitty-toolbox/lib/preset-pack.js",
+     "size": 9055
+    },
+    {
+     "path": "kitty-toolbox/tools/test-p567-integration.mjs",
+     "size": 8898
+    },
+    {
+     "path": "kitty-toolbox/lib/tool-factory.js",
+     "size": 8600
+    },
+    {
+     "path": "kitty-toolbox/lib/reverse-tools.js",
+     "size": 8534
+    },
+    {
+     "path": "kitty-toolbox/lib/shield-reverse.js",
+     "size": 8171
+    },
+    {
+     "path": "kitty-toolbox/tools/verify-v005-live.mjs",
+     "size": 8051
+    },
+    {
+     "path": "kitty-toolbox/lib/migration.js",
+     "size": 7961
+    },
+    {
+     "path": "kitty-toolbox/lib/types/reverse-store.d.ts",
+     "size": 7771
+    },
+    {
+     "path": "kitty-toolbox/lib/actions-bridge.js",
+     "size": 7460
+    },
+    {
+     "path": "kitty-toolbox/tools/test-reverse-tools.mjs",
+     "size": 7441
+    },
+    {
+     "path": "kitty-toolbox/lib/apkjadx.js",
+     "size": 7401
+    },
+    {
+     "path": "kitty-toolbox/lib/dsh-fit.js",
+     "size": 7377
+    },
+    {
+     "path": "kitty-toolbox/tools/test-p2-loop.mjs",
+     "size": 7227
+    },
+    {
+     "path": "kitty-toolbox/lib/setup-workflow.js",
+     "size": 7149
+    },
+    {
+     "path": "kitty-toolbox/lib/actions-host.js",
+     "size": 6902
+    },
+    {
+     "path": "kitty-toolbox/tools/test-p3-homomorphism.mjs",
+     "size": 6866
+    },
+    {
+     "path": "kitty-toolbox/lib/sym.js",
+     "size": 6840
+    },
+    {
+     "path": "kitty-toolbox/.dsh-kitty-overrides.md",
+     "size": 6807
+    },
+    {
+     "path": "kitty-toolbox/lib/pojia-reverse.js",
+     "size": 6734
+    },
+    {
+     "path": "kitty-toolbox/tools/test-session-projection.mjs",
+     "size": 6718
+    },
+    {
+     "path": "kitty-toolbox/tools/release-smoke.mjs",
+     "size": 6624
+    },
+    {
+     "path": "kitty-toolbox/lib/types/session-projection.d.ts",
+     "size": 6583
+    },
+    {
+     "path": "kitty-toolbox/lib/uedump.js",
+     "size": 6561
+    },
+    {
+     "path": "kitty-toolbox/tools/test-reverse-store.mjs",
+     "size": 6313
+    },
+    {
+     "path": "kitty-toolbox/lib/types/action-request.d.ts",
+     "size": 6053
+    },
+    {
+     "path": "kitty-toolbox/lib/unitymod.js",
+     "size": 5915
+    },
+    {
+     "path": "kitty-toolbox/lib/action-request.js",
+     "size": 5769
+    },
+    {
+     "path": "kitty-toolbox/tools/cwdguard.mjs",
+     "size": 5761
+    },
+    {
+     "path": "kitty-toolbox/tools/test-p5-lifecycle.mjs",
+     "size": 5454
+    },
+    {
+     "path": "kitty-toolbox/lib/actions-packs.js",
+     "size": 5442
+    },
+    {
+     "path": "kitty-toolbox/tools/test-p6-setup.mjs",
+     "size": 5303
+    },
+    {
+     "path": "kitty-toolbox/lib/unrealplus.js",
+     "size": 5236
+    },
+    {
+     "path": "kitty-toolbox/tools/test-task-api-adapter.mjs",
+     "size": 5236
+    },
+    {
+     "path": "kitty-toolbox/tools/test-p1-unified.mjs",
+     "size": 5186
+    },
+    {
+     "path": "kitty-toolbox/lib/capability.js",
+     "size": 5116
+    },
+    {
+     "path": "kitty-toolbox/templates/reverse-hybrid/ask-gate.mjs",
+     "size": 5062
+    },
+    {
+     "path": "kitty-toolbox/tools/test-p4-gate.mjs",
+     "size": 4782
+    },
+    {
+     "path": "kitty-toolbox/tools/test-gate-table.mjs",
+     "size": 4667
+    },
+    {
+     "path": "kitty-toolbox/lib/types/reverse-tools.d.ts",
+     "size": 4590
+    },
+    {
+     "path": "kitty-toolbox/lib/types/workbench-context.d.ts",
+     "size": 4349
+    },
+    {
+     "path": "kitty-toolbox/lib/user-status.js",
+     "size": 4279
+    },
+    {
+     "path": "kitty-toolbox/lib/registry.js",
+     "size": 4218
+    },
+    {
+     "path": "kitty-toolbox/lib/types/dump.d.ts",
+     "size": 4171
+    },
+    {
+     "path": "kitty-toolbox/lib/task-controller.js",
+     "size": 4139
+    },
+    {
+     "path": "kitty-toolbox/lib/engines.js",
+     "size": 4043
+    },
+    {
+     "path": "kitty-toolbox/lib/types/capability.d.ts",
+     "size": 4038
+    },
+    {
+     "path": "kitty-toolbox/lib/cpp2il.js",
+     "size": 3998
+    },
+    {
+     "path": "kitty-toolbox/scripts/atomic-build.mjs",
+     "size": 3962
+    },
+    {
+     "path": "kitty-toolbox/tools/test-settings-actions.mjs",
+     "size": 3902
+    },
+    {
+     "path": "kitty-toolbox/lib/task-turn-guard.js",
+     "size": 3880
+    },
+    {
+     "path": "kitty-toolbox/lib/runtime.js",
+     "size": 3879
+    },
+    {
+     "path": "kitty-toolbox/lib/task-projection.js",
+     "size": 3815
+    },
+    {
+     "path": "kitty-toolbox/lib/types/action-router.d.ts",
+     "size": 3673
+    },
+    {
+     "path": "kitty-toolbox/tools/release-lifecycle-smoke.mjs",
+     "size": 3614
+    },
+    {
+     "path": "kitty-toolbox/tools/release-assets.mjs",
+     "size": 3563
+    },
+    {
+     "path": "kitty-toolbox/tools/cm-row-refresh.js",
+     "size": 3526
+    },
+    {
+     "path": "kitty-toolbox/tools/test-bridge-op.mjs",
+     "size": 3383
+    },
+    {
+     "path": "kitty-toolbox/lib/il2cppdumper.js",
+     "size": 3381
+    },
+    {
+     "path": "kitty-toolbox/tools/test-p13-acceptance.mjs",
+     "size": 3362
+    },
+    {
+     "path": "kitty-toolbox/lib/ascii-alias.js",
+     "size": 3351
+    },
+    {
+     "path": "kitty-toolbox/tools/acceptance-p13.mjs",
+     "size": 3217
+    },
+    {
+     "path": "kitty-toolbox/lib/types/patch.d.ts",
+     "size": 3200
+    },
+    {
+     "path": "kitty-toolbox/tools/test-p10-migration.mjs",
+     "size": 3162
+    },
+    {
+     "path": "kitty-toolbox/lib/types/rea.d.ts",
+     "size": 3132
+    },
+    {
+     "path": "kitty-toolbox/lib/init.js",
+     "size": 3117
+    },
+    {
+     "path": "kitty-toolbox/tools/test-p9-ui.mjs",
+     "size": 3110
+    },
+    {
+     "path": "kitty-toolbox/lib/assetrip.js",
+     "size": 3103
+    },
+    {
+     "path": "kitty-toolbox/tools/test-p7-compat.mjs",
+     "size": 3057
+    },
+    {
+     "path": "kitty-toolbox/tools/test-task-persistence.mjs",
+     "size": 3052
+    },
+    {
+     "path": "kitty-toolbox/lib/action-router.js",
+     "size": 3039
+    },
+    {
+     "path": "kitty-toolbox/lib/types/pchain-snippet.d.ts",
+     "size": 3005
+    },
+    {
+     "path": "kitty-toolbox/tools/test-p8-skills.mjs",
+     "size": 2988
+    },
+    {
+     "path": "kitty-toolbox/lib/types/gate-table.d.ts",
+     "size": 2972
+    },
+    {
+     "path": "kitty-toolbox/lib/types/bridge.d.ts",
+     "size": 2959
+    },
+    {
+     "path": "kitty-toolbox/tools/test-p11-release.mjs",
+     "size": 2922
+    },
+    {
+     "path": "kitty-toolbox/tools/gen-readme-facts.mjs",
+     "size": 2818
+    },
+    {
+     "path": "kitty-toolbox/lib/types/task-state.d.ts",
+     "size": 2798
+    },
+    {
+     "path": "kitty-toolbox/lib/gdre.js",
+     "size": 2708
+    },
+    {
+     "path": "kitty-toolbox/lib/drvio.js",
+     "size": 2677
+    },
+    {
+     "path": "kitty-toolbox/tools/test-migration.mjs",
+     "size": 2653
+    },
+    {
+     "path": "kitty-toolbox/lib/structured-gate.js",
+     "size": 2584
+    },
+    {
+     "path": "kitty-toolbox/lib/types/preset-root.d.ts",
+     "size": 2583
+    },
+    {
+     "path": "kitty-toolbox/lib/install-manifest.json",
+     "size": 2553
+    },
+    {
+     "path": "kitty-toolbox/tools/test-task-controller.mjs",
+     "size": 2464
+    },
+    {
+     "path": "kitty-toolbox/tools/test-registry.mjs",
+     "size": 2459
+    },
+    {
+     "path": "kitty-toolbox/lib/task-api-adapter.js",
+     "size": 2436
+    },
+    {
+     "path": "kitty-toolbox/lib/task-file.js",
+     "size": 2357
+    },
+    {
+     "path": "kitty-toolbox/lib/types/registry.d.ts",
+     "size": 2320
+    },
+    {
+     "path": "kitty-toolbox/lib/types/shield-reverse.d.ts",
+     "size": 2284
+    },
+    {
+     "path": "kitty-toolbox/tools/test-task-projection.mjs",
+     "size": 2263
+    },
+    {
+     "path": "kitty-toolbox/lib/types/skill-pack.d.ts",
+     "size": 2240
+    },
+    {
+     "path": "kitty-toolbox/lib/types/sym.d.ts",
+     "size": 2206
+    },
+    {
+     "path": "kitty-toolbox/tools/test-task-turn-guard.mjs",
+     "size": 2079
+    },
+    {
+     "path": "kitty-toolbox/tools/kitty-report-save.mjs",
+     "size": 2076
+    },
+    {
+     "path": "kitty-toolbox/tools/test-p12-docs.mjs",
+     "size": 2036
+    },
+    {
+     "path": "kitty-toolbox/tools/stage-skill-packs.mjs",
+     "size": 1978
+    },
+    {
+     "path": "kitty-toolbox/tools/test-task-gate-truth.mjs",
+     "size": 1937
+    },
+    {
+     "path": "kitty-toolbox/tools/host-peer-fixture.mjs",
+     "size": 1875
+    },
+    {
+     "path": "kitty-toolbox/lib/types/variants.d.ts",
+     "size": 1872
+    },
+    {
+     "path": "kitty-toolbox/tools/test-tool-events.mjs",
+     "size": 1823
+    },
+    {
+     "path": "kitty-toolbox/scripts/build-client.mjs",
+     "size": 1814
+    },
+    {
+     "path": "kitty-toolbox/lib/types/dsh-fit.d.ts",
+     "size": 1797
+    },
+    {
+     "path": "kitty-toolbox/tools/test-task-root-isolation.mjs",
+     "size": 1791
+    },
+    {
+     "path": "kitty-toolbox/tools/test-structured-gate.mjs",
+     "size": 1786
+    },
+    {
+     "path": "kitty-toolbox/lib/types/idamcp.d.ts",
+     "size": 1747
+    },
+    {
+     "path": "kitty-toolbox/tools/test-capability.mjs",
+     "size": 1738
+    },
+    {
+     "path": "kitty-toolbox/cordis.patch.yml",
+     "size": 1712
+    },
+    {
+     "path": "kitty-toolbox/lib/types/pojia-reverse.d.ts",
+     "size": 1674
+    },
+    {
+     "path": "kitty-toolbox/lib/types/tool-manifest.d.ts",
+     "size": 1664
+    },
+    {
+     "path": "kitty-toolbox/lib/types/init.d.ts",
+     "size": 1652
+    },
+    {
+     "path": "kitty-toolbox/tools/test-task-registry.mjs",
+     "size": 1633
+    },
+    {
+     "path": "kitty-toolbox/lib/types/asm.d.ts",
+     "size": 1630
+    },
+    {
+     "path": "kitty-toolbox/lib/types/plugin.d.ts",
+     "size": 1623
+    },
+    {
+     "path": "kitty-toolbox/package.json",
+     "size": 1611
+    },
+    {
+     "path": "kitty-toolbox/lib/types/tools/deps.d.ts",
+     "size": 1595
+    },
+    {
+     "path": "kitty-toolbox/lib/types/ghidra.d.ts",
+     "size": 1562
+    },
+    {
+     "path": "kitty-toolbox/lib/types/ops-catalog.d.ts",
+     "size": 1521
+    },
+    {
+     "path": "kitty-toolbox/lib/types/preset-pack.d.ts",
+     "size": 1517
+    },
+    {
+     "path": "kitty-toolbox/tools/test-health.mjs",
+     "size": 1510
+    },
+    {
+     "path": "kitty-toolbox/lib/types/ida.d.ts",
+     "size": 1355
+    },
+    {
+     "path": "kitty-toolbox/lib/types/task-registry.d.ts",
+     "size": 1262
+    },
+    {
+     "path": "kitty-toolbox/tools/test-runtime.mjs",
+     "size": 1250
+    },
+    {
+     "path": "kitty-toolbox/tools/test-manifest.mjs",
+     "size": 1243
+    },
+    {
+     "path": "kitty-toolbox/tools/test-setup-integrity.mjs",
+     "size": 1242
+    },
+    {
+     "path": "kitty-toolbox/lib/types/drvio.d.ts",
+     "size": 1226
+    },
+    {
+     "path": "kitty-toolbox/lib/types/skills.d.ts",
+     "size": 1169
+    },
+    {
+     "path": "kitty-toolbox/lib/types/task-controller.d.ts",
+     "size": 1161
+    },
+    {
+     "path": "kitty-toolbox/tools/test-package-check.mjs",
+     "size": 1130
+    },
+    {
+     "path": "kitty-toolbox/tools/test-user-status.mjs",
+     "size": 1110
+    },
+    {
+     "path": "kitty-toolbox/lib/health.js",
+     "size": 1092
+    },
+    {
+     "path": "kitty-toolbox/lib/types/fridaplus.d.ts",
+     "size": 1092
+    },
+    {
+     "path": "kitty-toolbox/lib/types/runtime.d.ts",
+     "size": 1076
+    },
+    {
+     "path": "kitty-toolbox/tools/test-action-services.mjs",
+     "size": 1064
+    },
+    {
+     "path": "kitty-toolbox/lib/types/structured-gate.d.ts",
+     "size": 982
+    },
+    {
+     "path": "kitty-toolbox/lib/types/task-projection.d.ts",
+     "size": 971
+    },
+    {
+     "path": "kitty-toolbox/lib/types/unitymod.d.ts",
+     "size": 971
+    },
+    {
+     "path": "kitty-toolbox/lib/types/setup-service.d.ts",
+     "size": 948
+    },
+    {
+     "path": "kitty-toolbox/lib/types/task-turn-guard.d.ts",
+     "size": 933
+    },
+    {
+     "path": "kitty-toolbox/lib/types/setup-workflow.d.ts",
+     "size": 915
+    },
+    {
+     "path": "kitty-toolbox/lib/package-check.js",
+     "size": 863
+    },
+    {
+     "path": "kitty-toolbox/lib/types/apkjadx.d.ts",
+     "size": 851
+    },
+    {
+     "path": "kitty-toolbox/lib/types/task-file.d.ts",
+     "size": 832
+    },
+    {
+     "path": "kitty-toolbox/tools/workspace-temp.mjs",
+     "size": 810
+    },
+    {
+     "path": "kitty-toolbox/lib/index.js",
+     "size": 778
+    },
+    {
+     "path": "kitty-toolbox/lib/compat-deprecation.js",
+     "size": 761
+    },
+    {
+     "path": "kitty-toolbox/lib/types/index.d.ts",
+     "size": 745
+    },
+    {
+     "path": "kitty-toolbox/lib/types/manifest.d.ts",
+     "size": 742
+    },
+    {
+     "path": "kitty-toolbox/lib/types/unrealplus.d.ts",
+     "size": 739
+    }
+   ]
+  },
+  "bundled-skills": {
+   "count": 872,
+   "bytes": 14986369,
+   "files": [
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/raw/web.json",
+     "size": 1173348
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/raw/web.json",
+     "size": 1173348
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/raw/web.json",
+     "size": 1173348
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/raw/tools.json",
+     "size": 179026
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/raw/tools.json",
+     "size": 179026
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/raw/tools.json",
+     "size": 179026
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/waf-bypass.md",
+     "size": 173699
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/waf-bypass.md",
+     "size": 173699
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/waf-bypass.md",
+     "size": 173699
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/raw/navigation.json",
+     "size": 161818
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/raw/navigation.json",
+     "size": 161818
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/raw/navigation.json",
+     "size": 161818
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/manifest.json",
+     "size": 147125
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/rce.md",
+     "size": 128198
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/rce.md",
+     "size": 128198
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/rce.md",
+     "size": 128198
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/intranet-postexp.md",
+     "size": 114973
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/intranet-postexp.md",
+     "size": 114973
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/intranet-postexp.md",
+     "size": 114973
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/oauth-saml-jwt.md",
+     "size": 81559
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/oauth-saml-jwt.md",
+     "size": 81559
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/oauth-saml-jwt.md",
+     "size": 81559
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/框架漏洞.md",
+     "size": 71075
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/框架漏洞.md",
+     "size": 71075
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/框架漏洞.md",
+     "size": 71075
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/认证漏洞.md",
+     "size": 66838
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/认证漏洞.md",
+     "size": 66838
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/认证漏洞.md",
+     "size": 66838
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/ssrf-cache-host.md",
+     "size": 65113
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/ssrf-cache-host.md",
+     "size": 65113
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/ssrf-cache-host.md",
+     "size": 65113
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/sql-nosql注入.md",
+     "size": 65005
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/sql-nosql注入.md",
+     "size": 65005
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/sql-nosql注入.md",
+     "size": 65005
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/llm-prompt-injection.md",
+     "size": 57876
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/llm-prompt-injection.md",
+     "size": 57876
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/llm-prompt-injection.md",
+     "size": 57876
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/logic-flaws.md",
+     "size": 53287
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/logic-flaws.md",
+     "size": 53287
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/logic-flaws.md",
+     "size": 53287
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/api-rest.md",
+     "size": 48297
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/api-rest.md",
+     "size": 48297
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/api-rest.md",
+     "size": 48297
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/api安全.md",
+     "size": 48078
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/api安全.md",
+     "size": 48078
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/api安全.md",
+     "size": 48078
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/文件漏洞.md",
+     "size": 47961
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/文件漏洞.md",
+     "size": 47961
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/文件漏洞.md",
+     "size": 47961
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/sqli.md",
+     "size": 47081
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/sqli.md",
+     "size": 47081
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/sqli.md",
+     "size": 47081
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/xss跨站脚本.md",
+     "size": 45960
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/xss跨站脚本.md",
+     "size": 45960
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/xss跨站脚本.md",
+     "size": 45960
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/file-upload.md",
+     "size": 45395
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/file-upload.md",
+     "size": 45395
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/file-upload.md",
+     "size": 45395
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/rce远程代码执行.md",
+     "size": 39887
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/rce远程代码执行.md",
+     "size": 39887
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/rce远程代码执行.md",
+     "size": 39887
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/reverse-engineering/field-notes.md",
+     "size": 39666
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/reverse-engineering/field-notes.md",
+     "size": 39666
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/ssrf服务端请求伪造.md",
+     "size": 38974
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/ssrf服务端请求伪造.md",
+     "size": 38974
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/ssrf服务端请求伪造.md",
+     "size": 38974
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/lfi-rfi文件包含.md",
+     "size": 37280
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/lfi-rfi文件包含.md",
+     "size": 37280
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/lfi-rfi文件包含.md",
+     "size": 37280
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/intranet/凭证窃取.md",
+     "size": 36249
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/intranet/凭证窃取.md",
+     "size": 36249
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/intranet/凭证窃取.md",
+     "size": 36249
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/reverse-engineering/patterns-ctf-3.md",
+     "size": 35391
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/reverse-engineering/patterns-ctf-3.md",
+     "size": 35391
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/RULES.md",
+     "size": 34632
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/reverse-engineering/anti-analysis.md",
+     "size": 34002
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/reverse-engineering/anti-analysis.md",
+     "size": 34002
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/path-traversal.md",
+     "size": 33982
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/path-traversal.md",
+     "size": 33982
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/path-traversal.md",
+     "size": 33982
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/ssti模板注入.md",
+     "size": 33220
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/ssti模板注入.md",
+     "size": 33220
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/ssti模板注入.md",
+     "size": 33220
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/ai安全.md",
+     "size": 32844
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/ai安全.md",
+     "size": 32844
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/ai安全.md",
+     "size": 32844
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/xss.md",
+     "size": 31849
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/xss.md",
+     "size": 31849
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/xss.md",
+     "size": 31849
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/reverse-engineering/tools-dynamic.md",
+     "size": 30815
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/reverse-engineering/tools-dynamic.md",
+     "size": 30815
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/reverse-engineering/patterns.md",
+     "size": 30781
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/reverse-engineering/patterns.md",
+     "size": 30781
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/reverse-engineering/references/nonpe-format-cookbook.md",
+     "size": 30607
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/routing_zh.md",
+     "size": 30243
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/routing_zh.md",
+     "size": 29958
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/tests/routing-benchmark.json",
+     "size": 29815
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/dos.md",
+     "size": 28355
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/dos.md",
+     "size": 28355
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/dos.md",
+     "size": 28355
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/routing.md",
+     "size": 27720
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/云安全漏洞.md",
+     "size": 27502
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/云安全漏洞.md",
+     "size": 27502
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/云安全漏洞.md",
+     "size": 27502
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/reverse-engineering/tools-advanced.md",
+     "size": 27336
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/reverse-engineering/tools-advanced.md",
+     "size": 27336
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/routing.md",
+     "size": 27265
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/field-journal/precedent-pentest.md",
+     "size": 26138
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/field-journal/precedent-pentest.md",
+     "size": 26123
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/业务逻辑漏洞.md",
+     "size": 25950
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/业务逻辑漏洞.md",
+     "size": 25950
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/业务逻辑漏洞.md",
+     "size": 25950
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/xxe实体注入.md",
+     "size": 25691
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/xxe实体注入.md",
+     "size": 25691
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/xxe实体注入.md",
+     "size": 25691
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/csrf跨站请求伪造.md",
+     "size": 25127
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/csrf跨站请求伪造.md",
+     "size": 25127
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/csrf跨站请求伪造.md",
+     "size": 25127
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/RULES.md",
+     "size": 24993
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/reverse-engineering/patterns-ctf.md",
+     "size": 24781
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/reverse-engineering/patterns-ctf.md",
+     "size": 24781
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/references/burpsuite-mcp-guide.md",
+     "size": 24442
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/references/burpsuite-mcp-guide.md",
+     "size": 24339
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/reverse-engineering/languages-platforms.md",
+     "size": 23956
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/reverse-engineering/languages-platforms.md",
+     "size": 23956
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/reverse-engineering/references/ollvm-deobfuscation.md",
+     "size": 23927
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/reverse-engineering/references/ollvm-deobfuscation.md",
+     "size": 23927
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/reverse-engineering/languages-compiled.md",
+     "size": 23515
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/reverse-engineering/languages-compiled.md",
+     "size": 23515
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/intranet/信息收集.md",
+     "size": 22939
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/intranet/信息收集.md",
+     "size": 22939
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/intranet/信息收集.md",
+     "size": 22939
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/intranet/权限提升.md",
+     "size": 22464
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/intranet/权限提升.md",
+     "size": 22464
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/intranet/权限提升.md",
+     "size": 22464
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/请求走私.md",
+     "size": 22425
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/请求走私.md",
+     "size": 22425
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/请求走私.md",
+     "size": 22425
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/intranet/横向移动.md",
+     "size": 22171
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/intranet/横向移动.md",
+     "size": 22171
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/intranet/横向移动.md",
+     "size": 22171
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/http-smuggling.md",
+     "size": 21608
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/http-smuggling.md",
+     "size": 21608
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/http-smuggling.md",
+     "size": 21608
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/CONTRIBUTING.md",
+     "size": 21540
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/arbitrary-x-authz.md",
+     "size": 21126
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/arbitrary-x-authz.md",
+     "size": 21126
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/arbitrary-x-authz.md",
+     "size": 21126
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/websocket安全.md",
+     "size": 21053
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/websocket安全.md",
+     "size": 21053
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/websocket安全.md",
+     "size": 21053
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/reverse-engineering/languages.md",
+     "size": 21048
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/reverse-engineering/languages.md",
+     "size": 21048
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/CONTRIBUTING.md",
+     "size": 20928
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/jwt安全.md",
+     "size": 20542
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/jwt安全.md",
+     "size": 20542
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/jwt安全.md",
+     "size": 20542
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/reverse-engineering/patterns-ctf-2.md",
+     "size": 19617
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/reverse-engineering/patterns-ctf-2.md",
+     "size": 19617
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/intranet/免杀与规避.md",
+     "size": 19508
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/intranet/免杀与规避.md",
+     "size": 19508
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/intranet/免杀与规避.md",
+     "size": 19508
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/原型链污染.md",
+     "size": 19492
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/原型链污染.md",
+     "size": 19492
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/原型链污染.md",
+     "size": 19492
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/attack-chain/SKILL.md",
+     "size": 19299
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/attack-chain/SKILL.md",
+     "size": 19237
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/ida-reverse/SKILL.md",
+     "size": 19191
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/intranet/域渗透攻击.md",
+     "size": 19155
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/intranet/域渗透攻击.md",
+     "size": 19155
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/intranet/域渗透攻击.md",
+     "size": 19155
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/供应链攻击.md",
+     "size": 18242
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/供应链攻击.md",
+     "size": 18242
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/供应链攻击.md",
+     "size": 18242
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/tests/routing-benchmark.json",
+     "size": 18016
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/by-category/web/缓存与cdn安全.md",
+     "size": 17815
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/by-category/web/缓存与cdn安全.md",
+     "size": 17815
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/by-category/web/缓存与cdn安全.md",
+     "size": 17815
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/reverse-engineering/references/re-agent-workflow.md",
+     "size": 17181
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/ida-reverse/SKILL.md",
+     "size": 16874
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/playbooks/info-disclosure.md",
+     "size": 16741
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/playbooks/info-disclosure.md",
+     "size": 16741
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/playbooks/info-disclosure.md",
+     "size": 16741
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/tools/信息收集.md",
+     "size": 16326
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/tools/信息收集.md",
+     "size": 16326
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/tools/信息收集.md",
+     "size": 16326
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/tools/mcp-jshook.md",
+     "size": 16259
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/tools/mcp-jshook.md",
+     "size": 16259
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/tools/mcp-jshook.md",
+     "size": 16259
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/payloader/tools/内网渗透.md",
+     "size": 16166
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/payloader/tools/内网渗透.md",
+     "size": 16166
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/payloader/tools/内网渗透.md",
+     "size": 16166
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/reverse-engineering/references/re-agent-workflow.md",
+     "size": 15702
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/dictionaries/chinese-srcfingerprints.md",
+     "size": 15390
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/dictionaries/chinese-srcfingerprints.md",
+     "size": 15390
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/dictionaries/chinese-srcfingerprints.md",
+     "size": 15390
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/pentest-tools/src-hunter/references/industry/banking-finance.md",
+     "size": 15272
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/src-hunter/references/industry/banking-finance.md",
+     "size": 15272
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-skill/skills/pentest-tools/src-hunter/references/industry/banking-finance.md",
+     "size": 15272
+    },
+    {
+     "path": "kitty-toolbox/bundled-packs/dsh-reverse-security/skills/reverse-engineering/tools.md",
+     "size": 15266
+    }
+   ]
+  },
+  "preset": {
+   "count": 5,
+   "bytes": 20222,
+   "files": [
+    {
+     "path": "kitty-toolbox/preset/reverse/agent.cordis.yml",
+     "size": 17874
+    },
+    {
+     "path": "kitty-toolbox/preset/reverse/HOOKS.md",
+     "size": 1003
+    },
+    {
+     "path": "kitty-toolbox/preset/reverse/deny.json",
+     "size": 717
+    },
+    {
+     "path": "kitty-toolbox/preset-root.js",
+     "size": 425
+    },
+    {
+     "path": "kitty-toolbox/preset/reverse/preset.yml",
+     "size": 203
+    }
+   ]
+  },
+  "tool-core": {
+   "count": 76,
+   "bytes": 887714,
+   "files": [
+    {
+     "path": "kitty-toolbox/src/loop.ts",
+     "size": 90769
+    },
+    {
+     "path": "kitty-toolbox/src/host-utils.ts",
+     "size": 40450
+    },
+    {
+     "path": "kitty-toolbox/src/actions-session.ts",
+     "size": 38760
+    },
+    {
+     "path": "kitty-toolbox/src/settings-api.ts",
+     "size": 37330
+    },
+    {
+     "path": "kitty-toolbox/src/panel.ts",
+     "size": 34759
+    },
+    {
+     "path": "kitty-toolbox/src/skills.ts",
+     "size": 33816
+    },
+    {
+     "path": "kitty-toolbox/src/session-shards.ts",
+     "size": 33183
+    },
+    {
+     "path": "kitty-toolbox/src/reverse-store.ts",
+     "size": 31784
+    },
+    {
+     "path": "kitty-toolbox/src/rea.ts",
+     "size": 25378
+    },
+    {
+     "path": "kitty-toolbox/src/session-projection.ts",
+     "size": 22429
+    },
+    {
+     "path": "kitty-toolbox/src/skill-pack.ts",
+     "size": 21291
+    },
+    {
+     "path": "kitty-toolbox/src/workbench-context.ts",
+     "size": 18089
+    },
+    {
+     "path": "kitty-toolbox/src/dump.ts",
+     "size": 17808
+    },
+    {
+     "path": "kitty-toolbox/src/bridge.ts",
+     "size": 17615
+    },
+    {
+     "path": "kitty-toolbox/src/ida.ts",
+     "size": 16694
+    },
+    {
+     "path": "kitty-toolbox/src/patch.ts",
+     "size": 15806
+    },
+    {
+     "path": "kitty-toolbox/src/asm.ts",
+     "size": 14928
+    },
+    {
+     "path": "kitty-toolbox/src/ops-catalog.ts",
+     "size": 14622
+    },
+    {
+     "path": "kitty-toolbox/src/idamcp.ts",
+     "size": 14583
+    },
+    {
+     "path": "kitty-toolbox/src/pchain-snippet.ts",
+     "size": 13247
+    },
+    {
+     "path": "kitty-toolbox/src/plugin.ts",
+     "size": 13114
+    },
+    {
+     "path": "kitty-toolbox/src/gate-table.ts",
+     "size": 12735
+    },
+    {
+     "path": "kitty-toolbox/src/variants.ts",
+     "size": 12207
+    },
+    {
+     "path": "kitty-toolbox/src/setup-service.ts",
+     "size": 12149
+    },
+    {
+     "path": "kitty-toolbox/src/tool-manifest.ts",
+     "size": 12087
+    },
+    {
+     "path": "kitty-toolbox/src/ghidra.ts",
+     "size": 12066
+    },
+    {
+     "path": "kitty-toolbox/src/task-state.ts",
+     "size": 11130
+    },
+    {
+     "path": "kitty-toolbox/src/reverse-tools.ts",
+     "size": 10785
+    },
+    {
+     "path": "kitty-toolbox/src/preset-root.ts",
+     "size": 10466
+    },
+    {
+     "path": "kitty-toolbox/src/staticplus.ts",
+     "size": 9615
+    },
+    {
+     "path": "kitty-toolbox/src/fridaplus.ts",
+     "size": 9608
+    },
+    {
+     "path": "kitty-toolbox/src/task-registry.ts",
+     "size": 9607
+    },
+    {
+     "path": "kitty-toolbox/src/preset-pack.ts",
+     "size": 9290
+    },
+    {
+     "path": "kitty-toolbox/src/actions-diagnostics.ts",
+     "size": 9155
+    },
+    {
+     "path": "kitty-toolbox/src/tool-factory.ts",
+     "size": 8479
+    },
+    {
+     "path": "kitty-toolbox/src/shield-reverse.ts",
+     "size": 8437
+    },
+    {
+     "path": "kitty-toolbox/src/migration.ts",
+     "size": 7979
+    },
+    {
+     "path": "kitty-toolbox/src/dsh-fit.ts",
+     "size": 7376
+    },
+    {
+     "path": "kitty-toolbox/src/setup-workflow.ts",
+     "size": 7289
+    },
+    {
+     "path": "kitty-toolbox/src/sym.ts",
+     "size": 7011
+    },
+    {
+     "path": "kitty-toolbox/src/pojia-reverse.ts",
+     "size": 6906
+    },
+    {
+     "path": "kitty-toolbox/src/action-request.ts",
+     "size": 6730
+    },
+    {
+     "path": "kitty-toolbox/src/apkjadx.ts",
+     "size": 6687
+    },
+    {
+     "path": "kitty-toolbox/src/actions-host.ts",
+     "size": 6596
+    },
+    {
+     "path": "kitty-toolbox/src/actions-bridge.ts",
+     "size": 6390
+    },
+    {
+     "path": "kitty-toolbox/src/capability.ts",
+     "size": 6176
+    },
+    {
+     "path": "kitty-toolbox/src/uedump.ts",
+     "size": 6040
+    },
+    {
+     "path": "kitty-toolbox/src/unitymod.ts",
+     "size": 5570
+    },
+    {
+     "path": "kitty-toolbox/src/registry.ts",
+     "size": 5473
+    },
+    {
+     "path": "kitty-toolbox/src/actions-packs.ts",
+     "size": 5280
+    },
+    {
+     "path": "kitty-toolbox/src/unrealplus.ts",
+     "size": 4856
+    },
+    {
+     "path": "kitty-toolbox/src/task-controller.ts",
+     "size": 4588
+    },
+    {
+     "path": "kitty-toolbox/src/user-status.ts",
+     "size": 4564
+    },
+    {
+     "path": "kitty-toolbox/src/task-turn-guard.ts",
+     "size": 4266
+    },
+    {
+     "path": "kitty-toolbox/src/task-projection.ts",
+     "size": 4226
+    },
+    {
+     "path": "kitty-toolbox/src/runtime.ts",
+     "size": 4139
+    },
+    {
+     "path": "kitty-toolbox/src/engines.ts",
+     "size": 3851
+    },
+    {
+     "path": "kitty-toolbox/src/cpp2il.ts",
+     "size": 3836
+    },
+    {
+     "path": "kitty-toolbox/src/il2cppdumper.ts",
+     "size": 3274
+    },
+    {
+     "path": "kitty-toolbox/src/structured-gate.ts",
+     "size": 3259
+    },
+    {
+     "path": "kitty-toolbox/src/ascii-alias.ts",
+     "size": 3172
+    },
+    {
+     "path": "kitty-toolbox/src/drvio.ts",
+     "size": 3131
+    },
+    {
+     "path": "kitty-toolbox/src/init.ts",
+     "size": 3131
+    },
+    {
+     "path": "kitty-toolbox/src/action-router.ts",
+     "size": 3120
+    },
+    {
+     "path": "kitty-toolbox/src/assetrip.ts",
+     "size": 2885
+    },
+    {
+     "path": "kitty-toolbox/src/gdre.ts",
+     "size": 2644
+    },
+    {
+     "path": "kitty-toolbox/src/task-api-adapter.ts",
+     "size": 2629
+    },
+    {
+     "path": "kitty-toolbox/src/task-file.ts",
+     "size": 2624
+    },
+    {
+     "path": "kitty-toolbox/src/health.ts",
+     "size": 1531
+    },
+    {
+     "path": "kitty-toolbox/src/manifest.ts",
+     "size": 1203
+    },
+    {
+     "path": "kitty-toolbox/src/action-services.ts",
+     "size": 1024
+    },
+    {
+     "path": "kitty-toolbox/src/package-check.ts",
+     "size": 932
+    },
+    {
+     "path": "kitty-toolbox/src/compat-deprecation.ts",
+     "size": 894
+    },
+    {
+     "path": "kitty-toolbox/src/index.ts",
+     "size": 772
+    },
+    {
+     "path": "kitty-toolbox/src/execution-scope.ts",
+     "size": 715
+    },
+    {
+     "path": "kitty-toolbox/src/ambient-deps.d.ts",
+     "size": 674
+    }
+   ]
+  },
+  "tool-impl": {
+   "count": 8,
+   "bytes": 158537,
+   "files": [
+    {
+     "path": "kitty-toolbox/src/tools/driver-tools.ts",
+     "size": 42261
+    },
+    {
+     "path": "kitty-toolbox/src/tools/channel-tools.ts",
+     "size": 30790
+    },
+    {
+     "path": "kitty-toolbox/src/tools/anti-tools.ts",
+     "size": 25100
+    },
+    {
+     "path": "kitty-toolbox/src/tools/mem-tools.ts",
+     "size": 24273
+    },
+    {
+     "path": "kitty-toolbox/src/tools/session-tools.ts",
+     "size": 16433
+    },
+    {
+     "path": "kitty-toolbox/src/tools/static-tools.ts",
+     "size": 9467
+    },
+    {
+     "path": "kitty-toolbox/src/tools/kernel-tools.ts",
+     "size": 8774
+    },
+    {
+     "path": "kitty-toolbox/src/tools/deps.ts",
+     "size": 1439
+    }
+   ]
+  },
+  "patterns": {
+   "count": 3,
+   "bytes": 27904,
+   "files": [
+    {
+     "path": "patterns/canary-kitty-target.exe-dword-CC07C9.json",
+     "size": 14526
+    },
+    {
+     "path": "patterns/GATE-BRANCHES.md",
+     "size": 7034
+    },
+    {
+     "path": "patterns/module-signature@kitty-target.exe.json",
+     "size": 6344
+    }
+   ]
+  },
+  "bootstrap": {
+   "count": 5,
+   "bytes": 10715,
+   "files": [
+    {
+     "path": "reverse-bootstrap/task-state-v1.1.md",
+     "size": 8293
+    },
+    {
+     "path": "reverse-bootstrap/reverse-init.mjs",
+     "size": 1440
+    },
+    {
+     "path": "reverse-bootstrap/README.md",
+     "size": 802
+    },
+    {
+     "path": "reverse-bootstrap/target-state.json",
+     "size": 110
+    },
+    {
+     "path": "reverse-bootstrap/session-mode.json",
+     "size": 70
+    }
+   ]
+  },
+  "scripts": {
+   "count": 3,
+   "bytes": 27169,
+   "files": [
+    {
+     "path": "scripts/selftest-t4-p3.mjs",
+     "size": 14891
+    },
+    {
+     "path": "scripts/migrate-kitty-overrides.mjs",
+     "size": 8537
+    },
+    {
+     "path": "scripts/t4-restore-after-harness.mjs",
+     "size": 3741
+    }
+   ]
+  },
+  "audit-tools": {
+   "count": 32,
+   "bytes": 191676,
+   "files": [
+    {
+     "path": "tools/render-smoke.mjs",
+     "size": 22171
+    },
+    {
+     "path": "tools/verify-ace-wiring-v1.mjs",
+     "size": 17493
+    },
+    {
+     "path": "tools/audit-coverage.mjs",
+     "size": 16757
+    },
+    {
+     "path": "tools/scan-drv-primitives.mjs",
+     "size": 11699
+    },
+    {
+     "path": "tools/kitty-controls-verify.mjs",
+     "size": 10706
+    },
+    {
+     "path": "tools/kitty-pte-walk.mjs",
+     "size": 10245
+    },
+    {
+     "path": "tools/godot-gdsdecomp.mjs",
+     "size": 10207
+    },
+    {
+     "path": "tools/scan-vt-image.mjs",
+     "size": 9158
+    },
+    {
+     "path": "tools/ue-uedumper.mjs",
+     "size": 8616
+    },
+    {
+     "path": "tools/verify-t08-dualview.mjs",
+     "size": 8523
+    },
+    {
+     "path": "tools/engine-base.mjs",
+     "size": 7809
+    },
+    {
+     "path": "tools/unity-cpp2il.mjs",
+     "size": 7634
+    },
+    {
+     "path": "tools/verify-inject-v2.mjs",
+     "size": 6131
+    },
+    {
+     "path": "tools/dsh-fit-check.mjs",
+     "size": 5632
+    },
+    {
+     "path": "tools/plugin-tool-selftest.mjs",
+     "size": 4243
+    },
+    {
+     "path": "tools/dbvm-guard.mjs",
+     "size": 4105
+    },
+    {
+     "path": "tools/acceptance-p13.mjs",
+     "size": 3240
+    },
+    {
+     "path": "tools/fix-deps.mjs",
+     "size": 3043
+    },
+    {
+     "path": "tools/verify-build-chain.mjs",
+     "size": 2514
+    },
+    {
+     "path": "tools/asar-read.mjs",
+     "size": 2500
+    },
+    {
+     "path": "tools/gate-g6-build.mjs",
+     "size": 2335
+    },
+    {
+     "path": "tools/verify-skill-pack.mjs",
+     "size": 2239
+    },
+    {
+     "path": "tools/verify-preset-pack.mjs",
+     "size": 2146
+    },
+    {
+     "path": "tools/scan-dump.mjs",
+     "size": 1960
+    },
+    {
+     "path": "tools/asar-extract.mjs",
+     "size": 1707
+    },
+    {
+     "path": "tools/rename-patterns-kitty.mjs",
+     "size": 1579
+    },
+    {
+     "path": "tools/_inspect-injector.mjs",
+     "size": 1579
+    },
+    {
+     "path": "tools/_pe-arch.mjs",
+     "size": 1265
+    },
+    {
+     "path": "tools/matrix.mjs",
+     "size": 1216
+    },
+    {
+     "path": "tools/_inspect-km.mjs",
+     "size": 1191
+    },
+    {
+     "path": "tools/extract-region.mjs",
+     "size": 1020
+    },
+    {
+     "path": "tools/reverse-subscribe-verify.md",
+     "size": 1013
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,13 @@
+[0] proj_q    T=263 n=65536 full=0 nan=0 l2=89307.4375 bits=bf05 3ec3 bee5 be39
+[0] proj_k    T=263 n=65536 full=0 nan=63276 l2=26003378176.0000 bits=7fff 7fff 7fff 7fff
+[0] proj_v    T=263 n=65536 full=0 nan=3955 l2=18874617856.0000 bits=7fff 7fff 7fff 7fff
+[0] proj_gate T=263 n=65536 full=0 nan=0 l2=24924.9258 bits=c029 c021 c067 c083
+[0] norm_q    T=263 n=65536 full=0 nan=0 l2=31822.9141 bits=bfb0 3f89 bf9d bef5
+[0] norm_k    T=263 n=65536 full=0 nan=65536 l2=0.0000 bits=7fff 7fff 7fff 7fff
+[0] kv pre  fidx=0 last=262 logp=64 rows=1 tab=0,1,2 npg=64 nanpos=0 map=................................
+[0] rope_q    T=263 n=65536 full=0 nan=0 l2=31817.9180 bits=bfb0 3f89 bf9d bef5
+[0] rope_k    T=263 n=65536 full=0 nan=65536 l2=0.0000 bits=7fff 7fff 7fff 7fff
+[0] attn_out  T=263 n=65536 full=0 nan=65536 l2=0.0000 bits=7fff 7fff 7fff 7fff
+[0] kv post fidx=0 last=262 logp=64 rows=1 tab=0,1,2 npg=64 nanpos=32 map=NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+[0] pos       cache=0,0,0,0 rope=0,0,0,0 minvis=263 maxvis=263 batch=0 width=0
+[0] kvcache   last=408933200 lead=256 psz=64 kvh=4 page0=0 nan=1820 p0=7fff,7fff,7fff,7fff pA=0000,0000,0000,0000 pL=0000,0000,0000,0000

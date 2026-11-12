@@ -1,0 +1,224 @@
+"""一键体检 —— 数据 + 泛化集 + 训练脚本，一次出报告
+
+把 2026-10-28 手工跑的 6 轮脚本合成一条命令：
+  ① 数据集重复 / 空值 / 长度分布
+  ② token 层面 ctx 溢出（按 token，不是字符！）
+  ③ 工具覆盖（双前缀 kitty_ / reverse_，含粘连归一）
+  ④ 非白名单 token（区分真错名 vs 正则误切）
+  ⑤ 泛化集泄漏（场景题 vs 训练集表述重叠）
+  ⑥ 训练脚本可执行性（--help 不崩、新参数在位）
+
+用法：
+  python health_check.py                          # 检查全部默认数据集
+  python health_check.py --files a.jsonl b.jsonl  # 只查指定文件
+  python health_check.py --skip-leak              # 跳过泄漏检查（快）
+  exit code: 0 = 全绿；1 = 有 FAIL
+"""
+import argparse
+import collections
+import glob
+import hashlib
+import io
+import json
+import os
+import re
+import subprocess
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+TRAIN_ROOT = os.path.dirname(HERE)
+sys.path.insert(0, HERE)
+
+PAT = re.compile(r"(?:kitty|reverse)_[a-z0-9_]+")
+CONTRACT = os.path.join(TRAIN_ROOT, "data", "kitty-reverse", "kitty-contracts", "tools.json")
+
+# 默认体检清单：RE / 2A / 2B / 2C
+DEFAULT_FILES = [
+    "data/kitty-reverse/train-kitty-v2-aug.jsonl",
+    "data/agent-traj/traj-all-capped.jsonl",
+    "data/nsfw-gated/train-2b-gated.jsonl",
+    "data/mix-2c-gated.jsonl",
+]
+
+# 已知的「正则误切」白名单（不是真编造，是文本里的泛指或文件名）
+MISREAD_OK = {"reverse_add_", "kitty_v6", "kitty_c"}
+
+
+def load_tools():
+    with open(CONTRACT, encoding="utf-8") as f:
+        return {t["name"] for t in json.load(f) if isinstance(t, dict) and t.get("name")}
+
+
+def norm_tools(raw, tools):
+    out = set()
+    for tok in raw:
+        if tok in tools:
+            out.add(tok)
+            continue
+        pref = [k for k in tools if tok.startswith(k)]
+        out.add(max(pref, key=len) if pref else tok)
+    return out
+
+
+def check_file(path, tools, tokzr, ctx=4096):
+    """返回 (ok, 报告行列表)"""
+    if not os.path.isfile(path):
+        return False, ["  [MISS] 文件不存在"]
+    n = 0
+    ul, al, tl = [], [], []
+    empty_u = empty_a = 0
+    dup = collections.Counter()
+    over = 0
+    bad = collections.Counter()
+    cov = collections.Counter()
+    for line in io.open(path, "r", encoding="utf-8"):
+        if not line.strip():
+            continue
+        n += 1
+        o = json.loads(line)
+        msgs = o.get("messages") or []
+        s = next((m.get("content", "") for m in msgs if m.get("role") == "system"), "")
+        u = next((m.get("content", "") for m in msgs if m.get("role") == "user"), "")
+        a = next((m.get("content", "") for m in msgs if m.get("role") == "assistant"), "")
+        ul.append(len(u)); al.append(len(a))
+        if not u.strip(): empty_u += 1
+        if not a.strip(): empty_a += 1
+        dup[(u, a)] += 1
+        for t in norm_tools(set(PAT.findall(a)), tools):
+            if t in tools:
+                cov[t] += 1
+            elif t not in MISREAD_OK:
+                bad[t] += 1
+        if tokzr is not None:
+            L = (len(tokzr(s + u, add_special_tokens=False)["input_ids"])
+                 + len(tokzr(a, add_special_tokens=False)["input_ids"]) + 16)
+            tl.append(L)
+            if L > ctx:
+                over += 1
+
+    dupn = sum(v - 1 for v in dup.values() if v > 1)
+    lines = []
+    ok = True
+    lines.append("  样本 %d | 完全重复 %d | 空 user %d | 空 assistant %d"
+                 % (n, dupn, empty_u, empty_a))
+    if dupn or empty_u or empty_a:
+        ok = False
+    if ul:
+        ul_s = sorted(ul); al_s = sorted(al)
+        lines.append("  user 长度 min/中位/p90/max = %d / %d / %d / %d"
+                     % (ul_s[0], ul_s[len(ul_s)//2], ul_s[int(len(ul_s)*.9)], ul_s[-1]))
+        short = sum(1 for x in ul if x <= 4)
+        lines.append("  user <=4 字 %d 条（应已隔离）| assistant 中位 %d 字"
+                     % (short, al_s[len(al_s)//2]))
+    if tl:
+        tl_s = sorted(tl)
+        lines.append("  token 中位/p90/max = %d / %d / %d | >%d 溢出 %d 条"
+                     % (tl_s[len(tl)//2], tl_s[int(len(tl_s)*.9)], tl_s[-1], ctx, over))
+        if over:
+            ok = False
+    zero = [t for t in tools if cov.get(t, 0) == 0]
+    low = [t for t in tools if 0 < cov.get(t, 0) < 50]
+    lines.append("  工具覆盖 %d/64 | 0 覆盖 %d | <50 覆盖 %d"
+                 % (len([t for t in tools if cov.get(t, 0) > 0]), len(zero), len(low)))
+    if bad:
+        ok = False
+        lines.append("  ⚠ 非白名单 token：%s"
+                     % ", ".join("%s×%d" % (k, v) for k, v in bad.most_common(8)))
+    else:
+        lines.append("  非白名单 token：无（已知误切已白名单）")
+    return ok, lines
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--files", nargs="*", default=None,
+                    help="要检查的 jsonl（默认 RE/2A/2B/2C 四个）")
+    ap.add_argument("--ctx", type=int, default=4096)
+    ap.add_argument("--skip-leak", action="store_true", dest="skip_leak")
+    ap.add_argument("--skip-script", action="store_true", dest="skip_script")
+    args = ap.parse_args()
+
+    print("=" * 82)
+    print("OxCoder-9B 训练数据体检")
+    print("=" * 82)
+
+    tools = load_tools()
+    print("工具白名单 %d 个（kitty_ %d + reverse_ %d）"
+          % (len(tools),
+             sum(1 for t in tools if t.startswith("kitty_")),
+             sum(1 for t in tools if t.startswith("reverse_"))))
+
+    # tokenizer 可选（没有就跳过 ctx 检查）
+    tokzr = None
+    try:
+        from transformers import AutoTokenizer
+        tokzr = AutoTokenizer.from_pretrained(os.path.join(TRAIN_ROOT, "models", "OxCoder-9B"))
+        print("tokenizer 已加载（ctx 检查启用）")
+    except Exception as e:
+        print("[warn] tokenizer 加载失败，跳过 ctx 检查：%s" % e)
+
+    files = args.files or [os.path.join(TRAIN_ROOT, f) for f in DEFAULT_FILES]
+    results = {}
+    for p in files:
+        print()
+        print("─" * 82)
+        print(p)
+        ok, lines = check_file(p, tools, tokzr, args.ctx)
+        for ln in lines:
+            print(ln)
+        results[p] = ok
+
+    # 泄漏检查
+    if not args.skip_leak:
+        print()
+        print("─" * 82)
+        print("泛化集泄漏")
+        try:
+            r = subprocess.run(
+                [sys.executable, os.path.join(HERE, "check_eval_leak.py")],
+                capture_output=True, text=True, encoding="utf-8", timeout=900,
+            )
+            tail = [l for l in (r.stdout or "").splitlines() if l.strip()][-4:]
+            for l in tail:
+                print("  " + l.strip())
+            results["leak"] = (r.returncode == 0)
+        except Exception as e:
+            print("  [ERR] 泄漏检查失败：%s" % e)
+            results["leak"] = False
+
+    # 训练脚本可执行性
+    if not args.skip_script:
+        print()
+        print("─" * 82)
+        print("训练脚本 --help")
+        sp = os.path.join(HERE, "train_qlora9b.py")
+        try:
+            r = subprocess.run([sys.executable, sp, "--help"],
+                               capture_output=True, text=True, encoding="utf-8", timeout=120)
+            okhelp = r.returncode == 0 and "--lora-dropout" in (r.stdout or "") \
+                     and "--weight-decay" in (r.stdout or "")
+            print("  --help 退出码 %d | 含 --lora-dropout/--weight-decay：%s"
+                  % (r.returncode, "是" if okhelp else "否"))
+            results["script"] = okhelp
+        except Exception as e:
+            print("  [ERR] %s" % e)
+            results["script"] = False
+
+    # 汇总
+    print()
+    print("=" * 82)
+    fail = [k for k, v in results.items() if not v]
+    if fail:
+        print("❌ %d 项 FAIL：" % len(fail))
+        for k in fail:
+            print("   - %s" % k)
+    else:
+        print("✅ 全部通过（%d 项）" % len(results))
+    print("=" * 82)
+    sys.exit(0 if not fail else 1)
+
+
+if __name__ == "__main__":
+    main()

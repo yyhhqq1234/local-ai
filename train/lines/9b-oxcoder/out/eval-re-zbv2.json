@@ -1,0 +1,1697 @@
+{
+  "cases_per_adapter": 40,
+  "results": [
+    {
+      "label": "r3",
+      "n": 40,
+      "hit": 30,
+      "noarg": 3,
+      "wrong": 7,
+      "fake": 0,
+      "none": 0,
+      "acc": 0.75,
+      "by_level": {
+        "L1": {
+          "hit": 11,
+          "n": 12
+        },
+        "L2": {
+          "hit": 8,
+          "n": 12
+        },
+        "L3": {
+          "hit": 11,
+          "n": 16
+        }
+      },
+      "detail": [
+        {
+          "id": "G01",
+          "kind": "hit",
+          "got": [
+            "kitty_die"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_die"
+          ],
+          "level": "L1",
+          "note": "packer 识别 → die/scan",
+          "expect_args": {
+            "action": [
+              "scan",
+              "status"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_die action=scan\n\n选它的理由：packer detect (DIE passthrough)（通道 static）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G05",
+          "kind": "hit",
+          "got": [
+            "kitty_dump"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_dump"
+          ],
+          "level": "L2",
+          "note": "转储 + unmap 重建 → dump",
+          "expect_args": {
+            "action": [
+              "dump",
+              "unmap"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_dump action=dump module=TARGET.exe path=logs/\n\n选择理由：该动作在 schema 的 enum 里是唯一匹配，不要改写成近似值\n操作要点：目标先定死再发指令，缺 pid / 路径的先用 status 探一次\n判据：回包先看首段 OK/ERR；ERR 要原因，不额外加补偿动作"
+        },
+        {
+          "id": "G09",
+          "kind": "hit",
+          "got": [
+            "kitty_dualview"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_dualview"
+          ],
+          "level": "L3",
+          "note": "三视图分叉 → dualview",
+          "expect_args": {
+            "action": [
+              "dualview"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_dualview action=dualview\n\n选它的理由：三视图取数门禁（通道 orch-view）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G02",
+          "kind": "hit",
+          "got": [
+            "kitty_apkscan"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_apkscan"
+          ],
+          "level": "L1",
+          "note": "APKiD 分诊 → apkscan/scan",
+          "expect_args": {
+            "action": [
+              "scan",
+              "status"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_apkscan action=scan\n\n选它的理由：APK shell/scan (APKiD triage)（通道 static）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G06",
+          "kind": "hit",
+          "got": [
+            "kitty_pchain"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_pchain"
+          ],
+          "level": "L2",
+          "note": "多跳反查 → pchain（原题有歧义已改写）",
+          "expect_args": {
+            "action": [
+              "pchain"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_pchain action=pchain\n\n选它的理由：Kitty多跳反查（通道 A）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G10",
+          "kind": "wrong",
+          "got": [
+            "kitty_ce",
+            "kitty_ghidra",
+            "kitty_rea_binary",
+            "kitty_sym"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_rea_compare"
+          ],
+          "level": "L3",
+          "note": "跨版本迁移 → rea_compare",
+          "expect_args": {
+            "action": [
+              "compare_functions"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n[1] triage —— 确认两版的函数集\nkitty_sym action=exports path=old.exe\nkitty_sym action=exports path=new.exe\n判据：新版函数集是旧版的超集。\n退出：确认迁移方向。\n\n[2] static —— 从旧版取符号表\nkitty_rea_binary inspect_binary_layout path=old.exe\n判据：每个导出函数的 RVA 与节内偏移。\n退出：拿到符号清单。\n\n[3] static 二次 —— 在新版里按偏移填\nkitty_ghidra action=analyze target=new.exe\nkitty_ghidra action=functions out=logs\\ghidra-new-<ts> filter=<旧符号名>\n判据：同名函数是否落在新版对应节。\n退出：至少 3 个符号能对上。\n\n[4] dynamic —— 抽样验证\nkitty_ce op=MODENUM\nkitty_ce op=\"R|0xNEW_FUNC|bytes:16\"\n判据：前 16 字节与旧版反汇编一致（同实现）。\n退出：抽样通过。\n\n[5] 导出\n产物：符号映射表 + 抽样证据 + 未映射项清单。"
+        },
+        {
+          "id": "G03",
+          "kind": "hit",
+          "got": [
+            "kitty_assetrip"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_assetrip"
+          ],
+          "level": "L1",
+          "note": "资源导出 → assetrip/export",
+          "expect_args": {
+            "action": [
+              "export",
+              "list"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_assetrip action=list\n\n选它的理由：Unity asset export (AssetRipper passthrough)（通道 static）。\n参数要点：目标路径（游戏目录 / 包文件 / APK）必须显式给全，输出目录一次定好；只读类先 status 探一次，确认外部工具在位再动手。\n判据：回包给出产物路径或清单即成功；报「工具未安装」先补依赖，报「格式不支持」再换等价路径。"
+        },
+        {
+          "id": "G07",
+          "kind": "hit",
+          "got": [
+            "kitty_acescan"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_acescan"
+          ],
+          "level": "L2",
+          "note": "一键门禁 + 写回环 → acescan",
+          "expect_args": {
+            "action": [
+              "acescan"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_acescan action=acescan\n\n选它的理由：反作弊对抗日一键编排（通道 orch）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G11",
+          "kind": "hit",
+          "got": [
+            "kitty_net",
+            "kitty_proto"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_net",
+            "kitty_proto"
+          ],
+          "level": "L3",
+          "note": "序列化解码 → proto（易混 net）",
+          "expect_args": {
+            "action": [
+              "decode",
+              "capture"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_net action=decode out=logs/net-raw.pcap filter=\"tcp.port==30743\" limit=200\nkitty_proto action=decode target=<hex>\n判据一：按长度字段切出的各段都能映射到已知字段。\n判据二：同一消息体长度固定（同命令重复发长度不变）。\n收敛：长度字段与总长对不上时先补头校验和，再切字段；切不出完整字段说明有加密或压缩。"
+        },
+        {
+          "id": "G04",
+          "kind": "hit",
+          "got": [
+            "kitty_ce",
+            "kitty_sym"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_sym"
+          ],
+          "level": "L1",
+          "note": "内存导出表 → sym/exports",
+          "expect_args": {
+            "action": [
+              "exports",
+              "imports",
+              "resolve"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_sym action=exports source=mem module=ext.dll\nkitty_ce op=\"S_SNAP|bytes:16|0xADDR|0xADDR+0x1000\"\n判据一：内存导出表里每个条目是「VA,  RVA, ForwardName」三元组，Forward 非空说明指向另一个 DLL。\n判据二：Forward 目标在目标 DLL 的导出表里存在，否则是坏引用（运行时可能失败）。\n收敛：把内存导出表与磁盘定义逐条比对，差异项就是被改动的函数地址，定位到具体模块后按 VA 反查汇编确认。"
+        },
+        {
+          "id": "G08",
+          "kind": "wrong",
+          "got": [
+            "kitty_drv"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_init"
+          ],
+          "level": "L2",
+          "note": "双绿初始化 → init（易混 drv）",
+          "expect_args": {
+            "action": [
+              "init",
+              "status"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_drv action=ensure\n（action 可取 ensure / recover / host / storm；本次走 ensure）\n\n选它的理由：驱动+宿主守护（通道 infra）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G12",
+          "kind": "noarg",
+          "got": [
+            "kitty_x64dbg"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_x64dbg"
+          ],
+          "level": "L3",
+          "note": "真调试 → x64dbg（易混 dbg，后者会杀宿主）",
+          "expect_args": {
+            "action": [
+              "cmd",
+              "run",
+              "seed",
+              "rununtil"
+            ]
+          },
+          "missing": [
+            "action∈{cmd,run,seed,rununtil}"
+          ],
+          "resp": "</think>\n\nkitty_x64dbg action=selftest\n（action 可取 selftest / cmd / run / seed；本次走 selftest）\n\n选它的理由：醉梦DBG脚本通道（通道 C）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G13",
+          "kind": "hit",
+          "got": [
+            "kitty_ce"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_ce"
+          ],
+          "level": "L1",
+          "note": "内存写 → ce 的 W| 前缀",
+          "expect_args": {
+            "op": "W\\|"
+          },
+          "missing": [],
+          "resp": "</think>\n\n先读确认当前值，再写回并回读。\n\n```\nkitty_ce op=\"R|0xADDR|dword\"\nkitty_ce op=\"W|0xADDR|dword|500\" confirm=true\nkitty_ce op=\"R|0xADDR|dword\"\n```\n\n判据：回读等于 500 且后续 R 仍保持（未被覆盖）。写操作默认带保护位校验，失败时按 ACE 修复后再试，不要反复重试。"
+        },
+        {
+          "id": "G17",
+          "kind": "hit",
+          "got": [
+            "kitty_ida"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_ida"
+          ],
+          "level": "L2",
+          "note": "商业路线 → ida/analyze（忌 ghidra）",
+          "expect_args": {
+            "action": [
+              "analyze"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_ida action=analyze\n\n选它的理由：IDA 批处理真分析（idat64 -A -S ida_export.py → JSON 落盘；Pro/Free/无 三档）（通道 static）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G20",
+          "kind": "noarg",
+          "got": [
+            "kitty_ce",
+            "kitty_prot",
+            "kitty_wpb"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_wpb"
+          ],
+          "level": "L3",
+          "note": "PTE 绕过 → wpb/write（易混 prot）",
+          "expect_args": {
+            "action": [
+              "write"
+            ]
+          },
+          "missing": [
+            "action∈{write}"
+          ],
+          "resp": "</think>\n\n先查保护类型，再选对应路径。\n\n```\nkitty_prot action=query addr=0xTARGET\n```\n判读：返回 Protect=。ReadOnly / GuardNoWrite / PageReadExecute 三种处理不同：\n· ReadOnly → 先改保护再写\n· GuardNoWrite → 先关 guard 再写\n· 普通可执行 → 直接写\n\n```\nkitty_prot action=protect addr=0xTARGET size=0x1000 protect=rw confirm=true\n```\n判读：改完回 OK|已更新；若仍报失败，说明页表未生效，换 kitty_wpb 走 PTE 直改。\n\n```\nkitty_wpb addr=0xTARGET vt=dword val=期望值 confirm=true\n```\n判读：回包含 PTE 新旧值 → 写已生效；只回 OK 不报 PTE 变化，说明页表没变（可能是写到了非目标页）。\n\n```\nkitty_ce op=\"R|0xTARGET|dword\"\n```\n判读：回读等于期望值才算写成功；不等说明写的是另一个页。\n\n退出：回读一致 + kitty_prot action=query 确认保护已还原。"
+        },
+        {
+          "id": "G14",
+          "kind": "hit",
+          "got": [
+            "kitty_patch"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_patch"
+          ],
+          "level": "L1",
+          "note": "静态补丁 → patch/patch",
+          "expect_args": {
+            "action": [
+              "patch",
+              "find"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n[1] triage —— 先量大小与备份\nkitty_patch action=info path=SAMPLE.exe\n判据：节表、是否加壳、是否带签名。\n退出：确认可改。\n\n[2] static —— 找目标偏移\nkitty_patch action=find path=SAMPLE.exe pattern=\"<目标字节>\" limit=4\n判据：命中数与偏移。\n退出：拿到偏移。\n\n[3] 改之前建还原点\nkitty_patch action=hash path=SAMPLE.exe\n判据：原哈希。\n退出：记录。\n\n[4] 改\nkitty_patch action=patch path=SAMPLE.exe pattern=\"<目标>\" expect=\"<期望前后缀>\"\n判据：expect 必须命中，否则报「预期前后缀不匹配」。\n退出：expect 通过。\n\n[5] 还原能力\nkitty_patch action=rollback path=SAMPLE.exe\n判据：rollback 后 hash 回到原值。\n退出：rollback 成功。\n\n[6] 导出\n产物：偏移 + 原字节 + 新字节 + rollback 验证结果。"
+        },
+        {
+          "id": "G19",
+          "kind": "noarg",
+          "got": [
+            "kitty_km"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_km"
+          ],
+          "level": "L2",
+          "note": "内核读 → km",
+          "expect_args": {
+            "action": [
+              "read",
+              "info",
+              "attach"
+            ]
+          },
+          "missing": [
+            "action∈{read,info,attach}"
+          ],
+          "resp": "</think>\n\nkitty_km action=api\n（action 可取 api / info / attach / read；本次走 api）\n\n选它的理由：内核面（Dbgk/物理）（通道 kernel）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G25",
+          "kind": "hit",
+          "got": [
+            "reverse_add_target"
+          ],
+          "fake": [],
+          "expect": [
+            "reverse_add_target"
+          ],
+          "level": "L3",
+          "note": "G3 新建目标 → add",
+          "expect_args": {
+            "action": [
+              "add"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nreverse_add_target action=add\n\n选它的理由：G3主写：新建目标（会话清零，恒 target-1）（通道 reverse）。\n参数要点：parentId 只能引既有记录（不存在的父会拒写）；行数据一次给全，缺字段按占位符补齐再发，别分多次补。\n判据：回包给出新记录 id 即写入成功；出现 ERR 先看是父记录不存在还是必填项缺失，改完再发一次，不要原地重试。"
+        },
+        {
+          "id": "G15",
+          "kind": "hit",
+          "got": [
+            "kitty_ida",
+            "kitty_sym"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_sym"
+          ],
+          "level": "L1",
+          "note": "导出表 → sym/exports",
+          "expect_args": {
+            "action": [
+              "exports"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_sym action=exports path=MODULE.dll limit=200\nkitty_ida action=functions out=logs/ida-app filter=DllExport\n判据一：导出表非空且含至少一个非系统符号（如 Init / Create / Process）。\n判据二：导出函数名与实现地址都解析成功（resolve 返回 same-module）。\n收敛：把导出清单与 IDA 的导出结构对照，缺实现或名字不匹配的导出是壳残留，剔除后再看业务面。"
+        },
+        {
+          "id": "G21",
+          "kind": "hit",
+          "got": [
+            "kitty_prot"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_prot"
+          ],
+          "level": "L2",
+          "note": "改保护 → prot",
+          "expect_args": {
+            "action": [
+              "protect",
+              "rwx",
+              "query"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_prot action=protect addr=0x7FF75FCD1000 size=0x1000 protect=rwx confirm=true\n\n选择理由：该动作在 schema 的 enum 里是唯一匹配，不要改写成近似值\n操作要点：值类型要对齐（dword / qword / bytes:N），写错类型等于白跑\n判据：回包先看首段 OK/ERR；ERR 要原因，不额外加补偿动作"
+        },
+        {
+          "id": "G26",
+          "kind": "wrong",
+          "got": [
+            "reverse_add_asset"
+          ],
+          "fake": [],
+          "expect": [
+            "reverse_add_obs"
+          ],
+          "level": "L3",
+          "note": "G3 记观察 → add",
+          "expect_args": {
+            "action": [
+              "add"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nreverse_add_asset action=add\n\n选它的理由：G3主写：记资产（parent 只引既有）（通道 reverse）。\n参数要点：parentId 只能引既有记录（不存在的父会拒写）；行数据一次给全，缺字段按占位符补齐再发，别分多次补。\n判据：回包给出新记录 id 即写入成功；出现 ERR 先看是父记录不存在还是必填项缺失，改完再发一次，不要原地重试。"
+        },
+        {
+          "id": "G16",
+          "kind": "hit",
+          "got": [
+            "kitty_ghidra"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_ghidra"
+          ],
+          "level": "L1",
+          "note": "免费路线 → ghidra（忌 ida）",
+          "expect_args": {
+            "action": [
+              "analyze",
+              "decompile",
+              "functions",
+              "search"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_ghidra action=analyze\n\n选它的理由：Ghidra headless 真分析（analyze 跑 analyzeHeadless+DumpStage3 → 四件套落盘）（通道 static）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G22",
+          "kind": "hit",
+          "got": [
+            "kitty_loop"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_loop"
+          ],
+          "level": "L2",
+          "note": "夜跑流水 → loop/round",
+          "expect_args": {
+            "action": [
+              "round"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_loop action=round\n\n选它的理由：Kitty夜跑一轮（通道 loop）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G27",
+          "kind": "hit",
+          "got": [
+            "reverse_submit"
+          ],
+          "fake": [],
+          "expect": [
+            "reverse_submit"
+          ],
+          "level": "L3",
+          "note": "G3 子写父 → submit",
+          "expect_args": {
+            "action": [
+              "submit"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nreverse_submit action=submit\n\n选它的理由：G3子唯一写入口：直写父 intent（通道 reverse）。\n参数要点：parentId 只能引既有记录（不存在的父会拒写）；行数据一次给全，缺字段按占位符补齐再发，别分多次补。\n判据：回包给出新记录 id 即写入成功；出现 ERR 先看是父记录不存在还是必填项缺失，改完再发一次，不要原地重试。"
+        },
+        {
+          "id": "G18",
+          "kind": "hit",
+          "got": [
+            "kitty_inject"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_inject"
+          ],
+          "level": "L1",
+          "note": "注入 → inject",
+          "expect_args": {
+            "action": [
+              "ce",
+              "ps",
+              "loaddll"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_inject action=ce\n（action 可取 ce / ps / loaddll；本次走 ce）\n\n选它的理由：DLL注入（ce/ps/loaddll三档）（通道 runtime）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G24",
+          "kind": "wrong",
+          "got": [
+            "reverse_add_target"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_settings"
+          ],
+          "level": "L2",
+          "note": "会话真相源 → settings",
+          "expect_args": {
+            "action": [
+              "target-set",
+              "mode-set",
+              "target-get"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nreverse_add_target action=add\n\n选它的理由：G3主写：新建目标（会话清零，恒 target-1）（通道 reverse）。\n参数要点：parentId 只能引既有记录（不存在的父会拒写）；行数据一次给全，缺字段按占位符补齐再发，别分多次补。\n判据：回包给出新记录 id 即写入成功；出现 ERR 先看是父记录不存在还是必填项缺失，改完再发一次，不要原地重试。"
+        },
+        {
+          "id": "G33",
+          "kind": "hit",
+          "got": [
+            "kitty_asm"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_asm"
+          ],
+          "level": "L3",
+          "note": "迷你汇编器 → asm",
+          "expect_args": {
+            "action": [
+              "assemble",
+              "jump"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_asm action=assemble\n（action 可取 assemble / jump；本次走 assemble）\n\n选它的理由：x64迷你汇编器（通道 static）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G28",
+          "kind": "wrong",
+          "got": [
+            "kitty_apktool"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_jadx"
+          ],
+          "level": "L1",
+          "note": "Java 反编译 → jadx/decompile",
+          "expect_args": {
+            "action": [
+              "decompile"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_apktool action=decode\n（action 可取 decode / build；本次走 decode）\n\n选它的理由：APK smali decode/build (apktool passthrough)（通道 static）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G29",
+          "kind": "hit",
+          "got": [
+            "kitty_frida",
+            "kitty_rea_android",
+            "kitty_rea_method"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_frida"
+          ],
+          "level": "L2",
+          "note": "动态 hook → frida",
+          "expect_args": {
+            "action": [
+              "trace",
+              "attach",
+              "spawn"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n[1] triage —— 先定方法\nkitty_rea_method action=inspect_android_method path=app.apk\n判据：方法签名 + 调用点。\n退出：拿到目标方法。\n\n[2] static —— 看参数类型\nkitty_rea_android action=inspect_android_activity path=app.apk\n判据：参数类型与常量值。\n退出：拿到参数形态。\n\n[3] dynamic —— 在调用点前拦截\nkitty_frida action=attach pkg=<包名> script=<hook 方法入参打印>\n判据：打印的参数值是否与静态推断一致。\n退出：参数形态确认。\n\n[4] 导出\n产物：方法 + 参数类型 + 典型值 + 调用点。"
+        },
+        {
+          "id": "G34",
+          "kind": "hit",
+          "got": [
+            "kitty_ce"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_ce"
+          ],
+          "level": "L3",
+          "note": "内存扫描 → ce 的 S_NEW| 前缀",
+          "expect_args": {
+            "op": "S_NEW\\|"
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_ce op=S_NEW|dword|1500|0x7FF6DADB0000|0x7FF6DAEB0000\n\n判读：回包形态是 `OK|scan|range|nw|desc[|pending]`。先看首段是不是 OK，再按位取后面的字段。\n注意：必须显式区间，缺 → ERR|need-range；窗 ≤16MB、总 ≤64MB、≤4 窗\n下一步按回包决定：ERR 就按错误码修参数，OK 就把值/地址取出来往下走。"
+        },
+        {
+          "id": "G30",
+          "kind": "hit",
+          "got": [
+            "kitty_ce",
+            "kitty_net"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_net"
+          ],
+          "level": "L1",
+          "note": "流量抓取 → net/capture",
+          "expect_args": {
+            "action": [
+              "capture",
+              "decode"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n[1] 先定端口与协议\nkitty_net action=capture port=8080 out=logs/net-8080.pcap\n判据：抓 30 秒有流量即正常；无流量说明走的是非 8080 端口。\n\n[2] 若端口不确定，先列监听\nkitty_net action=list\n判据：看 bind 的端口与协议（tcp/udp）。\n\n[3] 解出域名\nkitty_ce op=\"MEMDUMP_HEX|<payload_va>|32\"\n判据：HTTP 请求行里的 Host 字段给出域名。\n\n[4] 判据\n域名 + 端口 + 协议 = 完整目标；域名解析不出 = 内网域名或 DNS-over-HTTPS。"
+        },
+        {
+          "id": "G31",
+          "kind": "wrong",
+          "got": [
+            "kitty_engines",
+            "kitty_il2cppdumper"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_dnspy"
+          ],
+          "level": "L2",
+          "note": "Mono → dnspy（易混 il2cpp）",
+          "expect_args": {
+            "action": [
+              "open",
+              "deobf"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_engines action=route path=game_dir\nkitty_il2cppdumper action=dump target=game_dir\n判据一：dump 输出里 Assembly-CSharp.dll 的元数据与游戏目录下的 Assembly-CSharp.dll 版本一致（build number 相同）。\n判据二：能解析出类名与方法签名，且方法体不是空。\n收敛：Mono 走 il2cppdumper 的 fallback 路径（读 assembly-cs 的 metadata）；版本不一致说明有热更包，先定位热更包目录再 dump。"
+        },
+        {
+          "id": "G35",
+          "kind": "hit",
+          "got": [
+            "kitty_variants"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_variants"
+          ],
+          "level": "L3",
+          "note": "变体切换 → variants",
+          "expect_args": {
+            "action": [
+              "switch",
+              "list"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_variants action=switch\n\n选它的理由：驱动CE/DBG变体管理（通道 infra）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G23",
+          "kind": "hit",
+          "got": [
+            "kitty_selftest"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_selftest"
+          ],
+          "level": "L1",
+          "note": "自检 → selftest/all",
+          "expect_args": {
+            "action": [
+              "all",
+              "a",
+              "c",
+              "e"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_selftest action=a\n\n选它的理由：回归自检（verify-all编排）（通道 test）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G32",
+          "kind": "hit",
+          "got": [
+            "kitty_engines"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_engines"
+          ],
+          "level": "L2",
+          "note": "引擎路由 → engines/route",
+          "expect_args": {
+            "action": [
+              "route"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nkitty_engines action=route\n\n选它的理由：engine router (ue/unity/godot dispatch)（通道 static）。\n参数要点：先把目标定死（pid 或模块名/路径），只读类先 status 探一次，动手类一次给全参数再发。\n判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G36",
+          "kind": "wrong",
+          "got": [
+            "reverse_add_obs"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_trail"
+          ],
+          "level": "L3",
+          "note": "探索日志 → trail",
+          "expect_args": {
+            "action": [
+              "append",
+              "get"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\nreverse_add_obs action=add\n\n选它的理由：G3主写：记观察/finding（reproSteps≥1）（通道 reverse）。\n参数要点：parentId 只能引既有记录（不存在的父会拒写）；行数据一次给全，缺字段按占位符补齐再发，别分多次补。\n判据：回包给出新记录 id 即写入成功；出现 ERR 先看是父记录不存在还是必填项缺失，改完再发一次，不要原地重试。"
+        },
+        {
+          "id": "N01",
+          "kind": "hit",
+          "got": [],
+          "fake": [],
+          "expect": [],
+          "level": "L3",
+          "note": "纯合规概念，不该输出工具名",
+          "expect_args": {},
+          "missing": [],
+          "resp": "</think>\n\n四要素缺一不可：\n\n1. **授权主体**：谁授权（公司全称 + 统一社会信用代码）\n2. **授权对象**：授权给谁（姓名/公司 + 证件号）\n3. **授权范围**：测试什么系统、什么模块、什么时间段\n4. **授权期限**：起止时间（过期即失效）\n\n判据：缺「期限」的授权书在司法实践中会被认定「授权不明确」，效力存疑。\n\n补充：授权书 + 测试计划 + 测试记录 三者要能对应上（时间、系统、模块）。"
+        },
+        {
+          "id": "N02",
+          "kind": "hit",
+          "got": [],
+          "fake": [],
+          "expect": [],
+          "level": "L3",
+          "note": "纯协议解释，不该输出工具名",
+          "expect_args": {},
+          "missing": [],
+          "resp": "</think>\n\n三段式回包（如 `OK|verified|回读值`）的判读：\n· 首段 `OK` —— 操作落定\n· 第二段 `verified` —— 回读值与预期一致\n· 第三段 `回读值` —— 实际回读值\n\n用途：这是**写后回读**，是比确认件更紧的标准。\n\n判据：第二段不是 OK 时，说明回读值与预期不符，按上面的分支处理。"
+        },
+        {
+          "id": "N03",
+          "kind": "hit",
+          "got": [],
+          "fake": [],
+          "expect": [],
+          "level": "L3",
+          "note": "纯流程知识，不该输出工具名",
+          "expect_args": {},
+          "missing": [],
+          "resp": "</think>\n\n1) **stage1** 宿主空载自检 —— 宿主先于驱动\n2) **stage2** 驱动 SE 还原 —— 重扫+还原双验证\n3) **stage3** KM 面三视图 —— 三视图分叉即停\n4) **stage4** 宿主带载自检 —— 宿主先于驱动\n5) **stage5** 驱动开启 —— 重扫+还原双验证\n6) **stage6** 宿主接管 —— 接管前必须 OPEN\n7) **stage7** 宿主验真 —— 验真必带 pid\n8) **stage8** 对账落证据 —— 三视图 + 三数 + 产物\n\n判据：任一阶段 red 就按上面那条「停 + 归因 + 修」处理，不要继续往下跑。"
+        },
+        {
+          "id": "N04",
+          "kind": "hit",
+          "got": [],
+          "fake": [],
+          "expect": [],
+          "level": "L3",
+          "note": "纯方法论，不该输出工具名",
+          "expect_args": {},
+          "missing": [],
+          "resp": "</think>\n\n黑盒：只给输入输出，不知道内部结构。方法：等价类/边界值/模糊测试/差分测试。判据：覆盖率无法度量，只能靠统计。\n\n白盒：能看到代码/字节。方法：静态控制流分析 + 动态断点/符号。判据：可精确说\"哪条路径被覆盖\"。\n\n灰盒：知道接口但不清楚实现。方法：输入驱动 + 输出观测，用已知行为约束未知。\n\n判据：黑盒适合\"找漏洞\"（未知代码），白盒适合\"理解代码\"（已知代码），灰盒适合\"验证假设\"。"
+        }
+      ],
+      "level_str": "11/8/11"
+    },
+    {
+      "label": "zbv2",
+      "n": 40,
+      "hit": 21,
+      "noarg": 8,
+      "wrong": 7,
+      "fake": 4,
+      "none": 0,
+      "acc": 0.525,
+      "by_level": {
+        "L1": {
+          "hit": 7,
+          "n": 12
+        },
+        "L2": {
+          "hit": 6,
+          "n": 12
+        },
+        "L3": {
+          "hit": 8,
+          "n": 16
+        }
+      },
+      "detail": [
+        {
+          "id": "G01",
+          "kind": "hit",
+          "got": [
+            "kitty_die"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_die"
+          ],
+          "level": "L1",
+          "note": "packer 识别 → die/scan",
+          "expect_args": {
+            "action": [
+              "scan",
+              "status"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_die\", \"arguments\": {\"action\": \"scan\"}}\n</tool_call>\n选它的理由：packer detect (DIE 通道)（通道 static）。参数要点：先把目标定死（文件路径或模块名），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G05",
+          "kind": "hit",
+          "got": [
+            "kitty_dump"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_dump"
+          ],
+          "level": "L2",
+          "note": "转储 + unmap 重建 → dump",
+          "expect_args": {
+            "action": [
+              "dump",
+              "unmap"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_dump\", \"arguments\": {\"action\": \"dump\"}}\n</tool_call>\n选它的理由：内存转储（通道 runtime）。参数要点：先把目标定死（pid 或模块名/路径），attach/inject 前先 status 确认宿主在；动手类一次给全参数再发。 判据：回包看 OK/ERR 与目标 pid；inject 后要 MODENUM 复核模块是否真落地，失败不要原地重试。"
+        },
+        {
+          "id": "G09",
+          "kind": "noarg",
+          "got": [
+            "kitty_dualview"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_dualview"
+          ],
+          "level": "L3",
+          "note": "三视图分叉 → dualview",
+          "expect_args": {
+            "action": [
+              "dualview"
+            ]
+          },
+          "missing": [
+            "action∈{dualview}"
+          ],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_dualview\", \"arguments\": {\"action\": \"switch\"}}\n</tool_call>\n选它的理由：三视图取数门禁（通道切换/刷新）（通道 dualview）。参数要点：参数一次给全，别分多次补。 判据：回包首段 OK/ERR，再取关键字段。"
+        },
+        {
+          "id": "G02",
+          "kind": "fake",
+          "got": [
+            "kitty_apk"
+          ],
+          "fake": [
+            "kitty_apk"
+          ],
+          "expect": [
+            "kitty_apkscan"
+          ],
+          "level": "L1",
+          "note": "APKiD 分诊 → apkscan/scan",
+          "expect_args": {
+            "action": [
+              "scan",
+              "status"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_apk\", \"arguments\": {\"action\": \"detect\"}}\n</tool_call>\n选它的理由：安卓包体检（通道 static）。参数要点：先把目标定死（文件路径或模块名），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G06",
+          "kind": "hit",
+          "got": [
+            "kitty_pchain"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_pchain"
+          ],
+          "level": "L2",
+          "note": "多跳反查 → pchain（原题有歧义已改写）",
+          "expect_args": {
+            "action": [
+              "pchain"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_pchain\", \"arguments\": {\"action\": \"pchain\"}}\n</tool_call>\n选它的理由：Kitty多跳反查（通道 A）。参数要点：参数一次给全，别分多次补。 判据：回包首段 OK/ERR，再取关键字段。"
+        },
+        {
+          "id": "G10",
+          "kind": "wrong",
+          "got": [
+            "kitty_rea_function"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_rea_compare"
+          ],
+          "level": "L3",
+          "note": "跨版本迁移 → rea_compare",
+          "expect_args": {
+            "action": [
+              "compare_functions"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_rea_function\", \"arguments\": {\"action\": \"resolve\"}}\n</tool_call>\n选它的理由：REA 函数反编译（通道 rea-mcp）。参数要点：REA 网关：首次 start 懒启动，再 describe/call。 判据：上游工具返回结构体才算通。"
+        },
+        {
+          "id": "G03",
+          "kind": "noarg",
+          "got": [
+            "kitty_assetrip"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_assetrip"
+          ],
+          "level": "L1",
+          "note": "资源导出 → assetrip/export",
+          "expect_args": {
+            "action": [
+              "export",
+              "list"
+            ]
+          },
+          "missing": [
+            "action∈{export,list}"
+          ],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_assetrip\", \"arguments\": {\"action\": \"assetrip\"}}\n</tool_call>\n选它的理由：Unity asset export (AssetRipper passthrough)（通道 static）。参数要点：先把目标定死（文件路径或模块名），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G07",
+          "kind": "hit",
+          "got": [
+            "kitty_acescan"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_acescan"
+          ],
+          "level": "L2",
+          "note": "一键门禁 + 写回环 → acescan",
+          "expect_args": {
+            "action": [
+              "acescan"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_acescan\", \"arguments\": {\"action\": \"acescan\"}}\n</tool_call>\n选它的理由：反作弊对抗日一键编排（通道 acescan）。参数要点：参数一次给全，别分多次补。 判据：回包首段 OK/ERR，再取关键字段。"
+        },
+        {
+          "id": "G11",
+          "kind": "hit",
+          "got": [
+            "kitty_net"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_net",
+            "kitty_proto"
+          ],
+          "level": "L3",
+          "note": "序列化解码 → proto（易混 net）",
+          "expect_args": {
+            "action": [
+              "decode",
+              "capture"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_net\", \"arguments\": {\"action\": \"decode\"}}\n</tool_call>\n选它的理由：手游协议解码（tshark 封装）（通道 static）。参数要点：先把目标定死（文件路径或模块名），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G04",
+          "kind": "hit",
+          "got": [
+            "kitty_sym"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_sym"
+          ],
+          "level": "L1",
+          "note": "内存导出表 → sym/exports",
+          "expect_args": {
+            "action": [
+              "exports",
+              "imports",
+              "resolve"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_sym\", \"arguments\": {\"action\": \"exports\"}}\n</tool_call>\n选它的理由：DLL导出面（文件/内存）（通道 static）。参数要点：先把目标定死（文件路径或模块名），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G08",
+          "kind": "wrong",
+          "got": [
+            "kitty_drvio"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_init"
+          ],
+          "level": "L2",
+          "note": "双绿初始化 → init（易混 drv）",
+          "expect_args": {
+            "action": [
+              "init",
+              "status"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_drvio\", \"arguments\": {\"action\": \"status\"}}\n</tool_call>\n选它的理由：辅助驱动面（只读不启停）（通道 infra）。参数要点：驱动/CE 变体动作：切换前先 status，切换后看 fiber/心跳。 判据：回包 OK 且状态变了才算成功。"
+        },
+        {
+          "id": "G12",
+          "kind": "noarg",
+          "got": [
+            "kitty_x64dbg"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_x64dbg"
+          ],
+          "level": "L3",
+          "note": "真调试 → x64dbg（易混 dbg，后者会杀宿主）",
+          "expect_args": {
+            "action": [
+              "cmd",
+              "run",
+              "seed",
+              "rununtil"
+            ]
+          },
+          "missing": [
+            "action∈{cmd,run,seed,rununtil}"
+          ],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_x64dbg\", \"arguments\": {\"action\": \"selftest\"}}\n</tool_call>\n选它的理由：醉梦DBG 自研通道（通道 A）。参数要点：参数一次给全，别分多次补。 判据：回包首段 OK/ERR，再取关键字段。"
+        },
+        {
+          "id": "G13",
+          "kind": "wrong",
+          "got": [
+            "kitty_wpb"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_ce"
+          ],
+          "level": "L1",
+          "note": "内存写 → ce 的 W| 前缀",
+          "expect_args": {
+            "op": "W\\|"
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_wpb\", \"arguments\": {\"action\": \"write\"}}\n</tool_call>\n选它的理由：写内存（pchain 连续重写）（通道 runtime）。参数要点：先把目标定死（pid 或模块名/路径），attach/inject 先造出宿主，再 MODENUM 确认模块落地，write 前先 MODENUM 复核模块是否真在，写完后回读校验。 判据：回包看 OK/ERR 与模块是否加载成功；写操作必须带校验，写失败不算成功。"
+        },
+        {
+          "id": "G17",
+          "kind": "wrong",
+          "got": [
+            "kitty_ghidra"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_ida"
+          ],
+          "level": "L2",
+          "note": "商业路线 → ida/analyze（忌 ghidra）",
+          "expect_args": {
+            "action": [
+              "analyze"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_ghidra\", \"arguments\": {\"action\": \"functions\"}}\n</tool_call>\n选它的理由：Ghidra headless 真分析（analyze 跑 analyzeHeadless 脚本，输出 actions/output/*）。参数要点：先把目标定死（文件路径或模块名），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G20",
+          "kind": "noarg",
+          "got": [
+            "kitty_wpb"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_wpb"
+          ],
+          "level": "L3",
+          "note": "PTE 绕过 → wpb/write（易混 prot）",
+          "expect_args": {
+            "action": [
+              "write"
+            ]
+          },
+          "missing": [
+            "action∈{write}"
+          ],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_wpb\", \"arguments\": {\"action\": \"protect\"}}\n</tool_call>\n选它的理由：写保护绕过（PTE直改）（通道 runtime-kernel）。参数要点：先把目标定死（pid 或模块名/路径），attach/inject 前先 status 确认宿主在；动手类一次给全参数再发。 判据：回包看 OK/ERR 与目标 pid；inject 后要 MODENUM 复核模块是否真落地，失败不要原地重试。"
+        },
+        {
+          "id": "G14",
+          "kind": "hit",
+          "got": [
+            "kitty_patch"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_patch"
+          ],
+          "level": "L1",
+          "note": "静态补丁 → patch/patch",
+          "expect_args": {
+            "action": [
+              "patch",
+              "find"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_patch\", \"arguments\": {\"action\": \"patch\"}}\n</tool_call>\n选它的理由：磁盘补丁（通道 static）。参数要点：先把目标定死（文件路径或模块名），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G19",
+          "kind": "hit",
+          "got": [
+            "kitty_km"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_km"
+          ],
+          "level": "L2",
+          "note": "内核读 → km",
+          "expect_args": {
+            "action": [
+              "read",
+              "info",
+              "attach"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_km\", \"arguments\": {\"action\": \"read\"}}\n</tool_call>\n选它的理由：内核面（Dbgk/物理）（通道 kernel）。参数要点：参数一次给全，别分多次补。 判据：回包首段 OK/ERR，再取关键字段。"
+        },
+        {
+          "id": "G25",
+          "kind": "wrong",
+          "got": [
+            "kitty_trail"
+          ],
+          "fake": [],
+          "expect": [
+            "reverse_add_target"
+          ],
+          "level": "L3",
+          "note": "G3 新建目标 → add",
+          "expect_args": {
+            "action": [
+              "add"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_trail\", \"arguments\": {\"action\": \"new\"}}\n</tool_call>\n选它的理由：agent逆向会话总线（通道 reverse）。参数要点：会话键（会话/目标/模式驱动：a 交互会话 b 批量跑 c 同步收稿；单次失败用 a 重试，别改成 b 硬跑） 判据：回包 OK 且状态变了才算成功。"
+        },
+        {
+          "id": "G15",
+          "kind": "hit",
+          "got": [
+            "kitty_sym"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_sym"
+          ],
+          "level": "L1",
+          "note": "导出表 → sym/exports",
+          "expect_args": {
+            "action": [
+              "exports"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_sym\", \"arguments\": {\"action\": \"exports\"}}\n</tool_call>\n选它的理由：PE符号导出（文件/内存）（通道 static）。参数要点：先把目标定死（文件路径或模块名），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G21",
+          "kind": "wrong",
+          "got": [
+            "kitty_wpb"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_prot"
+          ],
+          "level": "L2",
+          "note": "改保护 → prot",
+          "expect_args": {
+            "action": [
+              "protect",
+              "rwx",
+              "query"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_wpb\", \"arguments\": {\"action\": \"protect\"}}\n</tool_call>\n选它的理由：保护/反作弊/API 钩子入口（CE 入口面）（通道 runtime）。参数要点：先把目标定死（pid 或模块名/路径），attach/inject 前先 status 确认宿主在；动手类一次给全参数再发。 判据：回包看 OK/ERR 与目标 pid；inject 后要 MODENUM 复核模块是否真落地，失败不要原地重试。"
+        },
+        {
+          "id": "G26",
+          "kind": "wrong",
+          "got": [
+            "kitty_trail"
+          ],
+          "fake": [],
+          "expect": [
+            "reverse_add_obs"
+          ],
+          "level": "L3",
+          "note": "G3 记观察 → add",
+          "expect_args": {
+            "action": [
+              "add"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_trail\", \"arguments\": {\"action\": \"append\"}}\n</tool_call>\n选它的理由：agent探索：会话追踪：append=追加步骤（通道 reverse）。参数要点：会话侧动作：参数一次给全，别分多次补。 判据：回包给出结构化结果即成功；ERR 先看必填项。"
+        },
+        {
+          "id": "G16",
+          "kind": "hit",
+          "got": [
+            "kitty_ghidra"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_ghidra"
+          ],
+          "level": "L1",
+          "note": "免费路线 → ghidra（忌 ida）",
+          "expect_args": {
+            "action": [
+              "analyze",
+              "decompile",
+              "functions",
+              "search"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_ghidra\", \"arguments\": {\"action\": \"decompile\"}}\n</tool_call>\n选它的理由：Ghidra headless 真分析（analyze 跑 analyzeHeadless 脚本，输出产物去 var 目录）（通道 static）。参数要点：先把目标定死（文件路径或模块名），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G22",
+          "kind": "hit",
+          "got": [
+            "kitty_loop"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_loop"
+          ],
+          "level": "L2",
+          "note": "夜跑流水 → loop/round",
+          "expect_args": {
+            "action": [
+              "round"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_loop\", \"arguments\": {\"action\": \"round\"}}\n</tool_call>\n选它的理由：逆向编排：夜跑全流水线（通道 reverse）。参数要点：夜跑编排：round 要串行 8 站，别并发；带 confirm 才真跑。 判据：看每站 PASS/FAIL 与红线项。"
+        },
+        {
+          "id": "G27",
+          "kind": "fake",
+          "got": [
+            "kitty_submit"
+          ],
+          "fake": [
+            "kitty_submit"
+          ],
+          "expect": [
+            "reverse_submit"
+          ],
+          "level": "L3",
+          "note": "G3 子写父 → submit",
+          "expect_args": {
+            "action": [
+              "submit"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_submit\", \"arguments\": {\"action\": \"submit\"}}\n</tool_call>\n选它的理由：逆向提交子模块（通道 reverse）。参数要点：父 issue 的 target 先 status 确认存在，submit 要分块（8b/16b/4k/16k），大块失败降级为多轮 4k 重试；block 必须给真实文件路径。 判据：回包 OK 且作业落盘才算成功。"
+        },
+        {
+          "id": "G18",
+          "kind": "noarg",
+          "got": [
+            "kitty_inject"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_inject"
+          ],
+          "level": "L1",
+          "note": "注入 → inject",
+          "expect_args": {
+            "action": [
+              "ce",
+              "ps",
+              "loaddll"
+            ]
+          },
+          "missing": [
+            "action∈{ce,ps,loaddll}"
+          ],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_inject\", \"arguments\": {\"action\": \"inject\"}}\n</tool_call>\n选它的理由：运行时注入（ce 通道）（通道 runtime）。参数要点：先把目标定死（pid 或模块名/路径），attach/inject 前先 status 确认宿主在；动手类一次给全参数再发。 判据：回包看 OK/ERR 与目标 pid；inject 后要 MODENUM 复核模块是否真落地，失败不要原地重试。"
+        },
+        {
+          "id": "G24",
+          "kind": "noarg",
+          "got": [
+            "kitty_settings"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_settings"
+          ],
+          "level": "L2",
+          "note": "会话真相源 → settings",
+          "expect_args": {
+            "action": [
+              "target-set",
+              "mode-set",
+              "target-get"
+            ]
+          },
+          "missing": [
+            "action∈{target-set,mode-set,target-get}"
+          ],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_settings\", \"arguments\": {\"action\": \"target\"}}\n</tool_call>\n选它的理由：逆向会话直调（通道 reverse）。参数要点：会话键（会话/目标/模式）先定下来再发指令。 判据：回包先看首段 OK/ERR，再取关键字段。"
+        },
+        {
+          "id": "G33",
+          "kind": "hit",
+          "got": [
+            "kitty_asm"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_asm"
+          ],
+          "level": "L3",
+          "note": "迷你汇编器 → asm",
+          "expect_args": {
+            "action": [
+              "assemble",
+              "jump"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_asm\", \"arguments\": {\"action\": \"assemble\"}}\n</tool_call>\n选它的理由：x64迷你汇编器（通道 static）。参数要点：先把目标定死（文件路径或模块名），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G28",
+          "kind": "fake",
+          "got": [
+            "kitty_apk"
+          ],
+          "fake": [
+            "kitty_apk"
+          ],
+          "expect": [
+            "kitty_jadx"
+          ],
+          "level": "L1",
+          "note": "Java 反编译 → jadx/decompile",
+          "expect_args": {
+            "action": [
+              "decompile"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_apk\", \"arguments\": {\"action\": \"decompile\"}}\n</tool_call>\n选它的理由：安卓应用层检索（packetchain 上游 tcin 透传）（通道 static）。参数要点：先把目标定死（文件路径或模块名），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G29",
+          "kind": "hit",
+          "got": [
+            "kitty_frida"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_frida"
+          ],
+          "level": "L2",
+          "note": "动态 hook → frida",
+          "expect_args": {
+            "action": [
+              "trace",
+              "attach",
+              "spawn"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_frida\", \"arguments\": {\"action\": \"attach\"}}\n</tool_call>\n选它的理由：dynamic hook (Frida pass-through)（通道 runtime）。参数要点：先把目标定死（pid 或模块名/路径），attach/inject 前先 status 确认宿主在；动手类一次给全参数再发。 判据：回包看 OK/ERR 与目标 pid；inject 后要 MODENUM 复核模块是否真落地，失败不要原地重试。"
+        },
+        {
+          "id": "G34",
+          "kind": "fake",
+          "got": [
+            "kitty_fuzzy"
+          ],
+          "fake": [
+            "kitty_fuzzy"
+          ],
+          "expect": [
+            "kitty_ce"
+          ],
+          "level": "L3",
+          "note": "内存扫描 → ce 的 S_NEW| 前缀",
+          "expect_args": {
+            "op": "S_NEW\\|"
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_fuzzy\", \"arguments\": {\"action\": \"find\"}}\n</tool_call>\n选它的理由：模糊检索（文件/内存）（通道 static）。参数要点：先把目标定死（文件路径或模块），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G30",
+          "kind": "hit",
+          "got": [
+            "kitty_net"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_net"
+          ],
+          "level": "L1",
+          "note": "流量抓取 → net/capture",
+          "expect_args": {
+            "action": [
+              "capture",
+              "decode"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_net\", \"arguments\": {\"action\": \"capture\"}}\n</tool_call>\n选它的理由：traffic capture (mitmdump)（通道 static）。参数要点：先把目标定死（文件路径或模块名），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G31",
+          "kind": "noarg",
+          "got": [
+            "kitty_dnspy"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_dnspy"
+          ],
+          "level": "L2",
+          "note": "Mono → dnspy（易混 il2cpp）",
+          "expect_args": {
+            "action": [
+              "open",
+              "deobf"
+            ]
+          },
+          "missing": [
+            "action∈{open,deobf}"
+          ],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_dnspy\", \"arguments\": {\"action\": \"mono\"}}\n</tool_call>\n选它的理由：Unity Mono 反编译（dnSpyEx 通道）（通道 static）。参数要点：先把目标定死（文件路径或模块名），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G35",
+          "kind": "hit",
+          "got": [
+            "kitty_variants"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_variants"
+          ],
+          "level": "L3",
+          "note": "变体切换 → variants",
+          "expect_args": {
+            "action": [
+              "switch",
+              "list"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_variants\", \"arguments\": {\"action\": \"switch\"}}\n</tool_call>\n选它的理由：切换/对比变体（通道 infra）。参数要点：变体 ID 或切换目标，先 status 再切换。 判据：回包 OK 且 next=switch 才算成功。"
+        },
+        {
+          "id": "G23",
+          "kind": "hit",
+          "got": [
+            "kitty_selftest"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_selftest"
+          ],
+          "level": "L1",
+          "note": "自检 → selftest/all",
+          "expect_args": {
+            "action": [
+              "all",
+              "a",
+              "c",
+              "e"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_selftest\", \"arguments\": {\"action\": \"all\"}}\n</tool_call>\n选它的理由：回归自检（a 通道：回归自检）。参数要点：回归自检：按 a/c/e/all 分组跑，输出退出码与尾部日志。 判据：rc=0 且 PASS 计数达标才算过。"
+        },
+        {
+          "id": "G32",
+          "kind": "noarg",
+          "got": [
+            "kitty_engines"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_engines"
+          ],
+          "level": "L2",
+          "note": "引擎路由 → engines/route",
+          "expect_args": {
+            "action": [
+              "route"
+            ]
+          },
+          "missing": [
+            "action∈{route}"
+          ],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_engines\", \"arguments\": {\"action\": \"triage\"}}\n</tool_call>\n选它的理由：engine router (ue/unity/godot dispatch)（通道 static）。参数要点：先把目标定死（文件路径或模块名），只读类先 status 探一次，动手类一次给全参数再发。 判据：回包先看首段 OK/ERR，再取关键字段决定下一步；ERR 不要原地重试，按错误码修参数。"
+        },
+        {
+          "id": "G36",
+          "kind": "hit",
+          "got": [
+            "kitty_trail"
+          ],
+          "fake": [],
+          "expect": [
+            "kitty_trail"
+          ],
+          "level": "L3",
+          "note": "探索日志 → trail",
+          "expect_args": {
+            "action": [
+              "append",
+              "get"
+            ]
+          },
+          "missing": [],
+          "resp": "</think>\n\n<tool_call>\n{\"name\": \"kitty_trail\", \"arguments\": {\"action\": \"append\"}}\n</tool_call>\n选它的理由：agent逆向：trail：append/finish 通道（通道 meta）。参数要点：会话侧动作：参数一次给全，别分多次补。 判据：回包给出结构化结果即成功；ERR 先看必填项。"
+        },
+        {
+          "id": "N01",
+          "kind": "hit",
+          "got": [],
+          "fake": [],
+          "expect": [],
+          "level": "L3",
+          "note": "纯合规概念，不该输出工具名",
+          "expect_args": {},
+          "missing": [],
+          "resp": "</think>\n\n授权书要能证明「测试行为」与「授权范围」的对应关系，缺了就会变成「默许」或「无授权」。\n\n1. 主体：谁授权（公司盖章 + 授权人姓名/职务）、谁被授权（测试方姓名/公司）\n2. 标的：被测系统的「名称/版本/部署环境」，能精确到「哪个实例」\n3. 范围：测试行为类型（渗透/代码审计/社会工程）、时间窗口、数据保留期限\n4. 边界：明确「不做」什么（不碰生产数据、不扩散、不用于商业目的）\n5. 交付与保密：交付物清单、保密义务、违约处理\n6. 形式：书面 + 电子签名/盖章，避免口头授权\n\n判据：授权书能回答「测什么、测多久、测谁、数据怎么处理」四问。"
+        },
+        {
+          "id": "N02",
+          "kind": "hit",
+          "got": [],
+          "fake": [],
+          "expect": [],
+          "level": "L3",
+          "note": "纯协议解释，不该输出工具名",
+          "expect_args": {},
+          "missing": [],
+          "resp": "</think>\n\n三段式回包：首段 OK/ERR 状态，中段带 `verified` 字样表示已打对回读，尾段是回读值。 判据：回读值要和计划值比着看，差一位都是问题。"
+        },
+        {
+          "id": "N03",
+          "kind": "hit",
+          "got": [],
+          "fake": [],
+          "expect": [],
+          "level": "L3",
+          "note": "纯流程知识，不该输出工具名",
+          "expect_args": {},
+          "missing": [],
+          "resp": "</think>\n\n八个阶段（实现里按这个顺序串行）： ① triage ② dump ③ static ④ dump ⑤ dynamic ⑥ 对抗 ⑦ patch ⑧ 还原。 夜间批处理走自动模式，人工会话走交互模式。"
+        },
+        {
+          "id": "N04",
+          "kind": "hit",
+          "got": [],
+          "fake": [],
+          "expect": [],
+          "level": "L3",
+          "note": "纯方法论，不该输出工具名",
+          "expect_args": {},
+          "missing": [],
+          "resp": "</think>\n\n本质区别：白盒能看到代码/字节，黑盒只能看行为。\n\n· 白盒：静态（反编译、符号、控制流）+ 动态（断点、内存）\n· 黑盒：输入→输出对、行为侧写、特征串\n\n判据：拿到源码/可解反编译就白盒优先；只有二进制就黑盒。\n两者互补：黑盒发现现象，白盒解释原理。"
+        }
+      ],
+      "level_str": "7/6/8"
+    }
+  ]
+}

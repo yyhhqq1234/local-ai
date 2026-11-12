@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 
-const R = 'D:/BaiduNetdiskDownload/Local-AI/train/data/kitty-reverse';
+const R = 'D:/BaiduNetdiskDownload/Local-AI/train/lines/9b-oxcoder/data/kitty-reverse';
 const P = (f) => path.join(R, f);
 const sha256 = (p) => crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const md5 = (s) => crypto.createHash('md5').update(s).digest('hex');
@@ -49,7 +49,7 @@ const missing = incUsers.filter(u => !coreUsers.has(u));
 
 const manifest = {
   __meta: {
-    dir: 'train/data/kitty-reverse', built: new Date().toISOString(),
+    dir: 'train/lines/9b-oxcoder/data/kitty-reverse', built: new Date().toISOString(),
     state: '清理 + 补答完成（27 个过时文件已删，源代码中 28 条空答案已补并入 core）',
   },
   training_core: {

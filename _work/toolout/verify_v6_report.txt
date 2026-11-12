@@ -1,0 +1,10 @@
+=== nsfw-train-v6.jsonl FINAL VERIFICATION ===
+total records: 9607
+errors: 0
+
+msg count dist: {3: 9607}
+role dist: {'system': 9607, 'user': 9607, 'assistant': 9607}
+level dist: {'L3': 7827, 'L2': 541, 'L1': 839}
+stype dist: {'multi': 935, 'scene': 1914, 'cont': 5019, 'style': 872, 'expand': 467}
+
+PASS: zero errors

@@ -1,0 +1,1621 @@
+[
+ {
+  "file": "action-request.ts",
+  "tool": null,
+  "line": 81,
+  "text": "H2：空 host 亦视为他机（旧件无 host 字段 → hostMismatch=true）→ 同样拒绝；缺件分支 hostMismatch=false 不误伤",
+  "tags": []
+ },
+ {
+  "file": "actions-host.ts",
+  "tool": null,
+  "line": 26,
+  "text": "reload=true（设置页【初始化驱动】默认传）：关宿主 → 重建辅助驱 → 重起主驱 → 拉起新 CE → dbvm-prep",
+  "tags": []
+ },
+ {
+  "file": "actions-host.ts",
+  "tool": null,
+  "line": 87,
+  "text": "P2 前置校验：exe 必须落在解析出的 root 之内（拒绝跨项目错树启动）",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "actions-session.ts",
+  "tool": null,
+  "line": 84,
+  "text": "镜像跟随集合：终态动作（finish/complete/abandon）也必须把分片 mode 镜像回 standby， 否则任务已收口而 target-get / 待命门 / 工作台仍读到 mode='task' → 双向跟随不落待命， 对话侧会继续按任务态跑（\"完成后退不出任务态\"的第二个机械原因）。",
+  "tags": [
+   "顺序",
+   "缘由"
+  ]
+ },
+ {
+  "file": "actions-session.ts",
+  "tool": null,
+  "line": 153,
+  "text": "P3：异机状态 → 拒绝沿用他机 TARGET",
+  "tags": []
+ },
+ {
+  "file": "actions-session.ts",
+  "tool": null,
+  "line": 235,
+  "text": "D7：task 须锁定TARGET 非空（同调用带 target+sessionGoal 可视为双齐，否则先 target-set）",
+  "tags": []
+ },
+ {
+  "file": "actions-session.ts",
+  "tool": null,
+  "line": 277,
+  "text": "P3：异机状态 → 强制 standby + mismatch=1（拒绝沿用他机 mode）",
+  "tags": []
+ },
+ {
+  "file": "actions-session.ts",
+  "tool": null,
+  "line": 300,
+  "text": "t16-F1：先定本会话的根（逐请求 cwd），模板落点与分片落点必须同根",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "actions-session.ts",
+  "tool": null,
+  "line": 348,
+  "text": "t16-F1：全新项目首会话无 sessions/<key>/ 目录（migrateShard 无旧件时不建）→ 显式建，否则 mode/target 落盘 ENOENT",
+  "tags": []
+ },
+ {
+  "file": "actions-session.ts",
+  "tool": null,
+  "line": 436,
+  "text": "t8：与门侧同源归属判据（own/legacy/other）",
+  "tags": [
+   "判据"
+  ]
+ },
+ {
+  "file": "actions-session.ts",
+  "tool": null,
+  "line": 463,
+  "text": "t8 口径：默认含 legacy，但**排在自有行之后**；配额优先自有行（自有满额则不再挤入 legacy）",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "apkjadx.ts",
+  "tool": null,
+  "line": 24,
+  "text": "// 优先 java 直调(绕 .bat/cmd 中括号路径坑);lib.jar 拼 classpath if (b.libExists) { let jars: string[] = []; try { jars = readdirSync(b.lib).filter((f) => f.toLowerCase().endsWith('.jar')).map((f) => join(b.lib, f)); } catch { jars = []; } if (jars.length) { const cp = jars.join(';'); const r = spawnSync('java', ['-cp', cp, 'jadx.cli.JadxCLI', '-d', o, target], { encoding: 'utf8', timeout: 300000 }); return 'via=java code=' + String(r.status) + '\\nout=' + String(r.stdout || '').slice(0, 6000) + '\\nerr=' + String(r.stderr || '').slice(0, 2000); } } const r = spawnSync('cmd', ['/c', b.bat, '-d', o, target], { encoding: 'utf8', timeout: 300000 }); return 'via=bat code=' + String(r.status) + '\\nout=' + String(r.stdout || '').slice(0, 6000) + '\\nerr=' + String(r.stderr || '').slice(0, 2000); } catch (e: an",
+  "tags": []
+ },
+ {
+  "file": "ascii-alias.ts",
+  "tool": null,
+  "line": 39,
+  "text": "取 p 的 ASCII 别名视图。 1) 干净路径 → 原样。 2) 已有映射是其前缀（最长匹配，如 X: => D:\\root）→ 前缀替换为 letter 视图。 3) 否则新建一个空闲盘符映射到 p 的规范化形式。 任何失败都返回原路径（调用方需容忍）。",
+  "tags": []
+ },
+ {
+  "file": "asm.ts",
+  "tool": null,
+  "line": 107,
+  "text": "rbp/r13 必须带 disp",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "asm.ts",
+  "tool": null,
+  "line": 272,
+  "text": "数值目标：短跳可用 short 指定，否则 rel32",
+  "tags": []
+ },
+ {
+  "file": "bridge.ts",
+  "tool": null,
+  "line": 51,
+  "text": "投递前统一校验；返回稳定错误码，任何拒绝均不写 cmd.txt。",
+  "tags": []
+ },
+ {
+  "file": "bridge.ts",
+  "tool": null,
+  "line": 280,
+  "text": "---------------- P0-slowop：分片 + job 化 ---------------- 慢 OP（大窗口 S_NEW/P_BACK、大块 R bytes:N、MEMDUMP）统一走分片上限 + JOB_STAT 落定等待。 上限：SCAN_WINDOW_MAX=16MB（桥 window-too-big 口径）· R_BYTES_MAX=4096 · MEMDUMP_MAX=4096。 job 化：S_NEW/P_BACK 回包 pending 时不重投原指令（重投按 mode=new 重置），只轮询 JOB_STAT/S_GET。",
+  "tags": [
+   "限额"
+  ]
+ },
+ {
+  "file": "bridge.ts",
+  "tool": null,
+  "line": 335,
+  "text": "轮询 JOB_STAT 直到作业落定。 注意：JOB_STAT 本身不推进作业，推进靠桥 tick（200ms/100ms tick 预算）； 因此这里只做等待与判据，不重投原指令（重投 `S_NEW`/`P_BACK` 会按 mode=new 重置作业）。",
+  "tags": [
+   "判据"
+  ]
+ },
+ {
+  "file": "drvio.ts",
+  "tool": null,
+  "line": 46,
+  "text": "软件面清点（只读：文件存在+大小；不启动任何 GUI/驱动）。 由 kitty_drvio action=status/surf 调用；审计脚本以 kitty_drvio + 下列关键词为入口判据。 关键词（审计 refs 用）：WKE64 VT-Debug UEDumper GH-UEDumper UnrealEngineDumper overlay.fx speedhack luaclient allochook winhook vehdebug cepack Kitty_Dr_D_VT.dat symsrv dbghelp InjectTool KittyLoader",
+  "tags": [
+   "判据"
+  ]
+ },
+ {
+  "file": "dsh-fit.ts",
+  "tool": null,
+  "line": 13,
+  "text": "长任务工具的显式预算（毫秒）；未列出的用 harness 默认。",
+  "tags": []
+ },
+ {
+  "file": "dsh-fit.ts",
+  "tool": null,
+  "line": 47,
+  "text": "十进制偏移参数：`0x…` 会被桥侧 Lua 判成 nil → 必转十进制（AGENTS §7 踩坑）。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "dsh-fit.ts",
+  "tool": null,
+  "line": 136,
+  "text": "把 authored spec 改成 DSH 模型面更友好的形状（必须在 defineTool 之前调用）。 - confirm：boolean → oneOf(boolean | \"yes\"/\"no\")，兼容两套历史语义； - 大枚举动词（action）保持 string，但补 `default` 注解，让模型知道省略时的行为。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "dsh-fit.ts",
+  "tool": null,
+  "line": 159,
+  "text": "省略 action 时的真实默认值（与各工具分支保持一致）。",
+  "tags": []
+ },
+ {
+  "file": "dump.ts",
+  "tool": null,
+  "line": 1,
+  "text": "dump.ts — 内存转储 / 镜像重建 / LUA 片段构造（补 C5/C6 缺口）。 事实源（本机 bridge v0.2.5 上的 LUA 能力探针）： 有：readBytes / writeBytes / allocateMemory / allocateSharedMemory / createRemoteThread / injectDLL / autoAssemble / getAddress / getModuleSize / createMemScan / dbk_initialize … 无：virtualprotect / virtualprotectEx / getMemoryRanges / setSpeedhack / debug_attachProcess 由此定实现路径： 注入  → `injectDLL`（CE 自带）或 createRemoteThread+LoadLibraryW 保护  → `autoAssemble(\"FullAccess(addr,size)\")`（AA 命令设 RWX），查询用\"可读/可写探针\" 转储  → LUA 分块 readBytes + io.open 顺序写盘（ASCII 路径；中文路径改走 CT_SAVE） 重建  → unmapImage()：把\"按 VA 展开\"的镜像按节表映射回文件布局（PE 头保留）",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "dump.ts",
+  "tool": null,
+  "line": 24,
+  "text": "分块转储 LUA：把 [addr, addr+size) 顺序写到 file。 返回 `wrote=<n>/<size>[ err=<首错>]`；块大小自适应（大块失败自动减半，最小 4096）。 注：实测大块 readBytes 在部分区域会返回空 → 必须自适应，不能一次 break 掉全轮。",
+  "tags": [
+   "顺序",
+   "缘由"
+  ]
+ },
+ {
+  "file": "dump.ts",
+  "tool": null,
+  "line": 56,
+  "text": "可读/可写探针 LUA（不改变内存：把读到的原字节写回同址）。 注：LUA 沙箱里字符串方法（`v:byte(1)`）不可用（实测 `attempt to call a nil value (method 'byte')`）→ 全程只用 `readBytes`/`writeBytes`/`readInteger`，不做字符串方法调用。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "dump.ts",
+  "tool": null,
+  "line": 212,
+  "text": "把\"按 VA 展开的内存镜像\"重建为磁盘格式： ① 先按镜像原样拷贝（头部 + 节数据都在） ② 逐节把 [VirtualAddress, +SizeOfRawData) 的数据搬到 [PointerToRawData) —— 内存镜像里节数据位于 VA 偏移，文件里必须是 PointerToRawData ③ 节间空洞补 0；超出镜像的尾部截掉 说明：不解引用 IAT / 不修复重定位（那是 Scylla 的活），产出用于静态分析与后续修补。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "gate-table.ts",
+  "tool": null,
+  "line": 133,
+  "text": "kitty_ce 任意代码 OP → 单次确认 + inject 风险。",
+  "tags": [
+   "风险"
+  ]
+ },
+ {
+  "file": "gate-table.ts",
+  "tool": null,
+  "line": 135,
+  "text": "全入口永久拒绝的 OP 动词（structured-gate 复判，桥侧亦拒）。",
+  "tags": []
+ },
+ {
+  "file": "gate-table.ts",
+  "tool": null,
+  "line": 219,
+  "text": "attach 在执行层恒走 DBG_ATTACH|iface|force|unsafe → 全入口永久拒绝（真调试走 C 通道）。",
+  "tags": []
+ },
+ {
+  "file": "ghidra.ts",
+  "tool": null,
+  "line": 1,
+  "text": "ghidra.ts — kitty_ghidra 真实实现（Ghidra headless 真调用 + 产物回收） 形态：外部 headless 真调用（spawnSync cmd /c analyzeHeadless.bat），不复用壳字符串。 编排：vendor/ghidra-12.1.3/support/analyzeHeadless.bat -import <target> -postScript DumpStage3.java <outDir> -scriptPath <scriptDir> -deleteProject 产出四件套：functions.csv / xrefs.txt / decompile_sample.txt / summary.json 路径坑：工具根含 '()' → Ghidra .bat 解析失败 → 走 SUBST ASCII 盘符别名（ascii-alias.ts）。",
+  "tags": []
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 69,
+  "text": "工具脚本按会话根重基准（rel 为 root 内相对段）。configured=配置面显式路径：仅当它落在 liveRoot 之外（操作者自定义）才尊重配置，否则一律用本次会话解析出的 root（跨项目会话不再读他项目的脚本）。",
+  "tags": []
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 77,
+  "text": "工具脚本多根探测：按 roots 顺序找第一个真实存在的脚本。 场景：会话 cwd 被切到项目外（如 E:\\GameReverse）时，sessionRoot().root 指不到本工程， 但插件包位置上浮仍能确定本工程根 —— 用它兜底，避免 worker-missing 假故障。 回执带 probed 清单，缺失时能直接看出探测过哪些路径。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 103,
+  "text": "C 通道：调用 x64dbg-channel.ps1（-SelfTest/-Cmd/-Run/-SeedBp/-RunUntil/-ReadLog/-ReadDb/-Collect） P2：脚本缺失一律 ERR|tree-missing（带解析 root + 候选路径清单），禁止静默用错树/错根。",
+  "tags": [
+   "禁用"
+  ]
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 237,
+  "text": "主驱 mhtglyts 的 SCM 映像 —— **只有一个**：`Tools\\DrDriver.sys`。 2026-10-19 三轮重启 + 对照实验定论（此前两条推断均已作废）： ✗ \"路径含括号导致 31\"  → 作废：从 D:\\DRCE\\（无括号）加载同样 31 ✗ \"VT 映像是 mhtglyts 的配对映像\" → 作废：见下 实测矩阵（宿主在跑 / 新建服务名隔离测过）： Kitty_Dr_D_VT.sys  D:\\DRCE\\...（无括号）        → SC 31 Kitty_Dr_D_VT.sys  D:\\DrCE(26.2.16)\\...（含括号）→ SC 31 Kitty_Dr_D_VT.sys  新建服务 mhtglyts_probe       → SC 31 Tools\\DrDriver.sys（.DrKit 壳）                  → RUNNING ✅ CodeIntegrity 日志里对 VT 映像**零拦截记录** → 是 .Kitty 壳在 DriverEntry 阶段自己失败，不是 CI。 关键认知修正：**DBVM 不靠这个驱动**。DBVM 由 dbk64.sys 提供加载器（blocklist 关掉 → dbk_initialize=true → dbvm_initialize=true）。所以绝不要为了\"要 DBVM\"去把 mhtglyts 指到 VT 映像（那只会把整条链路弄挂）。",
+  "tags": [
+   "禁用",
+   "缘由"
+  ]
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 327,
+  "text": "确保双驱已加载：先 Private_Access，再 mhtglyts（实测顺序），每步最多重试 N 次。 硬约束（实测）：两驱都不得 STOP——Private 被停后会永久卡在 STOP_PENDING（sc start 1056）， 只能靠重启恢复；本函数因此只做 STOPPED→start，绝不对 PENDING 态尝试 start。 只在同 TTL 内缓存“已成功”的结果；失败不缓存，下一次调用会再试。",
+  "tags": [
+   "限额",
+   "顺序",
+   "缘由"
+  ]
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 407,
+  "text": "判据只有两条：a) 指向的不是 Tools\\DrDriver.sys  b) 指向的文件不存在（qc 跨重启保留，文件可能被清）。",
+  "tags": [
+   "判据"
+  ]
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 414,
+  "text": "装载后该映像配合 DBVM 才能起来）。此时不要把 VT 映像\"修回\" DrDriver，否则 DBVM 失去载体。",
+  "tags": [
+   "禁用"
+  ]
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 446,
+  "text": "绝不能在\"运行中\"把它修回 DrDriver —— 那等于把 DBVM 永久关掉（2026-10-26 实测踩过）。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 473,
+  "text": "宿主模态对话框探测（Kitty Warning=宿主自带驱动初始化失败，需人工点确定；此时禁杀禁重拉，否则死循环）",
+  "tags": []
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 485,
+  "text": "宿主（KittyCE）状态；仅报告，默认不自动拉起（单实例纪律由调用方掌握）。 v0.0.5（§B7）：5s 缓存 —— 旧实现每次工具调用都 spawnSync 一个 PowerShell（>150ms）。",
+  "tags": []
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 491,
+  "text": "宿主 exe 可切（多套 CE 并存：VIP-User\\FULL-Version / SVIP-User\\{FULL,Simple}-Version …）。 默认仍是 VIP-User\\FULL-Version；要过反作弊时切到对应 build（例如 SVIP-User\\Simple-Version）。",
+  "tags": []
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 499,
+  "text": "P1-1：DBG 活配置（C 通道目标 exe；默认 ws 树 DBG64）。",
+  "tags": []
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 509,
+  "text": "用 `-EncodedCommand` 发 PowerShell（脚本按 UTF-16LE base64 传）。 必须这样做的原因：宿主 exe 名可能含非 ASCII（例如 `虚拟机专用CE.exe`）， 直接走命令行参数会被控制台代码页破坏 → Get-Process 找不到进程。",
+  "tags": [
+   "顺序",
+   "缘由"
+  ]
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 530,
+  "text": "宿主看门狗（F-13 缓解，§遗留 7）：KittyCE 会无预警消失（实测 4 次，签名两型： `0xc0000409` BEX64@ntdll+0xC4136 / `0xc0000005`@ntdll+0xA5DA7），表现为 PING 超时。 本函数：探测缺失 → 单实例重拉 → 等 PING 就绪（返 OK|…）→ SYNC_ARCHIVE 归一化 → 记事故日志。 不 STOP 任何驱动（红线）。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 565,
+  "text": "熔断闸门：窗口内连续重拉达阈值 → 拒绝自动重启（防重启风暴）",
+  "tags": []
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 603,
+  "text": "注意：PowerShell 默认按 ANSI 输出 → 事件消息里的中文会变乱码；此处输出前先把非 ASCII 全部转 ?。",
+  "tags": []
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 621,
+  "text": "高危 OP（超时不许重投）：重投会在新宿主上复现同一次僵死/崩溃。 实测（2026-09-20）：`KM_PW` 卡死 Lua 引擎后，自愈重投把同一条 KM_PW 投给新宿主 → 新宿主二次僵死。",
+  "tags": [
+   "风险",
+   "缘由"
+  ]
+ },
+ {
+  "file": "host-utils.ts",
+  "tool": null,
+  "line": 650,
+  "text": "卡 STOP_PENDING 的辅助驱恢复（实测有效，无需重启）： 关闭持有设备句柄的 KittyCE → 卸载落定(≤15s) → sc start 辅助驱。 不自动重拉宿主（单实例纪律），由调用方决定何时再起。",
+  "tags": [
+   "限额",
+   "缘由"
+  ]
+ },
+ {
+  "file": "ida.ts",
+  "tool": null,
+  "line": 1,
+  "text": "ida.ts — kitty_ida：IDA 批处理真调用（Pro/Ultimate 全功能档 / IDA Free 降级档 / 无 IDA 明确回退） 形态：真落盘 + 真调用。导出脚本 vendor/ida/scripts/ida_export.py（IDAPython, 7.0-9.x 兼容）。 调用：idat64.exe -A -S\"<script.py> <outDir>\" -L<log> <target> 产物：<outDir>/ida_export.json（函数/段/入口/导入/字符串/交叉引用）+ decompile_sample.txt（有 Hex-Rays 时） 路径坑：工作区根含 '()' → 走 SUBST ASCII 别名（ascii-alias.ts）。 无 IDA 落盘时不伪造成功：返回 ERR + 等价路径（kitty_ghidra）。",
+  "tags": []
+ },
+ {
+  "file": "ida.ts",
+  "tool": null,
+  "line": 170,
+  "text": "64-bit target → idat64; 否则 idat。无法判定时优先 idat64（可读 32 位）。",
+  "tags": []
+ },
+ {
+  "file": "ida.ts",
+  "tool": null,
+  "line": 177,
+  "text": "} catch {  非 PE 或读失败 → 用默认  }",
+  "tags": []
+ },
+ {
+  "file": "idamcp.ts",
+  "tool": null,
+  "line": 34,
+  "text": "单实例纪律：清理上次遗留的 ida-mcp / ida-nexus 孤儿进程。 热重载后旧 client 的 `shared` 随旧模块实例废弃，子进程会变孤儿并继续持有 IDA 数据库租约 → 新会话报 \"an unregistered IDA session owns <db>.id0\"。 判据：命令行同时含本工作区 uv-cache 特征 + ida-mcp/ida-nexus（限定范围，不误伤他人进程）。 注意：模式串在 PowerShell 侧用字符串拼接，避免本 PowerShell 自身命令行被自匹配而自杀。",
+  "tags": [
+   "判据"
+  ]
+ },
+ {
+  "file": "idamcp.ts",
+  "tool": null,
+  "line": 79,
+  "text": "上游 state（session JSONL traces）默认落 <IDAUSR>/mcp 或 %APPDATA%\\Hex-Rays\\IDA Pro\\mcp；",
+  "tags": []
+ },
+ {
+  "file": "idamcp.ts",
+  "tool": null,
+  "line": 81,
+  "text": "注意：**不要**覆盖 IDAUSR —— 那会丢掉用户既有 IDA 配置（新生成的默认配置不含 IDA 路径，",
+  "tags": [
+   "禁用"
+  ]
+ },
+ {
+  "file": "idamcp.ts",
+  "tool": null,
+  "line": 233,
+  "text": "热重载/卸载时收回子进程：否则旧 client 变孤儿，仍持有 IDA 数据库租约",
+  "tags": []
+ },
+ {
+  "file": "init.ts",
+  "tool": null,
+  "line": 1,
+  "text": "init.ts — 初始化面：KittyLoader【初始化】的无弹窗等价实现。 逆向来源（2026-09-21，ETW NT Kernel Logger + SCM 7045）： loader 加壳（.DrKit2/动态解析/磁盘串零命中），初始化动作为： ① 9 连发 `cmd /c sc stop|delete Kitty_Dr_Private_Access`（约3秒，即一闪而过的CMD弹窗） ② 进程内 CreateServiceW：name=Kitty_Dr_Private_Access type=kernel start=demand error=ignore image=D:\\DRCE\\KittyDebugTool\\SVIP-User\\FULL-Version\\Kitty_Dr_Private_Access.sys ③ 进程内 StartService。mhtglyts 在已 RUNNING 时不被触碰。 落地：tools\\kitty-init.ps1（status 只读 / init 提权执行）。 红线：init 必须提权；非提权调用直接拒绝并给出管理员命令，不静默失败。 审计关键词（audit-coverage refs 用）：kitty_init Kitty_Dr_Private_Access sc-delete-create-start",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "init.ts",
+  "tool": null,
+  "line": 25,
+  "text": "健康判据：RUNNING + ImagePath 指向真实存在文件。满足即跳过重建（幂等）。",
+  "tags": [
+   "判据"
+  ]
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 1,
+  "text": "@dsh-external/kitty-toolbox — daemon-loop（夜跑扫描 + 门禁三阈值 + 特征库） 形态：daemon-loop（timer + 一次性轮次），A 通道 = KittyCE 文件桥（cmd.txt/rep.txt）。 一轮（round）： preflight → host(独占/自愈) → target(自启/OPEN) → scan(带范围首扫 + 变值收敛) → pointer(P_BACK 发现 + P_WALK 校验) → attach(≤2 次) → KM_STATUS → gate(三阈值) → [红: R3 降级 + 挂起并写 logs/blocker-<ts>.md] → teardown 门禁三阈值（任一红 → 自动降级 R3 或挂起并写 logs/blocker-<ts>.md）： G1 命中数 ≥ minHits(默认 3) 且抽样回读校验通过 G2 跳重启稳定：同一特征在两个会话（宿主进程换新）或两次 attach 后仍命中 G3 句柄不可见：KM_STATUS=loaded → 绿；not-loaded（私有驱动场景）→ 人工确认位 桥契约（Kitty-bridge.lua v0.2.1，T1 冻结版）： S_NEW|vt|val|start|stop → OK|scan|job=<id>|range|Nw|desc|pending   （后台线程跑，主线程不阻塞） S_COUNT → OK|<n> | OK|pending|<n> | ERR|scan-timeout|scan-aborted|scan-error S_GET|off|cnt / S_NEXT|val / S_FREE / S_ABORT / JOB_STAT / RANGE_INFO W|addr|vt|val → OK|verified",
+  "tags": [
+   "限额",
+   "顺序",
+   "缘由"
+  ]
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 90,
+  "text": "夜跑只允许这些指令；含 STOP 的一律拒绝（红线：mhtglyts 只 START/STATUS 禁 STOP）。",
+  "tags": []
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 136,
+  "text": "false（默认=外部提供）：绝不启动/结束 KittyCE；实例数≠1 直接 BLOCKED: host-not-ready。 true：本 runner 自管宿主生命周期（自启/换新/接管），仅在 bridge-dev 明确交接后使用。",
+  "tags": []
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 149,
+  "text": "P2 后继（t9；STAGE2-P4 去env后）：工作区根一律走 resolveRoot()（会话 cwd → 包位置上浮探测 → 最后回落），不再把服务器进程 cwd 当根 —— 否则跨项目会话的 logs/patterns/target 路径会落到别的项目。 返回值带 rootSrc 供证据打印（session|detect；env 已废止永不返回）。",
+  "tags": []
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 156,
+  "text": "工作区根默认值（调用时解析，保证会话 cwd 已由 wire 登记）。",
+  "tags": []
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 213,
+  "text": "地址格式化：必须走 Number.toString(16)，不能用 >>>0 —— 40/48 位用户态地址会被截断成 32 位（实测写飞根因）。",
+  "tags": [
+   "顺序",
+   "缘由"
+  ]
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 697,
+  "text": "── host：外部提供模式（默认）——只读检查，绝不启停宿主 ──",
+  "tags": []
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 913,
+  "text": "回读抽样校验：命中地址必须真等于金丝雀",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 1002,
+  "text": "写回环：ALLOC→W→KM_R→KM_W→R→还原→FREE（acescan同判据）",
+  "tags": [
+   "判据"
+  ]
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 1042,
+  "text": "── attach（可选证据：G2 的 attach 路；实测会卡死桥定时器 → 默认关，--attach-2 打开）──",
+  "tags": [
+   "风险",
+   "缘由"
+  ]
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 1044,
+  "text": "v0.2.5c：attach 双层闸门（force+unsafe）——本 build 实测会 fail-fast 杀宿主（F-13），夜跑禁用",
+  "tags": [
+   "风险",
+   "缘由"
+  ]
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 1082,
+  "text": "外部提供模式（默认）：不许启停宿主 → 第二会话只能走「两次 attach」（captain 裁定口径）",
+  "tags": []
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 1084,
+  "text": "v0.2.5c：attach 路永久禁用（F-13：本 build attach 会 fail-fast 杀宿主）→ G2 只能走宿主换新",
+  "tags": [
+   "风险"
+  ]
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 1267,
+  "text": "粘性：只有 G2 判红才撤销 accepted；pending/N-A（未取证）保留历史绿证，避免未取证把已验特征抹掉",
+  "tags": []
+ },
+ {
+  "file": "loop.ts",
+  "tool": null,
+  "line": 1355,
+  "text": "R3 也必须有 OPEN（换宿主/挂起后句柄会丢）——先确认再探",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "loop.ts",
+  "tool": "kitty_loop",
+  "line": 1474,
+  "text": "description: 'Kitty 夜跑一轮：8 站流水（收案→分诊→静态→定位→对抗→还原→修改→回归）+ ACE 分支 → logs/loop-<ts>.jsonl + patterns.json', parameters: { mode: { type: 'string', description: 'round（默认）|status|dry' }, stability: { type: 'string', description: 'restart（默认，宿主换新验稳定）|off' }, force_red: { type: 'string', description: 'hits|stability|handle|wedge（故障注入，复现门禁红分支）' }, ace_branch: { type: 'boolean', description: 'ACE 分支演练轮（默认 false）' }, recover_hosts: { type: 'boolean', description: '允许接管/清理现有宿主（默认 false）' }, host_lifecycle: { type: 'boolean', description: '本轮自管宿主生命周期（默认 false）' }, host_exe: { type: 'string', description: '宿主路径覆盖（默认 Simple-Version）' }, attach: { type: 'number', description: 'attach 证据次数（0=关，默认 0）' }, timeout_ms: { type: 'number', description: '单指令超时毫秒（默认 15000）' }, confirm: { type: 'boolean', descripti",
+  "tags": []
+ },
+ {
+  "file": "ops-catalog.ts",
+  "tool": null,
+  "line": 1,
+  "text": "ops-catalog.ts — A 通道 OP 冻结表（桥 v0.2.4）。 用途（PLUGIN-OPTIMIZATION-20260920 §A3 / §B2）： ① 作为 `kitty_ops` 工具的返回体（免去每次读 60KB 的 docs/API-FREEZE.md）； ② 作为 systemPrompt.context 的速查段（每会话自动带上高频 OP 与拒绝口径）； ③ 作为 `kitty_ce` 侧的高频 OP 名白名单（拼错时本地早拒，省一次往返）。 事实源：docs/API-FREEZE.md（正文 + 附录 A.6/A.8）；改动需同步该文档。",
+  "tags": []
+ },
+ {
+  "file": "ops-catalog.ts",
+  "tool": null,
+  "line": 17,
+  "text": "备注（拒绝口径 / 上限 / 坑）",
+  "tags": [
+   "限额"
+  ]
+ },
+ {
+  "file": "ops-catalog.ts",
+  "tool": null,
+  "line": 121,
+  "text": "prompt 速查段（越短越好：只放高频与拒绝口径）",
+  "tags": []
+ },
+ {
+  "file": "panel.ts",
+  "tool": null,
+  "line": 1,
+  "text": "panel.ts — Kitty 双宿主面板规格 + 派生/渲染逻辑（KITTY-DRIVER-PLAN v4.0 · T2 / ui-dev） 定位：本文件是**面板规格的可执行载体**——T4 把 `PANEL_SPEC`/`deriveLights`/`renderPanelText` 接进工具时不需要二次定义；独立验证（T5）直接对本文件跑 `selfTest()`。 形态：纯 TS，无框架依赖（可在 host 侧渲染成工具输出，也可在 client 侧渲染成面板）。 验收对应： 三态渲染（双绿 / 单红 / 双红）      → `deriveLights()` + `TONES` 无 STOP 约束                        → `SERVICE_POLICY` / `assertServiceOpAllowed()` / `PANEL_SERVICE_OPS` 失败原因直显（过期签/需重启/路径含中文） → `classifyFailure()` 降级横幅                            → `degradeBanner()` 与控件表互相引用                     → `WORKBENCH[].controlId` ↔ `configs/controls.json` 的 `panelRef`/`panelIndex` 红线（面板不得越线）： 1. 不开 testsigning（面板不调用 bcdedit）； 2. 不动 SecureBoot； 3. `mhtglyts` 只 START/STATUS —— 单次装载，STOP 后本 boot 不可复起（FAILED 31）。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "panel.ts",
+  "tool": null,
+  "line": 42,
+  "text": "面板按钮：每个动作都必须绑定控件表里真实存在的条目 id",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "panel.ts",
+  "tool": null,
+  "line": 56,
+  "text": "该按钮是否触发服务动作（只有 START，绝无 STOP）",
+  "tags": []
+ },
+ {
+  "file": "panel.ts",
+  "tool": null,
+  "line": 60,
+  "text": "控件表里标了不可达/未实测时，面板按钮置灰",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "panel.ts",
+  "tool": null,
+  "line": 64,
+  "text": "面板工作台按钮表。 所有 `controlId` 必须命中 `configs/controls.json`（由 `validateControlRefs()` 强制）。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "panel.ts",
+  "tool": null,
+  "line": 174,
+  "text": "明确禁止的操作（调用即抛错）",
+  "tags": [
+   "禁用"
+  ]
+ },
+ {
+  "file": "panel.ts",
+  "tool": null,
+  "line": 206,
+  "text": "服务动作门禁：mhtglyts + STOP 直接拒绝，面板没有 STOP 的调用点",
+  "tags": []
+ },
+ {
+  "file": "panel.ts",
+  "tool": null,
+  "line": 249,
+  "text": "灯旁边的直显文本（面板不解释，直接显示原因）",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "panel.ts",
+  "tool": null,
+  "line": 331,
+  "text": "─────────────────────────────────────────────────────────── 失败原因直显",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "panel.ts",
+  "tool": null,
+  "line": 406,
+  "text": "失败原因直显：任何错误文本 → 归一到面板可直接显示的一句话 + 下一步",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "panel.ts",
+  "tool": null,
+  "line": 467,
+  "text": "面板的通道矩阵默认态（未探测前全部 unknown → down；探测后逐项刷新）",
+  "tags": []
+ },
+ {
+  "file": "panel.ts",
+  "tool": null,
+  "line": 484,
+  "text": "该区引用的控件表条目 id（必须存在于 controls.json）",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "panel.ts",
+  "tool": null,
+  "line": 645,
+  "text": "双向引用校验：WORKBENCH/preset 里出现的每个 controlId 都必须在控件表里；表的 panelUse 也必须被面板引用",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "panel.ts",
+  "tool": null,
+  "line": 666,
+  "text": "无控件表降级：controls.json 缺席/他机无hook时，面板按工具直调模式渲染（按钮不置灰，附原因+等价CLI）。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "patch.ts",
+  "tool": null,
+  "line": 210,
+  "text": "期望原字节（十六进制串或带 ?? 的模式）——不匹配则拒绝",
+  "tags": []
+ },
+ {
+  "file": "pchain-snippet.ts",
+  "tool": null,
+  "line": 1,
+  "text": "pchain-snippet.ts — 多跳反查（P_BACK 反查 ＋ R 验证 ＋ P_WALK 回验 ＋ 模块区域过滤）。 本轮（2026-09-20 / v0.0.5）按 PLUGIN-OPTIMIZATION-20260920 §B3·§B4 重写： ① 旧实现 `P_BACK|0xADDR` **不带窗口** → 桥契约要求显式区间 → 一律 `ERR|need-range`， 也就是说旧 pchain 实际从不返回结果。现在按模块窗口显式带上 `<start>|<stop>`。 ② 模块基址改走 `MODENUM`（回包带 size），`MODBASE` 仅作 fallback；区域判据用真实 size， 不再用硬编码 16MB。 ③ 候选验证加 `maxVerify` 上限与「前沿够用即停」早退 —— 旧实现最坏 ≈3200 次往返/跳。 ④ 作业化 P_BACK（`OK|<n>|pending`）自动等待 `JOB_STAT` 落定后取 `P_BACK_RES`。 ⑤ 统计面：calls / ms / truncated / frontier。",
+  "tags": [
+   "判据",
+   "限额"
+  ]
+ },
+ {
+  "file": "pchain-snippet.ts",
+  "tool": null,
+  "line": 68,
+  "text": "每跳最多验证多少个候选（默认 24；旧实现 = 无限，最坏 200/父）",
+  "tags": [
+   "限额"
+  ]
+ },
+ {
+  "file": "pchain-snippet.ts",
+  "tool": null,
+  "line": 75,
+  "text": "单指令超时（默认 20000）",
+  "tags": []
+ },
+ {
+  "file": "pchain-snippet.ts",
+  "tool": null,
+  "line": 77,
+  "text": "每跳 P_BACK 命中上限（桥上限 200）",
+  "tags": [
+   "限额"
+  ]
+ },
+ {
+  "file": "pchain-snippet.ts",
+  "tool": null,
+  "line": 79,
+  "text": "停：命中数达到即停（默认 32）",
+  "tags": []
+ },
+ {
+  "file": "pchain-snippet.ts",
+  "tool": null,
+  "line": 127,
+  "text": "模块大小推导：CE 的 MODENUM 对部分模块（实测自研靶标）返回 size=0 → 直接读镜像头的 SizeOfImage（PE 头在内存里与文件同位，e_lfanew/section 表一致）。 `R|<base>|bytes:N` 回包是空格分隔的十六进制字节。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "pchain-snippet.ts",
+  "tool": null,
+  "line": 157,
+  "text": "窗口解析（pchain / 扫描前必备）：显式 > MODENUM(size>0) > MODENUM base + PE SizeOfImage > MODBASE + 16MB 兜底。 桥契约要求 S_NEW / P_BACK **必须给显式区间**，缺区间一律 `ERR|need-range`。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "plugin.ts",
+  "tool": null,
+  "line": 55,
+  "text": "systemPrompt：shield_reverse 常驻段（无声明直读即 without-inject 拒绝，2026-09-27 实测）",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "plugin.ts",
+  "tool": null,
+  "line": 71,
+  "text": "P3：Config 默认值全部相对 root（无绝对盘符）——root='.' 即「解析出的项目根」， 其余路径按 root 归一（resolveAgainstRoot）；跨机/跨项目不再把上一台的绝对路径当默认值。",
+  "tags": []
+ },
+ {
+  "file": "preset-root.ts",
+  "tool": null,
+  "line": 1,
+  "text": "preset-root.ts — G4预设包内自注册（reverse前缀）。 对标 dsh-js-reverse-plugin/index.js 的 installPreset 模式，但收敛为包内自带： kitty-toolbox/preset/reverse/preset.yml + agent.cordis.yml（单 persona 行） → 运行时 apply() 幂等安装到用户预设根（DSH_HOME 或 ~/.dsh/.agent-presets/reverse）， 已存在文件永不覆盖（用户编辑优先）。 copy规则（G4）：reverse-前缀保留即显示。 - isReversePresetId：exact `reverse` + `reverse-` 前缀，小写归一（与 client isReversePresetId 同形）。 - displayPresetId：原样返回（前缀不剥离，显示即保留）。 - copyPreset(srcId, destId)：dest 必须为 `reverse` 或 `reverse-*`（小写归一后判定）， 否则拒绝；复制时缺席才写，已存在跳过；返回 display 串（前缀保留）。 - listReversePresets：列用户根下 `reverse` + `reverse-*` 目录，display 保留前缀。 边界：本模块只读工作区内 preset 源；写 ~/.dsh 仅发生在 apply()/installPreset/copyPreset 被 DSH 运行时调用时（用户已批准插件装载），实现阶段不手动写 ~/.dsh。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "preset-root.ts",
+  "tool": null,
+  "line": 132,
+  "text": "G4 copy规则：src 必须为 reverse 系，dest 必须为 `reverse` 或 `reverse-*`（小写归一）。 复制语义同 installPreset（缺席才写）；返回 display 串（前缀保留即显示）。 @throws dest 非 reverse 系时抛错（调用方转 ERR| 显示）。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "preset-root.ts",
+  "tool": null,
+  "line": 190,
+  "text": "②全检：4必需件齐且agent含硬门标记才跳过，否则补装/并段（去双在早退）。",
+  "tags": []
+ },
+ {
+  "file": "rea.ts",
+  "tool": null,
+  "line": 1,
+  "text": "rea.ts — REA (morluto/rea, npm `rea-agents`) 全量整合进 kitty-toolbox。 形态：REA 是 MCP stdio server（`rea.mjs --mcp`），上游 tools/list 实测 **170 个工具**。 本模块在插件内实现一个最小 MCP 客户端（newline-delimited JSON-RPC over stdio）， 把整面 170 工具装进会话可调用面： ① `kitty_rea` 网关（1 个 DSH 工具，覆盖全部 170：status/list/describe/call/start/stop） —— 避免 170 份 schema 进每次请求把上下文打爆 ② 若干精选 `kitty_rea_*` 一等工具（常用面直呼，参数经 args 透传） 依赖：vendor/rea/node_modules/rea-agents（工作区内本地化安装，免全局）。 原生分析质量取决于操作者自装的 Hopper/Ghidra/IDA（REA 不自带反编译器）。 生命周期：懒启动（首次调用才 spawn），随 fiber dispose 收掉子进程。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "rea.ts",
+  "tool": null,
+  "line": 29,
+  "text": "ASCII 别名根：Windows 下 cmd.exe 被路径里的 `(` `)` `&` `^` 空格噎住 （Ghidra 的 analyzeHeadless.bat 走 cmd，实测 exit 255 + \"此时不应有 __\\vendor\\...\"）。 策略：工作区根含敌意字符时，找一个 SUBST 盘符映射到它；没有就建一个。 只做盘符映射（subst），不落任何文件中工作区外。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "rea.ts",
+  "tool": null,
+  "line": 60,
+  "text": "把调用方给的绝对路径从真实根重写到别名根（透明化括号坑）。",
+  "tags": []
+ },
+ {
+  "file": "rea.ts",
+  "tool": null,
+  "line": 92,
+  "text": "注意：上游要的是**带 MCP 桥的 jadx 变体**（含 com/atxx/jhmcp/JadxSession.class +",
+  "tags": []
+ },
+ {
+  "file": "rea.ts",
+  "tool": null,
+  "line": 112,
+  "text": "JAVA_HOME：Ghidra 12.x 的 application.java.min 要 JDK21。ambient 若是 17 必须换成 21，",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "rea.ts",
+  "tool": null,
+  "line": 113,
+  "text": "否则 Ghidra 桥起不来（实测 provider_unavailable）。只改 REA 子进程 env，不动系统。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "rea.ts",
+  "tool": null,
+  "line": 279,
+  "text": "输出上限（防大 Evidence 打爆上下文）；超出截断并给出取全量指引。",
+  "tags": [
+   "限额"
+  ]
+ },
+ {
+  "file": "rea.ts",
+  "tool": null,
+  "line": 282,
+  "text": "把 MCP result 展平成可读文本（content 块顺序保留；超限截断）。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "rea.ts",
+  "tool": null,
+  "line": 335,
+  "text": "调用方路径透明重写：真实根 → 别名根（绕 cmd 括号坑）。",
+  "tags": []
+ },
+ {
+  "file": "reverse-store.ts",
+  "tool": null,
+  "line": 102,
+  "text": "存储域路由（host 默认 json 重述，reverse 显式 sqlite）。",
+  "tags": []
+ },
+ {
+  "file": "reverse-store.ts",
+  "tool": null,
+  "line": 112,
+  "text": "工作区根：STAGE2-P1 存储透传口径（去env后：会话 cwd → 包位置探测 → 最后回落）。 与控制面 resolveRoot() 同源；调用方（index reverseStoreOf）须透传 rootOf(session).root，禁止用 stale live.root。 workspaceRoot() 无参=兼容旧口径；workspaceRootFor(sessionId)=按会话键取登记 cwd 后解析（双键隔离之根键）。",
+  "tags": [
+   "禁用"
+  ]
+ },
+ {
+  "file": "reverse-store.ts",
+  "tool": null,
+  "line": 127,
+  "text": "session 分支直接采信（就是该会话的项目）；detect 分支要求标志物，否则按包位置上浮兜底。",
+  "tags": []
+ },
+ {
+  "file": "reverse-store.ts",
+  "tool": null,
+  "line": 143,
+  "text": "默认数据目录：工作区内 storages/reverse/（P1：root 须由调用方透传 rootOf(session).root；缺省按会话键解析）。",
+  "tags": []
+ },
+ {
+  "file": "reverse-store.ts",
+  "tool": null,
+  "line": 456,
+  "text": "P1 存储透传rootOf：opts.root 优先（调用方 rootOf(session).root），否则按会话键解析，禁止用 stale 全局 cwd。",
+  "tags": [
+   "禁用"
+  ]
+ },
+ {
+  "file": "reverse-tools.ts",
+  "tool": null,
+  "line": 1,
+  "text": "reverse-tools.ts — G3工具读写分离：reverse_add_X（主）vs reverse_submit（子直写父 intent）。 主会话工具（parent/main）：reverse_add_target/intent/obs/patch/asset — 写 G1 存储域。 子会话工具（child/subagent）：reverse_submit 唯一写入口 — 直写父会话 intent 下， 不经 add 通道；子 toolFilter 拒绝 add 全家 + state/graph/report（t6 预留名）。 校验： - finding 必 reproSteps≥1（obs 行凡 kind=finding 或带 finding 标记，或 submit findings 项）。 - asset parentId 只引既有（不存在即拒；缺席时 submit 默认挂父 intent）。 - intent 同目标/范围/方法去重（target/scope/method 三元归一后命中即复用，不新插）。 本模块为纯逻辑（不依赖 cordis），index.ts 只做薄注册；单测直调本模块。",
+  "tags": []
+ },
+ {
+  "file": "reverse-tools.ts",
+  "tool": null,
+  "line": 16,
+  "text": "主写工具名（子 filter 拒绝）。",
+  "tags": []
+ },
+ {
+  "file": "reverse-tools.ts",
+  "tool": null,
+  "line": 28,
+  "text": "子会话拒绝清单：add 全家 + state/graph/report（读投影/报告面，子只读父视图，不直调）。",
+  "tags": []
+ },
+ {
+  "file": "reverse-tools.ts",
+  "tool": null,
+  "line": 126,
+  "text": "行数据；finding 类必填 reproSteps；parentId 缺席默认挂父 intent。",
+  "tags": []
+ },
+ {
+  "file": "reverse-tools.ts",
+  "tool": null,
+  "line": 147,
+  "text": "子唯一写入口：直写父 intent 下（obs/patches/assets），不经 add 通道。 findings 逐条 finding 校验；asset parentId 只引既有（缺席默认父 intent）。 原子版：经 store.submitBatch（all-or-nothing + created.reverse() 补偿删）。",
+  "tags": []
+ },
+ {
+  "file": "session-projection.ts",
+  "tool": null,
+  "line": 1,
+  "text": "session-projection.ts — G2会话投影 + reverseMounted 标记。 输入：reverse_* 日志 — 两路同形： A) G1 存储域行（ReverseStore.snapshot()：targets/intents/obs/patches/assets/edges），为主路； B) 原始 reverse_* 工具调用日志条目（foldEntries，供 t6 mock 先调通 + 日志回放）。 输出：折叠视图 {target, nodes, assets, edges, counts}，cap200 + 悬挂边清理。 日志条目形（B 路，t6 mock/回放照此造）： {session, ts, table: 'targets'|'intents'|'obs'|'patches'|'assets', id, data?} {session, ts, edge: {id?, src, dst, vocab}} tool 名以 `reverse_` 开头（reverse_add_X 系列 / reverse_submit）的调用行可直接投喂： {session, ts, tool: 'reverse_add_intent', args: {...}} → 按 tool 名派发表名。 reverseMounted（逐会话，日志自证，不可手置）： mounted=true 当且仅当该会话日志含任一：reverse_* 工具请求（tool 以 reverse_ 开头） / 记录调用（表行条目）/ 子提交（tool=reverse_submit 或 kind='submit'）。 无日志即 false；会话切换即按新会话日志重判。 节流：SessionProjector 持会话级缓存；tick 可降频（minIntervalMs，默认 5000， ",
+  "tags": []
+ },
+ {
+  "file": "session-projection.ts",
+  "tool": null,
+  "line": 27,
+  "text": "投影输出 cap：nodes(含 assets，不含 target)+edges 各自上限。",
+  "tags": [
+   "限额"
+  ]
+ },
+ {
+  "file": "session-projection.ts",
+  "tool": null,
+  "line": 58,
+  "text": "悬挂边清理：src/dst 须同时在节点集（含 target + nodes + assets）内，否则丢弃。",
+  "tags": []
+ },
+ {
+  "file": "session-projection.ts",
+  "tool": null,
+  "line": 434,
+  "text": "tick 节流下限 ms（0=每次重算；默认 5000 降频）。",
+  "tags": []
+ },
+ {
+  "file": "session-projection.ts",
+  "tool": null,
+  "line": 446,
+  "text": "按需投影：缓存新鲜（<minInterval）即复用，否则调 loader 重算。",
+  "tags": []
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 30,
+  "text": "---------------- P2 树/脚本缺失判定（禁止静默用错树） ---------------- KittyDebugTool / DBG / tools\\x64dbg-channel.ps1 缺失 → ERR|tree-missing root=<...> + 探测过的候选路径清单。",
+  "tags": [
+   "禁用"
+  ]
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 52,
+  "text": "变体启动前置校验：exe 必须落在解析出的 root 之内，否则拒绝启动（不再静默用错树）。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 61,
+  "text": "F1：真相源 JSON 读盘（剥 BOM；坏文件显错，禁止吞异常伪装待命）。",
+  "tags": [
+   "禁用"
+  ]
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 69,
+  "text": "F1：真相源 JSON 写盘（UTF-8 无 BOM；Node writeFileSync utf8 默认无 BOM，与 PowerShell 带 BOM 写入划清）。",
+  "tags": []
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 74,
+  "text": "---------------- P1 控制面按会话分片（解 S1/S2/S3/S4） ---------------- 分片根 = configs/reverse-hybrid/sessions/<sessionKey>/{mode.json,target.json,trail.jsonl}（真相源）。 旧根四件（session-mode.json / target-state.json / last-target.json / agent-trail.jsonl）降级为广播镜像，保留可读。 sessionKey 由 wire 注入（工具执行上下文 exec.agent.id = DSH 会话身份）；无 wire 才回落 args.session → 'default'，并标 sessionKeySrc。 读序：新根 → 缺件＝待命（**不迁 mode/target**）→ 迁移失败回落待命并报 rootSrc。 t13（迁移范围收窄）：新 sessionKey 首读**不得继承**旧全局 mode/target —— 缺件即 standby + 空 TARGET， rootSrc=shard-new（旧件也不存在）| legacy-mirror（旧件在但只作只读镜像，回执给 mirrorMode/mirrorTarget 供看，不采用）。 旧件 mode/target 仅当显式逃生口 KITTY_SHARD_LEGACY_MIGRATE=1 时按旧口径复制进新键（rootSrc=migrated）。 trail 的历史行迁移与 t8 语义不变（始终执行：session:'legacy'+migrated+migratedFrom，幂等）。 写序：新根真相源 + 同值双写旧件镜像（镜像写失败不阻断，记 mirrorWarn 进回执）。 sessionGateCheckAt",
+  "tags": []
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 108,
+  "text": "S3：wire-self 拒绝分裂 + refresh（与门同语义）。诊断仍回 wire-self，但调用方必须 DENY，不静默用自身键。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 122,
+  "text": "会话键来源：wire-root（上溯到根，方案A 默认）/ wire-self（上溯失败回落自身）/ wire（等价 wire-root 的旧值）/ fallback（无 wire）。",
+  "tags": []
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 130,
+  "text": "从 exec.agent.session.header 取会话头（t11 实测：子会话 origin='subagent'+parentSession 恒填写；根 parentSession=undefined）。 注意：exec.parent 不是父 agent（PTC 子调用 token），父关系只在本头或 subagent 服务树上。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 264,
+  "text": "t8：行归属判定（读侧同源判据，t5 客户端 / t6 验证可直接复用）。 own=本会话写入；legacy=迁移前历史（含未打标的旧行）；other=他会话行（读侧丢弃，保隔离）。",
+  "tags": [
+   "判据"
+  ]
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 274,
+  "text": "t13 逃生口读值：默认关（不迁移 legacy 全局 mode/target）。显式 KITTY_SHARD_LEGACY_MIGRATE=1 才恢复旧迁移口径。",
+  "tags": []
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 278,
+  "text": "一次性迁移：旧件 → 新根（旧件保留为镜像）。幂等：新根已在即跳过。 t8：trail 不走逐字节复制 —— 历史行须打 legacy 标（session:'legacy'+migrated+migratedFrom）；已存在的分片 trail 就地补齐。 t13：**mode/target 默认不再迁入任意新键**（否则新会话凭空继承旧全局任务态锁，与「缺件=待命」门禁冲突）。 仅 opts.legacyMigrate / 环境变量 KITTY_SHARD_LEGACY_MIGRATE=1 时按旧口径复制；trail 迁移不受开关影响（t8 语义恒定）。",
+  "tags": []
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 317,
+  "text": "只读：mode（新根 → **缺件即 standby**；legacy 只作只读镜像不采用）。 t13：缺件时绝不返回 legacy 的 mode（防新键继承他人任务态）；mirrorMode/mirrorTs/mirrorHost 仅供回执展示。 P3：带 host；host 不匹配（别机状态）→ 强制 standby 并标 hostMismatch（拒绝沿用他机 mode）。",
+  "tags": []
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 339,
+  "text": "只读：双字段（新根 → **缺件即空 TARGET**；legacy 只作只读镜像不采用）。onlyLastTarget 标记单字段 legacy 镜像来源。 t13：缺件时绝不返回 legacy 的 target（防新键继承他人锁定）；mirrorTarget/mirrorGoal/mirrorHost 仅供回执展示。 P3：带 host；host 不匹配 → targetProcess 一律清空（拒绝沿用他机 TARGET），标 hostMismatch。",
+  "tags": []
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 365,
+  "text": "S3b 修正：判据目标归一（反斜杠→正斜杠 + 折叠重复斜杠 + trim；不做大小写折叠，避免 a.exe/A.exe 判同）。",
+  "tags": [
+   "判据"
+  ]
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 373,
+  "text": "trail 同串判据：结构化 args.target 优先全等；无结构化字段才反转义 hay 后子串比较。",
+  "tags": [
+   "判据"
+  ]
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 403,
+  "text": "F6+P1：六门运行时化——与 configs/reverse-hybrid/session-gate.mjs 同语义的调用前门（按会话分片读，只读不写盘）。 返回 ''=放行，否则为拒绝行（ERR|STANDBY-DENY / PAUSED-DENY / TRAIL-MISMATCH，逐字不变）。 门自身故障 fail-closed；有 TaskState 时以它为执行授权真相源。",
+  "tags": []
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 452,
+  "text": "} catch {  预检失败不叠加拒绝  }",
+  "tags": []
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 453,
+  "text": "P4 结构化门禁：toolName 查表 + 类型化字段 → evaluateGate（ALLOW/TASK 文本正则已删除，见§20禁止项）。",
+  "tags": [
+   "禁用"
+  ]
+ },
+ {
+  "file": "session-shards.ts",
+  "tool": null,
+  "line": 504,
+  "text": "P2 门根：会话 cwd → resolveRoot()；该根必须带 configs/reverse-hybrid 才认（子会话/异常 cwd 不误伤）， 否则回落 live.root 镜像（保持旧行为，绝不因解析失败把拒收变成放行）。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "settings-api.ts",
+  "tool": null,
+  "line": 56,
+  "text": "t16-F1：会话键 → 会话 cwd 登记表（HTTP 面逐请求 cwd 的落点）。 与全局 sessionContext().mirror 的区别：**按会话键隔离**——HTTP 请求只登记自己那个键， 绝不改全局镜像（否则无 cwd 的他会话会继承本项目根，正是跨会话串根缺陷）。",
+  "tags": []
+ },
+ {
+  "file": "settings-api.ts",
+  "tool": null,
+  "line": 93,
+  "text": "探测过的候选路径清单（顺序=解析优先级；tree-missing 回执用；P4 起不含 env）。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "settings-api.ts",
+  "tool": null,
+  "line": 107,
+  "text": "会话分支：cwd 本身是工程根即用它；否则上浮 ≤6 层找工程根（仍记 rootSrc=session）。",
+  "tags": [
+   "限额"
+  ]
+ },
+ {
+  "file": "settings-api.ts",
+  "tool": null,
+  "line": 166,
+  "text": "树/脚本缺失显式回执（禁止静默回落到 process.cwd()）：ERR|tree-missing root=<...> + 候选路径清单。",
+  "tags": [
+   "禁用"
+  ]
+ },
+ {
+  "file": "settings-api.ts",
+  "tool": null,
+  "line": 285,
+  "text": "---------------- P3 覆盖配置项目化（STAGE2-P2 单键化相对化后口径） ---------------- 三级解析：L1 项目内 <root>\\.dsh-kitty\\overrides.json（唯一新写入口，按 projectKey 单键） L2 旧 ~/.dsh/kitty-toolkit.json（只读兼容，命中即标 legacy-home） L3 插件默认值（全相对 root，见 index.ts 的 Config） STAGE2-P2：projectKey = 规范化项目根（normProjectKey(root)，单键；历史 cwd/sessionCwd 多键只作只读迁移回落， 写一律单键）。路径值相对化：落盘时 root 下绝对路径转相对（forward-slash），读时相对按 root 还原为绝对； 跨机绝对路径（root 外）原样保留并计 absKeys/absMissing（H4）。",
+  "tags": []
+ },
+ {
+  "file": "settings-api.ts",
+  "tool": null,
+  "line": 293,
+  "text": "生效值来源标签：project=项目内覆盖 / legacy-home=旧全机文件 / default=插件默认 / detect=根探测（root 字段专有）。",
+  "tags": []
+ },
+ {
+  "file": "settings-api.ts",
+  "tool": null,
+  "line": 474,
+  "text": "把覆盖项写进目标配置对象（进程内即时生效）。 传 defaults 时先回落默认值再叠加覆盖——否则「清除覆盖」删掉的键会残留旧值。 STAGE2-P2：覆盖来源 = 项目内（单键 root）> 旧全机 home 文件（只读）。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "settings-api.ts",
+  "tool": null,
+  "line": 502,
+  "text": "---------------- P3 机器身份（H2 稳定机源：去卷序列 / H1 门侧同口径） ---------------- HOST_ID = hostname + 稳定机源短哈希（MachineGuid 优先，取不到退化为 hostname 哈希；永不读卷序列）。 旧 vol 口径已废止（卷重装/重分区即变，不稳定；见 H2）。状态件（mode.json/target.json）与 trail 行都带 host； host 不匹配 = 别机状态 → 强制待命 + 拒绝沿用他机 TARGET。空 host 一律视为他机（H2：hostMatches('')===false）。",
+  "tags": []
+ },
+ {
+  "file": "settings-api.ts",
+  "tool": null,
+  "line": 509,
+  "text": "try { hn = String(hostname() ?? '').trim() || 'unknown-host' } catch {  保持默认  }",
+  "tags": []
+ },
+ {
+  "file": "settings-api.ts",
+  "tool": null,
+  "line": 565,
+  "text": "插件加载配置的原值（侧边栏用来显示「未覆盖的默认」）。",
+  "tags": []
+ },
+ {
+  "file": "settings-api.ts",
+  "tool": null,
+  "line": 638,
+  "text": "t16-F1：HTTP 面逐请求 cwd 登记（等价 wire 的 setSessionCwd 语义，但**按会话键隔离**，不动全局镜像）。 不登记 → mutate 动作（reverse-init/mode-set/target-set）读会话镜像/live.root 的陈旧根， 把分片写进真项目根（t6 实测 F1：同会话劈成两个项目）。登记后 actionDispatch 的 rootOf(sk) 与只读回执根一致。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "settings-api.ts",
+  "tool": null,
+  "line": 648,
+  "text": "去快照化：动作回包不再默认附赠全量 state（一次快照 = 多次同步子进程 + ~10KB payload）。 需要快照的调用方显式带 body.withState=true（设置页操作按钮走这条）；不请求就完全不构建。",
+  "tags": []
+ },
+ {
+  "file": "shield-reverse.ts",
+  "tool": null,
+  "line": 61,
+  "text": "解析 systemPrompt 服务：直挂 `ctx.systemPrompt` 优先（dsh-shield 同款 `section()` 真 API），回退 `ctx.get('systemPrompt')`；注册一律用 `section()`（`context()` 无宿主实现，误用即静默零注入——2026-09-27 实测根因）。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "shield-reverse.ts",
+  "tool": null,
+  "line": 67,
+  "text": "get 优先：直读 ctx.systemPrompt 无 inject 即抛，须各自 try 隔离，禁止直读在前吞掉 get 路径。",
+  "tags": [
+   "禁用"
+  ]
+ },
+ {
+  "file": "shield-reverse.ts",
+  "tool": null,
+  "line": 95,
+  "text": "直读 ctx.systemPrompt 会抛 without-inject（宿主显式拒绝），故 get 优先、直读兜底且各自 try 隔离。",
+  "tags": []
+ },
+ {
+  "file": "skill-pack.ts",
+  "tool": null,
+  "line": 292,
+  "text": "skill-auto：对话/操作中按目标文本自动推荐技能（对话目标理解→工作台实时推荐的打分源）。 输入：自由文本（TARGET/形态/判据/用户原话拼起即可）；输出：topN[{name,description,pack,score,reason}]。 规则：形态映射加权 + token 命中加权，总路由常伴随；不改 SKILL.md，只读打分。",
+  "tags": [
+   "判据"
+  ]
+ },
+ {
+  "file": "task-state.ts",
+  "tool": null,
+  "line": 118,
+  "text": "形态守卫必须在 switch 之前：transition 为 null/undefined/非对象时，`switch (transition.type)` 自身就抛 \"Cannot read properties of null (reading 'type')\"，根本走不到 default 分支。 这是空转链的最后一环：任何\"参数形状猜错\"都不能变成原生 TypeError。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "tool-factory.ts",
+  "tool": null,
+  "line": 33,
+  "text": "DSH 适配（definition 期）：schema 在 defineTool 时编译，spec 必须在此之前改",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "tool-manifest.ts",
+  "tool": null,
+  "line": 27,
+  "text": "35 工具清单（顺序≈注册顺序；F3 补 kitty_trail + kitty_settings）",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "tools/anti-tools.ts",
+  "tool": "kitty_acescan",
+  "line": 236,
+  "text": "工具箱进程名白名单（-Name 过滤比全表 `Get-Process | Where Path` 快约 14×：实测 2.1s → 0.15s）。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "tools/anti-tools.ts",
+  "tool": "kitty_variants",
+  "line": 332,
+  "text": "P2：变体 exe 必须落在解析 root 内",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "tools/anti-tools.ts",
+  "tool": "kitty_variants",
+  "line": 351,
+  "text": "DBG：中文路径必须走 -EncodedCommand，否则控制台代码页破坏 exe 名",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "tools/channel-tools.ts",
+  "tool": "kitty_drv",
+  "line": 62,
+  "text": "P1-T1.3 宿主压测：连续 PING +（可选）KM_ATTACH，丢失即看门狗自愈并计数；判据=20 次零丢失",
+  "tags": [
+   "判据"
+  ]
+ },
+ {
+  "file": "tools/channel-tools.ts",
+  "tool": "kitty_status",
+  "line": 188,
+  "text": "只读快照也必须先同步覆盖值（否则改完配置本次仍显示旧 kittyDir/hostExe）",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "tools/channel-tools.ts",
+  "tool": "kitty_dbg",
+  "line": 430,
+  "text": "归一化（分离/附加后必须）",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "tools/channel-tools.ts",
+  "tool": "kitty_dbg",
+  "line": 432,
+  "text": "调试类动作后统一归一化 sync 残留（d-job / s-job 剂量），保持\"新鲜宿主\"判据",
+  "tags": [
+   "判据"
+  ]
+ },
+ {
+  "file": "tools/driver-tools.ts",
+  "tool": "kitty_drvio",
+  "line": 170,
+  "text": "解析目标树：显式优先，否则取含目标 sys 的第一棵树。",
+  "tags": []
+ },
+ {
+  "file": "tools/driver-tools.ts",
+  "tool": "kitty_drvio",
+  "line": 212,
+  "text": "SCM 二次判据：提权作业的自旋窗口（main 约 3×1.2s）常短于驱动真正落定时间， 作业会如实回报 not-green，而驱动几秒后才 RUNNING —— 直接采信作业回包就会造出\"假红\"。 这里不看作业文案，只以 SCM 真实态为准再等一段。",
+  "tags": [
+   "判据"
+  ]
+ },
+ {
+  "file": "tools/driver-tools.ts",
+  "tool": "kitty_drvio",
+  "line": 292,
+  "text": "一键双绿（kitty_init 工具 + 设置页【初始化驱动】按钮同源）。 顺序：宿主先行 → 辅助驱（健康跳过/非破坏修复/重建）→ 主驱 START → 双绿验真。 回执只含自有文案 + STATE/SC 令牌，不回显外部本地化原文（无乱码）。 preview=true 时只返回“将执行什么”，不动任何服务。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "tools/driver-tools.ts",
+  "tool": "kitty_drvio",
+  "line": 301,
+  "text": "2026-10-19 实测：该组合下 dbk_initialize / dbvm_initialize 各 2 秒返回 true；",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "tools/driver-tools.ts",
+  "tool": "kitty_drvio",
+  "line": 302,
+  "text": "而 Use DBVM Debugger=0 时 dbvm_initialize 要么秒返 false、要么卡死 150s 把桥弄死。",
+  "tags": [
+   "风险"
+  ]
+ },
+ {
+  "file": "tools/driver-tools.ts",
+  "tool": "kitty_drvio",
+  "line": 348,
+  "text": "CE 侧 DBVM 开关（决定 dbvm_initialize 是否可用：0=秒返false或卡死桥，1=2秒内 true）",
+  "tags": [
+   "风险"
+  ]
+ },
+ {
+  "file": "tools/driver-tools.ts",
+  "tool": "kitty_drvio",
+  "line": 369,
+  "text": "免手路径：不再直接拒绝。辅助驱/主驱两处需提权的动作统一走提权作业",
+  "tags": []
+ },
+ {
+  "file": "tools/driver-tools.ts",
+  "tool": "kitty_drvio",
+  "line": 406,
+  "text": "sys 选型：现货优先，qc 只做回退（且回退文件必须存在）。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "tools/driver-tools.ts",
+  "tool": "kitty_drvio",
+  "line": 552,
+  "text": "只做前置，不触发 dbvm_initialize（DBVM 由操作者手动加载；未初始化时调 dbvm_* 读函数会 AV 卡死 Lua）。",
+  "tags": [
+   "风险"
+  ]
+ },
+ {
+  "file": "tools/kernel-tools.ts",
+  "tool": "kitty_km",
+  "line": 103,
+  "text": "P4.4：KM_PW 全入口永久拒绝（门禁层先拒；执行层纵深拒，accept 旗不再放行）。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "tools/mem-tools.ts",
+  "tool": "kitty_prot",
+  "line": 126,
+  "text": "外部档位（.NET 内置 csc 现场编译）：protect / query / alloc / free / extread / extwrite 本 build CE Lua 无 virtualprotect / virtualquery 系列，保护变更与\"造 NOACCESS 页\"必须走这里",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "tools/mem-tools.ts",
+  "tool": "kitty_wpb",
+  "line": 233,
+  "text": "页状态判定：present=0 且无 PFN 时不能靠\"置 R/W 位\"解决（那会造出无 PFN 的非法 PTE）",
+  "tags": []
+ },
+ {
+  "file": "tools/mem-tools.ts",
+  "tool": "kitty_dump",
+  "line": 347,
+  "text": "默认走 node 侧分块读（`R|bytes:N`）——实测 LUA 沙箱里 readBytes 恒返回 nil， 桥自身的 readBytes 正常；故 LUA 转储在本 build 不可用（保留 dumpLua 供后续 build 用）。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "tools/session-tools.ts",
+  "tool": "kitty_trail",
+  "line": 51,
+  "text": "---------------- F3：会话真相源工具（对话侧直调；此前 /action 面仅浏览器可达，模型只能手写 JSON） ---------------- 白名单仅会话动作：target-set 落双字段+转任务态 / target-get 读双字段 / mode-set+mode-get 切读任务态 / reverse-init 首会话补齐缺件 / trail-get 按目标读日志道 / root-get（P2 只读根回执）/ host-rebind（P3 写回本机 host）。 桥 OP/驱动/扫描一律不经此口，走各 kitty_* 工具。 落盘统一走 actionDispatch → writeTruthJson（无 BOM）；P1 起模式/目标/轨迹按会话分片，P2 起根按会话 cwd 解析， P3 起状态件/轨迹行带 host（机器身份），异机状态强制待命并拒绝沿用。 ----------------------------------------------------------------------------",
+  "tags": []
+ },
+ {
+  "file": "tools/session-tools.ts",
+  "tool": "kitty_settings",
+  "line": 106,
+  "text": "---------------- G3读写分离：reverse_add_X（主）vs reverse_submit（子直写父intent） ---------------- 主会话写 G1 存储域（STAGE2-P1 双键隔离：<rootOf(session).root>/storages/reverse/<session>.db，确定ID<kind>-<n>）； root 由会话键透传（getSessionCwdFor→resolveRoot），禁止用 stale live.root；计数器键=根+会话（见 reverse-store）。 子会话唯一写入口 reverse_submit（直写父 intent，不经 add 通道）；子 toolFilter 见 reverse-tools.ts childToolAllow （deny add全家+state/graph/report）。输出 OK|<id>[|deduped] / ERR|…。 ----------------------------------------------------------------------------",
+  "tags": [
+   "禁用"
+  ]
+ },
+ {
+  "file": "variants.ts",
+  "tool": null,
+  "line": 1,
+  "text": "variants.ts — 工具箱\"驱动CE 变体\"注册表 + 标注（功能 / 检测面证据等级）。 设计要点： ① **从磁盘枚举**变体（两棵树 × {SVIP,VIP}-User × {FULL,Manual,Simple}-Version，外加 `死寂专用CE.exe` / `虚拟机专用CE.exe` 两个特殊件），不把路径写死成单份； ② 每个变体带 **桥状态 / 可调性 / 功能标注 / 检测标注**； ③ 检测标注只写 **证据等级**：`pass-by-operator`（操作者本机实测通过）/ `fail-by-operator` / `untested`；**不凭空断言\"能过某商业 AC\"** —— 给协议入口（kitty-surface + kitty_acescan）让操作者自验。",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "variants.ts",
+  "tool": null,
+  "line": 17,
+  "text": "证据等级：操作者实测通过 / 操作者实测不通过 / 未实测",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "variants.ts",
+  "tool": null,
+  "line": 19,
+  "text": "其它商业 AC：一律 untested，直到按协议实测",
+  "tags": [
+   "缘由"
+  ]
+ },
+ {
+  "file": "variants.ts",
+  "tool": null,
+  "line": 196,
+  "text": "变体 + 现场状态（存在性 / 桥 / 是否在跑）。 注意：running 必须**按 exe 路径**判定——同名的 KittyCE.exe 在两棵树/多个变体里都存在。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "workbench-context.ts",
+  "tool": null,
+  "line": 54,
+  "text": "Config 原值（P3：默认值全为相对 root 的路径，root='.'；无绝对盘符）。",
+  "tags": []
+ },
+ {
+  "file": "workbench-context.ts",
+  "tool": null,
+  "line": 56,
+  "text": "绝对默认（覆盖回落基线 / hand.defaults 展示面）。",
+  "tags": []
+ },
+ {
+  "file": "workbench-context.ts",
+  "tool": null,
+  "line": 59,
+  "text": "侧边栏可覆盖的活配置：绝对默认 → 项目内覆盖（P3 新写入口）→ 旧全机 home 覆盖（只读兼容）。",
+  "tags": []
+ },
+ {
+  "file": "workbench-context.ts",
+  "tool": null,
+  "line": 63,
+  "text": "同步 live：先回落绝对默认，再叠三级覆盖，再相对根归一，最后刷模块镜像（每次工具调用/快照前调用）。",
+  "tags": [
+   "顺序"
+  ]
+ },
+ {
+  "file": "workbench-context.ts",
+  "tool": null,
+  "line": 146,
+  "text": "设置页快照：先同步覆盖（项目内 > 旧 home > 默认），再只读探测。P3：带上 root/rootSrc/值来源/absCount/host。",
+  "tags": [
+   "顺序"
+  ]
+ }
+]

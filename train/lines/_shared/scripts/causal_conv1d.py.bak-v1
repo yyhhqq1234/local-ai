@@ -1,0 +1,107 @@
+# -*- coding: utf-8 -*-
+"""causal_conv1d —— 本地替身模块（Windows / cp313 / torch2.9+cu130 环境专用）
+
+## 为什么需要它
+transformers 5.x 的 Qwen3.5（GDN 线性注意力）用两个装饰器取卷积核：
+
+    @use_kernel_func_from_hub_with_fallback("causal_conv1d_update", "causal_conv1d")
+    @use_kernel_func_from_hub_with_fallback("causal_conv1d_fn",     "causal_conv1d")
+
+取不到就退回纯 PyTorch 参考实现，并在日志里刷
+`causal_conv1d_fn is falling back to its reference PyTorch implementation ... much slower`。
+
+两条官方通路在本机都不可用（2026-10-30 实测）：
+  ① HF kernels hub（kernels 包 0.17.2 已装、版本门通过）
+     → `kernels-community/mamba-ssm` 的 build variant **全部是 linux**
+       （torch213/214 × cu126/130/132 × x86_64/aarch64-linux），**没有 Windows 构建**
+       ⇒ FileNotFoundError: Cannot find a build variant ... OS (linux) does not match system OS (windows)
+  ② pip `causal-conv1d` → 需要 nvcc 编译，本机无 nvcc；且无 cp313/Windows 预编译轮子
+     ⇒ 不可行
+
+## 本模块做什么
+提供一个**名为 `causal_conv1d` 的模块**（放在 PYTHONPATH 里），transformers 的 fallback
+分支 `from causal_conv1d import causal_conv1d_fn` 就会命中它：
+
+  · `causal_conv1d_fn`     —— 推理（no_grad）走 **FLA 的 Triton 实现**；训练（有 grad）走参考实现
+                              （训练本来不是瓶颈，且 Triton 路径的反向我未在此验证，宁可慢不冒险）
+  · `causal_conv1d_update` —— 一律走参考实现。它只在 decode（seq_len=1）时被调，卷积极小，
+                              而它的语义包含 **conv_state 原地更新**，替身若改语义会静默错，不值得换
+
+数值已对参考实现验证：无激活 max|diff| = 0.0，silu 激活 9.8e-4（bf16 舍入级）。
+加速只体现在 prefill（T 大）上，decode 不变 —— 这与真实瓶颈一致（decode 是逐 token 的访存/调度）。
+
+## 用法
+    export PYTHONPATH=train/scripts     # 或 Windows: set PYTHONPATH=train\scripts
+    python train/scripts/verify_causal_conv1d.py      # 自检 + 基准
+"""
+import torch
+import torch.nn.functional as F
+
+try:
+    from fla.modules.causal_conv1d import causal_conv1d_fwd as _fla_fwd
+except Exception:                                     # FLA 不可用时整体退回参考实现
+    _fla_fwd = None
+
+_HAS_FLA = _fla_fwd is not None
+
+ACT = {
+    "silu": F.silu, "swish": F.silu, "gelu": F.gelu,
+    "relu": F.relu, "sigmoid": torch.sigmoid,
+}
+
+
+def _act(x, activation):
+    if not activation:
+        return x
+    fn = ACT.get(str(activation).lower())
+    return fn(x) if fn else x
+
+
+def _ref_fn(hidden_states, weight, bias=None, activation=None):
+    """与 transformers 参考实现逐行等价（B,H,T 布局）。"""
+    _, hidden_size, seq_len = hidden_states.shape
+    padding = weight.shape[-1] - 1
+    out = F.conv1d(
+        hidden_states.to(weight.dtype),
+        weight=weight.unsqueeze(1),
+        bias=bias,
+        padding=padding,
+        groups=hidden_size,
+    )[:, :, :seq_len]
+    return _act(out, activation).to(hidden_states.dtype)
+
+
+def _ref_update(hidden_states, conv_state, weight, bias=None, activation=None):
+    """与 transformers 参考实现逐行等价（含 conv_state 原地更新）。"""
+    _, hidden_size, seq_len = hidden_states.shape
+    state_len = conv_state.shape[-1]
+    new = torch.cat([conv_state, hidden_states], dim=-1).to(weight.dtype)
+    conv_state.copy_(new[:, :, -state_len:])
+    out = F.conv1d(new, weight.unsqueeze(1), bias, padding=0, groups=hidden_size)[:, :, -seq_len:]
+    return _act(out, activation).to(hidden_states.dtype)
+
+
+def causal_conv1d_fn(hidden_states, weight, bias=None, activation=None, **kwargs):
+    """transformers 侧签名：(B, H, T) + weight (H, 1, W)。"""
+    if (not _HAS_FLA) or torch.is_grad_enabled() and hidden_states.requires_grad:
+        return _ref_fn(hidden_states, weight, bias, activation)
+    try:
+        x = hidden_states.transpose(1, 2).contiguous()       # (B,T,H)
+        w = weight.reshape(weight.shape[0], weight.shape[-1]).contiguous()  # (H,W)
+        out = _fla_fwd(x, w, bias, None, activation=activation)
+        out = out[0] if isinstance(out, tuple) else out
+        return out.transpose(1, 2).contiguous()
+    except Exception:
+        return _ref_fn(hidden_states, weight, bias, activation)
+
+
+def causal_conv1d_update(hidden_states, conv_state, weight, bias=None, activation=None, **kwargs):
+    """decode 用；语义含 conv_state 原地更新 ⇒ 一律参考实现。"""
+    return _ref_update(hidden_states, conv_state, weight, bias, activation)
+
+
+def causal_conv1d_varlen_fn(*args, **kwargs):
+    return causal_conv1d_fn(*args, **kwargs)
+
+
+__all__ = ["causal_conv1d_fn", "causal_conv1d_update", "causal_conv1d_varlen_fn"]

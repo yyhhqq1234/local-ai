@@ -1,0 +1,39 @@
+{
+  "total": 25862,
+  "pos": 13951,
+  "neg": 8411,
+  "ctl": 3500,
+  "ratio_pos_neg": 1.659,
+  "ratio_ctl": 0.135,
+  "trigger_dist": {
+    "[[NSFW]]": 3086,
+    "NSFW": 2833,
+    "成人内容": 2510,
+    "[[模式:NSFW]]": 1375,
+    "R18": 1124,
+    "[NSFW]": 1087,
+    "无限制模式": 950,
+    "成人向创作模式": 566,
+    "18+ 模式": 420
+  },
+  "cat_dist": {
+    "cont": 6829,
+    "scene": 2741,
+    "multi": 2079,
+    "style": 1329,
+    "expand": 690,
+    "glossary": 283
+  },
+  "pos_both": 4229,
+  "approx_avg_tokens_pos": 1064,
+  "approx_avg_tokens_neg": 125,
+  "neg_token_ratio": 0.0711,
+  "token_balance_ok": false,
+  "skipped": {},
+  "params": {
+    "neg_per_pos": 0.6,
+    "pos_both_ratio": 0.3,
+    "ctl_n": 3500,
+    "seed": 42
+  }
+}

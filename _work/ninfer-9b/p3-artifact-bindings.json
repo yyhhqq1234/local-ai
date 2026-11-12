@@ -1,0 +1,8229 @@
+{
+  "path": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\lines\\9b-oxcoder\\out\\kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer",
+  "version": 3,
+  "artifact_id": "b0f7a44a0a624e6ca130a4e57b140af9",
+  "name": "kittyrev-oxcoder9b-nsfw-gate-full-GSQ",
+  "components": {
+    "text": {
+      "config": {
+        "architectures": [
+          "Qwen3_5ForCausalLM"
+        ],
+        "model_type": "qwen3_5_text",
+        "hidden_size": 4096,
+        "vocab_size": 248320,
+        "num_hidden_layers": 32,
+        "max_position_embeddings": 262144,
+        "tie_word_embeddings": false,
+        "rms_norm_eps": 9.999999974752427e-07,
+        "layer_types": [
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention"
+        ],
+        "num_attention_heads": 16,
+        "num_key_value_heads": 4,
+        "head_dim": 256,
+        "rope_parameters": {
+          "rope_theta": 10000000.0,
+          "partial_rotary_factor": 0.25,
+          "mrope_section": [
+            11,
+            11,
+            10
+          ]
+        },
+        "linear_num_key_heads": 16,
+        "linear_key_head_dim": 128,
+        "linear_num_value_heads": 32,
+        "linear_value_head_dim": 128,
+        "linear_conv_kernel_dim": 4,
+        "intermediate_size": 12288
+      },
+      "resources": {
+        "tokenizer.json": "resource/text/tokenizer.json",
+        "tokenizer_config.json": "resource/text/tokenizer_config.json",
+        "chat_template.jinja": "resource/text/chat_template.jinja",
+        "generation_config.json": "resource/text/generation_config.json"
+      }
+    },
+    "vision": {
+      "config": {
+        "model_type": "qwen3_5_vision",
+        "depth": 27,
+        "hidden_size": 1152,
+        "intermediate_size": 4304,
+        "num_heads": 16,
+        "patch_size": 16,
+        "temporal_patch_size": 2,
+        "spatial_merge_size": 2,
+        "num_position_embeddings": 2304
+      },
+      "target": "text",
+      "resources": {
+        "preprocessor_config.json": "resource/vision/preprocessor_config.json",
+        "video_preprocessor_config.json": "resource/vision/video_preprocessor_config.json"
+      }
+    },
+    "mtp": {
+      "config": {
+        "architectures": [
+          "Qwen3_5MTP"
+        ]
+      },
+      "target": "text"
+    }
+  },
+  "file_bytes": 9329072384,
+  "payload_bytes": 9328847104,
+  "files": 1,
+  "objects": 738,
+  "tensors": 732,
+  "resources": 6,
+  "bindings": 940,
+  "uses": 480,
+  "formats": {
+    "bf16": 521,
+    "fp32": 48,
+    "q4_g64_fp16": 32,
+    "q5_g64_fp16": 96,
+    "q8_g32_fp16": 35
+  },
+  "layouts": {
+    "contiguous_le_v1": 569,
+    "row_split_k128_v1": 163
+  },
+  "binding_records": {
+    "text/token_embedding": {
+      "object": "weight/000152"
+    },
+    "text/output_head": {
+      "object": "weight/000153"
+    },
+    "text/final_norm": {
+      "object": "weight/000154"
+    },
+    "text/layers/0/input_norm": {
+      "object": "weight/000155"
+    },
+    "text/layers/0/gdn/a_log": {
+      "object": "weight/000156"
+    },
+    "text/layers/0/gdn/dt_bias": {
+      "object": "weight/000157"
+    },
+    "text/layers/0/gdn/convolution": {
+      "object": "weight/000158"
+    },
+    "text/layers/0/gdn/a_projection": {
+      "object": "weight/000159"
+    },
+    "text/layers/0/gdn/b_projection": {
+      "object": "weight/000160"
+    },
+    "text/layers/0/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000000",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/0/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000000",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/0/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000001",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/0/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000001",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/0/gdn/norm": {
+      "object": "weight/000161"
+    },
+    "text/layers/0/gdn/output": {
+      "object": "weight/000162"
+    },
+    "text/layers/0/post_attention_norm": {
+      "object": "weight/000163"
+    },
+    "text/layers/0/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000002",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/0/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000002",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/0/mlp/down": {
+      "object": "weight/000164"
+    },
+    "text/layers/1/input_norm": {
+      "object": "weight/000165"
+    },
+    "text/layers/1/gdn/a_log": {
+      "object": "weight/000166"
+    },
+    "text/layers/1/gdn/dt_bias": {
+      "object": "weight/000167"
+    },
+    "text/layers/1/gdn/convolution": {
+      "object": "weight/000168"
+    },
+    "text/layers/1/gdn/a_projection": {
+      "object": "weight/000169"
+    },
+    "text/layers/1/gdn/b_projection": {
+      "object": "weight/000170"
+    },
+    "text/layers/1/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000003",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/1/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000003",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/1/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000004",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/1/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000004",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/1/gdn/norm": {
+      "object": "weight/000171"
+    },
+    "text/layers/1/gdn/output": {
+      "object": "weight/000172"
+    },
+    "text/layers/1/post_attention_norm": {
+      "object": "weight/000173"
+    },
+    "text/layers/1/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000005",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/1/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000005",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/1/mlp/down": {
+      "object": "weight/000174"
+    },
+    "text/layers/2/input_norm": {
+      "object": "weight/000175"
+    },
+    "text/layers/2/gdn/a_log": {
+      "object": "weight/000176"
+    },
+    "text/layers/2/gdn/dt_bias": {
+      "object": "weight/000177"
+    },
+    "text/layers/2/gdn/convolution": {
+      "object": "weight/000178"
+    },
+    "text/layers/2/gdn/a_projection": {
+      "object": "weight/000179"
+    },
+    "text/layers/2/gdn/b_projection": {
+      "object": "weight/000180"
+    },
+    "text/layers/2/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000006",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/2/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000006",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/2/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000007",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/2/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000007",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/2/gdn/norm": {
+      "object": "weight/000181"
+    },
+    "text/layers/2/gdn/output": {
+      "object": "weight/000182"
+    },
+    "text/layers/2/post_attention_norm": {
+      "object": "weight/000183"
+    },
+    "text/layers/2/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000008",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/2/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000008",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/2/mlp/down": {
+      "object": "weight/000184"
+    },
+    "text/layers/3/input_norm": {
+      "object": "weight/000185"
+    },
+    "text/layers/3/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000009",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/3/attention/gate": {
+      "parts": [
+        {
+          "object": "weight/000010",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/3/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000009",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/3/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000010",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/3/attention/query_norm": {
+      "object": "weight/000186"
+    },
+    "text/layers/3/attention/key_norm": {
+      "object": "weight/000187"
+    },
+    "text/layers/3/attention/output": {
+      "object": "weight/000188"
+    },
+    "text/layers/3/post_attention_norm": {
+      "object": "weight/000189"
+    },
+    "text/layers/3/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000011",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/3/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000011",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/3/mlp/down": {
+      "object": "weight/000190"
+    },
+    "text/layers/4/input_norm": {
+      "object": "weight/000191"
+    },
+    "text/layers/4/gdn/a_log": {
+      "object": "weight/000192"
+    },
+    "text/layers/4/gdn/dt_bias": {
+      "object": "weight/000193"
+    },
+    "text/layers/4/gdn/convolution": {
+      "object": "weight/000194"
+    },
+    "text/layers/4/gdn/a_projection": {
+      "object": "weight/000195"
+    },
+    "text/layers/4/gdn/b_projection": {
+      "object": "weight/000196"
+    },
+    "text/layers/4/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000012",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/4/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000012",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/4/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000013",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/4/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000013",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/4/gdn/norm": {
+      "object": "weight/000197"
+    },
+    "text/layers/4/gdn/output": {
+      "object": "weight/000198"
+    },
+    "text/layers/4/post_attention_norm": {
+      "object": "weight/000199"
+    },
+    "text/layers/4/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000014",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/4/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000014",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/4/mlp/down": {
+      "object": "weight/000200"
+    },
+    "text/layers/5/input_norm": {
+      "object": "weight/000201"
+    },
+    "text/layers/5/gdn/a_log": {
+      "object": "weight/000202"
+    },
+    "text/layers/5/gdn/dt_bias": {
+      "object": "weight/000203"
+    },
+    "text/layers/5/gdn/convolution": {
+      "object": "weight/000204"
+    },
+    "text/layers/5/gdn/a_projection": {
+      "object": "weight/000205"
+    },
+    "text/layers/5/gdn/b_projection": {
+      "object": "weight/000206"
+    },
+    "text/layers/5/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000015",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/5/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000015",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/5/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000016",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/5/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000016",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/5/gdn/norm": {
+      "object": "weight/000207"
+    },
+    "text/layers/5/gdn/output": {
+      "object": "weight/000208"
+    },
+    "text/layers/5/post_attention_norm": {
+      "object": "weight/000209"
+    },
+    "text/layers/5/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000017",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/5/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000017",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/5/mlp/down": {
+      "object": "weight/000210"
+    },
+    "text/layers/6/input_norm": {
+      "object": "weight/000211"
+    },
+    "text/layers/6/gdn/a_log": {
+      "object": "weight/000212"
+    },
+    "text/layers/6/gdn/dt_bias": {
+      "object": "weight/000213"
+    },
+    "text/layers/6/gdn/convolution": {
+      "object": "weight/000214"
+    },
+    "text/layers/6/gdn/a_projection": {
+      "object": "weight/000215"
+    },
+    "text/layers/6/gdn/b_projection": {
+      "object": "weight/000216"
+    },
+    "text/layers/6/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000018",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/6/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000018",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/6/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000019",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/6/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000019",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/6/gdn/norm": {
+      "object": "weight/000217"
+    },
+    "text/layers/6/gdn/output": {
+      "object": "weight/000218"
+    },
+    "text/layers/6/post_attention_norm": {
+      "object": "weight/000219"
+    },
+    "text/layers/6/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000020",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/6/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000020",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/6/mlp/down": {
+      "object": "weight/000220"
+    },
+    "text/layers/7/input_norm": {
+      "object": "weight/000221"
+    },
+    "text/layers/7/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000021",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/7/attention/gate": {
+      "parts": [
+        {
+          "object": "weight/000022",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/7/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000021",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/7/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000022",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/7/attention/query_norm": {
+      "object": "weight/000222"
+    },
+    "text/layers/7/attention/key_norm": {
+      "object": "weight/000223"
+    },
+    "text/layers/7/attention/output": {
+      "object": "weight/000224"
+    },
+    "text/layers/7/post_attention_norm": {
+      "object": "weight/000225"
+    },
+    "text/layers/7/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000023",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/7/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000023",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/7/mlp/down": {
+      "object": "weight/000226"
+    },
+    "text/layers/8/input_norm": {
+      "object": "weight/000227"
+    },
+    "text/layers/8/gdn/a_log": {
+      "object": "weight/000228"
+    },
+    "text/layers/8/gdn/dt_bias": {
+      "object": "weight/000229"
+    },
+    "text/layers/8/gdn/convolution": {
+      "object": "weight/000230"
+    },
+    "text/layers/8/gdn/a_projection": {
+      "object": "weight/000231"
+    },
+    "text/layers/8/gdn/b_projection": {
+      "object": "weight/000232"
+    },
+    "text/layers/8/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000024",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/8/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000024",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/8/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000025",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/8/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000025",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/8/gdn/norm": {
+      "object": "weight/000233"
+    },
+    "text/layers/8/gdn/output": {
+      "object": "weight/000234"
+    },
+    "text/layers/8/post_attention_norm": {
+      "object": "weight/000235"
+    },
+    "text/layers/8/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000026",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/8/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000026",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/8/mlp/down": {
+      "object": "weight/000236"
+    },
+    "text/layers/9/input_norm": {
+      "object": "weight/000237"
+    },
+    "text/layers/9/gdn/a_log": {
+      "object": "weight/000238"
+    },
+    "text/layers/9/gdn/dt_bias": {
+      "object": "weight/000239"
+    },
+    "text/layers/9/gdn/convolution": {
+      "object": "weight/000240"
+    },
+    "text/layers/9/gdn/a_projection": {
+      "object": "weight/000241"
+    },
+    "text/layers/9/gdn/b_projection": {
+      "object": "weight/000242"
+    },
+    "text/layers/9/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000027",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/9/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000027",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/9/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000028",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/9/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000028",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/9/gdn/norm": {
+      "object": "weight/000243"
+    },
+    "text/layers/9/gdn/output": {
+      "object": "weight/000244"
+    },
+    "text/layers/9/post_attention_norm": {
+      "object": "weight/000245"
+    },
+    "text/layers/9/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000029",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/9/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000029",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/9/mlp/down": {
+      "object": "weight/000246"
+    },
+    "text/layers/10/input_norm": {
+      "object": "weight/000247"
+    },
+    "text/layers/10/gdn/a_log": {
+      "object": "weight/000248"
+    },
+    "text/layers/10/gdn/dt_bias": {
+      "object": "weight/000249"
+    },
+    "text/layers/10/gdn/convolution": {
+      "object": "weight/000250"
+    },
+    "text/layers/10/gdn/a_projection": {
+      "object": "weight/000251"
+    },
+    "text/layers/10/gdn/b_projection": {
+      "object": "weight/000252"
+    },
+    "text/layers/10/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000030",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/10/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000030",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/10/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000031",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/10/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000031",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/10/gdn/norm": {
+      "object": "weight/000253"
+    },
+    "text/layers/10/gdn/output": {
+      "object": "weight/000254"
+    },
+    "text/layers/10/post_attention_norm": {
+      "object": "weight/000255"
+    },
+    "text/layers/10/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000032",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/10/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000032",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/10/mlp/down": {
+      "object": "weight/000256"
+    },
+    "text/layers/11/input_norm": {
+      "object": "weight/000257"
+    },
+    "text/layers/11/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000033",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/11/attention/gate": {
+      "parts": [
+        {
+          "object": "weight/000034",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/11/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000033",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/11/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000034",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/11/attention/query_norm": {
+      "object": "weight/000258"
+    },
+    "text/layers/11/attention/key_norm": {
+      "object": "weight/000259"
+    },
+    "text/layers/11/attention/output": {
+      "object": "weight/000260"
+    },
+    "text/layers/11/post_attention_norm": {
+      "object": "weight/000261"
+    },
+    "text/layers/11/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000035",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/11/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000035",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/11/mlp/down": {
+      "object": "weight/000262"
+    },
+    "text/layers/12/input_norm": {
+      "object": "weight/000263"
+    },
+    "text/layers/12/gdn/a_log": {
+      "object": "weight/000264"
+    },
+    "text/layers/12/gdn/dt_bias": {
+      "object": "weight/000265"
+    },
+    "text/layers/12/gdn/convolution": {
+      "object": "weight/000266"
+    },
+    "text/layers/12/gdn/a_projection": {
+      "object": "weight/000267"
+    },
+    "text/layers/12/gdn/b_projection": {
+      "object": "weight/000268"
+    },
+    "text/layers/12/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000036",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/12/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000036",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/12/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000037",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/12/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000037",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/12/gdn/norm": {
+      "object": "weight/000269"
+    },
+    "text/layers/12/gdn/output": {
+      "object": "weight/000270"
+    },
+    "text/layers/12/post_attention_norm": {
+      "object": "weight/000271"
+    },
+    "text/layers/12/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000038",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/12/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000038",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/12/mlp/down": {
+      "object": "weight/000272"
+    },
+    "text/layers/13/input_norm": {
+      "object": "weight/000273"
+    },
+    "text/layers/13/gdn/a_log": {
+      "object": "weight/000274"
+    },
+    "text/layers/13/gdn/dt_bias": {
+      "object": "weight/000275"
+    },
+    "text/layers/13/gdn/convolution": {
+      "object": "weight/000276"
+    },
+    "text/layers/13/gdn/a_projection": {
+      "object": "weight/000277"
+    },
+    "text/layers/13/gdn/b_projection": {
+      "object": "weight/000278"
+    },
+    "text/layers/13/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000039",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/13/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000039",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/13/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000040",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/13/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000040",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/13/gdn/norm": {
+      "object": "weight/000279"
+    },
+    "text/layers/13/gdn/output": {
+      "object": "weight/000280"
+    },
+    "text/layers/13/post_attention_norm": {
+      "object": "weight/000281"
+    },
+    "text/layers/13/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000041",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/13/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000041",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/13/mlp/down": {
+      "object": "weight/000282"
+    },
+    "text/layers/14/input_norm": {
+      "object": "weight/000283"
+    },
+    "text/layers/14/gdn/a_log": {
+      "object": "weight/000284"
+    },
+    "text/layers/14/gdn/dt_bias": {
+      "object": "weight/000285"
+    },
+    "text/layers/14/gdn/convolution": {
+      "object": "weight/000286"
+    },
+    "text/layers/14/gdn/a_projection": {
+      "object": "weight/000287"
+    },
+    "text/layers/14/gdn/b_projection": {
+      "object": "weight/000288"
+    },
+    "text/layers/14/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000042",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/14/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000042",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/14/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000043",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/14/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000043",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/14/gdn/norm": {
+      "object": "weight/000289"
+    },
+    "text/layers/14/gdn/output": {
+      "object": "weight/000290"
+    },
+    "text/layers/14/post_attention_norm": {
+      "object": "weight/000291"
+    },
+    "text/layers/14/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000044",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/14/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000044",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/14/mlp/down": {
+      "object": "weight/000292"
+    },
+    "text/layers/15/input_norm": {
+      "object": "weight/000293"
+    },
+    "text/layers/15/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000045",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/15/attention/gate": {
+      "parts": [
+        {
+          "object": "weight/000046",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/15/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000045",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/15/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000046",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/15/attention/query_norm": {
+      "object": "weight/000294"
+    },
+    "text/layers/15/attention/key_norm": {
+      "object": "weight/000295"
+    },
+    "text/layers/15/attention/output": {
+      "object": "weight/000296"
+    },
+    "text/layers/15/post_attention_norm": {
+      "object": "weight/000297"
+    },
+    "text/layers/15/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000047",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/15/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000047",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/15/mlp/down": {
+      "object": "weight/000298"
+    },
+    "text/layers/16/input_norm": {
+      "object": "weight/000299"
+    },
+    "text/layers/16/gdn/a_log": {
+      "object": "weight/000300"
+    },
+    "text/layers/16/gdn/dt_bias": {
+      "object": "weight/000301"
+    },
+    "text/layers/16/gdn/convolution": {
+      "object": "weight/000302"
+    },
+    "text/layers/16/gdn/a_projection": {
+      "object": "weight/000303"
+    },
+    "text/layers/16/gdn/b_projection": {
+      "object": "weight/000304"
+    },
+    "text/layers/16/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000048",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/16/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000048",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/16/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000049",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/16/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000049",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/16/gdn/norm": {
+      "object": "weight/000305"
+    },
+    "text/layers/16/gdn/output": {
+      "object": "weight/000306"
+    },
+    "text/layers/16/post_attention_norm": {
+      "object": "weight/000307"
+    },
+    "text/layers/16/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000050",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/16/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000050",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/16/mlp/down": {
+      "object": "weight/000308"
+    },
+    "text/layers/17/input_norm": {
+      "object": "weight/000309"
+    },
+    "text/layers/17/gdn/a_log": {
+      "object": "weight/000310"
+    },
+    "text/layers/17/gdn/dt_bias": {
+      "object": "weight/000311"
+    },
+    "text/layers/17/gdn/convolution": {
+      "object": "weight/000312"
+    },
+    "text/layers/17/gdn/a_projection": {
+      "object": "weight/000313"
+    },
+    "text/layers/17/gdn/b_projection": {
+      "object": "weight/000314"
+    },
+    "text/layers/17/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000051",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/17/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000051",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/17/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000052",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/17/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000052",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/17/gdn/norm": {
+      "object": "weight/000315"
+    },
+    "text/layers/17/gdn/output": {
+      "object": "weight/000316"
+    },
+    "text/layers/17/post_attention_norm": {
+      "object": "weight/000317"
+    },
+    "text/layers/17/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000053",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/17/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000053",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/17/mlp/down": {
+      "object": "weight/000318"
+    },
+    "text/layers/18/input_norm": {
+      "object": "weight/000319"
+    },
+    "text/layers/18/gdn/a_log": {
+      "object": "weight/000320"
+    },
+    "text/layers/18/gdn/dt_bias": {
+      "object": "weight/000321"
+    },
+    "text/layers/18/gdn/convolution": {
+      "object": "weight/000322"
+    },
+    "text/layers/18/gdn/a_projection": {
+      "object": "weight/000323"
+    },
+    "text/layers/18/gdn/b_projection": {
+      "object": "weight/000324"
+    },
+    "text/layers/18/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000054",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/18/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000054",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/18/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000055",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/18/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000055",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/18/gdn/norm": {
+      "object": "weight/000325"
+    },
+    "text/layers/18/gdn/output": {
+      "object": "weight/000326"
+    },
+    "text/layers/18/post_attention_norm": {
+      "object": "weight/000327"
+    },
+    "text/layers/18/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000056",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/18/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000056",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/18/mlp/down": {
+      "object": "weight/000328"
+    },
+    "text/layers/19/input_norm": {
+      "object": "weight/000329"
+    },
+    "text/layers/19/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000057",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/19/attention/gate": {
+      "parts": [
+        {
+          "object": "weight/000058",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/19/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000057",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/19/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000058",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/19/attention/query_norm": {
+      "object": "weight/000330"
+    },
+    "text/layers/19/attention/key_norm": {
+      "object": "weight/000331"
+    },
+    "text/layers/19/attention/output": {
+      "object": "weight/000332"
+    },
+    "text/layers/19/post_attention_norm": {
+      "object": "weight/000333"
+    },
+    "text/layers/19/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000059",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/19/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000059",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/19/mlp/down": {
+      "object": "weight/000334"
+    },
+    "text/layers/20/input_norm": {
+      "object": "weight/000335"
+    },
+    "text/layers/20/gdn/a_log": {
+      "object": "weight/000336"
+    },
+    "text/layers/20/gdn/dt_bias": {
+      "object": "weight/000337"
+    },
+    "text/layers/20/gdn/convolution": {
+      "object": "weight/000338"
+    },
+    "text/layers/20/gdn/a_projection": {
+      "object": "weight/000339"
+    },
+    "text/layers/20/gdn/b_projection": {
+      "object": "weight/000340"
+    },
+    "text/layers/20/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000060",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/20/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000060",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/20/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000061",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/20/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000061",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/20/gdn/norm": {
+      "object": "weight/000341"
+    },
+    "text/layers/20/gdn/output": {
+      "object": "weight/000342"
+    },
+    "text/layers/20/post_attention_norm": {
+      "object": "weight/000343"
+    },
+    "text/layers/20/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000062",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/20/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000062",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/20/mlp/down": {
+      "object": "weight/000344"
+    },
+    "text/layers/21/input_norm": {
+      "object": "weight/000345"
+    },
+    "text/layers/21/gdn/a_log": {
+      "object": "weight/000346"
+    },
+    "text/layers/21/gdn/dt_bias": {
+      "object": "weight/000347"
+    },
+    "text/layers/21/gdn/convolution": {
+      "object": "weight/000348"
+    },
+    "text/layers/21/gdn/a_projection": {
+      "object": "weight/000349"
+    },
+    "text/layers/21/gdn/b_projection": {
+      "object": "weight/000350"
+    },
+    "text/layers/21/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000063",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/21/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000063",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/21/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000064",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/21/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000064",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/21/gdn/norm": {
+      "object": "weight/000351"
+    },
+    "text/layers/21/gdn/output": {
+      "object": "weight/000352"
+    },
+    "text/layers/21/post_attention_norm": {
+      "object": "weight/000353"
+    },
+    "text/layers/21/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000065",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/21/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000065",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/21/mlp/down": {
+      "object": "weight/000354"
+    },
+    "text/layers/22/input_norm": {
+      "object": "weight/000355"
+    },
+    "text/layers/22/gdn/a_log": {
+      "object": "weight/000356"
+    },
+    "text/layers/22/gdn/dt_bias": {
+      "object": "weight/000357"
+    },
+    "text/layers/22/gdn/convolution": {
+      "object": "weight/000358"
+    },
+    "text/layers/22/gdn/a_projection": {
+      "object": "weight/000359"
+    },
+    "text/layers/22/gdn/b_projection": {
+      "object": "weight/000360"
+    },
+    "text/layers/22/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000066",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/22/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000066",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/22/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000067",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/22/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000067",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/22/gdn/norm": {
+      "object": "weight/000361"
+    },
+    "text/layers/22/gdn/output": {
+      "object": "weight/000362"
+    },
+    "text/layers/22/post_attention_norm": {
+      "object": "weight/000363"
+    },
+    "text/layers/22/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000068",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/22/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000068",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/22/mlp/down": {
+      "object": "weight/000364"
+    },
+    "text/layers/23/input_norm": {
+      "object": "weight/000365"
+    },
+    "text/layers/23/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000069",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/23/attention/gate": {
+      "parts": [
+        {
+          "object": "weight/000070",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/23/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000069",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/23/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000070",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/23/attention/query_norm": {
+      "object": "weight/000366"
+    },
+    "text/layers/23/attention/key_norm": {
+      "object": "weight/000367"
+    },
+    "text/layers/23/attention/output": {
+      "object": "weight/000368"
+    },
+    "text/layers/23/post_attention_norm": {
+      "object": "weight/000369"
+    },
+    "text/layers/23/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000071",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/23/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000071",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/23/mlp/down": {
+      "object": "weight/000370"
+    },
+    "text/layers/24/input_norm": {
+      "object": "weight/000371"
+    },
+    "text/layers/24/gdn/a_log": {
+      "object": "weight/000372"
+    },
+    "text/layers/24/gdn/dt_bias": {
+      "object": "weight/000373"
+    },
+    "text/layers/24/gdn/convolution": {
+      "object": "weight/000374"
+    },
+    "text/layers/24/gdn/a_projection": {
+      "object": "weight/000375"
+    },
+    "text/layers/24/gdn/b_projection": {
+      "object": "weight/000376"
+    },
+    "text/layers/24/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000072",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/24/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000072",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/24/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000073",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/24/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000073",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/24/gdn/norm": {
+      "object": "weight/000377"
+    },
+    "text/layers/24/gdn/output": {
+      "object": "weight/000378"
+    },
+    "text/layers/24/post_attention_norm": {
+      "object": "weight/000379"
+    },
+    "text/layers/24/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000074",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/24/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000074",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/24/mlp/down": {
+      "object": "weight/000380"
+    },
+    "text/layers/25/input_norm": {
+      "object": "weight/000381"
+    },
+    "text/layers/25/gdn/a_log": {
+      "object": "weight/000382"
+    },
+    "text/layers/25/gdn/dt_bias": {
+      "object": "weight/000383"
+    },
+    "text/layers/25/gdn/convolution": {
+      "object": "weight/000384"
+    },
+    "text/layers/25/gdn/a_projection": {
+      "object": "weight/000385"
+    },
+    "text/layers/25/gdn/b_projection": {
+      "object": "weight/000386"
+    },
+    "text/layers/25/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000075",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/25/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000075",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/25/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000076",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/25/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000076",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/25/gdn/norm": {
+      "object": "weight/000387"
+    },
+    "text/layers/25/gdn/output": {
+      "object": "weight/000388"
+    },
+    "text/layers/25/post_attention_norm": {
+      "object": "weight/000389"
+    },
+    "text/layers/25/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000077",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/25/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000077",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/25/mlp/down": {
+      "object": "weight/000390"
+    },
+    "text/layers/26/input_norm": {
+      "object": "weight/000391"
+    },
+    "text/layers/26/gdn/a_log": {
+      "object": "weight/000392"
+    },
+    "text/layers/26/gdn/dt_bias": {
+      "object": "weight/000393"
+    },
+    "text/layers/26/gdn/convolution": {
+      "object": "weight/000394"
+    },
+    "text/layers/26/gdn/a_projection": {
+      "object": "weight/000395"
+    },
+    "text/layers/26/gdn/b_projection": {
+      "object": "weight/000396"
+    },
+    "text/layers/26/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000078",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/26/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000078",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/26/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000079",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/26/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000079",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/26/gdn/norm": {
+      "object": "weight/000397"
+    },
+    "text/layers/26/gdn/output": {
+      "object": "weight/000398"
+    },
+    "text/layers/26/post_attention_norm": {
+      "object": "weight/000399"
+    },
+    "text/layers/26/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000080",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/26/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000080",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/26/mlp/down": {
+      "object": "weight/000400"
+    },
+    "text/layers/27/input_norm": {
+      "object": "weight/000401"
+    },
+    "text/layers/27/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000081",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/27/attention/gate": {
+      "parts": [
+        {
+          "object": "weight/000082",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/27/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000081",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/27/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000082",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/27/attention/query_norm": {
+      "object": "weight/000402"
+    },
+    "text/layers/27/attention/key_norm": {
+      "object": "weight/000403"
+    },
+    "text/layers/27/attention/output": {
+      "object": "weight/000404"
+    },
+    "text/layers/27/post_attention_norm": {
+      "object": "weight/000405"
+    },
+    "text/layers/27/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000083",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/27/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000083",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/27/mlp/down": {
+      "object": "weight/000406"
+    },
+    "text/layers/28/input_norm": {
+      "object": "weight/000407"
+    },
+    "text/layers/28/gdn/a_log": {
+      "object": "weight/000408"
+    },
+    "text/layers/28/gdn/dt_bias": {
+      "object": "weight/000409"
+    },
+    "text/layers/28/gdn/convolution": {
+      "object": "weight/000410"
+    },
+    "text/layers/28/gdn/a_projection": {
+      "object": "weight/000411"
+    },
+    "text/layers/28/gdn/b_projection": {
+      "object": "weight/000412"
+    },
+    "text/layers/28/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000084",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/28/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000084",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/28/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000085",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/28/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000085",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/28/gdn/norm": {
+      "object": "weight/000413"
+    },
+    "text/layers/28/gdn/output": {
+      "object": "weight/000414"
+    },
+    "text/layers/28/post_attention_norm": {
+      "object": "weight/000415"
+    },
+    "text/layers/28/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000086",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/28/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000086",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/28/mlp/down": {
+      "object": "weight/000416"
+    },
+    "text/layers/29/input_norm": {
+      "object": "weight/000417"
+    },
+    "text/layers/29/gdn/a_log": {
+      "object": "weight/000418"
+    },
+    "text/layers/29/gdn/dt_bias": {
+      "object": "weight/000419"
+    },
+    "text/layers/29/gdn/convolution": {
+      "object": "weight/000420"
+    },
+    "text/layers/29/gdn/a_projection": {
+      "object": "weight/000421"
+    },
+    "text/layers/29/gdn/b_projection": {
+      "object": "weight/000422"
+    },
+    "text/layers/29/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000087",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/29/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000087",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/29/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000088",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/29/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000088",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/29/gdn/norm": {
+      "object": "weight/000423"
+    },
+    "text/layers/29/gdn/output": {
+      "object": "weight/000424"
+    },
+    "text/layers/29/post_attention_norm": {
+      "object": "weight/000425"
+    },
+    "text/layers/29/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000089",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/29/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000089",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/29/mlp/down": {
+      "object": "weight/000426"
+    },
+    "text/layers/30/input_norm": {
+      "object": "weight/000427"
+    },
+    "text/layers/30/gdn/a_log": {
+      "object": "weight/000428"
+    },
+    "text/layers/30/gdn/dt_bias": {
+      "object": "weight/000429"
+    },
+    "text/layers/30/gdn/convolution": {
+      "object": "weight/000430"
+    },
+    "text/layers/30/gdn/a_projection": {
+      "object": "weight/000431"
+    },
+    "text/layers/30/gdn/b_projection": {
+      "object": "weight/000432"
+    },
+    "text/layers/30/gdn/query": {
+      "parts": [
+        {
+          "object": "weight/000090",
+          "range": [
+            0,
+            8388608
+          ]
+        }
+      ]
+    },
+    "text/layers/30/gdn/key": {
+      "parts": [
+        {
+          "object": "weight/000090",
+          "range": [
+            8388608,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/30/gdn/value": {
+      "parts": [
+        {
+          "object": "weight/000091",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/30/gdn/z": {
+      "parts": [
+        {
+          "object": "weight/000091",
+          "range": [
+            16777216,
+            33554432
+          ]
+        }
+      ]
+    },
+    "text/layers/30/gdn/norm": {
+      "object": "weight/000433"
+    },
+    "text/layers/30/gdn/output": {
+      "object": "weight/000434"
+    },
+    "text/layers/30/post_attention_norm": {
+      "object": "weight/000435"
+    },
+    "text/layers/30/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000092",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/30/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000092",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/30/mlp/down": {
+      "object": "weight/000436"
+    },
+    "text/layers/31/input_norm": {
+      "object": "weight/000437"
+    },
+    "text/layers/31/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000093",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/31/attention/gate": {
+      "parts": [
+        {
+          "object": "weight/000094",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "text/layers/31/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000093",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/31/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000094",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "text/layers/31/attention/query_norm": {
+      "object": "weight/000438"
+    },
+    "text/layers/31/attention/key_norm": {
+      "object": "weight/000439"
+    },
+    "text/layers/31/attention/output": {
+      "object": "weight/000440"
+    },
+    "text/layers/31/post_attention_norm": {
+      "object": "weight/000441"
+    },
+    "text/layers/31/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000095",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "text/layers/31/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000095",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "text/layers/31/mlp/down": {
+      "object": "weight/000442"
+    },
+    "mtp/input_projection": {
+      "object": "weight/000443"
+    },
+    "mtp/embedding_norm": {
+      "object": "weight/000444"
+    },
+    "mtp/hidden_norm": {
+      "object": "weight/000445"
+    },
+    "mtp/final_norm": {
+      "object": "weight/000446"
+    },
+    "mtp/layers/0/input_norm": {
+      "object": "weight/000447"
+    },
+    "mtp/layers/0/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000096",
+          "range": [
+            0,
+            16777216
+          ]
+        }
+      ]
+    },
+    "mtp/layers/0/attention/gate": {
+      "parts": [
+        {
+          "object": "weight/000096",
+          "range": [
+            20971520,
+            37748736
+          ]
+        }
+      ]
+    },
+    "mtp/layers/0/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000096",
+          "range": [
+            16777216,
+            20971520
+          ]
+        }
+      ]
+    },
+    "mtp/layers/0/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000096",
+          "range": [
+            37748736,
+            41943040
+          ]
+        }
+      ]
+    },
+    "mtp/layers/0/attention/query_norm": {
+      "object": "weight/000448"
+    },
+    "mtp/layers/0/attention/key_norm": {
+      "object": "weight/000449"
+    },
+    "mtp/layers/0/attention/output": {
+      "object": "weight/000450"
+    },
+    "mtp/layers/0/post_attention_norm": {
+      "object": "weight/000451"
+    },
+    "mtp/layers/0/mlp/gate": {
+      "parts": [
+        {
+          "object": "weight/000097",
+          "range": [
+            0,
+            50331648
+          ]
+        }
+      ]
+    },
+    "mtp/layers/0/mlp/up": {
+      "parts": [
+        {
+          "object": "weight/000097",
+          "range": [
+            50331648,
+            100663296
+          ]
+        }
+      ]
+    },
+    "mtp/layers/0/mlp/down": {
+      "object": "weight/000452"
+    },
+    "vision/patch_embedding": {
+      "object": "weight/000453"
+    },
+    "vision/patch_embedding_bias": {
+      "object": "weight/000454"
+    },
+    "vision/position_embedding": {
+      "object": "weight/000455"
+    },
+    "vision/layers/0/norm1_weight": {
+      "object": "weight/000456"
+    },
+    "vision/layers/0/norm1_bias": {
+      "object": "weight/000457"
+    },
+    "vision/layers/0/norm2_weight": {
+      "object": "weight/000458"
+    },
+    "vision/layers/0/norm2_bias": {
+      "object": "weight/000459"
+    },
+    "vision/layers/0/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000098",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/0/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000099",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/0/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000098",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/0/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000099",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/0/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000098",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/0/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000099",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/0/attention/output": {
+      "object": "weight/000460"
+    },
+    "vision/layers/0/attention/output_bias": {
+      "object": "weight/000461"
+    },
+    "vision/layers/0/mlp/fc1": {
+      "object": "weight/000462"
+    },
+    "vision/layers/0/mlp/fc1_bias": {
+      "object": "weight/000463"
+    },
+    "vision/layers/0/mlp/fc2": {
+      "object": "weight/000464"
+    },
+    "vision/layers/0/mlp/fc2_bias": {
+      "object": "weight/000465"
+    },
+    "vision/layers/1/norm1_weight": {
+      "object": "weight/000466"
+    },
+    "vision/layers/1/norm1_bias": {
+      "object": "weight/000467"
+    },
+    "vision/layers/1/norm2_weight": {
+      "object": "weight/000468"
+    },
+    "vision/layers/1/norm2_bias": {
+      "object": "weight/000469"
+    },
+    "vision/layers/1/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000100",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/1/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000101",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/1/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000100",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/1/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000101",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/1/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000100",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/1/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000101",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/1/attention/output": {
+      "object": "weight/000470"
+    },
+    "vision/layers/1/attention/output_bias": {
+      "object": "weight/000471"
+    },
+    "vision/layers/1/mlp/fc1": {
+      "object": "weight/000472"
+    },
+    "vision/layers/1/mlp/fc1_bias": {
+      "object": "weight/000473"
+    },
+    "vision/layers/1/mlp/fc2": {
+      "object": "weight/000474"
+    },
+    "vision/layers/1/mlp/fc2_bias": {
+      "object": "weight/000475"
+    },
+    "vision/layers/2/norm1_weight": {
+      "object": "weight/000476"
+    },
+    "vision/layers/2/norm1_bias": {
+      "object": "weight/000477"
+    },
+    "vision/layers/2/norm2_weight": {
+      "object": "weight/000478"
+    },
+    "vision/layers/2/norm2_bias": {
+      "object": "weight/000479"
+    },
+    "vision/layers/2/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000102",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/2/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000103",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/2/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000102",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/2/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000103",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/2/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000102",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/2/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000103",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/2/attention/output": {
+      "object": "weight/000480"
+    },
+    "vision/layers/2/attention/output_bias": {
+      "object": "weight/000481"
+    },
+    "vision/layers/2/mlp/fc1": {
+      "object": "weight/000482"
+    },
+    "vision/layers/2/mlp/fc1_bias": {
+      "object": "weight/000483"
+    },
+    "vision/layers/2/mlp/fc2": {
+      "object": "weight/000484"
+    },
+    "vision/layers/2/mlp/fc2_bias": {
+      "object": "weight/000485"
+    },
+    "vision/layers/3/norm1_weight": {
+      "object": "weight/000486"
+    },
+    "vision/layers/3/norm1_bias": {
+      "object": "weight/000487"
+    },
+    "vision/layers/3/norm2_weight": {
+      "object": "weight/000488"
+    },
+    "vision/layers/3/norm2_bias": {
+      "object": "weight/000489"
+    },
+    "vision/layers/3/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000104",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/3/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000105",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/3/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000104",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/3/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000105",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/3/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000104",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/3/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000105",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/3/attention/output": {
+      "object": "weight/000490"
+    },
+    "vision/layers/3/attention/output_bias": {
+      "object": "weight/000491"
+    },
+    "vision/layers/3/mlp/fc1": {
+      "object": "weight/000492"
+    },
+    "vision/layers/3/mlp/fc1_bias": {
+      "object": "weight/000493"
+    },
+    "vision/layers/3/mlp/fc2": {
+      "object": "weight/000494"
+    },
+    "vision/layers/3/mlp/fc2_bias": {
+      "object": "weight/000495"
+    },
+    "vision/layers/4/norm1_weight": {
+      "object": "weight/000496"
+    },
+    "vision/layers/4/norm1_bias": {
+      "object": "weight/000497"
+    },
+    "vision/layers/4/norm2_weight": {
+      "object": "weight/000498"
+    },
+    "vision/layers/4/norm2_bias": {
+      "object": "weight/000499"
+    },
+    "vision/layers/4/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000106",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/4/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000107",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/4/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000106",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/4/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000107",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/4/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000106",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/4/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000107",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/4/attention/output": {
+      "object": "weight/000500"
+    },
+    "vision/layers/4/attention/output_bias": {
+      "object": "weight/000501"
+    },
+    "vision/layers/4/mlp/fc1": {
+      "object": "weight/000502"
+    },
+    "vision/layers/4/mlp/fc1_bias": {
+      "object": "weight/000503"
+    },
+    "vision/layers/4/mlp/fc2": {
+      "object": "weight/000504"
+    },
+    "vision/layers/4/mlp/fc2_bias": {
+      "object": "weight/000505"
+    },
+    "vision/layers/5/norm1_weight": {
+      "object": "weight/000506"
+    },
+    "vision/layers/5/norm1_bias": {
+      "object": "weight/000507"
+    },
+    "vision/layers/5/norm2_weight": {
+      "object": "weight/000508"
+    },
+    "vision/layers/5/norm2_bias": {
+      "object": "weight/000509"
+    },
+    "vision/layers/5/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000108",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/5/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000109",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/5/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000108",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/5/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000109",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/5/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000108",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/5/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000109",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/5/attention/output": {
+      "object": "weight/000510"
+    },
+    "vision/layers/5/attention/output_bias": {
+      "object": "weight/000511"
+    },
+    "vision/layers/5/mlp/fc1": {
+      "object": "weight/000512"
+    },
+    "vision/layers/5/mlp/fc1_bias": {
+      "object": "weight/000513"
+    },
+    "vision/layers/5/mlp/fc2": {
+      "object": "weight/000514"
+    },
+    "vision/layers/5/mlp/fc2_bias": {
+      "object": "weight/000515"
+    },
+    "vision/layers/6/norm1_weight": {
+      "object": "weight/000516"
+    },
+    "vision/layers/6/norm1_bias": {
+      "object": "weight/000517"
+    },
+    "vision/layers/6/norm2_weight": {
+      "object": "weight/000518"
+    },
+    "vision/layers/6/norm2_bias": {
+      "object": "weight/000519"
+    },
+    "vision/layers/6/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000110",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/6/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000111",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/6/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000110",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/6/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000111",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/6/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000110",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/6/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000111",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/6/attention/output": {
+      "object": "weight/000520"
+    },
+    "vision/layers/6/attention/output_bias": {
+      "object": "weight/000521"
+    },
+    "vision/layers/6/mlp/fc1": {
+      "object": "weight/000522"
+    },
+    "vision/layers/6/mlp/fc1_bias": {
+      "object": "weight/000523"
+    },
+    "vision/layers/6/mlp/fc2": {
+      "object": "weight/000524"
+    },
+    "vision/layers/6/mlp/fc2_bias": {
+      "object": "weight/000525"
+    },
+    "vision/layers/7/norm1_weight": {
+      "object": "weight/000526"
+    },
+    "vision/layers/7/norm1_bias": {
+      "object": "weight/000527"
+    },
+    "vision/layers/7/norm2_weight": {
+      "object": "weight/000528"
+    },
+    "vision/layers/7/norm2_bias": {
+      "object": "weight/000529"
+    },
+    "vision/layers/7/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000112",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/7/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000113",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/7/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000112",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/7/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000113",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/7/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000112",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/7/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000113",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/7/attention/output": {
+      "object": "weight/000530"
+    },
+    "vision/layers/7/attention/output_bias": {
+      "object": "weight/000531"
+    },
+    "vision/layers/7/mlp/fc1": {
+      "object": "weight/000532"
+    },
+    "vision/layers/7/mlp/fc1_bias": {
+      "object": "weight/000533"
+    },
+    "vision/layers/7/mlp/fc2": {
+      "object": "weight/000534"
+    },
+    "vision/layers/7/mlp/fc2_bias": {
+      "object": "weight/000535"
+    },
+    "vision/layers/8/norm1_weight": {
+      "object": "weight/000536"
+    },
+    "vision/layers/8/norm1_bias": {
+      "object": "weight/000537"
+    },
+    "vision/layers/8/norm2_weight": {
+      "object": "weight/000538"
+    },
+    "vision/layers/8/norm2_bias": {
+      "object": "weight/000539"
+    },
+    "vision/layers/8/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000114",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/8/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000115",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/8/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000114",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/8/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000115",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/8/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000114",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/8/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000115",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/8/attention/output": {
+      "object": "weight/000540"
+    },
+    "vision/layers/8/attention/output_bias": {
+      "object": "weight/000541"
+    },
+    "vision/layers/8/mlp/fc1": {
+      "object": "weight/000542"
+    },
+    "vision/layers/8/mlp/fc1_bias": {
+      "object": "weight/000543"
+    },
+    "vision/layers/8/mlp/fc2": {
+      "object": "weight/000544"
+    },
+    "vision/layers/8/mlp/fc2_bias": {
+      "object": "weight/000545"
+    },
+    "vision/layers/9/norm1_weight": {
+      "object": "weight/000546"
+    },
+    "vision/layers/9/norm1_bias": {
+      "object": "weight/000547"
+    },
+    "vision/layers/9/norm2_weight": {
+      "object": "weight/000548"
+    },
+    "vision/layers/9/norm2_bias": {
+      "object": "weight/000549"
+    },
+    "vision/layers/9/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000116",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/9/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000117",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/9/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000116",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/9/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000117",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/9/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000116",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/9/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000117",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/9/attention/output": {
+      "object": "weight/000550"
+    },
+    "vision/layers/9/attention/output_bias": {
+      "object": "weight/000551"
+    },
+    "vision/layers/9/mlp/fc1": {
+      "object": "weight/000552"
+    },
+    "vision/layers/9/mlp/fc1_bias": {
+      "object": "weight/000553"
+    },
+    "vision/layers/9/mlp/fc2": {
+      "object": "weight/000554"
+    },
+    "vision/layers/9/mlp/fc2_bias": {
+      "object": "weight/000555"
+    },
+    "vision/layers/10/norm1_weight": {
+      "object": "weight/000556"
+    },
+    "vision/layers/10/norm1_bias": {
+      "object": "weight/000557"
+    },
+    "vision/layers/10/norm2_weight": {
+      "object": "weight/000558"
+    },
+    "vision/layers/10/norm2_bias": {
+      "object": "weight/000559"
+    },
+    "vision/layers/10/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000118",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/10/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000119",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/10/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000118",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/10/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000119",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/10/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000118",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/10/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000119",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/10/attention/output": {
+      "object": "weight/000560"
+    },
+    "vision/layers/10/attention/output_bias": {
+      "object": "weight/000561"
+    },
+    "vision/layers/10/mlp/fc1": {
+      "object": "weight/000562"
+    },
+    "vision/layers/10/mlp/fc1_bias": {
+      "object": "weight/000563"
+    },
+    "vision/layers/10/mlp/fc2": {
+      "object": "weight/000564"
+    },
+    "vision/layers/10/mlp/fc2_bias": {
+      "object": "weight/000565"
+    },
+    "vision/layers/11/norm1_weight": {
+      "object": "weight/000566"
+    },
+    "vision/layers/11/norm1_bias": {
+      "object": "weight/000567"
+    },
+    "vision/layers/11/norm2_weight": {
+      "object": "weight/000568"
+    },
+    "vision/layers/11/norm2_bias": {
+      "object": "weight/000569"
+    },
+    "vision/layers/11/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000120",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/11/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000121",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/11/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000120",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/11/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000121",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/11/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000120",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/11/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000121",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/11/attention/output": {
+      "object": "weight/000570"
+    },
+    "vision/layers/11/attention/output_bias": {
+      "object": "weight/000571"
+    },
+    "vision/layers/11/mlp/fc1": {
+      "object": "weight/000572"
+    },
+    "vision/layers/11/mlp/fc1_bias": {
+      "object": "weight/000573"
+    },
+    "vision/layers/11/mlp/fc2": {
+      "object": "weight/000574"
+    },
+    "vision/layers/11/mlp/fc2_bias": {
+      "object": "weight/000575"
+    },
+    "vision/layers/12/norm1_weight": {
+      "object": "weight/000576"
+    },
+    "vision/layers/12/norm1_bias": {
+      "object": "weight/000577"
+    },
+    "vision/layers/12/norm2_weight": {
+      "object": "weight/000578"
+    },
+    "vision/layers/12/norm2_bias": {
+      "object": "weight/000579"
+    },
+    "vision/layers/12/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000122",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/12/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000123",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/12/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000122",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/12/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000123",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/12/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000122",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/12/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000123",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/12/attention/output": {
+      "object": "weight/000580"
+    },
+    "vision/layers/12/attention/output_bias": {
+      "object": "weight/000581"
+    },
+    "vision/layers/12/mlp/fc1": {
+      "object": "weight/000582"
+    },
+    "vision/layers/12/mlp/fc1_bias": {
+      "object": "weight/000583"
+    },
+    "vision/layers/12/mlp/fc2": {
+      "object": "weight/000584"
+    },
+    "vision/layers/12/mlp/fc2_bias": {
+      "object": "weight/000585"
+    },
+    "vision/layers/13/norm1_weight": {
+      "object": "weight/000586"
+    },
+    "vision/layers/13/norm1_bias": {
+      "object": "weight/000587"
+    },
+    "vision/layers/13/norm2_weight": {
+      "object": "weight/000588"
+    },
+    "vision/layers/13/norm2_bias": {
+      "object": "weight/000589"
+    },
+    "vision/layers/13/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000124",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/13/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000125",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/13/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000124",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/13/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000125",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/13/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000124",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/13/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000125",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/13/attention/output": {
+      "object": "weight/000590"
+    },
+    "vision/layers/13/attention/output_bias": {
+      "object": "weight/000591"
+    },
+    "vision/layers/13/mlp/fc1": {
+      "object": "weight/000592"
+    },
+    "vision/layers/13/mlp/fc1_bias": {
+      "object": "weight/000593"
+    },
+    "vision/layers/13/mlp/fc2": {
+      "object": "weight/000594"
+    },
+    "vision/layers/13/mlp/fc2_bias": {
+      "object": "weight/000595"
+    },
+    "vision/layers/14/norm1_weight": {
+      "object": "weight/000596"
+    },
+    "vision/layers/14/norm1_bias": {
+      "object": "weight/000597"
+    },
+    "vision/layers/14/norm2_weight": {
+      "object": "weight/000598"
+    },
+    "vision/layers/14/norm2_bias": {
+      "object": "weight/000599"
+    },
+    "vision/layers/14/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000126",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/14/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000127",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/14/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000126",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/14/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000127",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/14/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000126",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/14/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000127",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/14/attention/output": {
+      "object": "weight/000600"
+    },
+    "vision/layers/14/attention/output_bias": {
+      "object": "weight/000601"
+    },
+    "vision/layers/14/mlp/fc1": {
+      "object": "weight/000602"
+    },
+    "vision/layers/14/mlp/fc1_bias": {
+      "object": "weight/000603"
+    },
+    "vision/layers/14/mlp/fc2": {
+      "object": "weight/000604"
+    },
+    "vision/layers/14/mlp/fc2_bias": {
+      "object": "weight/000605"
+    },
+    "vision/layers/15/norm1_weight": {
+      "object": "weight/000606"
+    },
+    "vision/layers/15/norm1_bias": {
+      "object": "weight/000607"
+    },
+    "vision/layers/15/norm2_weight": {
+      "object": "weight/000608"
+    },
+    "vision/layers/15/norm2_bias": {
+      "object": "weight/000609"
+    },
+    "vision/layers/15/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000128",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/15/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000129",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/15/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000128",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/15/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000129",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/15/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000128",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/15/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000129",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/15/attention/output": {
+      "object": "weight/000610"
+    },
+    "vision/layers/15/attention/output_bias": {
+      "object": "weight/000611"
+    },
+    "vision/layers/15/mlp/fc1": {
+      "object": "weight/000612"
+    },
+    "vision/layers/15/mlp/fc1_bias": {
+      "object": "weight/000613"
+    },
+    "vision/layers/15/mlp/fc2": {
+      "object": "weight/000614"
+    },
+    "vision/layers/15/mlp/fc2_bias": {
+      "object": "weight/000615"
+    },
+    "vision/layers/16/norm1_weight": {
+      "object": "weight/000616"
+    },
+    "vision/layers/16/norm1_bias": {
+      "object": "weight/000617"
+    },
+    "vision/layers/16/norm2_weight": {
+      "object": "weight/000618"
+    },
+    "vision/layers/16/norm2_bias": {
+      "object": "weight/000619"
+    },
+    "vision/layers/16/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000130",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/16/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000131",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/16/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000130",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/16/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000131",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/16/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000130",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/16/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000131",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/16/attention/output": {
+      "object": "weight/000620"
+    },
+    "vision/layers/16/attention/output_bias": {
+      "object": "weight/000621"
+    },
+    "vision/layers/16/mlp/fc1": {
+      "object": "weight/000622"
+    },
+    "vision/layers/16/mlp/fc1_bias": {
+      "object": "weight/000623"
+    },
+    "vision/layers/16/mlp/fc2": {
+      "object": "weight/000624"
+    },
+    "vision/layers/16/mlp/fc2_bias": {
+      "object": "weight/000625"
+    },
+    "vision/layers/17/norm1_weight": {
+      "object": "weight/000626"
+    },
+    "vision/layers/17/norm1_bias": {
+      "object": "weight/000627"
+    },
+    "vision/layers/17/norm2_weight": {
+      "object": "weight/000628"
+    },
+    "vision/layers/17/norm2_bias": {
+      "object": "weight/000629"
+    },
+    "vision/layers/17/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000132",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/17/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000133",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/17/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000132",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/17/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000133",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/17/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000132",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/17/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000133",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/17/attention/output": {
+      "object": "weight/000630"
+    },
+    "vision/layers/17/attention/output_bias": {
+      "object": "weight/000631"
+    },
+    "vision/layers/17/mlp/fc1": {
+      "object": "weight/000632"
+    },
+    "vision/layers/17/mlp/fc1_bias": {
+      "object": "weight/000633"
+    },
+    "vision/layers/17/mlp/fc2": {
+      "object": "weight/000634"
+    },
+    "vision/layers/17/mlp/fc2_bias": {
+      "object": "weight/000635"
+    },
+    "vision/layers/18/norm1_weight": {
+      "object": "weight/000636"
+    },
+    "vision/layers/18/norm1_bias": {
+      "object": "weight/000637"
+    },
+    "vision/layers/18/norm2_weight": {
+      "object": "weight/000638"
+    },
+    "vision/layers/18/norm2_bias": {
+      "object": "weight/000639"
+    },
+    "vision/layers/18/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000134",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/18/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000135",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/18/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000134",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/18/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000135",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/18/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000134",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/18/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000135",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/18/attention/output": {
+      "object": "weight/000640"
+    },
+    "vision/layers/18/attention/output_bias": {
+      "object": "weight/000641"
+    },
+    "vision/layers/18/mlp/fc1": {
+      "object": "weight/000642"
+    },
+    "vision/layers/18/mlp/fc1_bias": {
+      "object": "weight/000643"
+    },
+    "vision/layers/18/mlp/fc2": {
+      "object": "weight/000644"
+    },
+    "vision/layers/18/mlp/fc2_bias": {
+      "object": "weight/000645"
+    },
+    "vision/layers/19/norm1_weight": {
+      "object": "weight/000646"
+    },
+    "vision/layers/19/norm1_bias": {
+      "object": "weight/000647"
+    },
+    "vision/layers/19/norm2_weight": {
+      "object": "weight/000648"
+    },
+    "vision/layers/19/norm2_bias": {
+      "object": "weight/000649"
+    },
+    "vision/layers/19/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000136",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/19/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000137",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/19/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000136",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/19/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000137",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/19/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000136",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/19/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000137",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/19/attention/output": {
+      "object": "weight/000650"
+    },
+    "vision/layers/19/attention/output_bias": {
+      "object": "weight/000651"
+    },
+    "vision/layers/19/mlp/fc1": {
+      "object": "weight/000652"
+    },
+    "vision/layers/19/mlp/fc1_bias": {
+      "object": "weight/000653"
+    },
+    "vision/layers/19/mlp/fc2": {
+      "object": "weight/000654"
+    },
+    "vision/layers/19/mlp/fc2_bias": {
+      "object": "weight/000655"
+    },
+    "vision/layers/20/norm1_weight": {
+      "object": "weight/000656"
+    },
+    "vision/layers/20/norm1_bias": {
+      "object": "weight/000657"
+    },
+    "vision/layers/20/norm2_weight": {
+      "object": "weight/000658"
+    },
+    "vision/layers/20/norm2_bias": {
+      "object": "weight/000659"
+    },
+    "vision/layers/20/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000138",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/20/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000139",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/20/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000138",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/20/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000139",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/20/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000138",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/20/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000139",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/20/attention/output": {
+      "object": "weight/000660"
+    },
+    "vision/layers/20/attention/output_bias": {
+      "object": "weight/000661"
+    },
+    "vision/layers/20/mlp/fc1": {
+      "object": "weight/000662"
+    },
+    "vision/layers/20/mlp/fc1_bias": {
+      "object": "weight/000663"
+    },
+    "vision/layers/20/mlp/fc2": {
+      "object": "weight/000664"
+    },
+    "vision/layers/20/mlp/fc2_bias": {
+      "object": "weight/000665"
+    },
+    "vision/layers/21/norm1_weight": {
+      "object": "weight/000666"
+    },
+    "vision/layers/21/norm1_bias": {
+      "object": "weight/000667"
+    },
+    "vision/layers/21/norm2_weight": {
+      "object": "weight/000668"
+    },
+    "vision/layers/21/norm2_bias": {
+      "object": "weight/000669"
+    },
+    "vision/layers/21/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000140",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/21/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000141",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/21/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000140",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/21/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000141",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/21/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000140",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/21/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000141",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/21/attention/output": {
+      "object": "weight/000670"
+    },
+    "vision/layers/21/attention/output_bias": {
+      "object": "weight/000671"
+    },
+    "vision/layers/21/mlp/fc1": {
+      "object": "weight/000672"
+    },
+    "vision/layers/21/mlp/fc1_bias": {
+      "object": "weight/000673"
+    },
+    "vision/layers/21/mlp/fc2": {
+      "object": "weight/000674"
+    },
+    "vision/layers/21/mlp/fc2_bias": {
+      "object": "weight/000675"
+    },
+    "vision/layers/22/norm1_weight": {
+      "object": "weight/000676"
+    },
+    "vision/layers/22/norm1_bias": {
+      "object": "weight/000677"
+    },
+    "vision/layers/22/norm2_weight": {
+      "object": "weight/000678"
+    },
+    "vision/layers/22/norm2_bias": {
+      "object": "weight/000679"
+    },
+    "vision/layers/22/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000142",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/22/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000143",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/22/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000142",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/22/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000143",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/22/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000142",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/22/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000143",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/22/attention/output": {
+      "object": "weight/000680"
+    },
+    "vision/layers/22/attention/output_bias": {
+      "object": "weight/000681"
+    },
+    "vision/layers/22/mlp/fc1": {
+      "object": "weight/000682"
+    },
+    "vision/layers/22/mlp/fc1_bias": {
+      "object": "weight/000683"
+    },
+    "vision/layers/22/mlp/fc2": {
+      "object": "weight/000684"
+    },
+    "vision/layers/22/mlp/fc2_bias": {
+      "object": "weight/000685"
+    },
+    "vision/layers/23/norm1_weight": {
+      "object": "weight/000686"
+    },
+    "vision/layers/23/norm1_bias": {
+      "object": "weight/000687"
+    },
+    "vision/layers/23/norm2_weight": {
+      "object": "weight/000688"
+    },
+    "vision/layers/23/norm2_bias": {
+      "object": "weight/000689"
+    },
+    "vision/layers/23/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000144",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/23/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000145",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/23/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000144",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/23/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000145",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/23/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000144",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/23/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000145",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/23/attention/output": {
+      "object": "weight/000690"
+    },
+    "vision/layers/23/attention/output_bias": {
+      "object": "weight/000691"
+    },
+    "vision/layers/23/mlp/fc1": {
+      "object": "weight/000692"
+    },
+    "vision/layers/23/mlp/fc1_bias": {
+      "object": "weight/000693"
+    },
+    "vision/layers/23/mlp/fc2": {
+      "object": "weight/000694"
+    },
+    "vision/layers/23/mlp/fc2_bias": {
+      "object": "weight/000695"
+    },
+    "vision/layers/24/norm1_weight": {
+      "object": "weight/000696"
+    },
+    "vision/layers/24/norm1_bias": {
+      "object": "weight/000697"
+    },
+    "vision/layers/24/norm2_weight": {
+      "object": "weight/000698"
+    },
+    "vision/layers/24/norm2_bias": {
+      "object": "weight/000699"
+    },
+    "vision/layers/24/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000146",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/24/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000147",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/24/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000146",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/24/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000147",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/24/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000146",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/24/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000147",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/24/attention/output": {
+      "object": "weight/000700"
+    },
+    "vision/layers/24/attention/output_bias": {
+      "object": "weight/000701"
+    },
+    "vision/layers/24/mlp/fc1": {
+      "object": "weight/000702"
+    },
+    "vision/layers/24/mlp/fc1_bias": {
+      "object": "weight/000703"
+    },
+    "vision/layers/24/mlp/fc2": {
+      "object": "weight/000704"
+    },
+    "vision/layers/24/mlp/fc2_bias": {
+      "object": "weight/000705"
+    },
+    "vision/layers/25/norm1_weight": {
+      "object": "weight/000706"
+    },
+    "vision/layers/25/norm1_bias": {
+      "object": "weight/000707"
+    },
+    "vision/layers/25/norm2_weight": {
+      "object": "weight/000708"
+    },
+    "vision/layers/25/norm2_bias": {
+      "object": "weight/000709"
+    },
+    "vision/layers/25/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000148",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/25/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000149",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/25/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000148",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/25/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000149",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/25/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000148",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/25/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000149",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/25/attention/output": {
+      "object": "weight/000710"
+    },
+    "vision/layers/25/attention/output_bias": {
+      "object": "weight/000711"
+    },
+    "vision/layers/25/mlp/fc1": {
+      "object": "weight/000712"
+    },
+    "vision/layers/25/mlp/fc1_bias": {
+      "object": "weight/000713"
+    },
+    "vision/layers/25/mlp/fc2": {
+      "object": "weight/000714"
+    },
+    "vision/layers/25/mlp/fc2_bias": {
+      "object": "weight/000715"
+    },
+    "vision/layers/26/norm1_weight": {
+      "object": "weight/000716"
+    },
+    "vision/layers/26/norm1_bias": {
+      "object": "weight/000717"
+    },
+    "vision/layers/26/norm2_weight": {
+      "object": "weight/000718"
+    },
+    "vision/layers/26/norm2_bias": {
+      "object": "weight/000719"
+    },
+    "vision/layers/26/attention/query": {
+      "parts": [
+        {
+          "object": "weight/000150",
+          "range": [
+            0,
+            1327104
+          ]
+        }
+      ]
+    },
+    "vision/layers/26/attention/query_bias": {
+      "parts": [
+        {
+          "object": "weight/000151",
+          "range": [
+            0,
+            1152
+          ]
+        }
+      ]
+    },
+    "vision/layers/26/attention/key": {
+      "parts": [
+        {
+          "object": "weight/000150",
+          "range": [
+            1327104,
+            2654208
+          ]
+        }
+      ]
+    },
+    "vision/layers/26/attention/key_bias": {
+      "parts": [
+        {
+          "object": "weight/000151",
+          "range": [
+            1152,
+            2304
+          ]
+        }
+      ]
+    },
+    "vision/layers/26/attention/value": {
+      "parts": [
+        {
+          "object": "weight/000150",
+          "range": [
+            2654208,
+            3981312
+          ]
+        }
+      ]
+    },
+    "vision/layers/26/attention/value_bias": {
+      "parts": [
+        {
+          "object": "weight/000151",
+          "range": [
+            2304,
+            3456
+          ]
+        }
+      ]
+    },
+    "vision/layers/26/attention/output": {
+      "object": "weight/000720"
+    },
+    "vision/layers/26/attention/output_bias": {
+      "object": "weight/000721"
+    },
+    "vision/layers/26/mlp/fc1": {
+      "object": "weight/000722"
+    },
+    "vision/layers/26/mlp/fc1_bias": {
+      "object": "weight/000723"
+    },
+    "vision/layers/26/mlp/fc2": {
+      "object": "weight/000724"
+    },
+    "vision/layers/26/mlp/fc2_bias": {
+      "object": "weight/000725"
+    },
+    "vision/merger/norm_weight": {
+      "object": "weight/000726"
+    },
+    "vision/merger/norm_bias": {
+      "object": "weight/000727"
+    },
+    "vision/merger/fc1": {
+      "object": "weight/000728"
+    },
+    "vision/merger/fc1_bias": {
+      "object": "weight/000729"
+    },
+    "vision/merger/fc2": {
+      "object": "weight/000730"
+    },
+    "vision/merger/fc2_bias": {
+      "object": "weight/000731"
+    }
+  },
+  "use_records": [
+    {
+      "parameter": "text/output_head",
+      "input": "text/final_hidden",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/output_head",
+      "input": "mtp/final_hidden",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/0/gdn/a_projection",
+      "input": "text/layers/0/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/0/gdn/b_projection",
+      "input": "text/layers/0/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/0/gdn/query",
+      "input": "text/layers/0/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/0/gdn/key",
+      "input": "text/layers/0/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/0/gdn/value",
+      "input": "text/layers/0/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/0/gdn/z",
+      "input": "text/layers/0/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/0/gdn/output",
+      "input": "text/layers/0/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/0/mlp/gate",
+      "input": "text/layers/0/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/0/mlp/up",
+      "input": "text/layers/0/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/0/mlp/down",
+      "input": "text/layers/0/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/1/gdn/a_projection",
+      "input": "text/layers/1/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/1/gdn/b_projection",
+      "input": "text/layers/1/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/1/gdn/query",
+      "input": "text/layers/1/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/1/gdn/key",
+      "input": "text/layers/1/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/1/gdn/value",
+      "input": "text/layers/1/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/1/gdn/z",
+      "input": "text/layers/1/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/1/gdn/output",
+      "input": "text/layers/1/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/1/mlp/gate",
+      "input": "text/layers/1/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/1/mlp/up",
+      "input": "text/layers/1/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/1/mlp/down",
+      "input": "text/layers/1/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/2/gdn/a_projection",
+      "input": "text/layers/2/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/2/gdn/b_projection",
+      "input": "text/layers/2/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/2/gdn/query",
+      "input": "text/layers/2/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/2/gdn/key",
+      "input": "text/layers/2/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/2/gdn/value",
+      "input": "text/layers/2/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/2/gdn/z",
+      "input": "text/layers/2/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/2/gdn/output",
+      "input": "text/layers/2/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/2/mlp/gate",
+      "input": "text/layers/2/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/2/mlp/up",
+      "input": "text/layers/2/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/2/mlp/down",
+      "input": "text/layers/2/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/3/attention/query",
+      "input": "text/layers/3/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/3/attention/gate",
+      "input": "text/layers/3/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/3/attention/key",
+      "input": "text/layers/3/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/3/attention/value",
+      "input": "text/layers/3/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/3/attention/output",
+      "input": "text/layers/3/attention/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/3/mlp/gate",
+      "input": "text/layers/3/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/3/mlp/up",
+      "input": "text/layers/3/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/3/mlp/down",
+      "input": "text/layers/3/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/4/gdn/a_projection",
+      "input": "text/layers/4/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/4/gdn/b_projection",
+      "input": "text/layers/4/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/4/gdn/query",
+      "input": "text/layers/4/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/4/gdn/key",
+      "input": "text/layers/4/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/4/gdn/value",
+      "input": "text/layers/4/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/4/gdn/z",
+      "input": "text/layers/4/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/4/gdn/output",
+      "input": "text/layers/4/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/4/mlp/gate",
+      "input": "text/layers/4/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/4/mlp/up",
+      "input": "text/layers/4/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/4/mlp/down",
+      "input": "text/layers/4/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/5/gdn/a_projection",
+      "input": "text/layers/5/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/5/gdn/b_projection",
+      "input": "text/layers/5/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/5/gdn/query",
+      "input": "text/layers/5/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/5/gdn/key",
+      "input": "text/layers/5/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/5/gdn/value",
+      "input": "text/layers/5/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/5/gdn/z",
+      "input": "text/layers/5/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/5/gdn/output",
+      "input": "text/layers/5/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/5/mlp/gate",
+      "input": "text/layers/5/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/5/mlp/up",
+      "input": "text/layers/5/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/5/mlp/down",
+      "input": "text/layers/5/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/6/gdn/a_projection",
+      "input": "text/layers/6/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/6/gdn/b_projection",
+      "input": "text/layers/6/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/6/gdn/query",
+      "input": "text/layers/6/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/6/gdn/key",
+      "input": "text/layers/6/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/6/gdn/value",
+      "input": "text/layers/6/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/6/gdn/z",
+      "input": "text/layers/6/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/6/gdn/output",
+      "input": "text/layers/6/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/6/mlp/gate",
+      "input": "text/layers/6/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/6/mlp/up",
+      "input": "text/layers/6/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/6/mlp/down",
+      "input": "text/layers/6/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/7/attention/query",
+      "input": "text/layers/7/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/7/attention/gate",
+      "input": "text/layers/7/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/7/attention/key",
+      "input": "text/layers/7/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/7/attention/value",
+      "input": "text/layers/7/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/7/attention/output",
+      "input": "text/layers/7/attention/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/7/mlp/gate",
+      "input": "text/layers/7/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/7/mlp/up",
+      "input": "text/layers/7/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/7/mlp/down",
+      "input": "text/layers/7/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/8/gdn/a_projection",
+      "input": "text/layers/8/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/8/gdn/b_projection",
+      "input": "text/layers/8/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/8/gdn/query",
+      "input": "text/layers/8/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/8/gdn/key",
+      "input": "text/layers/8/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/8/gdn/value",
+      "input": "text/layers/8/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/8/gdn/z",
+      "input": "text/layers/8/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/8/gdn/output",
+      "input": "text/layers/8/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/8/mlp/gate",
+      "input": "text/layers/8/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/8/mlp/up",
+      "input": "text/layers/8/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/8/mlp/down",
+      "input": "text/layers/8/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/9/gdn/a_projection",
+      "input": "text/layers/9/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/9/gdn/b_projection",
+      "input": "text/layers/9/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/9/gdn/query",
+      "input": "text/layers/9/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/9/gdn/key",
+      "input": "text/layers/9/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/9/gdn/value",
+      "input": "text/layers/9/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/9/gdn/z",
+      "input": "text/layers/9/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/9/gdn/output",
+      "input": "text/layers/9/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/9/mlp/gate",
+      "input": "text/layers/9/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/9/mlp/up",
+      "input": "text/layers/9/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/9/mlp/down",
+      "input": "text/layers/9/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/10/gdn/a_projection",
+      "input": "text/layers/10/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/10/gdn/b_projection",
+      "input": "text/layers/10/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/10/gdn/query",
+      "input": "text/layers/10/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/10/gdn/key",
+      "input": "text/layers/10/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/10/gdn/value",
+      "input": "text/layers/10/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/10/gdn/z",
+      "input": "text/layers/10/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/10/gdn/output",
+      "input": "text/layers/10/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/10/mlp/gate",
+      "input": "text/layers/10/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/10/mlp/up",
+      "input": "text/layers/10/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/10/mlp/down",
+      "input": "text/layers/10/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/11/attention/query",
+      "input": "text/layers/11/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/11/attention/gate",
+      "input": "text/layers/11/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/11/attention/key",
+      "input": "text/layers/11/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/11/attention/value",
+      "input": "text/layers/11/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/11/attention/output",
+      "input": "text/layers/11/attention/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/11/mlp/gate",
+      "input": "text/layers/11/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/11/mlp/up",
+      "input": "text/layers/11/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/11/mlp/down",
+      "input": "text/layers/11/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/12/gdn/a_projection",
+      "input": "text/layers/12/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/12/gdn/b_projection",
+      "input": "text/layers/12/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/12/gdn/query",
+      "input": "text/layers/12/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/12/gdn/key",
+      "input": "text/layers/12/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/12/gdn/value",
+      "input": "text/layers/12/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/12/gdn/z",
+      "input": "text/layers/12/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/12/gdn/output",
+      "input": "text/layers/12/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/12/mlp/gate",
+      "input": "text/layers/12/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/12/mlp/up",
+      "input": "text/layers/12/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/12/mlp/down",
+      "input": "text/layers/12/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/13/gdn/a_projection",
+      "input": "text/layers/13/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/13/gdn/b_projection",
+      "input": "text/layers/13/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/13/gdn/query",
+      "input": "text/layers/13/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/13/gdn/key",
+      "input": "text/layers/13/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/13/gdn/value",
+      "input": "text/layers/13/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/13/gdn/z",
+      "input": "text/layers/13/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/13/gdn/output",
+      "input": "text/layers/13/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/13/mlp/gate",
+      "input": "text/layers/13/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/13/mlp/up",
+      "input": "text/layers/13/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/13/mlp/down",
+      "input": "text/layers/13/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/14/gdn/a_projection",
+      "input": "text/layers/14/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/14/gdn/b_projection",
+      "input": "text/layers/14/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/14/gdn/query",
+      "input": "text/layers/14/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/14/gdn/key",
+      "input": "text/layers/14/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/14/gdn/value",
+      "input": "text/layers/14/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/14/gdn/z",
+      "input": "text/layers/14/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/14/gdn/output",
+      "input": "text/layers/14/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/14/mlp/gate",
+      "input": "text/layers/14/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/14/mlp/up",
+      "input": "text/layers/14/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/14/mlp/down",
+      "input": "text/layers/14/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/15/attention/query",
+      "input": "text/layers/15/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/15/attention/gate",
+      "input": "text/layers/15/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/15/attention/key",
+      "input": "text/layers/15/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/15/attention/value",
+      "input": "text/layers/15/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/15/attention/output",
+      "input": "text/layers/15/attention/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/15/mlp/gate",
+      "input": "text/layers/15/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/15/mlp/up",
+      "input": "text/layers/15/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/15/mlp/down",
+      "input": "text/layers/15/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/16/gdn/a_projection",
+      "input": "text/layers/16/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/16/gdn/b_projection",
+      "input": "text/layers/16/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/16/gdn/query",
+      "input": "text/layers/16/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/16/gdn/key",
+      "input": "text/layers/16/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/16/gdn/value",
+      "input": "text/layers/16/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/16/gdn/z",
+      "input": "text/layers/16/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/16/gdn/output",
+      "input": "text/layers/16/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/16/mlp/gate",
+      "input": "text/layers/16/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/16/mlp/up",
+      "input": "text/layers/16/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/16/mlp/down",
+      "input": "text/layers/16/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/17/gdn/a_projection",
+      "input": "text/layers/17/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/17/gdn/b_projection",
+      "input": "text/layers/17/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/17/gdn/query",
+      "input": "text/layers/17/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/17/gdn/key",
+      "input": "text/layers/17/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/17/gdn/value",
+      "input": "text/layers/17/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/17/gdn/z",
+      "input": "text/layers/17/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/17/gdn/output",
+      "input": "text/layers/17/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/17/mlp/gate",
+      "input": "text/layers/17/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/17/mlp/up",
+      "input": "text/layers/17/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/17/mlp/down",
+      "input": "text/layers/17/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/18/gdn/a_projection",
+      "input": "text/layers/18/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/18/gdn/b_projection",
+      "input": "text/layers/18/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/18/gdn/query",
+      "input": "text/layers/18/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/18/gdn/key",
+      "input": "text/layers/18/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/18/gdn/value",
+      "input": "text/layers/18/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/18/gdn/z",
+      "input": "text/layers/18/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/18/gdn/output",
+      "input": "text/layers/18/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/18/mlp/gate",
+      "input": "text/layers/18/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/18/mlp/up",
+      "input": "text/layers/18/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/18/mlp/down",
+      "input": "text/layers/18/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/19/attention/query",
+      "input": "text/layers/19/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/19/attention/gate",
+      "input": "text/layers/19/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/19/attention/key",
+      "input": "text/layers/19/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/19/attention/value",
+      "input": "text/layers/19/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/19/attention/output",
+      "input": "text/layers/19/attention/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/19/mlp/gate",
+      "input": "text/layers/19/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/19/mlp/up",
+      "input": "text/layers/19/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/19/mlp/down",
+      "input": "text/layers/19/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/20/gdn/a_projection",
+      "input": "text/layers/20/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/20/gdn/b_projection",
+      "input": "text/layers/20/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/20/gdn/query",
+      "input": "text/layers/20/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/20/gdn/key",
+      "input": "text/layers/20/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/20/gdn/value",
+      "input": "text/layers/20/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/20/gdn/z",
+      "input": "text/layers/20/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/20/gdn/output",
+      "input": "text/layers/20/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/20/mlp/gate",
+      "input": "text/layers/20/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/20/mlp/up",
+      "input": "text/layers/20/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/20/mlp/down",
+      "input": "text/layers/20/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/21/gdn/a_projection",
+      "input": "text/layers/21/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/21/gdn/b_projection",
+      "input": "text/layers/21/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/21/gdn/query",
+      "input": "text/layers/21/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/21/gdn/key",
+      "input": "text/layers/21/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/21/gdn/value",
+      "input": "text/layers/21/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/21/gdn/z",
+      "input": "text/layers/21/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/21/gdn/output",
+      "input": "text/layers/21/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/21/mlp/gate",
+      "input": "text/layers/21/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/21/mlp/up",
+      "input": "text/layers/21/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/21/mlp/down",
+      "input": "text/layers/21/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/22/gdn/a_projection",
+      "input": "text/layers/22/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/22/gdn/b_projection",
+      "input": "text/layers/22/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/22/gdn/query",
+      "input": "text/layers/22/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/22/gdn/key",
+      "input": "text/layers/22/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/22/gdn/value",
+      "input": "text/layers/22/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/22/gdn/z",
+      "input": "text/layers/22/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/22/gdn/output",
+      "input": "text/layers/22/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/22/mlp/gate",
+      "input": "text/layers/22/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/22/mlp/up",
+      "input": "text/layers/22/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/22/mlp/down",
+      "input": "text/layers/22/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/23/attention/query",
+      "input": "text/layers/23/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/23/attention/gate",
+      "input": "text/layers/23/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/23/attention/key",
+      "input": "text/layers/23/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/23/attention/value",
+      "input": "text/layers/23/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/23/attention/output",
+      "input": "text/layers/23/attention/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/23/mlp/gate",
+      "input": "text/layers/23/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/23/mlp/up",
+      "input": "text/layers/23/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/23/mlp/down",
+      "input": "text/layers/23/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/24/gdn/a_projection",
+      "input": "text/layers/24/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/24/gdn/b_projection",
+      "input": "text/layers/24/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/24/gdn/query",
+      "input": "text/layers/24/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/24/gdn/key",
+      "input": "text/layers/24/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/24/gdn/value",
+      "input": "text/layers/24/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/24/gdn/z",
+      "input": "text/layers/24/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/24/gdn/output",
+      "input": "text/layers/24/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/24/mlp/gate",
+      "input": "text/layers/24/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/24/mlp/up",
+      "input": "text/layers/24/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/24/mlp/down",
+      "input": "text/layers/24/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/25/gdn/a_projection",
+      "input": "text/layers/25/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/25/gdn/b_projection",
+      "input": "text/layers/25/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/25/gdn/query",
+      "input": "text/layers/25/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/25/gdn/key",
+      "input": "text/layers/25/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/25/gdn/value",
+      "input": "text/layers/25/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/25/gdn/z",
+      "input": "text/layers/25/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/25/gdn/output",
+      "input": "text/layers/25/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/25/mlp/gate",
+      "input": "text/layers/25/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/25/mlp/up",
+      "input": "text/layers/25/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/25/mlp/down",
+      "input": "text/layers/25/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/26/gdn/a_projection",
+      "input": "text/layers/26/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/26/gdn/b_projection",
+      "input": "text/layers/26/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/26/gdn/query",
+      "input": "text/layers/26/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/26/gdn/key",
+      "input": "text/layers/26/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/26/gdn/value",
+      "input": "text/layers/26/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/26/gdn/z",
+      "input": "text/layers/26/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/26/gdn/output",
+      "input": "text/layers/26/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/26/mlp/gate",
+      "input": "text/layers/26/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/26/mlp/up",
+      "input": "text/layers/26/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/26/mlp/down",
+      "input": "text/layers/26/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/27/attention/query",
+      "input": "text/layers/27/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/27/attention/gate",
+      "input": "text/layers/27/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/27/attention/key",
+      "input": "text/layers/27/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/27/attention/value",
+      "input": "text/layers/27/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/27/attention/output",
+      "input": "text/layers/27/attention/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/27/mlp/gate",
+      "input": "text/layers/27/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/27/mlp/up",
+      "input": "text/layers/27/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/27/mlp/down",
+      "input": "text/layers/27/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/28/gdn/a_projection",
+      "input": "text/layers/28/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/28/gdn/b_projection",
+      "input": "text/layers/28/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/28/gdn/query",
+      "input": "text/layers/28/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/28/gdn/key",
+      "input": "text/layers/28/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/28/gdn/value",
+      "input": "text/layers/28/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/28/gdn/z",
+      "input": "text/layers/28/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/28/gdn/output",
+      "input": "text/layers/28/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/28/mlp/gate",
+      "input": "text/layers/28/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/28/mlp/up",
+      "input": "text/layers/28/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/28/mlp/down",
+      "input": "text/layers/28/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/29/gdn/a_projection",
+      "input": "text/layers/29/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/29/gdn/b_projection",
+      "input": "text/layers/29/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/29/gdn/query",
+      "input": "text/layers/29/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/29/gdn/key",
+      "input": "text/layers/29/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/29/gdn/value",
+      "input": "text/layers/29/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/29/gdn/z",
+      "input": "text/layers/29/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/29/gdn/output",
+      "input": "text/layers/29/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/29/mlp/gate",
+      "input": "text/layers/29/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/29/mlp/up",
+      "input": "text/layers/29/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/29/mlp/down",
+      "input": "text/layers/29/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/30/gdn/a_projection",
+      "input": "text/layers/30/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/30/gdn/b_projection",
+      "input": "text/layers/30/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/30/gdn/query",
+      "input": "text/layers/30/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/30/gdn/key",
+      "input": "text/layers/30/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/30/gdn/value",
+      "input": "text/layers/30/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/30/gdn/z",
+      "input": "text/layers/30/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/30/gdn/output",
+      "input": "text/layers/30/gdn/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/30/mlp/gate",
+      "input": "text/layers/30/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/30/mlp/up",
+      "input": "text/layers/30/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/30/mlp/down",
+      "input": "text/layers/30/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/31/attention/query",
+      "input": "text/layers/31/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/31/attention/gate",
+      "input": "text/layers/31/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/31/attention/key",
+      "input": "text/layers/31/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/31/attention/value",
+      "input": "text/layers/31/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/31/attention/output",
+      "input": "text/layers/31/attention/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/31/mlp/gate",
+      "input": "text/layers/31/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/31/mlp/up",
+      "input": "text/layers/31/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "text/layers/31/mlp/down",
+      "input": "text/layers/31/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "mtp/input_projection",
+      "input": "mtp/stem_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "mtp/layers/0/attention/query",
+      "input": "mtp/layers/0/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "mtp/layers/0/attention/gate",
+      "input": "mtp/layers/0/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "mtp/layers/0/attention/key",
+      "input": "mtp/layers/0/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "mtp/layers/0/attention/value",
+      "input": "mtp/layers/0/mixer_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "mtp/layers/0/attention/output",
+      "input": "mtp/layers/0/attention/gated_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "mtp/layers/0/mlp/gate",
+      "input": "mtp/layers/0/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "mtp/layers/0/mlp/up",
+      "input": "mtp/layers/0/ffn_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "mtp/layers/0/mlp/down",
+      "input": "mtp/layers/0/mlp/product",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/patch_embedding",
+      "input": "vision/patch_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/0/attention/query",
+      "input": "vision/layers/0/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/0/attention/key",
+      "input": "vision/layers/0/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/0/attention/value",
+      "input": "vision/layers/0/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/0/attention/output",
+      "input": "vision/layers/0/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/0/mlp/fc1",
+      "input": "vision/layers/0/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/0/mlp/fc2",
+      "input": "vision/layers/0/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/1/attention/query",
+      "input": "vision/layers/1/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/1/attention/key",
+      "input": "vision/layers/1/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/1/attention/value",
+      "input": "vision/layers/1/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/1/attention/output",
+      "input": "vision/layers/1/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/1/mlp/fc1",
+      "input": "vision/layers/1/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/1/mlp/fc2",
+      "input": "vision/layers/1/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/2/attention/query",
+      "input": "vision/layers/2/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/2/attention/key",
+      "input": "vision/layers/2/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/2/attention/value",
+      "input": "vision/layers/2/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/2/attention/output",
+      "input": "vision/layers/2/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/2/mlp/fc1",
+      "input": "vision/layers/2/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/2/mlp/fc2",
+      "input": "vision/layers/2/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/3/attention/query",
+      "input": "vision/layers/3/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/3/attention/key",
+      "input": "vision/layers/3/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/3/attention/value",
+      "input": "vision/layers/3/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/3/attention/output",
+      "input": "vision/layers/3/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/3/mlp/fc1",
+      "input": "vision/layers/3/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/3/mlp/fc2",
+      "input": "vision/layers/3/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/4/attention/query",
+      "input": "vision/layers/4/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/4/attention/key",
+      "input": "vision/layers/4/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/4/attention/value",
+      "input": "vision/layers/4/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/4/attention/output",
+      "input": "vision/layers/4/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/4/mlp/fc1",
+      "input": "vision/layers/4/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/4/mlp/fc2",
+      "input": "vision/layers/4/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/5/attention/query",
+      "input": "vision/layers/5/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/5/attention/key",
+      "input": "vision/layers/5/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/5/attention/value",
+      "input": "vision/layers/5/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/5/attention/output",
+      "input": "vision/layers/5/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/5/mlp/fc1",
+      "input": "vision/layers/5/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/5/mlp/fc2",
+      "input": "vision/layers/5/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/6/attention/query",
+      "input": "vision/layers/6/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/6/attention/key",
+      "input": "vision/layers/6/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/6/attention/value",
+      "input": "vision/layers/6/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/6/attention/output",
+      "input": "vision/layers/6/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/6/mlp/fc1",
+      "input": "vision/layers/6/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/6/mlp/fc2",
+      "input": "vision/layers/6/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/7/attention/query",
+      "input": "vision/layers/7/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/7/attention/key",
+      "input": "vision/layers/7/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/7/attention/value",
+      "input": "vision/layers/7/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/7/attention/output",
+      "input": "vision/layers/7/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/7/mlp/fc1",
+      "input": "vision/layers/7/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/7/mlp/fc2",
+      "input": "vision/layers/7/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/8/attention/query",
+      "input": "vision/layers/8/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/8/attention/key",
+      "input": "vision/layers/8/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/8/attention/value",
+      "input": "vision/layers/8/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/8/attention/output",
+      "input": "vision/layers/8/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/8/mlp/fc1",
+      "input": "vision/layers/8/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/8/mlp/fc2",
+      "input": "vision/layers/8/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/9/attention/query",
+      "input": "vision/layers/9/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/9/attention/key",
+      "input": "vision/layers/9/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/9/attention/value",
+      "input": "vision/layers/9/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/9/attention/output",
+      "input": "vision/layers/9/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/9/mlp/fc1",
+      "input": "vision/layers/9/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/9/mlp/fc2",
+      "input": "vision/layers/9/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/10/attention/query",
+      "input": "vision/layers/10/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/10/attention/key",
+      "input": "vision/layers/10/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/10/attention/value",
+      "input": "vision/layers/10/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/10/attention/output",
+      "input": "vision/layers/10/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/10/mlp/fc1",
+      "input": "vision/layers/10/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/10/mlp/fc2",
+      "input": "vision/layers/10/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/11/attention/query",
+      "input": "vision/layers/11/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/11/attention/key",
+      "input": "vision/layers/11/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/11/attention/value",
+      "input": "vision/layers/11/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/11/attention/output",
+      "input": "vision/layers/11/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/11/mlp/fc1",
+      "input": "vision/layers/11/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/11/mlp/fc2",
+      "input": "vision/layers/11/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/12/attention/query",
+      "input": "vision/layers/12/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/12/attention/key",
+      "input": "vision/layers/12/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/12/attention/value",
+      "input": "vision/layers/12/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/12/attention/output",
+      "input": "vision/layers/12/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/12/mlp/fc1",
+      "input": "vision/layers/12/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/12/mlp/fc2",
+      "input": "vision/layers/12/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/13/attention/query",
+      "input": "vision/layers/13/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/13/attention/key",
+      "input": "vision/layers/13/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/13/attention/value",
+      "input": "vision/layers/13/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/13/attention/output",
+      "input": "vision/layers/13/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/13/mlp/fc1",
+      "input": "vision/layers/13/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/13/mlp/fc2",
+      "input": "vision/layers/13/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/14/attention/query",
+      "input": "vision/layers/14/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/14/attention/key",
+      "input": "vision/layers/14/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/14/attention/value",
+      "input": "vision/layers/14/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/14/attention/output",
+      "input": "vision/layers/14/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/14/mlp/fc1",
+      "input": "vision/layers/14/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/14/mlp/fc2",
+      "input": "vision/layers/14/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/15/attention/query",
+      "input": "vision/layers/15/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/15/attention/key",
+      "input": "vision/layers/15/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/15/attention/value",
+      "input": "vision/layers/15/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/15/attention/output",
+      "input": "vision/layers/15/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/15/mlp/fc1",
+      "input": "vision/layers/15/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/15/mlp/fc2",
+      "input": "vision/layers/15/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/16/attention/query",
+      "input": "vision/layers/16/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/16/attention/key",
+      "input": "vision/layers/16/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/16/attention/value",
+      "input": "vision/layers/16/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/16/attention/output",
+      "input": "vision/layers/16/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/16/mlp/fc1",
+      "input": "vision/layers/16/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/16/mlp/fc2",
+      "input": "vision/layers/16/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/17/attention/query",
+      "input": "vision/layers/17/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/17/attention/key",
+      "input": "vision/layers/17/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/17/attention/value",
+      "input": "vision/layers/17/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/17/attention/output",
+      "input": "vision/layers/17/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/17/mlp/fc1",
+      "input": "vision/layers/17/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/17/mlp/fc2",
+      "input": "vision/layers/17/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/18/attention/query",
+      "input": "vision/layers/18/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/18/attention/key",
+      "input": "vision/layers/18/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/18/attention/value",
+      "input": "vision/layers/18/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/18/attention/output",
+      "input": "vision/layers/18/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/18/mlp/fc1",
+      "input": "vision/layers/18/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/18/mlp/fc2",
+      "input": "vision/layers/18/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/19/attention/query",
+      "input": "vision/layers/19/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/19/attention/key",
+      "input": "vision/layers/19/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/19/attention/value",
+      "input": "vision/layers/19/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/19/attention/output",
+      "input": "vision/layers/19/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/19/mlp/fc1",
+      "input": "vision/layers/19/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/19/mlp/fc2",
+      "input": "vision/layers/19/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/20/attention/query",
+      "input": "vision/layers/20/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/20/attention/key",
+      "input": "vision/layers/20/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/20/attention/value",
+      "input": "vision/layers/20/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/20/attention/output",
+      "input": "vision/layers/20/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/20/mlp/fc1",
+      "input": "vision/layers/20/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/20/mlp/fc2",
+      "input": "vision/layers/20/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/21/attention/query",
+      "input": "vision/layers/21/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/21/attention/key",
+      "input": "vision/layers/21/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/21/attention/value",
+      "input": "vision/layers/21/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/21/attention/output",
+      "input": "vision/layers/21/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/21/mlp/fc1",
+      "input": "vision/layers/21/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/21/mlp/fc2",
+      "input": "vision/layers/21/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/22/attention/query",
+      "input": "vision/layers/22/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/22/attention/key",
+      "input": "vision/layers/22/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/22/attention/value",
+      "input": "vision/layers/22/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/22/attention/output",
+      "input": "vision/layers/22/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/22/mlp/fc1",
+      "input": "vision/layers/22/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/22/mlp/fc2",
+      "input": "vision/layers/22/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/23/attention/query",
+      "input": "vision/layers/23/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/23/attention/key",
+      "input": "vision/layers/23/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/23/attention/value",
+      "input": "vision/layers/23/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/23/attention/output",
+      "input": "vision/layers/23/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/23/mlp/fc1",
+      "input": "vision/layers/23/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/23/mlp/fc2",
+      "input": "vision/layers/23/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/24/attention/query",
+      "input": "vision/layers/24/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/24/attention/key",
+      "input": "vision/layers/24/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/24/attention/value",
+      "input": "vision/layers/24/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/24/attention/output",
+      "input": "vision/layers/24/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/24/mlp/fc1",
+      "input": "vision/layers/24/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/24/mlp/fc2",
+      "input": "vision/layers/24/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/25/attention/query",
+      "input": "vision/layers/25/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/25/attention/key",
+      "input": "vision/layers/25/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/25/attention/value",
+      "input": "vision/layers/25/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/25/attention/output",
+      "input": "vision/layers/25/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/25/mlp/fc1",
+      "input": "vision/layers/25/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/25/mlp/fc2",
+      "input": "vision/layers/25/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/26/attention/query",
+      "input": "vision/layers/26/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/26/attention/key",
+      "input": "vision/layers/26/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/26/attention/value",
+      "input": "vision/layers/26/attention_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/26/attention/output",
+      "input": "vision/layers/26/attention_output",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/26/mlp/fc1",
+      "input": "vision/layers/26/mlp_input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/layers/26/mlp/fc2",
+      "input": "vision/layers/26/mlp_activation",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/merger/fc1",
+      "input": "vision/merger/input",
+      "activation_policy": "A16Only"
+    },
+    {
+      "parameter": "vision/merger/fc2",
+      "input": "vision/merger/activation",
+      "activation_policy": "A16Only"
+    }
+  ]
+}

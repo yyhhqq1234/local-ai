@@ -1,0 +1,9313 @@
+{
+  "path": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\local-pack\\qwen3_8_27b_kittyrev_iq2s.ninfer",
+  "version": 3,
+  "artifact_id": "ce143d575049439bb78aa9e6040d9050",
+  "name": "qwen3.8-27b-kittyrev-iq2s",
+  "components": {
+    "text": {
+      "config": {
+        "architectures": [
+          "Qwen3_5ForCausalLM"
+        ],
+        "model_type": "qwen3_5_text",
+        "hidden_size": 5120,
+        "vocab_size": 248320,
+        "num_hidden_layers": 64,
+        "max_position_embeddings": 262144,
+        "tie_word_embeddings": false,
+        "rms_norm_eps": 9.999999974752427e-07,
+        "layer_types": [
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention"
+        ],
+        "num_attention_heads": 24,
+        "num_key_value_heads": 4,
+        "head_dim": 256,
+        "rope_parameters": {
+          "rope_theta": 10000000.0,
+          "partial_rotary_factor": 0.25,
+          "mrope_section": [
+            11,
+            11,
+            10
+          ]
+        },
+        "linear_num_key_heads": 16,
+        "linear_key_head_dim": 128,
+        "linear_num_value_heads": 48,
+        "linear_value_head_dim": 128,
+        "linear_conv_kernel_dim": 4,
+        "intermediate_size": 17408
+      },
+      "resources": {
+        "tokenizer.json": "resource/text/tokenizer.json",
+        "tokenizer_config.json": "resource/text/tokenizer_config.json",
+        "chat_template.jinja": "resource/text/chat_template.jinja",
+        "generation_config.json": "resource/text/generation_config.json"
+      }
+    }
+  },
+  "file_bytes": 9407284736,
+  "payload_bytes": 9407038976,
+  "files": 1,
+  "objects": 792,
+  "tensors": 788,
+  "resources": 4,
+  "bindings": 963,
+  "uses": 609,
+  "formats": {
+    "bf16": 353,
+    "fp32": 96,
+    "gguf_iq2_xs": 248,
+    "gguf_iq3_s": 25,
+    "gguf_q4_k": 64,
+    "gguf_q5_k": 1,
+    "int32": 1
+  },
+  "layouts": {
+    "contiguous_le_v1": 450,
+    "gguf_blocks_v1": 338
+  },
+  "object_records": [
+    {
+      "id": "resource/text/tokenizer.json",
+      "encoding": "raw_bytes_v1",
+      "offset": 0,
+      "bytes": 19989339,
+      "kind": "resource"
+    },
+    {
+      "id": "resource/text/tokenizer_config.json",
+      "encoding": "raw_bytes_v1",
+      "offset": 19989339,
+      "bytes": 5821,
+      "kind": "resource"
+    },
+    {
+      "id": "resource/text/chat_template.jinja",
+      "encoding": "raw_bytes_v1",
+      "offset": 19995160,
+      "bytes": 8952,
+      "kind": "resource"
+    },
+    {
+      "id": "resource/text/generation_config.json",
+      "encoding": "raw_bytes_v1",
+      "offset": 20004112,
+      "bytes": 214,
+      "kind": "resource"
+    },
+    {
+      "id": "weight/000000",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 20004352,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000001",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 49495552,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000002",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 101023232,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000003",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 130514432,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000004",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 182042112,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000005",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 211533312,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000006",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 263060992,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000007",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 314588672,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000008",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 344079872,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000009",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 395607552,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000010",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 425098752,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000011",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 476626432,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000012",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 506117632,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000013",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 557645312,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000014",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 609172992,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000015",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 638664192,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000016",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 690191872,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000017",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 719683072,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000018",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 771210752,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000019",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 800701952,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000020",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 852229632,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000021",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 903757312,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000022",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 933248512,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000023",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 984776192,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000024",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 1014267392,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000025",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 1065795072,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000026",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 1095286272,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000027",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 1146813952,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000028",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 1198341632,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000029",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 1227832832,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000030",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 1279360512,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000031",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 1308851712,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000032",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 1360379392,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000033",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 1389870592,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000034",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 1441398272,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000035",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 1492925952,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000036",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 1522417152,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000037",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 1573944832,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000038",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 1603436032,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000039",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 1654963712,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000040",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 1684454912,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000041",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 1735982592,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000042",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 1787510272,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000043",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 1817001472,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000044",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 1868529152,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000045",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 1898020352,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000046",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 1949548032,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000047",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 1979039232,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000048",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 2030566912,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000049",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 2082094592,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000050",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 2111585792,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000051",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 2163113472,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000052",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 2192604672,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000053",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 2244132352,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000054",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 2273623552,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000055",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 2325151232,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000056",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 2376678912,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000057",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 2406170112,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000058",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 2457697792,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000059",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 2487188992,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000060",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 2538716672,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000061",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 2568207872,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000062",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 2619735552,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000063",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 2671263232,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000064",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 2700754432,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000065",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 2752282112,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000066",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 2781773312,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000067",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 2833300992,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000068",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 2862792192,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000069",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 2914319872,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000070",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 2965847552,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000071",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 2995338752,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000072",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 3046866432,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000073",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 3076357632,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000074",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 3127885312,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000075",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 3157376512,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000076",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 3208904192,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000077",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 3260431872,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000078",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 3289923072,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000079",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 3341450752,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000080",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 3370941952,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000081",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 3422469632,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000082",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 3451960832,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000083",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 3503488512,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000084",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 3555016192,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000085",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 3584507392,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000086",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 3636035072,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000087",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 3665526272,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000088",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 3717053952,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000089",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 3746545152,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000090",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 3798072832,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000091",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 3849600512,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000092",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 3879091712,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000093",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 3930619392,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000094",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 3960110592,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000095",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 4011638272,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000096",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4041129472,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000097",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4092657152,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000098",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 4144184832,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000099",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4173676032,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000100",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 4225203712,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000101",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4254694912,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000102",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 4306222592,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000103",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4335713792,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000104",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4387241472,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000105",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 4438769152,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000106",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4468260352,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000107",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 4519788032,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000108",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4549279232,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000109",
+      "shape": [
+        10240,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 4600806912,
+      "bytes": 29491200,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000110",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4630298112,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000111",
+      "shape": [
+        34816,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4681825792,
+      "bytes": 51527680,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000112",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4733353472,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000113",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4743962112,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000114",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4754570752,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000115",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4765179392,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000116",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4775788032,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000117",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4786396672,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000118",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4797005312,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000119",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4807613952,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000120",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4818222592,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000121",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4828831232,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000122",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4839439872,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000123",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4850048512,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000124",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4860657152,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000125",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4871265792,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000126",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4881874432,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000127",
+      "shape": [
+        7168,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 4892483072,
+      "bytes": 10608640,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000128",
+      "shape": [
+        248320,
+        5120
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 4903091712,
+      "bytes": 546304000,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000129",
+      "shape": [
+        248320,
+        5120
+      ],
+      "format": "gguf_q5_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 5449395712,
+      "bytes": 874086400,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000130",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6323482112,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000131",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6323492352,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000132",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6323502592,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000133",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6323502848,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000134",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6323503104,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000135",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6323585024,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000136",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6324076544,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000137",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6324568064,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000138",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6333661184,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000139",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6333661440,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000140",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6342754560,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000141",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 6342764800,
+      "bytes": 38297600,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000142",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6381062400,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000143",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6381072640,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000144",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6381072896,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000145",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6381073152,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000146",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6381155072,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000147",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6381646592,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000148",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6382138112,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000149",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6391231232,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000150",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6391231488,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000151",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6400324608,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000152",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 6400334848,
+      "bytes": 38297600,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000153",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6438632448,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000154",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6438642688,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000155",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6438642944,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000156",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6438643200,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000157",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6438725120,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000158",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6439216640,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000159",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6439708160,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000160",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6448801280,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000161",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6448801536,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000162",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6457894656,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000163",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 6457904896,
+      "bytes": 38297600,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000164",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6496202496,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000165",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6496212736,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000166",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 6505305856,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000167",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6508254976,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000168",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6508255488,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000169",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 6508256000,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000170",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6521772800,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000171",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 6521783040,
+      "bytes": 38297600,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000172",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6560080640,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000173",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6560090880,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000174",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6560091136,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000175",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6560091392,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000176",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6560173312,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000177",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6560664832,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000178",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6561156352,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000179",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6570249472,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000180",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6570249728,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000181",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6579342848,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000182",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 6579353088,
+      "bytes": 38297600,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000183",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6617650688,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000184",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6617660928,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000185",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6617661184,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000186",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6617661440,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000187",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6617743360,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000188",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6618234880,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000189",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6618726400,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000190",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6627819520,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000191",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6627819776,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000192",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6636912896,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000193",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 6636923136,
+      "bytes": 38297600,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000194",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6675220736,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000195",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6675230976,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000196",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6675231232,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000197",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6675231488,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000198",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6675313408,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000199",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6675804928,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000200",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6676296448,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000201",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6685389568,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000202",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6685389824,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000203",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6694482944,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000204",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 6694493184,
+      "bytes": 38297600,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000205",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6732790784,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000206",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6732801024,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000207",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 6741894144,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000208",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6744843264,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000209",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6744843776,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000210",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 6744844288,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000211",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6758361088,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000212",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 6758371328,
+      "bytes": 38297600,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000213",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6796668928,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000214",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6796679168,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000215",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6796679424,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000216",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6796679680,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000217",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6796761600,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000218",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6797253120,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000219",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6797744640,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000220",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6806837760,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000221",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6806838016,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000222",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6815931136,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000223",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6815941376,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000224",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6841705216,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000225",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6841715456,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000226",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6841715712,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000227",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6841715968,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000228",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6841797888,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000229",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6842289408,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000230",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6842780928,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000231",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6851874048,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000232",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6851874304,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000233",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6860967424,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000234",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6860977664,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000235",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6886741504,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000236",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6886751744,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000237",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6886752000,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000238",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6886752256,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000239",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6886834176,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000240",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6887325696,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000241",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6887817216,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000242",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6896910336,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000243",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6896910592,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000244",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6906003712,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000245",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6906013952,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000246",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6931777792,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000247",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6931788032,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000248",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 6940881152,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000249",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6943830272,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000250",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6943830784,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000251",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 6943831296,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000252",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6957348096,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000253",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6957358336,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000254",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6983122176,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000255",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6983132416,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000256",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 6983132672,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000257",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6983132928,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000258",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6983214848,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000259",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6983706368,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000260",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6984197888,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000261",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 6993291008,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000262",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 6993291264,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000263",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7002384384,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000264",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7002394624,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000265",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7028158464,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000266",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7028168704,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000267",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7028168960,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000268",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7028169216,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000269",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7028251136,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000270",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7028742656,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000271",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7029234176,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000272",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7038327296,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000273",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7038327552,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000274",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7047420672,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000275",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7047430912,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000276",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7073194752,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000277",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7073204992,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000278",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7073205248,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000279",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7073205504,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000280",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7073287424,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000281",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7073778944,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000282",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7074270464,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000283",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7083363584,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000284",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7083363840,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000285",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7092456960,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000286",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7092467200,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000287",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7118231040,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000288",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7118241280,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000289",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 7127334400,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000290",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7130283520,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000291",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7130284032,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000292",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 7130284544,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000293",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7143801344,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000294",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7143811584,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000295",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7169575424,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000296",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7169585664,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000297",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7169585920,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000298",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7169586176,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000299",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7169668096,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000300",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7170159616,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000301",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7170651136,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000302",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7179744256,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000303",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7179744512,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000304",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7188837632,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000305",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7188847872,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000306",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7214611712,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000307",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7214621952,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000308",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7214622208,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000309",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7214622464,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000310",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7214704384,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000311",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7215195904,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000312",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7215687424,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000313",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7224780544,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000314",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7224780800,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000315",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7233873920,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000316",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7233884160,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000317",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7259648000,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000318",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7259658240,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000319",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7259658496,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000320",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7259658752,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000321",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7259740672,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000322",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7260232192,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000323",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7260723712,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000324",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7269816832,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000325",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7269817088,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000326",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7278910208,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000327",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7278920448,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000328",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7304684288,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000329",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7304694528,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000330",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 7313787648,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000331",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7316736768,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000332",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7316737280,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000333",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 7316737792,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000334",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7330254592,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000335",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7330264832,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000336",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7356028672,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000337",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7356038912,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000338",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7356039168,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000339",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7356039424,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000340",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7356121344,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000341",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7356612864,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000342",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7357104384,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000343",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7366197504,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000344",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7366197760,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000345",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7375290880,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000346",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7375301120,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000347",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7401064960,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000348",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7401075200,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000349",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7401075456,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000350",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7401075712,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000351",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7401157632,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000352",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7401649152,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000353",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7402140672,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000354",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7411233792,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000355",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7411234048,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000356",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7420327168,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000357",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7420337408,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000358",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7446101248,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000359",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7446111488,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000360",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7446111744,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000361",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7446112000,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000362",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7446193920,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000363",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7446685440,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000364",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7447176960,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000365",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7456270080,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000366",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7456270336,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000367",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7465363456,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000368",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7465373696,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000369",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7491137536,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000370",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7491147776,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000371",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 7500240896,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000372",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7503190016,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000373",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7503190528,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000374",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 7503191040,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000375",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7516707840,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000376",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7516718080,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000377",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7542481920,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000378",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7542492160,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000379",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7542492416,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000380",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7542492672,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000381",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7542574592,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000382",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7543066112,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000383",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7543557632,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000384",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7552650752,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000385",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7552651008,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000386",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7561744128,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000387",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7561754368,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000388",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7587518208,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000389",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7587528448,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000390",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7587528704,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000391",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7587528960,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000392",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7587610880,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000393",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7588102400,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000394",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7588593920,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000395",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7597687040,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000396",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7597687296,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000397",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7606780416,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000398",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7606790656,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000399",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7632554496,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000400",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7632564736,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000401",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7632564992,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000402",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7632565248,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000403",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7632647168,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000404",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7633138688,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000405",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7633630208,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000406",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7642723328,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000407",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7642723584,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000408",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7651816704,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000409",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7651826944,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000410",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7677590784,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000411",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7677601024,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000412",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 7686694144,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000413",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7689643264,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000414",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7689643776,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000415",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 7689644288,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000416",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7703161088,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000417",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7703171328,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000418",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7728935168,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000419",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7728945408,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000420",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7728945664,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000421",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7728945920,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000422",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7729027840,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000423",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7729519360,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000424",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7730010880,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000425",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7739104000,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000426",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7739104256,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000427",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7748197376,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000428",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7748207616,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000429",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7773971456,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000430",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7773981696,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000431",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7773981952,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000432",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7773982208,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000433",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7774064128,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000434",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7774555648,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000435",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7775047168,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000436",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7784140288,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000437",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7784140544,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000438",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7793233664,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000439",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7793243904,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000440",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7819007744,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000441",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7819017984,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000442",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7819018240,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000443",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7819018496,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000444",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7819100416,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000445",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7819591936,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000446",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7820083456,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000447",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7829176576,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000448",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7829176832,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000449",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7838269952,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000450",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7838280192,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000451",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7864044032,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000452",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7864054272,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000453",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 7873147392,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000454",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7876096512,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000455",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7876097024,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000456",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 7876097536,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000457",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7889614336,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000458",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7889624576,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000459",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7915388416,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000460",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7915398656,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000461",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7915398912,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000462",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7915399168,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000463",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7915481088,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000464",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7915972608,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000465",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7916464128,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000466",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7925557248,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000467",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7925557504,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000468",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7934650624,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000469",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7934660864,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000470",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7960424704,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000471",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7960434944,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000472",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 7960435200,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000473",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7960435456,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000474",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7960517376,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000475",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7961008896,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000476",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7961500416,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000477",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7970593536,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000478",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7970593792,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000479",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 7979686912,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000480",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 7979697152,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000481",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8005460992,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000482",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8005471232,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000483",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8005471488,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000484",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8005471744,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000485",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8005553664,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000486",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8006045184,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000487",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8006536704,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000488",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8015629824,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000489",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8015630080,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000490",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8024723200,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000491",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8024733440,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000492",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8050497280,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000493",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8050507520,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000494",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 8059600640,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000495",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8062549760,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000496",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8062550272,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000497",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 8062550784,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000498",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8076067584,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000499",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8076077824,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000500",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8101841664,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000501",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8101851904,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000502",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8101852160,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000503",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8101852416,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000504",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8101934336,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000505",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8102425856,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000506",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8102917376,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000507",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8112010496,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000508",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8112010752,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000509",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8121103872,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000510",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8121114112,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000511",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8146877952,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000512",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8146888192,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000513",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8146888448,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000514",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8146888704,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000515",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8146970624,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000516",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8147462144,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000517",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8147953664,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000518",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8157046784,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000519",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8157047040,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000520",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8166140160,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000521",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8166150400,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000522",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8191914240,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000523",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8191924480,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000524",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8191924736,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000525",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8191924992,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000526",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8192006912,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000527",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8192498432,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000528",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8192989952,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000529",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8202083072,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000530",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8202083328,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000531",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8211176448,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000532",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8211186688,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000533",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8236950528,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000534",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8236960768,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000535",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 8246053888,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000536",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8249003008,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000537",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8249003520,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000538",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 8249004032,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000539",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8262520832,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000540",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8262531072,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000541",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8288294912,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000542",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8288305152,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000543",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8288305408,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000544",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8288305664,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000545",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8288387584,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000546",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8288879104,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000547",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8289370624,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000548",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8298463744,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000549",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8298464000,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000550",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8307557120,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000551",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8307567360,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000552",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8333331200,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000553",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8333341440,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000554",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8333341696,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000555",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8333341952,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000556",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8333423872,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000557",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8333915392,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000558",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8334406912,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000559",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8343500032,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000560",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8343500288,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000561",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8352593408,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000562",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8352603648,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000563",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8378367488,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000564",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8378377728,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000565",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8378377984,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000566",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8378378240,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000567",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8378460160,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000568",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8378951680,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000569",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8379443200,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000570",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8388536320,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000571",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8388536576,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000572",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8397629696,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000573",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8397639936,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000574",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8423403776,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000575",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8423414016,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000576",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 8432507136,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000577",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8435456256,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000578",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8435456768,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000579",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 8435457280,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000580",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8448974080,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000581",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8448984320,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000582",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8474748160,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000583",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8474758400,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000584",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8474758656,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000585",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8474758912,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000586",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8474840832,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000587",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8475332352,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000588",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8475823872,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000589",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8484916992,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000590",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8484917248,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000591",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8494010368,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000592",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8494020608,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000593",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8519784448,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000594",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8519794688,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000595",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8519794944,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000596",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8519795200,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000597",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8519877120,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000598",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8520368640,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000599",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8520860160,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000600",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8529953280,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000601",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8529953536,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000602",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8539046656,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000603",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8539056896,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000604",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8564820736,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000605",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8564830976,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000606",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8564831232,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000607",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8564831488,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000608",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8564913408,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000609",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8565404928,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000610",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8565896448,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000611",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8574989568,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000612",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8574989824,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000613",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8584082944,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000614",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8584093184,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000615",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8609857024,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000616",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8609867264,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000617",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 8618960384,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000618",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8621909504,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000619",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8621910016,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000620",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 8621910528,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000621",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8635427328,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000622",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8635437568,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000623",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8661201408,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000624",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8661211648,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000625",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8661211904,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000626",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8661212160,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000627",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8661294080,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000628",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8661785600,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000629",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8662277120,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000630",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8671370240,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000631",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8671370496,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000632",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8680463616,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000633",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8680473856,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000634",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8706237696,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000635",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8706247936,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000636",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8706248192,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000637",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8706248448,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000638",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8706330368,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000639",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8706821888,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000640",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8707313408,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000641",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8716406528,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000642",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8716406784,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000643",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8725499904,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000644",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8725510144,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000645",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8751273984,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000646",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8751284224,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000647",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8751284480,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000648",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8751284736,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000649",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8751366656,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000650",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8751858176,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000651",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8752349696,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000652",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8761442816,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000653",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8761443072,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000654",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8770536192,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000655",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8770546432,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000656",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8796310272,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000657",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8796320512,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000658",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 8805413632,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000659",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8808362752,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000660",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8808363264,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000661",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 8808363776,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000662",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8821880576,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000663",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8821890816,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000664",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8847654656,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000665",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8847664896,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000666",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8847665152,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000667",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8847665408,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000668",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8847747328,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000669",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8848238848,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000670",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8848730368,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000671",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8857823488,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000672",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8857823744,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000673",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8866916864,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000674",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8866927104,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000675",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8892690944,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000676",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8892701184,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000677",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8892701440,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000678",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8892701696,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000679",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8892783616,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000680",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8893275136,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000681",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8893766656,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000682",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8902859776,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000683",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8902860032,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000684",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8911953152,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000685",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8911963392,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000686",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8937727232,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000687",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8937737472,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000688",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 8937737728,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000689",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8937737984,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000690",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8937819904,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000691",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8938311424,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000692",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8938802944,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000693",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8947896064,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000694",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8947896320,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000695",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8956989440,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000696",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8956999680,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000697",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8982763520,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000698",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 8982773760,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000699",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 8991866880,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000700",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8994816000,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000701",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 8994816512,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000702",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 8994817024,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000703",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9008333824,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000704",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9008344064,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000705",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9034107904,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000706",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 9034118144,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000707",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 9034118400,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000708",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9034118656,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000709",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9034200576,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000710",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9034692096,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000711",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9035183616,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000712",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9044276736,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000713",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9044276992,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000714",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9053370112,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000715",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9053380352,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000716",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9079144192,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000717",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 9079154432,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000718",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 9079154688,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000719",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9079154944,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000720",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9079236864,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000721",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9079728384,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000722",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9080219904,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000723",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9089313024,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000724",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9089313280,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000725",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9098406400,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000726",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9098416640,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000727",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9124180480,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000728",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 9124190720,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000729",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 9124190976,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000730",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9124191232,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000731",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9124273152,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000732",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9124764672,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000733",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9125256192,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000734",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9134349312,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000735",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9134349568,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000736",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9143442688,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000737",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9143452928,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000738",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9169216768,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000739",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9169227008,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000740",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 9178320128,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000741",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9181269248,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000742",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9181269760,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000743",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 9181270272,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000744",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9194787072,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000745",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9194797312,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000746",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9220561152,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000747",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 9220571392,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000748",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 9220571648,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000749",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9220571904,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000750",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9220653824,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000751",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9221145344,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000752",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9221636864,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000753",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9230729984,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000754",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9230730240,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000755",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9239823360,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000756",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9239833600,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000757",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9265597440,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000758",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 9265607680,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000759",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 9265607936,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000760",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9265608192,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000761",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9265690112,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000762",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9266181632,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000763",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9266673152,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000764",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9275766272,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000765",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9275766528,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000766",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9284859648,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000767",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9284869888,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000768",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9310633728,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000769",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 9310643968,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000770",
+      "shape": [
+        48
+      ],
+      "format": "fp32",
+      "layout": "contiguous_le_v1",
+      "offset": 9310644224,
+      "bytes": 192,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000771",
+      "shape": [
+        4,
+        10240
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9310644480,
+      "bytes": 81920,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000772",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9310726400,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000773",
+      "shape": [
+        48,
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9311217920,
+      "bytes": 491520,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000774",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9311709440,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000775",
+      "shape": [
+        128
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9320802560,
+      "bytes": 256,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000776",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9320802816,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000777",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9329895936,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000778",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9329906176,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000779",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9355670016,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000780",
+      "shape": [
+        6144,
+        5120
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9355680256,
+      "bytes": 9093120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000781",
+      "shape": [
+        1024,
+        5120
+      ],
+      "format": "gguf_q4_k",
+      "layout": "gguf_blocks_v1",
+      "offset": 9364773376,
+      "bytes": 2949120,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000782",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9367722496,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000783",
+      "shape": [
+        256
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9367723008,
+      "bytes": 512,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000784",
+      "shape": [
+        5120,
+        6144
+      ],
+      "format": "gguf_iq3_s",
+      "layout": "gguf_blocks_v1",
+      "offset": 9367723520,
+      "bytes": 13516800,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000785",
+      "shape": [
+        5120
+      ],
+      "format": "bf16",
+      "layout": "contiguous_le_v1",
+      "offset": 9381240320,
+      "bytes": 10240,
+      "kind": "tensor"
+    },
+    {
+      "id": "weight/000786",
+      "shape": [
+        5120,
+        17408
+      ],
+      "format": "gguf_iq2_xs",
+      "layout": "gguf_blocks_v1",
+      "offset": 9381250560,
+      "bytes": 25763840,
+      "kind": "tensor"
+    },
+    {
+      "id": "auxiliary/000000",
+      "shape": [
+        6144
+      ],
+      "format": "int32",
+      "layout": "contiguous_le_v1",
+      "offset": 9407014400,
+      "bytes": 24576,
+      "kind": "tensor"
+    }
+  ]
+}

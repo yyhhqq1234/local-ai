@@ -1,0 +1,3 @@
+{"seed": 1, "steps": 400, "patched": 15, "train_tail": ["step  400 loss=2.7177 top1=0.5664 lr=5.00e-05 211s", "VAL top1 = 0.4586 (74107 tokens)"], "measure": {"ok": true, "decode_tok_s": 32.37, "draft_n": 238, "accepted": 16, "rate": 0.0672}}
+{"seed": 2, "steps": 400, "patched": 15, "train_tail": ["step  400 loss=3.7723 top1=0.4512 lr=5.00e-05 215s", "VAL top1 = 0.4336 (74107 tokens)"], "measure": {"ok": true, "decode_tok_s": 30.93, "draft_n": 253, "accepted": 1, "rate": 0.004}}
+{"seed": 3, "steps": 400, "patched": 15, "train_tail": ["step  400 loss=1.5560 top1=0.7109 lr=5.00e-05 214s", "VAL top1 = 0.4904 (74107 tokens)"], "measure": {"ok": true, "decode_tok_s": 32.29, "draft_n": 242, "accepted": 12, "rate": 0.0496}}

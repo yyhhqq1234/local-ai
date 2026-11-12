@@ -1,0 +1,898 @@
+{
+  "result": {
+    "ready": true,
+    "wall_s": 7.35,
+    "text": "Local-\n\nous **uss��**uss��**onta�� ��‪�\n\njo�� l��\n\njaz内心世界\n�� b纳士 to��\n\njazَكَ’�� AMPL'bane ofThe��\n\n至於��\n\n��\n\n��\n\n��\n\n��\n\n��\n\n��\n\n��\n\n��\n\n��\n\n��\n\n��\n\n��\n\n��\n\n��\n\n��\n\n�� [ic��\n影幽A�� c��‪� – omas an��庭女郎�oardjat ��\n��\r\n�� �� sol迪士 бак��**��Re‑��? a更多的人by�� ** fác or who oruss��\n�� �� �� �� �� �� �� �� �� ��‪� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� �� ��.t",
+    "chars": 371,
+    "finish_reason": "length",
+    "usage": {
+      "completion_tokens": 192,
+      "completion_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "prompt_tokens": 27,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 219
+    },
+    "timings": {
+      "cache_n": 0,
+      "draft_n": 564,
+      "draft_n_accepted": 1,
+      "predicted_ms": 7221.4729,
+      "predicted_n": 192,
+      "predicted_per_second": 26.448897980355227,
+      "predicted_per_token_ms": 37.808758638743456,
+      "prompt_ms": 111.6104,
+      "prompt_n": 27,
+      "prompt_per_second": 241.91294001275867,
+      "prompt_per_token_ms": 4.133718518518519
+    },
+    "reqlog": [
+      {
+        "argv": [
+          "D:\\BaiduNetdiskDownload\\Local-AI\\_tools\\ninfer-build\\apps\\ninfer-serve.exe",
+          "D:\\BaiduNetdiskDownload\\Local-AI\\train\\lines\\9b-oxcoder\\out\\kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer",
+          "--max-context",
+          "4096",
+          "--kv-capacity",
+          "4096",
+          "--greedy",
+          "--host-context-mib",
+          "2048",
+          "--prefill-chunk",
+          "128",
+          "--no-thinking",
+          "--spec",
+          "mtp",
+          "--draft-tokens",
+          "3",
+          "--port",
+          "18910",
+          "--request-log-jsonl",
+          "D:\\BaiduNetdiskDownload\\Local-AI\\_work\\ninfer-9b\\p3-mtp-probe.reqlog.jsonl",
+          "--log-level",
+          "info"
+        ],
+        "artifact": {
+          "architecture": "Qwen3_5ForCausalLM",
+          "bytes_read": 8416831745,
+          "device_object_count": 399,
+          "formats": [
+            "bf16",
+            "fp32",
+            "q4_g64_fp16",
+            "q5_g64_fp16",
+            "q8_g32_fp16"
+          ],
+          "host_object_count": 4,
+          "host_to_device_bytes": 8396805120,
+          "load_seconds": 6.8732378,
+          "name": "kittyrev-oxcoder9b-nsfw-gate-full-GSQ",
+          "path": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\lines\\9b-oxcoder\\out\\kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer",
+          "peak_staging_bytes": 268435456,
+          "prefill_signature": "442bbe196cc077e93a013d06c420a5eee045da827c70665decbf11e934f4caee",
+          "size_bytes": 9329072384,
+          "upload_seconds": 1.807345
+        },
+        "artifact_type": "ninfer_serve_request_log",
+        "engine": {
+          "context_cache": {
+            "device_state_slots": 1,
+            "enabled": true,
+            "host_capacity_bytes": 2147483648,
+            "total_device_state_slots": 2
+          },
+          "context_cost": {
+            "hardware_class": "nvidia-geforce-rtx-5070-ti-laptop-gpu-sm120",
+            "prefill_signature": "442bbe196cc077e93a013d06c420a5eee045da827c70665decbf11e934f4caee",
+            "prefill_source": "generic-default",
+            "preset_path": "",
+            "transfer_source": "generic-default"
+          },
+          "cuda_graph": true,
+          "device": 0,
+          "kv_cache": "bf16",
+          "kv_capacity": 4096,
+          "kv_capacity_max_page_groups": 64,
+          "kv_capacity_mode": "explicit",
+          "kv_capacity_page_groups": 64,
+          "log_stats_interval_ms": 5000,
+          "max_concurrency": 1,
+          "max_context": 4096,
+          "max_pending_requests": 16,
+          "pending_timeout_ms": 30000,
+          "prefill_chunk": 128,
+          "prefix_reuse": true,
+          "proposal_head": "full",
+          "speculative_backend": "mtp",
+          "speculative_draft_window": 3,
+          "vision": false
+        },
+        "environment": {
+          "compute_capability_major": 12,
+          "compute_capability_minor": 0,
+          "cuda_compile_version": "13.0",
+          "cuda_driver_version": "13.5",
+          "cuda_runtime_version": "13.5",
+          "device": 0,
+          "gpu_name": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+          "gpu_uuid": "GPU-0b09f680-6c4c-f2a6-eb76-3340c1e2c73f",
+          "total_device_memory_bytes": 12792365056
+        },
+        "event": "server_start",
+        "memory": {
+          "available_after_startup_bytes": 2898264064,
+          "available_after_weights_bytes": 3181379584,
+          "cuda_graph_calibration_increment_bytes": 4194304,
+          "cuda_graph_calibration_retained_bytes": 4194304,
+          "cuda_graph_prepare_increment_bytes": 0,
+          "cuda_graph_rebuild_estimate_bytes": 0,
+          "device_budget_bytes": 11578376192,
+          "host_context_capacity_bytes": 2147483648,
+          "host_context_occupied_bytes": 0,
+          "host_context_reserved_bytes": 0,
+          "host_kv_occupied_bytes": 0,
+          "host_state_occupied_slots": 0,
+          "kv_capacity_headroom_bytes": 1073741824,
+          "kv_capacity_increment_bytes": 0,
+          "kv_payload_bytes": 151257088,
+          "minimum_runtime_reservation_bytes": 275478784,
+          "moe": null,
+          "planned_slack_bytes": 1827964672,
+          "runtime_reservation_bytes": 275478784,
+          "sequence": {
+            "capacity_bytes": 262323456,
+            "peak_used_bytes": 262323456,
+            "used_bytes": 262323456
+          },
+          "startup_retained_bytes": 4379648,
+          "vision_workspace": null,
+          "weights": {
+            "capacity_bytes": 8396811264,
+            "peak_used_bytes": 8396811264,
+            "used_bytes": 8396811264
+          },
+          "workspace": {
+            "capacity_bytes": 13155328,
+            "peak_used_bytes": 13155328,
+            "used_bytes": 0
+          }
+        },
+        "sampling_defaults": {
+          "greedy": true,
+          "non_thinking": {
+            "frequency_penalty": 0.0,
+            "min_p": 0.0,
+            "presence_penalty": 1.5,
+            "temperature": 0.699999988079071,
+            "top_k": 20,
+            "top_p": 0.800000011920929
+          },
+          "omitted_seed": "random",
+          "server_overrides": {
+            "frequency_penalty": null,
+            "min_p": null,
+            "presence_penalty": null,
+            "seed": null,
+            "temperature": null,
+            "top_k": null,
+            "top_p": null
+          },
+          "thinking": {
+            "frequency_penalty": 0.0,
+            "min_p": 0.0,
+            "presence_penalty": 0.0,
+            "temperature": 1.0,
+            "top_k": 20,
+            "top_p": 0.949999988079071
+          }
+        },
+        "schema_version": 29,
+        "server": {
+          "api_key_configured": false,
+          "cors_enabled": false,
+          "default_output_tokens": 8192,
+          "default_preserve_thinking": null,
+          "default_thinking": false,
+          "default_thinking_budget": null,
+          "host": "127.0.0.1",
+          "max_request_bytes": 402653184,
+          "media_cache_bytes": 1073741824,
+          "media_live_bytes": 2147483648,
+          "media_preprocess_threads": 0,
+          "port": 18910,
+          "public_model_id": "kittyrev-oxcoder9b-nsfw-gate-full-GSQ",
+          "request_log_jsonl": "D:\\BaiduNetdiskDownload\\Local-AI\\_work\\ninfer-9b\\p3-mtp-probe.reqlog.jsonl"
+        },
+        "server_instance_id": "serve-17060-1794362947406000",
+        "timestamp_unix_ms": 1794362954477
+      },
+      {
+        "artifact_type": "ninfer_serve_request_log",
+        "event": "request_start",
+        "preparation_seconds": {
+          "acquisition": 1.9e-06,
+          "built_patch_bytes": 0,
+          "cache_hits": 0,
+          "cache_misses": 0,
+          "media_bytes": 0,
+          "media_items": 0,
+          "media_preprocess": 0.0,
+          "media_preprocess_work": 0.0,
+          "patch_bytes": 0,
+          "raw_patches": 0,
+          "reused_patch_bytes": 0,
+          "singleflight_waits": 0,
+          "tokenize": 3.28e-05,
+          "total": 0.0006732,
+          "vision_tokens": 0
+        },
+        "request": {
+          "enable_thinking": false,
+          "has_tool_history": false,
+          "http_request_id": "req_6d5e2a52fcd021671ec4e3cdfecb00d8",
+          "media_item_count": 0,
+          "message_count": 1,
+          "model": "kittyrev-oxcoder9b-nsfw-gate-full-GSQ",
+          "preserve_thinking": null,
+          "preserve_thinking_semantic_change": false,
+          "protocol": "openai_chat_completions",
+          "request_id": 1,
+          "requested_output_tokens": 192,
+          "requested_output_tokens_source": "client",
+          "requested_reasoning_effort": null,
+          "response_id": "chatcmpl-8f24e16cae5bc4ca",
+          "sampling": {
+            "frequency_penalty": 0.0,
+            "min_p": 0.0,
+            "presence_penalty": 1.5,
+            "seed": 3374665467695165115,
+            "temperature": 0.0,
+            "top_k": 20,
+            "top_p": 0.800000011920929
+          },
+          "stream": false,
+          "thinking_budget": null,
+          "tool_choice": "auto",
+          "tool_count": 0
+        },
+        "schema_version": 29,
+        "server_instance_id": "serve-17060-1794362947406000",
+        "timestamp_unix_ms": 1794362954507
+      },
+      {
+        "artifact_type": "ninfer_serve_request_log",
+        "context_cache": {
+          "actual_transfer_seconds": 0.0,
+          "captures": {
+            "aborted": 0,
+            "completed": 1
+          },
+          "kv_pools": [
+            {
+              "capacity_page_groups": 64,
+              "label": "text",
+              "occupied_page_groups": 3,
+              "pool_id": 0,
+              "transfers": {
+                "d2d": {
+                  "bytes": 0,
+                  "copy_operations": 0,
+                  "images": 0,
+                  "page_groups": 0,
+                  "seconds": 0.0
+                },
+                "d2h": {
+                  "bytes": 0,
+                  "copy_operations": 0,
+                  "images": 0,
+                  "page_groups": 0,
+                  "seconds": 0.0
+                },
+                "h2d": {
+                  "bytes": 0,
+                  "copy_operations": 0,
+                  "images": 0,
+                  "page_groups": 0,
+                  "seconds": 0.0
+                }
+              }
+            },
+            {
+              "capacity_page_groups": 65,
+              "label": "mtp",
+              "occupied_page_groups": 3,
+              "pool_id": 1,
+              "transfers": {
+                "d2d": {
+                  "bytes": 0,
+                  "copy_operations": 0,
+                  "images": 0,
+                  "page_groups": 0,
+                  "seconds": 0.0
+                },
+                "d2h": {
+                  "bytes": 0,
+                  "copy_operations": 0,
+                  "images": 0,
+                  "page_groups": 0,
+                  "seconds": 0.0
+                },
+                "h2d": {
+                  "bytes": 0,
+                  "copy_operations": 0,
+                  "images": 0,
+                  "page_groups": 0,
+                  "seconds": 0.0
+                }
+              }
+            }
+          ],
+          "last_selection": {
+            "frontier_tokens": 0
+          },
+          "occupancy": {
+            "device_state_slots": 2,
+            "host_context_occupied_bytes": 0,
+            "host_context_peak_occupied_bytes": 0,
+            "host_context_reserved_bytes": 0,
+            "host_kv_bytes": 0,
+            "host_state_slots": 0
+          },
+          "pressure": {
+            "partial_tail_cow_pages": 0,
+            "spill_pages": 0
+          },
+          "selections": {
+            "checkpoint": 0,
+            "reused_prompt_tokens": 0,
+            "root": 1
+          },
+          "state_operations": {
+            "forks": 1,
+            "materialization_forks": 0,
+            "moves": 0,
+            "restores": 0
+          },
+          "state_transfers": {
+            "d2d": {
+              "bytes": 0,
+              "copy_operations": 0,
+              "images": 0,
+              "page_groups": 0,
+              "seconds": 0.0
+            },
+            "d2h": {
+              "bytes": 0,
+              "copy_operations": 0,
+              "images": 0,
+              "page_groups": 0,
+              "seconds": 0.0
+            },
+            "h2d": {
+              "bytes": 0,
+              "copy_operations": 0,
+              "images": 0,
+              "page_groups": 0,
+              "seconds": 0.0
+            }
+          }
+        },
+        "decode_batch": {
+          "average_size": 1.0,
+          "rounds": 127,
+          "row_rounds": 127
+        },
+        "event": "throughput",
+        "final_interval": false,
+        "host_work": {
+          "constraint_draft_wait_seconds": 0.0,
+          "decode_device_wait_microseconds_per_round": 37945.249606299214,
+          "decode_host_microseconds_per_round": 132.83622047244094,
+          "decode_host_microseconds_per_row_round": 132.83622047244094,
+          "detail_invocations": {
+            "stats_publication": 259
+          },
+          "detail_microseconds_per_invocation": {
+            "stats_publication": 0.7841698841698842
+          },
+          "detail_subset_seconds": {
+            "stats_publication": 0.0002031
+          },
+          "device_wait_seconds": 4.8663222,
+          "elapsed_seconds": {
+            "engine_boundary": 0.0006940000000000001,
+            "engine_commit_output": 0.0007486000000000001,
+            "engine_maintenance": 0.00022030000000000002,
+            "program_post": 0.0024501,
+            "program_submit": 0.0635214,
+            "total": 0.0676344
+          },
+          "units": {
+            "control": 0,
+            "prefill": 2
+          },
+          "work_class_seconds": {
+            "control_device_wait": 0.0,
+            "control_host": 0.0006952000000000001,
+            "decode_device_wait": 4.8190467,
+            "decode_host": 0.016870200000000002,
+            "prefill_device_wait": 0.047275500000000005,
+            "prefill_host": 0.050069
+          }
+        },
+        "interval_seconds": 5.0101249,
+        "scheduler": {
+          "capture_pending": 0,
+          "decode_ready": 1,
+          "materializing": 0,
+          "paused": 0,
+          "prefilling": 0,
+          "replaying": 0,
+          "running": 1,
+          "terminal_pending": 0,
+          "waiting": 0
+        },
+        "scheduling": {
+          "preemptions": 0,
+          "replay_restores": 0,
+          "replayed_tokens": 0,
+          "snapshot_restores": 0
+        },
+        "schema_version": 29,
+        "server_instance_id": "serve-17060-1794362947406000",
+        "throughput_tokens_per_second": {
+          "decode": 25.548265273785887,
+          "prefill": 5.3890872061892106
+        },
+        "timestamp_unix_ms": 1794362959487,
+        "tokens": {
+          "committed_decode": 128,
+          "computed_prefill": 27
+        }
+      },
+      {
+        "artifact_type": "ninfer_serve_request_log",
+        "constraint": null,
+        "engine_timing": {
+          "constraint_draft_wait_exposed_seconds": 0.0,
+          "decode": {
+            "device_wait_exposed_seconds": 7.1940216,
+            "host_exposed_seconds": 0.0263483,
+            "rounds": 190
+          },
+          "device_wait_exposed_seconds": 7.241297100000001,
+          "host_exposed_seconds": {
+            "engine_boundary": 0.0007256000000000001,
+            "engine_commit_output": 0.0011751,
+            "engine_maintenance": 0.0003486,
+            "program_post": 0.0037622000000000003,
+            "program_submit": 0.0711364,
+            "total": 0.0771479
+          },
+          "queue_wait_seconds": 2.93e-05,
+          "units": {
+            "control": 0,
+            "prefill": 2
+          }
+        },
+        "event": "request_done",
+        "first_output_timing": {
+          "computed_prefill_tokens": 27,
+          "context_transfers": {
+            "kv_pools": [
+              {
+                "pool_id": 0,
+                "transfers": {
+                  "d2d": {
+                    "bytes": 0,
+                    "copy_operations": 0,
+                    "images": 0,
+                    "page_groups": 0,
+                    "seconds": 0.0
+                  },
+                  "d2h": {
+                    "bytes": 0,
+                    "copy_operations": 0,
+                    "images": 0,
+                    "page_groups": 0,
+                    "seconds": 0.0
+                  },
+                  "h2d": {
+                    "bytes": 0,
+                    "copy_operations": 0,
+                    "images": 0,
+                    "page_groups": 0,
+                    "seconds": 0.0
+                  }
+                }
+              },
+              {
+                "pool_id": 1,
+                "transfers": {
+                  "d2d": {
+                    "bytes": 0,
+                    "copy_operations": 0,
+                    "images": 0,
+                    "page_groups": 0,
+                    "seconds": 0.0
+                  },
+                  "d2h": {
+                    "bytes": 0,
+                    "copy_operations": 0,
+                    "images": 0,
+                    "page_groups": 0,
+                    "seconds": 0.0
+                  },
+                  "h2d": {
+                    "bytes": 0,
+                    "copy_operations": 0,
+                    "images": 0,
+                    "page_groups": 0,
+                    "seconds": 0.0
+                  }
+                }
+              }
+            ],
+            "state": {
+              "d2d": {
+                "bytes": 0,
+                "copy_operations": 0,
+                "images": 0,
+                "page_groups": 0,
+                "seconds": 0.0
+              },
+              "d2h": {
+                "bytes": 0,
+                "copy_operations": 0,
+                "images": 0,
+                "page_groups": 0,
+                "seconds": 0.0
+              },
+              "h2d": {
+                "bytes": 0,
+                "copy_operations": 0,
+                "images": 0,
+                "page_groups": 0,
+                "seconds": 0.0
+              }
+            }
+          },
+          "elapsed_seconds": 0.1116443,
+          "engine": {
+            "constraint_draft_wait_exposed_seconds": 0.0,
+            "decode": {
+              "device_wait_exposed_seconds": 0.0,
+              "host_exposed_seconds": 0.0,
+              "rounds": 0
+            },
+            "device_wait_exposed_seconds": 0.047275500000000005,
+            "host_exposed_seconds": {
+              "engine_boundary": 2.46e-05,
+              "engine_commit_output": 2.0600000000000003e-05,
+              "engine_maintenance": 2.6e-06,
+              "program_post": 9.740000000000001e-05,
+              "program_submit": 0.0499442,
+              "total": 0.0500894
+            },
+            "queue_wait_seconds": 2.93e-05,
+            "units": {
+              "control": 0,
+              "prefill": 2
+            }
+          },
+          "initial_binding_seconds": 0.0142441,
+          "prefill": {
+            "gpu_seconds": 0.096996706,
+            "post_seconds": 9.510000000000001e-05,
+            "submit_seconds": 0.049880100000000004,
+            "wait_seconds": 0.047275500000000005
+          },
+          "replay": {
+            "gpu_seconds": 0.0,
+            "post_seconds": 0.0,
+            "submit_seconds": 0.0,
+            "wait_seconds": 0.0
+          },
+          "scheduling": {
+            "device_to_host_bytes": 0,
+            "host_to_device_bytes": 0,
+            "paused_ns": 0,
+            "preemptions": 0,
+            "replay_restores": 0,
+            "replayed_tokens": 0,
+            "snapshot_restores": 0
+          }
+        },
+        "generation": {
+          "admission": {
+            "fallback_reason": "none",
+            "preferred_reused_tokens": 0,
+            "revoked_checkpoints": 0,
+            "source_wait_seconds": 0.0
+          },
+          "engine_request_id": 2,
+          "scheduling": {
+            "device_to_host_bytes": 0,
+            "host_to_device_bytes": 0,
+            "paused_ns": 0,
+            "preemptions": 0,
+            "replay_restores": 0,
+            "replayed_tokens": 0,
+            "snapshot_restores": 0
+          }
+        },
+        "request": {
+          "enable_thinking": false,
+          "has_tool_history": false,
+          "http_request_id": "req_6d5e2a52fcd021671ec4e3cdfecb00d8",
+          "media_item_count": 0,
+          "message_count": 1,
+          "model": "kittyrev-oxcoder9b-nsfw-gate-full-GSQ",
+          "preserve_thinking": null,
+          "preserve_thinking_semantic_change": false,
+          "protocol": "openai_chat_completions",
+          "request_id": 1,
+          "requested_output_tokens": 192,
+          "requested_output_tokens_source": "client",
+          "requested_reasoning_effort": null,
+          "response_id": "chatcmpl-8f24e16cae5bc4ca",
+          "sampling": {
+            "frequency_penalty": 0.0,
+            "min_p": 0.0,
+            "presence_penalty": 1.5,
+            "seed": 3374665467695165115,
+            "temperature": 0.0,
+            "top_k": 20,
+            "top_p": 0.800000011920929
+          },
+          "stream": false,
+          "thinking_budget": null,
+          "tool_choice": "auto",
+          "tool_count": 0
+        },
+        "result": {
+          "completion_tokens": 192,
+          "computed_prefill_tokens": 27,
+          "finish_reason": "output_limit",
+          "generated_token_ids": [
+            7090,
+            12,
+            271,
+            757,
+            2972,
+            1790,
+            151353,
+            332,
+            1790,
+            151353,
+            332,
+            47752,
+            151353,
+            220,
+            151353,
+            373,
+            151353,
+            271,
+            7078,
+            151353,
+            324,
+            151353,
+            271,
+            156334,
+            140298,
+            198,
+            151353,
+            292,
+            107467,
+            310,
+            151353,
+            271,
+            156334,
+            223807,
+            515,
+            151353,
+            3966,
+            64689,
+            6,
+            34724,
+            314,
+            760,
+            151353,
+            271,
+            114104,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            271,
+            151353,
+            498,
+            291,
+            151353,
+            198,
+            107539,
+            32,
+            151353,
+            272,
+            151353,
+            373,
+            151353,
+            1317,
+            91407,
+            449,
+            151353,
+            96969,
+            135397,
+            149781,
+            32281,
+            173830,
+            220,
+            151353,
+            198,
+            151353,
+            317,
+            151353,
+            220,
+            151353,
+            1980,
+            105890,
+            220,
+            187191,
+            151353,
+            332,
+            151353,
+            674,
+            54087,
+            151353,
+            30,
+            264,
+            119614,
+            1634,
+            151353,
+            2972,
+            168669,
+            466,
+            852,
+            466,
+            1790,
+            151353,
+            198,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            373,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            220,
+            151353,
+            13,
+            83
+          ],
+          "model_thinking_tokens": 0,
+          "prefix_cache_hit_tokens": 0,
+          "prefix_reuse_path": "root",
+          "prompt_tokens": 27,
+          "thinking_budget": null,
+          "thinking_control_applied": false,
+          "thinking_control_tokens": 0,
+          "tool_call_count": 0,
+          "tool_call_parse": {
+            "empty_arguments_omitted": 0,
+            "fallback_reason": "none",
+            "marker_seen": false,
+            "schema_mismatch_arguments": 0,
+            "structured_call_count": 0
+          }
+        },
+        "schema_version": 29,
+        "server_instance_id": "serve-17060-1794362947406000",
+        "speculative": {
+          "accepted_per_position": [
+            1,
+            0,
+            0
+          ],
+          "accepted_tokens": 1,
+          "backend": "mtp",
+          "draft_window": 3,
+          "drafted_tokens": 564,
+          "fallback_steps": 1,
+          "rounds": 189
+        },
+        "timestamp_unix_ms": 1794362961841,
+        "timings_seconds": {
+          "decode": 7.214879100000002,
+          "prefill": 0.0972495,
+          "prepare": 0.0006876,
+          "total": 7.3338396,
+          "ttft": 0.11232729999999999,
+          "vision": 0.0
+        }
+      }
+    ]
+  },
+  "remaining": []
+}

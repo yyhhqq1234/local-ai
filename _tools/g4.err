@@ -1,0 +1,10 @@
+2026-11-08 11:09:45.762  INFO  starting engine
+2026-11-08 11:09:47.081  INFO  loading weights | 5.81 GiB
+2026-11-08 11:09:48.357  INFO  weights ready | 5.81 GiB | 1.3s | 4.55 GiB/s
+[hostsync] DeviceContext::synchronize
+[hostsync] DeviceContext::synchronize
+[hostsync] DeviceContext::synchronize
+[hostsync] DeviceContext::synchronize
+[hostsync] DeviceContext::synchronize
+[hostsync] DeviceContext::synchronize
+D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-master\src\ops\elementwise\silu_mul.cu:202: CUDA_CHECK(cudaGetLastError()) failed: cudaErrorStreamCaptureInvalidated: operation failed due to a previous error during capture

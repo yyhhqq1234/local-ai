@@ -1,0 +1,2 @@
+2026-11-08 11:29:06.234  INFO  starting engine
+2026-11-08 11:29:06.317  FATAL server failed during startup | Qwen3.5 config: missing component vision

@@ -1,0 +1,31 @@
+=== 数据验证报告 ===
+总行数: 9653
+通过: 9653
+错误: 462
+警告: 0
+
+消息数分布: {2: 9653}
+角色分布: {'user': 9653, 'assistant': 9653}
+
+--- 错误详情 (前 20) ---
+  Line 102: missing 'id'
+  Line 126: missing 'id'
+  Line 143: missing 'id'
+  Line 152: missing 'meta'
+  Line 164 msg[1]: contains \ufffd replacement char
+  Line 185 msg[1]: contains \ufffd replacement char
+  Line 200: missing 'id'
+  Line 208: missing 'id'
+  Line 215: missing 'meta'
+  Line 224: missing 'id'
+  Line 305: missing 'id'
+  Line 328: missing 'meta'
+  Line 344: missing 'id'
+  Line 365: missing 'id'
+  Line 373: missing 'id'
+  Line 429: missing 'id'
+  Line 445 msg[0]: contains \ufffd replacement char
+  Line 445 msg[1]: contains \ufffd replacement char
+  Line 461 msg[1]: contains \ufffd replacement char
+  Line 476: missing 'id'
+--- 无警告 ---

@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-convert\ninfer-all-master\tools\convert\__main__.py", line 316, in <module>
+    main()
+    ~~~~^^
+  File "D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-convert\ninfer-all-master\tools\convert\__main__.py", line 272, in main
+    _function(args.recipe)(model, recipe, sources)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-convert\ninfer-all-master\tools\convert\gguf_blocks.py", line 568, in qwen3_8_27b_gguf
+    validate(gguf)
+    ~~~~~~~~^^^^^^
+  File "D:\BaiduNetdiskDownload\Local-AI\train\lines\_shared\tools\ninfer-convert\ninfer-all-master\tools\convert\gguf_blocks.py", line 156, in validate
+    raise ValueError(f"{gguf.path}: {blocks} blocks, expected {LAYERS} (+1 for MTP)")
+ValueError: ..\verify\fake.gguf: None blocks, expected 64 (+1 for MTP)

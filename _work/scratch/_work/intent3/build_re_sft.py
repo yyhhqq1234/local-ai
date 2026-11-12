@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""校验并生成 re-sft（规范路径：train/kitty-rev/data/intent3/）。
+"""校验并生成 re-sft（规范路径：train/lines/27b-kittyrev/kitty-rev/data/intent3/）。
 输出两份：re-sft.jsonl（id/prompt/response/meta）+ re-sft.messages.jsonl（训练侧 messages 格式）。
 门禁：id 唯一 / 长度 200-500 / 工具名 ⊆ contracts(64) / 每条 ≥2 判据 / prompt 唯一 / 合同外工具显式标注。
 """
@@ -10,10 +10,10 @@ import sys
 sys.path.insert(0, r"D:\BaiduNetdiskDownload\Local-AI\_work\intent3")
 import re1, re2, re3, re4
 
-D = r"D:\BaiduNetdiskDownload\Local-AI\train\kitty-rev\data\intent3"
+D = r"D:\BaiduNetdiskDownload\Local-AI\train\lines\27b-kittyrev\kitty-rev\data\intent3"
 OUT = D + r"\re-sft.jsonl"
 MSG_OUT = D + r"\re-sft.messages.jsonl"
-CONTRACTS = r"D:\BaiduNetdiskDownload\Local-AI\train\kitty-rev\contracts\tools.json"
+CONTRACTS = r"D:\BaiduNetdiskDownload\Local-AI\train\lines\27b-kittyrev\kitty-rev\contracts\tools.json"
 
 # 合同外工具：kitty 工具箱没有转储/文件系统解析能力，硬套 kitty_* 会写错判据。
 # 只允许这两个，且逐条写进 meta.tools_external。

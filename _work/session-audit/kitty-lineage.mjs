@@ -4,7 +4,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import readline from 'node:readline';
 
-const R = 'D:/BaiduNetdiskDownload/Local-AI/train/data/kitty-reverse';
+const R = 'D:/BaiduNetdiskDownload/Local-AI/train/lines/9b-oxcoder/data/kitty-reverse';
 const md5 = (s) => crypto.createHash('md5').update(s).digest('hex');
 
 // 用首条 user content 的 md5 作为样本指纹（稳定、跨文件可比）

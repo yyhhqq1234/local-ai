@@ -1,0 +1,16 @@
+[
+  {
+    "ctx": 2048,
+    "mode": "fwd",
+    "sec": 3.39,
+    "iters": 2,
+    "ok": true,
+    "peak_gib": 26.25
+  },
+  {
+    "ctx": 9216,
+    "mode": "fwd",
+    "ok": false,
+    "err": "OOM"
+  }
+]

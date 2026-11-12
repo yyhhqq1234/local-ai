@@ -1,8 +1,8 @@
-// 只读扫描：train/data/nsfw/ 全树里"逆向相关"内容分布
+// 只读扫描：train/lines/_shared/data/nsfw/ 全树里"逆向相关"内容分布
 import fs from 'node:fs';
 import path from 'node:path';
 
-const ROOT = 'D:/BaiduNetdiskDownload/Local-AI/train/data/nsfw';
+const ROOT = 'D:/BaiduNetdiskDownload/Local-AI/train/lines/_shared/data/nsfw';
 const RE_MARK = /kitty\s*逆向工作台|kitty_[a-z]|__stage"\s*:\s*"re"/i;
 
 function walk(dir, out = []) {

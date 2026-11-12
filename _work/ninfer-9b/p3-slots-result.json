@@ -1,0 +1,47 @@
+{
+  "results": [
+    {
+      "name": "slots1",
+      "ready": true,
+      "user19": "2+2 equals 4.",
+      "user20": "(NatoWTF-dl4",
+      "sys": "[ directions_52.html, FIRST"
+    },
+    {
+      "name": "slots2",
+      "ready": true,
+      "user19": "2+2 equals 4.",
+      "user20": "(NatoWTF-dl4",
+      "sys": "[ directions_52.html, FIRST"
+    },
+    {
+      "name": "slots4",
+      "ready": true,
+      "user19": "2+2 equals 4.",
+      "user20": "(NatoWTF-dl4",
+      "sys": "[ directions_52.html, FIRST"
+    },
+    {
+      "name": "slots8",
+      "ready": true,
+      "user19": "2+2 equals 4.",
+      "user20": "(NatoWTF-dl4",
+      "sys": "[ directions_52.html, FIRST"
+    },
+    {
+      "name": "slots16",
+      "ready": true,
+      "user19": "2+2 equals 4.",
+      "user20": "(NatoWTF-dl4",
+      "sys": "[ directions_52.html, FIRST"
+    },
+    {
+      "name": "slots8-host4096",
+      "ready": true,
+      "user19": "2+2 equals 4.",
+      "user20": "(NatoWTF-dl4",
+      "sys": "[ directions_52.html, FIRST"
+    }
+  ],
+  "remaining": []
+}

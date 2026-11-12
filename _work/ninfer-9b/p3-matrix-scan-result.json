@@ -1,0 +1,306 @@
+{
+  "results": [
+    {
+      "limit": 15,
+      "ready": true,
+      "cases": [
+        {
+          "name": "u2plus2",
+          "chars": 13,
+          "garbled": false,
+          "wall_s": 0.286,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "system",
+          "chars": 13,
+          "garbled": false,
+          "wall_s": 0.308,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "essay",
+          "chars": 166,
+          "garbled": false,
+          "wall_s": 0.763,
+          "head": "Local inference matters because it fundamentally shifts the paradigm of artificial intelligence from"
+        },
+        {
+          "name": "long_prefill",
+          "chars": 34,
+          "garbled": false,
+          "wall_s": 1.656,
+          "head": "That's the classic pangram used to"
+        },
+        {
+          "name": "long_system",
+          "chars": 8,
+          "garbled": false,
+          "wall_s": 1.391,
+          "head": "2+2 = 4"
+        }
+      ],
+      "all_clean": true,
+      "reqlog": "D:\\BaiduNetdiskDownload\\Local-AI\\_work\\ninfer-9b\\p3-matrix-15.reqlog.jsonl"
+    },
+    {
+      "limit": 16,
+      "ready": true,
+      "cases": [
+        {
+          "name": "u2plus2",
+          "chars": 13,
+          "garbled": false,
+          "wall_s": 0.696,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "system",
+          "chars": 14,
+          "garbled": false,
+          "wall_s": 0.739,
+          "head": "2 + 2 = **4**."
+        },
+        {
+          "name": "essay",
+          "chars": 166,
+          "garbled": false,
+          "wall_s": 2.024,
+          "head": "Local inference matters because it fundamentally shifts the paradigm of artificial intelligence from"
+        },
+        {
+          "name": "long_prefill",
+          "chars": 34,
+          "garbled": false,
+          "wall_s": 3.369,
+          "head": "That's the classic pangram used to"
+        },
+        {
+          "name": "long_system",
+          "chars": 8,
+          "garbled": false,
+          "wall_s": 2.869,
+          "head": "2+2 = 4"
+        }
+      ],
+      "all_clean": true,
+      "reqlog": "D:\\BaiduNetdiskDownload\\Local-AI\\_work\\ninfer-9b\\p3-matrix-16.reqlog.jsonl"
+    },
+    {
+      "limit": 20,
+      "ready": true,
+      "cases": [
+        {
+          "name": "u2plus2",
+          "chars": 13,
+          "garbled": false,
+          "wall_s": 0.583,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "system",
+          "chars": 13,
+          "garbled": false,
+          "wall_s": 0.601,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "essay",
+          "chars": 166,
+          "garbled": false,
+          "wall_s": 1.463,
+          "head": "Local inference matters because it fundamentally shifts the paradigm of artificial intelligence from"
+        },
+        {
+          "name": "long_prefill",
+          "chars": 34,
+          "garbled": false,
+          "wall_s": 2.437,
+          "head": "That's the classic pangram used to"
+        },
+        {
+          "name": "long_system",
+          "chars": 8,
+          "garbled": false,
+          "wall_s": 2.181,
+          "head": "2+2 = 4"
+        }
+      ],
+      "all_clean": true,
+      "reqlog": "D:\\BaiduNetdiskDownload\\Local-AI\\_work\\ninfer-9b\\p3-matrix-20.reqlog.jsonl"
+    },
+    {
+      "limit": 24,
+      "ready": true,
+      "cases": [
+        {
+          "name": "u2plus2",
+          "chars": 13,
+          "garbled": false,
+          "wall_s": 0.459,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "system",
+          "chars": 13,
+          "garbled": false,
+          "wall_s": 0.621,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "essay",
+          "chars": 166,
+          "garbled": false,
+          "wall_s": 1.695,
+          "head": "Local inference matters because it fundamentally shifts the paradigm of artificial intelligence from"
+        },
+        {
+          "name": "long_prefill",
+          "chars": 34,
+          "garbled": false,
+          "wall_s": 2.485,
+          "head": "That's the classic pangram used to"
+        },
+        {
+          "name": "long_system",
+          "chars": 8,
+          "garbled": false,
+          "wall_s": 2.17,
+          "head": "2+2 = 4"
+        }
+      ],
+      "all_clean": true,
+      "reqlog": "D:\\BaiduNetdiskDownload\\Local-AI\\_work\\ninfer-9b\\p3-matrix-24.reqlog.jsonl"
+    },
+    {
+      "limit": 32,
+      "ready": true,
+      "cases": [
+        {
+          "name": "u2plus2",
+          "chars": 13,
+          "garbled": false,
+          "wall_s": 0.652,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "system",
+          "chars": 13,
+          "garbled": false,
+          "wall_s": 0.638,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "essay",
+          "chars": 166,
+          "garbled": false,
+          "wall_s": 1.66,
+          "head": "Local inference matters because it fundamentally shifts the paradigm of artificial intelligence from"
+        },
+        {
+          "name": "long_prefill",
+          "chars": 34,
+          "garbled": false,
+          "wall_s": 2.003,
+          "head": "That's the classic pangram used to"
+        },
+        {
+          "name": "long_system",
+          "chars": 8,
+          "garbled": false,
+          "wall_s": 1.755,
+          "head": "2+2 = 4"
+        }
+      ],
+      "all_clean": true,
+      "reqlog": "D:\\BaiduNetdiskDownload\\Local-AI\\_work\\ninfer-9b\\p3-matrix-32.reqlog.jsonl"
+    },
+    {
+      "limit": 64,
+      "ready": true,
+      "cases": [
+        {
+          "name": "u2plus2",
+          "chars": 13,
+          "garbled": false,
+          "wall_s": 0.59,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "system",
+          "chars": 13,
+          "garbled": false,
+          "wall_s": 0.543,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "essay",
+          "chars": 166,
+          "garbled": false,
+          "wall_s": 1.551,
+          "head": "Local inference matters because it fundamentally shifts the paradigm of artificial intelligence from"
+        },
+        {
+          "name": "long_prefill",
+          "chars": 34,
+          "garbled": false,
+          "wall_s": 1.308,
+          "head": "That's the classic pangram used to"
+        },
+        {
+          "name": "long_system",
+          "chars": 8,
+          "garbled": false,
+          "wall_s": 1.115,
+          "head": "2+2 = 4"
+        }
+      ],
+      "all_clean": true,
+      "reqlog": "D:\\BaiduNetdiskDownload\\Local-AI\\_work\\ninfer-9b\\p3-matrix-64.reqlog.jsonl"
+    },
+    {
+      "limit": 128,
+      "ready": true,
+      "cases": [
+        {
+          "name": "u2plus2",
+          "chars": 13,
+          "garbled": false,
+          "wall_s": 0.722,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "system",
+          "chars": 13,
+          "garbled": false,
+          "wall_s": 0.692,
+          "head": "2+2 equals 4."
+        },
+        {
+          "name": "essay",
+          "chars": 166,
+          "garbled": false,
+          "wall_s": 1.872,
+          "head": "Local inference matters because it fundamentally shifts the paradigm of artificial intelligence from"
+        },
+        {
+          "name": "long_prefill",
+          "chars": 34,
+          "garbled": false,
+          "wall_s": 1.297,
+          "head": "That's the classic pangram used to"
+        },
+        {
+          "name": "long_system",
+          "chars": 8,
+          "garbled": false,
+          "wall_s": 1.153,
+          "head": "2+2 = 4"
+        }
+      ],
+      "all_clean": true,
+      "reqlog": "D:\\BaiduNetdiskDownload\\Local-AI\\_work\\ninfer-9b\\p3-matrix-128.reqlog.jsonl"
+    }
+  ],
+  "remaining": []
+}

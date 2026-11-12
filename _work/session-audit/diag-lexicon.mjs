@@ -1,6 +1,6 @@
 // 诊断 lexicon v8 结构问题（只读）
 import fs from 'node:fs';
-const v = JSON.parse(fs.readFileSync('D:/BaiduNetdiskDownload/Local-AI/train/data/nsfw/nsfw-lexicon-v8.json', 'utf8'));
+const v = JSON.parse(fs.readFileSync('D:/BaiduNetdiskDownload/Local-AI/train/lines/_shared/data/nsfw/nsfw-lexicon-v8.json', 'utf8'));
 const cats = Object.keys(v).filter(k => !k.startsWith('__'));
 const keys = {}, fieldMiss = {};
 let synStr = 0, synArr = 0, exDup = 0, exTot = 0, crossN = 0, varN = 0, glossN = 0, bothEx = 0;

@@ -1,0 +1,15 @@
+2026-11-08 12:59:40.167  INFO  starting engine
+2026-11-08 12:59:41.247  INFO  loading weights | 5.81 GiB
+2026-11-08 12:59:42.521  INFO  weights ready | 5.81 GiB | 1.3s | 4.56 GiB/s
+2026-11-08 12:59:46.428  INFO  CUDA graph memory calibrated | 3.9s
+2026-11-08 12:59:46.433  INFO  pinning host context | 2.00 GiB
+2026-11-08 12:59:46.658  INFO  host context pinned | 2.00 GiB | 224 ms
+2026-11-08 12:59:46.775  INFO  CUDA graphs ready | 60.0 ms
+2026-11-08 12:59:46.778  INFO  engine ready | oxcoder9b-merged | total 6.6s | weights 5.81 GiB | CUDA sync spin
+2026-11-08 12:59:46.779  INFO  capacity | KV 4,096 tokens, bf16, explicit | pages 64/64 | runtime 242.7 MiB | free 4.73 GiB
+2026-11-08 12:59:46.780  INFO  context | history on | 1 active + 1 extra device states | host 2.00 GiB
+2026-11-08 12:59:46.846  INFO  listening on http://127.0.0.1:1707 | model oxcoder9b-merged | auth disabled
+2026-11-08 12:59:46.881  INFO  req#1 started | openai-chat non-stream | 1 message | max output 48 | thinking template default
+2026-11-08 12:59:48.382  INFO  req#1 done | openai-chat | output limit | prompt 310 | output 48 | cache 0 (0.0%) | TTFT 226 ms | total 1.5s | prefill 1.46k tok/s | decode 36.9 tok/s
+2026-11-08 12:59:49.701  INFO  req#2 started | openai-chat non-stream | 1 message | max output 32 | thinking template default | tools 1
+2026-11-08 12:59:50.809  INFO  req#2 done | openai-chat | output limit | prompt 357 | output 32 | cache 0 (0.0%) | TTFT 1.6s | total 2.4s | queue 13.4 ms | prefill 1.63k tok/s | decode 36.4 tok/s

@@ -1,0 +1,110 @@
+{
+  "name": "OxCoder-9B 后训练三阶段数据集",
+  "created": "2026-10-28",
+  "ctx": 4096,
+  "why_ctx_4096": "RTX 5070 Ti Laptop 12GB 硬上限。实测：ctx 4096 = 26.9s/步可用；ctx 8192 = 1149s/步（reserved 25.98 GiB 超物理显存，Windows WDDM 换页）；ctx 9216 = OOM。",
+  "generator": {
+    "chunking": "train/scripts/chunk_train_samples.py",
+    "mix": "train/scripts/build_mix_2a.py",
+    "labels": "train/scripts/label_builder.py (验证用；训练走 trl completion_only_loss)"
+  },
+
+  "stage_2a": {
+    "file": "train/data/mix-2a.jsonl",
+    "purpose": "RE 工具编排 + 通用编码 agent 轨迹",
+    "rows": 34359,
+    "tokens_m": 54.63,
+    "steps_accum16": 833,
+    "eta_hours": "7.0–10.9",
+    "composition": {
+      "kitty_core": {
+        "source": "train/data/kitty-reverse/train-kitty-core.jsonl",
+        "rows_per_epoch": 5602,
+        "repeat": 3,
+        "rows_total": 16806,
+        "tokens_m": 4.54,
+        "token_share": 0.083
+      },
+      "agent_trajectories": {
+        "sources": [
+          "train/data/agent-traj/nemotron-swe/swe-8k-chunk4096.jsonl (16651)",
+          "train/data/agent-traj/deepswe/deepswe-8k-chunk4096.jsonl (424)",
+          "train/data/agent-traj/swe-rebench/rebench-8k-chunk4096.jsonl (478)"
+        ],
+        "rows": 17553,
+        "tokens_m": 50.21,
+        "token_share": 0.917,
+        "repeat": 1
+      }
+    },
+    "ratio_rationale": "kitty 全量只有 1.51 M token。若按 token 7:3 配比，总量只剩 2.16 M（33 步），步数严重不足。改用 epoch 配比：kitty 重复 3 轮加权，轨迹全量 1 轮。这样 kitty 的 RE 范式被重复强化 3 次，同时保留 835 步训练量。"
+  },
+
+  "stage_2b": {
+    "file": "train/data/mix-2b.jsonl",
+    "purpose": "NSFW 中文生成分布注入（低 lr + 低 r，不重排权重）",
+    "rows": 13668,
+    "tokens_m": 16.1,
+    "steps_accum16": 245,
+    "eta_hours": "2.0–3.2",
+    "composition": {
+      "sources": [
+        "train/data/nsfw/train-cont.jsonl (6829)",
+        "train/data/nsfw/train-scene.jsonl (2741)",
+        "train/data/nsfw/train-multi.jsonl (2079)",
+        "train/data/nsfw/train-style.jsonl (1329)",
+        "train/data/nsfw/train-expand.jsonl (690)"
+      ]
+    },
+    "note": "p99 1437 token，ctx 4096 完全装得下，无切分"
+  },
+
+  "stage_2c": {
+    "file": "train/data/mix-2c.jsonl",
+    "purpose": "长上下文代码工程能力（swe-16k 原始 16k 上下文数据，ctx 4096 下切分版）",
+    "rows": 14280,
+    "tokens_m": 39.9,
+    "steps_accum16": 608,
+    "eta_hours": "5.1–7.9",
+    "source": "train/data/agent-traj/nemotron-swe/swe-16k.jsonl → swe-16k-chunk4096.jsonl"
+  },
+
+  "totals": {
+    "rows": 62307,
+    "tokens_m": 110.63,
+    "steps_accum16": 1686,
+    "eta_hours": "14.1–22.0"
+  },
+
+  "known_issues": [
+    {
+      "issue": "2A 有 5 条样本超过 ctx 4096",
+      "detail": "34359 条中的 5 条（0.015%），最多超到 4146（超 50 token）",
+      "impact": "SFTTrainer 会按 max_length=4096 截断尾部约 50 token。合计损失约 250 token / 54.63 M = 0.0005%",
+      "decision": "接受。原因是 chunk 脚本的 base 余量（+64）对极少数超长 user 样本略欠；如需消除可把余量提到 +128 重切。"
+    }
+  ],
+
+  "training_commands": {
+    "2a": "train/.venv/Scripts/python.exe train/scripts/train_qlora9b.py --base train/models/OxCoder-9B --data train/data/mix-2a.jsonl --stage re --ctx 4096 --ga 16 --bs 1 --use-liger-ce --out train/out/2a",
+    "2b": "train/.venv/Scripts/python.exe train/scripts/train_qlora9b.py --base train/models/OxCoder-9B --data train/data/mix-2b.jsonl --stage nsfw --ctx 4096 --ga 16 --bs 1 --use-liger-ce --out train/out/2b",
+    "2c": "train/.venv/Scripts/python.exe train/scripts/train_qlora9b.py --base train/models/OxCoder-9B --data train/data/mix-2c.jsonl --stage re --ctx 4096 --ga 16 --bs 1 --use-liger-ce --out train/out/2c"
+  },
+
+  "presets": {
+    "re": "ctx=2048 r=32 alpha=64 lr=1e-4 epochs=4.0 ga=16（命令行 --ctx 4096 覆盖）",
+    "nsfw": "ctx=2048 r=16 alpha=32 lr=5e-5 epochs=2.0 ga=16",
+    "joint": "ctx=2048 r=24 alpha=48 lr=6e-5 epochs=3.0 ga=16"
+  },
+
+  "smoke_verified": {
+    "date": "2026-10-28",
+    "short_sample": "2.71 s/step, loss 4.562",
+    "long_sample": "47.16 s/step（满 ctx 4096）, loss 0.7617",
+    "vram": "alloc 7.35 GiB after bf16 cast, no OOM",
+    "bugs_found_and_fixed": [
+      "A1: 单列 text 导致 SFTTrainer 对全部 token 算 loss → 改 prompt/completion 双列 + completion_only_loss=True",
+      "A2: add_generation_prompt 补 <think> 但缺 </think> 闭合 → completion 前补 </think>\\n\\n"
+    ]
+  }
+}

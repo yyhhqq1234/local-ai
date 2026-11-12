@@ -1,7 +1,7 @@
 // lexicon v8 → v9：结构优化（分层 + 字段统一 + 归一索引），原字段值逐字保留，零丢失
 import fs from 'node:fs';
 
-const ROOT = 'D:/BaiduNetdiskDownload/Local-AI/train/data/nsfw';
+const ROOT = 'D:/BaiduNetdiskDownload/Local-AI/train/lines/_shared/data/nsfw';
 const v8 = JSON.parse(fs.readFileSync(ROOT + '/nsfw-lexicon-v8.json', 'utf8'));
 
 // 语义顺序（原 v8 的 descriptor 排在 relationship 之后，此处归位）

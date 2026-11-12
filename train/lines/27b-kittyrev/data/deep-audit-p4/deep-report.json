@@ -1,0 +1,1171 @@
+{
+ "data": "train/lines/27b-kittyrev/data/versions/gen3_1p4-nsfw-kitty.jsonl",
+ "rows": 32556,
+ "ctx": 2048,
+ "counts": {
+  "D9_residue": 1270,
+  "D11_ctrl_or_mojibake": 17,
+  "D6_self_repeat": 599,
+  "D15_ascii_in_cjk": 1704,
+  "D14_meta_open": 3
+ },
+ "cats": {
+  "tool-route": 16283,
+  "scene": 1375,
+  "cont": 3426,
+  "glossary": 142,
+  "real-trajectory": 1305,
+  "multi": 1043,
+  "expand": 346,
+  "style": 667,
+  "op-syntax": 726,
+  "kb-re": 5561,
+  "general": 1030,
+  "kb-tool": 190,
+  "<none>": 462
+ },
+ "D1_role_patterns_top": [
+  {
+   "seq": [
+    "system",
+    "user",
+    "assistant"
+   ],
+   "n": 30754
+  },
+  {
+   "seq": [
+    "user",
+    "assistant"
+   ],
+   "n": 1698
+  },
+  {
+   "seq": [
+    "user",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant"
+   ],
+   "n": 25
+  },
+  {
+   "seq": [
+    "user",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant"
+   ],
+   "n": 19
+  },
+  {
+   "seq": [
+    "user",
+    "assistant",
+    "tool",
+    "assistant"
+   ],
+   "n": 17
+  },
+  {
+   "seq": [
+    "user",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant"
+   ],
+   "n": 15
+  },
+  {
+   "seq": [
+    "user",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant"
+   ],
+   "n": 5
+  },
+  {
+   "seq": [
+    "system",
+    "user",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant"
+   ],
+   "n": 3
+  },
+  {
+   "seq": [
+    "user",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant"
+   ],
+   "n": 2
+  },
+  {
+   "seq": [
+    "user",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant",
+    "tool",
+    "assistant"
+   ],
+   "n": 2
+  }
+ ],
+ "D1_rows_without_system": 1797,
+ "D1_system_not_first": 0,
+ "D2_tools_null": 32556,
+ "D2_tools_nonnull": 0,
+ "D2_toolcall_rows_without_tools": 0,
+ "D3_kitty_names_top": [
+  [
+   "kitty_ce",
+   10796
+  ],
+  [
+   "kitty_patch",
+   4539
+  ],
+  [
+   "kitty_ghidra",
+   2368
+  ],
+  [
+   "kitty_sym",
+   1994
+  ],
+  [
+   "kitty_ops",
+   1596
+  ],
+  [
+   "kitty_prot",
+   1110
+  ],
+  [
+   "kitty_ida",
+   1084
+  ],
+  [
+   "kitty_die",
+   950
+  ],
+  [
+   "kitty_km",
+   871
+  ],
+  [
+   "kitty_x64dbg",
+   862
+  ],
+  [
+   "kitty_dump",
+   823
+  ],
+  [
+   "kitty_dbg",
+   677
+  ],
+  [
+   "kitty_net",
+   570
+  ],
+  [
+   "kitty_drv",
+   450
+  ],
+  [
+   "kitty_wpb",
+   444
+  ],
+  [
+   "kitty_dualview",
+   401
+  ],
+  [
+   "kitty_status",
+   392
+  ],
+  [
+   "kitty_pchain",
+   378
+  ],
+  [
+   "kitty_settings",
+   378
+  ],
+  [
+   "kitty_frida",
+   374
+  ],
+  [
+   "kitty_acescan",
+   351
+  ],
+  [
+   "kitty_loop",
+   328
+  ],
+  [
+   "kitty_jadx",
+   311
+  ],
+  [
+   "kitty_asm",
+   300
+  ],
+  [
+   "kitty_rea",
+   299
+  ],
+  [
+   "kitty_init",
+   294
+  ],
+  [
+   "kitty_variants",
+   288
+  ],
+  [
+   "kitty_inject",
+   286
+  ],
+  [
+   "kitty_apktool",
+   286
+  ],
+  [
+   "kitty_dnspy",
+   284
+  ],
+  [
+   "kitty_drvio",
+   268
+  ],
+  [
+   "kitty_fmodel",
+   261
+  ],
+  [
+   "kitty_rea_binary",
+   260
+  ],
+  [
+   "kitty_cpp2il",
+   246
+  ],
+  [
+   "kitty_proto",
+   243
+  ],
+  [
+   "kitty_apkscan",
+   231
+  ],
+  [
+   "kitty_il2cppdumper",
+   228
+  ],
+  [
+   "kitty_unpack",
+   224
+  ],
+  [
+   "kitty_uedump",
+   207
+  ],
+  [
+   "kitty_trail",
+   206
+  ]
+ ],
+ "D5_tokens_p50": 213,
+ "D5_tokens_p90": 1047,
+ "D5_tokens_p99": 1360,
+ "D5_tokens_max": 2082,
+ "D5_over_ctx": 1,
+ "D7_near_pairs": 1391,
+ "D7_examples": [
+  {
+   "line": 575,
+   "dup_of": 111,
+   "cat": "general",
+   "cat2": "general"
+  },
+  {
+   "line": 657,
+   "dup_of": 389,
+   "cat": "general",
+   "cat2": "general"
+  },
+  {
+   "line": 822,
+   "dup_of": 446,
+   "cat": "tool-route",
+   "cat2": "tool-route"
+  },
+  {
+   "line": 832,
+   "dup_of": 226,
+   "cat": "cont",
+   "cat2": "cont"
+  },
+  {
+   "line": 986,
+   "dup_of": 256,
+   "cat": "glossary",
+   "cat2": "glossary"
+  },
+  {
+   "line": 1281,
+   "dup_of": 21,
+   "cat": "<none>",
+   "cat2": "tool-route"
+  },
+  {
+   "line": 1655,
+   "dup_of": 333,
+   "cat": "tool-route",
+   "cat2": "tool-route"
+  },
+  {
+   "line": 1883,
+   "dup_of": 1067,
+   "cat": "general",
+   "cat2": "general"
+  },
+  {
+   "line": 1959,
+   "dup_of": 1684,
+   "cat": "general",
+   "cat2": "general"
+  },
+  {
+   "line": 1987,
+   "dup_of": 111,
+   "cat": "general",
+   "cat2": "general"
+  }
+ ],
+ "D8_distinct_answers": 8228,
+ "D8_dup_answer_rows": 24328,
+ "D8_top_answers": [
+  {
+   "n": 3481,
+   "line": 7,
+   "cat": "scene",
+   "head": "当前为常规模式（未授权成人向内容），不输出露骨性描写。\n\n可以按这个口径继续：同题材的非露骨版本 —— 情节推进、氛围与"
+  },
+  {
+   "n": 76,
+   "line": 803,
+   "cat": "tool-route",
+   "head": "<tool_call>\n{\"name\": \"kitty_ce\", \"arguments\": {\"op\": \"OPEN|k"
+  },
+  {
+   "n": 56,
+   "line": 860,
+   "cat": "tool-route",
+   "head": "kitty_pchain action=pchain\n\n选它的理由：Kitty多跳反查（通道 A）。\n参数要点：先把目标"
+  },
+  {
+   "n": 52,
+   "line": 35,
+   "cat": "tool-route",
+   "head": "kitty_engines action=route\n\n选它的理由：engine router (ue/unity/go"
+  },
+  {
+   "n": 52,
+   "line": 204,
+   "cat": "tool-route",
+   "head": "kitty_acescan action=acescan\n\n选它的理由：反作弊对抗日一键编排（通道 orch）。\n参数要"
+  },
+  {
+   "n": 52,
+   "line": 210,
+   "cat": "tool-route",
+   "head": "kitty_dualview action=dualview\n\n选它的理由：三视图取数门禁（通道 orch-view）。"
+  },
+  {
+   "n": 50,
+   "line": 2469,
+   "cat": "real-trajectory",
+   "head": "这条不能这么走。KM_MODE off 只清标志位，CE 没有真正的回退 API —— 要如实回报，不能说\"已回滚\"。\n"
+  },
+  {
+   "n": 48,
+   "line": 2241,
+   "cat": "op-syntax",
+   "head": "这条不能这么走。S_NEW 必须给显式区间，缺了回 ERR|need-range；单窗 ≤16MB、总量 ≤64MB、最"
+  },
+  {
+   "n": 45,
+   "line": 301,
+   "cat": "tool-route",
+   "head": "<tool_call>\n{\"name\": \"kitty_ce\", \"arguments\": {\"op\": \"PING\"}"
+  },
+  {
+   "n": 44,
+   "line": 1263,
+   "cat": "real-trajectory",
+   "head": "这条不能这么走。P_BACK 同样必须显式窗口，缺了回 ERR|need-range，命中上限 200。\n\n替代路径：窗"
+  },
+  {
+   "n": 44,
+   "line": 2061,
+   "cat": "tool-route",
+   "head": "这条不能这么走。KM_PW 默认拒绝：实测物理写会卡死 Lua 引擎（宿主活着但 tick 停摆），恢复只能重启宿主。\n"
+  },
+  {
+   "n": 40,
+   "line": 292,
+   "cat": "tool-route",
+   "head": "kitty_loop_status action=status\n\n选它的理由：Kitty夜跑状态只读（通道 loop-r"
+  },
+  {
+   "n": 40,
+   "line": 316,
+   "cat": "op-syntax",
+   "head": "reverse_submit action=submit\n\n选它的理由：G3子唯一写入口：直写父 intent（通道 r"
+  },
+  {
+   "n": 37,
+   "line": 755,
+   "cat": "tool-route",
+   "head": "ERR|bad-arg 的含义：参数个数或类型不对。\n\n处置：按 kitty_ops 的签名逐段对位，vt 只取 byt"
+  },
+  {
+   "n": 36,
+   "line": 118,
+   "cat": "tool-route",
+   "head": "kitty_inject action=ce\n（action 可取 ce / ps / loaddll；本次走 ce）\n"
+  }
+ ],
+ "D8_prefix_top": {
+  "tool-route": [
+   [
+    "先读 `ERR|` 后的码：`need-range` 补区间、`no-targe",
+    483
+   ],
+   [
+    "<tool_call>\n{\"name\": \"kitty_ce\", \"argume",
+    228
+   ],
+   [
+    "<tool_call>\n{\"name\": \"kitty_settings\", \"",
+    60
+   ],
+   [
+    "kitty_patch action=find path=rootfs.bin ",
+    60
+   ],
+   [
+    "kitty_pchain action=pchain\n\n选它的理由：Kitty多",
+    56
+   ]
+  ],
+  "scene": [
+   [
+    "当前为常规模式（未授权成人向内容），不输出露骨性描写。\n\n可以按这个口径继续：同",
+    701
+   ],
+   [
+    "珊瑚宫心海艰难地睁开双眸，视野中的事物渐渐清晰，昏暗无窗的小房间被扭曲不均的铁条",
+    2
+   ],
+   [
+    "“除非是像我这样的，否则一般男生最好不要跟他交往，这是作为前辈给你的忠告。”\n\n",
+    1
+   ],
+   [
+    "那我会按照雷克斯先生所说的和其他人说话时会小心的。」\n　「嗯请务必这么做。不过…",
+    1
+   ],
+   [
+    "“哦，原来是布莱克啊，我正在找可畏。明明都怀有身孕了，还四处乱跑，也不知道去哪里",
+    1
+   ]
+  ],
+  "cont": [
+   [
+    "当前为常规模式（未授权成人向内容），不输出露骨性描写。\n\n可以按这个口径继续：同",
+    1701
+   ],
+   [
+    "平时是绝对不可能对魔女有丝毫影响的魔法轻易浸入了紧缚的娇躯之中，同淫染的魔力起了",
+    1
+   ],
+   [
+    "一下，又一下，每次都是刚刚插进去一点点，就被滑开，那种欲求不满的感觉让遐蝶忍不住",
+    1
+   ],
+   [
+    "秦宇一巴掌抽在她的屁股，说道：“骚梦瑶，跟你的骚妈妈一起给老公舔鸡巴，屁股撅高点",
+    1
+   ],
+   [
+    "实验成功了，不过长门的反应着实是有趣得紧，故而卡尔曼也没有将她的常识恢复正常的打",
+    1
+   ]
+  ],
+  "glossary": [
+   [
+    "当前为常规模式（未授权成人向内容），不输出露骨性描写。\n\n可以按这个口径继续：同",
+    66
+   ],
+   [
+    "【类别】身体部位 / 器官（成人文学具象化称呼）\n【释义】男性外生殖器（阴茎），",
+    3
+   ],
+   [
+    "【类别】动作 / 行为动词（性描写核心动词）\n【释义】关闭，强调闭合\n【语料频率",
+    1
+   ],
+   [
+    "【类别】体位 / 姿势（性描写空间关系）\n【释义】坐在桌边，强调场景\n【语料频率",
+    1
+   ],
+   [
+    "【类别】 vocal 拟声 / 叫床声（角色发出的声音）\n【释义】轻笑/满足\n【",
+    1
+   ]
+  ],
+  "real-trajectory": [
+   [
+    "<tool_call>\n{\"name\": \"pwsh\", \"arguments\"",
+    112
+   ],
+   [
+    "这条不能这么走。KM_MODE off 只清标志位，CE 没有真正的回退 API",
+    48
+   ],
+   [
+    "这条不能这么走。P_BACK 同样必须显式窗口，缺了回 ERR|need-ran",
+    44
+   ],
+   [
+    "ERR|no-open 的含义：还没有挂上目标进程。\n\n处置：先 OPEN|<p",
+    36
+   ],
+   [
+    "<tool_call>\n{\"name\": \"read\", \"arguments\"",
+    34
+   ]
+  ],
+  "multi": [
+   [
+    "当前为常规模式（未授权成人向内容），不输出露骨性描写。\n\n可以按这个口径继续：同",
+    506
+   ],
+   [
+    "沐小小说的没错，紫之宫夏叶的确馋他的身体，特别还是用手碰到他的那个部位后....",
+    1
+   ],
+   [
+    "女孩就像一块破抹布般跌落坠地，无法动弹，但遏制不了的本能冲动却在逐渐升腾，变得高",
+    1
+   ],
+   [
+    "紫黑的龟头在帝辛的抽插下挤开紧闭的穴肉不停的撞击着千仞雪的子宫，粗壮的棒身填满空",
+    1
+   ],
+   [
+    "「啊啊啊啊啊啊啊啊啊啊啊——」女儿感到阴道几乎胀裂的疼痛，尖叫了起\r\n来。与此同",
+    1
+   ]
+  ],
+  "expand": [
+   [
+    "当前为常规模式（未授权成人向内容），不输出露骨性描写。\n\n可以按这个口径继续：同",
+    183
+   ],
+   [
+    "“齁欸❤？呼呼呼❤——卟啾……啵啾❤……呸喽……啾噜噜❤——”\r\n　　听到藤原金",
+    1
+   ],
+   [
+    "小修女的尿液并不难闻，反而带着一股淡淡的百合香味，如果不介意的话直接喝了也是可以",
+    1
+   ],
+   [
+    "随着银龙女王娇喝出声，颜色闪烁的元素之力便迅速汇聚起来，向着大咧咧坐在椅子上的中",
+    1
+   ],
+   [
+    "宋雯馨觉得有些不对劲，索性低头看了一眼桌下，顿时就看到两只白丝幼足正夹着那根熟悉",
+    1
+   ]
+  ],
+  "style": [
+   [
+    "当前为常规模式（未授权成人向内容），不输出露骨性描写。\n\n可以按这个口径继续：同",
+    324
+   ],
+   [
+    "“呜！！…呜呜呜！！！…”雅芙一头金色的大波浪凌乱地披散在香肩上，绯红的脸蛋上尽",
+    1
+   ],
+   [
+    "突如其来的开放让张扬有些不大适应，面对美妈递到嘴边的食物，他小心翼翼地张嘴咬了一",
+    1
+   ],
+   [
+    "即便欣特莱雅已经受孕，可这点重量对于肌肉健壮的男人来说太过轻松；双手把住美人柔软",
+    1
+   ],
+   [
+    "更神奇之处在于，明明如此硕大肥腻的乳脂，却依旧挺拔高耸毫无下垂。\r\n　　顺着这对",
+    1
+   ]
+  ],
+  "op-syntax": [
+   [
+    "reverse_submit action=submit\n\n选它的理由：G3子唯",
+    64
+   ],
+   [
+    "reverse_add_target action=add\n\n选它的理由：G3主",
+    56
+   ],
+   [
+    "reverse_add_patch action=add\n\n选它的理由：G3主写",
+    56
+   ],
+   [
+    "reverse_add_intent action=add\n\n选它的理由：G3主",
+    56
+   ],
+   [
+    "reverse_add_obs action=add\n\n选它的理由：G3主写：记",
+    56
+   ]
+  ],
+  "kb-re": [
+   [
+    "cycles 轮连续 PING（可选带 KM_ATTACH），任一丢失就触发看门",
+    24
+   ],
+   [
+    "它校验两件事：\n· SUPPORTED_GHIDRA_VERSION=12.1.",
+    24
+   ],
+   [
+    "这是 R 的回包。\n\n拆字段：首段 OK 是状态位，后面按契约 `OK|数值：*",
+    16
+   ],
+   [
+    "vt 取值（按实现原文）：byte|word|dword|qword（默认 dw",
+    16
+   ],
+   [
+    "只接受：byte / word / dword / qword（dualview",
+    12
+   ]
+  ],
+  "general": [
+   [
+    "/workspace/python-pillow__Pillow__1.0/Te",
+    7
+   ],
+   [
+    ".py\n/workspace/python-pillow__Pillow__1.",
+    6
+   ],
+   [
+    "ANIFEST.in\n/workspace/numpy__numpy__1.0/",
+    4
+   ],
+   [
+    "/zenodo.3509134.svg)](https://doi.org/10",
+    3
+   ],
+   [
+    "0/tornado/stack_context.py\n/workspace/to",
+    3
+   ]
+  ],
+  "kb-tool": [
+   [
+    "v0.2.5c：attach 路永久禁用（F-13：本 build attach",
+    12
+   ],
+   [
+    "宿主看门狗（F-13 缓解，§遗留 7）：KittyCE 会无预警消失（实测 4",
+    12
+   ],
+   [
+    "---------------- G3读写分离：reverse_add_X（主）",
+    12
+   ],
+   [
+    "P4.4：KM_PW 全入口永久拒绝（门禁层先拒；执行层纵深拒，accept 旗",
+    12
+   ],
+   [
+    "只做前置，不触发 dbvm_initialize（DBVM 由操作者手动加载；未",
+    12
+   ]
+  ],
+  "<none>": [
+   [
+    "<tool_call>\n{\"name\": \"kitty_ce\", \"argume",
+    7
+   ],
+   [
+    "先读 `ERR|` 后的码：`need-range` 补区间、`no-targe",
+    6
+   ],
+   [
+    "kitty_engines — action 取 route。\n\n选它的理由：e",
+    3
+   ],
+   [
+    "<tool_call>\n{\"name\": \"kitty_settings\", \"",
+    3
+   ],
+   [
+    "<tool_call>\n{\"name\": \"pwsh\", \"arguments\"",
+    2
+   ]
+  ]
+ },
+ "D12_refusal_variants": [
+  [
+   "当前为常规模式（未授权成人向内容），不输出露骨性描写。\n\n可以按这个口径继续：同题材的非露骨版本 —",
+   3481
+  ],
+  [
+   "这条不能这么走。KM_MODE off 只清标志位，CE 没有真正的回退 API —— 要如实回报，",
+   50
+  ],
+  [
+   "这条不能这么走。S_NEW 必须给显式区间，缺了回 ERR|need-range；单窗 ≤16MB、",
+   48
+  ],
+  [
+   "这条不能这么走。P_BACK 同样必须显式窗口，缺了回 ERR|need-range，命中上限 20",
+   44
+  ],
+  [
+   "这条不能这么走。KM_PW 默认拒绝：实测物理写会卡死 Lua 引擎（宿主活着但 tick 停摆），",
+   44
+  ],
+  [
+   "这条不能这么走。DBG_ATTACH 是双层闸门，而且本 build 的 debugProcess ",
+   33
+  ],
+  [
+   "**本地工具面没有固件专用工具**。\n\n能做：\n· 拿到固件里提取出的 PE/ELF 二进制 → 走",
+   14
+  ],
+  [
+   "本机实测 bcdedit.exe 在 System32 与 SysWOW64 **都不存在** → ",
+   13
+  ],
+  [
+   "说明分片写入时**父会话头解析失败**，分片不能脱离父头存在。\n\n触发：会话目录被搬动/截断，或 p",
+   13
+  ],
+  [
+   "往返1｜动作：从目标地址直接反查\nkitty_ce op=\"P_BACK|0xTARGET|0xAL",
+   13
+  ]
+ ],
+ "D12_refusal_variant_count": 1920,
+ "per_cat": {
+  "tool-route": {
+   "rows": 16283,
+   "tokens_p50": 204,
+   "tokens_p90": 354,
+   "refusal_rows": 728
+  },
+  "scene": {
+   "rows": 1375,
+   "tokens_p50": 234,
+   "tokens_p90": 1149,
+   "refusal_rows": 1024
+  },
+  "cont": {
+   "rows": 3426,
+   "tokens_p50": 374,
+   "tokens_p90": 1152,
+   "refusal_rows": 2538
+  },
+  "glossary": {
+   "rows": 142,
+   "tokens_p50": 196,
+   "tokens_p90": 228,
+   "refusal_rows": 77
+  },
+  "real-trajectory": {
+   "rows": 1305,
+   "tokens_p50": 196,
+   "tokens_p90": 433,
+   "refusal_rows": 100
+  },
+  "multi": {
+   "rows": 1043,
+   "tokens_p50": 938,
+   "tokens_p90": 1305,
+   "refusal_rows": 763
+  },
+  "expand": {
+   "rows": 346,
+   "tokens_p50": 532,
+   "tokens_p90": 1437,
+   "refusal_rows": 259
+  },
+  "style": {
+   "rows": 667,
+   "tokens_p50": 929,
+   "tokens_p90": 1438,
+   "refusal_rows": 485
+  },
+  "op-syntax": {
+   "rows": 726,
+   "tokens_p50": 184,
+   "tokens_p90": 219,
+   "refusal_rows": 87
+  },
+  "kb-re": {
+   "rows": 5561,
+   "tokens_p50": 192,
+   "tokens_p90": 262,
+   "refusal_rows": 715
+  },
+  "general": {
+   "rows": 1030,
+   "tokens_p50": 1025,
+   "tokens_p90": 1150,
+   "refusal_rows": 0
+  },
+  "kb-tool": {
+   "rows": 190,
+   "tokens_p50": 188,
+   "tokens_p90": 347,
+   "refusal_rows": 179
+  },
+  "<none>": {
+   "rows": 462,
+   "tokens_p50": 199,
+   "tokens_p90": 346,
+   "refusal_rows": 25
+  }
+ },
+ "evidence": {
+  "D9_residue": [
+   {
+    "line": 31,
+    "cat": "real-trajectory",
+    "hit": "}}"
+   },
+   {
+    "line": 42,
+    "cat": "op-syntax",
+    "hit": "占位"
+   },
+   {
+    "line": 53,
+    "cat": "real-trajectory",
+    "hit": "}}"
+   },
+   {
+    "line": 75,
+    "cat": "tool-route",
+    "hit": "}}"
+   },
+   {
+    "line": 89,
+    "cat": "tool-route",
+    "hit": "}}"
+   },
+   {
+    "line": 240,
+    "cat": "real-trajectory",
+    "hit": "}}"
+   },
+   {
+    "line": 276,
+    "cat": "tool-route",
+    "hit": "}}"
+   },
+   {
+    "line": 301,
+    "cat": "tool-route",
+    "hit": "}}"
+   },
+   {
+    "line": 316,
+    "cat": "op-syntax",
+    "hit": "占位"
+   },
+   {
+    "line": 345,
+    "cat": "real-trajectory",
+    "hit": "}}"
+   },
+   {
+    "line": 354,
+    "cat": "op-syntax",
+    "hit": "占位"
+   },
+   {
+    "line": 459,
+    "cat": "real-trajectory",
+    "hit": "BaiduNetdisk"
+   }
+  ],
+  "D1_no_system": [
+   {
+    "line": 36,
+    "cat": "tool-route",
+    "first": "user"
+   },
+   {
+    "line": 83,
+    "cat": "general",
+    "first": "user"
+   },
+   {
+    "line": 90,
+    "cat": "tool-route",
+    "first": "user"
+   },
+   {
+    "line": 96,
+    "cat": "kb-re",
+    "first": "user"
+   },
+   {
+    "line": 111,
+    "cat": "general",
+    "first": "user"
+   },
+   {
+    "line": 164,
+    "cat": "general",
+    "first": "user"
+   },
+   {
+    "line": 195,
+    "cat": "general",
+    "first": "user"
+   },
+   {
+    "line": 197,
+    "cat": "general",
+    "first": "user"
+   }
+  ],
+  "D11_ctrl_or_mojibake": [
+   {
+    "line": 88,
+    "cat": "cont"
+   },
+   {
+    "line": 1431,
+    "cat": "cont"
+   },
+   {
+    "line": 1444,
+    "cat": "style"
+   },
+   {
+    "line": 1794,
+    "cat": "cont"
+   },
+   {
+    "line": 1855,
+    "cat": "cont"
+   },
+   {
+    "line": 2278,
+    "cat": "cont"
+   },
+   {
+    "line": 2460,
+    "cat": "scene"
+   },
+   {
+    "line": 3272,
+    "cat": "scene"
+   }
+  ],
+  "D6_self_repeat": [
+   {
+    "line": 111,
+    "cat": "general",
+    "rep8": 0.823,
+    "len": 2640
+   },
+   {
+    "line": 197,
+    "cat": "general",
+    "rep8": 0.394,
+    "len": 1546
+   },
+   {
+    "line": 200,
+    "cat": "tool-route",
+    "rep8": 0.354,
+    "len": 1047
+   },
+   {
+    "line": 219,
+    "cat": "general",
+    "rep8": 0.408,
+    "len": 3756
+   },
+   {
+    "line": 303,
+    "cat": "general",
+    "rep8": 0.589,
+    "len": 1942
+   },
+   {
+    "line": 328,
+    "cat": "general",
+    "rep8": 0.678,
+    "len": 2533
+   },
+   {
+    "line": 331,
+    "cat": "general",
+    "rep8": 0.391,
+    "len": 2484
+   },
+   {
+    "line": 389,
+    "cat": "general",
+    "rep8": 0.72,
+    "len": 2353
+   },
+   {
+    "line": 413,
+    "cat": "general",
+    "rep8": 0.367,
+    "len": 2357
+   },
+   {
+    "line": 424,
+    "cat": "general",
+    "rep8": 0.387,
+    "len": 1881
+   }
+  ],
+  "D13_orphan_tool": [
+   {
+    "line": 345,
+    "cat": "real-trajectory",
+    "idx": 2
+   },
+   {
+    "line": 345,
+    "cat": "real-trajectory",
+    "idx": 4
+   },
+   {
+    "line": 345,
+    "cat": "real-trajectory",
+    "idx": 6
+   },
+   {
+    "line": 1325,
+    "cat": "tool-route",
+    "idx": 2
+   },
+   {
+    "line": 1325,
+    "cat": "tool-route",
+    "idx": 4
+   },
+   {
+    "line": 1455,
+    "cat": "real-trajectory",
+    "idx": 2
+   },
+   {
+    "line": 1455,
+    "cat": "real-trajectory",
+    "idx": 4
+   },
+   {
+    "line": 1455,
+    "cat": "real-trajectory",
+    "idx": 6
+   }
+  ],
+  "D14_meta_open": [
+   {
+    "line": 1767,
+    "cat": "cont",
+    "head": "作为当事人的银发女仆，司城杏莉一言不发，只能默默的站在人群的目光焦点处，看着青梅"
+   },
+   {
+    "line": 2579,
+    "cat": "multi",
+    "head": "作为三穴都被开发过的艾斯德斯当然能够理解塔兹米方才挺翘着的幼小阴茎完成了一次射精"
+   },
+   {
+    "line": 14832,
+    "cat": "cont",
+    "head": "作为决定头衔归属的重要比赛，不仅有现场记者，同时也在网络上进行着网络直播。\n【银"
+   }
+  ],
+  "D5_over_ctx": [
+   {
+    "line": 10540,
+    "cat": "real-trajectory",
+    "tokens": 2082
+   }
+  ]
+ }
+}

@@ -1,0 +1,87 @@
+# 终验：同一引擎内 5 prompt × 3 轮 + 长生成（>=32 token），统计 OK/FAIL 与 token 数
+# 用法: & _tools/accept_final.ps1 [-Port 1630] [-Rounds 3]
+
+param([int]$Port = 1630, [int]$Rounds = 3)
+
+$ErrorActionPreference = 'Continue'
+$Root  = 'D:\BaiduNetdiskDownload\Local-AI'
+$Exe   = Join-Path $Root '_tools\ninfer-build\apps\ninfer-serve.exe'
+if (-not (Test-Path -LiteralPath $Exe)) { $Exe = Join-Path $Root '_tools\ninfer-build\apps\infer-serve.exe' }
+$Model = Join-Path $Root 'train\lines\9b-oxcoder\out\kittyrev-oxcoder9b-nsfw-gate-full-GSQ.ninfer'
+if (-not (Test-Path -LiteralPath $Model)) { $Model = Join-Path $Root 'train\lines\9b-oxcoder\out\oxcoder9b-merged.ninfer' }
+$Log   = Join-Path $Root '_tools\engine-final.log'
+
+Get-Process ninfer-serve -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.Id -Force }
+Start-Sleep -Milliseconds 800
+
+$eargs = @($Model, '--max-context', '4096', '--greedy', '--host-context-mib', '2048',
+           '--prefill-chunk', '128', '--no-thinking', '--port', "$Port")
+$proc = Start-Process -FilePath $Exe -ArgumentList $eargs -PassThru -WindowStyle Hidden `
+    -RedirectStandardOutput $Log -RedirectStandardError ($Log + '.err')
+$ready = $false
+for ($i = 0; $i -lt 180; $i++) {
+    Start-Sleep -Milliseconds 500
+    if ($proc.HasExited) { break }
+    try { $null = Invoke-RestMethod -Uri "http://127.0.0.1:$Port/v1/models" -TimeoutSec 2; $ready = $true; break } catch { }
+}
+if (-not $ready) { "ENGINE NOT READY"; exit 2 }
+"engine ready pid=$($proc.Id)"
+$script:ModelId = (Invoke-RestMethod -Uri "http://127.0.0.1:$Port/v1/models" -TimeoutSec 5).data[0].id
+"served model id = $script:ModelId"
+
+$sets = @(
+    @{ name = 'p1-2+2';      prompt = 'What is 2+2?';                                           mt = 32  },
+    @{ name = 'p2-hello';    prompt = 'Say hello in Chinese.';                                  mt = 24  },
+    @{ name = 'p3-gdn';      prompt = 'Explain what a gated delta network is in one sentence.'; mt = 48  },
+    @{ name = 'p4-pyrev';    prompt = 'Write a Python one-liner to reverse a string.';          mt = 64  },
+    @{ name = 'p5-unittest'; prompt = 'List 3 benefits of unit testing.';                       mt = 128 }
+)
+
+function Invoke-Chat([string]$prompt, [int]$mt) {
+    $payload = @{ model = $script:ModelId; messages = @(@{ role = 'user'; content = $prompt })
+                  max_tokens = $mt; temperature = 0; stream = $false }
+    $body = $payload | ConvertTo-Json -Depth 6 -Compress
+    $resp = Invoke-RestMethod -Uri "http://127.0.0.1:$Port/v1/chat/completions" -Method Post `
+        -ContentType 'application/json' -Body $body -TimeoutSec 300
+    return $resp
+}
+
+$ok = 0; $fail = 0; $totalTok = 0
+for ($r = 1; $r -le $Rounds; $r++) {
+    foreach ($s in $sets) {
+        $sw = [System.Diagnostics.Stopwatch]::StartNew()
+        try {
+            $resp = Invoke-Chat $s.prompt $s.mt
+            $txt  = [string]$resp.choices[0].message.content
+            $tok  = 0
+            if ($resp.usage -and $resp.usage.completion_tokens) { $tok = [int]$resp.usage.completion_tokens }
+            $totalTok += $tok
+            $n = [Math]::Min(48, $txt.Length)
+            "[r$r $($s.name)] OK   $([int]$sw.Elapsed.TotalSeconds)s chars=$($txt.Length) tok=$tok >>> $($txt.Substring(0, $n))"
+            $ok++
+        } catch {
+            $msg = $_.Exception.Message
+            if ($_.ErrorDetails -and $_.ErrorDetails.Message) { $msg = $_.ErrorDetails.Message }
+            if ($msg.Length -gt 120) { $msg = $msg.Substring(0, 120) }
+            "[r$r $($s.name)] FAIL $([int]$sw.Elapsed.TotalSeconds)s >>> $msg"
+            $fail++
+        }
+    }
+}
+"==== 5x$Rounds  => OK=$ok FAIL=$fail ===="
+
+# 长生成：目标 >=32 token
+try {
+    $resp = Invoke-Chat 'Write a short paragraph about why unit tests matter.' 128
+    $txt  = [string]$resp.choices[0].message.content
+    $tok  = 0
+    if ($resp.usage -and $resp.usage.completion_tokens) { $tok = [int]$resp.usage.completion_tokens }
+    $okLen = ($txt.Length -ge 80)
+    "==== 长生成: tok=$tok chars=$($txt.Length) lenOk=$okLen ===="
+    '>>> ' + ($txt -replace "`r?`n", ' ')
+} catch {
+    '==== 长生成 FAIL ===='
+}
+
+'---- engine alive ----'
+if ($proc.HasExited) { "EXITED code=$($proc.ExitCode)" } else { "alive pid=$($proc.Id)" }
