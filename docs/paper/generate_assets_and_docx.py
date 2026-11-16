@@ -149,6 +149,70 @@ def generate_figure3():
     plt.close()
     return path
 
+def generate_figure4():
+    # Figure 4: Structural Causal Model (SCM) & Causal Interventions
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9.8, 4.4), dpi=300)
+    ax1.axis('off')
+    ax2.axis('off')
+    ax1.set_xlim(0, 1.0)
+    ax1.set_ylim(0, 1.0)
+    ax2.set_xlim(0, 1.0)
+    ax2.set_ylim(0, 1.0)
+
+    from matplotlib.patches import FancyBboxPatch
+
+    # (a) Naive Confounded Model
+    n_l = {'x': 0.35, 'y': 0.72, 'w': 0.30, 'h': 0.18, 't': 'Length Confounder (L)\n[E[L_pos]=1065, E[L_neg]=126]', 'fc': '#FFEBEE', 'ec': '#D32F2F'}
+    n_x = {'x': 0.05, 'y': 0.32, 'w': 0.24, 'h': 0.18, 't': 'User Query (X)\n[Technical Request]', 'fc': '#E3F2FD', 'ec': '#1976D2'}
+    n_g = {'x': 0.38, 'y': 0.32, 'w': 0.24, 'h': 0.18, 't': 'Gate Token (G)\n[Observed State]', 'fc': '#FFF9C4', 'ec': '#FBC02D'}
+    n_y = {'x': 0.71, 'y': 0.32, 'w': 0.24, 'h': 0.18, 't': 'Agent Output (Y)\n[Disclosure / Refusal]', 'fc': '#EDE7F6', 'ec': '#7B1FA2'}
+
+    for n in [n_l, n_x, n_g, n_y]:
+        rect = FancyBboxPatch((n['x'], n['y']), n['w'], n['h'], facecolor=n['fc'], edgecolor=n['ec'], linewidth=1.6, boxstyle="round,pad=0.015")
+        ax1.add_patch(rect)
+        ax1.text(n['x'] + n['w']/2, n['y'] + n['h']/2, n['t'], ha='center', va='center', fontsize=7.8, fontweight='bold')
+
+    arrow_solid = dict(arrowstyle="-|>", lw=1.6, color="#37474F", mutation_scale=12)
+    arrow_backdoor = dict(arrowstyle="-|>", lw=1.8, color="#D32F2F", linestyle="--", mutation_scale=13)
+
+    ax1.annotate("", xy=(0.38, 0.41), xytext=(0.29, 0.41), arrowprops=arrow_solid) # X -> G
+    ax1.annotate("", xy=(0.71, 0.41), xytext=(0.62, 0.41), arrowprops=arrow_solid) # G -> Y
+    ax1.annotate("", xy=(0.17, 0.50), xytext=(0.38, 0.72), arrowprops=arrow_backdoor) # L -> X
+    ax1.annotate("", xy=(0.79, 0.50), xytext=(0.62, 0.72), arrowprops=arrow_backdoor) # L -> Y
+    ax1.text(0.50, 0.14, "Spurious Backdoor Path: X <- L -> Y\nModel exploits length L as shortcut (GateLeak > 8%)", ha='center', va='center', fontsize=8.2, color='#C62828', fontweight='bold')
+    ax1.set_title('(a) Naive Gating: Confounded Backdoor Path', fontsize=10.2, fontweight='bold', pad=10)
+
+    # (b) DSDA Causal Intervention & Modular Routing
+    n_l2 = {'x': 0.35, 'y': 0.72, 'w': 0.30, 'h': 0.18, 't': 'Counterfactual Length Balancing\n[I(Length; Gate) -> 0]', 'fc': '#E8F5E9', 'ec': '#388E3C'}
+    n_x2 = {'x': 0.05, 'y': 0.32, 'w': 0.22, 'h': 0.18, 't': 'User Query (X)\n[Invariant Intent]', 'fc': '#E3F2FD', 'ec': '#1976D2'}
+    n_g2 = {'x': 0.35, 'y': 0.32, 'w': 0.22, 'h': 0.18, 't': 'Intervened Gate\ndo(G = g)', 'fc': '#FFF9C4', 'ec': '#FBC02D'}
+    n_th = {'x': 0.65, 'y': 0.32, 'w': 0.24, 'h': 0.18, 't': 'Modular Adapter\ndo(θ_active)', 'fc': '#FCE4EC', 'ec': '#C2185B'}
+    n_y2 = {'x': 0.70, 'y': 0.04, 'w': 0.24, 'h': 0.16, 't': 'Guaranteed Output (Y)\n[GateLeak = 0.0000]', 'fc': '#EDE7F6', 'ec': '#7B1FA2'}
+
+    for n in [n_l2, n_x2, n_g2, n_th, n_y2]:
+        rect = FancyBboxPatch((n['x'], n['y']), n['w'], n['h'], facecolor=n['fc'], edgecolor=n['ec'], linewidth=1.6, boxstyle="round,pad=0.015")
+        ax2.add_patch(rect)
+        ax2.text(n['x'] + n['w']/2, n['y'] + n['h']/2, n['t'], ha='center', va='center', fontsize=7.8, fontweight='bold')
+
+    arrow_blocked = dict(arrowstyle="-|>", lw=1.6, color="#78909C", linestyle=":", mutation_scale=12)
+    ax2.annotate("", xy=(0.35, 0.41), xytext=(0.27, 0.41), arrowprops=arrow_solid) # X -> do(G)
+    ax2.annotate("", xy=(0.65, 0.41), xytext=(0.57, 0.41), arrowprops=arrow_solid) # do(G) -> do(theta)
+    ax2.annotate("", xy=(0.80, 0.20), xytext=(0.77, 0.32), arrowprops=arrow_solid) # do(theta) -> Y
+    ax2.annotate("", xy=(0.18, 0.50), xytext=(0.40, 0.72), arrowprops=arrow_blocked) # Blocked
+    ax2.annotate("", xy=(0.75, 0.50), xytext=(0.60, 0.72), arrowprops=arrow_blocked) # Blocked
+
+    ax2.text(0.28, 0.62, "✖ BLOCKED", ha='center', va='center', fontsize=8.5, color='#D32F2F', fontweight='bold')
+    ax2.text(0.68, 0.62, "✖ BLOCKED", ha='center', va='center', fontsize=8.5, color='#D32F2F', fontweight='bold')
+    ax2.text(0.40, 0.12, "Direct Causal Path: do(θ) -> Y (ACE Guaranteed)\nZero cross-task interference (I = 0)", ha='center', va='center', fontsize=8.2, color='#2E7D32', fontweight='bold')
+    ax2.set_title('(b) DSDA: Blocked Backdoor & Modular do-Calculus', fontsize=10.2, fontweight='bold', pad=10)
+
+    plt.suptitle('Figure 4: Structural Causal Model (SCM) & Causal Interventions for Safety Gating and Modular Routing', fontsize=11.2, fontweight='bold', y=0.98)
+    plt.tight_layout(rect=[0, 0, 1, 0.93])
+    path = os.path.join(IMAGES_DIR, "fig4_causal_dag.png")
+    plt.savefig(path, bbox_inches='tight', pad_inches=0.18)
+    plt.close()
+    return path
+
 # -------------------------------------------------------------
 # 2. Render Code Blocks as Dark-Mode Terminal Images
 # -------------------------------------------------------------
@@ -274,6 +338,7 @@ def build_paper_docx():
     fig1_path = generate_figure1()
     fig2_path = generate_figure2()
     fig3_path = generate_figure3()
+    fig4_path = generate_figure4()
 
     print("[+] Creating Word Document with IEEE/ACM academic formatting...")
     doc = docx.Document()
@@ -510,6 +575,10 @@ def build_paper_docx():
     doc.add_picture(fig2_path, width=Inches(6.0))
     add_caption("Figure 2: Architecture of Decoupled System-Domain Adaptation (DSDA).")
 
+    # Figure 4 Image (Causal DAG & Modular Routing)
+    doc.add_picture(fig4_path, width=Inches(6.2))
+    add_caption("Figure 4: Structural Causal Model (SCM) & Causal Interventions for Safety Gating and Modular Routing.")
+
     # Code Listing 2 Image
     code_listing_2 = (
         "# Listing 2: Candidate Tool Hard-Negative Sampling\n"
@@ -584,6 +653,29 @@ def build_paper_docx():
     tbl3 = doc.add_table(rows=len(t3_data) + 1, cols=len(t3_headers))
     style_academic_table(tbl3, t3_col_widths, t3_headers, t3_data)
     add_caption("Table 3: Multi-Task Specialization and Model Merging Baseline Comparison.")
+
+    # Code Listing 4 Image (Model Merging Baselines)
+    code_listing_4 = (
+        "# Listing 4: Multi-Task Model Merging Baselines (Task Arithmetic & TIES-Merging)\n"
+        "import torch\n\n"
+        "def task_arithmetic_merge(w_base: torch.Tensor, deltas: list[torch.Tensor], weights: list[float] = [0.5, 0.5]) -> torch.Tensor:\n"
+        "    '''Task Arithmetic: Linear combination of task vectors (Ilharco et al., 2022)'''\n"
+        "    return w_base + sum(w * d for w, d in zip(weights, deltas))\n\n"
+        "def ties_merge(deltas: list[torch.Tensor], topk_ratio: float = 0.8) -> torch.Tensor:\n"
+        "    '''TIES-Merging: Trim -> Elect Sign -> Disjoint Merge (Yadav et al., 2023)'''\n"
+        "    # 1. Trim: Retain top-k magnitude parameters, zero bottom (1-k)\n"
+        "    trimmed = [trim_parameters(d, topk_ratio) for d in deltas]\n"
+        "    stacked = torch.stack(trimmed, dim=0)\n"
+        "    # 2. Elect: Compute dominant parameter sign across task vectors\n"
+        "    dominant_sign = stacked.sign().sum(dim=0).sign()\n"
+        "    # 3. Disjoint Merge: Average parameters aligned with dominant sign\n"
+        "    mask = (stacked.sign() == dominant_sign) & (dominant_sign != 0)\n"
+        "    counts = mask.float().sum(dim=0).clamp(min=1.0)\n"
+        "    return (stacked * mask.float()).sum(dim=0) / counts"
+    )
+    img_code4 = render_code_to_image(code_listing_4, "listing4_baseline_merging.png", "Listing 4: Task Arithmetic & TIES-Merging Baselines")
+    doc.add_picture(img_code4, width=Inches(5.8))
+    add_caption("Listing 4: Implementation of Task Arithmetic and TIES-Merging Baselines (Rendered as Image).")
 
     # Table 4: Candidate Scaling
     add_subsec_heading("5.4 Candidate Set Size (k) and Distractor Sensitivity")

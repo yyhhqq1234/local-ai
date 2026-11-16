@@ -105,21 +105,25 @@
 
 ---
 
-## 3. 图表与代码 Listing 规划总表
+## 3. 图表与代码 Listing 规划与交付总表
 
-| 编号 | 类型 | 标题 / 内容 | 论文所在章节 | 呈现目的 |
-|---|---|---|---|---|
-| **Figure 1** | 折线双轴图 | Training Loss vs. 20-Gram Memorization & L3 Generalization | §2.1 | 揭示“Loss 持续下降掩盖逐字记忆暴涨与泛化退化”的病理 |
-| **Figure 2** | 系统架构图 | Architectural Overview of Decoupled System-Domain Adaptation | §4 | 清晰呈现 4 轴扰动、候选簇采样、因果等长与 Scheme Z 运行时切换 |
-| **Figure 3** | 对比直方图 | Token Length Disparity in Naive Gating vs. DSDA Balanced Gating | §3.2 | 直观证明正负样本 8.4x 长度差异被 DSDA 成功对齐消除 |
-| **Listing 1** | 代码终端图 | Multi-Axis Semantic Query Perturbation Protocol | §4.1 | 展示 $K=4$ 轴意图扰动算法实现 |
-| **Listing 2** | 代码终端图 | Candidate Tool Hard-Negative Clustering & Sampling | §4.2 | 展示 11 簇拓扑划分与难负例提取算法 |
-| **Listing 3** | 代码终端图 | Inference-Time Modular Adapter Dynamic Routing Logic | §4.4 | 展示 Scheme Z 运行时无感切外挂架构 |
-| **Table 1** | 三线表格 | Anti-Memorization Dynamics across Training Regimes | §5.2 | 量化展示 3 个 epoch 的 Loss、20-Gram 重合与 L3 泛化得分 |
-| **Table 2** | 三线表格 | Cross-Scale and Cross-Attention Architecture Validation (9B vs 27B) | §5.3 | 证明 DSDA 在混合线性和密集全自注意力上的跨规模普适性 |
-| **Table 3** | 三线表格 | Multi-Task Specialization & Mainstream Model Merging Baselines | §5.4 | 全面对标 Task Arithmetic、TIES-Merging、ReAct、Sequential SFT |
-| **Table 4** | 三线表格 | Candidate Scale Ablation ($k$) & Random Seed Sensitivity | §5.5 | 验证 $k=8\sim12$ 最佳候选规模与 $+5$ 随机干扰鲁棒性 |
-| **Table 5** | 三线表格 | Dual-State Safety Gating & Adversarial Trap Robustness | §5.6 | 验证 GateLeak = 0.0000 与 TrapRefusal = 0.0000 零偏置拦截 |
+所有图表均已使用 Matplotlib / PIL 以 300 DPI 矢量级与暗黑终端样式渲染完毕，并作为高清图片插入 Word 定稿（[`beyond_surface_adaptation.docx`](beyond_surface_adaptation.docx)）：
+
+| 编号 | 类型 | 标题 / 内容 | 论文所在章节 | 对应高清图片路径 | 呈现目的与论证逻辑 |
+|---|---|---|---|---|---|
+| **Figure 1** | 折线双轴图 | Training Loss vs. 20-Gram Memorization & L3 Generalization | §2.1 | [`images/fig1_memorization_vs_loss.png`](images/fig1_memorization_vs_loss.png) | 揭示“Loss 持续下降掩盖逐字记忆暴涨与泛化退化”的表层假象 |
+| **Figure 2** | 系统架构图 | Architectural Overview of Decoupled System-Domain Adaptation | §4 | [`images/fig2_dsda_architecture.png`](images/fig2_dsda_architecture.png) | 呈现 4 轴扰动、候选簇采样、因果等长与 Scheme Z 运行时切换整体架构 |
+| **Figure 3** | 对比直方图 | Token Length Disparity in Naive Gating vs. DSDA Balanced Gating | §3.2 | [`images/fig3_length_bias_distribution.png`](images/fig3_length_bias_distribution.png) | 直观展示正负样本 8.4x 长度差异被 DSDA 成功对齐消除的过程 |
+| **Figure 4** | 因果 DAG 图 | Structural Causal Model (SCM) & Causal Interventions | §4.3 | [`images/fig4_causal_dag.png`](images/fig4_causal_dag.png) | 形式化展示后门路径切断与模块敲除干预 $do(\theta) \to Y$ 的因果保障 |
+| **Listing 1** | 终端代码图 | Multi-Axis Semantic Query Perturbation Protocol | §4.1 | [`images/listing1_perturbation.png`](images/listing1_perturbation.png) | 以暗黑代码窗展示 $K=4$ 轴意图扰动扩展算法实现 |
+| **Listing 2** | 终端代码图 | Candidate Tool Hard-Negative Clustering & Sampling | §4.2 | [`images/listing2_candidate_clustering.png`](images/listing2_candidate_clustering.png) | 展示 11 簇拓扑划分与簇内难负例提取算法实现 |
+| **Listing 3** | 终端代码图 | Inference-Time Modular Adapter Dynamic Routing Logic | §4.4 | [`images/listing3_runtime_routing.png`](images/listing3_runtime_routing.png) | 展示 Scheme Z 运行时无感切外挂路由逻辑 |
+| **Listing 4** | 终端代码图 | Task Arithmetic & TIES-Merging Baselines Implementation | §5.4 | [`images/listing4_baseline_merging.png`](images/listing4_baseline_merging.png) | 展示主流多任务模型合并基线的 PyTorch 算法实现 |
+| **Table 1** | 三线表格 | Anti-Memorization Dynamics across Training Regimes | §5.2 | Word 嵌入 / Markdown | 量化展示 3 个 epoch 的 Loss、20-Gram 重合与 L3 泛化得分 |
+| **Table 2** | 三线表格 | Cross-Scale and Cross-Attention Architecture Validation (9B vs 27B) | §5.3 | Word 嵌入 / Markdown | 证明 DSDA 在混合线性和密集全自注意力上的跨规模普适性 |
+| **Table 3** | 三线表格 | Multi-Task Specialization & Mainstream Model Merging Baselines | §5.4 | Word 嵌入 / Markdown | 全面对标 Task Arithmetic、TIES-Merging、ReAct、Sequential SFT |
+| **Table 4** | 三线表格 | Candidate Scale Ablation ($k$) & Random Seed Sensitivity | §5.5 | Word 嵌入 / Markdown | 验证 $k=8\sim12$ 最佳候选规模与 $+5$ 随机干扰鲁棒性 |
+| **Table 5** | 三线表格 | Dual-State Safety Gating & Adversarial Trap Robustness | §5.6 | Word 嵌入 / Markdown | 验证 GateLeak = 0.0000 与 TrapRefusal = 0.0000 零偏置拦截 |
 
 ---
 

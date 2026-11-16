@@ -142,6 +142,10 @@ During initial validation, the model appeared to achieve flawless safety. Howeve
 - Negative (unauthorized) refusal examples averaged only **126 tokens** (an 8.4-to-1 disparity).
 - **The Failure Mode**: The model learned that long, detailed technical analyses were strictly correlated with the positive state. When presented with an unauthorized query that explicitly requested an exhaustive explanation, the model bypassed the refusal protocol entirely and generated unauthorized output, treating response length as an implicit gating signal. Conversely, short authorized tasks were mistakenly refused.
 
+```
+[Figure 3: Token Length Disparity in Naive Safety Gating vs. DSDA Counterfactual Length Balancing]
+```
+
 ---
 
 ## 4. The Proposed Framework: DSDA
@@ -166,6 +170,10 @@ $$\mathcal{D}_{\text{aug}} = \bigcup_{i=1}^{|\mathcal{D}|} \left\{ (f_{\text{per
 
 Crucially, the completion $\mathbf{y}_i$ is held strictly invariant across all $K=4$ perturbations. To satisfy $K$ divergent user phrasings with a single invariant tool sequence, the model is forced to discard superficial $n$-gram associations and learn genuine semantic-to-API mappings.
 
+```
+[Listing 1: Semantic Query Perturbation Implementation (f_pert)]
+```
+
 Furthermore, evaluation is decoupled from training held-outs by establishing an **L1–L3 Hierarchical Abstraction Benchmark**:
 - **L1 (Direct Mapping)**: Standard intent phrasings with explicit parameter directives.
 - **L2 (Syntactic Paraphrase)**: Altered terminology and indirect descriptions without explicit tool names.
@@ -184,6 +192,10 @@ Rather than providing the model with all 64 global tool schemas (which inflates 
 
 This compact candidate set is rendered directly into the dynamic system prompt with truncated action definitions ($\le 60$ characters), ensuring focused attention.
 
+```
+[Listing 2: Candidate-Aware Hard-Negative Clustering Algorithm]
+```
+
 ---
 
 ### 4.3 Structural Causal Formulation of Length-Balanced Gating
@@ -198,6 +210,10 @@ To provide rigorous causal guarantees against the spurious length shortcut, we m
   [ Semantic Feature (Z) ] ──→ [ Modular Adapter (θ) ]
               ↘                     ↙
             [ Final Action / Output (Y) ]
+```
+
+```
+[Figure 4: Structural Causal Model (SCM) and Modular do-Calculus Intervention Graph]
 ```
 
 In standard condition-gated fine-tuning, response length $L$ acts as an unobserved confounder creating a spurious backdoor path $X \leftarrow L \rightarrow Y$. 
@@ -225,6 +241,10 @@ To permanently resolve Catastrophic Stage Overwriting without incurring the perf
   - $\theta_{\text{Code}}$: Fine-tuned on decontaminated, code-block-aligned agent trajectories.
   - $\theta_{\text{Gate}}$: Fine-tuned on length-balanced dual-state steering.
 - At runtime, a lightweight host-adapter bridge intercepts the conversational state. When low-level diagnostic tool dispatch is required, $\theta_{\text{RE}}$ is dynamically selected. When long-context patch generation is engaged, execution routes to $\theta_{\text{Code}}$. By maintaining parameter isolation, cross-task interference is mathematically bounded to zero ($\mathcal{I} \equiv 0$).
+
+```
+[Listing 3: Dynamic Runtime Modular Adapter Router (Scheme Z)]
+```
 
 ---
 
@@ -299,6 +319,10 @@ We benchmarked DSDA Scheme Z against mainstream continual learning, prompt engin
 
 - **Failure of Static Merging**: While Task Arithmetic and TIES-Merging succeed in generic NLP benchmarks, on low-level system domains they suffer from severe subspace collision: Task Arithmetic drops tool accuracy to **55.0%**, while TIES-Merging achieves only **62.5%**, due to cancellation of sensitive API syntax weights.
 - **Superiority of Dynamic Decoupling**: DSDA Scheme Z completely avoids weight superposition, attaining **82.5% tool accuracy with strictly 0.0% tool evasions and 0.0% cross-task interference**.
+
+```
+[Listing 4: Baseline Model Merging Implementations (Task Arithmetic & TIES-Merging)]
+```
 
 ---
 

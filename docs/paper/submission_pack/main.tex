@@ -63,7 +63,14 @@ Existing literature provides two prevailing paradigms: multi-stage instruction t
 
 In specialized system domains, training datasets typically consist of succinct operational requests (e.g., \emph{``Inspect the PE export table of the loaded target module''}) paired with structured tool invocations.
 
-We monitored the training dynamics of the 9B model over multiple epochs on a curated dataset of 5,602 core system tasks. As demonstrated in Table~\ref{tab:anti_memorization}, standard metrics provide a deceptive signal: cross-entropy loss drops from 1.110 to 0.373, and tool fabrication drops to zero. However, measuring $n$-gram token overlap against the training distribution reveals an alarming trend:
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.85\linewidth]{images/fig1_memorization_vs_loss.png}
+\caption{Cross-entropy training loss vs.\ verbatim 20-gram token overlap across fine-tuning epochs. While loss monotonically decreases, verbatim overlap surges, concealing severe memorization.}
+\label{fig:memorization_vs_loss}
+\end{figure}
+
+We monitored the training dynamics of the 9B model over multiple epochs on a curated dataset of 5,602 core system tasks. As demonstrated in Figure~\ref{fig:memorization_vs_loss} and Table~\ref{tab:anti_memorization}, standard metrics provide a deceptive signal: cross-entropy loss drops from 1.110 to 0.373, and tool fabrication drops to zero. However, measuring $n$-gram token overlap against the training distribution reveals an alarming trend:
 \begin{itemize}
     \item The 20-gram token overlap ratio triples from 0.167 at Epoch 1 to 0.515 at Epoch 2.
     \item The proportion of test queries producing verbatim identical matches rises from 10\% to 40\%.
@@ -117,18 +124,41 @@ Sweeping projection scaling $\gamma$ demonstrates that $\gamma \le 1.0$ yields z
 
 \subsection{Spurious Correlation in Condition Gating: The Length Bias Shortcut}
 
-Condition-gated SFT seeks to steer behavior via explicit authorization prompts. However, auditing revealed an acute length disparity: positive authorized disclosures averaged 1,065 tokens, while unauthorized refusals averaged 126 tokens (an 8.4-to-1 ratio). The model exploited this length difference as an unintended proxy for authorization, bypassing safety constraints whenever an unauthorized query prompted for an exhaustive, long-form technical analysis.
+Condition-gated SFT seeks to steer behavior via explicit authorization prompts. However, auditing revealed an acute length disparity: positive authorized disclosures averaged 1,065 tokens, while unauthorized refusals averaged 126 tokens (an 8.4-to-1 ratio). As visualized in Figure~\ref{fig:length_bias}, the model exploited this length difference as an unintended proxy for authorization, bypassing safety constraints whenever an unauthorized query prompted for an exhaustive, long-form technical analysis.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.85\linewidth]{images/fig3_length_bias_distribution.png}
+\caption{Token length disparity between authorized and refusal responses under naive gating (8.4:1 ratio) vs.\ balanced counterfactual distributions under DSDA.}
+\label{fig:length_bias}
+\end{figure}
 
 \section{The Proposed Framework: DSDA}
 
-DSDA (Decoupled System-Domain Adaptation) resolves these failure modes through an end-to-end decoupled framework consisting of four core components:
+DSDA (Decoupled System-Domain Adaptation) resolves these failure modes through an end-to-end decoupled framework consisting of four core components (Figure~\ref{fig:dsda_architecture}):
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.95\linewidth]{images/fig2_dsda_architecture.png}
+\caption{System architecture of Decoupled System-Domain Adaptation (DSDA), highlighting the four core modules: semantic query perturbation, dynamic candidate clustering, counterfactual length balancing, and runtime adapter routing.}
+\label{fig:dsda_architecture}
+\end{figure}
+
 \begin{enumerate}
     \item \textbf{Semantic Anti-Memorization Protocol}: Multi-axis query perturbation ($K=4$) paired with invariant tool completions, evaluated on an L1--L3 hierarchical abstraction benchmark.
     \item \textbf{Candidate-Aware Hard-Negative Clustering}: Grouping 64 system tools into 11 execution clusters, injecting 8--12 hard-negative candidates into dynamic prompts.
-    \item \textbf{Structural Causal Formulation of Length-Balanced Gating}: Synthesizing long, compliant alternatives for unauthorized states. Formalized through Pearl's Structural Causal Models~\cite{pearl2009causality}, counterfactual length balancing blocks the backdoor path $X \leftarrow L \rightarrow Y$, forcing mutual information $I(\text{Length}; \text{GateState}) \to 0$ and Average Causal Effect:
+    \item \textbf{Structural Causal Formulation of Length-Balanced Gating}: Synthesizing long, compliant alternatives for unauthorized states. Formalized through Pearl's Structural Causal Models~\cite{pearl2009causality} (Figure~\ref{fig:causal_dag}), counterfactual length balancing blocks the backdoor path $X \leftarrow L \rightarrow Y$, forcing mutual information $I(\text{Length}; \text{GateState}) \to 0$ and Average Causal Effect:
     \begin{equation}
     \text{ACE} = \mathbb{E}_{X} \left[ P(Y \mid do(G=1), X) - P(Y \mid do(G=0), X) \right]
     \end{equation}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.90\linewidth]{images/fig4_causal_dag.png}
+\caption{Structural Causal Models (SCMs) and Modular Intervention Graphs. (a) Naive gating where token length $L$ acts as an unobserved confounder opening a spurious backdoor path $X \leftarrow L \rightarrow Y$. (b) DSDA balanced gating where counterfactual pairing blocks the backdoor path and modular routing enforces $do(G=g)$.}
+\label{fig:causal_dag}
+\end{figure}
+
     \item \textbf{Modular Inference-Time Adapter Decoupling (Scheme Z)}: Deploying dedicated LoRA adapters for tool routing, trajectory coding, and gating, switched dynamically at runtime to guarantee $\mathcal{I} \equiv 0$.
 \end{enumerate}
 
