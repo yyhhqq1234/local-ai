@@ -707,3 +707,35 @@ node _work\ninfer-9b\p3_llamacpp_adapter_test.mjs
 **生效**：需重启 DSH（dev_reload_package 会卡死）。切换档位：ninfer_params set profile=llama-cpp
 **回滚**：Copy-Item lib\index.js.bak-llamacpp lib\index.js -Force
 **不影响**：csunx-27b / build-9b 两档行为不变（新增键只在 llama-cpp 档出现）
+
+## 2026-11-15 停用本包（provider "ninfer" 重复注册）
+
+**症状**：插件面板显示 `@dsh-external/dsh-ninfer-local` 异常，原因
+`an adapter for provider "ninfer" is already registered`；loader 里该 entry 为 `[failed]`。
+
+**根因**：本包与 `plugins/dsh-local-ai` 同源于一份代码，两者的 `cordis.patch.yml`
+都写了 `registerAdapter: true` 且 provider 都是 `ninfer`。`llm.registerAdapter()`
+对已注册 provider 抛 `LlmError(code=DUPLICATE_ADAPTER)`（all-or-nothing），
+后加载者整个 fiber 起不来。主线是 2026-11-12 的 `dsh-local-ai`（9B llama.cpp +
+27B 外部档），本包仍是 11-08 版，`engineDir` 指向已废弃的 `ninfer-csunx`
+/ `_tools/ninfer-build`，属陈旧复制品。
+
+**改动**
+```
+cordis.patch.yml  disabled: true + registerAdapter: false + engineDir 改 engines/ninfer-27b
+lib/index.js      apply(): listProviders() 预检，provider 已占用则不打日志直接跳过自注册
+lib/index.js      ctx.effect 内 try/catch：DUPLICATE_ADAPTER 只放弃路由，不再把 fiber 打挂
+```
+
+**验证**
+```
+node --check lib/index.js = 0
+provider 探针（dev_stage，调 llm.listProviders()）：
+  ninfer = "NInfer 本地 · 5070Ti 12G"，全表仅一条 → 无重复
+loader：dsh-ninfer-local 已不在 entries；dsh-local-ai = [active]
+ninfer_status：9B 档 llama-cpp / 8080 / kittyrev9b-Q5_K_M-im.gguf 正常
+```
+
+**生效**：整包停用型改动（patch）需下次 DSH 启动；lib 的防撞已在本进程生效。
+**回滚**：`git checkout plugins/dsh-ninfer-local` 或
+`cp lib/index.js.bak-dupfix-20261115023743 lib/index.js`

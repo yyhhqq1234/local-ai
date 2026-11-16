@@ -741,3 +741,15 @@ README：标题同步
   9B 在跑时：listModels → [{id:'<gguf 路径>', name:'kittyrev9b-Q5_K_M-im.gguf（运行中）'}]，stream 正常
   node --check lib/index.js → 0
 ```
+
+## 2026-11-15 防 DUPLICATE_ADAPTER 打挂 fiber
+
+**背景**：`plugins/dsh-ninfer-local`（11-08 陈旧复制品）也声明 provider `ninfer`
+并 `registerAdapter: true`，撞名时 `llm.registerAdapter()` 抛
+`LlmError(DUPLICATE_ADAPTER)`；后加载者整个 fiber 变 `[failed]`。
+
+**改动**：`apply()` 内先 `ctx.llm.listProviders()` 预检，已存在同 provider 则打一行
+warn 跳过自注册（不再抛错）。本包仍是 `ninfer` 路由的唯一 owner。
+
+**验证**：`node --check lib/index.js = 0`；`llm.listProviders()` 中 `ninfer` 唯一。
+**回滚**：`cp lib/index.js.bak-dupfix-20261115023743 lib/index.js`
