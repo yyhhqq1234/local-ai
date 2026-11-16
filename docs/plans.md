@@ -1,8 +1,8 @@
-# 计划（两条训练线与学术闭环）
+# 计划（两条训练线）
 
-> **2026-11-16 学术成果闭环**：DSDA 论文终稿（*Beyond Surface Adaptation*）、LaTeX 投稿包、高保真 Word 定稿及基准对标（Task Arithmetic / TIES-Merging）已全部交付，详见 [`docs/paper/`](paper/) 与 [`REPRODUCE.md`](../REPRODUCE.md)。  
-> **2026-11-12 工程结项**：9B（KittyRev-OxCoder）已交付 llama.cpp GGUF 生产；27B 使用 Huihui-Swift IQ2_S（NInfer）；v6 重建计划见 [`v6-rebuild.md`](v6-rebuild.md)。  
-> 本文件保留两条训练线的完整历史计划与实验数据，作为重建、复盘与论文复现的真相源。
+> **2026-11-12 结项**：9B（KittyRev-OxCoder）已交付 llama.cpp GGUF 生产；
+> 27B 使用 Huihui-Swift IQ2_S（NInfer）；v6 权重误删，重建计划见 [`v6-rebuild.md`](v6-rebuild.md)。
+> 本文件保留两条训练线的完整历史计划，作为重建与复盘依据。
 
 # 计划（两条训练线）
 

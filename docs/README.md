@@ -27,8 +27,8 @@ docs/
 ├─ operations.md       ← 【运维与切换】
 │  └─ 本地双模型（9B llama.cpp / 27B NInfer）运行时管理、显存调优与三档切换指南
 │
-├─ plans.md            ← 【演进计划总纲】
-│  └─ 涵盖 9B OxCoder 与 27B KittyRev 双线历史执行记录、里程碑与学术论文闭环
+├─ plans.md            ← 【工程计划】
+│  └─ 涵盖 9B OxCoder 与 27B KittyRev 双线训练与部署历史执行记录
 │
 └─ v6-rebuild.md       ← 【特定模型重建手册】
    └─ 针对 v6 模型的重建路线、权重校验与量化指南
