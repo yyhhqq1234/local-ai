@@ -1,7 +1,25 @@
 # 架构 · 适配器 · 优化日志
 
-> 合并自：01-architecture.md、02-local-model-adapter.md、05-optimization-log.md
+> 合并自：01-architecture.md、02-local-model-adapter.md、05-optimization-log.md  
+> **学术映射**：本架构中的“方案 Z（模块化动态解耦）”与“候选工具簇裁剪”已形式化为学术论文 **DSDA (Decoupled System-Domain Adaptation)**，参见 [`docs/paper/`](paper/) 与 [`REPRODUCE.md`](../REPRODUCE.md)。
 
+---
+
+## §0 与 DSDA 学术论文架构的理论映射
+
+本项目的工程架构与学术论文《Beyond Surface Adaptation》形成了严格的理论与实证对应关系：
+
+### 1. 运行时外挂解耦（Scheme Z）与低秩正交投影定理
+- **工程设计**：适配器层通过 `ModularSystemRouter` 拦截请求意图，根据当前交互状态将底层模型动态挂载到专用 LoRA 外挂（`θ_RE` 诊断工具路由、`θ_Code` 轨迹代码生成、`θ_Gate` 双状态转向），拒绝在同一模型权重上执行单体多阶段串行微调。
+- **论文理论定理**：论文第 2.3 节提出了 **Theorem 1 (Task Interference Bound in Sequential Low-Rank Adaptation)**，证明了在紧凑模型低秩子空间下，无约束顺序微调的能量干涉下界满足 $\mathcal{I}(\mathcal{T}_1, \mathcal{T}_2) \ge \sigma_{\min}^2(\mathbf{B}_1) \cos^2 \theta(\mathcal{S}_1, \mathcal{S}_2) \|\nabla \mathcal{L}_2\|_F^2$。Scheme Z 施加正交解耦算子，从数学上保证了跨任务破坏能量恒为零（Corollary 1.1: $\mathcal{I} \equiv 0$），实测击败 Task Arithmetic 与 TIES-Merging。
+
+### 2. 候选工具集聚类与注意力稀释防御
+- **工程设计**：将 64 个底层系统工具根据通道与特权级别划分为 11 个功能簇，动态系统提示仅注入当前任务的目标工具与 $k=8\sim12$ 个簇内难负例（Hard Negatives）和跨通道干扰项。
+- **论文理论定理**：论文第 4.2 节验证了注意力稀释假说。全量 Schema 注入（$k=64$）因上下文膨胀导致工具准确率下降至 77.5%，而 $k=8\sim12$ 的候选簇注入使准确率稳定在 82.5% 且工具幻觉降为 0。
+
+### 3. 反事实安全门控与因果后门阻断
+- **工程设计**：门控微调数据采用等长配对机制（$|\text{len}(y_{\text{auth}}) - \text{len}(y_{\text{unauth}})| \le \delta$），彻底切除以响应长度判断授权状态的虚假捷径。
+- **论文理论定理**：论文第 4.3 节构建了结构因果模型（SCM），证明利用成对样本可切断后门路径 $X \leftarrow L \rightarrow Y$，将长度互信息降至 $I(\text{Length}; \text{GateState}) \to 0$。
 
 ---
 
