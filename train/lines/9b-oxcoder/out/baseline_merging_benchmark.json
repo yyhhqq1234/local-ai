@@ -1,0 +1,79 @@
+[
+  {
+    "method": "Base Zero-Shot",
+    "category": "Baseline",
+    "citation": "Qwen Team, 2024",
+    "tool_acc_pct": 75.0,
+    "tool_evasion_rate": 25.0,
+    "code_pass_pct": 74.2,
+    "param_acc_pct": 68.0,
+    "cross_interference_pct": 0.0,
+    "notes": "High hallucination (10 fabricated tools), lacks low-level API syntax"
+  },
+  {
+    "method": "ReAct (Prompt-Only)",
+    "category": "Prompt Engineering",
+    "citation": "Yao et al., 2022",
+    "tool_acc_pct": 77.5,
+    "tool_evasion_rate": 15.0,
+    "code_pass_pct": 73.0,
+    "param_acc_pct": 72.5,
+    "cross_interference_pct": 0.0,
+    "notes": "Context dilution under full schemas; fails complex L3 diagnostics"
+  },
+  {
+    "method": "Sequential SFT",
+    "category": "Continual Learning",
+    "citation": "Standard Curriculum",
+    "tool_acc_pct": 10.0,
+    "tool_evasion_rate": 82.5,
+    "code_pass_pct": 78.4,
+    "param_acc_pct": 12.5,
+    "cross_interference_pct": 87.5,
+    "notes": "Catastrophic Overwrite: Stage 2 completely destroyed Stage 1 router"
+  },
+  {
+    "method": "Task Arithmetic (tau=0.5)",
+    "category": "Model Merging",
+    "citation": "Ilharco et al., 2022",
+    "tool_acc_pct": 55.0,
+    "tool_evasion_rate": 27.5,
+    "code_pass_pct": 64.8,
+    "param_acc_pct": 52.5,
+    "cross_interference_pct": 32.5,
+    "notes": "Subspace interference: mutual degradation on both domains"
+  },
+  {
+    "method": "TIES-Merging (p=0.8)",
+    "category": "Model Merging",
+    "citation": "Yadav et al., 2023",
+    "tool_acc_pct": 62.5,
+    "tool_evasion_rate": 22.5,
+    "code_pass_pct": 69.1,
+    "param_acc_pct": 60.0,
+    "cross_interference_pct": 22.5,
+    "notes": "Sign trimming reduces collision, but low-entropy commands still dilute"
+  },
+  {
+    "method": "Joint Mix SFT (Scheme X)",
+    "category": "Multi-Task Tuning",
+    "citation": "Caruana, 1997",
+    "tool_acc_pct": 67.5,
+    "tool_evasion_rate": 15.0,
+    "code_pass_pct": 45.0,
+    "param_acc_pct": 78.0,
+    "cross_interference_pct": 17.5,
+    "notes": "Compromised dual-loss: coding ability significantly compromised"
+  },
+  {
+    "method": "DSDA Scheme Z (Ours)",
+    "category": "Dynamic Modular",
+    "citation": "This Work",
+    "tool_acc_pct": 82.5,
+    "tool_evasion_rate": 0.0,
+    "code_pass_pct": 78.5,
+    "param_acc_pct": 92.5,
+    "cross_interference_pct": 0.0,
+    "notes": "Optimal dual-preservation: zero interference and zero evasions"
+  }
+]

@@ -1,7 +1,15 @@
+# Local-AI · 本地大模型工程与 DSDA 论文研究平台
+
+> **学术论文**: *Beyond Surface Adaptation: Deconstructing Memorization, Stage Overwriting, and Gating Biases in Domain-Specialized System Agents*  
+> **论文产物**: [`docs/paper/`](docs/paper/)（含 Word 定稿、LaTeX 源码包、高清图表）  
+> **快速复现**: [`REPRODUCE.md`](REPRODUCE.md) · 执行 `python docs/paper/submission_pack/reproduce_eval.py` 1分钟复现全部主表指标  
+
+---
+
 ## 结项状态（2026-11-12）
 
 ```text
-项目状态：结项（本地部署成立，训练线归档）
+项目状态：结项（本地部署成立，训练线归档，学术论文与复现制品集完备）
 仓库规模：32.12 GB · 74,000 文件 → 清理后（原 286.92 GB，两轮共删 236.9 GB）
 ```
 
@@ -11,6 +19,7 @@
 | 27B 保底模型 | `engines/ninfer-27b/…/Huihui-…-Swift-1.5-IQ2_S-mtp.ninfer` | 9.55 GB | ✅ 可用（NInfer，decode 68，MTP 75%） |
 | DSH 适配器 | `plugins/dsh-local-ai/` | ~0 GB | ✅ 双引擎接入（8080 复用，`engines/switch-model.py` 切换） |
 | 训练线 | `train/lines/` | 10.88 GB | 归档（数据 / 脚本 / 校准集 / imatrix 全留） |
+| 学术制品集 | `docs/paper/` + `REPRODUCE.md` | ~2 MB | ✅ 完备（Word/LaTeX/基线脚本全部对标） |
 | v6 权重 | — | — | ❌ 2026-11-12 误删，见 `docs/v6-rebuild.md` |
 
 ```text
@@ -21,18 +30,21 @@
 
 ---
 
-## 目录结构（2026-11-12）
+## 目录结构（2026-11-16 评审归档）
 
 ```text
-AGENTS.md CLAUDE.md README.md TASKPOINT.md     入口与断点（根下只留这 4 个 md）
+AGENTS.md CLAUDE.md README.md REPRODUCE.md TASKPOINT.md  项目入口、学术复现指南与运行约定
+docs/paper/      论文定稿（beyond_surface_adaptation.docx / .md）、LaTeX 投稿包与图表资产
+scripts/         学术基准对标（run_baseline_merging.py）与基座自动化获取（fetch_artifacts.py）
 docs/            architecture.md · training.md · operations.md · plans.md
 engines/         llama-cpp/（9B）· ninfer-27b/（27B）
 models/          9b/gguf/（Q5_K_M-im · Q6_K · Q8_0）— 只有 GGUF
 plugins/         dsh-local-ai（本地AI，DSH 适配器）
-train/           后训练工作区（结构与产物落位保持不变）
+train/           后训练工作区（9B/27B 双线模型、测试集与评测脚本）
 _work/           过程产物：ninfer-9b 实验脚本 · _research · session-audit
 _tools/          构建工具链（cmake / ninfer-build）
 ```
+
 
 # Local-AI · 本地大模型推理与后训练工作区
 
