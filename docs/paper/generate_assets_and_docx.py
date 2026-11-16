@@ -364,7 +364,7 @@ def build_paper_docx():
     p_auth = doc.add_paragraph()
     p_auth.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_auth.paragraph_format.space_after = Pt(14)
-    r_auth = p_auth.add_run("Anonymous Authors\nAnonymous Institution / Laboratory")
+    r_auth = p_auth.add_run("Hanqin Yang (杨涵钦, yyhhqq1234)\nAutonomous Systems & Engineering Laboratory (2923165556@qq.com)")
     r_auth.font.name = 'Arial'
     r_auth.font.size = Pt(10)
     r_auth.font.color.rgb = RGBColor(0x55, 0x55, 0x55)

@@ -1,6 +1,6 @@
 # intent3 接入 v4.1 的路径规格（只写规格，不改代码）
 
-> 作者：data-forge · 2026-10-22
+> 所有者：杨涵钦（yyhhqq1234）· 生成：data-forge · 2026-10-22
 > 适用范围：v4.1 增量轮（**不进 v4**）。本文件不动 subsets / large-mix-plus / 训练脚本。
 > 目录：`data/intent3/`（W1/W2/W3/W3n/W4/W5）+ `data/forge2/`（本轮已交 210 条）
 

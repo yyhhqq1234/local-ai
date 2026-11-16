@@ -199,7 +199,7 @@ Carbon emissions can be estimated using the [Machine Learning Impact calculator]
 
 ## Model Card Authors [optional]
 
-[More Information Needed]
+- 杨涵钦 (yyhhqq1234)
 
 ## Model Card Contact
 

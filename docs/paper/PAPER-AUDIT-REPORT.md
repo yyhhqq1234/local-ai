@@ -1,6 +1,7 @@
 # 项目漏洞完全性审查与修复验收报告 (Project Vulnerability Audit & Remediation Report)
 
 **Document ID**: `LOCAL-AI-AUDIT-REMEDIATION-20261116`  
+**Project Owner / Principal Investigator**: 杨涵钦 (yyhhqq1234)  
 **Auditor**: 石井 (Ishii), 本地工作区执行层  
 **Target Paper**: *Beyond Surface Adaptation: Deconstructing Memorization, Stage Overwriting, and Gating Biases in Domain-Specialized System Agents*  
 **Date**: 2026-11-16  

@@ -3,7 +3,8 @@
 **Document ID**: `LOCAL-AI-PAPER-FRAMEWORK-20261116`  
 **Paper Title**: *Beyond Surface Adaptation: Deconstructing Memorization, Stage Overwriting, and Gating Biases in Domain-Specialized System Agents*  
 **Target Venue**: IEEE Transactions (TSE / TIFS) / CCF-A 顶会 (NeurIPS / ICLR)  
-**Author**: 石井 (Ishii), 本地工作区执行层  
+**Author**: 杨涵钦 (yyhhqq1234)  
+**Assistant / Engineering Support**: 石井 (Ishii), 本地工作区执行层  
 
 ---
 

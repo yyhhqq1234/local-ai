@@ -27,8 +27,9 @@ Foundation Models -> Post-Training, Alignment, and Fine-Tuning
 Large Language Model Agents, Domain Specialization, Tool Routing, Anti-Memorization, Catastrophic Forgetting, Stage Overwriting, Safety Gating, Representation Engineering, Hybrid Attention
 
 [8. Authorship Mode (Double-Blind Requirement)]
-Author Names: Anonymous Authors
+Author Names: Anonymous Authors (Double-Blind Review Stage)
 Affiliation: Anonymous Institution / Laboratory
+Real Project Owner & Camera-Ready Author: Hanqin Yang (杨涵钦, yyhhqq1234, 2923165556@qq.com)
 
 [9. Financial & Conflict of Interest (COI) Statement]
 No non-academic sponsor influences the scientific conclusions. No conflicting institutional relationships to declare during the review cycle.

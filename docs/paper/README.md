@@ -1,6 +1,7 @@
 # DSDA 学术论文与制品包索引 (Research Paper & Artifacts)
 
-本目录归档了学术论文 **《Beyond Surface Adaptation: Deconstructing Memorization, Stage Overwriting, and Gating Biases in Domain-Specialized System Agents》** 的完整交付资产，涵盖 Word 定稿、Markdown 完整稿、标准 LaTeX 投稿包、高分辨率论文图表、基线对标数据以及匿名化可复现制品。
+> **论文作者与项目所有者**: 杨涵钦（yyhhqq1234，2923165556@qq.com）  
+> 本目录归档了学术论文 **《Beyond Surface Adaptation: Deconstructing Memorization, Stage Overwriting, and Gating Biases in Domain-Specialized System Agents》** 的完整交付资产，涵盖 Word 定稿、Markdown 完整稿、标准 LaTeX 投稿包、高分辨率论文图表、基线对标数据以及匿名化可复现制品。
 
 ---
 
