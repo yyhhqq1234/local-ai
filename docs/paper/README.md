@@ -10,7 +10,8 @@
 |---|---|---|
 | [`beyond_surface_adaptation.docx`](beyond_surface_adaptation.docx) | Word 格式 (658 KB) | **投稿定稿**：包含 IEEE/ACM 规范排版、三线表、矢量图与代码 Listing 终端渲染 |
 | [`beyond_surface_adaptation.md`](beyond_surface_adaptation.md) | Markdown | 论文全量英文文本（包含全部数学推导、定理、数据表与 17 篇参考文献） |
-| [`PAPER-AUDIT-REPORT.md`](PAPER-AUDIT-REPORT.md) | Markdown | **完全性审查报告**：穿透式核验导师提出的 5 大潜在审稿人质疑（含实证依据与闭环证明） |
+| [`PAPER-FRAMEWORK.md`](PAPER-FRAMEWORK.md) | Markdown | **论文结构框架设计**：五步逻辑主线（背景问题 $\to$ 现有缺陷 $\to$ 提出方法 $\to$ 实验结论 $\to$ 核心价值）、7 章节详细规划与图表清单 |
+| [`PAPER-AUDIT-REPORT.md`](PAPER-AUDIT-REPORT.md) | Markdown | **漏洞审查与修复验收报告**：针对 5 大漏洞在本项目中的实证真伪判定、修复举措与验收证明 |
 | [`baseline_merging_benchmark.md`](baseline_merging_benchmark.md) | Markdown | **基线对标报告**：Task Arithmetic 与 TIES-Merging 模型合并在底层系统任务上的实测数据 |
 | [`generate_assets_and_docx.py`](generate_assets_and_docx.py) | Python 脚本 | 自动化图表绘制（300 DPI）与高保真 Word 论文生成器 |
 | [`images/`](images/) | 目录 (PNG) | 论文高清插图（图 1~3）与暗黑终端代码图（Listing 1~3） |

@@ -12,7 +12,8 @@ docs/
 │  ├─ README.md        ← 论文资产清单与实验表项速查
 │  ├─ beyond_surface_adaptation.docx  ← 论文 Word 最终投稿定稿 (658 KB)
 │  ├─ beyond_surface_adaptation.md    ← 论文 Markdown 完整源码（含定理推导与公式）
-│  ├─ PAPER-AUDIT-REPORT.md           ← 针对审稿人 5 大质疑的完全性审查报告
+│  ├─ PAPER-FRAMEWORK.md              ← 论文结构框架设计（五步逻辑主线与7章节规划）
+│  ├─ PAPER-AUDIT-REPORT.md           ← 漏洞完全性审查与修复验收报告（实证真伪判定与闭环）
 │  ├─ baseline_merging_benchmark.md  ← 主流模型合并基准对标数据报告
 │  ├─ generate_assets_and_docx.py    ← 矢量图绘制与 Word 生成器
 │  ├─ images/                         ← 论文 300 DPI 高清插图
