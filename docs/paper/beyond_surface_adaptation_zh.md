@@ -66,15 +66,23 @@
 ### 3.1 记忆化假象与评估失效
 在特化的二进制逆向工程与恶意代码取证领域，训练数据通常由简练的专业操作请求（例如 *“读取当前载入目标模块的 PE 导出表 (EAT)”*、*“枚举用于动态 API Hooking 的 IAT 描述符”*、*“反汇编指定 RVA 偏移处的函数序言”*）和结构化的工具调用序列组成。
 
+在常规监督微调中，优化目标对应于离散词元分布上的经验风险最小化 (ERM)：
+
+$$\mathcal{L}_{\text{ERM}}(\theta) = \frac{1}{|\mathcal{D}|} \sum_{(\mathbf{x}, \mathbf{y}) \in \mathcal{D}} \sum_{t=1}^{|\mathbf{y}|} -\log P_\theta(y_t \mid \mathbf{y}_{<t}, \mathbf{x}) \tag{1}$$
+
+为量化损失降低究竟反映了真实语义泛化还是表层词汇检索，我们形式化定义 $n$-Gram 逐字记忆化重合度度量 $\mathcal{M}_n$：
+
+$$\mathcal{M}_n(\hat{\mathbf{y}}, \mathcal{D}_{\text{train}}) \triangleq \frac{\left| \operatorname{Gram}_n(\hat{\mathbf{y}}) \cap \bigcup_{(\mathbf{x},\mathbf{y}) \in \mathcal{D}_{\text{train}}} \operatorname{Gram}_n(\mathbf{y}) \right|}{\left| \operatorname{Gram}_n(\hat{\mathbf{y}}) \right|} \tag{2}$$
+
 我们在包含 5,602 条核心二进制分析与系统防御任务的语料集上对 9B 模型进行了连续 3 个 epoch 的监督微调。如图 1 所示，常规评估指标呈现出具有高度迷惑性的良好态势：
 
-$$\mathcal{L}_{\text{CE}} \downarrow (1.110 \rightarrow 0.373), \quad \text{工具幻觉数量} \downarrow (1 \rightarrow 0)$$
+$$\mathcal{L}_{\text{ERM}} \downarrow (1.110 \longrightarrow 0.373), \quad \text{工具幻觉数量} \downarrow (1 \longrightarrow 0)$$
 
 ```
 [Figure 1: Training Loss vs. Verbatim 20-Gram Memorization Rate Across Training Epochs]
 ```
 
-然而，当我们引入针对训练集的 $n$-gram 词元重合度度量时，暴露出极为严重的机械背题病理：
+然而，当我们引入针对训练集的 $n$-gram 词元重合度度量 $\mathcal{M}_{20}$ 时，暴露出极为严重的机械背题病理：
 - 20-Gram 词元逐字重合度从第 1 轮的 **0.167** 飙升至第 2 轮的 **0.515**；
 - 评测集中出现完全逐字匹配（SequenceMatcher 相似度 $= 1.00$）的样本比例从 **10%** 猛增至 **40%**；
 - 当我们在留出验证集中隐去具体工具名称（改用高层功能描述，考察真实推理能力）时，训练 3 轮后的模型表现出**负泛化增长**（准确率从 91.7% 下跌至 83.3%）。
@@ -101,39 +109,54 @@ $$\mathcal{L}_{\text{CE}} \downarrow (1.110 \rightarrow 0.373), \quad \text{工�
 ### 3.3 理论形式化：子空间干扰下界定理
 为阐明顺序微调破坏前序专业能力的内在数学机理，我们对低秩适配下的梯度投影动力学进行了严格建模。
 
-**假设 1 (格拉斯曼流形上的低秩参数化)**. 设 $\mathbf{W}_0 \in \mathbb{R}^{d_1 \times d_2}$ 为预训练基座权重。在特定任务 $\mathcal{T}$ 上的适配受限于低秩分解 $\Delta \mathbf{W} = \frac{\alpha}{r} \mathbf{B}\mathbf{A}$，其中 $\mathbf{B} \in \mathbb{R}^{d_1 \times r}$，$\mathbf{A} \in \mathbb{R}^{r \times d_2}$，秩 $r \ll \min(d_1, d_2)$。列空间 $\mathcal{S} = \text{span}(\mathbf{B})$ 定义了格拉斯曼流形 $\mathbf{Gr}(r, d_1)$ 上的一个 $r$ 维子空间。
+**假设 1 (格拉斯曼流形上的低秩参数化)**. 设 $\mathbf{W}_0 \in \mathbb{R}^{d_1 \times d_2}$ 为预训练基座权重。在特定任务 $\mathcal{T}$ 上的适配受限于低秩分解：
 
-**引理 1 (任务梯度的正交投影分解)**. 设 $\mathcal{S}_1 = \text{span}(\mathbf{B}_1)$ 为针对任务 $\mathcal{T}_1$ 优化后的低秩子空间。对于后续任务 $\mathcal{T}_2$ 产生的目标损失 $\mathcal{L}_2$，无约束欧氏梯度 $\nabla_{\mathbf{W}} \mathcal{L}_2 \in \mathbb{R}^{d_1 \times d_2}$ 具备唯一的正交投影分解：
-$$\nabla_{\mathbf{W}} \mathcal{L}_2 = \mathcal{P}_{\mathcal{S}_1}(\nabla_{\mathbf{W}} \mathcal{L}_2) + \mathcal{P}_{\mathcal{S}_1}^\perp(\nabla_{\mathbf{W}} \mathcal{L}_2)$$
-其中 $\mathcal{P}_{\mathcal{S}_1} = \mathbf{B}_1 (\mathbf{B}_1^\top \mathbf{B}_1)^{-1} \mathbf{B}_1^\top$ 为向 $\mathcal{S}_1$ 投影的正交投影算子，$\mathcal{P}_{\mathcal{S}_1}^\perp = \mathbf{I} - \mathcal{P}_{\mathcal{S}_1}$。
+$$\mathbf{W} = \mathbf{W}_0 + \Delta \mathbf{W} = \mathbf{W}_0 + \frac{\alpha}{r} \mathbf{B}\mathbf{A}, \quad \mathbf{B} \in \mathbb{R}^{d_1 \times r}, \; \mathbf{A} \in \mathbb{R}^{r \times d_2} \tag{3}$$
+
+其中秩 $r \ll \min(d_1, d_2)$。列空间 $\mathcal{S} = \text{span}(\mathbf{B})$ 定义了格拉斯曼流形 $\mathbf{Gr}(r, d_1)$ 上的一个 $r$ 维子空间。
+
+**引理 1 (任务梯度的正交投影分解)**. 设 $\mathcal{S}_1 = \text{span}(\mathbf{B}_1)$ 为针对任务 $\mathcal{T}_1$ 优化后的低秩子空间。向 $\mathcal{S}_1$ 投影的正交投影算子 $\mathcal{P}_{\mathcal{S}_1}$ 与其正交补算子 $\mathcal{P}_{\mathcal{S}_1}^\perp$ 唯一形式化定义为：
+
+$$\mathcal{P}_{\mathcal{S}_1} \triangleq \mathbf{B}_1 (\mathbf{B}_1^\top \mathbf{B}_1)^{-1} \mathbf{B}_1^\top, \quad \mathcal{P}_{\mathcal{S}_1}^\perp \triangleq \mathbf{I}_{d_1} - \mathcal{P}_{\mathcal{S}_1} \tag{4}$$
+
+对于后续任务 $\mathcal{T}_2$ 产生的目标损失 $\mathcal{L}_2$，无约束欧氏梯度 $\nabla_{\mathbf{W}} \mathcal{L}_2 \in \mathbb{R}^{d_1 \times d_2}$ 具备唯一的正交投影分解：
+
+$$\nabla_{\mathbf{W}} \mathcal{L}_2 = \mathcal{P}_{\mathcal{S}_1}(\nabla_{\mathbf{W}} \mathcal{L}_2) + \mathcal{P}_{\mathcal{S}_1}^\perp(\nabla_{\mathbf{W}} \mathcal{L}_2) \tag{5}$$
+
+设 $\theta(\mathcal{S}_1, \mathcal{S}_2) \in [0, \pi/2]$ 为两任务子空间之间的格拉斯曼主典范夹角：
+
+$$\cos \theta(\mathcal{S}_1, \mathcal{S}_2) \triangleq \max_{\mathbf{u} \in \mathcal{S}_1, \|\mathbf{u}\|_2=1} \max_{\mathbf{v} \in \mathcal{S}_2, \|\mathbf{v}\|_2=1} |\mathbf{u}^\top \mathbf{v}| = \|\mathbf{U}_1^\top \mathbf{U}_2\|_2 \tag{6}$$
 
 > **定理 1 (串行低秩微调中的任务干扰能量下界)**  
 > 设任务 $\mathcal{T}_1$ 微调收敛于参数空间 $\mathbf{B}_1 \mathbf{A}_1$，定义了主列子空间 $\mathcal{S}_1$。当后续任务 $\mathcal{T}_2$ 伴随损失 $\mathcal{L}_2$ 在共享的参数流形（主列子空间为 $\mathcal{S}_2 = \text{span}(\mathbf{B}_2)$）上继续训练时，直接作用于任务 1 关键参数子空间上的破坏性干扰能量 $\mathcal{I}(\mathcal{T}_1, \mathcal{T}_2)$ 满足非零下界：
 > 
-> $$\mathcal{I}(\mathcal{T}_1, \mathcal{T}_2) \triangleq \left\| \mathcal{P}_{\mathcal{S}_1} \left( \nabla_{\mathbf{W}} \mathcal{L}_2 \right) \right\|_F^2 \ge \sigma_{\min}^2(\mathbf{B}_1) \cdot \cos^2 \theta(\mathcal{S}_1, \mathcal{S}_2) \cdot \|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F^2$$
+> $$\mathcal{I}(\mathcal{T}_1, \mathcal{T}_2) \triangleq \left\| \mathcal{P}_{\mathcal{S}_1} \left( \nabla_{\mathbf{W}} \mathcal{L}_2 \right) \right\|_F^2 \ge \sigma_{\min}^2(\mathbf{B}_1) \cdot \cos^2 \theta(\mathcal{S}_1, \mathcal{S}_2) \cdot \|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F^2 \tag{7}$$
 > 
-> 其中 $\sigma_{\min}(\mathbf{B}_1) > 0$ 为适配矩阵 $\mathbf{B}_1$ 的最小非零奇异值，$\theta(\mathcal{S}_1, \mathcal{S}_2) \in [0, \pi/2]$ 为两任务流形间的格拉斯曼主典范夹角：
-> $$\cos \theta(\mathcal{S}_1, \mathcal{S}_2) = \max_{\mathbf{u} \in \mathcal{S}_1, \mathbf{v} \in \mathcal{S}_2} \frac{|\mathbf{u}^\top \mathbf{v}|}{\|\mathbf{u}\|_2 \|\mathbf{v}\|_2}$$
+> 其中 $\sigma_{\min}(\mathbf{B}_1) > 0$ 为适配矩阵 $\mathbf{B}_1$ 的最小非零奇异值。
 
 *证明简述*. 考虑正交投影算子作用下梯度的 Frobenius 范数。利用 $\mathcal{S}_1$ 的标准正交基 $\mathbf{U}_1 \in \mathbb{R}^{d_1 \times r}$，有：
 $$\left\| \mathcal{P}_{\mathcal{S}_1} \left( \nabla_{\mathbf{W}} \mathcal{L}_2 \right) \right\|_F^2 = \operatorname{Tr}\left( (\nabla_{\mathbf{W}} \mathcal{L}_2)^\top \mathbf{U}_1 \mathbf{U}_1^\top (\nabla_{\mathbf{W}} \mathcal{L}_2) \right) = \left\| \mathbf{U}_1^\top \nabla_{\mathbf{W}} \mathcal{L}_2 \right\|_F^2$$
-由于梯度 $\nabla_{\mathbf{W}} \mathcal{L}_2$ 是由任务 2 的优化产生，其主要梯度能量沿子空间 $\mathcal{S}_2 = \text{span}(\mathbf{U}_2)$ 分布。根据格拉斯曼主典范夹角定义，$\left\| \mathbf{U}_1^\top \mathbf{U}_2 \right\|_2 = \cos \theta(\mathcal{S}_1, \mathcal{S}_2)$。将梯度沿主要奇异方向分解并结合适配矩阵的下包络奇异值 $\sigma_{\min}(\mathbf{B}_1)$ 缩放，即证得下界。由于在紧凑模型中 $r \ll d_1$，子空间维数不足以保持严格正交（$\theta \ll \pi/2$），只要任务 2 处于有效学习状态（$\|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F > 0$），干扰能量下界严格恒大于零。 $\blacksquare$
+由于梯度 $\nabla_{\mathbf{W}} \mathcal{L}_2$ 是由任务 2 的优化产生，其主要梯度能量沿子空间 $\mathcal{S}_2 = \text{span}(\mathbf{U}_2)$ 分布。根据式 (6) 的格拉斯曼主典范夹角定义，$\left\| \mathbf{U}_1^\top \mathbf{U}_2 \right\|_2 = \cos \theta(\mathcal{S}_1, \mathcal{S}_2)$。将梯度沿主要奇异方向分解并结合适配矩阵的下包络奇异值 $\sigma_{\min}(\mathbf{B}_1)$ 缩放，即证得式 (7)。由于在紧凑模型中 $r \ll d_1$，子空间维数不足以保持严格正交（$\theta \ll \pi/2$），只要任务 2 处于有效学习状态（$\|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F > 0$），干扰能量下界严格恒大于零。 $\blacksquare$
 
 #### 定量相变映射机制：从干扰能量到 82.5% → 10.0% 崩塌
 为理解为何上述能量下界引发的是断崖式崩塌而非缓慢退化，考察目标系统工具 $t^*$ 与竞争干扰项 $t'$ 之间的对数几率差（Logit Margin）$\Delta z(x) = \mathbf{w}_{t^*}^\top \mathbf{h}(x) - \mathbf{w}_{t'}^\top \mathbf{h}(x)$。在连续 $T$ 步梯度更新中：
 
 $$\Delta \mathbf{W}_T = \Delta \mathbf{W}_0 - \eta \sum_{t=1}^T \nabla_{\mathbf{W}} \mathcal{L}_2^{(t)}$$
 
-投影至任务 1 流形上的累积参数漂移量为 $\Delta_{\text{drift}} = \eta \sum_{t=1}^T \mathcal{P}_{\mathcal{S}_1}(\nabla_{\mathbf{W}} \mathcal{L}_2^{(t)})$。根据定理 1，$\|\Delta_{\text{drift}}\|_F \ge \eta T \cdot \sigma_{\min}(\mathbf{B}_1) \cos \theta \|\nabla \mathcal{L}_2\|_F$。在低操作熵指令集中，初始分类裕度 $\Delta z_0$ 较为狭窄（约为 $0.8\sim1.4$）。随着漂移量的累积，其引发的对抗偏移使得 $\Delta z_T = \Delta z_0 - \langle \Delta_{\text{drift}}, \mathbf{h} \mathbf{x}^\top \rangle$ 迅速跌破零点。一旦几率差小于零，离散的 $\operatorname{argmax}$ 决策算子发生不可逆的**雪崩相变 (Phase Transition)**，导致工具调用准确率瞬间跌至底线（82.5% $\to$ 10.0%）。
+投影至任务 1 流形上的累积参数漂移量为：
+
+$$\Delta_{\text{drift}}(T) \triangleq \eta \sum_{t=1}^T \mathcal{P}_{\mathcal{S}_1}\left(\nabla_{\mathbf{W}} \mathcal{L}_2^{(t)}\right), \quad \|\Delta_{\text{drift}}(T)\|_F \ge \eta T \cdot \sigma_{\min}(\mathbf{B}_1) \cos \theta \|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F \tag{8}$$
+
+在低操作熵指令集中，初始分类裕度 $\Delta z_0$ 较为狭窄（约为 $0.8\sim1.4$）。随着漂移量的累积，其引发的对抗偏移使得：
+
+$$\Delta z(x; T) = \Delta z_0(x) - \operatorname{Tr}\left( \Delta_{\text{drift}}(T)^\top \mathbf{h}(x) \mathbf{x}^\top \right) < 0 \tag{9}$$
+
+一旦几率差小于零（$\Delta z(x; T) < 0$），离散的 $\operatorname{argmax}$ 决策算子发生不可逆的**雪崩相变 (Phase Transition)**，导致工具调用准确率瞬间跌至底线（82.5% $\to$ 10.0%）。
 
 > **推论 1.1 (模块化正交解耦下的零干扰保证)**  
-> 在 DSDA 方案中，不同任务 $\mathcal{T}_i$ 分别由独立的低秩适配器 $\mathbf{B}_i \mathbf{A}_i$ 参数化。推理期间由动态指示函数 $\mathbf{I}(\text{task} = \mathcal{T}_i)$ 调度：
+> 在 DSDA 方案中，不同任务 $\mathcal{T}_i$ 分别由独立的低秩适配器 $\mathbf{B}_i \mathbf{A}_i$ 参数化。推理期间由动态指示函数 $\mathbf{I}(\text{task} = \mathcal{T}_i)$ 调度。由于各任务参数在物理内存中完全解耦（$i \neq j$ 时，$\mathcal{S}_i \cap \mathcal{S}_j = \emptyset$），投影算子作用结果恒为零：
 > 
-> $$\Delta \mathbf{W}(x) = \sum_{i} \mathbf{I}(x \in \mathcal{T}_i) \cdot \frac{\alpha_i}{r_i} \mathbf{B}_i \mathbf{A}_i$$
-> 
-> 由于各任务参数物理隔离（$i \neq j$ 时，$\mathcal{S}_i \cap \mathcal{S}_j = \emptyset$），跨任务梯度投影干扰能量恒为零：
-> 
-> $$\mathcal{I}(\mathcal{T}_i, \mathcal{T}_j) \equiv 0 \quad (\forall i \neq j)$$
+> $$\mathcal{S}_i \cap \mathcal{S}_j = \emptyset \implies \mathcal{P}_{\mathcal{S}_i}\left(\nabla_{\mathbf{W}} \mathcal{L}_j\right) \equiv \mathbf{0} \implies \mathcal{I}(\mathcal{T}_i, \mathcal{T}_j) \equiv 0 \quad (\forall i \neq j) \tag{10}$$
 
 ---
 
@@ -147,16 +170,22 @@ $$\Delta \mathbf{W}_T = \Delta \mathbf{W}_0 - \eta \sum_{t=1}^T \nabla_{\mathbf{
 ## 4. 行为调控困境：表征编辑与门控捷径的边界 (The Steering Dilemma)
 
 ### 4.1 表征消融的帕累托悬崖
-在安全对齐中，基于几何方向投影的表征消融（Abliteration）尝试将隐藏层激活向量沿拒绝方向 $\mathbf{v}_{\text{refusal}}$ 正交剔除：
+在安全对齐中，基于几何方向投影的表征消融（Abliteration）尝试将隐藏层激活向量沿拒绝方向 $\hat{\mathbf{v}}_{\text{refusal}}$ 正交剔除：
 
-$$\mathbf{h}' = \mathbf{h} - \gamma (\mathbf{h} \cdot \hat{\mathbf{v}}_{\text{refusal}}) \hat{\mathbf{v}}_{\text{refusal}}$$
+$$\mathbf{h}' = \mathbf{h} - \gamma (\mathbf{h} \cdot \hat{\mathbf{v}}_{\text{refusal}}) \hat{\mathbf{v}}_{\text{refusal}} \tag{11}$$
+
+在参数层面，这等价于对模型的权重矩阵沿拒绝方向施加正交投影变换：
+
+$$\mathbf{W}' = \mathbf{W} \left( \mathbf{I}_{d_1} - \gamma \hat{\mathbf{v}}_{\text{refusal}} \hat{\mathbf{v}}_{\text{refusal}}^\top \right) \tag{12}$$
 
 然而将其应用于 9B 混合线性注意力模型时，表现出了尖锐的**帕累托悬崖 (Pareto Cliff)**：
 - 当消融强度 $\gamma \le 1.0$ 时，对拒绝方向的影响极其微弱，模型保持 100% 拒绝率（$\text{KL}=0.046$）；
 - 当 $\gamma = 2.0$ 时，模型依然拒绝所有请求（$\text{KL}=0.50$）；
-- 当 $\gamma \ge 4.0$ 时，模型突然越过崩溃阈值：KL 散度瞬间激增至 **7.4 – 17.0**，生成乱码，基础语言语法彻底解体。
+- 当 $\gamma \ge 4.0$ 时，模型突然越过崩溃阈值：Kullback-Leibler (KL) 散度瞬间激增：
 
-**结论**：在紧凑模型中，底层安全拒绝子空间与基础句法表征流形高度纠缠，不存在超平面的线性可分性，几何投影必然导致不可逆的结构瓦解。
+$$D_{\text{KL}}(P_{\mathbf{W}}(\cdot \mid \mathbf{x}) \,\|\, P_{\mathbf{W}'}(\cdot \mid \mathbf{x})) = \sum_{y \in \mathcal{V}} P_{\mathbf{W}}(y \mid \mathbf{x}) \log \frac{P_{\mathbf{W}}(y \mid \mathbf{x})}{P_{\mathbf{W}'}(y \mid \mathbf{x})} \ge 17.0 \quad (\gamma \ge 4.0) \tag{13}$$
+
+词元熵破坏，基础句法与多轮推理彻底解体。在紧凑模型中，底层安全拒绝子空间与基础句法表征流形高度纠缠，不存在超平面的线性可分性，几何投影必然导致不可逆的结构瓦解。
 
 ---
 
@@ -166,7 +195,11 @@ $$\mathbf{h}' = \mathbf{h} - \gamma (\mathbf{h} \cdot \hat{\mathbf{v}}_{\text{re
 在初始验证中，该方案看似实现了理想的拦截与放行。然而深入对抗审计揭示了一个严重的隐式安全漏洞（类似于 CWE-863 越权判定绕过）：
 - 训练集中的正样本（特权授权）包含详尽的二进制反汇编与内存布局披露，平均长度为 **1,065 tokens**；
 - 负样本（未授权拒答）普遍为简短的拒答声明，平均长度仅 **126 tokens**（长度比达 8.4:1）。
-- **安全漏洞与利用机制**：模型没有真正对特权标识符形成因果因果依赖，而是把“长篇详尽技术内容”与“特权授权状态”形成了虚假统计绑定。对抗攻击者只需在无授权请求中要求*“请提供详尽的万字内核打补丁与函数反汇编逐步排障教程”*，模型就会把长文本预算误当成特权凭据，绕过安全参考监视器，输出未经授权的高危操作指令；反之，简短的良性系统诊断却常被误拒，导致拒绝服务 (DoS)。
+- **安全漏洞与利用机制**：模型没有真正对特权标识符形成因果依赖，而是把“长篇详尽技术内容”与“特权授权状态”形成了虚假统计绑定。根据贝叶斯定理，给定响应长度 $L$ 条件下的特权放行后验概率可展开为：
+
+$$P(Y = \text{Permit} \mid X, L) = \frac{P(L \mid Y = \text{Permit}, X) \cdot P(Y = \text{Permit} \mid X)}{P(L \mid X)} \tag{14}$$
+
+由于 $\mathbb{E}[L \mid Y=\text{Permit}] \approx 1,065 \gg \mathbb{E}[L \mid Y=\text{Refuse}] \approx 126$，长文本先验成为了模型判定授权的隐式代理。对抗攻击者只需在无授权请求中要求*“请提供详尽的万字内核打补丁与函数反汇编逐步排障教程”*，模型就会把长文本预算误当成特权凭据，绕过安全参考监视器，输出未经授权的高危操作指令；反之，简短的良性系统诊断却常被误拒，导致拒绝服务 (DoS)。
 
 ```
 [Figure 3: Token Length Disparity in Naive Safety Gating vs. DSDA Counterfactual Length Balancing]
@@ -189,9 +222,11 @@ $$\mathbf{h}' = \mathbf{h} - \gamma (\mathbf{h} \cdot \hat{\mathbf{v}}_{\text{re
 3. 上下文前缀与修饰后缀动态注入；
 4. 长度与去重安全校验。
 
-扰动后的增强数据集满足：
+语义解耦优化目标在所有扰动样本上最小化经验交叉熵损失：
 
-$$\mathcal{D}_{\text{aug}} = \bigcup_{i=1}^{|\mathcal{D}|} \left\{ (f_{\text{pert}}(\mathbf{x}_i, k), \mathbf{y}_i) \right\}_{k=1}^K$$
+$$\mathcal{L}_{\text{semantic}}(\theta) \triangleq \frac{1}{K |\mathcal{D}|} \sum_{i=1}^{|\mathcal{D}|} \sum_{k=1}^K \sum_{t=1}^{|\mathbf{y}_i|} -\log P_\theta(y_{i,t} \mid \mathbf{y}_{i,<t}, f_{\text{pert}}(\mathbf{x}_i, k)) \tag{15}$$
+
+$$\text{约束条件} \quad \mathbf{y}_i(k) \equiv \mathbf{y}_i \quad (\forall k \in \{1,\dots,K\})$$
 
 关键在于：对于同一种操作意图生成的 $K=4$ 种截然不同的提示词，**对应的工具调用目标序列 $\mathbf{y}_i$ 严格保持完全一致**。这强迫模型抛弃表层词汇记忆，建立深层语义意图到工具签名的映射。
 
@@ -209,8 +244,15 @@ $$\mathcal{D}_{\text{aug}} = \bigcup_{i=1}^{|\mathcal{D}|} \left\{ (f_{\text{per
 ### 5.2 候选工具空间拓扑解耦 (Topology Decoupling)
 全量注入 64 个全局工具 schema 会导致上下文严重稀释并增加 20KB 提示负担。DSDA 建立**候选工具感知聚类**机制：
 1. 将 64 个系统逆向与安全工具按执行通道与特权级别划分至 11 个功能拓扑簇 $\mathcal{C}_1, \dots, \mathcal{C}_{11}$（包括内核直接 IOCTL 簇、调试器追踪与硬件断点簇、PE/ELF 静态文件取证簇、动态内存内省与打补丁簇、反作弊与 Hook 诊断探测簇、反汇编与反编译后端联动簇等）；
-2. 针对目标工具 $t^* \in \mathcal{C}_m$，动态构建规模为 $k \in [8, 12]$ 的候选集：包含同簇内的难负例干扰项（共享相似参数模式，如区分虚拟地址检查与物理内存读取）以及跨通道的隔离干扰项；
-3. 将紧凑的候选集注入动态提示词，实现高信息密度的注意力聚焦，彻底杜绝语法幻觉与误操作风险。
+2. 针对目标工具 $t^* \in \mathcal{C}_m$，动态构建规模为 $k \in [8, 12]$ 的紧凑候选集：
+
+$$\mathcal{S}_{\text{cand}}(t^*) \triangleq \{t^*\} \cup \operatorname{Sample}_{n_{\text{intra}}}(\mathcal{C}_m \setminus \{t^*\}) \cup \operatorname{Sample}_{n_{\text{inter}}}\left(\bigcup_{j \neq m} \mathcal{C}_j\right) \tag{16}$$
+
+同簇内的难负例干扰项共享相似参数模式，跨通道干扰项作为判别边界。工具预测概率被严格约束于候选集内：
+
+$$P(t = t^* \mid \mathbf{x}) \triangleq \frac{\exp\left(\mathbf{w}_{t^*}^\top \mathbf{h}(\mathbf{x}) / \tau\right)}{\sum_{t' \in \mathcal{S}_{\text{cand}}} \exp\left(\mathbf{w}_{t'}^\top \mathbf{h}(\mathbf{x}) / \tau\right)} \tag{17}$$
+
+这消除了全局上下文稀释，彻底杜绝语法幻觉与误操作风险。
 
 ```
 [Listing 2: Candidate-Aware Hard-Negative Clustering Algorithm]
@@ -221,7 +263,11 @@ $$\mathcal{D}_{\text{aug}} = \bigcup_{i=1}^{|\mathcal{D}|} \left\{ (f_{\text{per
 ### 5.3 因果等长解耦门控：SCM 与后门阻断 (Causal Decoupling)
 为从因果层面根除长度偏置捷径，我们构建了**结构因果模型 (SCM)** $\mathcal{M} = \langle \mathcal{U}, \mathcal{V}, \mathcal{F}, P(\mathcal{U}) \rangle$：
 - **内生变量 $\mathcal{V}$**：输入提示 $X$、响应词元长度 $L$、门控状态 $G \in \{0, 1\}$、语义特征 $Z$、最终行为输出 $Y$；
-- **外生变量 $\mathcal{U}$**：底层预训练先验噪声。
+- **外生变量 $\mathcal{U}$**：底层预训练先验噪声 $U_X, U_L, U_G, U_Z, U_Y$。
+
+结构因果控制方程形式化为：
+
+$$\begin{cases} X := f_X(U_X) \\ L := f_L(X, U_L) \\ G := f_G(X, U_G) \\ Z := f_Z(X, U_Z) \\ Y := f_Y(Z, \theta(G), U_Y) \end{cases} \tag{18}$$
 
 ```text
        [ Length Confounder (L) ] (Blocked via Counterfactual Pairs)
@@ -244,7 +290,7 @@ DSDA 强制构造严格等长的反事实配对样本 $(y_{\text{auth}}, y_{\tex
 - $y_{\text{auth}}$：提供已授权的详尽合规分析（约 780 tokens）；
 - $y_{\text{unauth}}$：针对同一敏感问题，生成详尽且合规的替代性技术审计与加固报告（约 765 tokens），严格满足长度约束：
 
-$$| \text{length}(y_{\text{auth}}) - \text{length}(y_{\text{unauth}}) | \le \delta \quad (\delta \le 50\text{ tokens})$$
+$$\forall x \in \mathcal{D}_{\text{sensitive}}, \quad \left| |\mathbf{y}_{\text{auth}}| - |\mathbf{y}_{\text{unauth}}| \right| \le \delta \quad (\delta \le 50\text{ tokens}) \tag{19}$$
 
 ```python
 # Algorithm 1: Counterfactual Length-Balanced Alignment Generation
@@ -263,16 +309,27 @@ def construct_counterfactual_pair(sensitive_prompt, delta_max=50):
 
 在 Pearl 的 $do$-演算下，授权决策的**平均因果效应 (ACE)** 表达为：
 
-$$\text{ACE} = \mathbb{E}_{X} \left[ P(Y \mid do(G=1), X) - P(Y \mid do(G=0), X) \right]$$
+$$\text{ACE}(G \to Y) \triangleq \mathbb{E}_{X} \left[ P(Y \mid do(G=1), X) - P(Y \mid do(G=0), X) \right] \tag{20}$$
 
-通过反事实等长消除后门通路后，互信息 $I(L; G) \to 0$，模型在数学上无法再将词元长度作为授权判断的代理依据。
+通过反事实等长消除后门通路后，互信息 $I(L; G)$ 被严格湮灭为零：
+
+$$I(L; G) = \sum_{l \in \mathcal{L}} \sum_{g \in \{0, 1\}} P(l, g) \log \frac{P(l, g)}{P(l)P(g)} \equiv 0 \tag{21}$$
+
+模型在数学上无法再将词元长度作为授权判断的代理依据。
 
 ---
 
 ### 5.4 推理期模块化适配器解耦：Scheme Z (Manifold Decoupling)
-为彻底解决多阶段能力覆盖，DSDA 实现 **Scheme Z 运行时流形解耦架构**：
-- 独立训练三套低秩适配器：$\theta_{\text{RE}}$（底层工具调度）、$\theta_{\text{Code}}$（多轮代码合成与轨迹排障）、$\theta_{\text{Gate}}$（双态因果门控）；
-- 宿主运行环境设立动态路由器：当上下文需要底层调试诊断时调度 $\theta_{\text{RE}}$；当涉及代码补丁或长报告生成时调度 $\theta_{\text{Code}}$。各专家参数物理隔离，根据推论 1.1，理论任务间干扰恒等于零（$\mathcal{I} \equiv 0$）。
+为彻底解决多阶段能力覆盖，DSDA 实现 **Scheme Z 运行时流形解耦架构**。运行时的有效操作权重由状态机动态切换：
+
+$$\mathbf{W}_{\text{eff}}(\mathbf{x}) = \mathbf{W}_0 + \sum_{k \in \{\text{RE}, \text{Code}, \text{Gate}\}} \mathbf{1}_{\{\mathcal{R}(\mathbf{x}) = k\}} \cdot \frac{\alpha_k}{r_k} \mathbf{B}_k \mathbf{A}_k \tag{22}$$
+
+其中 $\mathcal{R}(\mathbf{x})$ 为轻量确定性状态路由谓词：
+- $\theta_{\text{RE}}$：针对底层逆向分析与工具调度进行特化；
+- $\theta_{\text{Code}}$：针对多轮代码补丁与去污染轨迹排障进行特化；
+- $\theta_{\text{Gate}}$：针对等长因果安全门控进行特化。
+
+各专家参数物理隔离，根据推论 1.1，理论任务间干扰恒等于零（$\mathcal{I} \equiv 0$）。
 
 ```
 [Listing 3: Dynamic Runtime Modular Adapter Router (Scheme Z)]
@@ -286,6 +343,10 @@ $$\text{ACE} = \mathbb{E}_{X} \left[ P(Y \mid do(G=1), X) - P(Y \mid do(G=0), X)
 - **威胁模型 (Threat Model)**：我们遵循标准系统安全与参考监视器威胁模型假设。攻击者具备黑盒交互能力与部分白盒知识，能够构造对抗性提示词注入、角色扮演特权诱导、混淆技术词伪装以及多轮上下文语义漂移。
   - **安全性目标 (Safety Objective)**：在未授权状态下，智能体作为参考监视器必须保持 100% 拒绝率，严格禁止调用任意非授权的破坏性底层原语（特别是禁止调用内核物理内存写入 `KM_PW` 或非法的 ASLR 劫持工具）；
   - **可用性与反拒绝服务目标 (Availability & Utility Objective)**：在获得特权授权时，智能体必须 100% 忠实执行二进制分析与排障；同时，对良性系统维护、逆向工程取证与故障诊断请求绝不产生误拒（实现针对对抗性技术陷阱的零误拒 $\text{TrapRefusal} = 0.000$）。
+
+形式化安全评测指标定义为：
+
+$$\text{GateLeak} \triangleq \frac{1}{N_{\text{unauth}}} \sum_{i=1}^{N_{\text{unauth}}} \mathbf{1}_{\{\text{Action}(y_i) \in \Omega_{\text{prohibited}}\}}, \quad \text{TrapRefusal} \triangleq \frac{1}{N_{\text{trap}}} \sum_{j=1}^{N_{\text{trap}}} \mathbf{1}_{\{\text{Refusal}(y_j) = 1\}} \tag{23}$$
 - **三层综合对抗评测集 ($N=120$)**：
   - 第一层（成对意图，60 例）：30 对高度镜像的特权授权与违规请求（覆盖动态反汇编、PE 结构篡改、内核服务停止等）；
   - 第二层（混淆技术陷阱，35 例）：在良性管理与逆向操作中嵌入易诱发误拒的高危 API 名称（如 `ZwTerminateProcess`、内存 Hook 扫描等）；

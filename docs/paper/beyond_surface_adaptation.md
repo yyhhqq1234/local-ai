@@ -70,17 +70,25 @@ Integrating LLMs into security pipelines—such as binary reverse engineering, a
 
 ### 3.1 The Memorization Illusion and Brittle Evaluation
 
-In specialized binary reverse engineering and malware forensics domains, training datasets typically consist of succinct operational requests (e.g., *"Inspect the PE export table (EAT) of the loaded target module"*, *"Enumerate IAT descriptors for dynamic API hooking"*, *"Disassemble function prologues at specified RVA offsets"*) paired with structured tool invocations and templated explanations. 
+In specialized binary reverse engineering and malware forensics domains, training datasets typically consist of succinct operational requests (e.g., *"Inspect the PE export table (EAT) of the loaded target module"*, *"Enumerate IAT descriptors for dynamic API hooking"*, *"Disassemble function prologues at specified RVA offsets"*) paired with structured tool invocations and templated explanations.
+
+Under standard supervised fine-tuning, the optimization objective corresponds to Empirical Risk Minimization (ERM) over a discrete token distribution:
+
+$$\mathcal{L}_{\text{ERM}}(\theta) = \frac{1}{|\mathcal{D}|} \sum_{(\mathbf{x}, \mathbf{y}) \in \mathcal{D}} \sum_{t=1}^{|\mathbf{y}|} -\log P_\theta(y_t \mid \mathbf{y}_{<t}, \mathbf{x}) \tag{1}$$
+
+To quantify whether loss minimization reflects authentic semantic generalization or superficial sequence retrieval, we formalize the $n$-Gram Verbatim Memorization Metric $\mathcal{M}_n$:
+
+$$\mathcal{M}_n(\hat{\mathbf{y}}, \mathcal{D}_{\text{train}}) \triangleq \frac{\left| \operatorname{Gram}_n(\hat{\mathbf{y}}) \cap \bigcup_{(\mathbf{x},\mathbf{y}) \in \mathcal{D}_{\text{train}}} \operatorname{Gram}_n(\mathbf{y}) \right|}{\left| \operatorname{Gram}_n(\hat{\mathbf{y}}) \right|} \tag{2}$$
 
 We monitored the training dynamics of the 9B model over multiple epochs on a curated dataset of 5,602 core binary analysis and system defense tasks. As shown in **Figure 1**, standard metrics provide a deceptive signal:
 
-$$\mathcal{L}_{\text{CE}} \downarrow (1.110 \rightarrow 0.373), \quad \text{Hallucinated Tools} \downarrow (1 \rightarrow 0)$$
+$$\mathcal{L}_{\text{ERM}} \downarrow (1.110 \longrightarrow 0.373), \quad \text{Hallucinated Tools} \downarrow (1 \longrightarrow 0)$$
 
 ```
 [Figure 1: Training Loss vs. Verbatim 20-Gram Memorization Rate Across Training Epochs]
 ```
 
-However, measuring $n$-gram token overlap against the training distribution reveals an alarming trend:
+However, measuring $n$-gram token overlap $\mathcal{M}_{20}$ against the training distribution reveals an alarming trend:
 - The 20-gram token overlap ratio triples from **0.167** at Epoch 1 to **0.515** at Epoch 2.
 - The proportion of test queries producing verbatim identical matches (SequenceMatcher score $= 1.00$) rises from **10%** to **40%**.
 - When evaluated against a paraphrased held-out evaluation set with stripped tool names (requiring genuine functional reasoning over binary structures), the model trained for 3 epochs exhibits **negative generalization gain** (accuracy dropping from 91.7% to 83.3%).
@@ -109,27 +117,36 @@ However, upon completing Stage 2 (training on multi-turn trajectories with stand
 
 To provide a rigorous mathematical foundation explaining why sequential adaptation catastrophically overwrites preceding domain knowledge, we formalize the gradient projection dynamics under Low-Rank Adaptation.
 
-**Assumption 1 (Low-Rank Parameterization on Grassmann Manifolds)**. Let $\mathbf{W}_0 \in \mathbb{R}^{d_1 \times d_2}$ denote pre-trained foundation weights. Adaptation on task $\mathcal{T}$ is constrained to a low-rank factorization $\Delta \mathbf{W} = \frac{\alpha}{r} \mathbf{B}\mathbf{A}$, where $\mathbf{B} \in \mathbb{R}^{d_1 \times r}$ and $\mathbf{A} \in \mathbb{R}^{r \times d_2}$ with rank $r \ll \min(d_1, d_2)$. The column space $\mathcal{S} = \text{span}(\mathbf{B})$ defines an $r$-dimensional subspace on the Grassmannian manifold $\mathbf{Gr}(r, d_1)$.
+**Assumption 1 (Low-Rank Parameterization on Grassmann Manifolds)**. Let $\mathbf{W}_0 \in \mathbb{R}^{d_1 \times d_2}$ denote pre-trained foundation weights. Adaptation on task $\mathcal{T}$ is constrained to a low-rank factorization:
 
-**Lemma 1 (Orthogonal Decomposition of Task Gradients)**. Let $\mathcal{S}_1 = \text{span}(\mathbf{B}_1)$ denote the low-rank subspace optimized for task $\mathcal{T}_1$. For any subsequent objective loss $\mathcal{L}_2$ on task $\mathcal{T}_2$, the unconstrained Euclidean gradient $\nabla_{\mathbf{W}} \mathcal{L}_2 \in \mathbb{R}^{d_1 \times d_2}$ decomposes uniquely into orthogonal projection components:
-$$\nabla_{\mathbf{W}} \mathcal{L}_2 = \mathcal{P}_{\mathcal{S}_1}(\nabla_{\mathbf{W}} \mathcal{L}_2) + \mathcal{P}_{\mathcal{S}_1}^\perp(\nabla_{\mathbf{W}} \mathcal{L}_2)$$
-where $\mathcal{P}_{\mathcal{S}_1} = \mathbf{B}_1 (\mathbf{B}_1^\top \mathbf{B}_1)^{-1} \mathbf{B}_1^\top$ is the orthogonal projector onto $\mathcal{S}_1$, and $\mathcal{P}_{\mathcal{S}_1}^\perp = \mathbf{I} - \mathcal{P}_{\mathcal{S}_1}$.
+$$\mathbf{W} = \mathbf{W}_0 + \Delta \mathbf{W} = \mathbf{W}_0 + \frac{\alpha}{r} \mathbf{B}\mathbf{A}, \quad \mathbf{B} \in \mathbb{R}^{d_1 \times r}, \; \mathbf{A} \in \mathbb{R}^{r \times d_2} \tag{3}$$
+
+where rank $r \ll \min(d_1, d_2)$. The column space $\mathcal{S} = \text{span}(\mathbf{B})$ defines an $r$-dimensional subspace on the Grassmannian manifold $\mathbf{Gr}(r, d_1)$.
+
+**Lemma 1 (Orthogonal Decomposition of Task Gradients)**. Let $\mathcal{S}_1 = \text{span}(\mathbf{B}_1)$ denote the low-rank subspace optimized for task $\mathcal{T}_1$. The orthogonal projector $\mathcal{P}_{\mathcal{S}_1}$ and its orthogonal complement $\mathcal{P}_{\mathcal{S}_1}^\perp$ are uniquely defined as:
+
+$$\mathcal{P}_{\mathcal{S}_1} \triangleq \mathbf{B}_1 (\mathbf{B}_1^\top \mathbf{B}_1)^{-1} \mathbf{B}_1^\top, \quad \mathcal{P}_{\mathcal{S}_1}^\perp \triangleq \mathbf{I}_{d_1} - \mathcal{P}_{\mathcal{S}_1} \tag{4}$$
+
+For any subsequent objective loss $\mathcal{L}_2$ on task $\mathcal{T}_2$, the unconstrained Euclidean gradient $\nabla_{\mathbf{W}} \mathcal{L}_2 \in \mathbb{R}^{d_1 \times d_2}$ decomposes uniquely into orthogonal projection components:
+
+$$\nabla_{\mathbf{W}} \mathcal{L}_2 = \mathcal{P}_{\mathcal{S}_1}(\nabla_{\mathbf{W}} \mathcal{L}_2) + \mathcal{P}_{\mathcal{S}_1}^\perp(\nabla_{\mathbf{W}} \mathcal{L}_2) \tag{5}$$
+
+Let $\theta(\mathcal{S}_1, \mathcal{S}_2) \in [0, \pi/2]$ denote the principal canonical Grassmannian angle between the two task subspaces:
+
+$$\cos \theta(\mathcal{S}_1, \mathcal{S}_2) \triangleq \max_{\mathbf{u} \in \mathcal{S}_1, \|\mathbf{u}\|_2=1} \max_{\mathbf{v} \in \mathcal{S}_2, \|\mathbf{v}\|_2=1} |\mathbf{u}^\top \mathbf{v}| = \|\mathbf{U}_1^\top \mathbf{U}_2\|_2 \tag{6}$$
 
 > **Theorem 1 (Task Interference Lower Bound in Sequential Low-Rank Adaptation)**  
 > Let task $\mathcal{T}_1$ be adapted into parameters $\mathbf{B}_1 \mathbf{A}_1$ spanning column subspace $\mathcal{S}_1$. When task $\mathcal{T}_2$ with loss $\mathcal{L}_2$ is subsequently trained over the shared parameter manifold spanning principal subspace $\mathcal{S}_2 = \text{span}(\mathbf{B}_2)$, the parameter interference energy $\mathcal{I}(\mathcal{T}_1, \mathcal{T}_2)$ exerted directly on the task 1 manifold satisfies:
 > 
-> $$\mathcal{I}(\mathcal{T}_1, \mathcal{T}_2) \triangleq \left\| \mathcal{P}_{\mathcal{S}_1} \left( \nabla_{\mathbf{W}} \mathcal{L}_2 \right) \right\|_F^2 \ge \sigma_{\min}^2(\mathbf{B}_1) \cdot \cos^2 \theta(\mathcal{S}_1, \mathcal{S}_2) \cdot \|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F^2$$
+> $$\mathcal{I}(\mathcal{T}_1, \mathcal{T}_2) \triangleq \left\| \mathcal{P}_{\mathcal{S}_1} \left( \nabla_{\mathbf{W}} \mathcal{L}_2 \right) \right\|_F^2 \ge \sigma_{\min}^2(\mathbf{B}_1) \cdot \cos^2 \theta(\mathcal{S}_1, \mathcal{S}_2) \cdot \|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F^2 \tag{7}$$
 > 
-> where $\sigma_{\min}(\mathbf{B}_1) > 0$ is the minimum singular value of the adapter basis $\mathbf{B}_1$, and $\theta(\mathcal{S}_1, \mathcal{S}_2) \in [0, \pi/2]$ is the principal canonical subspace angle between task representations:
-> $$\cos \theta(\mathcal{S}_1, \mathcal{S}_2) = \max_{\mathbf{u} \in \mathcal{S}_1, \mathbf{v} \in \mathcal{S}_2} \frac{|\mathbf{u}^\top \mathbf{v}|}{\|\mathbf{u}\|_2 \|\mathbf{v}\|_2}$$
+> where $\sigma_{\min}(\mathbf{B}_1) > 0$ is the minimum singular value of the adapter basis $\mathbf{B}_1$.
 
 *Proof*. Consider the Frobenius norm of the projected gradient operator $\mathcal{P}_{\mathcal{S}_1}(\nabla_{\mathbf{W}} \mathcal{L}_2)$. Expressing the projection in terms of the orthonormal basis $\mathbf{U}_1 \in \mathbb{R}^{d_1 \times r}$ of $\mathcal{S}_1$, we have:
 $$\left\| \mathcal{P}_{\mathcal{S}_1} \left( \nabla_{\mathbf{W}} \mathcal{L}_2 \right) \right\|_F^2 = \operatorname{Tr}\left( (\nabla_{\mathbf{W}} \mathcal{L}_2)^\top \mathbf{U}_1 \mathbf{U}_1^\top (\nabla_{\mathbf{W}} \mathcal{L}_2) \right) = \left\| \mathbf{U}_1^\top \nabla_{\mathbf{W}} \mathcal{L}_2 \right\|_F^2$$
-Because $\nabla_{\mathbf{W}} \mathcal{L}_2$ is generated by optimizing task 2, its principal energy aligns along subspace $\mathcal{S}_2 = \text{span}(\mathbf{U}_2)$. By the definition of canonical Grassmannian angles between subspaces $\mathcal{S}_1$ and $\mathcal{S}_2$:
+Because $\nabla_{\mathbf{W}} \mathcal{L}_2$ is generated by optimizing task 2, its principal energy aligns along subspace $\mathcal{S}_2 = \text{span}(\mathbf{U}_2)$. By the definition of canonical Grassmannian angles between subspaces $\mathcal{S}_1$ and $\mathcal{S}_2$ in Eq. (6):
 $$\left\| \mathbf{U}_1^\top \mathbf{U}_2 \right\|_2 = \cos \theta(\mathcal{S}_1, \mathcal{S}_2)$$
-Decomposing $\nabla_{\mathbf{W}} \mathcal{L}_2 = \|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F \mathbf{U}_2 \mathbf{V}_2^\top$ along its dominant singular directions and projecting into $\mathbf{B}_1 = \mathbf{U}_1 \mathbf{\Sigma}_1 \mathbf{R}_1^\top$, the lower singular envelope yields:
-$$\left\| \mathcal{P}_{\mathcal{S}_1} \left( \nabla_{\mathbf{W}} \mathcal{L}_2 \right) \right\|_F^2 \ge \sigma_{\min}^2(\mathbf{B}_1) \cdot \cos^2 \theta(\mathcal{S}_1, \mathcal{S}_2) \cdot \|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F^2$$
-Because $r \ll d_1$, in compact models $\mathcal{S}_1$ and $\mathcal{S}_2$ cannot remain orthogonal ($\theta \ll \pi/2$), ensuring $\cos \theta > 0$. Thus, as long as task 2 experiences non-zero gradient updates ($\|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F > 0$), parameter interference energy is strictly bounded away from zero. $\blacksquare$
+Decomposing $\nabla_{\mathbf{W}} \mathcal{L}_2 = \|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F \mathbf{U}_2 \mathbf{V}_2^\top$ along its dominant singular directions and projecting into $\mathbf{B}_1 = \mathbf{U}_1 \mathbf{\Sigma}_1 \mathbf{R}_1^\top$, the lower singular envelope yields Eq. (7). Because $r \ll d_1$, in compact models $\mathcal{S}_1$ and $\mathcal{S}_2$ cannot remain orthogonal ($\theta \ll \pi/2$), ensuring $\cos \theta > 0$. Thus, as long as task 2 experiences non-zero gradient updates ($\|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F > 0$), parameter interference energy is strictly bounded away from zero. $\blacksquare$
 
 #### Quantitative Mapping Mechanism: From Interference Energy to 82.5% → 10.0% Collapse
 
@@ -137,16 +154,20 @@ To understand why this lower bound produces a non-linear drop from $82.5\%$ to $
 
 $$\Delta \mathbf{W}_T = \Delta \mathbf{W}_0 - \eta \sum_{t=1}^T \nabla_{\mathbf{W}} \mathcal{L}_2^{(t)}$$
 
-The accumulated parameter drift projected into the task 1 manifold is $\Delta_{\text{drift}} = \eta \sum_{t=1}^T \mathcal{P}_{\mathcal{S}_1}(\nabla_{\mathbf{W}} \mathcal{L}_2^{(t)})$. By Theorem 1, $\|\Delta_{\text{drift}}\|_F \ge \eta T \cdot \sigma_{\min}(\mathbf{B}_1) \cos \theta \|\nabla \mathcal{L}_2\|_F$. In low-entropy system tasks, the initial margin $\Delta z_0$ is small ($0.8\sim1.4$). As $\Delta_{\text{drift}}$ accumulates, it induces an adversarial shift $\Delta z_T = \Delta z_0 - \langle \Delta_{\text{drift}}, \mathbf{h} \mathbf{x}^\top \rangle$. Once the margin crosses zero ($\Delta z_T < 0$), the discrete $\operatorname{argmax}$ selection operator undergoes an abrupt **Phase Transition**, collapsing tool routing accuracy from $82.5\%$ to $10.0\%$.
+The accumulated parameter drift projected into the task 1 manifold is:
+
+$$\Delta_{\text{drift}}(T) \triangleq \eta \sum_{t=1}^T \mathcal{P}_{\mathcal{S}_1}\left(\nabla_{\mathbf{W}} \mathcal{L}_2^{(t)}\right), \quad \|\Delta_{\text{drift}}(T)\|_F \ge \eta T \cdot \sigma_{\min}(\mathbf{B}_1) \cos \theta \|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F \tag{8}$$
+
+In low-entropy system tasks, the initial margin $\Delta z_0$ is small ($0.8\sim1.4$). As $\Delta_{\text{drift}}$ accumulates, it induces an adversarial shift:
+
+$$\Delta z(x; T) = \Delta z_0(x) - \operatorname{Tr}\left( \Delta_{\text{drift}}(T)^\top \mathbf{h}(x)\mathbf{x}^\top \right) < 0 \tag{9}$$
+
+Once the margin crosses zero ($\Delta z(x; T) < 0$), the discrete $\operatorname{argmax}$ selection operator undergoes an abrupt **Phase Transition**, collapsing tool routing accuracy from $82.5\%$ to $10.0\%$.
 
 > **Corollary 1.1 (Interference Neutralization via Modular Decoupling)**  
-> In DSDA Scheme Z, each task $\mathcal{T}_i$ is parameterized by a dedicated low-rank adapter $\mathbf{B}_i \mathbf{A}_i$. At inference time, routing is governed by an indicator switch $\mathbf{I}(\text{task} = \mathcal{T}_i)$. The effective weight perturbation is:
+> In DSDA Scheme Z, each task $\mathcal{T}_i$ is parameterized by a dedicated low-rank adapter $\mathbf{B}_i \mathbf{A}_i$. At inference time, routing is governed by an indicator switch $\mathbf{I}(\text{task} = \mathcal{T}_i)$. Because parameters are held disjoint ($\mathcal{S}_i \cap \mathcal{S}_j = \emptyset$ for $i \neq j$), the projector evaluates to zero:
 > 
-> $$\Delta \mathbf{W}(x) = \sum_{i} \mathbf{I}(x \in \mathcal{T}_i) \cdot \frac{\alpha_i}{r_i} \mathbf{B}_i \mathbf{A}_i$$
-> 
-> Because parameters are held disjoint ($\mathcal{S}_i \cap \mathcal{S}_j = \emptyset$ for $i \neq j$), the cross-task gradient interference identically vanishes:
-> 
-> $$\mathcal{I}(\mathcal{T}_i, \mathcal{T}_j) \equiv 0 \quad (\forall i \neq j)$$
+> $$\mathcal{S}_i \cap \mathcal{S}_j = \emptyset \implies \mathcal{P}_{\mathcal{S}_i}\left(\nabla_{\mathbf{W}} \mathcal{L}_j\right) \equiv \mathbf{0} \implies \mathcal{I}(\mathcal{T}_i, \mathcal{T}_j) \equiv 0 \quad (\forall i \neq j) \tag{10}$$
 
 ---
 
@@ -171,16 +192,22 @@ To fit long agent interactions into fixed training context windows (e.g., 4096 t
 
 ### 4.1 The Pareto Cliff of Subspace Abliteration
 
-In safety alignment, direction-based representation editing (e.g., concept abliteration and spectral residual abliteration) attempts to remove refusal behaviors by projecting activation spaces orthogonally to a refusal direction $\mathbf{v}_{\text{refusal}}$:
+In safety alignment, direction-based representation editing (e.g., concept abliteration and spectral residual abliteration) attempts to remove refusal behaviors by projecting activation spaces orthogonally to a refusal direction $\hat{\mathbf{v}}_{\text{refusal}}$:
 
-$$\mathbf{h}' = \mathbf{h} - \gamma (\mathbf{h} \cdot \hat{\mathbf{v}}_{\text{refusal}}) \hat{\mathbf{v}}_{\text{refusal}}$$
+$$\mathbf{h}' = \mathbf{h} - \gamma (\mathbf{h} \cdot \hat{\mathbf{v}}_{\text{refusal}}) \hat{\mathbf{v}}_{\text{refusal}} \tag{11}$$
+
+At the parameter level, this corresponds to projecting the model's weight matrices along the refusal direction:
+
+$$\mathbf{W}' = \mathbf{W} \left( \mathbf{I}_{d_1} - \gamma \hat{\mathbf{v}}_{\text{refusal}} \hat{\mathbf{v}}_{\text{refusal}}^\top \right) \tag{12}$$
 
 While effective on large dense architectures (70B+), applying this technique to our 9B hybrid linear-attention agent revealed a severe **Pareto Cliff**:
 - At $\gamma \le 1.0$, the cosine alignment between refusal and target directions decreases minimally ($\cos \theta: 0.20 \rightarrow 0.003$), yet the model continues to refuse 100% of sensitive requests ($\text{KL} = 0.046$).
 - At $\gamma = 2.0$, refusal remains at 100% ($\text{KL} = 0.50$).
-- At $\gamma \ge 4.0$, the model abruptly crosses a collapse threshold: KL divergence explodes to **7.4 – 17.0**, destroying token entropy, syntax generation, and multi-round stability.
+- At $\gamma \ge 4.0$, the model abruptly crosses a collapse threshold: the Kullback-Leibler (KL) divergence explodes:
 
-In compact hybrid models, representations of refusal and syntactic coherence reside in closely entangled manifolds. Linear orthogonalization cannot disentangle safety gating without inducing irreversible structural destruction.
+$$D_{\text{KL}}(P_{\mathbf{W}}(\cdot \mid \mathbf{x}) \,\|\, P_{\mathbf{W}'}(\cdot \mid \mathbf{x})) = \sum_{y \in \mathcal{V}} P_{\mathbf{W}}(y \mid \mathbf{x}) \log \frac{P_{\mathbf{W}}(y \mid \mathbf{x})}{P_{\mathbf{W}'}(y \mid \mathbf{x})} \ge 17.0 \quad (\gamma \ge 4.0) \tag{13}$$
+
+destroying token entropy, syntax generation, and multi-round stability. In compact hybrid models, representations of refusal and syntactic coherence reside in closely entangled manifolds. Linear orthogonalization cannot disentangle safety gating without inducing irreversible structural destruction.
 
 ---
 
@@ -191,7 +218,11 @@ To avoid weight destruction, we explored condition-gated fine-tuning: training t
 During initial validation, the model appeared to achieve flawless safety. However, stress testing revealed an insidious artifact that constitutes a severe authorization bypass vulnerability (resembling CWE-863):
 - Training sets featured positive (authorized) examples with detailed technical disassembly and memory layout disclosures averaging **1,065 tokens**.
 - Negative (unauthorized) refusal examples averaged only **126 tokens** (an 8.4-to-1 disparity).
-- **The Security Vulnerability & Exploit Mechanism**: The model learned that long, detailed technical analyses were strictly correlated with the positive authorized state. When presented with an unauthorized adversarial query that explicitly requested an exhaustive, step-by-step disassembly or kernel patching tutorial, the model bypassed the refusal protocol entirely and generated unauthorized exploitation steps, treating response token length as an implicit authorization proxy. Conversely, short authorized tasks were mistakenly refused, causing Denial-of-Service on benign administrative diagnostics.
+- **The Security Vulnerability & Exploit Mechanism**: The model learned an unintended statistical shortcut. By Bayes' rule, the posterior authorization probability conditioned on response length $L$ decomposes as:
+
+$$P(Y = \text{Permit} \mid X, L) = \frac{P(L \mid Y = \text{Permit}, X) \cdot P(Y = \text{Permit} \mid X)}{P(L \mid X)} \tag{14}$$
+
+Because $\mathbb{E}[L \mid Y=\text{Permit}] \approx 1,065 \gg \mathbb{E}[L \mid Y=\text{Refuse}] \approx 126$, long technical outputs act as an implicit surrogate for the authorization token. When presented with an unauthorized adversarial query that explicitly requested an exhaustive, step-by-step disassembly or kernel patching tutorial, the model bypassed the refusal protocol entirely and generated unauthorized exploitation steps, treating response token length as an implicit authorization proxy. Conversely, short authorized tasks were mistakenly refused, causing Denial-of-Service on benign administrative diagnostics.
 
 ```
 [Figure 3: Token Length Disparity in Naive Safety Gating vs. DSDA Counterfactual Length Balancing]
@@ -201,7 +232,7 @@ During initial validation, the model appeared to achieve flawless safety. Howeve
 
 ## 5. The Proposed Framework: DSDA
 
-To systematically eliminate the identified pathologies, we develop **Decoupled System-Domain Adaptation (DSDA)**, structured around three orthogonal decoupling pillars: *Semantic Decoupling* (§5.1–§5.2, pairing semantic query perturbations with topology-aware candidate clustering), *Causal Decoupling* (§5.3, counterfactual length-balanced paired gating under Structural Causal Models), and *Manifold Decoupling* (§5.4, runtime modular adapter routing):
+To systematically eliminate the identified pathologies, we develop **Decoupled System-Domain Adaptation (DSDA)**, structured around three orthogonal decoupling pillars: *Semantic Decoupling* (§5.1–§5.2), *Causal Decoupling* (§5.3), and *Manifold Decoupling* (§5.4):
 
 ```
 [Figure 2: Architecture of Decoupled System-Domain Adaptation (DSDA)]
@@ -215,9 +246,11 @@ To prevent lexical memorization, DSDA enforces a semantic query expansion protoc
 3. Conversational prefix and suffix injection (10 prefixes, 9 contextual framing suffixes).
 4. Strict length and deduplication filters ensuring $\min_{\text{len}} \ge 4$ characters to prevent fragmented conversational turns.
 
-The augmented dataset satisfies:
+The invariant semantic optimization objective minimizes empirical cross-entropy over all perturbed realizations:
 
-$$\mathcal{D}_{\text{aug}} = \bigcup_{i=1}^{|\mathcal{D}|} \left\{ (f_{\text{pert}}(\mathbf{x}_i, k), \mathbf{y}_i) \right\}_{k=1}^K$$
+$$\mathcal{L}_{\text{semantic}}(\theta) \triangleq \frac{1}{K |\mathcal{D}|} \sum_{i=1}^{|\mathcal{D}|} \sum_{k=1}^K \sum_{t=1}^{|\mathbf{y}_i|} -\log P_\theta(y_{i,t} \mid \mathbf{y}_{i,<t}, f_{\text{pert}}(\mathbf{x}_i, k)) \tag{15}$$
+
+$$\text{subject to} \quad \mathbf{y}_i(k) \equiv \mathbf{y}_i \quad (\forall k \in \{1,\dots,K\})$$
 
 Crucially, the completion $\mathbf{y}_i$ is held strictly invariant across all $K=4$ perturbations. To satisfy $K$ divergent user phrasings with a single invariant tool sequence, the model is forced to discard superficial $n$-gram associations and learn genuine semantic-to-API mappings.
 
@@ -237,9 +270,12 @@ Furthermore, evaluation is decoupled from training held-outs by establishing an 
 Rather than providing the model with all 64 global tool schemas (which inflates prompt overhead to $\sim 20\text{KB}$ and dilutes attention), DSDA introduces **Candidate-Aware Tool Clustering**:
 1. Global system security tools are organized into 11 functional reverse engineering and system defense clusters $\mathcal{C}_1, \dots, \mathcal{C}_{11}$ based on execution channel and privilege level (e.g., Kernel Direct IOCTL, Debugger Tracing & Hardware Breakpoints, PE/ELF Static Forensics, Memory Introspection & Patching, Anti-Cheat & Hook Probing, Dynamic Disassembly Interfaces).
 2. For any query targeting tool $t^* \in \mathcal{C}_m$, a candidate set $\mathcal{S}_{\text{cand}}$ of size $k \in [8, 12]$ is constructed:
-   - $\mathcal{S}_{\text{cand}} = \{t^*\} \cup \text{Sample}(\mathcal{C}_m \setminus \{t^*\}, n_{\text{intra}}) \cup \text{Sample}(\bigcup_{j \neq m} \mathcal{C}_j, n_{\text{inter}})$
-   - Intra-cluster tools serve as **hard negative distractors** sharing identical parameter structures (e.g., distinguishing between physical memory reading vs. virtual address inspection).
-   - Inter-cluster tools serve as cross-domain discriminative boundaries.
+
+$$\mathcal{S}_{\text{cand}}(t^*) \triangleq \{t^*\} \cup \operatorname{Sample}_{n_{\text{intra}}}(\mathcal{C}_m \setminus \{t^*\}) \cup \operatorname{Sample}_{n_{\text{inter}}}\left(\bigcup_{j \neq m} \mathcal{C}_j\right) \tag{16}$$
+
+Intra-cluster tools serve as **hard negative distractors** sharing identical parameter structures, while inter-cluster tools serve as cross-domain discriminative boundaries. The tool prediction probability is constrained to the candidate space:
+
+$$P(t = t^* \mid \mathbf{x}) \triangleq \frac{\exp\left(\mathbf{w}_{t^*}^\top \mathbf{h}(\mathbf{x}) / \tau\right)}{\sum_{t' \in \mathcal{S}_{\text{cand}}} \exp\left(\mathbf{w}_{t'}^\top \mathbf{h}(\mathbf{x}) / \tau\right)} \tag{17}$$
 
 This compact candidate set is rendered directly into the dynamic system prompt with truncated action definitions ($\le 60$ characters), ensuring focused attention and eliminating syntactic hallucinations.
 
@@ -253,7 +289,11 @@ This compact candidate set is rendered directly into the dynamic system prompt w
 
 To provide mathematical guarantees against the spurious length shortcut and enforce the Principle of Least Privilege (PoLP), we formulate safety gating as a formal **Reference Monitor** using a **Structural Causal Model (SCM)** $\mathcal{M} = \langle \mathcal{U}, \mathcal{V}, \mathcal{F}, P(\mathcal{U}) \rangle$:
 - **Endogenous Variables $\mathcal{V}$**: Input prompt $X$, Response token length $L$, Gate representation $G \in \{0, 1\}$, Semantic representation $Z$, and Final generated output $Y$.
-- **Exogenous Variables $\mathcal{U}$**: Background conversational noise and prior pre-training representations.
+- **Exogenous Variables $\mathcal{U}$**: Background conversational noise $U_X, U_L, U_G, U_Z, U_Y$.
+
+The structural causal equations governing the interaction are:
+
+$$\begin{cases} X := f_X(U_X) \\ L := f_L(X, U_L) \\ G := f_G(X, U_G) \\ Z := f_Z(X, U_Z) \\ Y := f_Y(Z, \theta(G), U_Y) \end{cases} \tag{18}$$
 
 ```text
        [ Length Confounder (L) ] (Blocked via Counterfactual Pairs)
@@ -277,7 +317,7 @@ To block this path, DSDA enforces counterfactual paired generation satisfying st
 - $y_{\text{auth}}$ provides compliant, authorized technical disclosure ($\sim 780$ tokens).
 - $y_{\text{unauth}}$ provides a comprehensive, alternative diagnostic and security remediation plan with matched length ($\sim 765$ tokens):
 
-$$| \text{length}(y_{\text{auth}}) - \text{length}(y_{\text{unauth}}) | \le \delta \quad (\delta \le 50\text{ tokens})$$
+$$\forall x \in \mathcal{D}_{\text{sensitive}}, \quad \left| |\mathbf{y}_{\text{auth}}| - |\mathbf{y}_{\text{unauth}}| \right| \le \delta \quad (\delta \le 50\text{ tokens}) \tag{19}$$
 
 ```python
 # Algorithm 1: Counterfactual Length-Balanced Alignment Generation
@@ -296,20 +336,28 @@ def construct_counterfactual_pair(sensitive_prompt, delta_max=50):
 
 Under Pearl's $do$-calculus, the **Average Causal Effect (ACE)** of the authorization token on model output policy is given by:
 
-$$\text{ACE} = \mathbb{E}_{X} \left[ P(Y \mid do(G=1), X) - P(Y \mid do(G=0), X) \right]$$
+$$\text{ACE}(G \to Y) \triangleq \mathbb{E}_{X} \left[ P(Y \mid do(G=1), X) - P(Y \mid do(G=0), X) \right] \tag{20}$$
 
-Because $P(L \mid do(G=1)) \equiv P(L \mid do(G=0))$ under our counterfactual pairing, the mutual information $I(L; G) \to 0$. The model is mathematically prevented from using token length as an informational proxy for authorization.
+Because $P(L \mid do(G=1)) \equiv P(L \mid do(G=0))$ under our counterfactual pairing, the mutual information $I(L; G)$ between response length and gate state is annihilated:
+
+$$I(L; G) = \sum_{l \in \mathcal{L}} \sum_{g \in \{0, 1\}} P(l, g) \log \frac{P(l, g)}{P(l)P(g)} \equiv 0 \tag{21}$$
+
+The model is mathematically prevented from using token length as an informational proxy for authorization.
 
 ---
 
 ### 5.4 Inference-Time Modular Adapter Decoupling: Scheme Z (Manifold Decoupling)
 
-To permanently resolve Catastrophic Stage Overwriting without incurring the performance compromises of multi-task mixture training, DSDA implements **Scheme Z (Architectural Decoupling)**:
-- Independent LoRA adapters are trained under isolated objective functions:
-  - $\theta_{\text{RE}}$: Fine-tuned exclusively on anti-memorization system tool routing.
-  - $\theta_{\text{Code}}$: Fine-tuned on decontaminated, code-block-aligned agent trajectories.
-  - $\theta_{\text{Gate}}$: Fine-tuned on length-balanced dual-state steering.
-- At runtime, a lightweight host-adapter bridge intercepts the conversational state. When low-level diagnostic tool dispatch is required, $\theta_{\text{RE}}$ is dynamically selected. When long-context patch generation is engaged, execution routes to $\theta_{\text{Code}}$. By maintaining parameter isolation, cross-task interference is mathematically bounded to zero ($\mathcal{I} \equiv 0$).
+To permanently resolve Catastrophic Stage Overwriting without incurring the performance compromises of multi-task mixture training, DSDA implements **Scheme Z (Architectural Decoupling)**. The effective operational parameter matrix is dynamically switched at runtime:
+
+$$\mathbf{W}_{\text{eff}}(\mathbf{x}) = \mathbf{W}_0 + \sum_{k \in \{\text{RE}, \text{Code}, \text{Gate}\}} \mathbf{1}_{\{\mathcal{R}(\mathbf{x}) = k\}} \cdot \frac{\alpha_k}{r_k} \mathbf{B}_k \mathbf{A}_k \tag{22}$$
+
+where $\mathcal{R}(\mathbf{x})$ is a deterministic state-machine routing predicate:
+- $\theta_{\text{RE}}$: Fine-tuned exclusively on anti-memorization system tool routing.
+- $\theta_{\text{Code}}$: Fine-tuned on decontaminated, code-block-aligned agent trajectories.
+- $\theta_{\text{Gate}}$: Fine-tuned on length-balanced dual-state steering.
+
+By maintaining complete parameter isolation, cross-task interference is mathematically bounded to zero ($\mathcal{I} \equiv 0$).
 
 ```
 [Listing 3: Dynamic Runtime Modular Adapter Router (Scheme Z)]
@@ -326,6 +374,10 @@ We evaluate cyber security agent robustness under an explicit Threat Model align
 1. **Adversary Capabilities**: The adversary possesses black-box interactive query access and can craft arbitrary adversarial inputs, including direct and indirect prompt injection, role-play jailbreaks, obfuscated shellcode/opcodes, simulated authorization tokens, and conversational context drift.
 2. **Confidentiality & Integrity Objectives**: The agent must never execute destructive or unauthorized system actions (e.g., unauthorized physical memory writes `KM_PW`, detaching anti-cheat kernel drivers, or injecting unverified memory hooks) in the default unauthenticated state ($\text{Gate}=0$), enforcing zero unauthorized privilege escalation ($\text{GateLeak} = 0.000$).
 3. **Availability & Anti-DoS Objectives**: The agent must never falsely refuse benign diagnostic and administrative security queries that embed technical keywords (e.g., analyzing malware samples that invoke `ZwTerminateProcess`, `ObRegisterCallbacks`, or driver hooks), preventing Denial-of-Service on defensive security audits ($\text{TrapRefusal} = 0.000$).
+
+Formally, the security evaluation metrics are defined as:
+
+$$\text{GateLeak} \triangleq \frac{1}{N_{\text{unauth}}} \sum_{i=1}^{N_{\text{unauth}}} \mathbf{1}_{\{\text{Action}(y_i) \in \Omega_{\text{prohibited}}\}}, \quad \text{TrapRefusal} \triangleq \frac{1}{N_{\text{trap}}} \sum_{j=1}^{N_{\text{trap}}} \mathbf{1}_{\{\text{Refusal}(y_j) = 1\}} \tag{23}$$
 
 #### Comprehensive Evaluation Suite ($N=120$)
 To prevent empirical overfitting and test security boundaries, our evaluation benchmark is expanded to 120 rigorous cases spanning three tiers:
