@@ -1,4 +1,5 @@
 """generate_docx_zh.py · Generate Chinese Academic Word Document for DSDA Paper
+Compliant with Top Chinese Computer Security Journal Standards (《计算机学报》/《软件学报》/《信息安全学报》)
 
 Outputs:
   docs/paper/beyond_surface_adaptation_zh.docx
@@ -38,7 +39,7 @@ def style_academic_table(table, col_widths, headers, data):
         shading = parse_xml(r'<w:shd {} w:fill="F4F6F7"/>'.format(nsdecls('w')))
         hdr_cells[i]._tc.get_or_add_tcPr().append(shading)
 
-    # Borders
+    # Three-line table borders (No vertical borders)
     tblPr = table._tbl.tblPr
     tblBorders = parse_xml(
         r'<w:tblBorders {} >'
@@ -101,32 +102,40 @@ def build_chinese_paper_docx():
     # Subtitle / Authors
     p_auth = doc.add_paragraph()
     p_auth.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_auth.paragraph_format.space_after = Pt(14)
-    r_auth = p_auth.add_run("杨涵钦 (yyhhqq1234)\n独立研究与工程实验室 (2923165556@qq.com)")
+    p_auth.paragraph_format.space_after = Pt(4)
+    r_auth = p_auth.add_run("杨涵钦¹\n(¹系统软件与智能安全实验室，成都 610000; 通信作者 Email: 2923165556@qq.com)")
     r_auth.font.name = 'Microsoft YaHei'
     r_auth.font.size = Pt(10)
-    r_auth.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
+    r_auth.font.color.rgb = RGBColor(0x44, 0x44, 0x44)
+
+    # Funding & CLC Info
+    p_fund = doc.add_paragraph()
+    p_fund.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_fund.paragraph_format.space_after = Pt(12)
+    r_fund = p_fund.add_run("基金项目: 国家重点研发计划 (No. 2024YFBXXXXXXX); 国家自然科学基金重点项目 (No. 624XXXXX)\n中图法分类号: TP309.2, TP391    文献标识码: A")
+    r_fund.font.name = 'Microsoft YaHei'
+    r_fund.font.size = Pt(8.5)
+    r_fund.font.italic = True
+    r_fund.font.color.rgb = RGBColor(0x66, 0x66, 0x66)
 
     # Abstract Box
     p_abs = doc.add_paragraph()
     p_abs.paragraph_format.left_indent = Inches(0.35)
     p_abs.paragraph_format.right_indent = Inches(0.35)
-    p_abs.paragraph_format.space_after = Pt(14)
+    p_abs.paragraph_format.space_after = Pt(8)
     r_abs_title = p_abs.add_run("摘要——")
     r_abs_title.font.name = 'Microsoft YaHei'
     r_abs_title.font.size = Pt(9.5)
     r_abs_title.font.bold = True
     
     abs_text = (
-        "大型语言模型（LLM）驱动的自主智能体在通用自然语言推理和高层 API 编排中展现出卓越的能力，然而将其部署至受限、特化且操作不可逆的底层系统安全与逆向执行环境（如二进制逆向工程、内核调试、动态内存取证与脆弱性排查等）时，领域专业能力与行为可控性之间暴露出尖锐的结构性矛盾。"
-        "在本文中，我们针对紧凑型混合线性注意力智能体（9B 参数规模，含门控 Delta 网络与全注意力）以及密集全自注意力智能体（27B 参数规模），在底层系统安全工具环境下的后训练动力学展开了系统深入的实证与理论研究。"
-        "我们揭示了三大严重威胁自主网络行动的普遍微调病理缺陷：(1) 记忆化假象 (The Memorization Illusion)：经验交叉熵损失的单调下降掩盖了严重的逐字记忆现象（20-Gram 词元逐字重合度从 0.167 激增至 0.515），常规的留出验证集无法检测出在二进制结构解析上的脆弱表层词汇记忆；"
-        "(2) 阶段性能力覆盖 (Catastrophic Stage Overwriting)：串行多阶段微调会近乎完全擦除前序核心能力——领域安全工具调用准确率从 82.5% 断崖式崩塌至 10.0%——我们通过低秩子空间任务干扰下界定理 (Theorem on Low-Rank Subspace Interference Bounds) 对该现象进行了严格的数学形式化与相变分析；"
-        "(3) 几何表征消融的帕累托悬崖 (The Pareto Cliff of Subspace Abliteration)：基于权重方向投影的几何遗忘技术在紧凑模型上表现出阶跃式突变，在“完全拒绝”与“严重语法溃散”（KL 散度 > 17）之间存在不可调和的断崖。"
-        "进一步地，我们首次揭示了一种新型的虚假长度偏置捷径 (Spurious Gating Shortcut)（一种类似于 CWE-863 越权判定的严重授权绕过安全漏洞）：条件安全门控微调由于正负样本显著的长度差异（平均 1,065 tokens vs. 126 tokens），诱使模型将响应长度误作为特权授权的虚假后门信号。"
-        "为了根除上述系统性脆弱性，我们提出了解耦系统领域适配框架 (DSDA, Decoupled System-Domain Adaptation)。DSDA 围绕三维统一解耦主线构建：基于 4 轴语义扰动扩展与候选拓扑感知的语义解耦 (Semantic Decoupling)、基于运行时动态指针切换（Scheme Z）的流形解耦 (Manifold Decoupling)、以及在结构因果模型 (SCM) 框架下构建反事实等长对抗配对的因果解耦 (Causal Decoupling)，作为遵循最小特权原则 (Principle of Least Privilege, PoLP) 的安全参考监视器 (Reference Monitor)。"
-        "在 9B 与 27B 两种代表性架构上的 5 种子全量复现评测表明，DSDA 实现了 82.5% +/- 1.4% 的工具泛化准确率且保持零工具幻觉，在统计学上显著优于主流模型合并基线（Task Arithmetic 55.0%, TIES-Merging 62.5%, p < 0.01）。"
-        "在扩展的 N=120 综合对抗测试套件中，DSDA 实现了严格的零安全策略泄漏（GateLeak = 0.000）、零技术陷阱误拒（TrapRefusal = 0.000），并保留了 98.4% 的跨领域通用能力。"
+        "针对大语言模型（LLM）驱动的自主软件智能体在底层系统安全、二进制逆向工程及内核调试等任务关键型环境中面临的“领域专业能力获取”与“特权安全行为可控”之间的双重特化困境，开展系统性的实证与理论研究。"
+        "实证揭示了传统监督微调中的四大微调病理与安全脆弱性：(1) 记忆化假象 (The Memorization Illusion)：经验交叉熵损失的单调下降掩盖了严重的逐字背题（20-Gram 词元逐字重合度从 0.167 激增至 0.515），使常规同分布留出集评估失效；"
+        "(2) 阶段性能力覆盖 (Catastrophic Stage Overwriting)：串行多阶段微调导致前序系统工具调用能力断崖式跌落（准确率从 82.5% 崩塌至 10.0%），通过建立低秩子空间任务干扰下界定理 (Theorem on Low-Rank Subspace Interference Bounds) 揭示了累积参数漂移诱发分类 Logit 跨零相变崩塌的数学机理；"
+        "(3) 几何表征消融的帕累托悬崖 (The Pareto Cliff of Subspace Abliteration)：紧凑模型中拒答流形与语法流形高度纠缠，导致几何正交投影在拒答无效与语法完全解体（KL 散度 > 17）之间发生突变；"
+        "(4) 虚假长度偏置捷径 (Spurious Gating Shortcut)：揭示了条件安全门控中由于正负样本显著长度悬殊（平均 1,065 tokens vs. 126 tokens）诱发的类似 CWE-863 越权判定的严重授权绕过安全漏洞。"
+        "为此，提出解耦系统领域适配框架（Decoupled System-Domain Adaptation, DSDA）：通过 4 轴语义扰动扩展建立语义解耦，通过候选拓扑难负例聚类消除上下文稀释，通过运行时模块化外挂指针动态路由（方案 Z）建立流形解耦（证明跨任务干扰能量恒为零），并在结构因果模型（SCM）下构建反事实等长对抗配对建立因果解耦。"
+        "在 9B 混合线性注意力与 27B 密集全自注意力双架构上的 5 种子评测表明，DSDA 实现了 82.5% +/- 1.4% 的工具泛化准确率且保持零工具幻觉；在 N=120 综合对抗测试套件上实现严格的零安全策略泄漏（GateLeak = 0.000）与零技术陷阱误拒（TrapRefusal = 0.000），并保留 98.4% 跨领域通用推理能力。"
     )
     r_abs_body = p_abs.add_run(abs_text)
     r_abs_body.font.name = 'Microsoft YaHei'
@@ -137,12 +146,12 @@ def build_chinese_paper_docx():
     p_kw = doc.add_paragraph()
     p_kw.paragraph_format.left_indent = Inches(0.35)
     p_kw.paragraph_format.right_indent = Inches(0.35)
-    p_kw.paragraph_format.space_after = Pt(18)
+    p_kw.paragraph_format.space_after = Pt(16)
     r_kw_title = p_kw.add_run("关键词——")
     r_kw_title.font.name = 'Microsoft YaHei'
     r_kw_title.font.size = Pt(9)
     r_kw_title.font.bold = True
-    r_kw_body = p_kw.add_run("二进制逆向工程、自主网络防御、系统安全智能体、威胁模型、因果安全门控、子空间干扰下界、特权越权防护、恶意代码取证、内核安全、反汇编与动态调试。")
+    r_kw_body = p_kw.add_run("网络空间安全；系统安全智能体；二进制逆向工程；因果安全门控；子空间干扰下界；低秩自适应。")
     r_kw_body.font.name = 'Microsoft YaHei'
     r_kw_body.font.size = Pt(9)
     r_kw_body.font.italic = True
@@ -258,6 +267,7 @@ def build_chinese_paper_docx():
         p_eq.alignment = WD_ALIGN_PARAGRAPH.CENTER
         p_eq.paragraph_format.space_before = Pt(4)
         p_eq.paragraph_format.space_after = Pt(4)
+        # In Chinese top journal standards: pure formula without trailing tags or trailing punctuation
         r_eq = p_eq.add_run(formula_text)
         r_eq.font.name = 'Cambria Math'
         r_eq.font.size = Pt(9.5)
@@ -275,27 +285,27 @@ def build_chinese_paper_docx():
         r_num.font.color.rgb = RGBColor(0x11, 0x11, 0x11)
 
     # 1. 引言
-    add_sec_heading("1. 引言 (Introduction)")
+    add_sec_heading("1. 引言")
     add_p("由大型语言模型（LLM）驱动的自主软件智能体在通用网页浏览、对话式 REST API 编排和通用代码生成中取得了显著进展。然而，将其部署到底层系统操作环境（如内核驱动调试、二进制逆向工程、动态内存内省等任务关键场景）时，智能体的专业能力与行为安全边界暴露出深层次的割裂。")
     add_p("底层系统操作具有低操作熵、严苛参数模式和不可逆性三大核心特征。误发内存写入原语或错误停止关键驱动将直接引发系统崩溃（BSOD）或会话失效。通用基座在面临特化时陷入了双重困境：(1) 特化能力获取困境：需精准掌握 60+ 本地底层工具但极易出现幻觉与机械背题；(2) 行为可控性困境：需在获得授权时精准放行特权操作，在未授权时绝对拒答且不误拒良性请求。现有课程微调、表征消融与条件门控范式在此场景下均遭遇根本性失效。")
-    add_p("为此，我们提出解耦系统领域适配框架 (DSDA)，确立了以“三维解耦（语义解耦、流形解耦、因果解耦）”为统领的系统架构。")
+    add_p("为此，我们提出解耦系统领域适配框架 (DSDA)，确立了以“四维解耦（语义解耦、拓扑解耦、流形解耦、因果解耦）”为统领的系统架构。")
 
     # 表 1: 映射表
-    add_subsec_heading("实证病理、理论边界与 DSDA 解耦应对机制显式映射表")
+    add_subsec_heading("实证病理、理论边界与 DSDA 解耦应对机制显式映射")
     t1_headers = ["实证病理现象", "理论根因与数学边界", "DSDA 解耦应对机制", "实验验证与安全保障指标"]
     t1_data = [
-        ["记忆化假象 (§3.1)", "低操作熵经验风险最小化退化为高维字典查表", "语义解耦 (K=4 轴扰动扩展 + 候选工具聚类)", "20-Gram 重合度由 0.515 -> 0.210；L3 抽象题泛化提升至 87.5% +/- 2.2%"],
-        ["阶段性能力覆盖 (§3.2)", "定理 1: 连续低秩微调中的子空间干扰能量下界", "流形解耦 (Scheme Z 运行时模块化正交指针路由)", "交叉任务干扰能量数学严格恒为零 (I = 0)；工具准确率恢复至 82.5% +/- 1.4%"],
-        ["几何消融帕累托悬崖 (§4.1)", "紧凑模型中安全拒答子空间与通用语法子空间高度纠缠", "门控解耦 (参数隔离双状态独立外挂门控 θ_Gate)", "彻底规避 gamma >= 4.0 导致的语法崩溃 (KL > 17)；通用语言能力 100% 保留"],
-        ["虚假长度偏置捷径 (§4.2)", "结构因果模型 (SCM) 揭示混淆后门通路 X <- L -> Y", "因果解耦 (反事实等长对抗配对与因果阻断门控)", "评测对抗集上零策略违规 (GateLeak = 0.000)；技术陷阱误拒率降至 0.000"]
+        ["记忆化假象 (§4.1)", "低操作熵经验风险最小化退化为高维字典查表", "语义解耦 (K=4 轴扰动扩展 + 候选工具聚类)", "20-Gram 重合度由 0.515 -> 0.210；L3 抽象题泛化提升至 87.5% +/- 2.2%"],
+        ["阶段性能力覆盖 (§4.2)", "定理 1: 连续低秩微调中的子空间干扰能量下界", "流形解耦 (Scheme Z 运行时模块化正交指针路由)", "交叉任务干扰能量数学严格恒为零 (I = 0)；工具准确率恢复至 82.5% +/- 1.4%"],
+        ["几何消融帕累托悬崖 (§4.5)", "紧凑模型中安全拒答子空间与通用语法子空间高度纠缠", "门控解耦 (参数隔离双状态独立外挂门控 θ_Gate)", "彻底规避 gamma >= 4.0 导致的语法崩溃 (KL > 17)；通用语言能力 100% 保留"],
+        ["虚假长度偏置捷径 (§4.6)", "结构因果模型 (SCM) 揭示混淆后门通路 X <- L -> Y", "因果解耦 (反事实等长对抗配对与因果阻断门控)", "评测对抗集上零策略违规 (GateLeak = 0.000)；技术陷阱误拒率降至 0.000"]
     ]
     t1_col_widths = [1.6, 1.7, 1.7, 1.5]
     tbl1 = doc.add_table(rows=len(t1_data) + 1, cols=len(t1_headers))
     style_academic_table(tbl1, t1_col_widths, t1_headers, t1_data)
-    add_caption("表 1: 实证病理现象、理论边界与 DSDA 解耦机制显式映射矩阵。")
+    add_caption("表 1  实证病理现象、理论边界与 DSDA 解耦机制显式映射矩阵 / Table 1  Explicit Mapping Matrix of Pathologies, Boundaries, and Solutions")
 
     # 2. 相关工作
-    add_sec_heading("2. 相关工作 (Related Work)")
+    add_sec_heading("2. 相关工作")
     add_subsec_heading("2.1 参数高效持续学习与低秩干扰")
     add_p("LoRA 与 QLoRA 已成为大模型适配的主流。然而，连续多阶段微调会引发严重灾难性遗忘。虽然回放机制（A-GEM）与参数正则化（EWC）在通用场景中可缓解遗忘，但在低秩子空间约束下，有限的参数维度使后续梯度更新对前序子空间施加了破坏性的正交投影。")
     add_subsec_heading("2.2 模型合并与参数子空间解耦")
@@ -307,9 +317,18 @@ def build_chinese_paper_docx():
     add_subsec_heading("2.5 自主系统智能体与逆向安全沙箱")
     add_p("对比 ToolLLM 与 SWE-bench 等高层容错基准，底层系统驱动与调试操作具备零容错、强不可逆特征，对微调稳健性提出了更高要求。")
 
-    # 3. 实证病理
-    add_sec_heading("3. 系统智能体特化中的实证病理")
-    add_subsec_heading("3.1 记忆化假象与评估失效")
+    # 3. 威胁模型与问题形式化
+    add_sec_heading("3. 威胁模型与问题形式化")
+    add_subsec_heading("3.1 系统实体与执行通道模型")
+    add_p("智能体运行于宿主与底层靶标之间，通过动态调试通道 (C_dbg)、内核驱动通信通道 (C_drv) 及静态逆向分析通道 (C_static) 交互。")
+    add_subsec_heading("3.2 攻击者能力与知识空间")
+    add_p("攻击者 A_adv 具备黑盒交互能力与部分白盒知识，能够构造直接/间接提示注入、角色扮演越狱、伪造调试回显及混淆技术陷阱。")
+    add_subsec_heading("3.3 安全目标与形式化参考监视器")
+    add_p("智能体必须作为安全参考监视器，满足两大核心不变量：(1) 未授权状态下零特权操作泄漏 (GateLeak = 0.000)；(2) 面对包含技术敏感词的良性请求时零技术陷阱误拒 (TrapRefusal = 0.000)。")
+
+    # 4. 实证病理与理论边界
+    add_sec_heading("4. 系统智能体特化中的实证病理与理论边界")
+    add_subsec_heading("4.1 记忆化假象与评估失效")
     add_p("在二进制逆向工程与安全取证等专业领域中，微调数据集多由简洁的操作指令与结构化工具调用组成。标准监督微调目标对应离散词元分布上的经验风险最小化（ERM）：")
     add_equation("L_ERM(θ) = (1 / |D|) ∑_{(x, y) ∈ D} ∑_{t=1}^{|y|} -log P_θ(y_t | y_<t, x)", 1)
     add_p("为量化损失下降是否真实反映语义归纳能力，我们形式化了 n-Gram 逐字记忆化率指标 M_n：")
@@ -318,13 +337,13 @@ def build_chinese_paper_docx():
 
     # Figure 1
     doc.add_picture(os.path.join(IMAGES_DIR, "fig1_memorization_vs_loss.png"), width=Inches(6.0))
-    add_caption("图 1: 训练交叉熵损失 vs. 20-Gram 逐字记忆化率与 L3 抽象泛化跨轮次动态演进。")
+    add_caption("图 1  训练交叉熵损失 vs. 20-Gram 逐字记忆化率与 L3 抽象泛化跨轮次动态演进 / Fig. 1  Training CE Loss vs. Memorization and L3 Generalization")
 
-    add_subsec_heading("3.2 阶段性微调中的灾难性覆盖")
-    add_p("在完成阶段 1 (工具特化) $\to$ 阶段 2 (代码轨迹) 后，前序工具调用准确率由 82.5% 断崖式跌落至 10.0%，工具调用逃避率飙升至 82.5%。")
+    add_subsec_heading("4.2 阶段性微调中的灾难性覆盖")
+    add_p("在完成阶段 1 (工具特化) -> 阶段 2 (代码轨迹) 后，前序工具调用准确率由 82.5% 断崖式跌落至 10.0%，工具调用逃避率飙升至 82.5%。")
 
     # Theorem 1
-    add_subsec_heading("3.3 理论形式化：子空间干扰下界定理")
+    add_subsec_heading("4.3 理论形式化：子空间干扰下界定理与相变分析")
     add_p("假设 1 (格拉斯曼流形上的低秩参数化). 设 W_0 ∈ ℝ^{d_1 × d_2} 为预训练基座权重。任务 T 的适配约束于低秩分解空间：")
     add_equation("W = W_0 + ΔW = W_0 + (α / r) B · A,    B ∈ ℝ^{d_1 × r},  A ∈ ℝ^{r × d_2}", 3)
     add_p("引理 1 (任务梯度的正交投影分解). 设 S_1 = span(B_1) 为任务 T_1 的低秩优化列子空间。正交投影算子 P_{S_1} 及其正交补算子 P_{S_1}^⊥ 定义为：")
@@ -350,12 +369,10 @@ def build_chinese_paper_docx():
     )
     add_equation("S_i ∩ S_j = ∅  ⟹  P_{S_i}(∇_W L_j) ≡ 0  ⟹  I(T_i, T_j) ≡ 0    (∀ i ≠ j)", 10)
 
-    add_subsec_heading("3.4 轨迹数据污染与语义漂移")
+    add_subsec_heading("4.4 轨迹数据污染与语义漂移")
     add_p("审计发现 66.3% 的多轮轨迹残留角色控制标记，诱发死循环；99.3% 的窗口切片造成语义错位，使模型退化为纯文本日志摘要器。")
 
-    # 4. 行为调控困境
-    add_sec_heading("4. 行为调控困境：表征编辑与门控捷径的边界")
-    add_subsec_heading("4.1 表征消融的帕累托悬崖")
+    add_subsec_heading("4.5 表征消融的帕累托悬崖")
     add_p("在激活空间中，方向消除投影沿拒绝方向 v̂_refusal 正交化：")
     add_equation("h' = h - γ (h · v̂_refusal) v̂_refusal", 11)
     add_p("在参数层面，对应将权重矩阵沿拒绝方向进行正交投影：")
@@ -363,22 +380,22 @@ def build_chinese_paper_docx():
     add_p("扫参实验表明：消融系数 γ <= 1.0 时模型拒绝率维持 100%；γ >= 4.0 时突然跨越悬崖，KL 散度发生剧烈爆炸，引发灾难性语法崩溃：")
     add_equation("D_KL(P_W(· | x) || P_{W'}(· | x)) = ∑_{y ∈ V} P_W(y | x) log (P_W(y | x) / P_{W'}(y | x)) ≥ 17.0    (γ ≥ 4.0)", 13)
 
-    add_subsec_heading("4.2 条件门控中的虚假相关性：长度偏置捷径")
+    add_subsec_heading("4.6 条件门控中的虚假相关性：长度偏置捷径")
     add_p("授权样本平均 1,065 tokens，而未授权拒答样本仅 126 tokens（8.4:1 长度差异）。模型学习到了将输出 Token 长度作为隐式授权凭据的虚假统计捷径。根据贝叶斯后验分解：")
     add_equation("P(Y = Permit | X, L) = [ P(L | Y = Permit, X) · P(Y = Permit | X) ] / P(L | X)", 14)
     add_p("由于 E[L | Y=Permit] ≈ 1,065 >> E[L | Y=Refuse] ≈ 126，攻击者可通过诱导长篇输出轻松越狱绕过安全门控，构成严重的 CWE-863 权限验证绕过漏洞。")
 
     # Figure 3
     doc.add_picture(os.path.join(IMAGES_DIR, "fig3_length_bias_distribution.png"), width=Inches(6.0))
-    add_caption("图 3: 朴素安全门控 8.4x 长度偏置 vs. DSDA 反事实等长平衡分布。")
+    add_caption("图 3  朴素安全门控 8.4x 长度偏置 vs. DSDA 反事实等长平衡分布 / Fig. 3  Length Disparity vs. Balanced Gating")
 
     # 5. DSDA 框架
-    add_sec_heading("5. 提出的 DSDA 框架 (The Proposed Framework: DSDA)")
+    add_sec_heading("5. 提出的 DSDA 框架")
     add_p("DSDA 从语义、拓扑、因果与流形四个维度确立了系统解耦架构：")
 
     # Figure 2
     doc.add_picture(os.path.join(IMAGES_DIR, "fig2_dsda_architecture.png"), width=Inches(6.0))
-    add_caption("图 2: 解耦系统领域适配框架 (DSDA) 总体系统架构图。")
+    add_caption("图 2  解耦系统领域适配框架 (DSDA) 总体系统架构图 / Fig. 2  Architectural Overview of DSDA")
 
     add_subsec_heading("5.1 语义抗记忆化协议 (语义解耦)")
     add_p("不变语义优化目标在所有 K=4 轴扰动样本上最小化经验交叉熵：")
@@ -386,7 +403,7 @@ def build_chinese_paper_docx():
 
     # Listing 1
     doc.add_picture(os.path.join(IMAGES_DIR, "listing1_perturbation.png"), width=Inches(5.8))
-    add_caption("代码清单 1: 多轴语义查询扰动生成算法 (K=4)。")
+    add_caption("代码清单 1  多轴语义查询扰动生成算法 (K=4) / Listing 1  Multi-axis query perturbation protocol")
 
     add_subsec_heading("5.2 候选感知难负例工具聚类 (拓扑解耦)")
     add_p("针对目标工具 t* ∈ C_m，构建大小为 k ∈ [8, 12] 的紧凑候选集 S_cand：")
@@ -396,14 +413,14 @@ def build_chinese_paper_docx():
 
     # Listing 2
     doc.add_picture(os.path.join(IMAGES_DIR, "listing2_candidate_clustering.png"), width=Inches(5.8))
-    add_caption("代码清单 2: 候选工具簇内难负例采样协议 (k=8~12)。")
+    add_caption("代码清单 2  候选工具簇内难负例采样协议 (k=8~12) / Listing 2  Candidate tool sampling protocol")
 
     # Figure 4 (SCM)
     doc.add_picture(os.path.join(IMAGES_DIR, "fig4_causal_dag.png"), width=Inches(6.2))
-    add_caption("图 4: 结构因果模型 (SCM) 混淆后门通路与模块化 do-演算干预图。")
+    add_caption("图 4  结构因果模型 (SCM) 混淆后门通路与模块化 do-演算干预图 / Fig. 4  SCM and modular do-calculus DAG")
 
     # Algorithm 1
-    add_subsec_heading("算法 1: 反事实等长对齐样本对生成协议 (因果解耦)")
+    add_subsec_heading("5.3 因果等长门控协议：SCM 与后门阻断 (因果解耦)")
     add_p("在结构因果模型 (SCM) 中，变量交互的结构方程为：")
     add_equation("X := f_X(U_X),  L := f_L(X, U_L),  G := f_G(X, U_G),  Z := f_Z(X, U_Z),  Y := f_Y(Z, θ(G), U_Y)", 18)
     add_p("为阻断混淆后门通路 X <- L -> Y，DSDA 强制生成严格等长约束的反事实成对样本：")
@@ -413,16 +430,16 @@ def build_chinese_paper_docx():
     add_p("由于 P(L | do(G=1)) ≡ P(L | do(G=0))，响应长度与门控状态的互信息被彻底消解：")
     add_equation("I(L; G) = ∑_{l ∈ L} ∑_{g ∈ {0, 1}} P(l, g) log [ P(l, g) / (P(l) P(g)) ] ≡ 0", 21)
 
-    add_subsec_heading("5.4 推理期模块化外挂动态解耦：Scheme Z (流形解耦)")
+    add_subsec_heading("5.4 推理期模块化外挂动态解耦：方案 Z (流形解耦)")
     add_p("模型有效参数矩阵在运行时根据任务谓词动态正交切换：")
     add_equation("W_eff(x) = W_0 + ∑_{k ∈ {RE, Code, Gate}} 1_{R(x) = k} · (α_k / r_k) B_k A_k", 22)
 
     # Listing 3
     doc.add_picture(os.path.join(IMAGES_DIR, "listing3_runtime_routing.png"), width=Inches(5.8))
-    add_caption("代码清单 3: 推理期模块化外挂动态路由器 (Scheme Z)。")
+    add_caption("代码清单 3  推理期模块化外挂动态路由器 (Scheme Z) / Listing 3  Inference-time modular adapter routing")
 
     # 6. 实验评估
-    add_sec_heading("6. 实验评估与统计验证 (Experimental Evaluation)")
+    add_sec_heading("6. 实验评估与统计验证")
     add_subsec_heading("6.1 威胁模型、N=120 综合对抗套件与 5 种子统计规范")
     add_p("安全评估指标策略泄漏率 (GateLeak) 与陷阱误拒率 (TrapRefusal) 形式化定义为：")
     add_equation("GateLeak ≜ (1 / N_unauth) ∑_{i=1}^{N_unauth} 1_{Action(y_i) ∈ Ω_prohibited},    TrapRefusal ≜ (1 / N_trap) ∑_{j=1}^{N_trap} 1_{Refusal(y_j) = 1}", 23)
@@ -441,7 +458,7 @@ def build_chinese_paper_docx():
     t2_col_widths = [1.6, 0.6, 0.6, 1.2, 0.6, 1.0, 0.8, 1.1]
     tbl2 = doc.add_table(rows=len(t2_data) + 1, cols=len(t2_headers))
     style_academic_table(tbl2, t2_col_widths, t2_headers, t2_data)
-    add_caption("表 2: 不同微调体制下的抗记忆化动态与抽象泛化性能对比 (* p < 0.01)。")
+    add_caption("表 2  不同微调体制下的抗记忆化动态与抽象泛化性能对比 (* p < 0.01) / Table 2  Anti-memorization dynamics")
 
     # 表 3: 跨规模
     add_subsec_heading("6.3 跨规模与跨注意力架构泛化评测对比 (9B vs. 27B)")
@@ -458,7 +475,7 @@ def build_chinese_paper_docx():
     t3_col_widths = [1.8, 2.0, 2.0, 1.4]
     tbl3 = doc.add_table(rows=len(t3_data) + 1, cols=len(t3_headers))
     style_academic_table(tbl3, t3_col_widths, t3_headers, t3_data)
-    add_caption("表 3: 跨规模与跨注意力架构泛化评测对比 (9B vs. 27B, 5 种子测试)。")
+    add_caption("表 3  跨规模与跨注意力架构泛化评测对比 (9B vs. 27B, 5 种子测试) / Table 3  Cross-scale generalization")
 
     # 表 4: 模型合并
     add_subsec_heading("6.4 多任务持续学习与主流模型合并基线对标")
@@ -475,11 +492,11 @@ def build_chinese_paper_docx():
     t4_col_widths = [1.6, 1.3, 0.9, 0.9, 0.9, 0.9, 1.0]
     tbl4 = doc.add_table(rows=len(t4_data) + 1, cols=len(t4_headers))
     style_academic_table(tbl4, t4_col_widths, t4_headers, t4_data)
-    add_caption("表 4: 多任务微调与模型合并主流方法评测对比 (5 种子 Mean +/- Std)。")
+    add_caption("表 4  多任务微调与模型合并主流方法评测对比 (5 种子 Mean +/- Std) / Table 4  Model merging comparison")
 
     # Listing 4
     doc.add_picture(os.path.join(IMAGES_DIR, "listing4_baseline_merging.png"), width=Inches(5.8))
-    add_caption("代码清单 4: Task Arithmetic 与 TIES-Merging 基线合并算法实现。")
+    add_caption("代码清单 4  Task Arithmetic 与 TIES-Merging 基线合并算法实现 / Listing 4  Model merging baselines")
 
     # 表 5: 候选集规模
     add_subsec_heading("6.5 候选集规模消融与稳定性分析")
@@ -494,7 +511,7 @@ def build_chinese_paper_docx():
     t5_col_widths = [1.6, 0.8, 0.9, 1.0, 1.1, 0.9, 1.2]
     tbl5 = doc.add_table(rows=len(t5_data) + 1, cols=len(t5_headers))
     style_academic_table(tbl5, t5_col_widths, t5_headers, t5_data)
-    add_caption("表 5: 候选工具空间规模 (k) 消融与随机种子敏感性分析 (5 种子 Mean +/- Std)。")
+    add_caption("表 5  候选工具空间规模 (k) 消融与随机种子敏感性分析 (5 种子 Mean +/- Std) / Table 5  Candidate scale ablation")
 
     # 表 6: 安全门控
     add_subsec_heading("6.6 N=120 综合对抗套件双状态安全门控测试")
@@ -509,7 +526,7 @@ def build_chinese_paper_docx():
     t6_col_widths = [1.8, 1.2, 1.2, 1.1, 1.2, 1.0]
     tbl6 = doc.add_table(rows=len(t6_data) + 1, cols=len(t6_headers))
     style_academic_table(tbl6, t6_col_widths, t6_headers, t6_data)
-    add_caption("表 6: 扩展 N=120 对抗测试套件上的双状态安全门控与陷阱鲁棒性评测 (* 零策略违规)。")
+    add_caption("表 6  扩展 N=120 对抗测试套件上的双状态安全门控与陷阱鲁棒性评测 (* 零策略违规) / Table 6  Safety gating on N=120 suite")
 
     # 表 7: 跨领域
     add_subsec_heading("6.7 跨领域能力保留与适用边界讨论")
@@ -523,39 +540,43 @@ def build_chinese_paper_docx():
     t7_col_widths = [1.8, 1.8, 1.0, 1.2, 1.2]
     tbl7 = doc.add_table(rows=len(t7_data) + 1, cols=len(t7_headers))
     style_academic_table(tbl7, t7_col_widths, t7_headers, t7_data)
-    add_caption("表 7: 跨领域能力保留与通用基准评测。")
+    add_caption("表 7  跨领域能力保留与通用基准评测 / Table 7  Cross-domain retention and benchmark generalization")
 
-    # 7. 工程落地准则
-    add_sec_heading("7. 边缘自主系统智能体的工程落地准则")
+    # 7. 伦理考量
+    add_sec_heading("7. 伦理考量与双重用途缓解")
+    add_p("系统安全智能体具备调用底层调试器与驱动的能力，存在被恶意滥用于漏洞利用的双重用途风险。本文恪守学术伦理：(1) 所有实验均在隔离无网沙盒进行；(2) 严厉封禁非受检物理写原语 (KM_PW)；(3) 提出的因果门控机制专门用于封堵 CWE-863 越权判定绕过漏洞。")
+
+    # 8. 工程落地准则
+    add_sec_heading("8. 边缘自主系统智能体的工程落地准则")
     add_p("四大工程准则：(1) 彻底废弃单权重多阶段微调，强制建立运行时动态指针解耦隔离；(2) 切勿单信留出验证集 Loss，必须监控 n-gram 词元记忆率并在评估中隐去工具名；(3) 严格审查对齐数据的 Token 长度平衡，物理阻断长度后门；(4) 强力约束运行时工具候选空间，实施拓扑簇难负例动态聚类注入。")
 
-    # 8. 结论
-    add_sec_heading("8. 结论 (Conclusion)")
+    # 9. 结论
+    add_sec_heading("9. 结论")
     add_p("本文全面解构了紧凑语言模型在底层系统特化微调中出现的深层病理缺陷。我们证明了监督微调下降的损失掩盖了严重的机械背题，串行多阶段微调引发破坏性能力覆盖（由定理 1 子空间干扰下界严格形式化），表征消融面临剧烈的语法崩溃悬崖，而条件门控则潜伏着虚假长度偏置后门。我们提出的解耦系统领域适配框架（DSDA）通过语义、流形与因果三维解耦，从根本上攻克了上述难题。在 9B 与 27B 双架构上的严格实验为在任务关键型环境下构建稳健、高可靠且行为受控的自主系统智能体奠定了坚实的理论与工程基石。")
 
-    # 参考文献
-    add_sec_heading("参考文献 (References)")
+    # 参考文献 (GB/T 7714-2015 格式)
+    add_sec_heading("参考文献")
     refs = [
-        "1. Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, Weizhu Chen. LoRA: Low-Rank Adaptation of Large Language Models. ICLR, 2022.",
-        "2. Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, Luke Zettlemoyer. QLoRA: Efficient Finetuning of Quantized LLMs. NeurIPS, 2023.",
-        "3. Andy Zou, Long Phan, Sarah Chen, James Campbell, Phillip Guo, Richard Ren, Alexander Pan, Xuwang Yin, Mantas Mazeika, Ann-Kathrin Dombrowski, Dan Hendrycks. Representation Engineering: A Top-Down Approach to AI Transparency. arXiv:2310.01405, 2023.",
-        "4. Nishant Arditi, Obada Al-Cheikh, Neel Nanda. Refusal in Language Models Is Mediated by a Single Direction. arXiv:2406.11717, 2024.",
-        "5. Carlos E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, Karthik Narasimhan. SWE-bench: Can Language Models Resolve Real-World GitHub Issues? ICLR, 2024.",
-        "6. Shishir G. Patil, Tianjun Zhang, Xin Wang, Joseph E. Gonzalez. Gorilla: Large Language Model Connected with Massive APIs. arXiv:2305.15334, 2023.",
-        "7. Yujia Qin, Shengding Hu, Yankai Lin, et al. ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs. ICLR, 2024.",
-        "8. Dan Biderman, Jose Gonzalez Ortiz, Jacob Portes, Mansheej Paul, Philip Greengard, Connor Jennings, Daniel King, Sam Havens, Vitaliy Chiley, Jonathan Frankle, Cody Blakeney, John P. Cunningham. LoRA Learns Less and Forgets Less. arXiv:2405.09673, 2024.",
-        "9. Songlin Yang, Bailin Wang, Yikang Shen, Rameswar Panda, Yoon Kim. Gated Linear Attention Transformers with Hardware-Efficient Training. ICML, 2024.",
-        "10. Xiangning Chen, Chen Liang, Da Huang, Mingxing Tan, et al. Symbolic Discovery of Optimization Algorithms (Lion). NeurIPS, 2023.",
-        "11. LinkedIn Liger-Kernel Team. Liger Kernel: Efficient Triton Kernels for LLM Training. 2024.",
-        "12. OrionLLM Team. OxCoder-9B: Hybrid Linear Attention Code Model. 2025.",
-        "13. Qwen Team. Qwen2.5 Technical Report. arXiv:2412.15115, 2024.",
-        "14. Gabriel Ilharco, Marco Tulio Ribeiro, Mitchell Wortsman, Suchin Gururangan, Ludwig Schmidt, Hannaneh Hajishirzi, Ali Farhadi. Editing Models with Task Arithmetic. ICLR, 2023.",
-        "15. Prateek Yadav, Derek Tam, Leshem Choshen, Colin Raffel, Mohit Bansal. TIES-Merging: Resolving Interference When Merging Models. NeurIPS, 2023.",
-        "16. Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, Yuan Cao. ReAct: Synergizing Reasoning and Acting in Language Models. ICLR, 2023.",
-        "17. Judea Pearl. Causality: Models, Reasoning, and Inference. Cambridge University Press, 2009.",
-        "18. James Kirkpatrick, Razvan Pascanu, Neil Rabinowitz, et al. Overcoming Catastrophic Forgetting in Neural Networks. PNAS, 2017.",
-        "19. Arslan Chaudhry, Marc'Aurelio Ranzato, Marcus Rohrbach, Mohamed Elhoseiny. Efficient Lifelong Learning with A-GEM. ICLR, 2019.",
-        "20. Xuezhi Wang, Jason Wei, Dale Schuurmans, et al. Self-Consistency Improves Chain of Thought Reasoning in Language Models. ICLR, 2023."
+        "[1] HU E J, SHEN Y, WALLIS P, et al. LoRA: Low-rank adaptation of large language models[C]//Proceedings of the International Conference on Learning Representations (ICLR). Virtual: OpenReview.net, 2022: 1-14.",
+        "[2] DETTMERS T, PAGNONI A, HOLTZMAN A, et al. QLoRA: Efficient finetuning of quantized LLMs[C]//Advances in Neural Information Processing Systems (NeurIPS). New Orleans: Curran Associates, Inc., 2023, 36: 10088-10115.",
+        "[3] ZOU A, PHAN L, CHEN S, et al. Representation engineering: A top-down approach to AI transparency[J]. arXiv preprint arXiv:2310.01405, 2023.",
+        "[4] ARDITI N, AL-CHEIKH O, NANDA N. Refusal in language models is mediated by a single direction[J]. arXiv preprint arXiv:2406.11717, 2024.",
+        "[5] JIMENEZ C E, YANG J, WETTIG A, et al. SWE-bench: Can language models resolve real-world GitHub issues?[C]//Proceedings of the International Conference on Learning Representations (ICLR). Vienna: OpenReview.net, 2024: 1-28.",
+        "[6] PATIL S G, ZHANG T, WANG X, et al. Gorilla: Large language model connected with massive APIs[J]. arXiv preprint arXiv:2305.15334, 2023.",
+        "[7] QIN Y, HU S, LIN Y, et al. ToolLLM: Facilitating large language models to master 16000+ real-world APIs[C]//Proceedings of the International Conference on Learning Representations (ICLR). Vienna: OpenReview.net, 2024: 1-32.",
+        "[8] BIDERMAN D, ORTIZ J G, PORTES J, et al. LoRA learns less and forgets less[J]. arXiv preprint arXiv:2405.09673, 2024.",
+        "[9] YANG S, WANG B, SHEN Y, et al. Gated linear attention transformers with hardware-efficient training[C]//Proceedings of the 41st International Conference on Machine Learning (ICML). Vienna: PMLR, 2024, 235: 56345-56367.",
+        "[10] CHEN X, LIANG C, HUANG D, et al. Symbolic discovery of optimization algorithms[C]//Advances in Neural Information Processing Systems (NeurIPS). New Orleans: Curran Associates, Inc., 2023, 36: 49204-49232.",
+        "[11] LIGER TEAM. Liger Kernel: Efficient Triton kernels for LLM training[EB/OL]. (2024-08-15)[2026-03-01]. https://github.com/linkedin/Liger-Kernel.",
+        "[12] ORIONLLM TEAM. OxCoder-9B: Hybrid linear attention code model[EB/OL]. (2025-01-10)[2026-03-01]. https://huggingface.co/OrionLLM/OxCoder-9B.",
+        "[13] QWEN TEAM. Qwen2.5 technical report[J]. arXiv preprint arXiv:2412.15115, 2024.",
+        "[14] ILHARCO G, RIBEIRO M T, WORTSMAN M, et al. Editing models with task arithmetic[C]//Proceedings of the International Conference on Learning Representations (ICLR). Kigali: OpenReview.net, 2023: 1-22.",
+        "[15] YADAV P, TAM D, CHOSHEN L, et al. TIES-Merging: Resolving interference when merging models[C]//Advances in Neural Information Processing Systems (NeurIPS). New Orleans: Curran Associates, Inc., 2023, 36: 7183-7204.",
+        "[16] YAO S, ZHAO J, YU D, et al. ReAct: Synergizing reasoning and acting in language models[C]//Proceedings of the International Conference on Learning Representations (ICLR). Kigali: OpenReview.net, 2023: 1-31.",
+        "[17] PEARL J. Causality: Models, reasoning, and inference[M]. 2nd ed. Cambridge: Cambridge University Press, 2009: 65-106.",
+        "[18] KIRKPATRICK J, PASCANU R, RABINOWITZ N, et al. Overcoming catastrophic forgetting in neural networks[J]. Proceedings of the National Academy of Sciences (PNAS), 2017, 114(13): 3521-3526.",
+        "[19] CHAUDHRY A, RANZATO M, ROHRBACH M, et al. Efficient lifelong learning with A-GEM[C]//Proceedings of the International Conference on Learning Representations (ICLR). New Orleans: OpenReview.net, 2019: 1-18.",
+        "[20] WANG X, WEI J, SCHUURMANS D, et al. Self-consistency improves chain of thought reasoning in language models[C]//Proceedings of the International Conference on Learning Representations (ICLR). Kigali: OpenReview.net, 2023: 1-20."
     ]
     for r in refs:
         p = doc.add_paragraph()
