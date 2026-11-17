@@ -203,8 +203,10 @@ D:\DrCE(26.2.16)  ← 只读源
 | 文档 | 内容 |
 |---|---|
 | [`docs/paper/README.md`](docs/paper/README.md) | **DSDA 学术论文资产总览**（8 章节 IEEE/ACM 规范排版定稿、7 大数据表、4 张插图） |
-| [`docs/paper/beyond_surface_adaptation.docx`](docs/paper/beyond_surface_adaptation.docx) | **论文定稿 (Word)**：嵌入 300 DPI 矢量图与暗黑终端代码块，面向信息安全/系统顶刊 |
-| [`docs/paper/beyond_surface_adaptation.md`](docs/paper/beyond_surface_adaptation.md) | 论文全量英文稿：含 Assumption 1、Lemma 1、Theorem 1 证明、SCM 因果推导与 20 篇文献 |
+| [`docs/paper/beyond_surface_adaptation.docx`](docs/paper/beyond_surface_adaptation.docx) | **英文论文定稿 (Word)**：嵌入 300 DPI 矢量图与暗黑代码块，面向 IEEE TIFS/TDSC 等顶级安全期刊 |
+| [`docs/paper/beyond_surface_adaptation.md`](docs/paper/beyond_surface_adaptation.md) | 英文全量手稿：含 Assumption 1、Lemma 1、Theorem 1 证明、SCM 因果推导与 20 篇文献 |
+| [`docs/paper/beyond_surface_adaptation_zh.docx`](docs/paper/beyond_surface_adaptation_zh.docx) | **中文完整学术定稿 (Word)**：标准排版、三线表与全套图表代码块，便于中文汇报与国内顶刊评审 |
+| [`docs/paper/beyond_surface_adaptation_zh.md`](docs/paper/beyond_surface_adaptation_zh.md) | 中文全量手稿：与英文稿逐段对齐，包含完整公式证明、算法 1 伪代码与中文主表矩阵 |
 | [`docs/paper/submission_pack/`](docs/paper/submission_pack/) | **双盲投稿独立包**：含 `main.tex`、`references.bib`、`METADATA.txt` 与复现脚本 |
 | [`REPRODUCE.md`](REPRODUCE.md) | **学术复现指南**：1 分钟确定性复现 Tables 1~7 评测矩阵 |
 | [`docs/architecture.md`](docs/architecture.md) | 组件关系、数据流、端口与进程 |

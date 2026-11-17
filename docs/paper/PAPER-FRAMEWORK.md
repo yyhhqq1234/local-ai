@@ -5,7 +5,6 @@
 *(副标题/备选: Deconstructing Memorization, Stage Overwriting, and Gating Biases in Domain-Specialized System Agents)*  
 **Target Venue**: IEEE Transactions on Information Forensics and Security (TIFS) / IEEE Transactions on Dependable and Secure Computing (TDSC) / ACM TOPS / CCF-A  
 **Author & Project Owner**: 杨涵钦 (yyhhqq1234，2923165556@qq.com)  
-**Assistant / Engineering Support**: 石井 (Ishii), 本地工作区执行层  
 **Date**: 2026-11-17 (含导师二审意见完全性深度补齐与闭环版本)
 
 ---

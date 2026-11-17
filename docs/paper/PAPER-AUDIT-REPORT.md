@@ -2,7 +2,6 @@
 
 **Document ID**: `LOCAL-AI-AUDIT-REMEDIATION-20261117`  
 **Project Owner / Principal Investigator**: 杨涵钦 (yyhhqq1234，2923165556@qq.com)  
-**Auditor**: 石井 (Ishii), 本地工作区执行层  
 **Target Paper**: *Beyond Surface Adaptation: Decoupled System-Domain Adaptation and Causal Gating for Autonomous System Agents*  
 **Target Venues**: IEEE Transactions on Information Forensics and Security (TIFS) / IEEE TDSC / ACM TOPS / CCF-A  
 **Date**: 2026-11-17 (含导师二审意见完全性深度补齐与闭环验收)  

@@ -9,12 +9,15 @@
 
 | 文件 / 目录 | 格式 / 形态 | 说明 |
 |---|---|---|
-| [`beyond_surface_adaptation.docx`](beyond_surface_adaptation.docx) | Word 格式 (940 KB) | **顶级期刊投稿定稿**：包含 IEEE/ACM 规范排版、三线表、300 DPI 矢量图与代码 Listing 终端渲染 |
+| [`beyond_surface_adaptation.docx`](beyond_surface_adaptation.docx) | Word 格式 (940 KB) | **英文顶级期刊投稿定稿**：包含 IEEE/ACM 规范排版、三线表、300 DPI 矢量图与代码 Listing 终端渲染 |
 | [`beyond_surface_adaptation.md`](beyond_surface_adaptation.md) | Markdown | 论文全量英文文本（包含 8 大章节、全部数学推导、定理 1、引理 1、推论 1.1、SCM 因果图、7 张数据表与 20 篇权威文献） |
+| [`beyond_surface_adaptation_zh.docx`](beyond_surface_adaptation_zh.docx) | Word 格式 (941 KB) | **中文完整学术定稿**：标准双栏版面、三线表、矢量插图与暗黑终端代码图，便于中文答辩与国内期刊投递 |
+| [`beyond_surface_adaptation_zh.md`](beyond_surface_adaptation_zh.md) | Markdown | **中文全量学术论文手稿**：逐字逐段与英文版对齐，包含完整公式证明、算法 1 伪代码与 7 张中文数据表 |
 | [`PAPER-FRAMEWORK.md`](PAPER-FRAMEWORK.md) | Markdown | **论文结构框架设计**：五步逻辑主线（背景问题 $\to$ 现有缺陷 $\to$ 提出方法 $\to$ 实验结论 $\to$ 核心价值）、8 章节详细规划与图表清单 |
 | [`PAPER-AUDIT-REPORT.md`](PAPER-AUDIT-REPORT.md) | Markdown | **漏洞审查与修复验收报告**：针对 5 大漏洞在本项目中的实证真伪判定、修复举措与验收证明 |
 | [`baseline_merging_benchmark.md`](baseline_merging_benchmark.md) | Markdown | **基线对标报告**：Task Arithmetic 与 TIES-Merging 模型合并在底层系统任务上的实测数据与理论分析 |
-| [`generate_assets_and_docx.py`](generate_assets_and_docx.py) | Python 脚本 | 自动化图表绘制（300 DPI）与高保真 Word 论文生成器 |
+| [`generate_assets_and_docx.py`](generate_assets_and_docx.py) | Python 脚本 | 自动化图表绘制（300 DPI）与高保真英文 Word 论文生成器 |
+| [`generate_docx_zh.py`](generate_docx_zh.py) | Python 脚本 | 自动化中文 Word 论文生成器 |
 | [`images/`](images/) | 目录 (PNG) | 论文高清插图（Figure 1~4）与暗黑终端代码图（Listing 1~4） |
 | [`submission_pack/`](submission_pack/) | 目录 | **独立双盲投稿包**：包含 `main.tex`、`references.bib`、`METADATA.txt` 及离线复现脚本 `reproduce_eval.py` |
 

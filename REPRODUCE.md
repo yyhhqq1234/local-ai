@@ -43,16 +43,21 @@ train/.venv/Scripts/python.exe scripts/run_baseline_merging.py
 
 ## 3. 图表与 Word 论文生成器 (Asset Generation)
 
-重新渲染论文中所有的 300 DPI 矢量级插图（Figure 1~4）以及暗黑终端代码块（Listing 1~4），并生成标准排版的 Word 论文定稿：
+重新渲染论文中所有的 300 DPI 矢量级插图（Figure 1~4）以及暗黑终端代码块（Listing 1~4），并生成标准排版的英文与中文 Word 论文定稿：
 
 ```bash
+# 1. 生成 300 DPI 矢量图表并编译英文 Word 论文定稿 (IEEE/ACM 格式)
 train/.venv/Scripts/python.exe docs/paper/generate_assets_and_docx.py
+
+# 2. 编译中文全量 Word 论文定稿 (适合中文汇报与答辩)
+train/.venv/Scripts/python.exe docs/paper/generate_docx_zh.py
 ```
 
 生成产物：
 - 插图产物：`docs/paper/images/`（`fig1_memorization_vs_loss.png`，`fig2_dsda_architecture.png`，`fig3_length_bias_distribution.png`，`fig4_causal_dag.png`）
 - 代码图产物：`docs/paper/images/`（`listing1_perturbation.png`，`listing2_candidate_clustering.png`，`listing3_runtime_routing.png`，`listing4_baseline_merging.png`）
-- 论文定稿：`docs/paper/beyond_surface_adaptation.docx` (约 940 KB)
+- 英文论文定稿：`docs/paper/beyond_surface_adaptation.docx` (约 940 KB)
+- 中文论文定稿：`docs/paper/beyond_surface_adaptation_zh.docx` (约 941 KB)
 
 ---
 
@@ -60,7 +65,7 @@ train/.venv/Scripts/python.exe docs/paper/generate_assets_and_docx.py
 
 | 论文章节 / 贡献点 | 对应代码与文档路径 | 说明 |
 |---|---|---|
-| **完整论文手稿 (Word / Markdown / LaTeX)** | `docs/paper/beyond_surface_adaptation.docx`<br>`docs/paper/beyond_surface_adaptation.md`<br>`docs/paper/submission_pack/main.tex` | 包含 8 大章节、完整三线表、矢量图与定理推导 |
+| **完整论文手稿 (英文/中文 Word/MD/TeX)** | `docs/paper/beyond_surface_adaptation.docx`<br>`docs/paper/beyond_surface_adaptation.md`<br>`docs/paper/beyond_surface_adaptation_zh.docx`<br>`docs/paper/beyond_surface_adaptation_zh.md`<br>`docs/paper/submission_pack/main.tex` | 包含 8 大章节、完整三线表、矢量图与定理推导 |
 | **定理 1：低秩干扰下界推导与相变分析** | `docs/paper/beyond_surface_adaptation.md` §3.3 | 格拉斯曼流形投影矩阵证明与 $82.5\% \to 10.0\%$ 相变坍缩量化推导 |
 | **反事实因果门控 (SCM / do-演算)** | `docs/paper/beyond_surface_adaptation.md` §5.3<br>`train/lines/9b-oxcoder/data/nsfw-gated/` | 结构因果模型 (SCM)、阻断后门路径 $X \leftarrow L \rightarrow Y$ 与 Algorithm 1 伪代码 |
 | **逆向工作台 40 场景测试集** | `train/lines/_shared/scripts/eval_cases_re.py` | 涵盖 L1 直白、L2 间接与 L3 抽象题 |
