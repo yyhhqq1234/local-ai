@@ -201,7 +201,7 @@ During initial validation, the model appeared to achieve flawless safety. Howeve
 
 ## 5. The Proposed Framework: DSDA
 
-To systematically eliminate the identified pathologies, we develop **Decoupled System-Domain Adaptation (DSDA)**, organized into three orthogonal decoupling modules:
+To systematically eliminate the identified pathologies, we develop **Decoupled System-Domain Adaptation (DSDA)**, structured around three orthogonal decoupling pillars: *Semantic Decoupling* (§5.1–§5.2, pairing semantic query perturbations with topology-aware candidate clustering), *Causal Decoupling* (§5.3, counterfactual length-balanced paired gating under Structural Causal Models), and *Manifold Decoupling* (§5.4, runtime modular adapter routing):
 
 ```
 [Figure 2: Architecture of Decoupled System-Domain Adaptation (DSDA)]
