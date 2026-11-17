@@ -12,6 +12,21 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
 from docx.oxml import parse_xml
 from docx.oxml.ns import nsdecls
+import latex2mathml.converter
+import lxml.etree as ET
+
+XSLT_PATH = r'C:\Program Files\Microsoft Office\root\Office16\MML2OMML.XSL'
+_xslt_transform = None
+
+def get_omml_transform():
+    global _xslt_transform
+    if _xslt_transform is None and os.path.exists(XSLT_PATH):
+        try:
+            xslt_doc = ET.parse(XSLT_PATH)
+            _xslt_transform = ET.XSLT(xslt_doc)
+        except Exception:
+            pass
+    return _xslt_transform
 
 OUTPUT_DIR = r"D:\BaiduNetdiskDownload\Local-AI\docs\paper"
 IMAGES_DIR = os.path.join(OUTPUT_DIR, "images")
@@ -239,50 +254,31 @@ def build_chinese_paper_docx():
         p_after.paragraph_format.space_before = Pt(2)
         p_after.paragraph_format.space_after = Pt(4)
 
-    def add_equation(formula_text, eq_num):
-        tbl = doc.add_table(rows=1, cols=2)
-        tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
-        tbl.autofit = False
-        tblPr = tbl._tbl.tblPr
-        tblBorders = parse_xml(
-            r'<w:tblBorders {} >'
-            r'  <w:top w:val="none"/>'
-            r'  <w:bottom w:val="none"/>'
-            r'  <w:left w:val="none"/>'
-            r'  <w:right w:val="none"/>'
-            r'  <w:insideH w:val="none"/>'
-            r'  <w:insideV w:val="none"/>'
-            r'</w:tblBorders>'.format(nsdecls('w'))
-        )
-        tblPr.append(tblBorders)
+    def add_equation(latex_str):
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.space_before = Pt(6)
+        p.paragraph_format.space_after = Pt(6)
         
-        cell_eq = tbl.rows[0].cells[0]
-        cell_num = tbl.rows[0].cells[1]
-        cell_eq.width = Inches(5.8)
-        cell_num.width = Inches(0.8)
-        cell_eq.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-        cell_num.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-        
-        p_eq = cell_eq.paragraphs[0]
-        p_eq.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        p_eq.paragraph_format.space_before = Pt(4)
-        p_eq.paragraph_format.space_after = Pt(4)
-        # In Chinese top journal standards: pure formula without trailing tags or trailing punctuation
-        r_eq = p_eq.add_run(formula_text)
-        r_eq.font.name = 'Cambria Math'
-        r_eq.font.size = Pt(9.5)
-        r_eq.font.italic = True
-        r_eq.font.color.rgb = RGBColor(0x11, 0x11, 0x11)
-        
-        p_num = cell_num.paragraphs[0]
-        p_num.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        p_num.paragraph_format.space_before = Pt(4)
-        p_num.paragraph_format.space_after = Pt(4)
-        r_num = p_num.add_run(f"({eq_num})")
-        r_num.font.name = 'Microsoft YaHei'
-        r_num.font.size = Pt(9.5)
-        r_num.font.bold = True
-        r_num.font.color.rgb = RGBColor(0x11, 0x11, 0x11)
+        transform = get_omml_transform()
+        if transform is not None:
+            try:
+                mml = latex2mathml.converter.convert(latex_str)
+                dom = ET.fromstring(mml)
+                omml = transform(dom)
+                omml_str = ET.tostring(omml).decode('utf-8')
+                omml_element = parse_xml(omml_str)
+                p._p.append(omml_element)
+                return p
+            except Exception:
+                pass
+                
+        run = p.add_run(latex_str)
+        run.font.name = 'Cambria Math'
+        run.font.size = Pt(10)
+        run.font.italic = True
+        run.font.color.rgb = RGBColor(0x11, 0x11, 0x11)
+        return p
 
     # 1. 引言
     add_sec_heading("1. 引言")
@@ -330,9 +326,9 @@ def build_chinese_paper_docx():
     add_sec_heading("4. 系统智能体特化中的实证病理与理论边界")
     add_subsec_heading("4.1 记忆化假象与评估失效")
     add_p("在二进制逆向工程与安全取证等专业领域中，微调数据集多由简洁的操作指令与结构化工具调用组成。标准监督微调目标对应离散词元分布上的经验风险最小化（ERM）：")
-    add_equation("L_ERM(θ) = (1 / |D|) ∑_{(x, y) ∈ D} ∑_{t=1}^{|y|} -log P_θ(y_t | y_<t, x)", 1)
+    add_equation(r"\mathcal{L}_{\text{ERM}}(\theta) = \frac{1}{|\mathcal{D}|} \sum_{(\mathbf{x}, \mathbf{y}) \in \mathcal{D}} \sum_{t=1}^{|\mathbf{y}|} -\log P_\theta(y_t \mid \mathbf{y}_{<t}, \mathbf{x})")
     add_p("为量化损失下降是否真实反映语义归纳能力，我们形式化了 n-Gram 逐字记忆化率指标 M_n：")
-    add_equation("M_n(ŷ, D_train) ≜ | Gram_n(ŷ) ∩ ⋃_{(x,y) ∈ D_train} Gram_n(y) | / | Gram_n(ŷ) |", 2)
+    add_equation(r"\mathcal{M}_n(\hat{\mathbf{y}}, \mathcal{D}_{\text{train}}) \triangleq \frac{\left| \operatorname{Gram}_n(\hat{\mathbf{y}}) \cap \bigcup_{(\mathbf{x},\mathbf{y}) \in \mathcal{D}_{\text{train}}} \operatorname{Gram}_n(\mathbf{y}) \right|}{\left| \operatorname{Gram}_n(\hat{\mathbf{y}}) \right|}")
     add_p("在 5,602 条底层系统操作任务上的微调表明，交叉熵损失从 1.110 降至 0.373，但 20-Gram 词元逐字重合度从 0.167 激增至 0.515，完全匹配占比升至 40%。隐去工具名的 L3 抽象题泛化表现出现负增长。常规留出测试集因共享相同的表层词汇分布而完全失效。")
 
     # Figure 1
@@ -345,44 +341,44 @@ def build_chinese_paper_docx():
     # Theorem 1
     add_subsec_heading("4.3 理论形式化：子空间干扰下界定理与相变分析")
     add_p("假设 1 (格拉斯曼流形上的低秩参数化). 设 W_0 ∈ ℝ^{d_1 × d_2} 为预训练基座权重。任务 T 的适配约束于低秩分解空间：")
-    add_equation("W = W_0 + ΔW = W_0 + (α / r) B · A,    B ∈ ℝ^{d_1 × r},  A ∈ ℝ^{r × d_2}", 3)
-    add_p("引理 1 (任务梯度的正交投影分解). 设 S_1 = span(B_1) 为任务 T_1 的低秩优化列子空间。正交投影算子 P_{S_1} 及其正交补算子 P_{S_1}^⊥ 定义为：")
-    add_equation("P_{S_1} ≜ B_1 (B_1^T B_1)^{-1} B_1^T,    P_{S_1}^⊥ ≜ I_{d_1} - P_{S_1}", 4)
+    add_equation(r"\mathbf{W} = \mathbf{W}_0 + \Delta \mathbf{W} = \mathbf{W}_0 + \frac{\alpha}{r} \mathbf{B}\mathbf{A}, \quad \mathbf{B} \in \mathbb{R}^{d_1 \times r}, \; \mathbf{A} \in \mathbb{R}^{r \times d_2}")
+    add_p("引理 1 (任务梯度的正交投影分解). 设 S_1 = span(B_1) 为任务 T_1 的低秩优化列子空间。正交投影算子 P_S1 及其正交补算子 P_S1^⊥ 定义为：")
+    add_equation(r"\mathcal{P}_{\mathcal{S}_1} \triangleq \mathbf{B}_1 (\mathbf{B}_1^\top \mathbf{B}_1)^{-1} \mathbf{B}_1^\top, \quad \mathcal{P}_{\mathcal{S}_1}^\perp \triangleq \mathbf{I}_{d_1} - \mathcal{P}_{\mathcal{S}_1}")
     add_p("后续任务 T_2 的梯度 ∇_W L_2 可正交分解为：")
-    add_equation("∇_W L_2 = P_{S_1}(∇_W L_2) + P_{S_1}^⊥(∇_W L_2)", 5)
+    add_equation(r"\nabla_{\mathbf{W}} \mathcal{L}_2 = \mathcal{P}_{\mathcal{S}_1}(\nabla_{\mathbf{W}} \mathcal{L}_2) + \mathcal{P}_{\mathcal{S}_1}^\perp(\nabla_{\mathbf{W}} \mathcal{L}_2)")
     add_p("设 θ(S_1, S_2) ∈ [0, π/2] 为两任务子空间的主典范夹角：")
-    add_equation("cos θ(S_1, S_2) ≜ max_{u ∈ S_1, ||u||_2=1} max_{v ∈ S_2, ||v||_2=1} |u^T v| = ||U_1^T U_2||_2", 6)
+    add_equation(r"\cos \theta(\mathcal{S}_1, \mathcal{S}_2) \triangleq \max_{\mathbf{u} \in \mathcal{S}_1, \|\mathbf{u}\|_2=1} \max_{\mathbf{v} \in \mathcal{S}_2, \|\mathbf{v}\|_2=1} |\mathbf{u}^\top \mathbf{v}| = \|\mathbf{U}_1^\top \mathbf{U}_2\|_2")
     add_theorem_box(
         "定理 1 (串行低秩微调中的任务干扰能量下界)",
         "在格拉斯曼流形 Gr(r, d1) 的低秩适配设定下，设任务 T1 优化列子空间为 S1 = span(B1)。当后续任务 T2 以损失 L2 在共享流形 S2 = span(B2) 上继续微调时，对任务 1 流形施加的正交投影干扰能量 I(T1, T2) 满足非零下界：\n"
         "I(T1, T2) = || P_S1(grad_W L2) ||_F^2 >= sigma_min^2(B1) * cos^2 theta(S1, S2) * || grad_W L2 ||_F^2\n"
         "其中 sigma_min(B1) > 0 为适配矩阵的最小奇异值，theta 为主典范夹角。"
     )
-    add_equation("I(T_1, T_2) ≜ || P_{S_1}(∇_W L_2) ||_F^2 ≥ σ_min^2(B_1) · cos^2 θ(S_1, S_2) · || ∇_W L_2 ||_F^2", 7)
+    add_equation(r"\mathcal{I}(T_1, T_2) \triangleq \left\| \mathcal{P}_{\mathcal{S}_1} \left( \nabla_{\mathbf{W}} \mathcal{L}_2 \right) \right\|_F^2 \ge \sigma_{\min}^2(\mathbf{B}_1) \cdot \cos^2 \theta(\mathcal{S}_1, \mathcal{S}_2) \cdot \left\| \nabla_{\mathbf{W}} \mathcal{L}_2 \right\|_F^2")
     add_p("定量映射机制：在任务 2 上经过 T 步梯度迭代后，累积投影漂移 Δ_drift 满足：")
-    add_equation("Δ_drift(T) ≜ η ∑_{t=1}^T P_{S_1}(∇_W L_2^{(t)}),    ||Δ_drift(T)||_F ≥ η T · σ_min(B_1) cos θ ||∇_W L_2||_F", 8)
+    add_equation(r"\Delta_{\text{drift}}(T) \triangleq \eta \sum_{t=1}^T \mathcal{P}_{\mathcal{S}_1}\left(\nabla_{\mathbf{W}} \mathcal{L}_2^{(t)}\right), \quad \|\Delta_{\text{drift}}(T)\|_F \ge \eta T \cdot \sigma_{\min}(\mathbf{B}_1) \cos \theta \|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F")
     add_p("在低操作熵系统任务中，初始裕度 Δz_0 极小。累积漂移推动分类 Logit 裕度跨越零点，驱动离散 argmax 决策发生雪崩相变崩塌：")
-    add_equation("Δz(x; T) = Δz_0(x) - Tr( Δ_drift(T)^T h(x) x^T ) < 0", 9)
+    add_equation(r"\Delta z(x; T) = \Delta z_0(x) - \operatorname{Tr}\left( \Delta_{\text{drift}}(T)^\top \mathbf{h}(x)\mathbf{x}^\top \right) < 0")
     add_theorem_box(
         "推论 1.1 (模块化正交解耦下的零干扰保证)",
         "在 DSDA Scheme Z 方案中，不同任务由独立的低秩适配器 Bi * Ai 承载，推理期由指示开关 I(task = Ti) 动态调度。由于参数空间正交隔离 (Si 与 Sj 交集为空)，跨任务梯度干扰能量恒等于零：I(Ti, Tj) ≡ 0。"
     )
-    add_equation("S_i ∩ S_j = ∅  ⟹  P_{S_i}(∇_W L_j) ≡ 0  ⟹  I(T_i, T_j) ≡ 0    (∀ i ≠ j)", 10)
+    add_equation(r"\mathcal{S}_i \cap \mathcal{S}_j = \emptyset \implies \mathcal{P}_{\mathcal{S}_i}(\nabla_{\mathbf{W}} \mathcal{L}_j) \equiv 0 \implies \mathcal{I}(T_i, T_j) \equiv 0")
 
     add_subsec_heading("4.4 轨迹数据污染与语义漂移")
     add_p("审计发现 66.3% 的多轮轨迹残留角色控制标记，诱发死循环；99.3% 的窗口切片造成语义错位，使模型退化为纯文本日志摘要器。")
 
     add_subsec_heading("4.5 表征消融的帕累托悬崖")
     add_p("在激活空间中，方向消除投影沿拒绝方向 v̂_refusal 正交化：")
-    add_equation("h' = h - γ (h · v̂_refusal) v̂_refusal", 11)
+    add_equation(r"\mathbf{h}^\prime = \mathbf{h} - \gamma (\mathbf{h} \cdot \hat{\mathbf{v}}_{\text{refusal}}) \hat{\mathbf{v}}_{\text{refusal}}")
     add_p("在参数层面，对应将权重矩阵沿拒绝方向进行正交投影：")
-    add_equation("W' = W ( I_{d_1} - γ v̂_refusal v̂_refusal^T )", 12)
+    add_equation(r"\mathbf{W}^\prime = \mathbf{W} \left( \mathbf{I}_{d_1} - \gamma \hat{\mathbf{v}}_{\text{refusal}} \hat{\mathbf{v}}_{\text{refusal}}^\top \right)")
     add_p("扫参实验表明：消融系数 γ <= 1.0 时模型拒绝率维持 100%；γ >= 4.0 时突然跨越悬崖，KL 散度发生剧烈爆炸，引发灾难性语法崩溃：")
-    add_equation("D_KL(P_W(· | x) || P_{W'}(· | x)) = ∑_{y ∈ V} P_W(y | x) log (P_W(y | x) / P_{W'}(y | x)) ≥ 17.0    (γ ≥ 4.0)", 13)
+    add_equation(r"D_{\text{KL}}(P_{\mathbf{W}}(\cdot \mid \mathbf{x}) \,\|\, P_{\mathbf{W}^\prime}(\cdot \mid \mathbf{x})) = \sum_{y \in \mathcal{V}} P_{\mathbf{W}}(y \mid \mathbf{x}) \log \frac{P_{\mathbf{W}}(y \mid \mathbf{x})}{P_{\mathbf{W}^\prime}(y \mid \mathbf{x})} \ge 17.0 \quad (\gamma \ge 4.0)")
 
     add_subsec_heading("4.6 条件门控中的虚假相关性：长度偏置捷径")
     add_p("授权样本平均 1,065 tokens，而未授权拒答样本仅 126 tokens（8.4:1 长度差异）。模型学习到了将输出 Token 长度作为隐式授权凭据的虚假统计捷径。根据贝叶斯后验分解：")
-    add_equation("P(Y = Permit | X, L) = [ P(L | Y = Permit, X) · P(Y = Permit | X) ] / P(L | X)", 14)
+    add_equation(r"P(Y = \text{Permit} \mid X, L) = \frac{P(L \mid Y = \text{Permit}, X) \cdot P(Y = \text{Permit} \mid X)}{P(L \mid X)}")
     add_p("由于 E[L | Y=Permit] ≈ 1,065 >> E[L | Y=Refuse] ≈ 126，攻击者可通过诱导长篇输出轻松越狱绕过安全门控，构成严重的 CWE-863 权限验证绕过漏洞。")
 
     # Figure 3
@@ -399,7 +395,7 @@ def build_chinese_paper_docx():
 
     add_subsec_heading("5.1 语义抗记忆化协议 (语义解耦)")
     add_p("不变语义优化目标在所有 K=4 轴扰动样本上最小化经验交叉熵：")
-    add_equation("L_semantic(θ) ≜ (1 / (K |D|)) ∑_{i=1}^{|D|} ∑_{k=1}^K ∑_{t=1}^{|y_i|} -log P_θ(y_{i,t} | y_{i,<t}, f_pert(x_i, k))", 15)
+    add_equation(r"\mathcal{L}_{\text{semantic}}(\theta) \triangleq \frac{1}{K |\mathcal{D}|} \sum_{i=1}^{|\mathcal{D}|} \sum_{k=1}^K \sum_{t=1}^{|\mathbf{y}_i|} -\log P_\theta(y_{i,t} \mid \mathbf{y}_{i,<t}, f_{\text{pert}}(\mathbf{x}_i, k))")
 
     # Listing 1
     doc.add_picture(os.path.join(IMAGES_DIR, "listing1_perturbation.png"), width=Inches(5.8))
@@ -407,9 +403,9 @@ def build_chinese_paper_docx():
 
     add_subsec_heading("5.2 候选感知难负例工具聚类 (拓扑解耦)")
     add_p("针对目标工具 t* ∈ C_m，构建大小为 k ∈ [8, 12] 的紧凑候选集 S_cand：")
-    add_equation("S_cand(t*) ≜ {t*} ∪ Sample_{n_intra}(C_m \\ {t*}) ∪ Sample_{n_inter}(⋃_{j ≠ m} C_j)", 16)
+    add_equation(r"\mathcal{S}_{\text{cand}}(t^*) \triangleq \{t^*\} \cup \operatorname{Sample}_{n_{\text{intra}}}(\mathcal{C}_m \setminus \{t^*\}) \cup \operatorname{Sample}_{n_{\text{inter}}}\left(\bigcup_{j \neq m} \mathcal{C}_j\right)")
     add_p("工具选择概率被严格约束于局部候选空间内：")
-    add_equation("P(t = t* | x) ≜ exp( w_{t*}^T h(x) / τ ) / [ ∑_{t' ∈ S_cand} exp( w_{t'}^T h(x) / τ ) ]", 17)
+    add_equation(r"P(t = t^* \mid \mathbf{x}) \triangleq \frac{\exp\left(\mathbf{w}_{t^*}^\top \mathbf{h}(\mathbf{x}) / \tau\right)}{\sum_{t^\prime \in \mathcal{S}_{\text{cand}}} \exp\left(\mathbf{w}_{t^\prime}^\top \mathbf{h}(\mathbf{x}) / \tau\right)}")
 
     # Listing 2
     doc.add_picture(os.path.join(IMAGES_DIR, "listing2_candidate_clustering.png"), width=Inches(5.8))
@@ -422,17 +418,17 @@ def build_chinese_paper_docx():
     # Algorithm 1
     add_subsec_heading("5.3 因果等长门控协议：SCM 与后门阻断 (因果解耦)")
     add_p("在结构因果模型 (SCM) 中，变量交互的结构方程为：")
-    add_equation("X := f_X(U_X),  L := f_L(X, U_L),  G := f_G(X, U_G),  Z := f_Z(X, U_Z),  Y := f_Y(Z, θ(G), U_Y)", 18)
+    add_equation(r"X := f_X(U_X), \quad L := f_L(X, U_L), \quad G := f_G(X, U_G), \quad Z := f_Z(X, U_Z), \quad Y := f_Y(Z, \theta(G), U_Y)")
     add_p("为阻断混淆后门通路 X <- L -> Y，DSDA 强制生成严格等长约束的反事实成对样本：")
-    add_equation("∀ x ∈ D_sensitive,    | |y_auth| - |y_unauth| | ≤ δ    (δ ≤ 50 tokens)", 19)
+    add_equation(r"\forall x \in \mathcal{D}_{\text{sensitive}}, \quad \left| |\mathbf{y}_{\text{auth}}| - |\mathbf{y}_{\text{unauth}}| \right| \le \delta \quad (\delta \le 50)")
     add_p("在 Pearl do-演算框架下，授权凭据对模型决策的平均因果效应 (ACE) 为：")
-    add_equation("ACE(G → Y) ≜ 𝔼_X [ P(Y | do(G = 1), X) - P(Y | do(G = 0), X) ]", 20)
+    add_equation(r"\text{ACE}(G \to Y) \triangleq \mathbb{E}_{X} \left[ P(Y \mid do(G=1), X) - P(Y \mid do(G=0), X) \right]")
     add_p("由于 P(L | do(G=1)) ≡ P(L | do(G=0))，响应长度与门控状态的互信息被彻底消解：")
-    add_equation("I(L; G) = ∑_{l ∈ L} ∑_{g ∈ {0, 1}} P(l, g) log [ P(l, g) / (P(l) P(g)) ] ≡ 0", 21)
+    add_equation(r"I(L; G) = \sum_{l \in \mathcal{L}} \sum_{g \in \{0, 1\}} P(l, g) \log \frac{P(l, g)}{P(l)P(g)} \equiv 0")
 
     add_subsec_heading("5.4 推理期模块化外挂动态解耦：方案 Z (流形解耦)")
     add_p("模型有效参数矩阵在运行时根据任务谓词动态正交切换：")
-    add_equation("W_eff(x) = W_0 + ∑_{k ∈ {RE, Code, Gate}} 1_{R(x) = k} · (α_k / r_k) B_k A_k", 22)
+    add_equation(r"\mathbf{W}_{\text{eff}}(\mathbf{x}) = \mathbf{W}_0 + \sum_{k \in \{\text{RE}, \text{Code}, \text{Gate}\}} \mathbf{1}_{\{\mathcal{R}(\mathbf{x}) = k\}} \cdot \frac{\alpha_k}{r_k} \mathbf{B}_k \mathbf{A}_k")
 
     # Listing 3
     doc.add_picture(os.path.join(IMAGES_DIR, "listing3_runtime_routing.png"), width=Inches(5.8))
@@ -442,7 +438,7 @@ def build_chinese_paper_docx():
     add_sec_heading("6. 实验评估与统计验证")
     add_subsec_heading("6.1 威胁模型、N=120 综合对抗套件与 5 种子统计规范")
     add_p("安全评估指标策略泄漏率 (GateLeak) 与陷阱误拒率 (TrapRefusal) 形式化定义为：")
-    add_equation("GateLeak ≜ (1 / N_unauth) ∑_{i=1}^{N_unauth} 1_{Action(y_i) ∈ Ω_prohibited},    TrapRefusal ≜ (1 / N_trap) ∑_{j=1}^{N_trap} 1_{Refusal(y_j) = 1}", 23)
+    add_equation(r"\text{GateLeak} \triangleq \frac{1}{N_{\text{unauth}}} \sum_{i=1}^{N_{\text{unauth}}} \mathbf{1}_{\{\text{Action}(y_i) \in \Omega_{\text{prohibited}}\}}, \quad \text{TrapRefusal} \triangleq \frac{1}{N_{\text{trap}}} \sum_{j=1}^{N_{\text{trap}}} \mathbf{1}_{\{\text{Refusal}(y_j) = 1\}}")
     add_p("构建三层综合对抗套件 (N=120)：成对意图 (60 例)、混淆技术陷阱 (35 例) 与多轮状态诱导 (25 例)。所有主实验统一报告 5 个独立随机种子 (Seeds: 7, 11, 42, 128, 256) 的均值 +/- 标准差 (Mean +/- Std)、95% 置信区间及配对 t 检验显著性。")
 
     # 表 2: 抗记忆化

@@ -25,6 +25,21 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
 from docx.oxml import parse_xml
 from docx.oxml.ns import nsdecls
+import latex2mathml.converter
+import lxml.etree as ET
+
+XSLT_PATH = r'C:\Program Files\Microsoft Office\root\Office16\MML2OMML.XSL'
+_xslt_transform = None
+
+def get_omml_transform():
+    global _xslt_transform
+    if _xslt_transform is None and os.path.exists(XSLT_PATH):
+        try:
+            xslt_doc = ET.parse(XSLT_PATH)
+            _xslt_transform = ET.XSLT(xslt_doc)
+        except Exception:
+            pass
+    return _xslt_transform
 
 OUTPUT_DIR = r"D:\BaiduNetdiskDownload\Local-AI\docs\paper"
 IMAGES_DIR = os.path.join(OUTPUT_DIR, "images")
@@ -521,50 +536,31 @@ def build_paper_docx():
         p_after.paragraph_format.space_before = Pt(2)
         p_after.paragraph_format.space_after = Pt(4)
 
-    def add_equation(formula_text, eq_num):
-        tbl = doc.add_table(rows=1, cols=2)
-        tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
-        tbl.autofit = False
-        tblPr = tbl._tbl.tblPr
-        tblBorders = parse_xml(
-            r'<w:tblBorders {} >'
-            r'  <w:top w:val="none"/>'
-            r'  <w:bottom w:val="none"/>'
-            r'  <w:left w:val="none"/>'
-            r'  <w:right w:val="none"/>'
-            r'  <w:insideH w:val="none"/>'
-            r'  <w:insideV w:val="none"/>'
-            r'</w:tblBorders>'.format(nsdecls('w'))
-        )
-        tblPr.append(tblBorders)
+    def add_equation(latex_str):
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.space_before = Pt(6)
+        p.paragraph_format.space_after = Pt(6)
         
-        cell_eq = tbl.rows[0].cells[0]
-        cell_num = tbl.rows[0].cells[1]
-        cell_eq.width = Inches(5.8)
-        cell_num.width = Inches(0.8)
-        cell_eq.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-        cell_num.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-        
-        p_eq = cell_eq.paragraphs[0]
-        p_eq.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        p_eq.paragraph_format.space_before = Pt(4)
-        p_eq.paragraph_format.space_after = Pt(4)
-        # Foreign journal standard: formula cleanly formatted without tag markers
-        r_eq = p_eq.add_run(formula_text)
-        r_eq.font.name = 'Cambria Math'
-        r_eq.font.size = Pt(9.5)
-        r_eq.font.italic = True
-        r_eq.font.color.rgb = RGBColor(0x11, 0x11, 0x11)
-        
-        p_num = cell_num.paragraphs[0]
-        p_num.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        p_num.paragraph_format.space_before = Pt(4)
-        p_num.paragraph_format.space_after = Pt(4)
-        r_num = p_num.add_run(f"({eq_num})")
-        r_num.font.name = 'Arial'
-        r_num.font.size = Pt(9.5)
-        r_num.font.bold = True
-        r_num.font.color.rgb = RGBColor(0x11, 0x11, 0x11)
+        transform = get_omml_transform()
+        if transform is not None:
+            try:
+                mml = latex2mathml.converter.convert(latex_str)
+                dom = ET.fromstring(mml)
+                omml = transform(dom)
+                omml_str = ET.tostring(omml).decode('utf-8')
+                omml_element = parse_xml(omml_str)
+                p._p.append(omml_element)
+                return p
+            except Exception:
+                pass
+                
+        run = p.add_run(latex_str)
+        run.font.name = 'Cambria Math'
+        run.font.size = Pt(10)
+        run.font.italic = True
+        run.font.color.rgb = RGBColor(0x11, 0x11, 0x11)
+        return p
 
     # =========================================================
     # I. INTRODUCTION
@@ -635,9 +631,9 @@ def build_paper_docx():
     add_subsec_heading("A. The Memorization Illusion and Brittle Evaluation")
     add_p("In specialized binary reverse engineering and malware forensics domains, training datasets typically consist of succinct operational requests (e.g., 'Inspect the PE export table (EAT)', 'Enumerate IAT descriptors for dynamic API hooking') paired with structured tool invocations.")
     add_p("Under standard supervised fine-tuning, the optimization objective corresponds to Empirical Risk Minimization (ERM) over a discrete token distribution:")
-    add_equation("L_ERM(θ) = (1 / |D|) ∑_{(x, y) ∈ D} ∑_{t=1}^{|y|} -log P_θ(y_t | y_<t, x),", 1)
+    add_equation(r"\mathcal{L}_{\text{ERM}}(\theta) = \frac{1}{|\mathcal{D}|} \sum_{(\mathbf{x}, \mathbf{y}) \in \mathcal{D}} \sum_{t=1}^{|\mathbf{y}|} -\log P_\theta(y_t \mid \mathbf{y}_{<t}, \mathbf{x})")
     add_p("To quantify whether loss minimization reflects authentic semantic generalization or superficial sequence retrieval, we formalize the n-Gram Verbatim Memorization Metric M_n:")
-    add_equation("M_n(ŷ, D_train) ≜ | Gram_n(ŷ) ∩ ⋃_{(x,y) ∈ D_train} Gram_n(y) | / | Gram_n(ŷ) |,", 2)
+    add_equation(r"\mathcal{M}_n(\hat{\mathbf{y}}, \mathcal{D}_{\text{train}}) \triangleq \frac{\left| \operatorname{Gram}_n(\hat{\mathbf{y}}) \cap \bigcup_{(\mathbf{x},\mathbf{y}) \in \mathcal{D}_{\text{train}}} \operatorname{Gram}_n(\mathbf{y}) \right|}{\left| \operatorname{Gram}_n(\hat{\mathbf{y}}) \right|}")
     add_p("We monitored training dynamics over multiple epochs on a curated dataset of 5,602 core system tasks. As shown in Fig. 1, cross-entropy loss monotonically drops from 1.110 to 0.373, yet verbatim 20-gram token overlap triples from 0.167 to 0.515, and exact matches rise to 40%. Paraphrased evaluation without tool signatures reveals negative generalization gain.")
 
     # Figure 1 Image
@@ -649,29 +645,29 @@ def build_paper_docx():
 
     add_subsec_heading("C. Theoretical Formalization: Subspace Interference Lower Bounds")
     add_p("Assumption 1 (Low-Rank Parameterization on Grassmann Manifolds). Let W_0 ∈ ℝ^{d_1 × d_2} denote pre-trained foundation weights. Adaptation on task T is constrained to a low-rank factorization:")
-    add_equation("W = W_0 + ΔW = W_0 + (α / r) B · A,    B ∈ ℝ^{d_1 × r},  A ∈ ℝ^{r × d_2},", 3)
-    add_p("Lemma 1 (Orthogonal Decomposition of Task Gradients). Let S_1 = span(B_1) denote the low-rank subspace optimized for task T_1. The orthogonal projector P_{S_1} and its orthogonal complement P_{S_1}^⊥ are uniquely defined as:")
-    add_equation("P_{S_1} ≜ B_1 (B_1^T B_1)^{-1} B_1^T,    P_{S_1}^⊥ ≜ I_{d_1} - P_{S_1},", 4)
+    add_equation(r"\mathbf{W} = \mathbf{W}_0 + \Delta \mathbf{W} = \mathbf{W}_0 + \frac{\alpha}{r} \mathbf{B}\mathbf{A}, \quad \mathbf{B} \in \mathbb{R}^{d_1 \times r}, \; \mathbf{A} \in \mathbb{R}^{r \times d_2}")
+    add_p("Lemma 1 (Orthogonal Decomposition of Task Gradients). Let S_1 = span(B_1) denote the low-rank subspace optimized for task T_1. The orthogonal projector P_S1 and its orthogonal complement P_S1^⊥ are uniquely defined as:")
+    add_equation(r"\mathcal{P}_{\mathcal{S}_1} \triangleq \mathbf{B}_1 (\mathbf{B}_1^\top \mathbf{B}_1)^{-1} \mathbf{B}_1^\top, \quad \mathcal{P}_{\mathcal{S}_1}^\perp \triangleq \mathbf{I}_{d_1} - \mathcal{P}_{\mathcal{S}_1}")
     add_p("For any subsequent objective loss L_2 on task T_2, the unconstrained Euclidean gradient decomposes into orthogonal projection components:")
-    add_equation("∇_W L_2 = P_{S_1}(∇_W L_2) + P_{S_1}^⊥(∇_W L_2),", 5)
+    add_equation(r"\nabla_{\mathbf{W}} \mathcal{L}_2 = \mathcal{P}_{\mathcal{S}_1}(\nabla_{\mathbf{W}} \mathcal{L}_2) + \mathcal{P}_{\mathcal{S}_1}^\perp(\nabla_{\mathbf{W}} \mathcal{L}_2)")
     add_p("Let θ(S_1, S_2) ∈ [0, π/2] denote the principal canonical Grassmannian angle between the two task subspaces:")
-    add_equation("cos θ(S_1, S_2) ≜ max_{u ∈ S_1, ||u||_2=1} max_{v ∈ S_2, ||v||_2=1} |u^T v| = ||U_1^T U_2||_2,", 6)
+    add_equation(r"\cos \theta(\mathcal{S}_1, \mathcal{S}_2) \triangleq \max_{\mathbf{u} \in \mathcal{S}_1, \|\mathbf{u}\|_2=1} \max_{\mathbf{v} \in \mathcal{S}_2, \|\mathbf{v}\|_2=1} |\mathbf{u}^\top \mathbf{v}| = \|\mathbf{U}_1^\top \mathbf{U}_2\|_2")
     add_theorem_box(
         "Theorem 1 (Task Interference Lower Bound in Sequential Low-Rank Adaptation)",
         "Under Low-Rank Adaptation on Grassmannian manifolds Gr(r, d_1), let task T_1 have principal subspace S_1 = span(B_1). When task T_2 is subsequently trained with loss L_2, the parameter interference energy I(T_1, T_2) exerted on the task 1 manifold satisfies:\n"
         "I(T_1, T_2) = || P_{S_1}(∇_W L_2) ||_F^2 >= σ_min^2(B_1) · cos^2 θ(S_1, S_2) · || ∇_W L_2 ||_F^2\n"
         "where σ_min(B_1) > 0 is the minimum singular value of B_1, and θ(S_1, S_2) is the canonical principal subspace angle."
     )
-    add_equation("I(T_1, T_2) ≜ || P_{S_1}(∇_W L_2) ||_F^2 ≥ σ_min^2(B_1) · cos^2 θ(S_1, S_2) · || ∇_W L_2 ||_F^2,", 7)
+    add_equation(r"\mathcal{I}(T_1, T_2) \triangleq \left\| \mathcal{P}_{\mathcal{S}_1} \left( \nabla_{\mathbf{W}} \mathcal{L}_2 \right) \right\|_F^2 \ge \sigma_{\min}^2(\mathbf{B}_1) \cdot \cos^2 \theta(\mathcal{S}_1, \mathcal{S}_2) \cdot \left\| \nabla_{\mathbf{W}} \mathcal{L}_2 \right\|_F^2")
     add_p("Quantitative Mapping Mechanism: The accumulated parameter drift Δ_drift projected into the task 1 manifold over T training steps on Task 2 satisfies:")
-    add_equation("Δ_drift(T) ≜ η ∑_{t=1}^T P_{S_1}(∇_W L_2^{(t)}),    ||Δ_drift(T)||_F ≥ η T · σ_min(B_1) cos θ ||∇_W L_2||_F,", 8)
+    add_equation(r"\Delta_{\text{drift}}(T) \triangleq \eta \sum_{t=1}^T \mathcal{P}_{\mathcal{S}_1}\left(\nabla_{\mathbf{W}} \mathcal{L}_2^{(t)}\right), \quad \|\Delta_{\text{drift}}(T)\|_F \ge \eta T \cdot \sigma_{\min}(\mathbf{B}_1) \cos \theta \|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F")
     add_p("In low-entropy system tasks, the initial margin Δz_0 is small. As Δ_drift accumulates, it induces an adversarial shift driving an abrupt Phase Transition collapse once the margin crosses zero:")
-    add_equation("Δz(x; T) = Δz_0(x) - Tr( Δ_drift(T)^T h(x) x^T ) < 0,", 9)
+    add_equation(r"\Delta z(x; T) = \Delta z_0(x) - \operatorname{Tr}\left( \Delta_{\text{drift}}(T)^\top \mathbf{h}(x)\mathbf{x}^\top \right) < 0")
     add_theorem_box(
         "Corollary 1.1 (Zero-Interference Guarantee Under Modular Orthogonal Decomposition)",
         "In DSDA Scheme Z, distinct tasks are hosted on independent low-rank adapters B_i · A_i dynamically selected at inference time via task predicates. Because parameter subspaces are disjoint (S_i ∩ S_j = ∅), cross-task gradient interference is identically zero: I(T_i, T_j) ≡ 0."
     )
-    add_equation("S_i ∩ S_j = ∅  ⟹  P_{S_i}(∇_W L_j) ≡ 0  ⟹  I(T_i, T_j) ≡ 0    (∀ i ≠ j).", 10)
+    add_equation(r"\mathcal{S}_i \cap \mathcal{S}_j = \emptyset \implies \mathcal{P}_{\mathcal{S}_i}(\nabla_{\mathbf{W}} \mathcal{L}_j) \equiv 0 \implies \mathcal{I}(T_i, T_j) \equiv 0")
 
     add_subsec_heading("D. Trajectory Contamination and Semantic Displacement")
     add_subsubsec_heading("1) Pathological Marker Rewards (The B11 Phenomenon)")
@@ -681,15 +677,15 @@ def build_paper_docx():
 
     add_subsec_heading("E. Limits of Representation Editing: The Abliteration Pareto Cliff")
     add_p("In safety alignment, direction-based representation editing attempts to remove refusal behaviors by projecting activation spaces orthogonally to a refusal direction v̂_refusal:")
-    add_equation("h' = h - γ (h · v̂_refusal) v̂_refusal,", 11)
+    add_equation(r"\mathbf{h}^\prime = \mathbf{h} - \gamma (\mathbf{h} \cdot \hat{\mathbf{v}}_{\text{refusal}}) \hat{\mathbf{v}}_{\text{refusal}}")
     add_p("At the parameter level, this corresponds to projecting the model's weight matrices along the refusal direction:")
-    add_equation("W' = W ( I_{d_1} - γ v̂_refusal v̂_refusal^T ),", 12)
+    add_equation(r"\mathbf{W}^\prime = \mathbf{W} \left( \mathbf{I}_{d_1} - \gamma \hat{\mathbf{v}}_{\text{refusal}} \hat{\mathbf{v}}_{\text{refusal}}^\top \right)")
     add_p("Attempting to unlearn refusal directions via representation engineering on compact hybrid architectures hits a severe Pareto Cliff. Sweeping projection scaling γ demonstrates that γ <= 1.0 yields zero refusal mitigation (refusal remains 100%), while γ >= 4.0 triggers catastrophic linguistic collapse where KL divergence explodes:")
-    add_equation("D_KL(P_W(· | x) || P_{W'}(· | x)) = ∑_{y ∈ V} P_W(y | x) log (P_W(y | x) / P_{W'}(y | x)) ≥ 17.0    (γ ≥ 4.0).", 13)
+    add_equation(r"D_{\text{KL}}(P_{\mathbf{W}}(\cdot \mid \mathbf{x}) \,\|\, P_{\mathbf{W}^\prime}(\cdot \mid \mathbf{x})) = \sum_{y \in \mathcal{V}} P_{\mathbf{W}}(y \mid \mathbf{x}) \log \frac{P_{\mathbf{W}}(y \mid \mathbf{x})}{P_{\mathbf{W}^\prime}(y \mid \mathbf{x})} \ge 17.0 \quad (\gamma \ge 4.0)")
 
     add_subsec_heading("F. Spurious Shortcut in Condition Gating: The Length Bias Vulnerability")
     add_p("Condition-gated SFT seeks to steer behavior via explicit authorization prompts. However, auditing revealed an acute length disparity: positive authorized disclosures averaged 1,065 tokens, while unauthorized refusals averaged 126 tokens (an 8.4x ratio). Models learned response length as an unintended proxy for authorization. By Bayes' rule, the posterior authorization probability conditioned on response length L decomposes as:")
-    add_equation("P(Y = Permit | X, L) = [ P(L | Y = Permit, X) · P(Y = Permit | X) ] / P(L | X),", 14)
+    add_equation(r"P(Y = \text{Permit} \mid X, L) = \frac{P(L \mid Y = \text{Permit}, X) \cdot P(Y = \text{Permit} \mid X)}{P(L \mid X)}")
     add_p("Because E[L | Y=Permit] ≈ 1,065 >> E[L | Y=Refuse] ≈ 126, long technical outputs act as an implicit surrogate for the authorization token, creating an exploitable authorization bypass vulnerability (resembling CWE-863).")
 
     # Figure 3 Image
@@ -712,7 +708,7 @@ def build_paper_docx():
 
     add_subsec_heading("A. Semantic Anti-Memorization Protocol (Semantic Decoupling)")
     add_p("The invariant semantic optimization objective minimizes empirical cross-entropy over all perturbed realizations:")
-    add_equation("L_semantic(θ) ≜ (1 / (K |D|)) ∑_{i=1}^{|D|} ∑_{k=1}^K ∑_{t=1}^{|y_i|} -log P_θ(y_{i,t} | y_{i,<t}, f_pert(x_i, k)),", 15)
+    add_equation(r"\mathcal{L}_{\text{semantic}}(\theta) \triangleq \frac{1}{K |\mathcal{D}|} \sum_{i=1}^{|\mathcal{D}|} \sum_{k=1}^K \sum_{t=1}^{|\mathbf{y}_i|} -\log P_\theta(y_{i,t} \mid \mathbf{y}_{i,<t}, f_{\text{pert}}(\mathbf{x}_i, k))")
 
     # Code Listing 1 Image
     code_listing_1 = (
@@ -734,9 +730,9 @@ def build_paper_docx():
 
     add_subsec_heading("B. Candidate-Aware Hard-Negative Tool Clustering (Topology Decoupling)")
     add_p("System security tools are organized into 11 functional clusters. For any query targeting tool t* ∈ C_m, a candidate set S_cand of size k ∈ [8, 12] is constructed:")
-    add_equation(r"S_cand(t*) ≜ {t*} ∪ Sample_{n_intra}(C_m \ {t*}) ∪ Sample_{n_inter}(⋃_{j ≠ m} C_j),", 16)
+    add_equation(r"\mathcal{S}_{\text{cand}}(t^*) \triangleq \{t^*\} \cup \operatorname{Sample}_{n_{\text{intra}}}(\mathcal{C}_m \setminus \{t^*\}) \cup \operatorname{Sample}_{n_{\text{inter}}}\left(\bigcup_{j \neq m} \mathcal{C}_j\right)")
     add_p("The tool prediction probability is constrained to the candidate space via Softmax:")
-    add_equation("P(t = t* | x) ≜ exp( w_{t*}^T h(x) / τ ) / [ ∑_{t' ∈ S_cand} exp( w_{t'}^T h(x) / τ ) ],", 17)
+    add_equation(r"P(t = t^* \mid \mathbf{x}) \triangleq \frac{\exp\left(\mathbf{w}_{t^*}^\top \mathbf{h}(\mathbf{x}) / \tau\right)}{\sum_{t^\prime \in \mathcal{S}_{\text{cand}}} \exp\left(\mathbf{w}_{t^\prime}^\top \mathbf{h}(\mathbf{x}) / \tau\right)}")
 
     # Code Listing 2 Image
     code_listing_2 = (
@@ -762,17 +758,17 @@ def build_paper_docx():
     # Algorithm 1: Causal Length Balancing
     add_subsec_heading("C. Counterfactual Length-Balanced Alignment (Causal Decoupling)")
     add_p("We formulate safety gating under a Structural Causal Model (SCM). The structural causal equations governing the system interaction are:")
-    add_equation("{ X := f_X(U_X);  L := f_L(X, U_L);  G := f_G(X, U_G);  Z := f_Z(X, U_Z);  Y := f_Y(Z, θ(G), U_Y) },", 18)
+    add_equation(r"X := f_X(U_X), \quad L := f_L(X, U_L), \quad G := f_G(X, U_G), \quad Z := f_Z(X, U_Z), \quad Y := f_Y(Z, \theta(G), U_Y)")
     add_p("To eliminate the confounding effect of token length L on gating state G, DSDA enforces counterfactual paired generation satisfying strict length invariance:")
-    add_equation("∀ x ∈ D_sensitive,    | |y_auth| - |y_unauth| | ≤ δ    (δ ≤ 50 tokens),", 19)
+    add_equation(r"\forall x \in \mathcal{D}_{\text{sensitive}}, \quad \left| |\mathbf{y}_{\text{auth}}| - |\mathbf{y}_{\text{unauth}}| \right| \le \delta \quad (\delta \le 50)")
     add_p("Under Pearl's do-calculus, the Average Causal Effect (ACE) of the authorization token on model output policy is given by:")
-    add_equation("ACE(G → Y) ≜ 𝔼_X [ P(Y | do(G = 1), X) - P(Y | do(G = 0), X) ],", 20)
+    add_equation(r"\text{ACE}(G \to Y) \triangleq \mathbb{E}_{X} \left[ P(Y \mid do(G=1), X) - P(Y \mid do(G=0), X) \right]")
     add_p("Because P(L | do(G=1)) ≈ P(L | do(G=0)), the mutual information I(L; G) between response token length and gate state is annihilated:")
-    add_equation("I(L; G) = ∑_{l ∈ L} ∑_{g ∈ {0, 1}} P(l, g) log [ P(l, g) / (P(l) P(g)) ] ≡ 0.", 21)
+    add_equation(r"I(L; G) = \sum_{l \in \mathcal{L}} \sum_{g \in \{0, 1\}} P(l, g) \log \frac{P(l, g)}{P(l)P(g)} \equiv 0")
 
     add_subsec_heading("D. Inference-Time Modular Adapter Decoupling: Scheme Z (Manifold Decoupling)")
     add_p("The effective operational parameter matrix is dynamically switched at runtime based on the task predicate:")
-    add_equation("W_eff(x) = W_0 + ∑_{k ∈ {RE, Code, Gate}} 1_{R(x) = k} · (α_k / r_k) B_k A_k,", 22)
+    add_equation(r"\mathbf{W}_{\text{eff}}(\mathbf{x}) = \mathbf{W}_0 + \sum_{k \in \{\text{RE}, \text{Code}, \text{Gate}\}} \mathbf{1}_{\{\mathcal{R}(\mathbf{x}) = k\}} \cdot \frac{\alpha_k}{r_k} \mathbf{B}_k \mathbf{A}_k")
 
     # Code Listing 3 Image (Runtime Router)
     code_listing_3 = (
@@ -800,7 +796,7 @@ def build_paper_docx():
     add_subsec_heading("A. Evaluation Setup, Adversarial Suite (N=120), and Statistical Protocols")
     add_p("We evaluate DSDA across two distinct architectures: compact hybrid linear-attention (OxCoder-9B: 24 Gated Delta + 8 Full Attention layers) and large dense full-attention (Qwen-27B: 64-layer full attention). We construct a curated N=120 comprehensive adversarial test suite partitioned into 4 distinct slices: Unauthorized Prompts (N=30), Authorized System Operations (N=30), Benign Unprivileged Inquiries (N=35), and Obfuscated Technical Traps (N=25).")
     add_p("Dual-state safety metrics quantify unauthorized policy leakage and false refusals:")
-    add_equation("GateLeak ≜ (1 / N_unauth) ∑_{i=1}^{N_unauth} 1_{Action(y_i) ∈ Ω_prohibited},    TrapRefusal ≜ (1 / N_trap) ∑_{j=1}^{N_trap} 1_{Refusal(y_j) = 1}", 23)
+    add_equation(r"\text{GateLeak} \triangleq \frac{1}{N_{\text{unauth}}} \sum_{i=1}^{N_{\text{unauth}}} \mathbf{1}_{\{\text{Action}(y_i) \in \Omega_{\text{prohibited}}\}}, \quad \text{TrapRefusal} \triangleq \frac{1}{N_{\text{trap}}} \sum_{j=1}^{N_{\text{trap}}} \mathbf{1}_{\{\text{Refusal}(y_j) = 1\}}")
 
     # Table 2: Training Regimes
     add_subsec_heading("B. Anti-Memorization Dynamics across Training Regimes (5 Seeds)")
