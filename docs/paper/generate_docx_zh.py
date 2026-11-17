@@ -28,6 +28,52 @@ def get_omml_transform():
             pass
     return _xslt_transform
 
+def clean_omml(root):
+    """Eliminate dotted empty placeholder boxes by transforming empty m:nary into clean m:sSub/m:sSubSup."""
+    NS = {'m': 'http://schemas.openxmlformats.org/officeDocument/2006/math'}
+    for nary in root.xpath('//m:nary', namespaces=NS):
+        e = nary.find('m:e', namespaces=NS)
+        if e is not None and len(e) == 0 and not (e.text and e.text.strip()):
+            sub = nary.find('m:sub', namespaces=NS)
+            sup = nary.find('m:sup', namespaces=NS)
+            naryPr = nary.find('m:naryPr', namespaces=NS)
+            chr_val = '∑'
+            if naryPr is not None:
+                chr_elem = naryPr.find('m:chr', namespaces=NS)
+                if chr_elem is not None:
+                    chr_val = chr_elem.get('{http://schemas.openxmlformats.org/officeDocument/2006/math}val', '∑')
+            
+            has_sub = sub is not None and (len(sub) > 0 or (sub.text and sub.text.strip()))
+            has_sup = sup is not None and (len(sup) > 0 or (sup.text and sup.text.strip()))
+            
+            parent = nary.getparent()
+            if has_sub and has_sup:
+                new_elem = ET.Element('{http://schemas.openxmlformats.org/officeDocument/2006/math}sSubSup')
+                base_e = ET.SubElement(new_elem, '{http://schemas.openxmlformats.org/officeDocument/2006/math}e')
+                r = ET.SubElement(base_e, '{http://schemas.openxmlformats.org/officeDocument/2006/math}r')
+                t = ET.SubElement(r, '{http://schemas.openxmlformats.org/officeDocument/2006/math}t')
+                t.text = chr_val
+                new_elem.append(sub)
+                new_elem.append(sup)
+                parent.replace(nary, new_elem)
+            elif has_sub:
+                new_elem = ET.Element('{http://schemas.openxmlformats.org/officeDocument/2006/math}sSub')
+                base_e = ET.SubElement(new_elem, '{http://schemas.openxmlformats.org/officeDocument/2006/math}e')
+                r = ET.SubElement(base_e, '{http://schemas.openxmlformats.org/officeDocument/2006/math}r')
+                t = ET.SubElement(r, '{http://schemas.openxmlformats.org/officeDocument/2006/math}t')
+                t.text = chr_val
+                new_elem.append(sub)
+                parent.replace(nary, new_elem)
+            elif has_sup:
+                new_elem = ET.Element('{http://schemas.openxmlformats.org/officeDocument/2006/math}sSup')
+                base_e = ET.SubElement(new_elem, '{http://schemas.openxmlformats.org/officeDocument/2006/math}e')
+                r = ET.SubElement(base_e, '{http://schemas.openxmlformats.org/officeDocument/2006/math}r')
+                t = ET.SubElement(r, '{http://schemas.openxmlformats.org/officeDocument/2006/math}t')
+                t.text = chr_val
+                new_elem.append(sup)
+                parent.replace(nary, new_elem)
+
+
 OUTPUT_DIR = r"D:\BaiduNetdiskDownload\Local-AI\docs\paper"
 IMAGES_DIR = os.path.join(OUTPUT_DIR, "images")
 
@@ -266,7 +312,9 @@ def build_chinese_paper_docx():
                 mml = latex2mathml.converter.convert(latex_str)
                 dom = ET.fromstring(mml)
                 omml = transform(dom)
-                omml_str = ET.tostring(omml).decode('utf-8')
+                root = omml.getroot()
+                clean_omml(root)
+                omml_str = ET.tostring(root).decode('utf-8')
                 omml_element = parse_xml(omml_str)
                 p._p.append(omml_element)
                 return p

@@ -136,9 +136,9 @@ $$\mathcal{M}_n(\hat{\mathbf{y}}, \mathcal{D}_{\text{train}}) \triangleq \frac{\
 
 $$\mathcal{L}_{\text{ERM}} \downarrow (1.110 \longrightarrow 0.373), \quad \text{工具幻觉数量} \downarrow (1 \longrightarrow 0)$$
 
-```text
-[图 1: 训练交叉熵损失 vs. 20-Gram 逐字记忆化率与 L3 抽象泛化跨轮次动态演进]
-```
+<p align="center">
+  <img src="images/fig1_memorization_vs_loss.png" alt="图 1: 训练交叉熵损失 vs. 20-Gram 逐字记忆化率与 L3 抽象泛化跨轮次动态演进" width="85%" />
+</p>
 
 **图 1  训练交叉熵损失 vs. 20-Gram 逐字记忆化率与 L3 抽象泛化跨轮次动态演进**  
 *Fig. 1  Training cross-entropy loss vs. verbatim 20-gram memorization and L3 generalization across training epochs*
@@ -252,9 +252,9 @@ $$P(Y = \text{Permit} \mid X, L) = \frac{P(L \mid Y = \text{Permit}, X) \cdot P(
 
 由于 $\mathbb{E}[L \mid Y=\text{Permit}] \approx 1,065 \gg \mathbb{E}[L \mid Y=\text{Refuse}] \approx 126$，长文本先验成为了模型判定授权的隐式代理。攻击者只需在无授权请求中要求*“请提供详尽的万字内核打补丁与函数反汇编逐步排障教程”*，模型就会把长文本预算误当成特权凭据，绕过安全参考监视器输出未经授权的高危操作指令；反之，简短的良性系统诊断却常被误拒，导致拒绝服务 (DoS)。
 
-```text
-[图 3: 朴素安全门控 8.4x 长度偏置 vs. DSDA 反事实等长平衡分布]
-```
+<p align="center">
+  <img src="images/fig3_length_bias_distribution.png" alt="图 3: 朴素安全门控 8.4x 长度偏置 vs. DSDA 反事实等长平衡分布" width="85%" />
+</p>
 
 **图 3  朴素安全门控 8.4x 长度偏置 vs. DSDA 反事实等长平衡分布**  
 *Fig. 3  Spurious token length disparity in naive gating vs. counterfactual balanced distribution in DSDA*
@@ -265,9 +265,9 @@ $$P(Y = \text{Permit} \mid X, L) = \frac{P(L \mid Y = \text{Permit}, X) \cdot P(
 
 针对上述系统性病理，提出**解耦系统领域适配框架 (DSDA)**，系统总体架构如图 2 所示。
 
-```text
-[图 2: 解耦系统领域适配框架 (DSDA) 总体系统架构图]
-```
+<p align="center">
+  <img src="images/fig2_dsda_architecture.png" alt="图 2: 解耦系统领域适配框架 (DSDA) 总体系统架构图" width="90%" />
+</p>
 
 **图 2  解耦系统领域适配框架 (DSDA) 总体系统架构图**  
 *Fig. 2  Architectural overview of Decoupled System-Domain Adaptation (DSDA)*
@@ -287,9 +287,9 @@ $$\text{约束条件} \quad \mathbf{y}_i(k) \equiv \mathbf{y}_i \quad (\forall k
 
 对于同一种操作意图生成的 $K=4$ 种截然不同的提示词，**对应的工具调用目标序列 $\mathbf{y}_i$ 严格保持完全一致**。这强迫模型抛弃表层词汇记忆，建立深层语义意图到工具签名的映射。
 
-```text
-[代码清单 1: 多轴语义查询扰动生成算法 (K=4)]
-```
+<p align="center">
+  <img src="images/listing1_perturbation.png" alt="代码清单 1: 多轴语义查询扰动生成算法" width="80%" />
+</p>
 
 **代码清单 1  多轴语义查询扰动生成算法**  
 *Listing 1  Multi-axis query perturbation protocol*
@@ -312,9 +312,9 @@ $$P(t = t^* \mid \mathbf{x}) \triangleq \frac{\exp\left(\mathbf{w}_{t^*}^\top \m
 
 这消除了全局上下文稀释，彻底杜绝语法幻觉与误操作风险。
 
-```text
-[代码清单 2: 候选工具簇内难负例采样协议 (k=8~12)]
-```
+<p align="center">
+  <img src="images/listing2_candidate_clustering.png" alt="代码清单 2: 候选工具簇内难负例采样协议" width="80%" />
+</p>
 
 **代码清单 2  候选工具簇内难负例采样协议**  
 *Listing 2  Candidate tool hard-negative sampling protocol*
@@ -338,9 +338,9 @@ $$\begin{cases} X := f_X(U_X) \\ L := f_L(X, U_L) \\ G := f_G(X, U_G) \\ Z := f_
             [ Final Action / Output (Y) ]
 ```
 
-```text
-[图 4: 结构因果模型 (SCM) 混淆后门通路与模块化 do-演算干预图]
-```
+<p align="center">
+  <img src="images/fig4_causal_dag.png" alt="图 4: 结构因果模型 (SCM) 混淆后门通路与模块化 do-演算干预图" width="90%" />
+</p>
 
 **图 4  结构因果模型 (SCM) 混淆后门通路与模块化 do-演算干预图**  
 *Fig. 4  Structural Causal Model (SCM) and modular do-calculus intervention graph*
@@ -391,9 +391,9 @@ $$\mathbf{W}_{\text{eff}}(\mathbf{x}) = \mathbf{W}_0 + \sum_{k \in \{\text{RE}, 
 
 各专家参数物理隔离，根据推论 1.1，理论任务间干扰恒等于零（$\mathcal{I} \equiv 0$）。
 
-```text
-[代码清单 3: 推理期模块化外挂动态路由器 (Scheme Z)]
-```
+<p align="center">
+  <img src="images/listing3_runtime_router.png" alt="代码清单 3: 推理期模块化外挂动态路由器" width="80%" />
+</p>
 
 **代码清单 3  推理期模块化外挂动态路由器**  
 *Listing 3  Inference-time modular adapter dynamic routing*
@@ -467,9 +467,9 @@ $^*$ 表示与朴素 SFT 第 3 轮相比具有统计学显著差异 ($p < 0.01$)
 - **静态权重合并的失效**：Task Arithmetic 与 TIES-Merging 会在底层指令敏感区引发参数冲突，导致工具准确率大幅下跌（分别降至 55.0% 与 62.5%）；
 - **动态解耦的优越性**：DSDA Scheme Z 实现了 **82.5% 准确率、0% 逃避率与 0% 交叉干涉**，双任务能力均获完全保留。
 
-```text
-[代码清单 4: Task Arithmetic 与 TIES-Merging 基线合并算法实现]
-```
+<p align="center">
+  <img src="images/listing4_baseline_merging.png" alt="代码清单 4: Task Arithmetic 与 TIES-Merging 基线合并算法实现" width="80%" />
+</p>
 
 **代码清单 4  Task Arithmetic 与 TIES-Merging 基线合并算法实现**  
 *Listing 4  Implementation of Task Arithmetic and TIES-Merging baselines*
