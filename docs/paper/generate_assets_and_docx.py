@@ -372,7 +372,7 @@ def build_paper_docx():
     p_auth = doc.add_paragraph()
     p_auth.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_auth.paragraph_format.space_after = Pt(14)
-    r_auth = p_auth.add_run("Hanqin Yang (杨涵钦, yyhhqq1234)\nAutonomous Systems & Engineering Laboratory (2923165556@qq.com)")
+    r_auth = p_auth.add_run("Hanqin Yang (杨涵钦)\nIndependent Researcher (Email: 2923165556@qq.com)")
     r_auth.font.name = 'Arial'
     r_auth.font.size = Pt(10)
     r_auth.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
@@ -990,18 +990,24 @@ def build_paper_docx():
     r_bio_name.font.bold = True
     r_bio_body = p_bio.add_run(
         "received his academic training in computer science and cyber security. "
-        "He is an independent researcher with the System Software & Intelligent Security Laboratory. "
+        "He is an independent researcher. "
         "His research interests include autonomous cyber defense agents, binary reverse engineering, "
-        "representation engineering, kernel security introspection, and trustworthy machine learning. "
-        "He is the sole project owner of the Local-AI and DSDA autonomous systems research projects."
+        "kernel security introspection, and parameter-efficient domain adaptation. "
+        "He is the project owner of the Local-AI and DSDA autonomous systems research projects. Contact: 2923165556@qq.com."
     )
     r_bio_body.font.name = 'Arial'
     r_bio_body.font.size = Pt(9.5)
 
     docx_path = os.path.join(OUTPUT_DIR, "beyond_surface_adaptation.docx")
-    doc.save(docx_path)
-    print(f"Successfully generated docx: {docx_path}")
-    return docx_path
+    try:
+        doc.save(docx_path)
+        print(f"Successfully generated docx: {docx_path}")
+        return docx_path
+    except PermissionError:
+        alt_path = os.path.join(OUTPUT_DIR, "beyond_surface_adaptation_clean.docx")
+        doc.save(alt_path)
+        print(f"[!] {docx_path} is currently locked by Word. Generated clean copy to: {alt_path}")
+        return alt_path
 
 if __name__ == "__main__":
     docx_path = build_paper_docx()

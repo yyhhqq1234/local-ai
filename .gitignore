@@ -56,3 +56,7 @@ _work/_repos/
 # 外部仓库 clone（CSUNX233/...-5070tilaptop-kvmem-local-agent），不随主仓库提交
 _work/_research/csunx/
 
+# Office 临时锁文件
+~$*
+
+

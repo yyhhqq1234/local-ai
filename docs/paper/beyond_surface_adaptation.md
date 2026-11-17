@@ -1,7 +1,7 @@
 # Beyond Surface Adaptation: Decoupled System-Domain Adaptation and Causal Gating for Autonomous Binary Reverse Engineering and Security Agents
 
 **Hanqin Yang**  
-*System Software & Intelligent Security Laboratory, Chengdu 610000, China*  
+*Independent Researcher*  
 *Correspondence: Hanqin Yang (Email: 2923165556@qq.com)*  
 
 ---
@@ -549,4 +549,4 @@ In this work, we deconstructed the empirical failure modes that arise when fine-
 
 ## AUTHOR BIOGRAPHY
 
-**Hanqin Yang** received his academic training in computer science and cyber security. He is an independent researcher with the System Software & Intelligent Security Laboratory. His research interests include autonomous cyber defense agents, binary reverse engineering, representation engineering, and trustworthy machine learning. He is the project owner of the Local-AI and DSDA autonomous systems research projects.
+**Hanqin Yang** received his academic training in computer science and cyber security. He is an independent researcher. His research interests include autonomous cyber defense agents, binary reverse engineering, kernel security introspection, and parameter-efficient domain adaptation. He is the project owner of the Local-AI and DSDA autonomous systems research projects. Contact: 2923165556@qq.com.

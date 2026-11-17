@@ -1,12 +1,9 @@
 # 表面适配之外：面向自主二进制逆向工程与安全智能体的解耦系统领域适配与因果门控
 
-**杨涵钦**$^{1}$  
-($^{1}$系统软件与智能安全实验室，成都 610000)  
-*通信作者: 杨涵钦 (Email: 2923165556@qq.com)*  
+**杨涵钦**  
+(独立研究者，Email: 2923165556@qq.com)  
 
 ---
-
-**基金项目**：国家重点研发计划资助项目 (No. 2024YFBXXXXXXX)；国家自然科学基金重点项目资助 (No. 624XXXXX)。
 
 **中图法分类号**：TP309.2 (网络空间安全)；TP391 (人工智能与自然语言处理) &emsp; **文献标识码**：A
 
@@ -30,9 +27,8 @@
 
 **Beyond Surface Adaptation: Decoupled System-Domain Adaptation and Causal Gating for Autonomous Binary Reverse Engineering and Security Agents**
 
-*YANG Hanqin*$^{1}$  
-($^{1}$*System Software and Intelligent Security Laboratory, Chengdu 610000, China*)  
-*Corresponding Author: YANG Hanqin, Email: 2923165556@qq.com*
+*YANG Hanqin*  
+(*Independent Researcher, Email: 2923165556@qq.com*)
 
 **Abstract**—While Large Language Model (LLM) agents demonstrate remarkable general reasoning capabilities, deploying them to specialized, low-level system operating environments—such as binary reverse engineering, kernel debugging, dynamic memory forensics, and vulnerability triage—exposes acute contradictions between domain competence and behavioral controllability. In this paper, we conduct an extensive empirical and theoretical study on fine-tuning compact hybrid linear-attention agents (9B parameters) and dense full-attention agents (27B parameters) on native low-level system security tool environments. We uncover four pervasive failure modes that severely undermine autonomous cyber operations: (1) The Memorization Illusion: standard empirical cross-entropy loss reductions mask severe verbatim memorization (20-gram token overlap escalating from 0.167 to 0.515), where conventional held-out validation splits fail to detect brittle memorized tool mapping; (2) Catastrophic Stage Overwriting: sequential multi-stage post-training completely overwrites preceding capabilities—dropping domain security tool calling accuracy from 82.5% to 10.0%—which we formalize through our Theorem on Low-Rank Subspace Interference Bounds and quantitative phase-transition collapse analysis; (3) The Pareto Cliff of Subspace Abliteration: geometric weight-direction unlearning triggers an abrupt transition between complete refusal and severe linguistic collapse (KL divergence > 17) on compact models without achieving viable steering; and (4) Spurious Gating Shortcuts: condition-gated safety tuning inadvertently exploits response length disparities (1,065 tokens vs. 126 tokens) as an unintended authorization signal (resembling CWE-863). To address these vulnerabilities, we propose DSDA (Decoupled System-Domain Adaptation), an integrated training and inference framework structured around four pillars of decoupling: Semantic Decoupling via 4-axis query perturbation, Topology Decoupling via candidate-aware tool clustering, Manifold Decoupling via runtime modular adapter routing (Scheme Z), and Causal Decoupling via counterfactual length-balanced paired gating formalized under Structural Causal Models (SCM). Across comprehensive evaluations on 9B hybrid and 27B dense architectures over 5 random seeds, DSDA achieves an 82.5% +/- 1.4% tool generalization accuracy with zero hallucinations, statistically outperforming model merging baselines (p < 0.01). Within our N=120 comprehensive adversarial test suite, DSDA achieves zero observed policy violations (GateLeak = 0.000), zero false refusals on technical traps (TrapRefusal = 0.000), and preserves 98.4% performance on cross-domain benchmarks.
 

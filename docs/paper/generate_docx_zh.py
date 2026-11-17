@@ -103,16 +103,16 @@ def build_chinese_paper_docx():
     p_auth = doc.add_paragraph()
     p_auth.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_auth.paragraph_format.space_after = Pt(4)
-    r_auth = p_auth.add_run("杨涵钦¹\n(¹系统软件与智能安全实验室，成都 610000; 通信作者 Email: 2923165556@qq.com)")
+    r_auth = p_auth.add_run("杨涵钦\n(独立研究者; 通信作者 Email: 2923165556@qq.com)")
     r_auth.font.name = 'Microsoft YaHei'
     r_auth.font.size = Pt(10)
     r_auth.font.color.rgb = RGBColor(0x44, 0x44, 0x44)
 
-    # Funding & CLC Info
+    # CLC Info
     p_fund = doc.add_paragraph()
     p_fund.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_fund.paragraph_format.space_after = Pt(12)
-    r_fund = p_fund.add_run("基金项目: 国家重点研发计划 (No. 2024YFBXXXXXXX); 国家自然科学基金重点项目 (No. 624XXXXX)\n中图法分类号: TP309.2, TP391    文献标识码: A")
+    r_fund = p_fund.add_run("中图法分类号: TP309.2, TP391    文献标识码: A")
     r_fund.font.name = 'Microsoft YaHei'
     r_fund.font.size = Pt(8.5)
     r_fund.font.italic = True
@@ -588,9 +588,15 @@ def build_chinese_paper_docx():
         run.font.size = Pt(8.5)
 
     docx_path = os.path.join(OUTPUT_DIR, "beyond_surface_adaptation_zh.docx")
-    doc.save(docx_path)
-    print(f"Successfully generated Chinese docx: {docx_path}")
-    return docx_path
+    try:
+        doc.save(docx_path)
+        print(f"Successfully generated Chinese docx: {docx_path}")
+        return docx_path
+    except PermissionError:
+        alt_path = os.path.join(OUTPUT_DIR, "beyond_surface_adaptation_zh_clean.docx")
+        doc.save(alt_path)
+        print(f"[!] {docx_path} is currently locked by Word. Generated clean copy to: {alt_path}")
+        return alt_path
 
 if __name__ == "__main__":
     build_chinese_paper_docx()
