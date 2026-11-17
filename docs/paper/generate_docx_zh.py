@@ -92,7 +92,7 @@ def build_chinese_paper_docx():
     p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_title.paragraph_format.space_before = Pt(0)
     p_title.paragraph_format.space_after = Pt(6)
-    r_title = p_title.add_run("表面适配之外：自主系统智能体的解耦系统领域适配与因果门控")
+    r_title = p_title.add_run("表面适配之外：面向自主二进制逆向工程与安全智能体的解耦系统领域适配与因果门控")
     r_title.font.name = 'Microsoft YaHei'
     r_title.font.size = Pt(16.5)
     r_title.font.bold = True
@@ -118,13 +118,13 @@ def build_chinese_paper_docx():
     r_abs_title.font.bold = True
     
     abs_text = (
-        "大型语言模型（LLM）驱动的自主智能体在通用自然语言推理和高层 API 编排中展现出卓越的能力，然而将其部署至受限、特化且操作不可逆的底层系统执行环境（如内核驱动调试、二进制逆向分析、内存检测等）时，领域专业能力与行为可控性之间暴露出尖锐的结构性矛盾。"
-        "在本文中，我们针对紧凑型混合线性注意力智能体（9B 参数规模，含门控 Delta 网络与全注意力）以及密集全自注意力智能体（27B 参数规模），在底层系统工具环境下的后训练动力学展开了系统深入的实证与理论研究。"
-        "我们揭示了三大普遍存在的微调病理缺陷：(1) 记忆化假象 (The Memorization Illusion)：经验交叉熵损失的单调下降掩盖了严重的逐字记忆现象（20-Gram 词元逐字重合度从 0.167 激增至 0.515），常规的留出验证集无法检测出脆弱的表层词汇记忆；"
-        "(2) 阶段性能力覆盖 (Catastrophic Stage Overwriting)：串行多阶段微调会近乎完全擦除前序核心能力——底层系统工具调用准确率从 82.5% 断崖式崩塌至 10.0%——我们通过低秩子空间任务干扰下界定理 (Theorem on Low-Rank Subspace Interference Bounds) 对该现象进行了严格的数学形式化与相变分析；"
+        "大型语言模型（LLM）驱动的自主智能体在通用自然语言推理和高层 API 编排中展现出卓越的能力，然而将其部署至受限、特化且操作不可逆的底层系统安全与逆向执行环境（如二进制逆向工程、内核调试、动态内存取证与脆弱性排查等）时，领域专业能力与行为可控性之间暴露出尖锐的结构性矛盾。"
+        "在本文中，我们针对紧凑型混合线性注意力智能体（9B 参数规模，含门控 Delta 网络与全注意力）以及密集全自注意力智能体（27B 参数规模），在底层系统安全工具环境下的后训练动力学展开了系统深入的实证与理论研究。"
+        "我们揭示了三大严重威胁自主网络行动的普遍微调病理缺陷：(1) 记忆化假象 (The Memorization Illusion)：经验交叉熵损失的单调下降掩盖了严重的逐字记忆现象（20-Gram 词元逐字重合度从 0.167 激增至 0.515），常规的留出验证集无法检测出在二进制结构解析上的脆弱表层词汇记忆；"
+        "(2) 阶段性能力覆盖 (Catastrophic Stage Overwriting)：串行多阶段微调会近乎完全擦除前序核心能力——领域安全工具调用准确率从 82.5% 断崖式崩塌至 10.0%——我们通过低秩子空间任务干扰下界定理 (Theorem on Low-Rank Subspace Interference Bounds) 对该现象进行了严格的数学形式化与相变分析；"
         "(3) 几何表征消融的帕累托悬崖 (The Pareto Cliff of Subspace Abliteration)：基于权重方向投影的几何遗忘技术在紧凑模型上表现出阶跃式突变，在“完全拒绝”与“严重语法溃散”（KL 散度 > 17）之间存在不可调和的断崖。"
-        "进一步地，我们首次揭示了一种新型的虚假长度偏置捷径 (Spurious Gating Shortcut)：条件安全门控微调由于正负样本显著的长度差异（平均 1,065 tokens vs. 126 tokens），诱使模型将响应长度误作为特权授权的虚假后门信号。"
-        "为了根除上述系统性脆弱性，我们提出了解耦系统领域适配框架 (DSDA, Decoupled System-Domain Adaptation)。DSDA 围绕三维统一解耦主线构建：基于 4 轴语义扰动扩展与难负例聚类的语义解耦 (Semantic Decoupling)、基于运行时动态指针切换（Scheme Z）的流形解耦 (Manifold Decoupling)、以及在结构因果模型 (SCM) 框架下构建反事实等长对抗配对的因果解耦 (Causal Decoupling)。"
+        "进一步地，我们首次揭示了一种新型的虚假长度偏置捷径 (Spurious Gating Shortcut)（一种类似于 CWE-863 越权判定的严重授权绕过安全漏洞）：条件安全门控微调由于正负样本显著的长度差异（平均 1,065 tokens vs. 126 tokens），诱使模型将响应长度误作为特权授权的虚假后门信号。"
+        "为了根除上述系统性脆弱性，我们提出了解耦系统领域适配框架 (DSDA, Decoupled System-Domain Adaptation)。DSDA 围绕三维统一解耦主线构建：基于 4 轴语义扰动扩展与候选拓扑感知的语义解耦 (Semantic Decoupling)、基于运行时动态指针切换（Scheme Z）的流形解耦 (Manifold Decoupling)、以及在结构因果模型 (SCM) 框架下构建反事实等长对抗配对的因果解耦 (Causal Decoupling)，作为遵循最小特权原则 (Principle of Least Privilege, PoLP) 的安全参考监视器 (Reference Monitor)。"
         "在 9B 与 27B 两种代表性架构上的 5 种子全量复现评测表明，DSDA 实现了 82.5% +/- 1.4% 的工具泛化准确率且保持零工具幻觉，在统计学上显著优于主流模型合并基线（Task Arithmetic 55.0%, TIES-Merging 62.5%, p < 0.01）。"
         "在扩展的 N=120 综合对抗测试套件中，DSDA 实现了严格的零安全策略泄漏（GateLeak = 0.000）、零技术陷阱误拒（TrapRefusal = 0.000），并保留了 98.4% 的跨领域通用能力。"
     )
@@ -142,7 +142,7 @@ def build_chinese_paper_docx():
     r_kw_title.font.name = 'Microsoft YaHei'
     r_kw_title.font.size = Pt(9)
     r_kw_title.font.bold = True
-    r_kw_body = p_kw.add_run("自主系统智能体、领域适配、解耦微调、子空间干扰下界、因果门控、抗记忆化、灾难性遗忘、威胁模型。")
+    r_kw_body = p_kw.add_run("二进制逆向工程、自主网络防御、系统安全智能体、威胁模型、因果安全门控、子空间干扰下界、特权越权防护、恶意代码取证、内核安全、反汇编与动态调试。")
     r_kw_body.font.name = 'Microsoft YaHei'
     r_kw_body.font.size = Pt(9)
     r_kw_body.font.italic = True

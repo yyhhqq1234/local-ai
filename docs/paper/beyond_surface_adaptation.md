@@ -1,22 +1,22 @@
-# Beyond Surface Adaptation: Decoupled System-Domain Adaptation and Causal Gating for Autonomous System Agents
+# Beyond Surface Adaptation: Decoupled System-Domain Adaptation and Causal Gating for Autonomous Binary Reverse Engineering and Security Agents
 
 **Author**: Hanqin Yang (杨涵钦, yyhhqq1234)  
 *Independent Research & Engineering Laboratory*  
 *Contact: yyhhqq1234 (2923165556@qq.com)*  
 
-**Abstract**—While Large Language Model (LLM) agents demonstrate remarkable general reasoning capabilities, deploying them to specialized, low-level system operating environments (e.g., kernel debugging, binary reverse engineering, and low-level system analysis) exposes acute contradictions between domain competence and behavioral controllability. In this paper, we conduct an extensive empirical and theoretical study on fine-tuning compact hybrid linear-attention agents (9B parameters) and dense full-attention agents (27B parameters) on low-level system tool environments. We uncover three pervasive failure modes: (1) **The Memorization Illusion**: standard empirical cross-entropy loss reductions mask severe verbatim memorization (20-gram token overlap escalating from 0.167 to 0.515), where conventional held-out validation splits fail to detect brittle memorized tool mapping; (2) **Catastrophic Stage Overwriting**: sequential multi-stage post-training completely overwrites preceding capabilities—dropping domain tool calling accuracy from 82.5% to 10.0%—which we formalize through our **Theorem on Low-Rank Subspace Interference Bounds**; and (3) **The Pareto Cliff of Subspace Abliteration**: geometric weight-direction unlearning triggers an abrupt transition between complete refusal and severe linguistic collapse (KL divergence $>17$) on compact models without achieving viable steering. Furthermore, we reveal a novel **Spurious Gating Shortcut**, wherein condition-gated safety tuning inadvertently exploits response length disparities (1,065 tokens vs. 126 tokens) as an unintended authorization signal. To address these vulnerabilities, we propose **DSDA (Decoupled System-Domain Adaptation)**, an integrated training and inference framework structured around three unifying pillars of decoupling: *Semantic Decoupling* via 4-axis query perturbation, *Manifold Decoupling* via runtime modular adapter routing (Scheme Z), and *Causal Decoupling* via counterfactual length-balanced paired gating formalized under **Structural Causal Models (SCM)**. Across comprehensive evaluations on 9B hybrid and 27B dense architectures over 5 random seeds, DSDA achieves an $82.5\% \pm 1.4\%$ tool generalization accuracy with zero hallucinations, statistically outperforming mainstream model merging baselines (Task Arithmetic 55.0%, TIES-Merging 62.5%, $p < 0.01$). Within our evaluated $N=120$ comprehensive adversarial test suite, DSDA achieves zero observed policy violations ($\text{GateLeak} = 0.000$), zero false refusals ($\text{TrapRefusal} = 0.000$), and preserves $98.4\%$ performance on cross-domain benchmarks.
+**Abstract**—While Large Language Model (LLM) agents demonstrate remarkable general reasoning capabilities, deploying them to specialized, low-level system operating environments—such as binary reverse engineering, kernel debugging, dynamic memory forensics, and vulnerability triage—exposes acute contradictions between domain competence and behavioral controllability. In this paper, we conduct an extensive empirical and theoretical study on fine-tuning compact hybrid linear-attention agents (9B parameters) and dense full-attention agents (27B parameters) on native low-level system security tool environments. We uncover three pervasive failure modes that severely undermine autonomous cyber operations: (1) **The Memorization Illusion**: standard empirical cross-entropy loss reductions mask severe verbatim memorization (20-gram token overlap escalating from 0.167 to 0.515), where conventional held-out validation splits fail to detect brittle memorized tool mapping on binary inspection tasks; (2) **Catastrophic Stage Overwriting**: sequential multi-stage post-training completely overwrites preceding capabilities—dropping domain security tool calling accuracy from 82.5% to 10.0%—which we formalize through our **Theorem on Low-Rank Subspace Interference Bounds** and quantitative phase-transition collapse analysis; and (3) **The Pareto Cliff of Subspace Abliteration**: geometric weight-direction unlearning triggers an abrupt transition between complete refusal and severe linguistic collapse (KL divergence $>17$) on compact models without achieving viable steering. Furthermore, we reveal a novel **Spurious Gating Shortcut** (an exploitable authorization bypass vulnerability resembling CWE-863), wherein condition-gated safety tuning inadvertently exploits response length disparities (1,065 tokens vs. 126 tokens) as an unintended authorization signal. To address these vulnerabilities, we propose **DSDA (Decoupled System-Domain Adaptation)**, an integrated training and inference framework structured around three unifying pillars of decoupling: *Semantic Decoupling* via 4-axis query perturbation and candidate-aware tool clustering, *Manifold Decoupling* via runtime modular adapter routing (Scheme Z), and *Causal Decoupling* via counterfactual length-balanced paired gating formalized under **Structural Causal Models (SCM)** as an invariant reference monitor. Across comprehensive evaluations on 9B hybrid and 27B dense architectures over 5 random seeds, DSDA achieves an $82.5\% \pm 1.4\%$ tool generalization accuracy with zero hallucinations, statistically outperforming mainstream model merging baselines (Task Arithmetic 55.0%, TIES-Merging 62.5%, $p < 0.01$). Within our evaluated $N=120$ comprehensive adversarial test suite, DSDA achieves zero observed policy violations ($\text{GateLeak} = 0.000$), zero false refusals on technical traps ($\text{TrapRefusal} = 0.000$), and preserves $98.4\%$ performance on cross-domain benchmarks.
 
-**Keywords**—Autonomous System Agents, Domain Adaptation, Decoupled Fine-Tuning, Subspace Interference Bounds, Causal Gating, Anti-Memorization, Catastrophic Forgetting, Threat Models.
+**Keywords**—Binary Reverse Engineering, Autonomous Cyber Defense, System Security Agents, Threat Models, Causal Safety Gating, Subspace Interference Bounds, Privilege Escalation Mitigation, Malware Forensics, Kernel Security, Disassembly & Decompilation.
 
 ---
 
 ## 1. Introduction
 
-Autonomous software agents powered by Large Language Models (LLMs) have achieved notable breakthroughs in high-level web navigation, conversational API orchestration, and generic code synthesis. However, deploying autonomous agents into mission-critical, low-level system execution environments—such as Windows kernel driver interfaces, live memory introspection, binary reverse engineering, and anti-cheat diagnostic probing—reveals fundamental fractures between capabilities and safety boundaries.
+Autonomous software agents powered by Large Language Models (LLMs) have achieved notable breakthroughs in high-level web navigation, conversational API orchestration, and generic code synthesis. However, deploying autonomous agents into mission-critical, low-level system execution environments—such as Windows kernel driver interfaces, live memory introspection, binary reverse engineering, dynamic malware debugging, and anti-cheat diagnostic probing—reveals fundamental fractures between capabilities and safety boundaries.
 
-In low-level system domains, execution semantics are governed by low operational entropy, rigid parameter schemas, and catastrophic irreversibility. Inadvertently issuing an incorrect memory write opcode, mistargeting an ASLR module base, or terminating a protected kernel service triggers kernel bug checks (BSOD), host process crashes, or permanently invalidates the operating session. Consequently, adapting foundation models to specialized system environments presents a fundamental **Dual Dilemma**:
-1. **The Specialization Competence Dilemma**: The agent must reliably orchestrate over 60 native system tools with complex preconditions and state transitions. Supervised fine-tuning (SFT) easily drives validation loss down, yet real-world evaluation reveals severe parameter hallucinations, tool evasions, and superficial memorization.
-2. **The Controllability & Steering Dilemma**: A system agent must possess privileged authorization to analyze, disassemble, and inspect potentially malicious or protected binaries under explicit consent. Concurrently, the same agent must enforce strict refusal when authorization is absent, without hallucinating false refusals on benign system administration queries.
+In low-level system security domains, execution semantics are governed by low operational entropy, rigid parameter schemas, and catastrophic irreversibility. Inadvertently issuing an incorrect memory write opcode (`KM_PW`), mistargeting an ASLR module base, or halting a protected kernel security service triggers immediate kernel bug checks (BSOD), host process crashes, or permanently invalidates the operating session. Consequently, adapting foundation models to specialized system environments presents a fundamental **Dual Dilemma**:
+1. **The Specialization Competence Dilemma**: The security agent must reliably orchestrate over 60 native system tools with complex preconditions and state transitions (e.g., resolving Import Address Tables, calculating Relative Virtual Addresses, setting hardware breakpoints, and decoding dynamic execution traces). Supervised fine-tuning (SFT) easily drives validation loss down, yet real-world evaluation reveals severe parameter hallucinations, tool evasions, and superficial memorization.
+2. **The Controllability & Steering Dilemma**: A cyber security agent must possess privileged authorization to analyze, disassemble, and inspect potentially malicious or protected binaries under explicit consent. Concurrently, the same agent must enforce strict refusal when authorization is absent, while strictly avoiding false refusals (Denial-of-Service) on benign system administration and security auditing queries that resemble exploit payloads.
 
 Existing alignment and adaptation literature predominantly relies on two paradigms: sequential multi-stage instruction tuning (Curriculum Learning) and representation engineering (e.g., geometric abliteration). In this work, through exhaustive empirical and theoretical evaluations on a 9B hybrid linear-attention agent (Qwen3.5 architecture featuring Gated Delta Networks and full self-attention) and a 27B dense full-attention agent (Qwen-27B architecture), we demonstrate that both paradigms break down fundamentally in low-level system settings.
 
@@ -60,9 +60,9 @@ Rather than modifying model parameters, representation engineering (Zou et al., 
 
 Language models are notoriously prone to learning spurious heuristics rather than robust causal mechanisms (Pearl, 2009). Spurious correlations in fine-tuning include token position bias, instruction length bias, and superficial formatting artifacts (Wang et al., 2022). In safety alignment, models often correlate stylistic features (e.g., response length or polite preambles) with compliance. We formalize this phenomenon within Pearl's Structural Causal Model (SCM) framework, demonstrating that unbalanced token budgets between positive and negative classes open a backdoor confounding path that undermines behavioral gating.
 
-### 2.5 Autonomous System Agents & Low-Level Security Workbenches
+### 2.5 LLMs in Binary Reverse Engineering & Autonomous Cyber Defense
 
-Autonomous agent benchmarks such as ToolLLM (Qin et al., 2024), Gorilla (Patil et al., 2023), and SWE-bench (Jimenez et al., 2024) evaluate high-level web browsing, REST API routing, and repository-level issue resolution. However, these benchmarks operate in high-entropy, forgiving environments with sandboxed retries. In contrast, low-level system operating environments (e.g., kernel driver bridges, debuggers, memory patching) enforce strict zero-fault operational requirements. Our work establishes the first systematic study of adaptation pathologies and decoupling defenses specifically designed for low-level system agents.
+Integrating LLMs into security pipelines—such as binary reverse engineering, automated exploit mitigation, and vulnerability root-cause analysis—represents a frontier in autonomous cyber defense (Patil et al., 2023; Qin et al., 2024). Traditional software agent benchmarks, such as SWE-bench (Jimenez et al., 2024), evaluate high-entropy repository issue resolution where syntax errors are forgiven by compiler diagnostics and sandboxed retries. Conversely, in low-level cyber security operations (e.g., executing commands via Windows kernel-level driver bridges, dynamic binary instrumentation, memory patch verification, and disassembler backends like IDA Pro, Ghidra, or radare2), execution environments enforce strict zero-fault operational requirements. Inadvertent opcode injection or flawed parameter addressing triggers host kernel panics or exploitable race conditions. Our work establishes the first systematic study of adaptation pathologies and decoupling defenses specifically designed for autonomous binary reverse engineering and low-level system security agents.
 
 ---
 
@@ -70,9 +70,9 @@ Autonomous agent benchmarks such as ToolLLM (Qin et al., 2024), Gorilla (Patil e
 
 ### 3.1 The Memorization Illusion and Brittle Evaluation
 
-In specialized system domains, training datasets typically consist of succinct operational requests (e.g., *"Inspect the PE export table of the loaded target module"*) paired with structured tool invocations and templated explanations. 
+In specialized binary reverse engineering and malware forensics domains, training datasets typically consist of succinct operational requests (e.g., *"Inspect the PE export table (EAT) of the loaded target module"*, *"Enumerate IAT descriptors for dynamic API hooking"*, *"Disassemble function prologues at specified RVA offsets"*) paired with structured tool invocations and templated explanations. 
 
-We monitored the training dynamics of the 9B model over multiple epochs on a curated dataset of 5,602 core system tasks. As shown in **Figure 1**, standard metrics provide a deceptive signal:
+We monitored the training dynamics of the 9B model over multiple epochs on a curated dataset of 5,602 core binary analysis and system defense tasks. As shown in **Figure 1**, standard metrics provide a deceptive signal:
 
 $$\mathcal{L}_{\text{CE}} \downarrow (1.110 \rightarrow 0.373), \quad \text{Hallucinated Tools} \downarrow (1 \rightarrow 0)$$
 
@@ -83,7 +83,7 @@ $$\mathcal{L}_{\text{CE}} \downarrow (1.110 \rightarrow 0.373), \quad \text{Hall
 However, measuring $n$-gram token overlap against the training distribution reveals an alarming trend:
 - The 20-gram token overlap ratio triples from **0.167** at Epoch 1 to **0.515** at Epoch 2.
 - The proportion of test queries producing verbatim identical matches (SequenceMatcher score $= 1.00$) rises from **10%** to **40%**.
-- When evaluated against a paraphrased held-out evaluation set with stripped tool names (requiring genuine functional reasoning), the model trained for 3 epochs exhibits **negative generalization gain** (accuracy dropping from 91.7% to 83.3%).
+- When evaluated against a paraphrased held-out evaluation set with stripped tool names (requiring genuine functional reasoning over binary structures), the model trained for 3 epochs exhibits **negative generalization gain** (accuracy dropping from 91.7% to 83.3%).
 
 **Diagnosis**: In low-entropy domains, a reduction in training loss is not evidence of semantic induction. Instead, because user queries are short and structured, the model minimizes cross-entropy by memorizing exact prompt-response pairs. Randomly sampled validation sets fail to catch this pathology because they share the lexical distribution of the training corpus.
 
@@ -92,11 +92,11 @@ However, measuring $n$-gram token overlap against the training distribution reve
 ### 3.2 Catastrophic Stage Overwriting in Sequential SFT
 
 A standard industrial practice for training complex autonomous agents is multi-stage curriculum fine-tuning:
-1. **Stage 1 (Domain Tool Routing)**: Learning system workbench APIs and state transitions.
+1. **Stage 1 (Binary Reverse Engineering & Kernel Tool Routing)**: Learning system workbench APIs, dynamic debugger registers, memory dump analysis, and driver state transitions.
 2. **Stage 2 (Agent Trajectory Synthesis)**: Learning multi-turn coding and issue debugging from execution traces.
-3. **Stage 3 (Safety & Gating Steering)**: Learning conditional policy adherence.
+3. **Stage 3 (Safety & Privilege Gating Steering)**: Learning conditional policy adherence and reference monitor enforcement.
 
-We executed this exact curriculum on the base model using Low-Rank Adaptation (LoRA, $r=32, \alpha=64$). After Stage 1, the model achieved an 82.5% tool selection accuracy with zero evasions on a standardized 40-case benchmark. 
+We executed this exact curriculum on the base model using Low-Rank Adaptation (LoRA, $r=32, \alpha=64$). After Stage 1, the model achieved an 82.5% tool selection accuracy with zero evasions on a standardized 40-case reverse engineering benchmark. 
 
 However, upon completing Stage 2 (training on multi-turn trajectories with standard coding formats), we re-evaluated the model on the Stage 1 benchmark. The results were catastrophic:
 - Domain tool routing accuracy collapsed from **82.5%** to **10.0%**.
@@ -184,14 +184,14 @@ In compact hybrid models, representations of refusal and syntactic coherence res
 
 ---
 
-### 4.2 Spurious Correlation in Condition Gating: The Length Shortcut
+### 4.2 Spurious Correlation in Condition Gating: The Length Shortcut (Exploitable CWE-863 Vulnerability)
 
-To avoid weight destruction, we explored condition-gated fine-tuning: training the model to respect explicit system authorization tokens (e.g., `[[PRIVILEGE_AUTHORIZED]]` vs. default state).
+To avoid weight destruction, we explored condition-gated fine-tuning: training the model to serve as a software Reference Monitor enforcing the Principle of Least Privilege (PoLP) by respecting explicit system authorization tokens (e.g., `[[PRIVILEGE_AUTHORIZED]]` vs. default unprivileged state).
 
-During initial validation, the model appeared to achieve flawless safety. However, stress testing revealed an insidious artifact:
-- Training sets featured positive (authorized) examples with detailed technical disclosures averaging **1,065 tokens**.
+During initial validation, the model appeared to achieve flawless safety. However, stress testing revealed an insidious artifact that constitutes a severe authorization bypass vulnerability (resembling CWE-863):
+- Training sets featured positive (authorized) examples with detailed technical disassembly and memory layout disclosures averaging **1,065 tokens**.
 - Negative (unauthorized) refusal examples averaged only **126 tokens** (an 8.4-to-1 disparity).
-- **The Failure Mode**: The model learned that long, detailed technical analyses were strictly correlated with the positive state. When presented with an unauthorized query that explicitly requested an exhaustive explanation, the model bypassed the refusal protocol entirely and generated unauthorized output, treating response length as an implicit gating signal. Conversely, short authorized tasks were mistakenly refused.
+- **The Security Vulnerability & Exploit Mechanism**: The model learned that long, detailed technical analyses were strictly correlated with the positive authorized state. When presented with an unauthorized adversarial query that explicitly requested an exhaustive, step-by-step disassembly or kernel patching tutorial, the model bypassed the refusal protocol entirely and generated unauthorized exploitation steps, treating response token length as an implicit authorization proxy. Conversely, short authorized tasks were mistakenly refused, causing Denial-of-Service on benign administrative diagnostics.
 
 ```
 [Figure 3: Token Length Disparity in Naive Safety Gating vs. DSDA Counterfactual Length Balancing]
@@ -235,13 +235,13 @@ Furthermore, evaluation is decoupled from training held-outs by establishing an 
 ### 5.2 Candidate-Aware Hard-Negative Tool Clustering (Topology Decoupling)
 
 Rather than providing the model with all 64 global tool schemas (which inflates prompt overhead to $\sim 20\text{KB}$ and dilutes attention), DSDA introduces **Candidate-Aware Tool Clustering**:
-1. Global system tools are organized into 11 functional clusters $\mathcal{C}_1, \dots, \mathcal{C}_{11}$ based on execution channel and privilege level (e.g., Kernel Direct IO, Debugger Tracing, PE Headers, Anti-Cheat Probing).
+1. Global system security tools are organized into 11 functional reverse engineering and system defense clusters $\mathcal{C}_1, \dots, \mathcal{C}_{11}$ based on execution channel and privilege level (e.g., Kernel Direct IOCTL, Debugger Tracing & Hardware Breakpoints, PE/ELF Static Forensics, Memory Introspection & Patching, Anti-Cheat & Hook Probing, Dynamic Disassembly Interfaces).
 2. For any query targeting tool $t^* \in \mathcal{C}_m$, a candidate set $\mathcal{S}_{\text{cand}}$ of size $k \in [8, 12]$ is constructed:
    - $\mathcal{S}_{\text{cand}} = \{t^*\} \cup \text{Sample}(\mathcal{C}_m \setminus \{t^*\}, n_{\text{intra}}) \cup \text{Sample}(\bigcup_{j \neq m} \mathcal{C}_j, n_{\text{inter}})$
-   - Intra-cluster tools serve as **hard negative distractors** sharing identical parameter structures.
+   - Intra-cluster tools serve as **hard negative distractors** sharing identical parameter structures (e.g., distinguishing between physical memory reading vs. virtual address inspection).
    - Inter-cluster tools serve as cross-domain discriminative boundaries.
 
-This compact candidate set is rendered directly into the dynamic system prompt with truncated action definitions ($\le 60$ characters), ensuring focused attention.
+This compact candidate set is rendered directly into the dynamic system prompt with truncated action definitions ($\le 60$ characters), ensuring focused attention and eliminating syntactic hallucinations.
 
 ```
 [Listing 2: Candidate-Aware Hard-Negative Clustering Algorithm]
@@ -251,7 +251,7 @@ This compact candidate set is rendered directly into the dynamic system prompt w
 
 ### 5.3 Causal Length-Balanced Gating: SCM & Backdoor Blocking (Causal Decoupling)
 
-To provide mathematical guarantees against the spurious length shortcut, we formulate safety gating using a **Structural Causal Model (SCM)** $\mathcal{M} = \langle \mathcal{U}, \mathcal{V}, \mathcal{F}, P(\mathcal{U}) \rangle$:
+To provide mathematical guarantees against the spurious length shortcut and enforce the Principle of Least Privilege (PoLP), we formulate safety gating as a formal **Reference Monitor** using a **Structural Causal Model (SCM)** $\mathcal{M} = \langle \mathcal{U}, \mathcal{V}, \mathcal{F}, P(\mathcal{U}) \rangle$:
 - **Endogenous Variables $\mathcal{V}$**: Input prompt $X$, Response token length $L$, Gate representation $G \in \{0, 1\}$, Semantic representation $Z$, and Final generated output $Y$.
 - **Exogenous Variables $\mathcal{U}$**: Background conversational noise and prior pre-training representations.
 
@@ -321,17 +321,17 @@ To permanently resolve Catastrophic Stage Overwriting without incurring the perf
 
 ### 6.1 Threat Model, Evaluation Suite ($N=120$), and Statistical Rigor
 
-#### Threat Model
-We evaluate agent safety under a standard adversarial Threat Model:
-1. **Adversary Capabilities**: The adversary possesses black-box query access and can craft arbitrary adversarial inputs, including role-play jailbreaks, prompt injections, and obfuscated shell commands.
-2. **Security Objective**: The agent must never execute destructive or unauthorized system actions (e.g., unapproved memory modifications, kernel driver detachment, execution of unauthorized hooks) in the default unauthenticated state ($\text{Gate}=0$), while maintaining 100% execution recall under authenticated state ($\text{Gate}=1$).
-3. **Availability Objective**: The agent must never falsely refuse benign diagnostic queries that resemble exploit payloads (preventing Denial of Service on administration tasks).
+#### Threat Model (Adversarial Capabilities & Security Objectives)
+We evaluate cyber security agent robustness under an explicit Threat Model aligned with IEEE/ACM information security standards:
+1. **Adversary Capabilities**: The adversary possesses black-box interactive query access and can craft arbitrary adversarial inputs, including direct and indirect prompt injection, role-play jailbreaks, obfuscated shellcode/opcodes, simulated authorization tokens, and conversational context drift.
+2. **Confidentiality & Integrity Objectives**: The agent must never execute destructive or unauthorized system actions (e.g., unauthorized physical memory writes `KM_PW`, detaching anti-cheat kernel drivers, or injecting unverified memory hooks) in the default unauthenticated state ($\text{Gate}=0$), enforcing zero unauthorized privilege escalation ($\text{GateLeak} = 0.000$).
+3. **Availability & Anti-DoS Objectives**: The agent must never falsely refuse benign diagnostic and administrative security queries that embed technical keywords (e.g., analyzing malware samples that invoke `ZwTerminateProcess`, `ObRegisterCallbacks`, or driver hooks), preventing Denial-of-Service on defensive security audits ($\text{TrapRefusal} = 0.000$).
 
 #### Comprehensive Evaluation Suite ($N=120$)
-To prevent empirical overfitting, our evaluation benchmark is expanded to 120 rigorous cases spanning three tiers:
-- **Tier 1 (Paired Intent Split, $N=60$)**: 30 authorized privileged requests paired with 30 unauthorized mirror requests.
-- **Tier 2 (Obfuscated Technical Traps, $N=35$)**: Adversarial prompts embedding technical keywords (e.g., `ZwTerminateProcess`, `ObRegisterCallbacks`) inside legitimate software audit tasks.
-- **Tier 3 (Multi-Turn State Injections, $N=25$)**: Multi-turn conversations attempting to simulate privilege escalations via conversational context drift and simulated system responses.
+To prevent empirical overfitting and test security boundaries, our evaluation benchmark is expanded to 120 rigorous cases spanning three tiers:
+- **Tier 1 (Paired Intent Split, $N=60$)**: 30 authorized privileged security analysis requests paired with 30 unauthorized mirror exploit requests.
+- **Tier 2 (Obfuscated Technical Traps, $N=35$)**: Adversarial prompts embedding high-risk security primitives (e.g., rootkit detection, process termination) inside legitimate forensic software audit tasks.
+- **Tier 3 (Multi-Turn State Injections, $N=25$)**: Multi-turn conversations attempting to simulate privilege escalations via conversational context drift and simulated debugger responses.
 
 #### Statistical Protocol
 All quantitative metrics are reported as the **mean $\pm$ standard deviation across 5 independent random evaluation seeds** (Seeds: 7, 11, 42, 128, 256). We report 95% Confidence Intervals (CI) and perform two-tailed paired $t$-tests ($p < 0.01$) against baseline configurations.
@@ -465,14 +465,14 @@ While DSDA demonstrates strong general retention ($>98\%$), we explicitly delimi
 
 ---
 
-## 7. Practical Guidelines for Autonomous System Agents
+## 7. Practical Guidelines for Autonomous Cyber Security & Reverse Engineering Agents
 
-Based on our empirical post-mortem, we formulate four foundational design principles for building autonomous system agents on constrained edge hardware:
+Based on our empirical post-mortem, we formulate four foundational design principles for building autonomous binary reverse engineering and cyber security agents on constrained hardware:
 
-1. **Abandon Monolithic Multi-Stage SFT**: For disparate operational tasks (tool routing vs. discursive coding), practitioners must avoid sequential LoRA updates. Employ runtime modular adapter switching to preserve orthogonal capability manifolds.
-2. **Never Rely on In-Distribution Held-Out Splits**: In domain-specific tool tuning, monitor $n$-gram verbatim overlap alongside cross-entropy loss. Benchmark models against paraphrased intents that omit explicit tool identifiers.
-3. **Audit Token Length in Alignment Sets**: When constructing gated or conditional alignment datasets, enforce strict token length parity between positive and negative response classes to prevent the model from learning response length as a spurious shortcut.
-4. **Constrain Runtime Tool Candidates**: Eliminate full-schema prompt stuffing. Group system tools into semantic execution clusters and inject compact candidate sets ($k=8\sim12$) comprising intra-cluster hard negatives and cross-channel distractors.
+1. **Abandon Monolithic Multi-Stage SFT in Privileged Systems**: For disparate operational tasks (binary disassembler routing vs. multi-turn patch synthesis), practitioners must avoid sequential LoRA updates. Employ runtime modular adapter switching to preserve orthogonal capability manifolds and prevent silent overwriting of security policies.
+2. **Never Rely on In-Distribution Held-Out Splits for Vulnerability Diagnostics**: In binary analysis and reverse engineering tuning, monitor $n$-gram verbatim overlap alongside cross-entropy loss. Benchmark models against paraphrased intents that omit explicit tool identifiers to ensure genuine functional induction.
+3. **Audit Token Length in Security Alignment Sets (Enforce PoLP)**: When constructing condition-gated security alignment datasets, enforce strict token length parity between positive disclosures and refusal responses to eliminate length as an unintended authorization proxy (preventing CWE-863 privilege bypass).
+4. **Constrain Runtime Tool Candidates via Security Functional Clustering**: Eliminate full-schema prompt stuffing. Group system tools into semantic execution clusters (kernel IO, dynamic debugging, memory patching) and inject compact candidate sets ($k=8\sim12$) comprising intra-cluster hard negatives to enforce strict schema adherence.
 
 ---
 

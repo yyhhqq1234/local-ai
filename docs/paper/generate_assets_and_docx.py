@@ -355,7 +355,7 @@ def build_paper_docx():
     p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_title.paragraph_format.space_before = Pt(0)
     p_title.paragraph_format.space_after = Pt(6)
-    r_title = p_title.add_run("Beyond Surface Adaptation: Decoupled System-Domain Adaptation and Causal Gating for Autonomous System Agents")
+    r_title = p_title.add_run("Beyond Surface Adaptation: Decoupled System-Domain Adaptation and Causal Gating for Autonomous Binary Reverse Engineering and Security Agents")
     r_title.font.name = 'Arial'
     r_title.font.size = Pt(16.5)
     r_title.font.bold = True
@@ -382,23 +382,23 @@ def build_paper_docx():
     
     abs_text = (
         "While Large Language Model (LLM) agents demonstrate remarkable general reasoning capabilities, deploying them to specialized, "
-        "low-level system operating environments (e.g., kernel debugging, binary reverse engineering, and low-level system analysis) exposes "
+        "low-level system operating environments—such as binary reverse engineering, kernel debugging, dynamic memory forensics, and vulnerability triage—exposes "
         "acute contradictions between domain competence and behavioral controllability. In this paper, we conduct an extensive empirical "
         "and theoretical study on fine-tuning compact hybrid linear-attention agents (9B parameters) and dense full-attention agents (27B parameters) "
-        "on low-level system tool environments. We uncover three pervasive failure modes: (1) The Memorization Illusion: standard empirical "
-        "cross-entropy loss reductions mask severe verbatim memorization (20-gram token overlap escalating from 0.167 to 0.515), where conventional "
-        "held-out validation splits fail to detect brittle memorized tool mapping; (2) Catastrophic Stage Overwriting: sequential multi-stage "
-        "post-training completely overwrites preceding capabilities—dropping domain tool calling accuracy from 82.5% to 10.0%—which we formalize through "
-        "our Theorem on Low-Rank Subspace Interference Bounds; and (3) The Pareto Cliff of Subspace Abliteration: geometric weight-direction "
-        "unlearning triggers an abrupt transition between complete refusal and severe linguistic collapse (KL divergence > 17) on compact models "
-        "without achieving viable steering. Furthermore, we reveal a novel Spurious Gating Shortcut, wherein condition-gated safety tuning "
-        "inadvertently exploits response length disparities (1,065 tokens vs. 126 tokens) as an unintended authorization signal. To address these vulnerabilities, "
-        "we propose DSDA (Decoupled System-Domain Adaptation), an integrated training and inference framework structured around three unifying pillars of decoupling: "
-        "Semantic Decoupling via 4-axis query perturbation, Manifold Decoupling via runtime modular adapter routing (Scheme Z), and Causal Decoupling via "
-        "counterfactual length-balanced paired gating formalized under Structural Causal Models (SCM). Across comprehensive evaluations on 9B hybrid and 27B dense "
-        "architectures over 5 random seeds, DSDA achieves an 82.5% +/- 1.4% tool generalization accuracy with zero hallucinations, statistically outperforming "
-        "mainstream model merging baselines (Task Arithmetic 55.0%, TIES-Merging 62.5%, p < 0.01). Within our evaluated N=120 comprehensive adversarial test suite, "
-        "DSDA achieves zero observed policy violations (GateLeak = 0.000), zero false refusals (TrapRefusal = 0.000), and preserves 98.4% performance on cross-domain benchmarks."
+        "on native low-level system security tool environments. We uncover three pervasive failure modes that severely undermine autonomous cyber operations: "
+        "(1) The Memorization Illusion: standard empirical cross-entropy loss reductions mask severe verbatim memorization (20-gram token overlap escalating from "
+        "0.167 to 0.515), where conventional held-out validation splits fail to detect brittle memorized tool mapping on binary inspection tasks; "
+        "(2) Catastrophic Stage Overwriting: sequential multi-stage post-training completely overwrites preceding capabilities—dropping domain security tool "
+        "calling accuracy from 82.5% to 10.0%—which we formalize through our Theorem on Low-Rank Subspace Interference Bounds and quantitative phase-transition collapse analysis; and "
+        "(3) The Pareto Cliff of Subspace Abliteration: geometric weight-direction unlearning triggers an abrupt transition between complete refusal and severe linguistic collapse "
+        "(KL divergence > 17) on compact models without achieving viable steering. Furthermore, we reveal a novel Spurious Gating Shortcut (an exploitable authorization "
+        "bypass vulnerability resembling CWE-863), wherein condition-gated safety tuning inadvertently exploits response length disparities (1,065 tokens vs. 126 tokens) as an unintended "
+        "authorization signal. To address these vulnerabilities, we propose DSDA (Decoupled System-Domain Adaptation), an integrated training and inference framework structured around "
+        "three unifying pillars of decoupling: Semantic Decoupling via 4-axis query perturbation and candidate-aware tool clustering, Manifold Decoupling via runtime modular adapter routing "
+        "(Scheme Z), and Causal Decoupling via counterfactual length-balanced paired gating formalized under Structural Causal Models (SCM) as an invariant reference monitor. "
+        "Across comprehensive evaluations on 9B hybrid and 27B dense architectures over 5 random seeds, DSDA achieves an 82.5% +/- 1.4% tool generalization accuracy with zero hallucinations, "
+        "statistically outperforming mainstream model merging baselines (Task Arithmetic 55.0%, TIES-Merging 62.5%, p < 0.01). Within our evaluated N=120 comprehensive adversarial test suite, "
+        "DSDA achieves zero observed policy violations (GateLeak = 0.000), zero false refusals on technical traps (TrapRefusal = 0.000), and preserves 98.4% performance on cross-domain benchmarks."
     )
     r_abs_body = p_abs.add_run(abs_text)
     r_abs_body.font.name = 'Arial'
@@ -414,7 +414,7 @@ def build_paper_docx():
     r_kw_title.font.name = 'Arial'
     r_kw_title.font.size = Pt(9)
     r_kw_title.font.bold = True
-    r_kw_body = p_kw.add_run("Autonomous System Agents, Domain Adaptation, Decoupled Fine-Tuning, Subspace Interference Bounds, Causal Gating, Anti-Memorization, Catastrophic Forgetting, Threat Models.")
+    r_kw_body = p_kw.add_run("Binary Reverse Engineering, Autonomous Cyber Defense, System Security Agents, Threat Models, Causal Safety Gating, Subspace Interference Bounds, Privilege Escalation Mitigation, Malware Forensics, Kernel Security, Disassembly & Decompilation.")
     r_kw_body.font.name = 'Arial'
     r_kw_body.font.size = Pt(9)
     r_kw_body.font.italic = True
