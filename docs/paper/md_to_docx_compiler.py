@@ -88,6 +88,14 @@ def clean_omml(root):
                 new_elem.append(sup)
                 parent.replace(nary, new_elem)
 
+    # 2. Fix empty base elements in m:sSup / m:sSub / m:sSubSup to eliminate dashed boxes
+    for script in root.xpath('//m:sSup | //m:sSub | //m:sSubSup', namespaces=NS):
+        base_e = script.find('m:e', namespaces=NS)
+        if base_e is not None and len(base_e) == 0 and not (base_e.text and base_e.text.strip()):
+            r = ET.SubElement(base_e, '{http://schemas.openxmlformats.org/officeDocument/2006/math}r')
+            t = ET.SubElement(r, '{http://schemas.openxmlformats.org/officeDocument/2006/math}t')
+            t.text = ''
+
 def latex_to_omml_element(latex_str, is_display=False):
     """Converts a LaTeX formula string to a parsed docx OMML XML element."""
     transform = get_omml_transform()

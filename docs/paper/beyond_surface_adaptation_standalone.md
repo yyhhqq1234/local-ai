@@ -488,7 +488,7 @@ Table II details anti-memorization and generalization metrics across training re
 | Naive SFT (Pass 3) | 3 | 0.373 | $80.0 \pm 0.0\%$ | 0 | $0.478 \pm 0.011$ | 4 / 10 | $10.0 \pm 0.0$ (62.5%) |
 | **DSDA (K=4 + Decoupled)** | 1 | 0.720 | $\mathbf{82.5 \pm 1.4\%}^*$ [$81.1, 83.9$] | $\mathbf{0}$ | $\mathbf{0.210 \pm 0.015}^*$ | $\mathbf{0 / 10}$ | $\mathbf{14.0 \pm 0.4}^*$ ($\mathbf{87.5\%}$) |
 
-$^*$ Indicates statistical significance ($p < 0.01$) compared to Naive SFT (Pass 3) under paired two-tailed $t$-test.
+* Indicates statistical significance ($p < 0.01$) compared to Naive SFT (Pass 3) under paired two-tailed $t$-test.
 
 Under naive SFT, pushing training to 3 epochs drops training loss to 0.373, but verbatim 20-gram overlap reaches 0.478, and abstract L3 generalization performance declines to 10/16. Under DSDA ($K=4$ query perturbation with LoRA dropout 0.10), verbatim memorization is suppressed to $0.210 \pm 0.015$, exact matches drop to 0/10, and abstract L3 generalization reaches **14/16 (87.5%)**, demonstrating true semantic mastery.
 
