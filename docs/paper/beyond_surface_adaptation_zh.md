@@ -223,10 +223,10 @@ $$\|(\mathbf{U}_1^\top \mathbf{U}_2) \mathbf{M}_2\|_F^2 = \sum_{j=1}^{d_2} \math
 $$\|\nabla_{\mathbf{A}} \mathcal{L}_2\|_F^2 = \frac{\alpha^2}{r^2} \|\mathbf{R}_1^\top (\mathbf{U}_1^\top \mathbf{G}_2)\|_F^2 \ge \frac{\alpha^2}{r^2} \sigma_{\min}^2(\mathbf{R}_1) \|\mathbf{U}_1^\top \mathbf{G}_2\|_F^2 = \frac{\alpha^2}{r^2} \sigma_{\min}^2(\mathbf{B}_1) \|\mathbf{U}_1 \mathbf{U}_1^\top \mathbf{G}_2\|_F^2 = \frac{\alpha^2}{r^2} \sigma_{\min}^2(\mathbf{B}_1) \mathcal{I}_{\text{geo}}(\mathcal{T}_1, \mathcal{T}_2)$$
 证毕。$\blacksquare$
 
-*审稿人防御性注记*：上述公式严格区分了无量纲投影率 $\cos^2 \theta_{\max}$ 与有量纲参数尺度因子 $\frac{\alpha^2}{r^2} \sigma_{\min}^2(\mathbf{B}_1)$。若人为缩放 $\mathbf{B}_1 \leftarrow c \mathbf{B}_1$，子空间 $\mathcal{S}_1$ 与 $\mathcal{I}_{\text{geo}}$ 保持标度不变（Scale-Invariant），而参数梯度能量 $\mathcal{I}_{\text{param}}$ 精确吸收 $c^2$，彻底根除了维度不一致隐患。
+**量纲与尺度不变性分析 (Dimensional and Scale Invariance)**：上述公式严格区分了无量纲投影率 $\cos^2 \theta_{\max}$ 与有量纲参数尺度因子 $\frac{\alpha^2}{r^2} \sigma_{\min}^2(\mathbf{B}_1)$。若人为缩放 $\mathbf{B}_1 \leftarrow c \mathbf{B}_1$，子空间 $\mathcal{S}_1$ 与 $\mathcal{I}_{\text{geo}}$ 保持标度不变（Scale-Invariant），而参数梯度能量 $\mathcal{I}_{\text{param}}$ 精确吸收 $c^2$，从而在量纲上保证了物理一致性。
 
 #### 连续参数漂移诱导离散决策相变坍缩的严格数学推导
-为回答审稿人关于“连续参数漂移如何精确诱发离散 $\operatorname{argmax}$ 决策从 82.5% 断崖式跌落至 10.0%”的质疑，我们推导决策裕度（Margin）的二阶泰勒展开，并通过经验分布累积函数（CDF）形式化相变边界。
+**离散决策相变动力学建模**：为了精确揭示连续参数漂移如何诱发离散 $\operatorname{argmax}$ 决策从 82.5% 发生阶跃式跌落的微观机理，我们推导决策裕度（Margin）的二阶泰勒展开，并通过经验分布累积函数（CDF）形式化相变边界。
 
 > **命题 1 (连续参数漂移诱导离散决策相变崩塌的充分条件)**  
 > 设样本 $x \in \mathcal{D}_1$ 的真实操作标签为 $y^*$，其在一阶段收敛权重 $\mathbf{W}^{(1)}$ 下的输出 logits 为 $\mathbf{z}(x; \mathbf{W}^{(1)}) \in \mathbb{R}^K$。定义初始决策裕度为：
@@ -253,13 +253,13 @@ $$\|\nabla_{\mathbf{A}} \mathcal{L}_2\|_F^2 = \frac{\alpha^2}{r^2} \|\mathbf{R}_
 > 
 > $$\mathcal{I}_{\text{geo}}^{\text{direct}}(\mathcal{T}_i, \mathcal{T}_j) \equiv 0 \quad \text{且} \quad \mathcal{I}_{\text{param}}^{\text{direct}}(\mathcal{T}_i, \mathcal{T}_j) \equiv 0 \quad (\forall i \neq j)$$
 
-*学术严谨性注记 1 (关于定理 1 典范角降维与参数能量的讨论)*：在定理 1 中，虽然下界采用了最保守的最大主夹角 $	heta_{\max}$，但在高维空间中，若两子空间仅在个别维度正交而大部分维度存在重叠（即 $	heta_{\max} = \pi/2$ 但存在 $k < r$ 使得 $\cos 	heta_k > 0$），总几何投影能量仍可表示为所有典范角能量的和形式：$\mathcal{I}_{	ext{geo}} = \sum_{k=1}^r \cos^2 	heta_k(\mathcal{S}_1, \mathcal{S}_2) \cdot \|\mathcal{P}_{\mathbf{u}_k}(\mathbf{G}_2)\|_F^2$。该能量直接反映了参数扰动向任务 1 空间的泄漏强度；只要累积扰动在任务 1 的损失曲面上具备非负投影，参数漂移必然导致任务 1 经验风险的实质性恶化。
+**注记 1（全典范角与流形投影能量分析）**：在定理 1 中，虽然下界采用了最保守的最大主夹角 $\theta_{\max}$，但在高维空间中，若两子空间仅在个别维度正交而大部分维度存在重叠（即 $\theta_{\max} = \pi/2$ 但存在 $k < r$ 使得 $\cos \theta_k > 0$），总几何投影能量仍可表示为所有典范角能量的和形式：$\mathcal{I}_{\text{geo}} = \sum_{k=1}^r \cos^2 \theta_k(\mathcal{S}_1, \mathcal{S}_2) \cdot \|\mathcal{P}_{\mathbf{u}_k}(\mathbf{G}_2)\|_F^2$。该能量直接反映了参数扰动向任务 1 空间的泄漏强度；只要累积扰动在任务 1 的损失曲面上具备非负投影，参数漂移必然导致任务 1 经验风险的实质性恶化。
 
-*学术严谨性注记 2 (关于命题 1 决策裕度方向次梯度的讨论)*：决策裕度函数 $m(x) 	riangleq z_{y^*}(x) - \max_{c 
-eq y^*} z_c(x)$ 在次优类别发生置换的交界点处不可微，但在几乎处处（Almost Everywhere）具备局部平滑性。命题 1 中的二阶泰勒展开严格以一阶段收敛时刻的活跃次优类 $c^*(x) 	riangleq rg\max_{c 
+**注记 2（非光滑决策裕度与方向次导数动力学）**：决策裕度函数 $m(x) \triangleq z_{y^*}(x) - \max_{c 
+eq y^*} z_c(x)$ 在次优类别发生置换的交界点处不可微，但在几乎处处（Almost Everywhere）具备局部平滑性。命题 1 中的二阶泰勒展开严格以一阶段收敛时刻的活跃次优类 $c^*(x) \triangleq \arg\max_{c 
 eq y^*} z_c(x; \mathbf{W}^{(1)})$ 为条件基准；在局部凸邻域内，方向次导数与 Lipschitz 梯度的结合保证了生存函数截断界在上界意义下的全局数学自洽性。
 
-*学术严谨性注记 3 (关于推论 1.1 路由函数 Lipschitz 稳定性与残差耦合)*：推论 1.1 保证了直接权重梯度的物理完全隔离。在运行时动态路由机制中，系统的抗对抗稳定性进一步依赖于门控路由函数 $\pi(x)$ 的 Lipschitz 连续性：$\|\pi(x) - \pi(x')\|_1 \le L_\pi \|x - x'\|$。Scheme Z 结合两层防御架构，通过第一层语义门控对非受信输入进行对抗清洗，防止敌手通过构造触发词元诱导路由错配，从而使参数空间的零直接干扰能够在推理运行时无损维持。
+**注记 3（门控路由函数 Lipschitz 鲁棒性分析）**：推论 1.1 保证了直接权重梯度的物理完全隔离。在运行时动态路由机制中，系统的抗对抗稳定性进一步依赖于门控路由函数 $\pi(x)$ 的 Lipschitz 连续性：$\|\pi(x) - \pi(x')\|_1 \le L_\pi \|x - x'\|$。Scheme Z 结合两层防御架构，通过第一层语义门控对非受信输入进行对抗清洗，防止敌手通过构造触发词元诱导路由错配，从而使参数空间的零直接干扰能够在推理运行时无损维持。
 
 ### 4.4  轨迹数据污染与语义漂移
 通过对工业界常用的智能体多轮轨迹切片深入审查，发现了两大严重的数据污染病理：
