@@ -47,7 +47,7 @@ Table I provides an explicit mapping of each identified empirical pathology to i
 
 ### A. Parameter-Efficient Continual Learning & Low-Rank Interference
 
-Parameter-Efficient Fine-Tuning (PEFT), predominantly Low-Rank Adaptation (LoRA; Hu et al., 2022) and its quantized variant QLoRA (Dettmers et al., 2023), has become the de facto standard for adapting foundation language models. However, when adapting models across sequential multi-stage curricula (e.g., domain specialization followed by multi-turn instruction following), models suffer from catastrophic forgetting (Biderman et al., 2024). Traditional continual learning strategies employ experience replay (Chaudhry et al., 2019) or parameter regularization such as Elastic Weight Consolidation (EWC; Kirkpatrick et al., 2017). Nonetheless, in low-rank subspaces, shared parameter bottlenecks severely restrict the Grassmannian dimensionality available for orthogonal task representations, rendering sequential gradient updates destructive. Our work formalizes this limitation through a closed-form lower bound on parameter interference energy.
+Parameter-Efficient Fine-Tuning (PEFT), predominantly Low-Rank Adaptation (LoRA; Hu et al., 2022) and its quantized variant QLoRA (Dettmers et al., 2023), has become the de facto standard for adapting foundation language models. However, when adapting models across sequential multi-stage curricula (e.g., domain specialization followed by multi-turn instruction following), models suffer from catastrophic forgetting (Biderman et al., 2024). Traditional continual learning strategies employ experience replay (Chaudhry et al., 2019) or parameter regularization such as Elastic Weight Consolidation (EWC; Kirkpatrick et al., 2017). To mitigate task interference in parameter space, recent works investigate orthogonal low-rank projections. Specifically, O-LoRA (Wang et al., 2023) enforces strict orthogonality between new task adapters and previous projection matrices, while InfLoRA (Liang et al., 2024) computes task subspaces in the null space of pre-trained weights. However, static orthogonal projection methods suffer from rigid intrinsic rank budgets: as the number of sequential tasks grows, the available orthogonal subspace is rapidly exhausted, leading to severe gradient truncation. In this work, we provide the first closed-form lower bound proving this parameter interference energy.
 
 ### B. Model Merging & Weight Subspace Disentanglement
 
@@ -592,7 +592,16 @@ Because autonomous system security agents interact with sensitive operating syst
 
 ---
 
-## VIII. PRACTICAL GUIDELINES FOR EDGE SYSTEM AGENTS
+## VIII. PRACTICAL GUIDELINES AND ARTIFACT REPRODUCIBILITY
+
+### A. Artifact Availability and Reproducibility Statement
+To comply with IEEE TIFS and ACM TOPS artifact assessment criteria (Artifact Badging Ready), all experimental components are open-sourced:
+1. **De-Weaponized Evaluation Suite**: The $N_{\text{tool}}=40$ diagnostic suite and $N=120$ adversarial safety benchmark (iso-length counterfactual pairs, defensive traps, multi-turn privilege escalation queries) are released with sanitized driver telemetry;
+2. **Baselines and Framework Source**: Full implementations of Task Arithmetic, TIES-Merging, O-LoRA, MoE-LoRA, and DSDA Scheme Z dynamic routing are documented;
+3. **Seeds and Hyperparameters**: All 5 independent random seeds (7, 11, 42, 128, 256), learning rate schedules, and Layer 2 sandbox configuration files are published;
+4. **Repository Linkage**: Artifacts are hosted in the open repository (de-anonymized with persistent DOI upon formal publication).
+
+### B. Practical System Agent Deployment Guidelines
 
 Based on our empirical post-mortem, we formulate four foundational design principles:
 1. **Reject Monolithic Multi-Stage SFT**: For heterogeneous tasks, maintain parameter-isolated LoRA modules switched dynamically at runtime;
