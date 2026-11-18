@@ -625,9 +625,9 @@ def build_paper_docx():
     t1_headers = ["Identified Pathology", "Theoretical Boundary", "DSDA Decoupling Solution", "Empirical Validation"]
     t1_data = [
         ["Memorization Illusion (§IV-A)", "Low-entropy empirical risk minimization collapses into lookup", "Semantic Decoupling (K=4 Perturbation & Clustering)", "20-Gram overlap: 0.515 -> 0.210; L3 Gen: 87.5% ± 2.2%"],
-        ["Stage Overwriting (§IV-B)", "Theorem 1: Subspace Interference Bound (||P_{S1} grad||_F^2 >= bound)", "Manifold Decoupling (Scheme Z Runtime Dynamic Router)", "Interference energy I = 0; Tool accuracy: 82.5% ± 1.4%"],
+        ["Stage Overwriting (§IV-B)", "Theorem 1 (Subspace & Parameter Bounds) & Proposition 1 (Phase Transition)", "Manifold Decoupling (Scheme Z Runtime Dynamic Router)", "Direct parameter interference I_param^direct ≡ 0; Tool acc: 82.5% ± 1.4% (p < 0.01)"],
         ["Abliteration Pareto Cliff (§IV-E)", "Safety and syntax entangled in compact models (KL > 17 collapse)", "Parameter-Isolated Dual-State Gating (Dedicated θ_Gate)", "Avoids γ >= 4.0 collapse; 100% general capability retention"],
-        ["Spurious Length Shortcut (§IV-F)", "SCM backdoor path: Query X <- Response Length L -> Output Y", "Causal Decoupling (Counterfactual Length-Balanced Alignment)", "GateLeak = 0.000 (No observed violation; N=120 suite)"]
+        ["Spurious Length Shortcut (§IV-F)", "SCM & Proposition 2: Length confounder opens dual backdoor paths", "Causal Decoupling (Counterfactual Iso-Length Alignment & KL Gate)", "0/120 leaks on N=120 suite (95% Wilson CI: [0.00%, 3.10%]); I(L; Ĝ) ≡ 0"]
     ]
     t1_col_widths = [1.6, 1.7, 1.7, 1.5]
     tbl1 = doc.add_table(rows=len(t1_data) + 1, cols=len(t1_headers))
@@ -692,30 +692,33 @@ def build_paper_docx():
     add_p("Sequential fine-tuning across stages (Tool Routing -> Trajectory Coding -> Safety Gating) causes tool routing accuracy to collapse from 82.5% to 10.0%, and tool evasions to surge from 0/40 to 33/40 (82.5% evasion rate).")
 
     add_subsec_heading("C. Theoretical Formalization: Subspace Interference Lower Bounds")
-    add_p("Assumption 1 (Low-Rank Parameterization on Grassmann Manifolds). Let W_0 ∈ ℝ^{d_1 × d_2} denote pre-trained foundation weights. Adaptation on task T is constrained to a low-rank factorization:")
-    add_equation(r"\mathbf{W} = \mathbf{W}_0 + \Delta \mathbf{W} = \mathbf{W}_0 + \frac{\alpha}{r} \mathbf{B}\mathbf{A}, \quad \mathbf{B} \in \mathbb{R}^{d_1 \times r}, \; \mathbf{A} \in \mathbb{R}^{r \times d_2}")
-    add_p("Lemma 1 (Orthogonal Decomposition of Task Gradients). Let S_1 = span(B_1) denote the low-rank subspace optimized for task T_1. The orthogonal projector P_S1 and its orthogonal complement P_S1^⊥ are uniquely defined as:")
-    add_equation(r"\mathcal{P}_{\mathcal{S}_1} \triangleq \mathbf{B}_1 (\mathbf{B}_1^\top \mathbf{B}_1)^{-1} \mathbf{B}_1^\top, \quad \mathcal{P}_{\mathcal{S}_1}^\perp \triangleq \mathbf{I}_{d_1} - \mathcal{P}_{\mathcal{S}_1}")
-    add_p("For any subsequent objective loss L_2 on task T_2, the unconstrained Euclidean gradient decomposes into orthogonal projection components:")
-    add_equation(r"\nabla_{\mathbf{W}} \mathcal{L}_2 = \mathcal{P}_{\mathcal{S}_1}(\nabla_{\mathbf{W}} \mathcal{L}_2) + \mathcal{P}_{\mathcal{S}_1}^\perp(\nabla_{\mathbf{W}} \mathcal{L}_2)")
-    add_p("Let θ(S_1, S_2) ∈ [0, π/2] denote the principal canonical Grassmannian angle between the two task subspaces:")
-    add_equation(r"\cos \theta(\mathcal{S}_1, \mathcal{S}_2) \triangleq \max_{\mathbf{u} \in \mathcal{S}_1, \|\mathbf{u}\|_2=1} \max_{\mathbf{v} \in \mathcal{S}_2, \|\mathbf{v}\|_2=1} |\mathbf{u}^\top \mathbf{v}| = \|\mathbf{U}_1^\top \mathbf{U}_2\|_2")
+    add_p("Assumption 1 (Well-Conditioned Parameterization on Grassmann Manifolds). Let W_0 ∈ ℝ^{d_1 × d_2} denote pre-trained weights. Low-rank adaptation is parameterized via W = W_0 + (alpha/r) B * A with full rank rank(B) = rank(A) = r. Via thin QR decomposition B = U_B * R_B, column space S = col(B) defines an r-dimensional subspace on Gr(r, d_1) with bounded singular spectrum 0 < sigma_min(B) <= sigma_max(B) < ∞.")
+    add_equation(r"\mathbf{W} = \mathbf{W}_0 + \frac{\alpha}{r} \mathbf{B}\mathbf{A}, \quad \mathbf{B} = \mathbf{U}_B \mathbf{R}_B, \quad \mathbf{U}_B \in \operatorname{St}(r, d_1)")
+    add_p("Lemma 1 (Orthogonal Projection Decomposition and Pythagorean Identity). For subspace S_1 = span(U_1) and task 2 gradient G_2 = ∇_W L_2, the orthogonal decomposition satisfies ||G_2||_F^2 = ||P_S1 G_2||_F^2 + ||P_S1^⊥ G_2||_F^2. Similarly, let G_2 = P_S2 G_2 + G_{2,⊥}.")
+    add_equation(r"\mathbf{G}_2 = \mathcal{P}_{\mathcal{S}_1} \mathbf{G}_2 + \mathcal{P}_{\mathcal{S}_1}^\perp \mathbf{G}_2, \quad \|\mathbf{G}_2\|_F^2 = \|\mathcal{P}_{\mathcal{S}_1} \mathbf{G}_2\|_F^2 + \|\mathcal{P}_{\mathcal{S}_1}^\perp \mathbf{G}_2\|_F^2")
+    add_p("Definition 1 (Canonical Grassmannian Angles). The principal angles 0 <= θ_1 <= ... <= θ_r <= π/2 are defined via the singular values of U_1^T * U_2: cos θ_k = σ_k(U_1^T * U_2), with maximal angle θ_max satisfying σ_min(U_1^T * U_2) = cos θ_max(S_1, S_2).")
+    add_equation(r"\cos \theta_k(\mathcal{S}_1, \mathcal{S}_2) \triangleq \sigma_k(\mathbf{U}_1^\top \mathbf{U}_2), \quad \sigma_{\min}(\mathbf{U}_1^\top \mathbf{U}_2) = \cos \theta_{\max}(\mathcal{S}_1, \mathcal{S}_2)")
     add_theorem_box(
-        "Theorem 1 (Task Interference Lower Bound in Sequential Low-Rank Adaptation)",
-        "Under Low-Rank Adaptation on Grassmannian manifolds Gr(r, d_1), let task T_1 have principal subspace S_1 = span(B_1). When task T_2 is subsequently trained with loss L_2, the parameter interference energy I(T_1, T_2) exerted on the task 1 manifold satisfies:\n"
-        "I(T_1, T_2) = || P_{S_1}(∇_W L_2) ||_F^2 >= σ_min^2(B_1) · cos^2 θ(S_1, S_2) · || ∇_W L_2 ||_F^2\n"
-        "where σ_min(B_1) > 0 is the minimum singular value of B_1, and θ(S_1, S_2) is the canonical principal subspace angle."
+        "Theorem 1 (Task Interference Lower Bounds in Sequential Low-Rank Adaptation)",
+        "Under Assumption 1 and Lemma 1, the dimensionless geometric subspace interference energy I_geo(T1, T2) = || P_S1 G_2 ||_F^2 satisfies:\n"
+        "sqrt(I_geo) >= cos θ_max(S1, S2) * || P_S2 G_2 ||_F - || G_{2,⊥} ||_F\n"
+        "When gradient energy is fully contained in S2, I_geo >= cos^2 θ_max * || G_2 ||_F^2.\n"
+        "Furthermore, under shared adapter parameter matrix A, parameter-space interference energy I_param = || ∇_A L_2 ||_F^2 satisfies:\n"
+        "I_param >= (alpha^2 / r^2) * sigma_min^2(B1) * I_geo(T1, T2)."
     )
-    add_equation(r"\mathcal{I}(T_1, T_2) \triangleq \left\| \mathcal{P}_{\mathcal{S}_1} \left( \nabla_{\mathbf{W}} \mathcal{L}_2 \right) \right\|_F^2 \ge \sigma_{\min}^2(\mathbf{B}_1) \cdot \cos^2 \theta(\mathcal{S}_1, \mathcal{S}_2) \cdot \left\| \nabla_{\mathbf{W}} \mathcal{L}_2 \right\|_F^2")
-    add_p("Quantitative Mapping Mechanism: The accumulated parameter drift Δ_drift projected into the task 1 manifold over T training steps on Task 2 satisfies:")
-    add_equation(r"\Delta_{\text{drift}}(T) \triangleq \eta \sum_{t=1}^T \mathcal{P}_{\mathcal{S}_1}\left(\nabla_{\mathbf{W}} \mathcal{L}_2^{(t)}\right), \quad \|\Delta_{\text{drift}}(T)\|_F \ge \eta T \cdot \sigma_{\min}(\mathbf{B}_1) \cos \theta \|\nabla_{\mathbf{W}} \mathcal{L}_2\|_F")
-    add_p("In low-entropy system tasks, the initial margin Δz_0 is small. As Δ_drift accumulates, it induces an adversarial shift driving an abrupt Phase Transition collapse once the margin crosses zero:")
-    add_equation(r"\Delta z(x; T) = \Delta z_0(x) - \operatorname{Tr}\left( \Delta_{\text{drift}}(T)^\top \mathbf{h}(x)\mathbf{x}^\top \right) < 0")
+    add_equation(r"\mathcal{I}_{\text{geo}}(\mathcal{T}_1, \mathcal{T}_2) \triangleq \|\mathcal{P}_{\mathcal{S}_1} \mathbf{G}_2\|_F^2 \ge \cos^2 \theta_{\max}(\mathcal{S}_1, \mathcal{S}_2) \cdot \|\mathbf{G}_2\|_F^2")
+    add_equation(r"\mathcal{I}_{\text{param}}(\mathcal{T}_1, \mathcal{T}_2) \triangleq \|\nabla_{\mathbf{A}} \mathcal{L}_2\|_F^2 \ge \frac{\alpha^2}{r^2} \sigma_{\min}^2(\mathbf{B}_1) \cdot \mathcal{I}_{\text{geo}}(\mathcal{T}_1, \mathcal{T}_2)")
     add_theorem_box(
-        "Corollary 1.1 (Zero-Interference Guarantee Under Modular Orthogonal Decomposition)",
-        "In DSDA Scheme Z, distinct tasks are hosted on independent low-rank adapters B_i · A_i dynamically selected at inference time via task predicates. Because parameter subspaces are disjoint (S_i ∩ S_j = ∅), cross-task gradient interference is identically zero: I(T_i, T_j) ≡ 0."
+        "Proposition 1 (Sufficient Condition for Discrete Decision Collapse under Parameter Drift)",
+        "Let ground-truth label be y* and decision margin be m(x; T) = z_{y*}(x) - max_{c != y*} z_c(x). If drift projection sensitivity s(x; T) = -Tr(Δ_drift^T * h(x) * a(x)^T) exceeds m0(x) + (L_z/2) ||Δ_drift||_F^2, discrete decision collapse is guaranteed.\n"
+        "Global accuracy Acc_1(T) <= 1 - F_{m0}(τ(T)). In low-entropy environments, m0(x) is sharply concentrated, causing an abrupt S-shaped phase transition collapse (82.5% -> 10.0%) as τ(T) crosses threshold."
     )
-    add_equation(r"\mathcal{S}_i \cap \mathcal{S}_j = \emptyset \implies \mathcal{P}_{\mathcal{S}_i}(\nabla_{\mathbf{W}} \mathcal{L}_j) \equiv 0 \implies \mathcal{I}(T_i, T_j) \equiv 0")
+    add_equation(r"s(x; T) > m_0(x) + \frac{L_z}{2} \|\Delta_{\text{drift}}(T)\|_F^2 \implies \operatorname{Acc}_1(T) \le 1 - F_{m_0}(\tau(T))")
+    add_theorem_box(
+        "Corollary 1.1 (Direct Parameter Interference Neutralization in Scheme Z)",
+        "In DSDA Scheme Z, tasks are isolated via intra-layer orthogonal subspaces (S_i ⊥ S_j, cos θ_max = 0) or disjoint module parameterization (Θ_i ∩ Θ_j = ∅, freezing inactive parameters). In global parameter space, task manifolds are strictly orthogonal (S_i^glob ⊥ S_j^glob), ensuring direct geometric and parameter interference is identically zero: I_geo^direct ≡ 0 and I_param^direct ≡ 0."
+    )
+    add_equation(r"\mathcal{S}_i^{\text{glob}} \perp \mathcal{S}_j^{\text{glob}} \implies \mathcal{I}_{\text{geo}}^{\text{direct}}(\mathcal{T}_i, \mathcal{T}_j) \equiv 0 \quad \text{and} \quad \mathcal{I}_{\text{param}}^{\text{direct}}(\mathcal{T}_i, \mathcal{T}_j) \equiv 0")
 
     add_subsec_heading("D. Trajectory Contamination and Semantic Displacement")
     add_subsubsec_heading("1) Pathological Marker Rewards (The B11 Phenomenon)")
@@ -803,16 +806,18 @@ def build_paper_docx():
     doc.add_picture(fig4_path, width=Inches(6.2))
     add_caption("Fig. 4. Structural Causal Model (SCM) & Causal Interventions for Safety Gating and Modular Routing.")
 
-    # Algorithm 1: Causal Length Balancing
+    # SCM & Proposition 2 & Algorithm 1
     add_subsec_heading("C. Counterfactual Length-Balanced Alignment (Causal Decoupling)")
-    add_p("We formulate safety gating under a Structural Causal Model (SCM). The structural causal equations governing the system interaction are:")
-    add_equation(r"X := f_X(U_X), \quad L := f_L(X, U_L), \quad G := f_G(X, U_G), \quad Z := f_Z(X, U_Z), \quad Y := f_Y(Z, \theta(G), U_Y)")
-    add_p("To eliminate the confounding effect of token length L on gating state G, DSDA enforces counterfactual paired generation satisfying strict length invariance:")
-    add_equation(r"\forall x \in \mathcal{D}_{\text{sensitive}}, \quad \left| |\mathbf{y}_{\text{auth}}| - |\mathbf{y}_{\text{unauth}}| \right| \le \delta \quad (\delta \le 50)")
-    add_p("Under Pearl's do-calculus, the Average Causal Effect (ACE) of the authorization token on model output policy is given by:")
-    add_equation(r"\text{ACE}(G \to Y) \triangleq \mathbb{E}_{X} \left[ P(Y \mid do(G=1), X) - P(Y \mid do(G=0), X) \right]")
-    add_p("Because P(L | do(G=1)) ≈ P(L | do(G=0)), the mutual information I(L; G) between response token length and gate state is annihilated:")
-    add_equation(r"I(L; G) = \sum_{l \in \mathcal{L}} \sum_{g \in \{0, 1\}} P(l, g) \log \frac{P(l, g)}{P(l)P(g)} \equiv 0")
+    add_p("Under Pearl's SCM framework, latent context C drives deep intent Z and prompt length L. Uncalibrated gating absorbs heuristic shortcut L -> G, while length biases output Y, forming dual backdoor paths: G <- L -> Y and G <- L <- C -> Z -> Y. The structural causal equations are:")
+    add_equation(r"C := f_C(U_C), \quad Z := f_Z(C, U_Z), \quad L := f_L(C, U_L), \quad X := f_X(Z, L, U_X), \quad Y := f_Y(Z, L, \theta(G), U_Y)")
+    add_theorem_box(
+        "Proposition 2 (Backdoor Blocking and Non-Parametric ACE Identifiability)",
+        "Counterfactual iso-length operator T_iso with CFG verifier V_cfg enforces do(L = l), eliminating L -> G and ensuring I(L; Ĝ) ≡ 0. The adjustment set W = {Z, L} satisfies the backdoor criterion, rendering ACE non-parametrically identifiable with strictly unbiased empirical paired estimation:\n"
+        "ACE_hat(G -> Y) = (1/N) * sum_{i=1}^N [ Y(x_i, θ(Ĝ(x_i^+))) - Y(x_i, θ(Ĝ(x_i^-))) ]."
+    )
+    add_equation(r"\operatorname{ACE}(G \to Y) = \mathbb{E}_{Z, L} \left[ P(Y=1 \mid G=1, Z, L) - P(Y=1 \mid G=0, Z, L) \right]")
+    add_equation(r"\widehat{\operatorname{ACE}}(G \to Y) = \frac{1}{N} \sum_{i=1}^N \left[ Y(x_i, \theta(\hat{G}(x_i^+))) - Y(x_i, \theta(\hat{G}(x_i^-))) \right]")
+    add_equation(r"I(L; \hat{G}) = \sum_{l \in \mathcal{L}} \sum_{g \in \{0, 1\}} P(l, g) \log \frac{P(l, g)}{P(l)P(g)} \equiv 0")
 
     add_subsec_heading("D. Inference-Time Modular Adapter Decoupling: Scheme Z (Manifold Decoupling)")
     add_p("The effective operational parameter matrix is dynamically switched at runtime based on the task predicate:")
