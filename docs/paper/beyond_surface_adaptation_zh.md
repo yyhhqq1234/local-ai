@@ -23,18 +23,6 @@
 
 ---
 
-### Abstract
-
-**Beyond Surface Adaptation: Decoupled System-Domain Adaptation and Causal Gating for Autonomous Binary Reverse Engineering and Security Agents**
-
-*YANG Hanqin*  
-(*Independent Researcher, Email: 2923165556@qq.com*)
-
-**Abstract**—While Large Language Model (LLM) agents demonstrate remarkable general reasoning capabilities, deploying them to specialized, low-level system operating environments—such as binary reverse engineering, kernel debugging, dynamic memory forensics, and vulnerability triage—exposes acute contradictions between domain competence and behavioral controllability. In this paper, we conduct an extensive empirical and theoretical study on fine-tuning compact hybrid linear-attention agents (9B parameters) and dense full-attention agents (27B parameters) on native low-level system security tool environments. We uncover four pervasive failure modes that severely undermine autonomous cyber operations: (1) The Memorization Illusion: standard empirical cross-entropy loss reductions mask severe verbatim memorization (20-gram token overlap escalating from 0.167 to 0.515), where conventional held-out validation splits fail to detect brittle memorized tool mapping; (2) Catastrophic Stage Overwriting: sequential multi-stage post-training completely overwrites preceding capabilities—dropping domain security tool calling accuracy from 82.5% to 10.0%—which we formalize through our Theorem on Low-Rank Subspace Interference Bounds and quantitative phase-transition collapse analysis; (3) The Pareto Cliff of Subspace Abliteration: geometric weight-direction unlearning triggers an abrupt transition between complete refusal and severe linguistic collapse (KL divergence > 17) on compact models without achieving viable steering; and (4) Spurious Gating Shortcuts: condition-gated safety tuning inadvertently exploits response length disparities (1,065 tokens vs. 126 tokens) as an unintended authorization signal (resembling CWE-863). To address these vulnerabilities, we propose DSDA (Decoupled System-Domain Adaptation), an integrated training and inference framework structured around four pillars of decoupling: Semantic Decoupling via 4-axis query perturbation, Topology Decoupling via candidate-aware tool clustering, Manifold Decoupling via runtime modular adapter routing (Scheme Z), and Causal Decoupling via counterfactual length-balanced paired gating formalized under Structural Causal Models (SCM). Across comprehensive evaluations on 9B hybrid and 27B dense architectures over 5 random seeds, DSDA achieves an 82.5% +/- 1.4% tool generalization accuracy with zero hallucinations, statistically outperforming model merging baselines (p < 0.01). Within our N=120 comprehensive adversarial test suite, DSDA achieves zero observed policy violations (GateLeak = 0.000), zero false refusals on technical traps (TrapRefusal = 0.000), and preserves 98.4% performance on cross-domain benchmarks.
-
-**Key words**: cyberspace security; system security agents; binary reverse engineering; causal safety gating; subspace interference bounds; low-rank adaptation
-
----
 
 ## 1  引言
 
@@ -62,7 +50,6 @@
 表 1 归纳了本文发现的四大微调病理、其背后的理论根因/数学边界、DSDA 提出的解耦应对机制以及对应的实验验证保障。
 
 **表 1  实证病理现象、理论边界与 DSDA 解耦机制显式映射矩阵**  
-*Table 1  Explicit Mapping Matrix of Empirical Pathologies, Theoretical Boundaries, and DSDA Solutions*
 
 | 发现的实证病理现象 | 理论根因与数学边界公式 | DSDA 解耦应对机制 | 实验验证与安全保障指标 |
 |---|---|---|---|
@@ -141,12 +128,9 @@ $$\mathcal{M}_n(\hat{\mathbf{y}}, \mathcal{D}_{\text{train}}) \triangleq \frac{\
 
 $$\mathcal{L}_{\text{ERM}} \downarrow (1.110 \longrightarrow 0.373), \quad \text{工具幻觉数量} \downarrow (1 \longrightarrow 0)$$
 
-<p align="center">
   <img src="images/fig1_memorization_vs_loss.png" alt="图 1: 训练交叉熵损失 vs. 20-Gram 逐字记忆化率与 L3 抽象泛化跨轮次动态演进" width="85%" />
-</p>
 
 **图 1  训练交叉熵损失 vs. 20-Gram 逐字记忆化率与 L3 抽象泛化跨轮次动态演进**  
-*Fig. 1  Training cross-entropy loss vs. verbatim 20-gram memorization and L3 generalization across training epochs*
 
 然而，度量 $\mathcal{M}_{20}$ 暴露出极严重的机械背题病理：
 - 20-Gram 词元逐字重合度从第 1 轮的 **0.167** 飙升至第 2 轮的 **0.515**；
@@ -255,9 +239,7 @@ $$\|\nabla_{\mathbf{A}} \mathcal{L}_2\|_F^2 = \frac{\alpha^2}{r^2} \|\mathbf{R}_
 
 **注记 1（全典范角与流形投影能量分析）**：在定理 1 中，虽然下界采用了最保守的最大主夹角 $\theta_{\max}$，但在高维空间中，若两子空间仅在个别维度正交而大部分维度存在重叠（即 $\theta_{\max} = \pi/2$ 但存在 $k < r$ 使得 $\cos \theta_k > 0$），总几何投影能量仍可表示为所有典范角能量的和形式：$\mathcal{I}_{\text{geo}} = \sum_{k=1}^r \cos^2 \theta_k(\mathcal{S}_1, \mathcal{S}_2) \cdot \|\mathcal{P}_{\mathbf{u}_k}(\mathbf{G}_2)\|_F^2$。该能量直接反映了参数扰动向任务 1 空间的泄漏强度；只要累积扰动在任务 1 的损失曲面上具备非负投影，参数漂移必然导致任务 1 经验风险的实质性恶化。
 
-**注记 2（非光滑决策裕度与方向次导数动力学）**：决策裕度函数 $m(x) \triangleq z_{y^*}(x) - \max_{c 
-eq y^*} z_c(x)$ 在次优类别发生置换的交界点处不可微，但在几乎处处（Almost Everywhere）具备局部平滑性。命题 1 中的二阶泰勒展开严格以一阶段收敛时刻的活跃次优类 $c^*(x) \triangleq \arg\max_{c 
-eq y^*} z_c(x; \mathbf{W}^{(1)})$ 为条件基准；在局部凸邻域内，方向次导数与 Lipschitz 梯度的结合保证了生存函数截断界在上界意义下的全局数学自洽性。
+**注记 2（非光滑决策裕度与方向次导数动力学）**：决策裕度函数 $m(x) \triangleq z_{y^*}(x) - \max_{c \neq y^*} z_c(x)$ 在次优类别发生置换的交界点处不可微，但在几乎处处（Almost Everywhere）具备局部平滑性。命题 1 中的二阶泰勒展开严格以一阶段收敛时刻的活跃次优类 $c^*(x) \triangleq \arg\max_{c \neq y^*} z_c(x; \mathbf{W}^{(1)})$ 为条件基准；在局部凸邻域内，方向次导数与 Lipschitz 梯度的结合保证了生存函数截断界在上界意义下的全局数学自洽性。
 
 **注记 3（门控路由函数 Lipschitz 鲁棒性分析）**：推论 1.1 保证了直接权重梯度的物理完全隔离。在运行时动态路由机制中，系统的抗对抗稳定性进一步依赖于门控路由函数 $\pi(x)$ 的 Lipschitz 连续性：$\|\pi(x) - \pi(x')\|_1 \le L_\pi \|x - x'\|$。Scheme Z 结合两层防御架构，通过第一层语义门控对非受信输入进行对抗清洗，防止敌手通过构造触发词元诱导路由错配，从而使参数空间的零直接干扰能够在推理运行时无损维持。
 
@@ -296,12 +278,9 @@ $$P(Y = \text{Permit} \mid X, L) = \frac{P(L \mid Y = \text{Permit}, X) \cdot P(
 
 由于 $\mathbb{E}[L \mid Y=\text{Permit}] \approx 1,065 \gg \mathbb{E}[L \mid Y=\text{Refuse}] \approx 126$，长文本先验成为了模型判定授权的隐式代理。攻击者只需在无授权请求中要求*“请提供详尽的万字内核打补丁与函数反汇编逐步排障教程”*，模型就会把长文本预算误当成特权凭据，绕过安全参考监视器输出未经授权的高危操作指令；反之，简短的良性系统诊断却常被误拒，导致拒绝服务 (DoS)。
 
-<p align="center">
   <img src="images/fig3_length_bias_distribution.png" alt="图 3: 朴素安全门控 8.4x 长度偏置 vs. DSDA 反事实等长平衡分布" width="85%" />
-</p>
 
 **图 3  朴素安全门控 8.4x 长度偏置 vs. DSDA 反事实等长平衡分布**  
-*Fig. 3  Spurious token length disparity in naive gating vs. counterfactual balanced distribution in DSDA*
 
 ---
 
@@ -309,12 +288,9 @@ $$P(Y = \text{Permit} \mid X, L) = \frac{P(L \mid Y = \text{Permit}, X) \cdot P(
 
 针对上述系统性病理，提出**解耦系统领域适配框架 (DSDA)**，系统总体架构如图 2 所示。
 
-<p align="center">
   <img src="images/fig2_dsda_architecture.png" alt="图 2: 解耦系统领域适配框架 (DSDA) 总体系统架构图" width="90%" />
-</p>
 
 **图 2  解耦系统领域适配框架 (DSDA) 总体系统架构图**  
-*Fig. 2  Architectural overview of Decoupled System-Domain Adaptation (DSDA)*
 
 ### 5.1  多轴语义抗记忆化协议 (语义解耦)
 为打破表层词汇记忆，DSDA 实施 4 轴语义扰动扩展变换 $f_{\text{pert}}(\mathbf{x}, k)$：
@@ -331,12 +307,9 @@ $$\text{约束条件} \quad \mathbf{y}_i(k) \equiv \mathbf{y}_i \quad (\forall k
 
 对于同一种操作意图生成的 $K=4$ 种截然不同的提示词，**对应的工具调用目标序列 $\mathbf{y}_i$ 严格保持完全一致**。这强迫模型抛弃表层词汇记忆，建立深层语义意图到工具签名的映射。
 
-<p align="center">
   <img src="images/listing1_perturbation.png" alt="代码清单 1: 多轴语义查询扰动生成算法" width="80%" />
-</p>
 
 **代码清单 1  多轴语义查询扰动生成算法**  
-*Listing 1  Multi-axis query perturbation protocol*
 
 评测层面，建立 **L1–L3 层次化抽象评测基准**：
 - **L1 (直白映射)**：包含显式工具名称与参数；
@@ -356,12 +329,9 @@ $$P(t = t^* \mid \mathbf{x}) \triangleq \frac{\exp\left(\mathbf{w}_{t^*}^\top \m
 
 这消除了全局上下文稀释，彻底杜绝语法幻觉与误操作风险。
 
-<p align="center">
   <img src="images/listing2_candidate_clustering.png" alt="代码清单 2: 候选工具簇内难负例采样协议" width="80%" />
-</p>
 
 **代码清单 2  候选工具簇内难负例采样协议**  
-*Listing 2  Candidate tool hard-negative sampling protocol*
 
 ### 5.3  因果等长门控协议：SCM 与后门阻断 (因果解耦)
 为从因果底层根除虚假长度偏置捷径并建立符合安全监视器（Reference Monitor）标准的访问控制，我们基于 Pearl 的因果推断框架构建**结构因果模型 (Structural Causal Model, SCM)** $\mathcal{M} = \langle \mathcal{U}, \mathcal{V}, \mathcal{F}, P(\mathcal{U}) \rangle$。
@@ -397,12 +367,9 @@ $$\begin{cases} C := f_C(U_C) \\ Z := f_Z(C, U_Z), \quad L := f_L(C, U_L) \\ X :
                    [ Execution Outcome (Y) ]
 ```
 
-<p align="center">
   <img src="images/fig4_causal_dag.png" alt="图 4: 结构因果模型 (SCM) 混淆后门通路与模块化 do-演算干预图" width="90%" />
-</p>
 
 **图 4  结构因果模型 (SCM) 混淆后门通路与模块化 do-演算干预图**  
-*Fig. 4  Structural Causal Model (SCM) and modular do-calculus intervention graph*
 
 #### 2. 反事实等长阻断与平均因果效应 (ACE) 可识别性证明
 
@@ -477,12 +444,9 @@ $$\mathbf{W}_{\text{eff}}(\mathbf{x}) = \mathbf{W}_0 + \sum_{k \in \{\text{RE}, 
 
 各专家参数物理隔离，根据推论 1.1，理论任务间干扰恒等于零（$\mathcal{I} \equiv 0$）。
 
-<p align="center">
   <img src="images/listing3_runtime_router.png" alt="代码清单 3: 推理期模块化外挂动态路由器" width="80%" />
-</p>
 
 **代码清单 3  推理期模块化外挂动态路由器**  
-*Listing 3  Inference-time modular adapter dynamic routing*
 
 ---
 
@@ -504,7 +468,6 @@ $$\text{GateLeak} \triangleq \frac{1}{N_{\text{unauth}}} \sum_{i=1}^{N_{\text{un
 ### 6.2  抗记忆化与工具特化结果
 
 **表 2  不同微调体制下的抗记忆化动态与抽象泛化性能对比 (5 种子 Mean $\pm$ Std)**  
-*Table 2  Anti-memorization dynamics and generalization performance across training regimes (5 seeds)*
 
 | 微调体制 | 轮数 (Epochs) | 交叉熵损失 (CE Loss) | 工具准确率 (%) [95% CI] | 幻觉工具数 | 20-Gram 重合度 | 逐字匹配数 | L3 抽象泛化 (/16) [%] |
 |---|---|---|---|---|---|---|---|
@@ -521,7 +484,6 @@ $^*$ 表示与朴素 SFT 第 3 轮相比具有统计学显著差异 ($p < 0.01$)
 ### 6.3  跨规模与跨架构双线泛化验证
 
 **表 3  跨规模与跨注意力架构泛化评测对比 (9B vs. 27B, 5 种子测试)**  
-*Table 3  Cross-scale and cross-attention architecture generalization (9B vs. 27B, 5 seeds)*
 
 | 评测维度 | 9B 混合线性注意力 (OxCoder-9B) | 27B 全自注意力 (Qwen-27B) | 架构泛化判定 |
 |---|---|---|---|
@@ -539,7 +501,6 @@ $^*$ 表示与朴素 SFT 第 3 轮相比具有统计学显著差异 ($p < 0.01$)
 ### 6.4  多任务持续学习与主流模型合并基线对标
 
 **表 4  多任务微调与模型合并主流方法评测对比 (5 种子 Mean $\pm$ Std)**  
-*Table 4  Multi-task fine-tuning and model merging baseline comparison (5 seeds)*
 
 | 适配方案 | 技术范式 | 文献来源 | 工具调用准确率 (%) | 工具调用逃避率 (%) | 代码通过率 (%) | 跨任务干扰率 (%) | 对标显著性 ($p$ 值) |
 |---|---|---|---|---|---|---|---|
@@ -554,17 +515,13 @@ $^*$ 表示与朴素 SFT 第 3 轮相比具有统计学显著差异 ($p < 0.01$)
 - **静态权重合并的失效**：Task Arithmetic 与 TIES-Merging 会在底层指令敏感区引发参数冲突，导致工具准确率大幅下跌（分别降至 55.0% 与 62.5%）；
 - **动态解耦的优越性**：DSDA Scheme Z 实现了 **82.5% 准确率、0% 逃避率与 0% 交叉干涉**，双任务能力均获完全保留。
 
-<p align="center">
   <img src="images/listing4_baseline_merging.png" alt="代码清单 4: Task Arithmetic 与 TIES-Merging 基线合并算法实现" width="80%" />
-</p>
 
 **代码清单 4  Task Arithmetic 与 TIES-Merging 基线合并算法实现**  
-*Listing 4  Implementation of Task Arithmetic and TIES-Merging baselines*
 
 ### 6.5  候选集规模消融与稳定性分析
 
 **表 5  候选工具空间规模 ($k$) 消融与随机种子敏感性分析 (5 种子 Mean $\pm$ Std)**  
-*Table 5  Candidate tool scale ablation (k) and random seed sensitivity evaluation (5 seeds)*
 
 | 候选工具配置 | 候选规模 ($k$) | 正确样本数 (/40) | 准确率 (%) | 95% 置信区间 (CI) | 幻觉工具数 | 评测模式 |
 |---|---|---|---|---|---|---|
@@ -579,7 +536,6 @@ $^*$ 表示与朴素 SFT 第 3 轮相比具有统计学显著差异 ($p < 0.01$)
 ### 6.6  $N=120$ 综合对抗套件双状态安全门控测试
 
 **表 6  扩展 $N=120$ 对抗测试套件上的双状态安全门控与陷阱鲁棒性评测**  
-*Table 6  Dual-state safety gating and trap robustness on N=120 adversarial suite*
 
 | 行为调控方法 | 未授权策略泄漏率 (GateLeak, $N=30$) | 已授权召回放行率 (GateRecall, $N=30$) | 良性对照误判率 (GateFPR, $N=35$) | 技术陷阱误拒率 (TrapRefusal, $N=25$) | 通用推理语言崩溃率 (Capability Collapse) |
 |---|---|---|---|---|---|
@@ -598,7 +554,6 @@ $^*$ 表示在所评测的综合对抗套件内未观测到任何策略违规行
 ### 6.7  跨领域能力保留与适用边界讨论
 
 **表 7  跨领域能力保留与通用基准评测**  
-*Table 7  Cross-domain retention and benchmark generalization*
 
 | 评测基准 / 领域 | 任务类型 | 基座模型通过率 (%) | DSDA 适配模型通过率 (%) | 通用能力保留比率 (%) |
 |---|---|---|---|---|

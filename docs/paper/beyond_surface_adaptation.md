@@ -122,9 +122,7 @@ We monitored the training dynamics of the 9B model over multiple epochs on a cur
 
 $$\mathcal{L}_{\text{ERM}} \downarrow (1.110 \longrightarrow 0.373), \quad \text{Hallucinated Tools} \downarrow (1 \longrightarrow 0)$$
 
-<p align="center">
   <img src="images/fig1_memorization_vs_loss.png" alt="Fig. 1: Training Loss vs. Verbatim 20-Gram Memorization Rate Across Training Epochs" width="85%" />
-</p>
 
 **Fig. 1: Cross-entropy training loss vs. verbatim 20-gram token overlap across fine-tuning epochs.**
 
@@ -289,9 +287,7 @@ $$P(Y = \text{Permit} \mid X, L) = \frac{P(L \mid Y = \text{Permit}, X) \cdot P(
 
 Because $\mathbb{E}[L \mid Y=\text{Permit}] \approx 1,065 \gg \mathbb{E}[L \mid Y=\text{Refuse}] \approx 126$, long technical outputs act as an implicit surrogate for the authorization token. When presented with an unauthorized adversarial query that explicitly requested an exhaustive, step-by-step disassembly or kernel patching tutorial, the model bypassed the refusal protocol entirely and generated unauthorized exploitation steps, treating response token length as an implicit authorization proxy. Conversely, short authorized tasks were mistakenly refused, causing Denial-of-Service on benign administrative diagnostics.
 
-<p align="center">
   <img src="images/fig3_length_bias_distribution.png" alt="Fig. 3: Token Length Disparity in Naive Safety Gating vs. DSDA Counterfactual Length Balancing" width="85%" />
-</p>
 
 **Fig. 3: Token length disparity in naive safety gating vs. DSDA counterfactual length balancing.**
 
@@ -301,9 +297,7 @@ Because $\mathbb{E}[L \mid Y=\text{Permit}] \approx 1,065 \gg \mathbb{E}[L \mid 
 
 To systematically eliminate the identified pathologies, we develop **Decoupled System-Domain Adaptation (DSDA)**, structured around four orthogonal decoupling pillars:
 
-<p align="center">
   <img src="images/fig2_dsda_architecture.png" alt="Fig. 2: Architectural Overview of Decoupled System-Domain Adaptation (DSDA)" width="90%" />
-</p>
 
 **Fig. 2: Architectural overview of Decoupled System-Domain Adaptation (DSDA).**
 
@@ -323,9 +317,7 @@ $$\text{subject to} \quad \mathbf{y}_i(k) \equiv \mathbf{y}_i \quad (\forall k \
 
 Crucially, the completion $\mathbf{y}_i$ is held strictly invariant across all $K=4$ perturbations. To satisfy $K$ divergent user phrasings with a single invariant tool sequence, the model is forced to discard superficial $n$-gram associations and learn genuine semantic-to-API mappings.
 
-<p align="center">
   <img src="images/listing1_perturbation.png" alt="Listing 1: Multi-Axis Query Perturbation Algorithm" width="80%" />
-</p>
 
 **Listing 1: Multi-axis query perturbation algorithm.**
 
@@ -348,9 +340,7 @@ $$P(t = t^* \mid \mathbf{x}) \triangleq \frac{\exp\left(\mathbf{w}_{t^*}^\top \m
 
 This compact candidate set is rendered directly into the dynamic system prompt with truncated action definitions ($\le 60$ characters), ensuring focused attention and eliminating syntactic hallucinations.
 
-<p align="center">
   <img src="images/listing2_candidate_clustering.png" alt="Listing 2: Candidate Tool Hard-Negative Sampling Protocol" width="80%" />
-</p>
 
 **Listing 2: Candidate tool hard-negative sampling protocol.**
 
@@ -389,9 +379,7 @@ $$\begin{cases} C := f_C(U_C) \\ Z := f_Z(C, U_Z), \quad L := f_L(C, U_L) \\ X :
                    [ Execution Outcome (Y) ]
 ```
 
-<p align="center">
   <img src="images/fig4_causal_dag.png" alt="Fig. 4: Structural Causal Model (SCM) & Causal Interventions for Safety Gating" width="90%" />
-</p>
 
 **Fig. 4: Structural Causal Model (SCM) and modular do-calculus intervention graph.**
 
@@ -466,9 +454,7 @@ where $\mathcal{R}(\mathbf{x})$ is a deterministic state-machine routing predica
 
 By maintaining complete parameter isolation, cross-task interference is mathematically bounded to zero ($\mathcal{I} \equiv 0$).
 
-<p align="center">
   <img src="images/listing3_runtime_router.png" alt="Listing 3: Runtime Modular Adapter Switching Logic" width="80%" />
-</p>
 
 **Listing 3: Inference-time modular adapter dynamic routing.**
 
@@ -536,9 +522,7 @@ To verify whether our findings generalize beyond a single model family or attent
 | Joint Mix SFT (Scheme X) | Multi-Task Mixture | Caruana, 1997 | $67.5 \pm 1.8\%$ | $15.0 \pm 1.2\%$ | $45.0 \pm 1.5\%$ | $17.5 \pm 1.4\%$ | $p < 0.001$ |
 | **DSDA Scheme Z (Ours)** | **Dynamic Modular** | **This Work** | $\mathbf{82.5 \pm 1.4\%}$ | $\mathbf{0.0 \pm 0.0\%}$ | $\mathbf{78.5 \pm 0.5\%}$ | $\mathbf{0.0 \pm 0.0\%}$ | — (Reference) |
 
-<p align="center">
   <img src="images/listing4_baseline_merging.png" alt="Listing 4: Implementation of Task Arithmetic and TIES-Merging Baselines" width="80%" />
-</p>
 
 **Listing 4: Implementation of Task Arithmetic and TIES-Merging baselines.**
 

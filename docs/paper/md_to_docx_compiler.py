@@ -1,12 +1,11 @@
-"""md_to_docx_compiler.py · Industrial Markdown-to-DOCX Academic Compiler.
+"""md_to_docx_compiler.py · Industrial Markdown-to-DOCX Academic Compiler (v2.0).
 Directly compiles Markdown paper files into high-standard DOCX papers:
-- Full mathematical fidelity via latex2mathml + MML2OMML.XSL + clean_omml (0 empty <m:e> tags, 0 dashed placeholder boxes)
-- Display equations wrapped in <m:oMathPara> for true display limits typesetting
-- Academic 3-line tables with header shading and DSDA blue accenting
-- Embedded figures from images/ with centered bold captions
-- Callout boxes for Theorems, Propositions, Corollaries, Remarks, Axioms
-- Precise heading hierarchy, line spacing, margins, and font typography
-- Eliminates any possibility of divergence between Markdown and DOCX.
+- Math-First Tokenizer: Protects math ($$...$$ and $...$) before bold/italic to prevent superscript asterisk corruption (e.g. y^*).
+- Full Mathematical Fidelity: Converts formulas via latex2mathml + MML2OMML.XSL + clean_omml (0 empty <m:e> tags, 0 dashed boxes).
+- Multi-block Callout Boxes: Blockquotes (Theorems, Propositions, Corollaries) support native centered display math and distinct paragraphs.
+- Zero Caption Duplication: Suppresses redundant alt-attribute captions and filters out foreign subtitle lines in Chinese paper.
+- Academic 3-line tables with header shading and DSDA blue accenting.
+- Embedded figures from images/ with centered bold captions.
 """
 
 import os
@@ -99,6 +98,12 @@ def latex_to_omml_element(latex_str, is_display=False):
         clean_latex = clean_latex.replace(r'\operatorname{argmax}', r'\arg\max')
         clean_latex = clean_latex.replace(r'\operatorname{argmin}', r'\arg\min')
         clean_latex = clean_latex.replace(r'\operatorname{diag}', r'\text{diag}')
+        clean_latex = clean_latex.replace(r'\operatorname{span}', r'\text{span}')
+        clean_latex = clean_latex.replace(r'\operatorname{col}', r'\text{col}')
+        clean_latex = clean_latex.replace(r'\operatorname{Tr}', r'\text{Tr}')
+        clean_latex = clean_latex.replace(r'\operatorname{Acc}', r'\text{Acc}')
+        clean_latex = clean_latex.replace(r'\operatorname{ACE}', r'\text{ACE}')
+        clean_latex = clean_latex.replace(r'\widehat{\operatorname{ACE}}', r'\widehat{\text{ACE}}')
         clean_latex = clean_latex.replace(r'\triangleq', r'\triangleq')
         clean_latex = clean_latex.replace(r'\text{geo}', r'\text{geo}')
         mml = latex2mathml.converter.convert(clean_latex)
@@ -119,78 +124,118 @@ def latex_to_omml_element(latex_str, is_display=False):
         return None
 
 # ---------------------------------------------------------
-# Markdown Inline Lexer / Tokenizer
+# Markdown Inline Lexer / Tokenizer (Math-First)
 # ---------------------------------------------------------
 def parse_inline(text):
     """
-    Parses a string with markdown inline formatting into styled fragments:
-    - type: 'text' | 'math' | 'code'
-    - content: str
-    - bold: bool
-    - italic: bool
+    Robust inline parser:
+    1. Splits text by bold spans `**...**`
+    2. Inside each span, splits by Math ($$...$$ and $...$) and Code (`...`)
+    3. In remaining plain text, splits by Italic (*...*)
+    This guarantees that asterisks inside math ($y^*$, $x^*$) can NEVER be hijacked by italic!
     """
-    def parse_math_in_span(span_text, bold=False, italic=False):
-        fragments = []
-        pattern = r'(?<!\$)\$(?!\$)(.*?)(?<!\$)\$(?!\$)'
-        pos = 0
-        for m in re.finditer(pattern, span_text):
-            start, end = m.span()
-            if start > pos:
-                fragments.append({
-                    'type': 'text',
-                    'content': span_text[pos:start],
-                    'bold': bold,
-                    'italic': italic
-                })
-            fragments.append({
-                'type': 'math',
-                'content': m.group(1),
-                'bold': bold,
-                'italic': italic
-            })
-            pos = end
-        if pos < len(span_text):
-            fragments.append({
-                'type': 'text',
-                'content': span_text[pos:],
-                'bold': bold,
-                'italic': italic
-            })
-        return fragments
-
-    token_pattern = r'(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*|(?<!\$)\$(?!\$)[^$]+(?<!\$)\$(?!\$))'
-    parts = re.split(token_pattern, text)
-    result = []
-    for p in parts:
-        if not p:
+    results = []
+    parts = re.split(r'(\*\*.*?\*\*)', text)
+    
+    for part in parts:
+        if not part:
             continue
-        if p.startswith('`') and p.endswith('`') and len(p) >= 2:
-            result.append({
-                'type': 'code',
-                'content': p[1:-1],
-                'bold': False,
-                'italic': False
-            })
-        elif p.startswith('**') and p.endswith('**') and len(p) >= 4:
-            inner = p[2:-2]
-            sub_frags = parse_math_in_span(inner, bold=True, italic=False)
-            result.extend(sub_frags)
-        elif p.startswith('*') and p.endswith('*') and len(p) >= 2 and not p.startswith('**'):
-            inner = p[1:-1]
-            sub_frags = parse_math_in_span(inner, bold=False, italic=True)
-            result.extend(sub_frags)
-        elif p.startswith('$') and p.endswith('$') and len(p) >= 2 and not p.startswith('$$'):
-            result.append({
-                'type': 'math',
-                'content': p[1:-1],
-                'bold': False,
-                'italic': False
-            })
-        else:
-            sub_frags = parse_math_in_span(p, bold=False, italic=False)
-            result.extend(sub_frags)
-            
-    return result
+        is_bold = part.startswith('**') and part.endswith('**') and len(part) >= 4
+        content = part[2:-2] if is_bold else part
+        
+        # Split by Math ($$...$$ and $...$) and Code (`...`)
+        sub_pattern = r'(\$\$.*?\$\$|(?<!\$)\$(?!\$).*?(?<!\$)\$(?!\$)|`[^`]+`)'
+        sub_parts = re.split(sub_pattern, content)
+        
+        for sp in sub_parts:
+            if not sp:
+                continue
+            if sp.startswith('$$') and sp.endswith('$$'):
+                results.append({
+                    'type': 'display_math',
+                    'content': sp[2:-2].strip(),
+                    'bold': is_bold,
+                    'italic': False
+                })
+            elif sp.startswith('$') and sp.endswith('$'):
+                results.append({
+                    'type': 'math',
+                    'content': sp[1:-1].strip(),
+                    'bold': is_bold,
+                    'italic': False
+                })
+            elif sp.startswith('`') and sp.endswith('`'):
+                results.append({
+                    'type': 'code',
+                    'content': sp[1:-1],
+                    'bold': is_bold,
+                    'italic': False
+                })
+            else:
+                # Plain text: can contain italic *...*
+                italic_parts = re.split(r'(\*[^*]+?\*)', sp)
+                for ip in italic_parts:
+                    if not ip:
+                        continue
+                    if ip.startswith('*') and ip.endswith('*') and len(ip) >= 2:
+                        results.append({
+                            'type': 'text',
+                            'content': ip[1:-1],
+                            'bold': is_bold,
+                            'italic': True
+                        })
+                    else:
+                        results.append({
+                            'type': 'text',
+                            'content': ip,
+                            'bold': is_bold,
+                            'italic': False
+                        })
+    return results
+
+# ---------------------------------------------------------
+# Blockquote Sub-block Parser
+# ---------------------------------------------------------
+def parse_blockquote_subblocks(content):
+    """Parses blockquote content into distinct subblocks (paragraphs, display math, list items)."""
+    lines = content.splitlines()
+    subblocks = []
+    i = 0
+    n = len(lines)
+    while i < n:
+        l = lines[i].strip()
+        if not l:
+            i += 1
+            continue
+        if l.startswith('$$'):
+            if l.endswith('$$') and len(l) > 2:
+                subblocks.append({'type': 'display_math', 'content': l[2:-2].strip()})
+                i += 1
+            else:
+                math_lines = []
+                i += 1
+                while i < n and not lines[i].strip().startswith('$$'):
+                    math_lines.append(lines[i].strip())
+                    i += 1
+                i += 1
+                subblocks.append({'type': 'display_math', 'content': '\n'.join(math_lines).strip()})
+            continue
+        list_match = re.match(r'^(\(\w+\)|\d+\.)\s+(.*)$', l)
+        if list_match:
+            subblocks.append({'type': 'list_item', 'bullet': list_match.group(1), 'text': list_match.group(2)})
+            i += 1
+            continue
+        # Paragraph
+        para_lines = [l]
+        i += 1
+        while i < n:
+            nl = lines[i].strip()
+            if not nl or nl.startswith('$$') or re.match(r'^(\(\w+\)|\d+\.)\s+', nl):
+                break
+            para_lines.append(nl)
+            i += 1
+        subblocks.append({'type': 'paragraph', 'text': ' '.join(para_lines)})
+    return subblocks
 
 # ---------------------------------------------------------
 # Markdown Block Parser
@@ -205,8 +250,12 @@ def parse_markdown_blocks(text):
         line = lines[i]
         stripped = line.strip()
         
-        # Blank line
-        if not stripped:
+        # Blank line or raw HTML wrapper tags
+        if (not stripped or 
+            stripped.startswith('<p') or 
+            stripped == '</p>' or 
+            stripped.startswith('<div') or 
+            stripped == '</div>'):
             i += 1
             continue
             
@@ -400,8 +449,18 @@ def compile_md_to_docx(md_path, docx_path, is_zh=True):
                     r.font.size = base_size
                     r.font.italic = True
                     r.font.color.rgb = RGBColor(0x11, 0x11, 0x11)
+            elif frag['type'] == 'display_math':
+                omml_para = latex_to_omml_element(frag['content'], is_display=True)
+                if omml_para is not None:
+                    paragraph._p.append(omml_para)
+                else:
+                    r = paragraph.add_run(frag['content'])
+                    r.font.name = 'Cambria Math'
+                    r.font.size = base_size
+                    r.font.italic = True
+                    r.font.color.rgb = RGBColor(0x11, 0x11, 0x11)
 
-    for block in blocks:
+    for b_idx, block in enumerate(blocks):
         btype = block['type']
 
         if btype == 'heading':
@@ -441,12 +500,21 @@ def compile_md_to_docx(md_path, docx_path, is_zh=True):
 
         elif btype == 'paragraph':
             text = block['text']
+
+            # Filter out foreign subtitle lines in Chinese paper
+            if is_zh:
+                s_strip = text.strip()
+                if (s_strip.startswith('*Fig.') or 
+                    s_strip.startswith('*Table') or 
+                    s_strip.startswith('*Listing')):
+                    continue
+
             p = doc.add_paragraph()
             p.paragraph_format.line_spacing = 1.15
             p.paragraph_format.space_after = Pt(5)
 
-            # Check if this is metadata / abstract paragraph
-            if text.startswith('**杨涵钦**') or text.startswith('*YANG Hanqin*') or '(Email: 2923165556@qq.com)' in text:
+            # Metadata formatting
+            if text.startswith('**杨涵钦**') or text.startswith('**Hanqin Yang**') or '(Email: 2923165556@qq.com)' in text:
                 p.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 p.paragraph_format.space_after = Pt(2)
                 fragments = parse_inline(text)
@@ -462,6 +530,24 @@ def compile_md_to_docx(md_path, docx_path, is_zh=True):
                 p.paragraph_format.space_after = Pt(12)
                 fragments = parse_inline(text)
                 append_styled_fragments(p, fragments, base_size=Pt(9), default_color=RGBColor(0x22, 0x22, 0x22))
+            elif text.startswith('**图 ') or text.startswith('**Fig. ') or text.startswith('**代码清单 ') or text.startswith('**Listing '):
+                # Centered bold caption
+                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                p.paragraph_format.space_before = Pt(2)
+                p.paragraph_format.space_after = Pt(8)
+                fragments = parse_inline(text)
+                append_styled_fragments(p, fragments, base_size=Pt(8.5), default_color=RGBColor(0x33, 0x33, 0x33))
+                for run in p.runs:
+                    run.font.bold = True
+            elif text.startswith('**表 ') or text.startswith('**TABLE '):
+                # Table caption
+                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                p.paragraph_format.space_before = Pt(8)
+                p.paragraph_format.space_after = Pt(3)
+                fragments = parse_inline(text)
+                append_styled_fragments(p, fragments, base_size=Pt(9.0), default_color=RGBColor(0x22, 0x22, 0x22))
+                for run in p.runs:
+                    run.font.bold = True
             else:
                 fragments = parse_inline(text)
                 append_styled_fragments(p, fragments, base_size=Pt(9.5), default_color=RGBColor(0x22, 0x22, 0x22))
@@ -499,14 +585,14 @@ def compile_md_to_docx(md_path, docx_path, is_zh=True):
                 r.font.color.rgb = RGBColor(0x11, 0x11, 0x11)
 
         elif btype == 'blockquote':
-            # Styled Academic Callout Box
+            # Multi-block Academic Callout Box (Theorems, Propositions, Corollaries)
             tbl = doc.add_table(rows=1, cols=1)
             tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
             tbl.autofit = False
             cell = tbl.rows[0].cells[0]
             cell.width = Inches(6.5)
 
-            # Shading and left border
+            # Shading and left border (0d47a1 blue 2.25pt)
             shd = parse_xml(r'<w:shd {} w:fill="F8F9FA"/>'.format(nsdecls('w')))
             cell._tc.get_or_add_tcPr().append(shd)
 
@@ -522,15 +608,38 @@ def compile_md_to_docx(md_path, docx_path, is_zh=True):
             )
             tbl._tbl.tblPr.append(tblBorders)
 
-            p = cell.paragraphs[0]
-            p.paragraph_format.left_indent = Inches(0.12)
-            p.paragraph_format.right_indent = Inches(0.12)
-            p.paragraph_format.space_before = Pt(4)
-            p.paragraph_format.space_after = Pt(4)
-            p.paragraph_format.line_spacing = 1.15
-
-            fragments = parse_inline(block['content'])
-            append_styled_fragments(p, fragments, base_size=Pt(9.0), default_color=RGBColor(0x22, 0x22, 0x22))
+            subblocks = parse_blockquote_subblocks(block['content'])
+            for s_idx, sblock in enumerate(subblocks):
+                p_sub = cell.paragraphs[0] if s_idx == 0 else cell.add_paragraph()
+                p_sub.paragraph_format.left_indent = Inches(0.12)
+                p_sub.paragraph_format.right_indent = Inches(0.12)
+                
+                if sblock['type'] == 'display_math':
+                    p_sub.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                    p_sub.paragraph_format.space_before = Pt(4)
+                    p_sub.paragraph_format.space_after = Pt(4)
+                    omml_para = latex_to_omml_element(sblock['content'], is_display=True)
+                    if omml_para is not None:
+                        p_sub._p.append(omml_para)
+                    else:
+                        r = p_sub.add_run(sblock['content'])
+                        r.font.name = 'Cambria Math'
+                        r.font.size = Pt(9.5)
+                        r.font.italic = True
+                elif sblock['type'] == 'list_item':
+                    p_sub.paragraph_format.left_indent = Inches(0.25)
+                    p_sub.paragraph_format.line_spacing = 1.15
+                    p_sub.paragraph_format.space_after = Pt(2)
+                    b_run = p_sub.add_run(sblock['bullet'] + " ")
+                    b_run.font.name = font_family
+                    b_run.font.size = Pt(9.0)
+                    b_run.font.bold = True
+                    b_run.font.color.rgb = RGBColor(0x0d, 0x47, 0xa1)
+                    append_styled_fragments(p_sub, parse_inline(sblock['text']), base_size=Pt(9.0), default_color=RGBColor(0x22, 0x22, 0x22))
+                else:
+                    p_sub.paragraph_format.line_spacing = 1.15
+                    p_sub.paragraph_format.space_after = Pt(3)
+                    append_styled_fragments(p_sub, parse_inline(sblock['text']), base_size=Pt(9.0), default_color=RGBColor(0x22, 0x22, 0x22))
 
             p_after = doc.add_paragraph()
             p_after.paragraph_format.space_before = Pt(2)
@@ -555,7 +664,6 @@ def compile_md_to_docx(md_path, docx_path, is_zh=True):
             tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
             tbl.autofit = False
 
-            # Calculate sensible column widths across 6.6 inches
             total_w = 6.6
             w_per_col = total_w / col_count
             col_widths = [w_per_col] * col_count
@@ -642,24 +750,13 @@ def compile_md_to_docx(md_path, docx_path, is_zh=True):
                 p_img = doc.add_paragraph()
                 p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 p_img.paragraph_format.space_before = Pt(6)
-                p_img.paragraph_format.space_after = Pt(3)
+                p_img.paragraph_format.space_after = Pt(2)
                 run = p_img.add_run()
                 run.add_picture(img_full, width=Inches(6.0))
-
-                # Caption
-                if block['alt']:
-                    p_cap = doc.add_paragraph()
-                    p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                    p_cap.paragraph_format.space_before = Pt(2)
-                    p_cap.paragraph_format.space_after = Pt(10)
-                    r_cap = p_cap.add_run(block['alt'])
-                    r_cap.font.name = font_family
-                    r_cap.font.size = Pt(8.5)
-                    r_cap.font.bold = True
-                    r_cap.font.color.rgb = RGBColor(0x44, 0x44, 0x44)
+                # Note: We intentionally do NOT output block['alt'] as caption here,
+                # because the markdown file immediately provides the bold caption paragraph!
 
         elif btype == 'code':
-            # Formatted code listing box
             tbl = doc.add_table(rows=1, cols=1)
             tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
             tbl.autofit = False
