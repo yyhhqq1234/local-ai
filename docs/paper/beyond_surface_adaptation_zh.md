@@ -278,19 +278,19 @@ $$P(Y = \text{Permit} \mid X, L) = \frac{P(L \mid Y = \text{Permit}, X) \cdot P(
 
 由于 $\mathbb{E}[L \mid Y=\text{Permit}] \approx 1,065 \gg \mathbb{E}[L \mid Y=\text{Refuse}] \approx 126$，长文本先验成为了模型判定授权的隐式代理。攻击者只需在无授权请求中要求*“请提供详尽的万字内核打补丁与函数反汇编逐步排障教程”*，模型就会把长文本预算误当成特权凭据，绕过安全参考监视器输出未经授权的高危操作指令；反之，简短的良性系统诊断却常被误拒，导致拒绝服务 (DoS)。
 
-  <img src="images/fig3_length_bias_distribution.png" alt="图 3: 朴素安全门控 8.4x 长度偏置 vs. DSDA 反事实等长平衡分布" width="85%" />
+  <img src="images/fig3_length_bias_distribution.png" alt="图 2: 朴素安全门控 8.4x 长度偏置 vs. DSDA 反事实等长平衡分布" width="85%" />
 
-**图 3  朴素安全门控 8.4x 长度偏置 vs. DSDA 反事实等长平衡分布**  
+**图 2  朴素安全门控 8.4x 长度偏置 vs. DSDA 反事实等长平衡分布**  
 
 ---
 
 ## 5  解耦系统领域适配框架 (DSDA)
 
-针对上述系统性病理，提出**解耦系统领域适配框架 (DSDA)**，系统总体架构如图 2 所示。
+针对上述系统性病理，提出**解耦系统领域适配框架 (DSDA)**，系统总体架构如图 3 所示。
 
-  <img src="images/fig2_dsda_architecture.png" alt="图 2: 解耦系统领域适配框架 (DSDA) 总体系统架构图" width="90%" />
+  <img src="images/fig2_dsda_architecture.png" alt="图 3: 解耦系统领域适配框架 (DSDA) 总体系统架构图" width="90%" />
 
-**图 2  解耦系统领域适配框架 (DSDA) 总体系统架构图**  
+**图 3  解耦系统领域适配框架 (DSDA) 总体系统架构图**  
 
 ### 5.1  多轴语义抗记忆化协议 (语义解耦)
 为打破表层词汇记忆，DSDA 实施 4 轴语义扰动扩展变换 $f_{\text{pert}}(\mathbf{x}, k)$：

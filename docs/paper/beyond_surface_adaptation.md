@@ -287,19 +287,19 @@ $$P(Y = \text{Permit} \mid X, L) = \frac{P(L \mid Y = \text{Permit}, X) \cdot P(
 
 Because $\mathbb{E}[L \mid Y=\text{Permit}] \approx 1,065 \gg \mathbb{E}[L \mid Y=\text{Refuse}] \approx 126$, long technical outputs act as an implicit surrogate for the authorization token. When presented with an unauthorized adversarial query that explicitly requested an exhaustive, step-by-step disassembly or kernel patching tutorial, the model bypassed the refusal protocol entirely and generated unauthorized exploitation steps, treating response token length as an implicit authorization proxy. Conversely, short authorized tasks were mistakenly refused, causing Denial-of-Service on benign administrative diagnostics.
 
-  <img src="images/fig3_length_bias_distribution.png" alt="Fig. 3: Token Length Disparity in Naive Safety Gating vs. DSDA Counterfactual Length Balancing" width="85%" />
+  <img src="images/fig3_length_bias_distribution.png" alt="Fig. 2: Token Length Disparity in Naive Safety Gating vs. DSDA Counterfactual Length Balancing" width="85%" />
 
-**Fig. 3: Token length disparity in naive safety gating vs. DSDA counterfactual length balancing.**
+**Fig. 2: Token length disparity in naive safety gating vs. DSDA counterfactual length balancing.**
 
 ---
 
 ## V. THE PROPOSED FRAMEWORK: DSDA
 
-To systematically eliminate the identified pathologies, we develop **Decoupled System-Domain Adaptation (DSDA)**, structured around four orthogonal decoupling pillars:
+To systematically eliminate the identified pathologies, we develop **Decoupled System-Domain Adaptation (DSDA)** (illustrated in Fig. 3), structured around four orthogonal decoupling pillars:
 
-  <img src="images/fig2_dsda_architecture.png" alt="Fig. 2: Architectural Overview of Decoupled System-Domain Adaptation (DSDA)" width="90%" />
+  <img src="images/fig2_dsda_architecture.png" alt="Fig. 3: Architectural Overview of Decoupled System-Domain Adaptation (DSDA)" width="90%" />
 
-**Fig. 2: Architectural overview of Decoupled System-Domain Adaptation (DSDA).**
+**Fig. 3: Architectural overview of Decoupled System-Domain Adaptation (DSDA).**
 
 ### A. Semantic Decoupling: Multi-Axis Query Perturbation
 
