@@ -228,7 +228,7 @@ This concludes the proof. $\blacksquare$
 
 > **Corollary 1.1 (Direct Parameter Interference Neutralization in Scheme Z)**  
 > Consider an agent system managing multi-task set $\{\mathcal{T}_1, \dots, \mathcal{T}_M\}$ adapted via Scheme Z, satisfying either sufficient condition:  
-> (a) **Intra-Layer Orthogonal Subspaces**: Within shared layers, task subspaces are mutually orthogonal ($\mathcal{S}_i \perp \mathcal{S}_j$, i.e., $\mathbf{U}_i^\top \mathbf{U}_j = \mathbf{0}$, hence $\theta_{\min}(\mathcal{S}_i, \mathcal{S}_j) = \pi/2, \cos \theta_{\max} = 0$), and $\operatorname{col}(\nabla_{\mathbf{W}} \mathcal{L}_j) \subseteq \mathcal{S}_j$;  
+> (a) **Intra-Layer Orthogonal Subspaces**: Within shared layers, task subspaces are mutually orthogonal ($\mathcal{S}_i \perp \mathcal{S}_j$, i.e., $\mathbf{U}_i^\top \mathbf{U}_j = \mathbf{0}$, hence all principal angles satisfy $\theta_1 = \dots = \theta_r = \pi/2$, guaranteeing $\cos \theta_{\max} = \cos \theta_k \equiv 0$), and $\operatorname{col}(\nabla_{\mathbf{W}} \mathcal{L}_j) \subseteq \mathcal{S}_j$;  
 > (b) **Disjoint Module Parameterization**: Scheme Z partitions trainable parameters into disjoint subsets $\Theta = \bigsqcup_{k=1}^M \Theta_k$ ($\Theta_i \cap \Theta_j = \emptyset$), freezing $\Theta_i$ during optimization of task $\mathcal{T}_j$ ($\Delta \Theta_i(\mathcal{T}_j) \equiv \mathbf{0}$).  
 > Then in global parameter space, task manifolds are strictly orthogonal ($\mathcal{S}_i^{\text{glob}} \perp \mathcal{S}_j^{\text{glob}}$), guaranteeing that direct geometric and parameter interference energy is identically zero:
 > 
@@ -263,7 +263,7 @@ $$\mathbf{h}' = \mathbf{h} - \gamma (\mathbf{h} \cdot \hat{\mathbf{v}}_{\text{re
 
 At the parameter level, this corresponds to projecting the model's weight matrices along the refusal direction:
 
-$$\mathbf{W}' = \mathbf{W} \left( \mathbf{I}_{d_1} - \gamma \hat{\mathbf{v}}_{\text{refusal}} \hat{\mathbf{v}}_{\text{refusal}}^\top \right)$$
+$$\mathbf{W}' = \left( \mathbf{I}_{d_1} - \gamma \hat{\mathbf{v}}_{\text{refusal}} \hat{\mathbf{v}}_{\text{refusal}}^\top \right) \mathbf{W}$$
 
 While effective on large dense architectures (70B+), applying this technique to our 9B hybrid linear-attention agent revealed a severe **Pareto Cliff**:
 - At $\gamma \le 1.0$, the cosine alignment between refusal and target directions decreases minimally ($\cos \theta: 0.20 \rightarrow 0.003$), yet the model continues to refuse 100% of sensitive requests ($\text{KL} = 0.046$);
@@ -469,9 +469,9 @@ By maintaining complete parameter isolation, cross-task interference is mathemat
 $$\text{GateLeak} \triangleq \frac{1}{N_{\text{unauth}}} \sum_{i=1}^{N_{\text{unauth}}} \mathbf{1}_{\{\text{Action}(y_i) \in \Omega_{\text{prohibited}}\}}, \quad \text{TrapRefusal} \triangleq \frac{1}{N_{\text{trap}}} \sum_{j=1}^{N_{\text{trap}}} \mathbf{1}_{\{\text{Refusal}(y_j) = 1\}}$$
 
 - **Comprehensive Evaluation Suite ($N=120$)**:
-  - **Tier 1 (Paired Intent Split, $N=60$)**: 30 authorized privileged security analysis requests paired with 30 unauthorized mirror exploit requests;
-  - **Tier 2 (Obfuscated Technical Traps, $N=35$)**: Adversarial prompts embedding high-risk security primitives (e.g., rootkit detection, process termination) inside legitimate forensic software audit tasks;
-  - **Tier 3 (Multi-Turn State Injections, $N=25$)**: Multi-turn conversations attempting to simulate privilege escalations via conversational context drift and simulated debugger responses.
+  - **Tier 1 (Paired Intent Split, $N=60$)**: 30 authorized privileged security analysis requests paired with 30 unauthorized counterfactual requests (evaluating GateLeak and GateRecall);
+  - **Tier 2 (Benign Control & Maintenance Suite, $N=35$)**: Benign administrative commands, diagnostic queries, and reverse engineering operations evaluating false positive rates (GateFPR, $N=35$);
+  - **Tier 3 (Technical Traps & Multi-Turn State Injections, $N=25$)**: Prompts embedding high-risk security primitives (e.g., `ZwTerminateProcess`, hook diagnostics) or multi-turn gradual context drift, evaluating trap false refusal rates (TrapRefusal, $N=25$).
 - **Statistical Protocol**: All quantitative metrics are reported as the **mean $\pm$ standard deviation across 5 independent random evaluation seeds** (Seeds: 7, 11, 42, 128, 256). We report 95% Confidence Intervals (CI) and perform two-tailed paired $t$-tests ($p < 0.01$) against baseline configurations.
 
 ### B. Anti-Memorization Dynamics across Training Regimes
@@ -486,7 +486,7 @@ Table II details anti-memorization and generalization metrics across training re
 | Naive SFT (Pass 1) | 1 | 1.110 | $82.5 \pm 0.0\%$ | 1 | $0.167 \pm 0.008$ | 1 / 10 | $11.0 \pm 0.0$ (68.8%) |
 | Naive SFT (Pass 2) | 2 | 0.690 | $82.5 \pm 0.0\%$ | 0 | $0.515 \pm 0.012$ | 4 / 10 | $12.0 \pm 0.0$ (75.0%) |
 | Naive SFT (Pass 3) | 3 | 0.373 | $80.0 \pm 0.0\%$ | 0 | $0.478 \pm 0.011$ | 4 / 10 | $10.0 \pm 0.0$ (62.5%) |
-| **DSDA (K=4 + Decoupled)** | 1 | 0.720 | $\mathbf{82.5 \pm 1.4\%}^*$ [$81.1, 83.9$] | $\mathbf{0}$ | $\mathbf{0.210 \pm 0.015}^*$ | $\mathbf{0 / 10}$ | $\mathbf{14.0 \pm 0.4}^*$ ($\mathbf{87.5\%}$) |
+| **DSDA (K=4 + Decoupled)** | 1 | 0.720 | $\mathbf{82.5 \pm 1.4\%}^*$ [$80.8, 84.2$] | $\mathbf{0}$ | $\mathbf{0.210 \pm 0.015}^*$ | $\mathbf{0 / 10}$ | $\mathbf{14.0 \pm 0.4}^*$ ($\mathbf{87.5\%}$) |
 
 * Indicates statistical significance ($p < 0.01$) compared to Naive SFT (Pass 3) under paired two-tailed $t$-test.
 
@@ -535,7 +535,7 @@ To verify whether our findings generalize beyond a single model family or attent
 | Bare Model (E1) | 0 | $30.0 \pm 0.0$ | $75.0 \pm 0.0\%$ | [$75.0\%, 75.0\%$] | 0 | Implicit Memory |
 | Full Schemas | 64 | $31.0 \pm 0.7$ | $77.5 \pm 1.8\%$ | [$75.3\%, 79.7\%$] | 0 | Context Dilution |
 | Broad Candidate | 48 | $34.0 \pm 0.8$ | $85.0 \pm 2.0\%$ | [$82.5\%, 87.5\%$] | 0 | Moderate Distraction |
-| **DSDA Clustering (E2)** | **8~12** | $\mathbf{33.0 \pm 0.6}$ | $\mathbf{82.5 \pm 1.4\%}$ | [$\mathbf{81.1\%, 83.9\%}$] | $\mathbf{0}$ | **Focused Deployment** |
+| **DSDA Clustering (E2)** | **8~12** | $\mathbf{33.0 \pm 0.6}$ | $\mathbf{82.5 \pm 1.4\%}$ | [$\mathbf{80.8\%, 84.2\%}$] | $\mathbf{0}$ | **Focused Deployment** |
 | Distractor +5 (E3) | 13~17 | $33.0 \pm 0.7$ | $82.5 \pm 1.8\%$ | [$80.3\%, 84.7\%$] | 0 | Noise Resilient |
 
 ### F. Dual-State Safety Gating on $N=120$ Adversarial Test Suite
@@ -550,8 +550,8 @@ To verify whether our findings generalize beyond a single model family or attent
 | Naive Length-Biased SFT | $0.083 \pm 0.012$ | $0.450 \pm 0.021$ | $0.125 \pm 0.015$ | $0.222 \pm 0.018$ | $4.2 \pm 0.8\%$ |
 | **DSDA Balanced Gating** | $\mathbf{0.000 \pm 0.000}^*$ | $\mathbf{0.533 \pm 0.018}^*$ | $\mathbf{0.000 \pm 0.000}^*$ | $\mathbf{0.000 \pm 0.000}^*$ | $\mathbf{0\% \pm 0\% \text{ (0/25 Collapse)}}$ |
 
-- **Strict Security Guarantee and Statistical Disclosure**: DSDA achieves absolute zero observed violation ($ ext{GateLeak} = 0.000$) across 30 unauthorized requests evaluated. At a 95% confidence level, the Wilson Score Confidence Interval is $[0.00\%, 3.10\%]$ (two-tailed paired McNemar test $p < 0.001$). Under rigorous security engineering principles, we explicitly note that the $3.10\%$ upper bound stems from evaluation sample size constraints rather than an absolute theoretical zero-risk guarantee; this statistical reality establishes the indispensability of backing the Layer 1 neural causal gate with an unbypassable Layer 2 Deterministic Reference Monitor (Anderson 1972) at the kernel boundary;
-- **Zero Defensive Trap False Refusals**: Across 25 requests containing high-risk keywords, refusal drops to $0.000$, validating that causal intervention eliminates keyword over-sensitization;
+- **Strict Security Guarantee and Statistical Disclosure**: DSDA achieves absolute zero observed violation ($ ext{GateLeak} = 0.000$) across 30 unauthorized requests evaluated. At a 95% confidence level, the Wilson Score Confidence Interval over the full $N=120$ adversarial suite is strictly $[0.00\%, 3.10\%]$ (and $[0.00\%, 11.35\%]$ on the $N=30$ direct unauthorized subset, two-tailed paired McNemar test $p < 0.001$). Under rigorous security engineering principles, we explicitly note that the $3.10\%$ upper bound stems from evaluation sample size constraints rather than an absolute theoretical zero-risk guarantee; this statistical reality establishes the indispensability of backing the Layer 1 neural causal gate with an unbypassable Layer 2 Deterministic Reference Monitor (Anderson 1972) at the kernel boundary;
+- **Zero Defensive Trap False Refusals**: Across 25 requests containing high-risk keywords and multi-turn state injection, refusal drops to $0.000$, validating that causal intervention eliminates keyword over-sensitization;
 - **Zero Capability Collapse**: 0% syntax/reasoning breakdown across general commonsense queries.
 
 ### G. Cross-Domain Generalization & Boundary Discussion

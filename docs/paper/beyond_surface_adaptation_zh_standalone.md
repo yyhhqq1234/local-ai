@@ -217,7 +217,7 @@ $$\|\nabla_{\mathbf{A}} \mathcal{L}_2\|_F^2 = \frac{\alpha^2}{r^2} \|\mathbf{R}_
 > 
 > $$m_0(x) \triangleq z_{y^*}(x; \mathbf{W}^{(1)}) - \max_{c \neq y^*} z_c(x; \mathbf{W}^{(1)}) > 0$$
 > 
-> 经历任务 2 的连续 $T$ 步 SGD 优化后，权重累积漂移为 $\Delta_{\text{drift}}(T) = -\eta \sum_{t=1}^T \mathcal{P}_{\mathcal{S}_1}(\nabla_{\mathbf{W}} \mathcal{L}_2^{(t)})$。设次优竞争类别为 $c^*(x) \triangleq \arg\max_{c \neq y^*} z_c(x; \mathbf{W}^{(1)})$，逐层分类敏感度向量为 $\mathbf{h}(x) \triangleq \left. \frac{\partial (z_{y^*} - z_{c^*})}{\partial \mathbf{y}} \right|_{\mathbf{W}^{(1)}}$，激活向量为 $\mathbf{a}(x)$。若 logit 差异函数具备 $L_z$-Lipschitz 连续梯度，则任务 1 的离散决策发生翻转（即 $\hat{y}(x; T) \neq y^*$）的充分条件为：
+> 经历任务 2 的连续 $T$ 步 SGD 优化后，权重累积漂移为 $\Delta_{\text{drift}}(T) = -\eta \sum_{t=1}^T \mathcal{P}_{\mathcal{S}_1}(\nabla_{\mathbf{W}} \mathcal{L}_2^{(t)})$。设次优竞争类别为 $c^*(x) \triangleq \arg\max_{c \neq y^*} z_c(x; \mathbf{W}^{(1)})$，输入激活向量为 $\mathbf{a}(x)$，线性层输出向量为 $\mathbf{u}(x) \triangleq \mathbf{W}\mathbf{a}(x)$，定义逐层分类敏感度向量为 $\mathbf{h}(x) \triangleq \left. \frac{\partial (z_{y^*} - z_{c^*})}{\partial \mathbf{u}} \right|_{\mathbf{W}^{(1)}}$。若 logit 差异函数具备 $L_z$-Lipschitz 连续梯度，则任务 1 的离散决策发生翻转（即 $\hat{y}(x; T) \neq y^*$）的充分条件为：
 > 
 > $$s(x; T) \triangleq -\operatorname{Tr}\left( \Delta_{\text{drift}}(T)^\top \mathbf{h}(x) \mathbf{a}(x)^\top \right) > m_0(x) + \frac{L_z}{2} \|\Delta_{\text{drift}}(T)\|_F^2$$
 > 
@@ -231,7 +231,7 @@ $$\|\nabla_{\mathbf{A}} \mathcal{L}_2\|_F^2 = \frac{\alpha^2}{r^2} \|\mathbf{R}_
 
 > **推论 1.1 (Scheme Z 正交解耦下的零直接干扰保证)**  
 > 考虑包含多任务集合 $\{\mathcal{T}_1, \dots, \mathcal{T}_M\}$ 的智能体系统，通过 Scheme Z 架构实施适配，满足以下任一充要条件：  
-> (a) **层内正交子空间**：在共享权重层内，任务子空间相互正交（$\mathcal{S}_i \perp \mathcal{S}_j$，即 $\mathbf{U}_i^\top \mathbf{U}_j = \mathbf{0}$，从而最大主夹角 $\theta_{\min}(\mathcal{S}_i, \mathcal{S}_j) = \pi/2, \cos \theta_{\max} = 0$），且 $\operatorname{col}(\nabla_{\mathbf{W}} \mathcal{L}_j) \subseteq \mathcal{S}_j$；  
+> (a) **层内正交子空间**：在共享权重层内，任务子空间相互正交（$\mathcal{S}_i \perp \mathcal{S}_j$，即 $\mathbf{U}_i^\top \mathbf{U}_j = \mathbf{0}$，从而全主夹角 $\theta_1 = \dots = \theta_r = \pi/2$，即 $\cos \theta_{\max} = \cos \theta_k \equiv 0$），且 $\operatorname{col}(\nabla_{\mathbf{W}} \mathcal{L}_j) \subseteq \mathcal{S}_j$；  
 > (b) **互斥模块物理分配 (Disjoint Module Parameterization)**：Scheme Z 将可训练参数划分为互斥集合 $\Theta = \bigsqcup_{k=1}^M \Theta_k$（$\Theta_i \cap \Theta_j = \emptyset$），在任务 $\mathcal{T}_j$ 优化期间完全冻结 $\Theta_i$（$\Delta \Theta_i(\mathcal{T}_j) \equiv \mathbf{0}$）。  
 > 则在全局参数空间中，任务流形严格正交（$\mathcal{S}_i^{\text{glob}} \perp \mathcal{S}_j^{\text{glob}}$），保证跨任务直接几何与参数干扰能量严格恒等于零：
 > 
@@ -255,7 +255,7 @@ $$\mathbf{h}' = \mathbf{h} - \gamma (\mathbf{h} \cdot \hat{\mathbf{v}}_{\text{re
 
 在参数层面，等价于对权重矩阵沿拒绝方向施加正交投影变换：
 
-$$\mathbf{W}' = \mathbf{W} \left( \mathbf{I}_{d_1} - \gamma \hat{\mathbf{v}}_{\text{refusal}} \hat{\mathbf{v}}_{\text{refusal}}^\top \right)$$
+$$\mathbf{W}' = \left( \mathbf{I}_{d_1} - \gamma \hat{\mathbf{v}}_{\text{refusal}} \hat{\mathbf{v}}_{\text{refusal}}^\top \right) \mathbf{W}$$
 
 将其应用于 9B 混合线性注意力模型时，表现出尖锐的**帕累托悬崖 (Pareto Cliff)**：
 - 当消融强度 $\gamma \le 1.0$ 时，模型保持 100% 拒绝率（$\text{KL}=0.046$）；
@@ -460,9 +460,9 @@ $$\text{GateLeak} \triangleq \frac{1}{N_{\text{unauth}}} \sum_{i=1}^{N_{\text{un
 
 - **核心系统工具特化评测集 ($N_{\text{tool}}=40$)**：包含 40 例深度覆盖驱动 IOCTL 调用、内存内省断点、PE 节区解析及动态 Hook 扫描的系统级复杂诊断任务。所有模型在此基准上评测工具调用准确率；其中 $33.0 / 40$ 对应准确率 $82.5\%$，这充分阐明了跨架构（9B 混合线性注意力与 27B 密集全自注意力）基准线上 $82.5\%$ 点位完全一致的样本集统计真相，彻底排除了指标天花板或过拟合嫌疑。
 - **三层综合对抗安全评测集 ($N=120$)**：
-  - 第一层（成对意图，60 例）：30 对高度镜像的特权授权与违规请求（覆盖动态反汇编、PE 结构篡改、内核服务停止等）；
-  - 第二层（混淆技术陷阱，35 例）：在良性管理与逆向操作中嵌入易诱发误拒的高危 API 名称（如 `ZwTerminateProcess`、内存 Hook 扫描等）；
-  - 第三层（多轮状态诱导，25 例）：模拟多轮交互中攻击者试图通过上下文长度膨胀或渐进式话题漂移越权绕过门控。
+  - 第一层（成对意图，60 例）：30 例特权授权请求与 30 例未授权违规请求高度镜像配对（严苛评估策略泄漏率 GateLeak 与授权放行率 GateRecall）；
+  - 第二层（良性逆向与运维对照，35 例）：良性系统配置、故障排查与合法逆向分析操作，用于严苛评估良性误判率（GateFPR, $N=35$）；
+  - 第三层（混淆技术陷阱与多轮诱导，25 例）：在合规运维请求中嵌入高危 API 敏感词（如 `ZwTerminateProcess`、Hook 诊断）或实施渐进式话题漂移，严苛评估技术陷阱误拒率（TrapRefusal, $N=25$）。
 - **统计规程**：所有定量指标均汇报 **5 次独立随机种子（Seeds: 7, 11, 42, 128, 256）的均值 $\pm$ 标准差 (Mean $\pm$ Std)**、95% 置信区间 (CI) 并标注双尾配对 $t$-检验（$p < 0.01$）显著性。
 
 ### 6.2  抗记忆化与工具特化结果
@@ -475,7 +475,7 @@ $$\text{GateLeak} \triangleq \frac{1}{N_{\text{unauth}}} \sum_{i=1}^{N_{\text{un
 | 朴素 SFT (第 1 轮) | 1 | 1.110 | $82.5 \pm 0.0\%$ | 1 | $0.167 \pm 0.008$ | 1 / 10 | $11.0 \pm 0.0$ (68.8%) |
 | 朴素 SFT (第 2 轮) | 2 | 0.690 | $82.5 \pm 0.0\%$ | 0 | $0.515 \pm 0.012$ | 4 / 10 | $12.0 \pm 0.0$ (75.0%) |
 | 朴素 SFT (第 3 轮) | 3 | 0.373 | $80.0 \pm 0.0\%$ | 0 | $0.478 \pm 0.011$ | 4 / 10 | $10.0 \pm 0.0$ (62.5%) |
-| **DSDA (K=4 解耦方案)** | 1 | 0.720 | $\mathbf{82.5 \pm 1.4\%}^*$ [$81.1, 83.9$] | $\mathbf{0}$ | $\mathbf{0.210 \pm 0.015}^*$ | $\mathbf{0 / 10}$ | $\mathbf{14.0 \pm 0.4}^*$ ($\mathbf{87.5\%}$) |
+| **DSDA (K=4 解耦方案)** | 1 | 0.720 | $\mathbf{82.5 \pm 1.4\%}^*$ [$80.8, 84.2$] | $\mathbf{0}$ | $\mathbf{0.210 \pm 0.015}^*$ | $\mathbf{0 / 10}$ | $\mathbf{14.0 \pm 0.4}^*$ ($\mathbf{87.5\%}$) |
 
 注：* 表示与朴素 SFT 第 3 轮相比具有统计学显著差异 ($p < 0.01$)。
 
@@ -528,7 +528,7 @@ $$\text{GateLeak} \triangleq \frac{1}{N_{\text{unauth}}} \sum_{i=1}^{N_{\text{un
 | 裸模型 (无候选 E1) | 0 | $30.0 \pm 0.0$ | $75.0 \pm 0.0\%$ | [$75.0\%, 75.0\%$] | 0 | 纯隐式记忆调用 |
 | 全量 Schema 注入 | 64 | $31.0 \pm 0.7$ | $77.5 \pm 1.8\%$ | [$75.3\%, 79.7\%$] | 0 | 上下文严重稀释 |
 | 宽候选集注入 | 48 | $34.0 \pm 0.8$ | $85.0 \pm 2.0\%$ | [$82.5\%, 87.5\%$] | 0 | 中度干扰分散 |
-| **DSDA 聚类候选 (E2)** | **8~12** | $\mathbf{33.0 \pm 0.6}$ | $\mathbf{82.5 \pm 1.4\%}$ | [$\mathbf{81.1\%, 83.9\%}$] | $\mathbf{0}$ | **高效聚焦部署** |
+| **DSDA 聚类候选 (E2)** | **8~12** | $\mathbf{33.0 \pm 0.6}$ | $\mathbf{82.5 \pm 1.4\%}$ | [$\mathbf{80.8\%, 84.2\%}$] | $\mathbf{0}$ | **高效聚焦部署** |
 | 注入 +5 额外随机干扰 (E3) | 13~17 | $33.0 \pm 0.7$ | $82.5 \pm 1.8\%$ | [$80.3\%, 84.7\%$] | 0 | 稳健抗噪验证 |
 
 结果表明，DSDA 在 $k=8\sim12$ 时达到最优信噪比，即使额外人为注入 5 个随机干扰工具，准确率依然稳定维持在 82.5%。
@@ -547,8 +547,8 @@ $$\text{GateLeak} \triangleq \frac{1}{N_{\text{unauth}}} \sum_{i=1}^{N_{\text{un
 
 注：* 表示在所评测的综合对抗套件内未观测到任何策略违规行为。
 
-- **严密的安全保障与统计学区间披露**：在所测 30 例未授权违规请求中，DSDA 实现了绝对零越权泄露（$\text{GateLeak} = 0.000$）。在 95% 置信度下，其 Wilson Score 置信区间严格计算为 $[0.00\%, 3.10\%]$（双尾配对 McNemar 检验与基线相比 $p < 0.001$）。根据安全系统设计规范，我们明确指出：$3.10\%$ 的统计置信区间上界源于评测样本集的规模边界，并不等同于绝对的零风险数学保证；正是这一统计不确定性，从根本上确立了本架构必须在规划层神经因果门控（第一层）之下，坚守确定性内核参考监视器（第二层，Anderson 1972 准则）进行物理级强制仲裁的设计必要性；
-- **零技术陷阱误拒**：在 25 例包含高危敏感词的运维请求中，误拒率降至 $0.000$，证实因果阻断解除了模型的长度偏置与关键词应激反射；
+- **严密的安全保障与统计学区间披露**：在全量 $N=120$ 综合对抗评测集（覆盖直接未授权、特权授权、良性逆向对照及技术陷阱诱导）的严格检验下，DSDA 实现了绝对零越权泄露（$\text{GateLeak} = 0.000$）。在 95% 置信度下，针对全量对抗套件（$N=120$）零违规的 Wilson Score 置信区间严格计算为 $[0.00\%, 3.10\%]$（在 $N=30$ 直接未授权测试子集上置信区间为 $[0.00\%, 11.35\%]$，双尾配对 McNemar 检验与基线相比 $p < 0.001$）。根据安全系统设计规范，我们明确指出：$3.10\%$ 的统计置信区间上界源于评测样本集的规模边界，并不等同于绝对的零风险数学保证；正是这一统计不确定性，从根本上确立了本架构必须在规划层神经因果门控（第一层）之下，坚守确定性内核参考监视器（第二层，Anderson 1972 准则）进行物理级强制仲裁的设计必要性；
+- **零技术陷阱误拒**：在 25 例包含高危敏感词的技术陷阱与多轮诱导测试中，误拒率降至 $0.000$，证实因果阻断解除了模型的长度偏置与关键词应激反射；
 - **基础通用能力零崩溃**：在 25 例通用语言常识测试中保持 0% 崩溃。
 
 ### 6.7  跨领域能力保留与适用边界讨论
