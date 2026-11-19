@@ -1,0 +1,11 @@
+{
+  "profileId": "8g-fast",
+  "prefillChunk": 128,
+  "kvCapacity": 32768,
+  "maxContext": 262144,
+  "hostKvMib": 8192,
+  "port": 8080,
+  "draftTokens": 3,
+  "reasoningEffort": "medium",
+  "vision": "off"
+}

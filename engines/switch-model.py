@@ -15,10 +15,10 @@ import urllib.request
 
 BASE = r"D:\BaiduNetdiskDownload\Local-AI"
 PY = r"C:\ProgramData\anaconda3\python.exe"
+START27 = os.path.join(BASE, "engines", "ninfer-27b", "start-27b-v2.py")
 PY27 = os.path.join(BASE, "engines", "ninfer-27b", "ninfer-27b-kv-stream-3arch-20261019",
                     "runtime", "python", "python.exe")
-SW9 = os.path.join(BASE, "engines", "llama-cpp", "switch-9b.py")
-START27 = os.path.join(BASE, "engines", "ninfer-27b", "start-27b.py")
+SW9 = os.path.join(BASE, "engines", "llama-cpp", "start-9b.py")
 SMI = r"C:\Windows\System32\DriverStore\FileRepository\nvtfi.inf_amd64_540239129807163b\nvidia-smi.exe"
 
 

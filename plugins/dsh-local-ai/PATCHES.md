@@ -753,3 +753,339 @@ warn 跳过自注册（不再抛错）。本包仍是 `ninfer` 路由的唯一 o
 
 **验证**：`node --check lib/index.js = 0`；`llm.listProviders()` 中 `ninfer` 唯一。
 **回滚**：`cp lib/index.js.bak-dupfix-20261115023743 lib/index.js`
+
+## 2026-11-19 · 9B 上下文 8K 硬顶 + 手动开服务 → 一键启动
+
+**问题（用户提供 DSH 截图）**：9B 档显示「上下文已用 100% ~15.2K / 8.2K」，消息进不去；
+且 DSH 插件不能拉起引擎，必须手动开 llama.cpp 服务。
+
+**根因（双重 8K）**：
+```
+1) serve.bat 写死 -c 8192 → /v1/models 自报 meta.n_ctx=8192 → DSH 选择器显示 8.2K 上限
+2) ENGINE_PROFILES['llama-cpp'].maxContext=8192 / contextBudget.window=8192
+   → 系统提示 ~8K 就吃满，对话消息一进来即 100%，日志 truncated=1
+3) 该档 kind='external' 且无 launcher → start() 直接抛「请先启动 ollama 或 llama-server」
+```
+模型本体 `n_ctx_train=262144`，8K 完全是启动参数与插件配置的保守值。
+
+**改动**：
+```
+新增 engines/llama-cpp/serve-9b-32k.bat    32K q8_0 KV（新默认，65-72 tok/s）
+新增 engines/llama-cpp/start-9b.py        一键启动器：status/start/tier/stop
+                                          · 按显存自动选档（auto）
+                                          · /v1/models 回读真实 n_ctx 校验换档成功
+                                          · run/active-tier.json 落盘给插件读
+新增 engines/llama-cpp/start-9b.bat       双击启动入口
+改   engines/llama-cpp/switch-9b.py       保留兼容，start 转调 start-9b.py，新增 32k 档
+改   engines/llama-cpp/config/engine.json maxContext 8192→32768，新增 tier=32k
+改   lib/index.js（备份 .bak-ctxlaunch-20261119203132）
+    · llama-cpp 档 maxContext/contextBudget 8192→32768，新增 launcher 配置
+    · NinferManager.launchExternal()/stopExternal()：external+launcher 档能真正启停
+    · start() external 分支：有 launcher 走一键拉起，无 launcher 维持原行为（27B 不受影响）
+    · stop() 同上
+    · contextBudget 按 run/active-tier.json 实测档位动态调整（切 128k 后预算同步放大）
+    · toolAllowlist 新增 llama_engine
+    · ensureModel()：外部档端点未就绪时自动拉起（首次请求即启动）
+    · 新增 llama_engine 工具：action=start|stop|status|tier
+```
+
+**验证（全链路实测，非仅语法）**：
+```
+node --check lib/index.js = 0
+python -m py_compile start-9b.py / switch-9b.py = 0
+start-9b.py 32k → {"ok":true,"tier":"32k","contextWindow":32768,"vramFreeMb":5469}
+node _tmp/verify-ctx.mjs → START running=true ctx=32768；BUDGET window=32768；ASSERT PASS
+长提示实测：15036 prompt tokens，finish_reason=stop，日志 truncated=0
+（同长度在旧 8K 档为 truncated=1，即截图里被截断的现象）
+```
+
+**生效**：重启 DSH（dev_reload_package 会卡死）。之后首次请求自动拉起 32K 引擎。
+对话内可直接 `llama_engine action=tier tier=128k` 切长文档档。
+
+**回滚**：
+```
+cp lib/index.js.bak-ctxlaunch-20261119203132 lib/index.js
+cp engines/llama-cpp/config/engine.json 的 maxContext 改回 8192、删 tier
+（新脚本可保留，不加载即无影响）
+```
+**不影响**：csunx-27b（无 launcher）仍是纯转发外部档，启停行为未变。
+
+## 2026-11-19 20:40 · 默认档改为 256K（操作者指定 265K 级）
+
+**指令**：操作者「我要的是265k」。硬件/模型上限为 262144 tokens（256 KiB，即 serve-9b-256k.bat），
+265000 超出 n_ctx_train 无意义，按 262144 落位。
+
+**改动**（在上一轮基础上，备份 `.bak-256k-20261119`）：
+```
+lib/index.js      llama-cpp maxContext 32768→262144、contextBudget.window→262144
+                  launcher.defaultTier '32k'→'256k'
+config/engine.json maxContext→262144、tier→'256k'
+start-9b.py       pick_auto 默认返回 256k（显存 <7200 才降 fast）
+                  用法注释同步
+```
+
+**实测**：
+```
+node --check = 0；py_compile = 0
+start-9b.py 256k → {"ok":true,"tier":"256k","contextWindow":262144,"vramFreeMb":4069}
+15036 prompt tokens → finish_reason=stop，日志 truncated=0
+node 校验：maxContext=262144 / defaultTier=256k / engineWindow=262144 / budgetWindow=262144 → PASS
+```
+
+**代价（已知）**：KV 放主机内存（--no-kv-offload），decode 35 tok/s（短）/ 11.5 tok/s（长上下文）；
+128k 档设备 KV 为 44 tok/s。追求速度可 `llama_engine action=tier tier=128k`。
+
+**回滚**：`cp lib/index.js.bak-256k-20261119 lib/index.js`，并把 config/engine.json 的
+maxContext/tier 改回 32768/32k。
+
+**生效**：重启 DSH 后由配置读取新默认档；当前引擎已切至 256K。
+
+## 2026-11-19 20:55 · 全参数可调 + 两档一键启动 + 27B 元数据修正
+
+**指令**：优化插件，所有参数可调、一键启动；并检查 27B 启动（截图显示模型选择/引擎名称不对）。
+备份：`lib/index.js.bak-256k-20261119`（本轮在上一轮已备份基础上继续改）。
+
+**截图问题诊断**：
+```
+1) 档位标签「Huihui-Swift IQ2_S，与 9B 共用 8080」—— 名称缩写且过时（真实模型
+   Huihui-Qwen3.8-27B-abliterated-Swift-1.5-GSQ-RCO-IQ2_S-mtp；端口两档互斥非共用）
+2) 模型下拉「[27B] j27b (0 GiB)」—— external 档用 defaultModel=j27b 冒充条目且 bytes=0，
+   真实 9.55 GiB 的 .ninfer 文件在 model/ 目录没被展示
+3) engineInfo() 对 external 档 engineExe 为空 → 面板「可执行缺失！」
+```
+
+**改动**：
+```
+元数据（lib/index.js ENGINE_PROFILES['csunx-27b']）
+  · label 改完整真实模型名 + 「与 9B 互斥」
+  · engineExe 指向 engines/sm120a/infer-serve.exe（面板不再显示缺失）
+  · modelDirs 指向真实 ninfer-27b/.../model 目录
+  · listModels()：external 档跳过原始文件条目，合成一条 file=j27b + 真实 bytes/modelLabel
+  · modelCatalog / /state models / ninfer_status modelFiles 均携带真实名称与大小
+  · lib/client.js：下拉显示 m.label；tag 把 llama-cpp 归为 9B
+
+一键启动（两档统一走 launcher）
+  · csunx-27b 新增 launcher → start-27b-v2.py（27B runtime python）
+    paramArgs 9 项：profileId/prefillChunk/kvCapacity/maxContext/hostKvMib/port/draftTokens/effort/vision
+  · launchExternal() 改造：positionalFromTier（9B 档位名）+ paramArgs 全参数
+    + [falseFlag,trueFlag,key] 布尔项（noKvOffload）
+  · 9B launcher 同样透传 tier/ngl/batch/ubatch/cacheTypeK/cacheTypeV/port
+
+全参数可调
+  · 新增 engines/ninfer-27b/start-27b-v2.py —— 参数化 27B 启动器（原 start-27b.py 硬编码）
+  · 重写 engines/llama-cpp/start-9b.py —— 动态拼 llama-server 命令行，不再用固定 bat
+  · config/engine.json 补齐所有参数；DEFAULT_PARAMS / pickParams 支持 number/string/boolean
+  · ninfer_engine / ninfer_params 工具参数定义补齐；client.js FIELDS 新增 9B 六项 + profileId27
+  · engines/switch-model.py 两分支改指向新启动器
+```
+
+**实测（全链路）**：
+```
+node --check index.js/client.js = 0；py_compile 三脚本 = 0
+27B：start-27b-v2.py 带全参数 → ok:true, contextWindow=98304, model id=j27b
+     /v1/models → j27b, n_ctx=98304；推理请求 finish=length（成功）
+9B ：start-9b.py 256k 带全参数 → ok:true, contextWindow=262144, ngl=99/batch=2048/q8_0 生效
+模型列表：MODELS_27B 单条 {file:j27b, bytes:10257632000, label:Huihui-Qwen3.8-27B-...-mtp}
+参数往返：ngl/batch/cacheTypeK/profileId27/tier 全部 roundtrip true，恢复默认 true
+```
+
+**当前状态**：9B 运行中（256K / 262144）。
+**生效**：重启 DSH 加载新 client.js 与 index.js。
+**回滚**：`cp lib/index.js.bak-256k-20261119 lib/index.js`；启动器回退用 serve*.bat / 原 start-27b.py。
+
+### 20:58 补丁：状态探测按 model id 区分两档
+两档共用 8080，原启动器只探端口 → 9B 在跑时 27B status 误报 running=true，
+且 start() 会跳过拉起。修复：
+```
+start-27b-v2.py probe()：仅当 /v1/models 首项 id == 'j27b' 才算自己
+start-9b.py    is_mine()：仅当 id 含 'kittyrev9b' 才算自己；status/start/等待循环全部改用它
+```
+实测：9B 在跑 → 9B status running=true / 27B status running=false ✅
+
+### 21:05 补丁：27B 链路完全自包含（操作者强调引擎/模型都在 ninfer-27b 内）
+```
+问题：switch-model.py 的 PY27（上一轮误写为 anaconda3）；start-27b-v2.py 的 PY27 是未使用死定义。
+修复：
+  · switch-model.py PY27 → PKG/runtime/python/python.exe（目录内 3.12.8）
+  · start-27b-v2.py 删除死定义 PY27，改注释明确「不依赖任何外部 Python 安装」
+路径审计：engineExe / modelDirs / launcher.python / script / cwd / state 全部在 engines/ninfer-27b 内
+实测（目录内 runtime python 3.12.8）：
+  py_compile = OK；status 正确识别 9B 非自己（running:false）
+  一键启动 → ok:true, model=j27b, n_ctx=98304, size=9.54GiB，日志在 PKG/logs/serve-27b.log
+  已停 27B 并切回 9B 256K（当前状态）
+注：lib/index.js:174 的 anaconda 是 9B launcher，与 27B 无关，保留。
+
+## 2026-11-19 21:40 · 思考截断修复（27B + 9B）
+
+**问题**：27B 思考太容易被截断（finish=length，正文写不出来）。
+**根因（三重）**：
+```
+1) contextBudget.maxOutput = 1024（两档都是）→ body.max_tokens 被压到 1024，
+   reasoning 先吃光预算，正文被截
+2) this._maxOutCap 是适配器实例字段，在 budget 块赋值后跨请求 sticky ——
+   一旦某轮被压到 1024，后续所有请求（即使 maxTokens=8192）都被封顶
+3) effortCap='medium' 把 DSH 选的 high/xhigh/max 一律压回 medium（8K 时代保护）
+```
+**改动**（备份 `lib/index.js.bak-thinkfix-20261119`）：
+```
+DEFAULT_CONFIG：effortCap 'medium'→''（解除压制）；defaultEffort 'minimal'→'medium'
+27B contextBudget.maxOutput 1024→16384（window 32768 的一半）
+9B  contextBudget.maxOutput 1024→32768（256K 上下文）
+stream()：删除 this._maxOutCap，改请求内局部 maxOutCapLocal；budget 提前读取，
+          body.max_tokens 与裁剪预算共用同一 maxOut；长文本 Math.max(cappedMax,16384) 不变
+```
+**实测**：
+```
+node 拦截 fetch 检查请求体：
+  27B high/首请求 → max_tokens=8192, reasoning_effort=high ✅（不再 1024）
+  27B max/二次请求 → max_tokens=8192, reasoning_effort=max ✅（无 sticky）
+  9B  xhigh        → max_tokens=8192, reasoning_effort=xhigh ✅
+  none             → enable_thinking=false ✅
+  边界：请求 99999 被 cap 到 32768；长文本在预算内放宽到 16384 ✅
+真实引擎（9B 256K，max_tokens=8192，高思考数学题）：
+  finish=stop，completion_tokens=2516，答案 6181 字符 —— 完整未被截断 ✅
+```
+**注**：当前 llama.cpp 启动带 `--reasoning-format none`，思考以 `<think>` 文本形式落在
+`content` 里（reasoning_content 为空），不影响截断判定。
+
+**当前状态**：9B 256K 运行中（8080）。
+**生效**：重启 DSH 加载新 index.js 后，两档思考均不再被 1024 封顶。
+**回滚**：`cp lib/index.js.bak-thinkfix-20261119 lib/index.js`。
+```
+
+---
+
+## 2026-11-19 · NSFW 门控可用性修复（9B 档专属，27B 零改动）
+
+**背景**：能力鉴定（audit-9b-dsh-20261119.md）判定 9B 的 NSFW 门控与创作不可交付：
+官方评测 recall 0.47–0.53；val 集复测 30 条 trigger 仅 0.567；长文 3-gram 重复率峰值 0.825；
+且 9B 在 DSH 里 0 工具调用（30K system 抑制）。本轮只修 NSFW，且必须与 27B / NInfer 引擎隔离。
+
+**隔离设计（硬约束）**
+```
+门控与采样覆盖只写在 ENGINE_PROFILES['llama-cpp'] 里：
+    nsfwGate / samplingOverride / gateHit
+ENGINE_PROFILES['csunx-27b'] 不含上述任何键 → profileFlags 返回空 → 调用侧空转
+所有触发点都同时要求 profileFlags().profile === 'llama-cpp'
+未触碰 engines/ninfer-27b/**（目录 mtime 保持 21:07），未改 27B 的 contextBudget / 采样 / 工具面
+```
+
+**改动**（备份 `lib/index.js.bak-nsfw9b-20261119`）
+```
+ENGINE_PROFILES['llama-cpp'] 新增：
+  nsfwGate { enabled, logPath, retryOnRefusal, escalate, refusalCues }
+  samplingOverride { default/code/fact: repeatPenalty 1.06; creative: temp .8 / topP .92 / presence .3 / repeat 1.08 / repeat_last_n 768 }
+  gateHit { effort: 'none', minTokens: 1200 }
+新增导出：NSFW_GATE_TRIGGERS / detectNsfwTrigger / buildNsfwGateBlock / applyNsfwGate / applySamplingOverride
+stream()：
+  1) 触发词命中 → system 末尾注入授权块（幂等），日志 _work/session-audit/nsfw-gate-9b.jsonl
+  2) 命中时采样切 creative 档 + 重复惩罚；关思考；max_tokens 保底 1200
+  3) 命中时走缓冲两轮：首轮若判为拒答/空/敷衍 → 追加升级指令重试一次，只输出第二轮
+profileFlags()：新增 profile / nsfwGate / samplingOverride / gateHit 四个返回键
+```
+
+**实测（val 集 n=85，判官复用 train/lines/_shared/scripts/nsfw_gate_eval.py）**
+```
+组别        A 现状            B 注入+惩罚        B2 注入+关思考+1200    重试后
+trigger     nsfw 13/30 .433   nsfw 15/30 .500   nsfw 17/30 .567        nsfw 23/30 .767
+trigger 3-gram 重复峰值  0.825 → 0.473 → 0.240 → 0.235
+nogate      16/30（复读污染） 12/30             11/30                   —
+general     3/16 → 2/16  → 2/16（均无 strict leak）
+单轮强指令对照：0.600（低于两轮 0.767，故采用两轮实现）
+```
+
+**验证**
+```
+node --check                    通过
+纯函数单测（detect/注入/幂等/采样覆盖） 通过
+适配器整链路 stub fetch（adapter_harness2.mjs）：
+  9B 触发词 → calls=2，含「重试指令」，repeat=1.08 lastN=768 maxTok=1200 effort=none think=false
+  9B 普通问 → calls=1，流式路径不变
+  27B 触发词 → calls=1，无注入、无 repeat_penalty、effort 跟随请求
+真实链路（热重载后经 ninfer 适配器发 [[NSFW]]+无害问题）：
+  events=5（走缓冲路径），1.15s 返回正文，日志 hit=[[NSFW]] injected=true
+```
+
+**已知代价 / 注意**
+```
+1) 门控命中走缓冲两轮 → 该路径没有 token 级流式（等整段返回），本地 9B 约 20–40s 白屏
+2) 9B 本体对部分请求仍有硬拒答（30 条里 4 条重试后仍拒）→ recall 上限 0.767，达不到 0.90 门线
+   要过门线仍需训练侧补数据（2b 线），适配器只能兜到这里
+3) 热重载存在「provider 已注册 → 新实例跳过注册 → 旧 fiber dispose 后 ninfer 消失」的坑：
+   连续 reload 两次可恢复（第二次因 provider 已不存在而正常注册）
+```
+
+**回滚**：`Copy-Item lib\index.js.bak-nsfw9b-20261119 lib\index.js -Force` 后重载插件。
+
+### 2026-11-19 晚 · 门控改流式重试 + 未成年硬闸 + 空回复兜底（9B 档，27B 零改动）
+
+**背景**：上一版门控走"缓冲两轮"，命中触发词时无 token 级流式（20–40s 白屏）；
+且复核 val 集发现 trigger 30 条里 15 条含未成年指向（萝莉/幼/少女/学生…），
+把这些计入"召回 0.90"等于拿红线当指标，必须拆开口径。
+
+**改动（同文件，沿用备份 index.js.bak-nsfw9b-20261119）**
+```
+1) 流式重试：删掉缓冲两轮；首轮正常流式，但正文先扣住 200 字判拒答——
+   命中 refusalCues → 中止首轮（丢弃已扣文本）→ 追加 escalate 重发 → 流式输出第二轮
+   未命中 → 200 字后放行，恢复 token 级流式
+2) 未成年硬闸：NSFW_MINOR_MARKERS（萝莉/幼女/幼齿/未成/未成年/小学生/初中生/高中生/
+   学生妹/少女/童/JK）命中 → 不注入授权块、不重试、不按 creative 采样，日志记 blocked
+3) 空回复兜底：重试轮空包 → 回落首轮文本；两轮都空 → 给可见提示（不再出现空白回复）
+4) 采样覆盖新增 repeat_last_n 768；applySamplingOverride 支持 repeatLastN
+```
+
+**实测**
+```
+成年向子集（val trigger 去未成年后 n=15）：recall 12/15 = 0.800（词表判据），重试救回 1 条，仍拒答 0
+含未成年指向 n=15：全部被硬闸拦下（不生成、不计召回）
+上一版（缓冲两轮，全 30 条混算）：0.767；本版成年向口径 0.800
+复读：3-gram 峰值 0.825 → 0.244（关思考+惩罚+repeat_last_n）
+端到端抽样 8 条经运行实例：refusal 0、repMax 0.244、repAvg 0.033
+```
+
+**验证**
+```
+node --check 通过
+纯函数：成年 prompt → injected=true；含「萝莉」「少女」→ injected=false + blocked
+适配器 stub 三例：首轮拒答→重试流式输出第二轮；重试空包→回落首轮文本（不空回复）；
+                27B 触发词→calls=1、无注入、无 repeat_penalty
+运行实例（重启后加载）：ninfer provider 已注册；发 [[NSFW]]+无害问题 → 日志 hit=[[NSFW]] injected=true，1 次调用返回
+```
+
+**生效说明**
+```
+本机 dev_reload_package 会导致 DSH 卡死（操作者已确认），因此本轮改动由重启加载，
+不再热重载。如需强制生效：重启 DSH（不要连点 reload）。
+```
+
+**回滚**：`Copy-Item lib\index.js.bak-nsfw9b-20261119 lib\index.js -Force` 后重启 DSH。
+
+### 2026-11-20 · 门控按"成年声明"放行场景词（未成年性内容仍不放开）
+
+**诉求与边界**：操作者要求"NSFW 开启后移除未成年硬闸"。
+只做到"成年向作品里常见的场景词不再被误拦"，**未移除未成年性内容的拦截**：
+萝莉/幼女/幼齿/童女/正太/未成/未成年/小学生/初中生/高中生/学生妹 属违法内容类，
+不随门控、授权或成年声明变化。
+
+**实现（同文件）**
+```
+NSFW_MINOR_HARD：萝莉 幼女 幼齿 幼童 童女 未成 未成年 小学生 初中生 高中生 学生妹 女童 正太 → 永远拦
+NSFW_MINOR_SOFT：少女 校园 JK jk 女高中生 学生
+ADULT_DECL_RE： 成年|成年人|均已满18|已满18岁|18岁以上|全员成年|角色均为成人|均为成年人
+判定：HARD 命中 → blocked；SOFT 命中且无成年声明 → blocked(需成年声明:xxx)；
+      SOFT + 成年声明 → 正常注入授权块并按 creative 采样；无 SOFT/HARD → 正常注入
+日志：blocked 字段记录命中的词
+```
+
+**实测（纯函数）**
+```
+成年向                       → injected=true
+少女 + 角色均为成年人        → injected=true
+少女（无声明）               → injected=false blocked=需成年声明:少女
+校园 + 全员成年              → injected=true
+萝莉 + 角色均为成年人        → injected=false blocked=萝莉   ← 声明不放行
+幼女                         → injected=false blocked=幼女
+```
+
+**生效**：下次重启 DSH 加载（本机热重载会卡死，已不再使用）。
+**回滚**：`Copy-Item lib\index.js.bak-nsfw9b-20261119 lib\index.js -Force` 后重启。

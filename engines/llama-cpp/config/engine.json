@@ -1,13 +1,22 @@
 {
   "profile": "llama-cpp",
-  "deviceKV": 36864,
-  "hostKVMiB": 7168,
-  "kvDtype": "nvfp4",
+  "deviceKV": 32768,
+  "hostKVMiB": 8192,
+  "kvDtype": "rk2v4-e8",
   "prefillChunk": 128,
   "draftTokens": 3,
-  "reasoningEffort": "none",
-  "maxContext": 8192,
+  "reasoningEffort": "medium",
+  "maxContext": 262144,
   "vision": "off",
   "port": 8080,
-  "modelFile": "D:/BaiduNetdiskDownload/Local-AI/models/9b/gguf/kittyrev9b-Q5_K_M-im.gguf"
+  "profileId27": "8g-fast",
+  "ngl": 99,
+  "batch": 2048,
+  "ubatch": 1024,
+  "cacheTypeK": "q8_0",
+  "cacheTypeV": "q8_0",
+  "flashAttn": true,
+  "noKvOffload": false,
+  "tier": "128k",
+  "modelFile": "j27b"
 }

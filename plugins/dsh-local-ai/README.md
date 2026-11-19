@@ -53,6 +53,66 @@ ninfer_params action=set reasoningEffort=low restartNow=true
 | `vision` | cpu | `off` / `cpu`（不占显存，单图约 9.6s）/ `overlay`（用时才上卡） |
 | `port` | 1234 | 引擎端口 |
 
+## 两档一键启动 + 全参数可调（2026-11-19）
+
+两档都在模型选择器里，选中后发消息会自动拉起对应引擎；也可手动：
+
+```text
+ninfer_engine action=start profile=llama-cpp tier=256k      # 9B → 262144
+ninfer_engine action=start profile=csunx-27b profileId27=8g-fast maxContext=98304  # 27B
+ninfer_engine action=stop
+ninfer_params  action=get                                   # 查看全部当前参数
+ninfer_params  action=set ngl=64 cacheTypeK=f16 restartNow=true
+```
+
+9B 与 27B **显存互斥**（12G 卡无法同时跑），切换引擎会先停另一个。
+
+| 档位 | profile | 引擎 | 可调参数 |
+|---|---|---|---|
+| 9B | `llama-cpp` | llama.cpp CUDA | tier / ngl / batch / ubatch / cacheTypeK / cacheTypeV / port / maxContext |
+| 27B | `csunx-27b` | NInfer | profileId27 / deviceKV / hostKVMiB / kvDtype / prefillChunk / draftTokens / reasoningEffort / vision / port / maxContext |
+
+命令行入口（均可传 `--参数 值` 覆盖）：
+```text
+C:\ProgramData\anaconda3\python.exe engines\llama-cpp\start-9b.py 256k --ngl 99 --batch 2048
+C:\ProgramData\anaconda3\python.exe engines\ninfer-27b\start-27b-v2.py --profile-id 8g-fast --max-context 98304
+C:\ProgramData\anaconda3\python.exe engines\switch-model.py status   # 两档状态/显存
+```
+
+**27B 模型名称说明**：面板显示引擎内部 id `j27b`（DSH 请求必须用这个 id），
+但会携带真实模型文件 `Huihui-Qwen3.8-27B-abliterated-Swift-1.5-GSQ-RCO-IQ2_S-mtp.ninfer`（9.55 GiB）的名称与大小。
+
+## 9B 一键启动与上下文档位（早期记录，256K 默认仍有效）
+
+DSH 里不再需要手动开 llama.cpp 服务：选中 9B 模型发第一条消息时，插件自动拉起引擎；
+也可在对话中直接调用工具：
+
+```text
+llama_engine action=status
+llama_engine action=start                # 默认 256K 档（自动选档）
+llama_engine action=tier tier=256k        # fast(8k) / 32k / 128k / 256k（默认）
+llama_engine action=stop
+```
+
+命令行等价入口（解释器必须用全路径）：
+
+```text
+C:\ProgramData\anaconda3\python.exe D:\BaiduNetdiskDownload\Local-AI\engines\llama-cpp\start-9b.py status
+C:\ProgramData\anaconda3\python.exe D:\BaiduNetdiskDownload\Local-AI\engines\llama-cpp\start-9b.py 256k
+```
+
+也可以双击 `engines/llama-cpp/start-9b.bat`。
+
+| 档位 | 上下文 | 速度 | 显存 / 场景 |
+|---|---|---|---|
+| `fast` | 8192 | 70-75 tok/s | 旧默认，仅调试兼容 |
+| `256k` | 262144 | 20-35 tok/s | **默认**；操作者指定；KV 在主机内存，长文无截断上限 |
+| `128k` | 131072 | ~44 tok/s | 长文档；设备 KV q8_0 |
+| `256k` | 262144 | 20-35 tok/s | 超长；KV 在主机内存 |
+
+档位状态写入 `engines/llama-cpp/run/active-tier.json`，适配器按实际档位动态调整裁剪预算。
+引擎自报的 `/v1/models → meta.n_ctx` 是上下文上限的真相源（DSH 选择器读它）。
+
 ## 已知约束
 
 - **同一时间只能有一个 `ninfer-serve.exe`**：两个实例抢显存会触发 WDDM 驱逐（权重被踢到共享内存，服务还在但速度崩）。切换前先 `ninfer_engine action=stop`，确认 `nvidia-smi` 回落到 ~800 MiB。

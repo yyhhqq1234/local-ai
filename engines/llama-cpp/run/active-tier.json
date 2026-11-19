@@ -1,0 +1,14 @@
+{
+  "ngl": 99,
+  "port": 8080,
+  "flashAttn": true,
+  "extraArgs": [],
+  "tier": "128k",
+  "ctx": 131072,
+  "cacheTypeK": "q8_0",
+  "cacheTypeV": "q8_0",
+  "batch": 2048,
+  "ubatch": 1024,
+  "noKvOffload": false,
+  "speed": "~44 tok/s"
+}

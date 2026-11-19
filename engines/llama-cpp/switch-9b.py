@@ -18,9 +18,13 @@ BASE = r"D:\BaiduNetdiskDownload\Local-AI"
 ENG = os.path.join(BASE, "engines", "llama-cpp")
 BATS = {
     "fast": os.path.join(ENG, "serve.bat"),
+    "32k": os.path.join(ENG, "serve-9b-32k.bat"),
     "128k": os.path.join(ENG, "serve-9b-128k.bat"),
     "256k": os.path.join(ENG, "serve-9b-256k.bat"),
 }
+# 2026-11-19：新入口 start-9b.py 支持自动选档 + 状态落盘；本脚本保留为兼容包装。
+LAUNCHER = os.path.join(ENG, "start-9b.py")
+PY = r"C:\ProgramData\anaconda3\python.exe"
 PORT = 8080
 
 
@@ -48,6 +52,14 @@ def status():
 
 
 def start(tier):
+    # 统一走新启动器：自动选档 / 写 active-tier.json / 校验实际 n_ctx
+    try:
+        r = subprocess.run([PY, LAUNCHER, tier], capture_output=True, text=True, timeout=330)
+        print((r.stdout or r.stderr).strip())
+        return
+    except Exception as e:
+        print(json.dumps({"ok": False, "err": "launcher failed: " + str(e)[:80]}, ensure_ascii=False))
+        return
     bat = BATS[tier]
     if not os.path.exists(bat):
         print(json.dumps({"ok": False, "err": "missing " + bat}, ensure_ascii=False))
