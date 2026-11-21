@@ -1,0 +1,33 @@
+{
+ "generated_at": "2026-11-21",
+ "mode": "operational",
+ "input": {
+  "rows": 9433,
+  "permit": 5604,
+  "regular": 3829
+ },
+ "output": {
+  "rows": 8113,
+  "permit": 4284,
+  "regular": 3829
+ },
+ "dropped": 1320,
+ "dropped_degenerate": 1312,
+ "dropped_minor_soft": 8,
+ "dropped_ratio_of_permit": 0.24,
+ "codes": {
+  "INTERJ_RUN": 481,
+  "CHAR_RUN8": 292,
+  "REPEAT_5GRAM": 723,
+  "SINGLE_CHAR_DOMINANT": 33,
+  "LEN_SHORT": 30,
+  "HEART_RUN": 157,
+  "TILDE_RUN": 169,
+  "MINOR_SOFT_NO_DECL": 8
+ },
+ "sensitivity": {
+  "literal_run3_would_drop": 3405,
+  "literal_run3_ratio_of_permit": 0.61,
+  "note": "按「任意字符连续≥3即弃」的原始口径会多删的 permit 行（多为正常的啊啊啊/啪啪啪/……）"
+ }
+}

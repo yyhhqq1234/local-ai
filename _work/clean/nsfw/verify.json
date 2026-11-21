@@ -1,0 +1,12 @@
+{
+ "nsfw": {
+  "near_dup_pairs>=0.9": 0,
+  "near_dup_max_jaccard": 0.0,
+  "no_system": 0,
+  "rows": 9433
+ },
+ "dsh": {
+  "toolcall_ok": 95,
+  "rows": 192
+ }
+}

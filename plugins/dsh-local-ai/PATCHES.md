@@ -1089,3 +1089,888 @@ ADULT_DECL_RE： 成年|成年人|均已满18|已满18岁|18岁以上|全员成�
 
 **生效**：下次重启 DSH 加载（本机热重载会卡死，已不再使用）。
 **回滚**：`Copy-Item lib\index.js.bak-nsfw9b-20261119 lib\index.js -Force` 后重启。
+
+### 2026-11-20 · 修 TDZ 崩溃：`Cannot access 'gateActive' before initialization`
+
+**现象**：9B 任何请求都报 `本轮运行失败 Cannot access 'gateActive' before initialization`。
+**原因**：上一版把 `const gateActive` 声明写在采样块之后（用在后、声明在后），
+采样段先引用即触发 TDZ。
+**修复**：`gateActive` 上移到 `applyNsfwGate` 之后立即声明；`gateRetryOn` 仍在流式段声明。
+**验证**：`node --check` 通过；两个 stub harness 全绿——
+```
+9B 触发词(首轮拒答) → calls=2、第二轮 stream=true、effort=none、maxTok=1200、repeat=1.08
+9B 普通问          → calls=1、effort 跟随请求
+27B 触发词         → calls=1、无注入、repeat=undefined
+重试空包           → 回落首轮文本（不空回复）
+重试正常           → 输出第二轮
+```
+**生效**：运行中的实例仍是带 bug 的旧代码，必须重启一次 DSH（本机热重载会卡死，不要用 reload）。
+
+### 2026-11-20 · 治「只回状态模板不写正文」：9B system 压缩 + 授权块 v2 + 开场种子
+
+**现象**：9B 收到 NSFW 创作请求后回「NSFW 模式已启动…当前：sandbox_permissions=… 结果：… 下一步：…」，
+只抄工作区收口模板，不产出正文。
+
+**根因（实测）**
+```
+1) 真实请求 systemChars=31718、tools=15 —— system 里含大量「当前/结果/下一步」「首行即交付物/收口一行」示例，
+   9B 直接照着这个格式生成，于是回复变成状态回执。
+2) 授权块偏弱：模型会追问场景或给"骨架"。实测 3 变体×2 轮：
+   V1 旧授权块 1/2 出正文；V2 加禁套话 1/2；V3 再加「开场种子」2/2 出正文（rep3 全 0）
+```
+
+**改动（llama-cpp 档专用；27B 不声明这些键 → 行为不变）**
+```
+slimSystemMaxChars: 4000 + compactSystemText（约 700 字：边界/工具/交付/禁收口行/成人向）
+   stream() 里 system 超 4000 字符即整段换成精简版，并打日志「system 压缩 N → M 字符（9B 档）」
+nsfwGate.seed: 中性开场句（夜间，门在身后合上，屋里只剩两个人的呼吸声。）
+  授权块 v2：追加「禁状态行」「不要追问场景」「800 字以上」「人物均为成年人」+ 种子段
+refusalCues 补：先给你能写的部分 / 先给你能直接跑的骨架
+```
+
+**验收（完全按适配器出站形态复现：精简 system + 授权块 + 种子 + 关思考 + 1200 预算）**
+```
+3 轮：2093 / 1391 / 1032 字；均无状态套话、无回避词；2 轮判明确对白，1 轮为章节体正文（finish=length）
+3-gram 重复率 0.000–0.002（此前峰值 0.825）
+```
+
+**生效**：重启 DSH 后加载（本机热重载会卡死，不再使用）。
+**回滚**：`Copy-Item lib\index.js.bak-nsfw9b-20261119 lib\index.js -Force` 后重启。
+
+### 2026-11-20 · 开场种子改为「随请求派生」（去掉写死场景）
+
+**问题**：上一版 nsfwGate.seed 写死「夜间，门在身后合上…」，会把所有题材往都市雨夜带。
+
+**三种种子实测（每题材 2 轮）**
+```
+固定都市种子：正文率 6/6，但奇幻/科幻里 2/6 出现「雨/门在身后/呼吸声」串味
+纯元指令（只要求"第一句写具体动作"）：正文率 2/6 —— 模型转而反问/给骨架
+请求派生种子：正文率 9/10（5 题材×2 轮），无串味，3-gram 重复正常
+```
+
+**实现**
+```
+新增 deriveScenarioCore(text)：剥掉指令词（进行/创作/写一段/输出正文/NSFW/[[ ]]等）后取前 48 字
+applyNsfwGate 用 deriveScenarioCore(lastUser) 生成"场景要素"，空则回落 nsfwGate.seed
+授权块标题改为「## 开场（直接进入下面这个场景，第一句写一个具体动作；不要复述本段，不要写标题）」
+```
+
+**验证**
+```
+病娇姐姐和弟弟的禁忌之恋 / 精灵女王与人类骑士的，场景在森林宫殿 / 江湖女侠与书生的情节，客栈雨夜
+/ 空间站上两名宇航员的，失重环境  → 各自派生正确，无写死内容
+node --check 通过
+```
+
+**生效**：重启 DSH 后加载。
+
+### 2026-11-20 · 9B 思考挡位全测结论（引擎侧无解，属权重侧）
+
+```
+七档 effort（none/minimal/low/medium/high/xhigh/max）× 2 任务 = 14 次：
+  思考字数恒 0；输出 328–1200 tok；tok/s 61–66 恒定；工具调用 0/7
+换引擎参数临时实例（8091：--reasoning-format deepseek --reasoning on --reasoning-budget -1）：
+  A–E 五种组合仍 rc=0 / 内联 think=0；显式要求「在 think 块里写推理」→ 推理写进正文，不产 think
+判定：思考通道属权重侧缺失（微调未保留），不是引擎开关问题
+影响：不能靠降 effort 省时/防截断 → 只能用 max_tokens 控；
+     nsfwGate.gateHit.effort='none' 为空操作（保留无害）
+报告：train/lines/9b-oxcoder/out/audit-9b-effort-tiers-20261120.md
+善后：8091 临时实例已关闭；8080 主引擎 /health=ok，单实例
+```
+
+### 2026-11-20 · 门控坏输出二类识别（JSON 伪调用 / 反问要开关）→ 自动重试
+
+**重启后实测（运行实例，未经本轮修补）**
+```
+run1: len=96   head={"error": "Missing re...      384ms   ← JSON 伪调用
+run2: len=318  head=我需要一个明确的开关才知道要不要接 NSFW  3963ms  ← 反问要"开关"
+两次 gate 都命中（stats: sample=creative+gate, effort=none），但输出不是正文
+```
+
+**修补**
+```
+1) gateLooksNonStory：先剥前导 <think>…</think> 再判，命中 ^[{[] 或 "action/tool/name/error":
+   即视为坏输出（此前中文弯引号 “error”: 漏判）
+2) 首轮流完仍判坏（空包/JSON/正文 <200 字）→ 同样转升级重试（原来只有流中早判）
+3) refusalCues 增补：我需要一个 | 需要一个明确 | 要不要接 | 请提供 | 按常规内容
+4) 重试轮仍坏 → 可见提示，不留空回复
+```
+
+**验证（stub harness，两种坏输出各一次）**
+```
+<think></think>{"error":...}      → calls=2，最终正文 92 字，首字「雨」
+我需要一个明确的开关…            → calls=2，最终正文 138 字，首字「夜里」
+node --check 通过
+```
+
+**生效**：需再重启一次 DSH（本次修补在重启后加载；热重载会卡死，不用）。
+
+### 2026-11-20 · 起手句预填（assistant prefill）——解决"要参数/给骨架/拒答"
+
+**证据（同题，各 3 轮）**
+```
+无预填：大纲 1 条 / 拒答 2 条（"我无法生成包含性暴力内容的故事"）→ 0/3 出正文
+有预填：3/3 直接续写，1097–1333 字，含对白
+跨题材中性预填（奇幻/科幻/古风 × 2 句）：6/6 出正文、无拒绝；N2 三题材均带对白
+```
+
+**实现**
+```
+nsfwGate.prefill = '空气安静了一瞬，谁都没有先开口。'（与题材无关的中性动作句）
+stream()：门控命中且未 block 时，把该句作为 assistant 消息追加到对话末尾（模型直接续写）
+输出侧：首个 text-delta 与最终 block 都带这句作为首行，用户看到的正文以它开头
+```
+
+**验证（stub harness）**
+```
+messages roles = system,user,assistant     ← 预填已注入
+首个 delta = "空气安静了一瞬，谁都没有先开口。\n她抬眼…"
+block-end 文本同源，长度一致
+node --check 通过
+```
+
+**生效**：需再重启一次 DSH。
+
+### 2026-11-20 · 9B 完全适配 DSH：文本工具协议 + 工具预填（llama-cpp 档）
+
+**问题**：9B 从不发 native tool_calls（真实会话 10/10 为 0；短 system+2 工具仍 0/14）→ DSH 里没有工具能力。
+
+**实验（各 3 题）**
+```
+仅给协议（工具名列表）                    1/3 命中
+协议带「名字+必填字段」schema              1/3 命中（字段名对）
+协议 + 工具预填（无 schema）               3/3 命中（字段名错：path/cmd/pid）
+schema + 工具预填                          3/3 命中且字段名正确（file_path / command+description / op）
+```
+
+**改动**
+```
+1) 新增 toolSchemaHint(tools)：从 schema 生成「- read  必填 file_path」清单
+   textToolProtocol 改为接收清单（兼容旧的纯名字数组）
+2) 工具预填：textToolCalls 且请求含取数动词（读/看/查/搜/列/执行/跑/扫/grep/read/ls/cat/find/dump/kitty）
+   → 对话末尾追加 assistant '<tool_call>{"name":"'，模型直接续写调用行
+   解析前补回前缀，解析成功下发结构化 tool-call；失败则剥前缀当正文
+3) llama-cpp.textToolCalls: false → true
+```
+
+**验证（stub 整链路）**
+```
+roles = system,user,assistant；system 尾部含「必填 file_path」
+tool-call: name=read args={"file_path":"x.md"}；textOut 空（无废话）
+纯聊天：textLen=152，toolCalls=0（未误判）
+node --check 通过；27B 段仍 textToolCalls:false，无 nsfwGate/samplingOverride/slimSystemMaxChars
+```
+
+**文档**：train/lines/9b-oxcoder/out/9b-dsh-adaptation-20261120.md（契约对照表 + 实验 + 风险）
+**生效**：需重启 DSH。
+
+### 2026-11-20 · 工具调用链路三修（重启后实测暴露）
+
+**重启后实测（dsh_probe）**
+```
+请求「读一下 PATCHES.md 最后 20 行」+ 两工具：
+  finish=stop，tools=[]，textLen=0  ← 静默空回复
+直连同形请求看原始输出：
+  预填时模型吐 <tool_call>{"name":"kitty_patch",...}</tool_call>（模型点名未白名单工具）
+  无预填时模型吐 {op:read, file_path: ...} 裸花括号（非法 JSON）
+```
+
+**三处修复**
+```
+1) 白名单补齐模型会点名的 kitty 工具：kitty_patch / kitty_sym / kitty_asm
+   （此前合法调用被判"未授权"直接丢弃）
+2) 未授权工具不再静默：解析失败且点名未授权 → 回一条可见提示
+   「[工具未授权] 模型请求了 X，不在当前可用列表，已拒绝执行。可用：…」
+3) 预填前缀只在正文里没有 <tool_call> 时才补（原来无条件补，把 think 段和调用拼坏）
+   并清掉调用解析后残留的空 think 段
+```
+
+**验证（stub harness）**
+```
+合法调用   → tools=["read"]，textLen=0（无 <think></think> 残留）
+未授权工具 → 文本「[工具未授权] 模型请求了 kitty_patch…」
+纯聊天     → textLen=152，toolCalls=0（未误判）
+node --check 通过
+```
+
+**生效**：需再重启一次 DSH；验收三条见 9b-dsh-adaptation-20261120.md §6。
+
+### 2026-11-20 · 关键根因：9B system 压缩在生产里从未生效（键没被暴露）
+
+**现象**：多次重启后，9B 仍回"当前/结果/下一步"模板，工具请求回空。
+
+**根因链**
+```
+1) slimSystemMaxChars / compactSystemText 写在了 ENGINE_PROFILES['llama-cpp']
+   但适配器 stream() 读的是 this.profile.*（来自 DEFAULT_CONFIG），
+   profileFlags 只暴露 textToolCalls/nsfwGate/samplingOverride/gateHit → 压缩条件恒为 cap=0 → 从未压缩
+2) 未压缩 → 32.8K system 原样下发 → 模型照抄收口模板
+3) 原生 tools + assistant 预填 → 9B 立刻停（content 只剩空 think）→ 工具请求回空
+```
+
+**修复**
+```
+1) profileFlags 增暴露 slimSystemMaxChars / compactSystemText
+2) stream() 顶部统一取 stageFlags（每请求一次），system 压缩与门控共用
+3) 压缩条件改为 stageFlags.slimSystemMaxChars||this.profile.*，文案同源；27B 档两键为 undefined → 不压缩
+4) 文本协议档不再下发原生 tools（if (tools && !textToolCalls) body.tools = tools）
+5) 工具档空输出不再静默：落 _work/session-audit/tooldebug.jsonl + 回可见诊断行
+```
+
+**验证（stub）**
+```
+30K system + slimSystemMaxChars=4000 → sysLen 255（压缩生效）
+body.tools = false（文本协议档）
+tool-call: name=read arguments={"file_path":"a.md"}
+纯聊天：textLen=152，toolCalls=0
+未授权工具：可见提示
+node --check 通过
+```
+
+**生效**：需重启 DSH。
+
+### 2026-11-20 · 修 GUI 实测两现象：计划清单抬头 + 半截调用漏出
+
+**现象（GUI 截图）**
+```
+① 工具任务先输出「[STAGE] 1/4 — 目标与交付物」整份计划清单，不直接开做
+② 接着发 NSFW 创作 → 回复是 read","file_path":"…data123.mht"}</tool_call>（半截调用当正文）
+```
+
+**根因**
+```
+① 计划抬头来自 32K system 里的约定样式；compactSystemText 只禁了「当前/结果/下一步」
+② 门控命中时仍下发原生 tools，且 toolPrefillOn 仍可能为真 → 创作预填与工具预填打架，
+   解析失败后残片被当正文输出
+```
+
+**修复**
+```
+1) toolMode = textToolCalls && !gateActive：门控（创作）请求一律不走工具协议
+2) body.tools 只在非文本协议档下发（if (tools && !textToolCalls)）→ 创作档也无原生 tools
+3) 残片兜底：正文里命中 [name]","arguments": 或 </tool_call> → 截断并替换为
+   「[工具调用解析失败] 模型回了半截调用，已拦截。可重发或换个说法。」
+4) compactSystemText 增一条：任务直接开做，不要先输出 [STAGE]/目标/交付物/判据 计划清单
+```
+
+**验证（stub）**
+```
+门控+tools  → hasTools=false，toolCalls=[]，残片被替换为拦截提示
+工具任务    → body 不带原生 tools，解析出 read(file_path)
+纯聊天      → 正常正文，不误判
+node --check 通过
+```
+
+**生效**：需重启 DSH。
+
+### 2026-11-20 · 普通回复可见缺陷：think 标签外露 + 无流式
+
+**实测（运行实例，普通问答）**
+```
+问：解释 TCP 三次握手（三句话）
+回：<think>\n</think>\n\n1) 客户端 SYN → …   ← 前两行是裸露的 think 标签
+deltas=1                                       ← 整段一次性返回（被 holdText 压到结束）
+```
+原因：9B 把思考写成正文里的 `<think></think>`（引擎 `--reasoning-format none`），
+适配器原样下发；holdText 看到首字符 `<` 判定"可能是工具调用"，一直压到流结束。
+
+**修复**
+```
+1) 新增 stripThinkTags()，在 4 处出口统一剥标签：首次放行、流式 delta、block-end、重试分支
+2) holdText 放行条件改为「先剥 think 标签再看首字符」→ 普通正文立刻流式放行
+3) 放行时去掉前导空白，避免回复开头空三行
+4) compactSystemText 增一条：任务直接开做，不要先输出 [STAGE]/目标/交付物/判据 计划清单
+```
+
+**验证（stub）**
+```
+think 开头 + 两段 delta → deltas=2，streamed="TCP 是面向连接的协议。"，block 无 think 标签
+工具任务仍解析出 read(file_path)；纯聊天不受影响
+node --check 通过
+```
+
+**生效**：需重启 DSH。
+
+### 2026-11-20 · 正常回复崩坏的真因：DSH 把工作区约定塞在 **user 消息**里
+
+**实测（运行实例）**
+```
+问「你好」→ 回：「[STAGE] 工具环境 / 状态与路径 / 判据：给出工具数 + 工作区路径
+              工具数 23 | 工作区 D:/Ba… 回退动作是 kitty action=rollback」
+```
+模型把问候当成运维任务，套用了工作区约定的 [STAGE]/判据/收口模板。
+
+**根因**
+```
+DSH 的工作区约定、运行时上下文、skills 目录是以 **user 消息**注入的（不是 system），
+而之前的 system 压缩只作用于 system 消息 → 这些模板原样喂给 9B，9B 照抄
+```
+
+**修复（只对 llama-cpp 档）**
+```
+stream() 里新增注入剔除：role=user 且命中
+  SHIYI-DSH WORKSPACE CONVENTIONS / [SHIYI TOOL LOCK] / <available_skills> /
+  Current runtime context. / Instructions from: / <system-reminder> /
+  skill-catalog / Time sampled
+且长度>400、末 200 字没有真实提问（请/帮我/写一段/解释/读一下/看一下）→ 整条删除
+```
+
+**验证（stub）**
+```
+输入：system + 注入约定(user) + 「你好」
+下发：["system", "user:你好"]   ← 注入被剔除
+回复：「你好，有什么要做的？」
+node --check 通过
+```
+
+**生效**：需重启 DSH。
+
+### 2026-11-20 · 正常回复模板化的真因：模型自身先验（微调带来的 [STAGE]/交付物/判据）
+
+**实测**
+```
+直接在引擎上问「你好」（system 只有身份+禁模板）→ 仍回 [STAGE]/本地资产扫描/交付物/.shiyi-workspace.json/判据
+→ 说明这不是 system 里的约定被抄，而是微调把工作区约定写进了模型的回复先验
+```
+
+**对照实验（同引擎，3 题 × 两种做法）**
+```
+仅禁模板指令：你好 → "石井已就绪…按块推进、显式状态、最小假设｜当前视图"（仍带模板味）
+加 few-shot 示例：你好 → "我在。有事直说。"
+                 TCP → "1) SYN → 2) SYN+ACK → 3) ACK"
+                 五绝 → 四句诗，无自评
+```
+
+**改动**
+```
+compactSystemText 重写为「铁律 + 边界 + 工具 + 成人向 + 3 条 few-shot 示例」：
+  用户：你好              → 助手：我在。有事直说。
+  用户：解释 TCP 三次握手  → 助手：1) SYN → 2) SYN+ACK → 3) ACK
+  用户：读一下 a.md        → 助手：<tool_call>{"name":"read",...}</tool_call>
+```
+
+**验证（真实引擎）**
+```
+你好 / TCP / 五绝：bad=[]（无 [STAGE]/交付物/判据/当前/下一步）
+工具题在纯文本调用下仍会写成猜清单，但适配器有工具预填兜底（stub 已验证解析出 read）
+node --check + 4 个 harness 全绿
+```
+
+**生效**：需重启 DSH。
+
+### 2026-11-20 · 创作请求跨步掉出门控 → 工具乱调 + 半截调用
+
+**现象（GUI）**
+```
+「进行NSFW内容创作」这一轮里出现：
+  读 WORKSPACE.md（文件不存在）、kitty_settings 参数非法 ×2、最后半截调用被拦截
+```
+
+**根因**
+```
+① 门控只看"最后一条 user 消息"。DSH 的工具结果/后续步骤里，最后一条 user 不再是创作请求
+   → 门控判定消失 → 该步重新带上 18 个工具 → 模型开始乱猜工具与文件
+② 门控重试分支是逐字直发，没有残片拦截（主路径有）
+```
+
+**修复**
+```
+1) 门控检测改为扫末 3 条 user 消息（tailUserText），工具结果夹在中间也能命中
+2) 门控块增加第 6 条：只写正文，禁止 <tool_call>/JSON/工具名/文件路径
+3) 重试分支改为整段缓冲 + 清洗（剥 think、拦半截调用、去前导空白）再一次性下发
+```
+
+**验证（stub）**
+```
+多步消息（创作请求 → assistant 调用 → 工具结果 user）→ applyNsfwGate 仍 hit=NSFW，injected=true
+门控路径收到 kitty_settings 半截调用 → toolCalls=[]，输出替换为「[工具调用解析失败]…」
+普通问答流式不受影响（deltas=2，无 think）
+真实引擎：「进行NSFW内容创作」→ 1147 字正文，tools=[]
+node --check 通过
+```
+
+**生效**：需重启 DSH。
+
+### 2026-11-20 · 预填复读前缀归一化（权重行为，适配层兜住）
+
+**实测坏形态（真实引擎，10 次工具任务）**
+```
+1 次出现：<tool_call>{"name":"<think></think><tool_call>{"name":"write",...}}
+→ 预填后模型先复读前缀再吐真调用，JSON 解析失败
+```
+
+**修复**：解析前归一化——若正文以 `<tool_call>{"name":"` 紧跟 `<think>` 或再一个 `<tool_call>`，剥掉这层复读前缀（最多 2 层）。
+
+**验证（stub 复现该坏形态）**
+```
+tool = write:{"file_path":"_work/tmp/a.txt","content":"hello"}；无杂文本
+node --check 通过
+```
+
+**稳定性（真实引擎，同一任务 10 次）**
+```
+可解析且参数完整 9/10；参数名写错 1 次（path 而非 file_path）；无调用 0
+```
+
+### 2026-11-20 · 压缩作用域收紧：只对 llama-cpp（9B），27B 与其它后端零影响
+
+**用户要求**：压缩只作用于本地模型，不要动其它后端提示词。
+
+**现状审计**
+```
+① 本插件只注册 provider=ninfer；云端（deepseek/opencode/codex…）走各自适配器，根本不经过这段代码
+② 插件内部所有 9B 专属逻辑都以 profileFlags().profile === 'llama-cpp' 为门：
+   system 压缩 / 注入剔除 / 门控 / 采样覆盖 / 文本工具协议
+③ 27B（csunx-27b）在 ENGINE_PROFILES 里不声明 slimSystemMaxChars / compactSystemText
+```
+
+**收紧**
+```
+压缩条件由「读 stageFlags 或 this.profile」改为严格：
+  profile === 'llama-cpp' 才取 cap 与文案，否则 cap=0、不压缩
+顺手去掉 profileFlags 里 compactSystemText 的重复键
+```
+
+**验证（stub，30K system + 1 工具）**
+```
+9B (llama-cpp)      → sysLen 258（压缩），不带原生 tools
+27B (csunx-27b)     → sysLen 30006（原样），带原生 tools
+未声明键的档         → sysLen 30006（原样）
+```
+
+**生效**：需重启 DSH。
+
+### 2026-11-20 · 创作续写模式（不再每轮重新开场）
+
+**问题**：session-e17c225b 里第 2、3 轮回复开头完全相同（"空气安静了一瞬，谁都没有先开口。"）
+——因为每轮都注入开场种子 + assistant 预填，模型把每轮当新故事开头。
+
+**修复**
+```
+1) applyNsfwGate 检测 messages 里是否已有 assistant → continuing
+2) 续写轮：授权块改为第 7 条「上文已有正文：接着往下写，不要重新开场、不要重复上一段第一句」，
+   不再注入「## 开场（场景要素…）」
+3) 预填只在首轮注入（gateHasHistory 为真时 gatePrefill=''）
+```
+
+**验证（stub）**
+```
+首轮 block 含「## 开场」= true；续写 block 含「接着往下写」= true、不含开场 = true
+续写轮 roles = system,user,assistant,user（无额外预填），输出不以预填句开头
+node --check 通过
+```
+
+**相关发现（上游确认）**：NSFW adapter 的 base_model_name_or_path = train/lines/9b-oxcoder/models/OxCoder-9B，
+该目录本地只剩 metadata/mtp（权重已删）。
+
+### 2026-11-20 · B1 重训前保护清单（操作者要求：旧模型不得删除）
+
+**红线（本线不再动，只读保留）**
+```
+models/9b/gguf/kittyrev9b-Q5_K_M-im.gguf      6.19 GB  现役（8080 正在跑）
+models/9b/gguf/kittyrev9b-nsfw-bf16.gguf     17.14 GB  A 线中间产物
+models/9b/gguf/kittyrev9b-nsfw-Q5_K_M.gguf    6.19 GB  A 线成品（工具退化，仅留证据）
+models/9b/gguf/adapter-2b-nsfw-f16.gguf       0.16 GB  LoRA GGUF（可 --lora-scaled）
+train/lines/9b-oxcoder/out/2b-nsfw-final/     165 MB   历史 adapter
+train/lines/9b-oxcoder/models/kittyrev-nsfw-merged/ 17.98 GB  A 线合并目录
+```
+
+**B1 产物落位（新目录，不覆盖任何旧文件）**
+```
+train/lines/9b-oxcoder/out/b1-oxcoder-nsfw-kitty/     新 adapter（QLoRA r=64）
+models/9b/gguf/kittyrev9b-b1-Q5_K_M.gguf              新 GGUF（训练后另起名）
+```
+
+**数据（新目录）**
+```
+train/lines/9b-oxcoder/data/b1-combined/train-b1.jsonl
+rows=20250；露骨 assistant 行 6106（30.2%）；kitty 9000 / nsfw 9000 / general 2250
+```
+
+**已备脚本**
+```
+_work/rebuild/build_b1_data.py     数据构建（可重跑，幂等覆盖自己）
+_work/rebuild/train_b1.ps1         训练启动（含基座完整性检查：weights >= 15GB 才开跑）
+```
+
+### 2026-11-20 · 外挂知识库（kitty 操作知识 + NSFW 创作规范）
+
+**动机**：27B 暂不能训；9B 权重装不下这两类知识 → 走检索增强，不靠权重。
+
+**构建** `_work/kb/build_kb.py` → `_work/kb/chunks.jsonl` + `stats.json`
+```
+kitty-tool     110   每个工具一张卡（用途/参数/必填，从 defineTool 解析）
+kitty-manifest  62   工具 → action 面（tool-manifest.ts 单一事实源）
+kitty-doc      183   toolkit docs + 本仓库 docs/plans/operations/architecture + PATCHES
+kitty-qa      4474   kitty 训练语料里的 Q→A（工具面适配 + 核心轨迹）
+nsfw-style     119   授权分支正文风格卡（未成年硬闸过滤后抽样）
+nsfw-ref       119   _shared/data/nsfw 词表/术语/指南片段
+style-rule       6   规范卡：授权后进正文 / 失败形态纠正 / 续写不重开 / 结构与节奏 / 人物与视角 / 调用纪律
+合计 5073 段，词项 91,791
+```
+
+**检索** `plugins/dsh-local-ai/lib/kb.mjs`（零依赖 BM25，含类别权重）
+```
+style-rule 1.6 · kitty-tool 1.35 · kitty-manifest 1.25 · nsfw-style 1.15 · kitty-doc 1.0 · kitty-qa 0.95 · nsfw-ref 0.9
+实测 11 条探针 11/11 命中（指针链/patch/IDA/门禁/APK/写保护/证据库/REA/拒答纠正/露骨正文/续写不重开）
+```
+
+**注入** `lib/index.js`（仅 llama-cpp 档；27B 与云端零变化）
+```
+最后一条 user 文本 → 意图判定（门控命中或触发词 = NSFW，否则 kitty）
+→ BM25 top-k=4（maxChars 3200）→ 拼成「参考知识（外挂知识库）」追加到 system 末尾
+短寒暄（<8 字且无关键词）不检索，避免污染「你好」
+```
+**验证（stub）**
+```
+9B kitty 意图  sysLen=1893 hasKB=true
+9B NSFW 意图   sysLen=2225 hasKB=true（命中「续写规则（不要重新开场）」）
+9B 寒暄「你好」 sysLen=1402 hasKB=false
+27B            sysLen=1200 hasKB=false
+node --check 通过
+```
+
+**生效**：需重启 DSH。知识库更新（重建 chunks）不需要重启——检索每次按需读缓存，重建后重启一次即可刷新。
+
+### 2026-11-20 · 分工定版：9B 走训练（原生能力）· 27B 走外挂知识库
+
+**操作者口径**
+```
+9B  = 后训练获得原生能力（kitty 工具面 + NSFW 写作），不挂检索
+27B = 不做后训练，靠外挂知识库（kitty 操作知识 + NSFW 创作规范）增强
+```
+
+**改动**
+```
+ENGINE_PROFILES['llama-cpp'].kb  → enabled: false（保留键位便于对比实验；请求不检索不注入）
+ENGINE_PROFILES['csunx-27b'].kb  → enabled: true, dir=_work/kb, k=6, maxChars=6000
+注入条件从「profile === llama-cpp」改为「stageFlags.kb.enabled === true」→ 由档位配置驱动，与档名解耦
+```
+
+**验证（stub）**
+```
+9B  kitty 意图           sysLen=1402  hasKB=false   ← 不注入
+27B kitty 意图           sysLen=1691  hasKB=true    ← 命中指针链工具卡
+27B NSFW 意图            sysLen=1872  hasKB=true    ← 命中「拒答纠正」规范卡
+27B 寒暄「你好」          sysLen=1200  hasKB=false
+27B 段隔离检查：nsfwGate/samplingOverride/gateHit/slimSystemMaxChars/compactSystemText/textToolCalls:true 全为 False
+node --check 通过
+```
+
+**9B 侧（训练路线）不变**
+```
+数据 train/lines/9b-oxcoder/data/b1-combined/train-b1.jsonl（20250 行；kitty 9000 含新版工具面 2796）
+基座 OxCoder-9B（HF OrionLLM/OxCoder-9B，下载中）
+启动 _work/rebuild/train_b1.ps1（QLoRA r=64 α=128，lr 5e-5，3 epoch）
+```
+
+### 2026-11-20 · 外挂知识库升级为「能力级」（27B 获得同等/更好能力）
+
+**目标口径**：27B 不训练，但要在 kitty 逆向工作台与 NSFW 创作上达到同等或更好 → 知识库必须给"怎么做"的完整作战手册，不是参考资料。
+
+**新增内容**
+```
+kitty-op         62    A 通道 OP 冻结表（从 ops-catalog.ts 解析：签名/回包/坑，如 R 回十进制、P_WALK offset 十进制、KM_PW 永久拒绝）
+kitty-playbook   16    能力卡：会话开工/内存读写/指针链/四连扫描/静态到补丁/IDA-Ghidra-REA 三档/内核门禁/转储还原/
+                       Android/引擎逆向/协议/汇编跳转/驱动运维/证据交付/参数给全/失败降级 —— 每张含 何时用→步骤→判据→坑
+nsfw-craft        7    写作法：授权判定与开场/节奏推进/对白人物/直白度/场景骨架/续写不重开/拒答纠正/交付自检
+nsfw-style      119    正文风格样例（未成年硬闸过滤）
+style-rule        6    规范卡
+```
+
+**检索升级：多面取数 searchMix**
+```
+kitty 意图 → playbook×2 + OP×1 + 工具卡×1 + QA/文档×2（合并去重，≤6000 字）
+NSFW 意图  → nsfw-craft×2 + style-rule×1 + nsfw-style×1（≤6000 字）
+类别权重：kitty-playbook 1.45 / nsfw-craft 1.45 / style-rule 1.5 / kitty-op 1.3
+```
+
+**验证（stub）**
+```
+能力级探针 12/12：
+ 血量链端到端 / PE 校验回滚 / 三视图门禁 / IL2CPP dump / APK 脱壳 / 未知值四轮收敛 /
+ 宿主自愈 / finding 证据 / 续写不重开 / 拒答纠正 / 写得不空 / 对白补动作
+每次注入 5-6 段，含 2 张 playbook（或 2 张写作法），非只给一条 QA
+chunks 5178；node --check 通过
+```
+
+**分工不变**
+```
+9B  训练（原生能力）—— 数据 20250 行就绪，基座 OxCoder-9B 下载中
+27B 外挂 —— kb.enabled=true, k=6→多面取数, maxChars 6000
+```
+
+### 2026-11-21 · 口径纠正：「萝莉」不是未成年硬闸词
+
+**操作者纠正**：萝莉描述女子身材娇小，与未成年无必然关系 → 不作硬门控。
+
+**改动**
+```
+lib/index.js  NSFW_MINOR_SOFT 去掉 '萝莉'（原来只在 SOFT，现在 HARD/SOFT 都没有）
+_work/kb/build_kb.py  MINOR_HARD 去掉 '萝莉'
+HARD 最终：幼女/幼齿/幼童/童女/未成/未成年/小学生/初中生/高中生/学生妹/女童/正太
+SOFT 最终：少女/校园/JK/jk/女高中生/学生（需成年声明才放行）
+```
+**子智能体**：已发纠正给 cleaner-nsfw，要求按新口径重跑数据（不是只改报告），并回报三个数：
+原按「萝莉」删除条数 / 纠正后恢复条数 / 现 HARD 命中条数。
+
+**生效**：runtime 门控改动需重启 DSH。
+
+### 2026-11-21 · 量化方案升级（不局限 Q5_K_M）
+
+**外部依据（HF GGUF Quantization Guide）**
+```
+imatrix 在 Q4 档可带来 10–20% 困惑度改善，Q3 以下基本是必需项；Q6_K = 最佳 quality/size；Q8_0 近无损
+代码/工具类任务建议 Q5_K_M 或 Q6_K（精度敏感），创作类 Q4_K_M 够用
+```
+
+**本机可用类型（llama-quantize 实测枚举）**
+```
+Q8_0 8.5bpw / Q6_K 6.56 / Q5_K_M 5.77 / Q5_K_S 5.4 / Q4_K_M 4.58 / IQ4_XS 4.25 / IQ4_NL 4.5 / IQ3_M 3.66 …
+```
+
+**定档（按上下文长度分场景）**
+```
+质量优先（ctx ≤32K）：Q6_K + output/embedding=Q6_K      ~7.2 GB
+均衡（ctx 128K）    ：Q5_K_M + imatrix + out/emb=Q6_K   ~6.3 GB
+最省（多并发/长文） ：IQ4_XS + imatrix                   ~4.8 GB
+```
+**校准集**：_work/quant/calib-b1.txt（460 条 / 597 KB，kitty 220 + NSFW permit 160 + DSH 80，仅用清洗后自有语料）
+**流水**：merge → bf16 GGUF → llama-imatrix → 三档量化 → 六项验收（困惑度/工具/创作/基础/复读/显存）
+**脚本**：_work/quant/QUANT-PLAN-9B.md · _work/quant/build_calib.py
+
+### 2026-11-21 · 9B 服务档位改 KV q4_0（支持 256K 且省 2 GiB）
+
+**改动** `engines/llama-cpp/start-9b.py`（备份 start-9b.py.bak-kvq4）
+```
+"128k": cacheTypeK/V  q8_0 → q4_0   （KV 4.00 → 1.12 GiB，速度 ~45-55 tok/s）
+"256k": cacheTypeK/V  q8_0 → q4_0   （KV 4.00 → 2.25 GiB，noKvOffload 关闭=KV 上卡）
+"32k" 保持 q8_0（短上下文留精度）
+```
+**依据**：Q6_K 权重 7.2 + KV q4_0 2.25 + 预留 0.8 = 10.25 GiB ≤ 12.2，256K 可跑；
+q8_0 KV 在 256K 要 4.0 GiB，Q6_K 就装不下。
+
+**量化定档**（`_work/quant/QUANT-PLAN-9B.md` §11）
+```
+主投 Q6_K + KV q4_0（256K 全覆盖，近无损）
+备选 Q5_K_M + imatrix + KV q4_0（余量更大 9.35 GiB）
+```
+
+### 2026-11-21 13:40 · NSFW 预填句发现（待与模型切换一起上线）
+
+**问题**：插件 NSFW 门控的 assistant 预填是中性软句
+```js
+prefill: '空气安静了一瞬，谁都没有先开口。'   // lib/index.js:210
+```
+实测（b1v3 Q6_K，8 条难 prompt）：无预填通过 4/8（50%），换成身体描写起手句预填 → 5/8（62.5%）。
+即预填句在把模型往「言情」分支推，与训练侧想要的「露骨」分支相反。
+
+**拟改**：
+```js
+prefill: '她的呼吸一下子乱了，手抵在他胸口，指节按着不放，另一只手顺着他的腰侧往下滑。'
+```
+（与题材无关，但确定是身体动作；不绑定场景）
+
+**上线条件**：改 lib/index.js 必须重启 DSH，所以与「切新模型」一次性做，避免多次重启。
+**验证口径**：切换后跑 verify_nsfw2.py（40 条 × 2 次）对比切换前的通过率与稳定率。
+### 2026-11-21 16:10 · 修 NSFW 门控误触发（裸 `NSFW` 词）
+
+**实测缺陷**（harness_dsh_adapt.mjs，B3 用例）
+```
+任务「搜一下仓库里 nsfwGate 出现在哪」→ 命中门控 → 注入授权块 + 露骨预填 → 输出变成情色正文
+原因：NSFW_GATE_TRIGGERS 里含裸词 'NSFW'，detectNsfwTrigger 用 indexOf 子串匹配
+     → 'nsfwGate' / 'nsfw-gated' / 'NSFW 门控' 全部误命中
+```
+
+**修法**
+```
+去掉裸 'NSFW'；保留显式标记，并对裸词加词边界（前后不能是字母/数字/_/-）
+新增触发器：'NSFW 创作'、'NSFW内容创作'、'进行NSFW'、'18+'、'成人向'
+```
+### 2026-11-21 17:20 · 提示词去禁用词字面 + 答非所问护栏
+
+**① compactSystemText 改正面表述**（原来直接列出 [STAGE]/目标：/交付物：/判据：/当前：… 等字面，
+9B 会把这些当模板复读 —— 实测 3/84 次）：
+
+```
+【铁律】先直接回答用户问的那一件事：只给答案本身，不写阶段小节、不写计划清单、不加固定格式的收尾段。
+【答问】只答被问的那一点：算数给数字，事实给结论，翻译给译文；不扩展到相邻话题，不复述用户原话。
+```
+
+**② 适配层加「答非所问」护栏**（offtopic guard）：
+```
+触发条件：用户消息 ≤40 字、不含工具类动词、首轮回复里出现模板标记（阶段小节/计划/固定收尾）
+处置：一次纠偏重试（system 追加"只回答被问的那一件事"，temperature 0.3、关预填），
+     重试仍违规 → 剥离模板行；剥完为空 → 给可见提示，绝不留空白或错答。
+日志：_work/session-audit/offtopic-guard.jsonl（只记长度与标记类型，不记正文）
+```
+
+### 2026-11-21 17:31 · 空回复根因修复（英文子串误判工具意图）
+
+**根因**
+```
+工具意图判定用子串匹配（cat|read|find|ls 等英文词）
+"把 \"The cat is on the table.\" 翻成中文" 里的 cat 命中词表
+→ 误判为工具请求 → 注入工具协议 + 工具预填 <tool_call>{"name":"
+→ 模型顺预填编工具名（kitty_llama3 / kitty_trie / kitty_tradeprep）
+→ 未授权被拦 → 正文为空（实测 5 档 × 3 次 = 0/15）
+裸 API 无此机制，所以正常返回「那只猫在桌子上。」
+```
+
+**修法**
+```js
+// 中文动词单独判；英文词必须带命令形态（路径/十六进制/.exe/pid/kitty_，或行首命令、命令+标志）
+const TOOLISH_CJK_RE = /(读|看|查|搜|列|执行|跑|打开|扫|反编译|指针|内存|补丁|注入|转储|进程|地址|工具|kitty|ida|apk|逆向)/
+const TOOLISH_EN_RE = /([a-z]:[\\/]|\/[\w.-]{2,}\/|0x[0-9a-fA-F]{4,}|\.exe\b|\bpid\b|\bkitty_|\b(?:ls|cat|grep|find|head|tail)\s+[-.\/]|^\s*(?:ls|cat|grep|find|head|tail|wc|python|node|git)\s)/im
+function looksToolish(t){ return TOOLISH_CJK_RE.test(t) || TOOLISH_EN_RE.test(t) }
+```
+`toolPrefillOn` 同步改用 `looksToolish(lastUserText)`，不再用独立子串表。
+
+**mock SSE 验证（不发请求）**
+```
+"把 \"The cat is on the table.\" 翻成中文" → protocol=false  text=那只猫在桌子上。  ✅
+"读一下 AGENTS.md"                        → protocol=true                 ✅
+"看一下当前目录有哪些文件"                  → protocol=true                 ✅
+```
+
+### 2026-11-21 19:20 · 确定性意图路由（治 K2/K3/D4 系统性错路由）
+
+**问题**：v5 仍把「反查指针链」路由成 kitty_ce（7/7 档全错）、「反编译 exe」漏 target、「列目录」走 ops_grep 乱参数。
+
+**做法**：插件加意图表 `pickToolHint(text)` →
+```
+指针链/多跳/谁指向/追父链   → kitty_pchain{target,depth}
+反编译/函数表/导入导出/xrefs → kitty_ida{action,target}
+读/看 <文件名.扩展名>        → read{file_path}
+列目录/有哪些文件/当前目录    → ops_bash{command:"ls -la",description:...}
+搜一下/查一下 <ASCII关键词>   → ops_grep{pattern}
+```
+命中时：① system 追加「【意图】应调用 X，参数：{...}」 ② assistant 预填直接给「工具名+完整参数」
+③ 流结束后按 hint **合成** tool-call 块（不依赖模型补 </tool_call>，避免"半截调用"拦截误伤）。
+
+**实测（走真实适配层 → 8080 b1v5）**
+```
+kitty 路由 4 档 × 3 次：K2 12/12（原 7/12）、K3 12/12（原 8/12）、K1 11/12
+DSH harness：base_ok=true · tool 4/4 · NSFW 1694 字不拒答 · think/STAGE/收口 全 0
+7 档 × 12 矩阵：none 1 / minimal 1 / low 0 / medium 2 / high 0 / xhigh 1 / max 1 未达标
+翻译句回归：不再空回复（"那只猫在桌子上。"）
+```
+
+### 2026-11-21 19:47 · b1v5 接任现役 + 插件更新
+
+**模型切换（已生效）**
+```
+switch-model-9b.ps1 -Apply → kittyrev9b-b1v5-Q6_K.gguf
+start-9b.py : MODEL = os.path.join(BASE,"models","9b","gguf","kittyrev9b-b1v5-Q6_K.gguf")
+serve.bat   : set MODEL=D:\...\kittyrev9b-b1v5-Q6_K.gguf
+engine.json : modelFile/tier=256k/cacheTypeK,V=q4_0 同步（备份 .bak-v5-20261121-1947）
+引擎实况：/v1/models = kittyrev9b-b1v5-Q6_K.gguf · n_ctx=262144 · 显存 10398 MiB
+回滚：Copy-Item engines\llama-cpp\start-9b.py.bak-switch-20261121-1945 → start-9b.py
+```
+
+**插件本轮新增/修复（lib/index.js，node --check 通过，新逻辑 9 处）**
+```
+① 英文子串不再误判工具意图（cat/read/find → 需命令形态）—— 治"翻译句变空"
+② 短问句（≤40 字、无工具动词）不挂工具、不注协议
+③ 答非所问护栏：模板标记 → 一次纠偏重试 → 仍违规剥离模板行 → 剥空给可见提示
+④ 确定性意图路由 pickToolHint：指针链/反编译/读文件/列目录/搜内容 → 直接合成 tool-call
+⑤ 意图命中时预填"工具名+完整参数"，不再依赖模型补 </tool_call>
+⑥ compactSystemText 去禁用词字面（正面表述 + 加 17*23/你是谁 示例）
+```
+
+**验收（切换前实测，真实适配层 → 8080 b1v5）**
+```
+7 档矩阵：未达标 none 1 / minimal 1 / low 0 / medium 2 / high 0 / xhigh 1 / max 1
+kitty 路由：K2 指针链 12/12、K3 反编译 12/12、K1 读内存 11/12
+DSH harness：base_ok=true、tool 4/4、NSFW 1694 字不拒答
+think/STAGE/收口行：0 / 0 / 0
+工具意图 6 项抽测：ops_grep ×3、ops_bash、read、kitty_ce 全部正确
+```
+
+### 2026-11-21 20:05 · kitty_ce op 参数顺序纠正
+
+**问题**：模型把内存读写参数反序 —— `R|dword|0x7FF6A0000000`（A 通道约定是 `R|addr|vt`，反序直接报错）
+**修法**：意图表新增内存读写分支
+```
+地址+类型+读/写动词 → kitty_ce{op:"R|0xADDR|vt"} / W|0xADDR|vt|val
+值支持 =、改成、改写、写入、设为、置为、换成
+```
+**验证**
+```
+把进程 4321 的 0x7FF6A0000000 读成 dword → R|0x7FF6A0000000|dword
+读一下 0x140001000 的 byte            → R|0x140001000|byte
+```
+
+### 2026-11-21 20:25 · 第二轮响应巨慢（TTFT 262s）根因与修复
+
+**证据（session-be33a194-2729-45cf-933d-1fc49c4d04e6）**
+```
+sessionStats: turns=2 steps=4 llmMs=262378 ttftMs=261844 ttftSteps=3 decodeTokens=16436
+turnOutline : turn1「你好」 / turn2「确认当前项目内的根目录文件」→ 回「[工具调用解析失败]…」
+per-request : 20:03:49 / 20:04:23 / 20:08:43 / 20:08:44 四次 payload 仅 2.7–5.3 KB（不是 prompt 大）
+引擎日志    : task 17878 release n_tokens=14566（单轮吐了 14566 token）
+              下一轮 get_available_slot: selected slot by LRU, n_tokens=14566 → 全量重算
+```
+
+**根因两条**
+```
+① 输出预算 32768 + high 档 → 单轮可生成 1.4 万 token（创作/长答时）
+② slot 里残留这 1.4 万 token 的 KV，新一轮 prompt 前缀不同且未开 cache-reuse
+   → llama.cpp 全量重算 1.4 万 token 上下文 → 首个 token 要等 4 分钟
+```
+
+**修复**
+```
+engines/llama-cpp/start-9b.py : 加 --cache-reuse 256（KV shifting 复用公共前缀块）
+plugins/dsh-local-ai/lib/index.js : contextBudget.maxOutput 32768 → 8192
+（长文需要时按请求显式放大 maxTokens，不再全局给 32K）
+引擎已按新参数重启（256K / KV q4_0 / cache-reuse 256）
+```
+
+**修复后实测（同机 8080，三轮连续）**
+```
+轮1「写 600 字说明文」 ttft=0.41s total=6.27s chars=669
+轮2「继续补 300 字」   ttft=0.22s total=2.71s chars=313
+轮3「一句话总结」      ttft=0.16s total=0.62s chars=70
+```
+
+### 2026-11-21 20:35 · NSFW 创作完整性（写足 + 断点续写 + 防注水）
+
+**需求**：NSFW 创作不能出现"写到一半断掉"，也不能为凑字数无限注水。
+
+**改动**
+```
+① 门控创作独立输出预算：contextBudget.maxOutput 8192 只约束交互；
+   门控路径 body.max_tokens = max(请求值, minTokens 1200, creativeTokens 16384)
+② 截断自动续写：finish_reason=length 且正文非空 → 用已写尾部做 assistant 前缀续写，
+   最多 2 轮；续写指令「从断点续上，不要重述，不要总结，不要加结尾说明」
+③ 字数上限护栏：从用户文本抓 "N 字" → capChars = N×1.6（无数字则 4000），
+   到达即停，防止"不许提前结束"被理解成无限写
+④ 门控提示词第 7 条：写到达标附近就自然收尾（收在句末），不许注水、不许用一句话总结代替正文
+```
+
+**实测（8080 b1v5 / 256K）**
+```
+A 「1200 字以上」正常请求 : 1933 字 / 16.6s / 结尾干净 ✅（改前：27537 字 / 269s / 尾部截断）
+B 强制 300 token 触发截断 : 1189 字 / 11.5s / 自动续写补完，收在「（本章完）」✅
+```
+
+### 2026-11-21 20:52 · NSFW 创作：剧情合理 + 内容密度 + 篇幅补足
+
+**三项新增（lib/index.js）**
+```
+① 门控提示第 8 条：剧情要 起因—发展—转折—收束，动作与对白推进，不复读不空转；
+   每隔一两段落到具体身体与性描写，用直白词，不许用「气氛/暧昧/心跳」代替实质
+② 密度护栏 nsfwExplicitCount()：45 个直白词统计，底线 = 每 300 字 ≥1（且 ≥6）
+   不达线 → 自动"加料重写"一次（保留情节走向，只把含蓄改直白）
+   采纳条件：密度达线 且 ≥800 字 且 ≥原 35%（宁要 2000 字达标版，不要 4700 字只有 5 个词的言情版）
+③ 篇幅不足补写：未截断但明显短于要求（<目标 80%）→ 追加一次续写补足
+日志：_work/session-audit/nsfw-density.jsonl（before/after/need/chars）
+```
+
+**实测（8080 b1v5 / 256K，两条不同题材）**
+```
+都市 1200 字   : 1676 字 · 13 个直白词 · 2.33/300 字 · 16.5s · 结尾干净
+办公室 1500 字 : 3752 字 · 21 个直白词 · 1.68/300 字 · 35.5s · 结尾干净
+修复前出过一次：4698 字只有 5 个词（0.32/300）→ 现已被密度护栏拦下
+```

@@ -1,0 +1,547 @@
+{
+ "eval_user_fingerprints": 486,
+ "dedup": {
+  "exact_removed": 2466,
+  "exact_groups": 681,
+  "after_exact": 23537,
+  "near_removed": 1255,
+  "after_near": 22282,
+  "near_mode": "dual",
+  "verified_pairs_with_user_jaccard_lt_0.9": 19134,
+  "verified_pairs_user_jaccard_mean": 0.662,
+  "lsh_params": {
+   "k": 64,
+   "bands": 8,
+   "rows": 8,
+   "shingle": "char-5gram",
+   "jaccard_threshold": 0.9,
+   "min_len": 80
+  },
+  "lsh_candidate_pairs": 106663,
+  "lsh_verified_pairs": 1279,
+  "lsh_skipped_short": 70,
+  "lsh_oversize_buckets_skipped": 0,
+  "examples": [
+   {
+    "pass": "exact",
+    "kept_src": "train-kitty-v3-clean.jsonl",
+    "kept_idx": 4,
+    "dropped_src": "train-kitty-v3-clean.jsonl",
+    "dropped_idx": 8387,
+    "user_head": "接着刚才那步——试试这块地址到底能不能读能写，先探一下再决定动不动，用哪个动作？"
+   },
+   {
+    "pass": "exact",
+    "kept_src": "train-kitty-v3-clean.jsonl",
+    "kept_idx": 4,
+    "dropped_src": "train-kitty-v3-clean.jsonl",
+    "dropped_idx": 9214,
+    "user_head": "接着刚才那步——试试这块地址到底能不能读能写，先探一下再决定动不动，用哪个动作？"
+   },
+   {
+    "pass": "exact",
+    "kept_src": "train-kitty-v3-clean.jsonl",
+    "kept_idx": 19,
+    "dropped_src": "train-kitty-v3-clean.jsonl",
+    "dropped_idx": 5736,
+    "user_head": "直接给通道下一条单指令，把某个地址按 dword 读回来"
+   },
+   {
+    "pass": "exact",
+    "kept_src": "train-kitty-v3-clean.jsonl",
+    "kept_idx": 19,
+    "dropped_src": "train-kitty-v3-clean.jsonl",
+    "dropped_idx": 7896,
+    "user_head": "直接给通道下一条单指令，把某个地址按 dword 读回来"
+   },
+   {
+    "pass": "exact",
+    "kept_src": "train-kitty-v3-clean.jsonl",
+    "kept_idx": 46,
+    "dropped_src": "train-kitty-v3-clean.jsonl",
+    "dropped_idx": 2530,
+    "user_head": "现在要确认一下现在锁定的是哪个对象、什么形态，别再靠记忆猜，走哪条路？"
+   },
+   {
+    "pass": "exact",
+    "kept_src": "train-kitty-v3-clean.jsonl",
+    "kept_idx": 46,
+    "dropped_src": "train-kitty-v3-clean.jsonl",
+    "dropped_idx": 4754,
+    "user_head": "现在要确认一下现在锁定的是哪个对象、什么形态，别再靠记忆猜，走哪条路？"
+   },
+   {
+    "pass": "near",
+    "cluster": 2,
+    "kept_src": "train-kitty-v3-clean.jsonl",
+    "kept_idx": 2,
+    "dropped_src": "train-kitty-v3-clean.jsonl",
+    "dropped_idx": 3727,
+    "user_head": "要从 asar 里还原出应用结构"
+   },
+   {
+    "pass": "near",
+    "cluster": 2,
+    "kept_src": "train-kitty-v3-clean.jsonl",
+    "kept_idx": 9,
+    "dropped_src": "train-kitty-v3-clean.jsonl",
+    "dropped_idx": 7747,
+    "user_head": "我在 当前挂着的目标进程 上遇到问题。已知：调过 kitty_drv。卡点：Kitty_Dr_Private_Acces"
+   },
+   {
+    "pass": "near",
+    "cluster": 2,
+    "kept_src": "train-kitty-v3-clean.jsonl",
+    "kept_idx": 11,
+    "dropped_src": "train-kitty-v3-clean.jsonl",
+    "dropped_idx": 6351,
+    "user_head": "这条回包什么意思：`OK|verified|…`"
+   },
+   {
+    "pass": "near",
+    "cluster": 2,
+    "kept_src": "train-kitty-v3-clean.jsonl",
+    "kept_idx": 22,
+    "dropped_src": "train-kitty-v3-clean.jsonl",
+    "dropped_idx": 4619,
+    "user_head": "当前挂着的目标进程 的分析做到一半，用 kitty_acescan 时 addr 给什么？有什么限制？ 这里对不上。我之"
+   },
+   {
+    "pass": "near",
+    "cluster": 2,
+    "kept_src": "train-kitty-v3-clean.jsonl",
+    "kept_idx": 9450,
+    "dropped_src": "train-kitty-v3-clean.jsonl",
+    "dropped_idx": 51,
+    "user_head": "需要修改安卓应用的资源或清单文件"
+   },
+   {
+    "pass": "near",
+    "cluster": 3,
+    "kept_src": "train-kitty-v3-clean.jsonl",
+    "kept_idx": 14680,
+    "dropped_src": "train-kitty-v3-clean.jsonl",
+    "dropped_idx": 15353,
+    "user_head": "实测记录：对象 当前挂着的目标进程，调过 kitty_dbg，，但 用 kitty_dbg 时 mode 给什么？有什么"
+   }
+  ]
+ },
+ "generated_at": "2026-11-21T00:23:31",
+ "inputs": {
+  "train-kitty-v3-clean.jsonl": 23674,
+  "kitty-v6-fix.jsonl": 328,
+  "kitty-v7-direct-answer.jsonl": 456,
+  "kitty-v5-strong.jsonl": 2244,
+  "kitty-adapt-v2.jsonl": 233
+ },
+ "total_in": 26935,
+ "dropped_by_reason": {
+  "degraded_reference": 12,
+  "format_incompatible": 736,
+  "truncated_content": 100,
+  "invalid_action": 64,
+  "scaffold_stage": 20
+ },
+ "dropped_total": 4653,
+ "rewrites": {
+  "tool_name_rewritten": 12,
+  "action_rewritten": 699
+ },
+ "per_source": {
+  "train-kitty-v3-clean.jsonl": {
+   "in": 23674,
+   "after_row_filters": 22742,
+   "out": 21061
+  },
+  "kitty-v6-fix.jsonl": {
+   "in": 328,
+   "after_row_filters": 328,
+   "out": 220
+  },
+  "kitty-v7-direct-answer.jsonl": {
+   "in": 456,
+   "after_row_filters": 456,
+   "out": 114
+  },
+  "kitty-v5-strong.jsonl": {
+   "in": 2244,
+   "after_row_filters": 2244,
+   "out": 654
+  },
+  "kitty-adapt-v2.jsonl": {
+   "in": 233,
+   "after_row_filters": 233,
+   "out": 233
+  }
+ },
+ "kept_before_dedup": 26003,
+ "final_rows": 22282,
+ "quarantine_rows": 820,
+ "system_injected_in_merged": 988,
+ "rows_with_control_chars_fixed": 8,
+ "length_all": {
+  "min": 37,
+  "p50": 267,
+  "p90": 519,
+  "max": 2820,
+  "mean": 312.7
+ },
+ "length_final": {
+  "min": 37,
+  "p50": 260,
+  "p90": 530,
+  "max": 2820,
+  "mean": 310.8
+ },
+ "length_all_raw_chars": {
+  "min": 37,
+  "p50": 267,
+  "p90": 519,
+  "max": 2820,
+  "mean": 312.7
+ },
+ "tool_dist_final_top20": [
+  [
+   "kitty_ce",
+   9938
+  ],
+  [
+   "kitty_patch",
+   4133
+  ],
+  [
+   "kitty_ghidra",
+   2317
+  ],
+  [
+   "kitty_sym",
+   1833
+  ],
+  [
+   "kitty_ops",
+   1347
+  ],
+  [
+   "kitty_prot",
+   1209
+  ],
+  [
+   "kitty_ida",
+   1097
+  ],
+  [
+   "kitty_km",
+   921
+  ],
+  [
+   "kitty_die",
+   864
+  ],
+  [
+   "kitty_x64dbg",
+   741
+  ],
+  [
+   "kitty_dump",
+   725
+  ],
+  [
+   "kitty_dbg",
+   610
+  ],
+  [
+   "kitty_net",
+   542
+  ],
+  [
+   "kitty_drv",
+   535
+  ],
+  [
+   "kitty_dualview",
+   451
+  ],
+  [
+   "kitty_wpb",
+   408
+  ],
+  [
+   "kitty_settings",
+   405
+  ],
+  [
+   "kitty_frida",
+   376
+  ],
+  [
+   "kitty_status",
+   363
+  ],
+  [
+   "kitty_pchain",
+   348
+  ]
+ ],
+ "tool_dist_all_before_dedup_top20": [
+  [
+   "kitty_ce",
+   11561
+  ],
+  [
+   "kitty_patch",
+   4405
+  ],
+  [
+   "kitty_ghidra",
+   2890
+  ],
+  [
+   "kitty_prot",
+   2237
+  ],
+  [
+   "kitty_sym",
+   1931
+  ],
+  [
+   "kitty_ida",
+   1647
+  ],
+  [
+   "kitty_ops",
+   1470
+  ],
+  [
+   "kitty_km",
+   1430
+  ],
+  [
+   "kitty_settings",
+   1197
+  ],
+  [
+   "kitty_drv",
+   1048
+  ],
+  [
+   "reverse_add_obs",
+   985
+  ],
+  [
+   "kitty_dualview",
+   960
+  ],
+  [
+   "kitty_die",
+   904
+  ],
+  [
+   "kitty_trail",
+   812
+  ],
+  [
+   "kitty_x64dbg",
+   792
+  ],
+  [
+   "kitty_dump",
+   776
+  ],
+  [
+   "reverse_add_target",
+   699
+  ],
+  [
+   "kitty_dbg",
+   651
+  ],
+  [
+   "kitty_init",
+   602
+  ],
+  [
+   "kitty_net",
+   582
+  ]
+ ],
+ "action_dist_final_top20": [
+  [
+   "kitty_patch action=find",
+   1994
+  ],
+  [
+   "kitty_patch action=info",
+   1393
+  ],
+  [
+   "kitty_ce op=MODENUM",
+   1101
+  ],
+  [
+   "kitty_sym action=imports",
+   1080
+  ],
+  [
+   "kitty_ghidra action=analyze",
+   876
+  ],
+  [
+   "kitty_prot action=query",
+   651
+  ],
+  [
+   "kitty_die action=scan",
+   625
+  ],
+  [
+   "kitty_ce op=R|0xBASE",
+   399
+  ],
+  [
+   "kitty_ghidra action=search",
+   363
+  ],
+  [
+   "kitty_sym action=exports",
+   350
+  ],
+  [
+   "kitty_ghidra action=functions",
+   327
+  ],
+  [
+   "kitty_ida action=analyze",
+   290
+  ],
+  [
+   "kitty_ce op=R|0xADDR|dword",
+   267
+  ],
+  [
+   "kitty_ghidra action=decompile",
+   241
+  ],
+  [
+   "kitty_km action=read",
+   238
+  ],
+  [
+   "kitty_patch action=hash",
+   237
+  ],
+  [
+   "kitty_x64dbg action=seed",
+   217
+  ],
+  [
+   "kitty_net action=decode",
+   215
+  ],
+  [
+   "kitty_ce op=S_CHANGED",
+   214
+  ],
+  [
+   "kitty_ida action=functions",
+   199
+  ]
+ ],
+ "drop_examples": {
+  "invalid_action": [
+   [
+    "train-kitty-v3-clean.jsonl",
+    589,
+    [
+     [
+      "kitty_ghidra",
+      "action",
+      "xrefs"
+     ]
+    ]
+   ],
+   [
+    "train-kitty-v3-clean.jsonl",
+    770,
+    [
+     [
+      "kitty_ghidra",
+      "action",
+      "xrefs"
+     ]
+    ]
+   ],
+   [
+    "train-kitty-v3-clean.jsonl",
+    1281,
+    [
+     [
+      "kitty_uedump",
+      "action",
+      "dump"
+     ]
+    ]
+   ],
+   [
+    "train-kitty-v3-clean.jsonl",
+    2795,
+    [
+     [
+      "kitty_ghidra",
+      "action",
+      "xrefs"
+     ]
+    ]
+   ],
+   [
+    "train-kitty-v3-clean.jsonl",
+    4753,
+    [
+     [
+      "kitty_ghidra",
+      "action",
+      "xrefs"
+     ]
+    ]
+   ],
+   [
+    "train-kitty-v3-clean.jsonl",
+    4765,
+    [
+     [
+      "kitty_ghidra",
+      "action",
+      "xrefs"
+     ]
+    ]
+   ],
+   [
+    "train-kitty-v3-clean.jsonl",
+    5343,
+    [
+     [
+      "kitty_uedump",
+      "action",
+      "dump"
+     ]
+    ]
+   ],
+   [
+    "train-kitty-v3-clean.jsonl",
+    6436,
+    [
+     [
+      "kitty_ghidra",
+      "action",
+      "xrefs"
+     ]
+    ]
+   ]
+  ]
+ },
+ "elapsed_s": 12.4,
+ "outputs": {
+  "dir": "train\\lines\\9b-oxcoder\\data\\kitty-reverse\\cleaned",
+  "merged": "kitty-clean-v3-phrasing-variants.jsonl",
+  "quarantine": "_quarantine-phrasing-variants.jsonl"
+ }
+}

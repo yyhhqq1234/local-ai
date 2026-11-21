@@ -48,6 +48,12 @@ def parse():
     ap.add_argument("--no-4bit", action="store_true", help="关掉 4bit（bf16 LoRA，显存需求暴涨）")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--resume", default=None)
+    ap.add_argument("--packing", action="store_true", help="序列打包（短样本拼接，吞吐大涨）")
+    ap.add_argument("--workers", type=int, default=0, help="dataloader 进程数")
+    ap.add_argument("--save-steps", type=int, default=0, help=">0 时按步数存 checkpoint")
+    ap.add_argument("--no-grad-ckpt", action="store_true", help="关梯度检查点（更快，显存涨）")
+    ap.add_argument("--optim", default="paged_adamw_8bit", help="优化器：paged_adamw_8bit | adamw_torch")
+    ap.add_argument("--attn", default="", help="attn_implementation：sdpa | eager | flash_attention_2")
     return ap.parse_args()
 
 
@@ -130,6 +136,10 @@ def main():
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
 
+    frac = float(os.environ.get('TORCH_CUDA_MEM_FRACTION', '0') or 0)
+    if frac > 0 and torch.cuda.is_available():
+        torch.cuda.set_per_process_memory_fraction(frac, 0)
+        print('[cuda] memory fraction capped at %.2f (防驱动层卡死)' % frac)
     print("[load] model（首次加载较慢，27B offload 可能 2-5 分钟）")
     model = AutoModelForCausalLM.from_pretrained(
         base,
@@ -139,7 +149,21 @@ def main():
         trust_remote_code=True,
     )
     if not a.no_4bit:
-        model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
+        # 不调 peft 的 prepare_model_for_kbit_training：它会把所有 bf16/fp16 参数全量 upcast 到 fp32，
+        # embed_tokens / lm_head（各 ~622M）一次性要 3.79 GiB，12 GB 卡上必 OOM（实测两次卡死/一次 OOM）。
+        # 手写等价三件事：① 开 input_require_grads ② 梯度检查点（非 reentrant）③ 只把 Norm 升 fp32 保稳定。
+        model.enable_input_require_grads()
+        if not bool(a.no_grad_ckpt):
+            try:
+                model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={'use_reentrant': False})
+            except TypeError:
+                model.gradient_checkpointing_enable()
+        for _p in model.parameters():
+            _p.requires_grad = False
+        for _m in model.modules():
+            if _m.__class__.__name__.lower().endswith('norm'):
+                _m.to(torch.float32)
+        print('[kbit] 手动冻结基座（跳过 fp32 全量 upcast，省约 4 GiB 显存）')
 
     model = get_peft_model(model, LoraConfig(
         r=a.lora_r, lora_alpha=a.lora_alpha, lora_dropout=0.05, bias="none",
@@ -168,26 +192,32 @@ def main():
         max_steps=a.max_steps,
         per_device_train_batch_size=a.bs,
         gradient_accumulation_steps=ga,
-        gradient_checkpointing=True,
+        gradient_checkpointing=(not bool(a.no_grad_ckpt)),
         learning_rate=a.lr,
         lr_scheduler_type="cosine",
-        warmup_ratio=0.03,
+        warmup_steps=30,
         bf16=True,
         logging_steps=5,
-        logging_dir=os.path.join(TRAIN_ROOT, "logs"),
-        save_strategy="epoch" if a.max_steps < 0 else "no",
+        save_strategy=("steps" if a.save_steps > 0 else ("epoch" if a.max_steps < 0 else "no")),
         save_total_limit=2,
-        optim="paged_adamw_8bit",
+        optim=str(a.optim),
         max_grad_norm=0.3,
         report_to="none",
         max_length=ctx,
         dataset_text_field="text",
-        resume_from_checkpoint=a.resume,
+        packing=bool(a.packing),
+        dataloader_num_workers=int(a.workers),
+        dataloader_pin_memory=bool(a.workers),
+        save_steps=(a.save_steps if a.save_steps > 0 else 500),
     )
 
-    trainer = SFTTrainer(model=model, args=args, train_dataset=ds, tokenizer=tok)
+    trainer = SFTTrainer(model=model, args=args, train_dataset=ds, processing_class=tok)
     print("[train] start")
-    trainer.train()
+    if a.resume:
+        print('[resume]', a.resume)
+        trainer.train(resume_from_checkpoint=a.resume)
+    else:
+        trainer.train()
 
     adapter = os.path.join(a.out, "adapter")
     model.save_pretrained(adapter)
@@ -198,3 +228,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+

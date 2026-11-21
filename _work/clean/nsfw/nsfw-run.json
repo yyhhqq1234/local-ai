@@ -1,0 +1,123 @@
+{
+ "input": {
+  "v5": 24970,
+  "gate_pos": 13951,
+  "gate_neg": 8411,
+  "eval_user_keys": 544,
+  "supplement_added": 15861,
+  "candidates": 40831
+ },
+ "drops": {
+  "hard_minor": 9339,
+  "soft_minor": 10353,
+  "template": 1126,
+  "refusal": 658,
+  "short_nodialog": 62,
+  "leak_eval": 28,
+  "dup_exact": 7,
+  "dup_near": 8517,
+  "low_quality_moved": 1308
+ },
+ "drop_by_branch": {
+  "hard_minor|permit": 7540,
+  "hard_minor|regular": 1799,
+  "soft_minor|permit": 7640,
+  "template|permit": 834,
+  "soft_minor|regular": 2713,
+  "refusal|permit": 658,
+  "template|regular": 292,
+  "short_nodialog|permit": 62,
+  "leak_eval|permit": 3,
+  "leak_eval|regular": 25,
+  "dup_exact|regular": 7,
+  "dup_near|regular": 5388,
+  "dup_near|permit": 3129
+ },
+ "minor_reason": {
+  "hard:幼(残留)": 4055,
+  "hard:幼女": 2816,
+  "hard:正太": 559,
+  "hard:未成": 506,
+  "hard:小学生": 279,
+  "hard:初中生": 239,
+  "hard:高中生": 226,
+  "hard:幼齿": 188,
+  "hard:幼少": 72,
+  "hard:萝莉+cue:小学": 54,
+  "hard:幼子": 47,
+  "hard:幼儿": 42,
+  "hard:萝莉+age:十四": 32,
+  "hard:幼童": 28,
+  "hard:幼年": 24,
+  "hard:萝莉+cue:高中": 23,
+  "hard:萝莉+age:十三": 21,
+  "hard:女童": 17,
+  "hard:萝莉+age:几": 15,
+  "hard:萝莉+age:十二": 15,
+  "hard:学生妹": 14,
+  "hard:萝莉+age:十": 10,
+  "hard:萝莉+cue:儿童": 8,
+  "hard:萝莉+cue:初中": 7,
+  "hard:萝莉+age:一": 7,
+  "hard:萝莉+age:14": 5,
+  "hard:萝莉+age:17": 4,
+  "hard:萝莉+age:九": 4,
+  "hard:萝莉+age:十七": 3,
+  "hard:萝莉+age:十五": 3,
+  "hard:萝莉+age:三": 2,
+  "hard:萝莉+age:十一": 2,
+  "hard:萝莉+age:16": 2,
+  "hard:萝莉+age:8": 2,
+  "hard:萝莉+age:十六": 2,
+  "hard:萝莉+cue:周岁": 2,
+  "hard:萝莉+age:六": 2,
+  "hard:萝莉+age:15": 1,
+  "hard:萝莉+age:4": 1
+ },
+ "soft_word": {
+  "少女": 9749,
+  "学生": 1367,
+  "JK": 257,
+  "校园": 234
+ },
+ "refusal_reason": {
+  "非露骨": 643,
+  "我无法": 13,
+  "不能写": 2
+ },
+ "template_reason": {
+  "判据": 1126,
+  "交付物": 5
+ },
+ "template_rewrite_reason": {
+  "判据": 1333
+ },
+ "template_rewritten": 1333,
+ "final": 9433,
+ "final_branch": {
+  "permit": 5604,
+  "regular": 3829
+ },
+ "explicit_count": 5213,
+ "explicit_ratio_pct": 55.26,
+ "assistant_len": {
+  "p50": 618,
+  "p95": 1474,
+  "min": 59,
+  "max": 3118
+ },
+ "user_len": {
+  "p50": 227,
+  "p95": 637
+ },
+ "paired_users": 207,
+ "paired_rows": 414,
+ "loli_correction": {
+  "present_total": 6049,
+  "old_would_drop": 2261,
+  "gated_metrics": 227,
+  "dropped_other_gate": 796,
+  "dropped_dedup": 598,
+  "restored": 1663
+ }
+}

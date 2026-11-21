@@ -1,0 +1,25 @@
+0.00.099.367 I srv  llama_server: initializing ...
+0.00.099.375 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.099.708 W srv  server_setup: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.00.107.999 I srv    load_model: loading model 'models\9b\gguf\kittyrev9b-Q5_K_M-im.gguf'
+0.00.463.021 W common_fit_params: failed to fit params to free device memory: n_gpu_layers already set by user to 99, abort
+0.00.672.772 W model has unused tensor blk.32.attn_norm.weight (size = 16384 bytes) -- ignoring
+0.00.672.781 W model has unused tensor blk.32.post_attention_norm.weight (size = 16384 bytes) -- ignoring
+0.00.672.795 W model has unused tensor blk.32.attn_q.weight (size = 23068672 bytes) -- ignoring
+0.00.672.800 W model has unused tensor blk.32.attn_k.weight (size = 2883584 bytes) -- ignoring
+0.00.672.805 W model has unused tensor blk.32.attn_v.weight (size = 3440640 bytes) -- ignoring
+0.00.672.823 W model has unused tensor blk.32.attn_output.weight (size = 11534336 bytes) -- ignoring
+0.00.672.827 W model has unused tensor blk.32.attn_q_norm.weight (size = 1024 bytes) -- ignoring
+0.00.672.832 W model has unused tensor blk.32.attn_k_norm.weight (size = 1024 bytes) -- ignoring
+0.00.672.837 W model has unused tensor blk.32.ffn_gate.weight (size = 34603008 bytes) -- ignoring
+0.00.672.842 W model has unused tensor blk.32.ffn_down.weight (size = 41287680 bytes) -- ignoring
+0.00.672.847 W model has unused tensor blk.32.ffn_up.weight (size = 34603008 bytes) -- ignoring
+0.00.672.853 W model has unused tensor blk.32.nextn.eh_proj.weight (size = 23068672 bytes) -- ignoring
+0.00.672.858 W model has unused tensor blk.32.nextn.enorm.weight (size = 16384 bytes) -- ignoring
+0.00.672.863 W model has unused tensor blk.32.nextn.hnorm.weight (size = 16384 bytes) -- ignoring
+0.00.672.879 W model has unused tensor blk.32.nextn.shared_head_norm.weight (size = 16384 bytes) -- ignoring
+0.04.495.901 I cmn          init: llama threadpool init, n_threads = 20
+0.04.714.882 I srv    load_model: initializing, n_slots = 4, n_ctx_slot = 131072, kv_unified = 'true'
+0.04.722.514 W srv          init: chat template supports preserving reasoning, it is enabled by default (may use more tokens, disable via --no-reasoning-preserve)
+0.04.722.570 I srv  server_run_i: model loaded
+0.04.722.581 I srv  server_on_li: listening on http://127.0.0.1:8080

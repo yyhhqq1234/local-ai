@@ -13,10 +13,10 @@
   "ngl": 99,
   "batch": 2048,
   "ubatch": 1024,
-  "cacheTypeK": "q8_0",
-  "cacheTypeV": "q8_0",
+  "cacheTypeK": "q4_0",
+  "cacheTypeV": "q4_0",
   "flashAttn": true,
   "noKvOffload": false,
-  "tier": "128k",
-  "modelFile": "j27b"
+  "tier": "256k",
+  "modelFile": "D:/BaiduNetdiskDownload/Local-AI/models/9b/gguf/kittyrev9b-b1v5-Q6_K.gguf"
 }

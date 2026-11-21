@@ -1,0 +1,58 @@
+{
+ "v5": {
+  "n": 24970,
+  "branch": {
+   "permit": 19068,
+   "regular": 5902
+  },
+  "gates": {
+   "minor_hard": 6847,
+   "soft_no_adult_decl": 8450,
+   "template": 2465,
+   "short_nodialog": 1288,
+   "outline_like": 2543,
+   "refusal": 2660,
+   "soft_with_adult_decl": 340
+  }
+ },
+ "gate-pos": {
+  "n": 13951,
+  "branch": {
+   "permit": 4229,
+   "regular": 9722
+  },
+  "gates": {
+   "minor_hard": 5677,
+   "soft_with_adult_decl": 312,
+   "soft_no_adult_decl": 7000,
+   "short_nodialog": 40,
+   "outline_like": 53,
+   "refusal": 22
+  }
+ },
+ "gate-neg": {
+  "n": 8411,
+  "branch": {
+   "regular": 8411
+  },
+  "gates": {
+   "refusal": 6267,
+   "soft_no_adult_decl": 2163,
+   "short_nodialog": 3125,
+   "outline_like": 1675,
+   "minor_hard": 1693,
+   "soft_with_adult_decl": 29
+  }
+ },
+ "dsh": {
+  "n": 1909,
+  "branch": {
+   "regular": 1909
+  },
+  "gates": {
+   "short_nodialog": 900,
+   "outline_like": 868,
+   "template": 4
+  }
+ }
+}

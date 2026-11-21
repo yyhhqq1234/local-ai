@@ -1,0 +1,226 @@
+{
+ "generated_at": "2026-11-21",
+ "seed": 20261121,
+ "design": {
+  "front_window": 300,
+  "front_min_strict": 3,
+  "prefix_range": [
+   80,
+   200
+  ],
+  "prefix_strict_min": 2,
+  "suffix_min": 200,
+  "targets": {
+   "A": 1800,
+   "B": 1400,
+   "C": 400
+  },
+  "sources": [
+   "train\\lines\\9b-oxcoder\\data\\nsfw-gated\\cleaned\\nsfw-clean.jsonl",
+   "train\\lines\\9b-oxcoder\\data\\nsfw-gated\\gate-pos.jsonl",
+   "train\\lines\\9b-oxcoder\\data\\nsfw-gated\\train-2b-gated-v5.jsonl"
+  ]
+ },
+ "pool": {
+  "unique_bodies": 18090,
+  "by_src": {
+   "nsfw-clean.jsonl": 5604,
+   "gate-pos.jsonl": 9749,
+   "train-2b-gated-v5.jsonl": 2737
+  },
+  "cross_src_dup": 20533,
+  "usable": 7867,
+  "fresh": 7124,
+  "reject": {
+   "degenerate": 1478,
+   "meta_or_refusal": 1225,
+   "not_chinese": 1779,
+   "too_short": 858,
+   "truncated": 23,
+   "continuation_head": 19,
+   "minor_hard": 4662,
+   "minor_stage": 137,
+   "refusal_cue": 18,
+   "template_cue": 24
+  }
+ },
+ "files": {
+  "A": {
+   "path": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\lines\\9b-oxcoder\\data\\nsfw-gated\\cleaned\\opt\\nsfw-zeroshot-v4.jsonl",
+   "rows": 1800,
+   "unique_assistant": 1800,
+   "unique_assistant_norm": 1800,
+   "front300_strict": {
+    "n": 1800,
+    "mean": 6.26,
+    "median": 6,
+    "p90": 11,
+    "min": 3,
+    "max": 23,
+    "ge3_ratio": 1.0,
+    "ge5_ratio": 0.63
+   },
+   "overlap_old800": {
+    "n": 0,
+    "rate": 0.0
+   },
+   "len": {
+    "n": 1800,
+    "mean": 1334.1,
+    "median": 1377,
+    "p90": 1448,
+    "min": 303,
+    "max": 2124,
+    "ge3_ratio": 1.0,
+    "ge5_ratio": 1.0
+   },
+   "src": {
+    "nsfw-clean.jsonl": 1175,
+    "gate-pos.jsonl": 595,
+    "train-2b-gated-v5.jsonl": 30
+   },
+   "adult_decl_appended": 135,
+   "reuse_source_from_a": 0,
+   "front100_ge2_ratio": 0.58,
+   "strict_total": {
+    "n": 1800,
+    "mean": 23.75,
+    "median": 23,
+    "p90": 41,
+    "min": 3,
+    "max": 70,
+    "ge3_ratio": 1.0,
+    "ge5_ratio": 0.97
+   }
+  },
+  "B": {
+   "path": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\lines\\9b-oxcoder\\data\\nsfw-gated\\cleaned\\opt\\nsfw-continue-v4.jsonl",
+   "rows": 1400,
+   "unique_assistant": 1400,
+   "unique_assistant_norm": 1400,
+   "front300_strict": {
+    "n": 1400,
+    "mean": 4.73,
+    "median": 4,
+    "p90": 10,
+    "min": 0,
+    "max": 20,
+    "ge3_ratio": 0.69,
+    "ge5_ratio": 0.46
+   },
+   "overlap_old800": {
+    "n": 0,
+    "rate": 0.0
+   },
+   "len": {
+    "n": 1400,
+    "mean": 1182.91,
+    "median": 1215,
+    "p90": 1283,
+    "min": 200,
+    "max": 1543,
+    "ge3_ratio": 1.0,
+    "ge5_ratio": 1.0
+   },
+   "src": {
+    "nsfw-clean.jsonl": 505,
+    "gate-pos.jsonl": 862,
+    "train-2b-gated-v5.jsonl": 33
+   },
+   "adult_decl_appended": 836,
+   "reuse_source_from_a": 0,
+   "prefix_len": {
+    "n": 1400,
+    "mean": 173.0,
+    "median": 179,
+    "p90": 198,
+    "min": 85,
+    "max": 200,
+    "ge3_ratio": 1.0,
+    "ge5_ratio": 1.0
+   },
+   "prefix_strict": {
+    "n": 1400,
+    "mean": 3.59,
+    "median": 3,
+    "p90": 6,
+    "min": 2,
+    "max": 16,
+    "ge3_ratio": 0.62,
+    "ge5_ratio": 0.24
+   },
+   "prefix_ge2_ratio": 1.0
+  },
+  "C": {
+   "path": "D:\\BaiduNetdiskDownload\\Local-AI\\train\\lines\\9b-oxcoder\\data\\nsfw-gated\\cleaned\\opt\\nsfw-frontload-v4.jsonl",
+   "rows": 400,
+   "unique_assistant": 400,
+   "unique_assistant_norm": 400,
+   "front300_strict": {
+    "n": 400,
+    "mean": 8.22,
+    "median": 8,
+    "p90": 12,
+    "min": 3,
+    "max": 22,
+    "ge3_ratio": 1.0,
+    "ge5_ratio": 0.91
+   },
+   "overlap_old800": {
+    "n": 0,
+    "rate": 0.0
+   },
+   "len": {
+    "n": 400,
+    "mean": 1342.28,
+    "median": 1397,
+    "p90": 1461,
+    "min": 336,
+    "max": 1727,
+    "ge3_ratio": 1.0,
+    "ge5_ratio": 1.0
+   },
+   "src": {
+    "nsfw-clean.jsonl": 33,
+    "gate-pos.jsonl": 351,
+    "train-2b-gated-v5.jsonl": 16
+   },
+   "adult_decl_appended": 353,
+   "reuse_source_from_a": 0,
+   "front300_ge4_ratio": 0.94
+  }
+ },
+ "user_templates": {
+  "A_counts": {
+   "00": 259,
+   "01": 256,
+   "02": 180,
+   "03": 180,
+   "04": 180,
+   "05": 180,
+   "06": 180,
+   "07": 134,
+   "08": 133,
+   "09": 118
+  },
+  "B_counts": {
+   "00": 280,
+   "01": 280,
+   "02": 280,
+   "03": 280,
+   "04": 280
+  },
+  "C_counts": {
+   "00": 67,
+   "01": 67,
+   "02": 67,
+   "03": 67,
+   "04": 66,
+   "05": 66
+  },
+  "A_explicit_ratio": 0.5,
+  "A_distinct_shapes": 10,
+  "B_distinct_shapes": 5,
+  "C_distinct_shapes": 6
+ }
+}

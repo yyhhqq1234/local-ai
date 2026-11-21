@@ -28,15 +28,15 @@ ENG = os.path.join(BASE, "engines", "llama-cpp")
 RUN = os.path.join(ENG, "run")
 STATE = os.path.join(RUN, "active-tier.json")
 PORT = 8080
-MODEL = os.path.join(BASE, "models", "9b", "gguf", "kittyrev9b-Q5_K_M-im.gguf")
+MODEL = os.path.join(BASE, "models", "9b", "gguf", "kittyrev9b-b1v5-Q6_K.gguf")
 EXE = os.path.join(ENG, "llama-bin", "llama-server.exe")
 
 # 档位默认参数（ctx + 配套 KV / batch）
 TIER_DEFAULTS = {
     "fast": {"ctx": 8192, "cacheTypeK": "f16", "cacheTypeV": "f16", "batch": 2048, "ubatch": 1024, "noKvOffload": False, "speed": "70-75 tok/s"},
     "32k": {"ctx": 32768, "cacheTypeK": "q8_0", "cacheTypeV": "q8_0", "batch": 1024, "ubatch": 512, "noKvOffload": False, "speed": "65-72 tok/s"},
-    "128k": {"ctx": 131072, "cacheTypeK": "q8_0", "cacheTypeV": "q8_0", "batch": 1024, "ubatch": 512, "noKvOffload": False, "speed": "~44 tok/s"},
-    "256k": {"ctx": 262144, "cacheTypeK": "q8_0", "cacheTypeV": "q8_0", "batch": 2048, "ubatch": 1024, "noKvOffload": True, "speed": "~20-35 tok/s"},
+    "128k": {"ctx": 131072, "cacheTypeK": "q4_0", "cacheTypeV": "q4_0", "batch": 1024, "ubatch": 512, "noKvOffload": False, "speed": "~45-55 tok/s"},
+    "256k": {"ctx": 262144, "cacheTypeK": "q4_0", "cacheTypeV": "q4_0", "batch": 2048, "ubatch": 1024, "noKvOffload": False, "speed": "~25-40 tok/s（KV q4_0，显存 2.25 GiB）"},
 }
 
 GLOBAL_DEFAULTS = {"ngl": 99, "port": PORT, "flashAttn": True, "extraArgs": []}
@@ -140,6 +140,9 @@ def build_cmd(p):
          "--cache-type-k", p["cacheTypeK"], "--cache-type-v", p["cacheTypeV"],
          "--host", "127.0.0.1", "--port", str(p["port"]),
          "--jinja", "--no-warmup", "--reasoning-format", "none",
+         # 2026-11-21：第二轮巨慢根因 = slot 里残留上一轮上万 token 的 KV，新一轮 prompt 前缀
+         # 不完全一致 → 全量重算。开 cache-reuse 让 llama.cpp 用 KV shifting 复用公共前缀（≥256 token）。
+         "--cache-reuse", "256",
          "--parallel", "1", "--metrics"]
     if p.get("flashAttn", True):
         a += ["-fa", "on"]
@@ -239,3 +242,6 @@ if __name__ == "__main__":
         status()
     else:
         start(cmd, merged_overrides(args))
+
+
+

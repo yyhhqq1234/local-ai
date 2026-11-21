@@ -1,0 +1,6 @@
+{"ts":1795265439368,"kind":"density_ok","count":28,"need":7,"chars":2212}
+{"ts":1795265461092,"kind":"density_rewrite","before":5,"after":14,"need":6,"chars":1032}
+{"ts":1795265490123,"kind":"density_ok","count":14,"need":6,"chars":1316}
+{"ts":1795265543034,"kind":"density_keep","before":5,"after":57,"need":15,"chars":4698}
+{"ts":1795265571296,"kind":"density_ok","count":13,"need":6,"chars":1676}
+{"ts":1795265606792,"kind":"density_ok","count":21,"need":12,"chars":3752}

@@ -1,0 +1,80 @@
+{
+ "generated_at": "2026-11-21",
+ "seed": 20261121,
+ "params": {
+  "min_strict": 5,
+  "body_len": [
+   400,
+   3000
+  ],
+  "near_dup_jaccard": 0.85,
+  "target": 800,
+  "scene_caps": {
+   "通用": 320,
+   "室内": 190,
+   "都市": 130,
+   "校园": 80,
+   "职场": 90,
+   "幻想": 70,
+   "户外": 60
+  }
+ },
+ "input": {
+  "rows": 9433,
+  "permit": 5604
+ },
+ "reject": {
+  "degenerate": 602,
+  "too_mild": 1169,
+  "meta_or_refusal": 460,
+  "not_chinese": 638,
+  "too_short": 275,
+  "truncated": 13,
+  "continuation_head": 7,
+  "minor_soft_no_decl": 1,
+  "too_long": 2,
+  "dup_near": 1
+ },
+ "reject_degenerate_detail": {
+  "INTERJ_RUN": 371,
+  "REPEAT_5GRAM": 170,
+  "HEART_RUN": 142,
+  "TILDE_RUN": 132,
+  "CHAR_RUN8": 154
+ },
+ "rows": 800,
+ "unique_assistant": 800,
+ "unique_assistant_norm": 800,
+ "strict": {
+  "mean": 20.04,
+  "min": 5,
+  "max": 64,
+  "ge5_ratio": 1.0,
+  "ge8_ratio": 0.85
+ },
+ "len": {
+  "mean": 1354,
+  "min": 456,
+  "max": 2211
+ },
+ "scene": {
+  "通用": 302,
+  "室内": 190,
+  "都市": 73,
+  "校园": 59,
+  "职场": 90,
+  "幻想": 70,
+  "户外": 16
+ },
+ "adult_decl_injected": 57,
+ "user_template": {
+  "t0": 134,
+  "t1": 134,
+  "t2": 133,
+  "t3": 133,
+  "t4": 133,
+  "t5": 133
+ },
+ "system_verbatim": true,
+ "degenerate_hits": 0
+}

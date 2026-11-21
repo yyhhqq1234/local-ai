@@ -1,0 +1,80 @@
+{
+  "seed": 20261121,
+  "A": {
+    "file": "tool-pchain.jsonl",
+    "lines": 155,
+    "bad_json": 0,
+    "bad_shape": 0,
+    "empty_assistant": 0,
+    "unique_answer": 155,
+    "unique_rate": 1.0,
+    "tool_call_ok": 155,
+    "tool_call_bad_lines": [],
+    "args_bad": 0,
+    "unique_toolcall": 155,
+    "unique_toolcall_rate": 1.0,
+    "tool_name_dist": {
+      "kitty_pchain": 119,
+      "kitty_ce": 36
+    }
+  },
+  "B": {
+    "file": "tool-ida.jsonl",
+    "lines": 132,
+    "bad_json": 0,
+    "bad_shape": 0,
+    "empty_assistant": 0,
+    "unique_answer": 132,
+    "unique_rate": 1.0,
+    "tool_call_ok": 132,
+    "tool_call_bad_lines": [],
+    "args_bad": 0,
+    "unique_toolcall": 132,
+    "unique_toolcall_rate": 1.0,
+    "tool_name_dist": {
+      "kitty_ida": 110,
+      "kitty_ghidra": 12,
+      "kitty_rea_function": 10
+    }
+  },
+  "C": {
+    "file": "tool-direct-answer.jsonl",
+    "lines": 200,
+    "bad_json": 0,
+    "bad_shape": 0,
+    "empty_assistant": 0,
+    "unique_answer": 193,
+    "unique_rate": 0.965,
+    "banned_hits": {},
+    "banned_clean": true
+  },
+  "A_coverage": {
+    "反查指针链": 17,
+    "多跳指针": 17,
+    "谁指向这个地址": 17,
+    "从哪读到这个值": 17,
+    "追父链": 17,
+    "找基址": 17,
+    "几跳能到": 17,
+    "读值对照(kitty_ce R)": 24,
+    "扫描对照(kitty_ce S_NEW)": 12
+  },
+  "B_coverage": {
+    "函数列表": 14,
+    "反编译某函数": 14,
+    "导入表": 14,
+    "导出表": 14,
+    "交叉引用": 14,
+    "字符串": 14,
+    "入口点": 14,
+    "对照(ghidra 无 IDA)": 12,
+    "对照(rea_function 已知符号)": 10,
+    "对照(ida 有 IDA)": 12
+  },
+  "C_coverage": {
+    "C1 短算术/事实": 50,
+    "C2 身份与寒暄": 50,
+    "C3 不需要工具": 50,
+    "C4 诱饵对照(只答 A)": 50
+  }
+}

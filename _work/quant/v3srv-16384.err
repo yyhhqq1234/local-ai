@@ -1,0 +1,15 @@
+0.00.158.137 I srv  llama_server: initializing ...
+0.00.158.145 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.160.699 W srv  server_setup: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.00.165.659 I srv    load_model: loading model 'D:\BaiduNetdiskDownload\Local-AI\models\9b\gguf\kittyrev9b-b1v4-Q6_K.gguf'
+0.00.166.309 E gguf_init_from_reader: invalid magic characters: '????', expected 'GGUF'
+0.00.167.250 E llama_model_load: error loading model: llama_model_loader: failed to load model from D:\BaiduNetdiskDownload\Local-AI\models\9b\gguf\kittyrev9b-b1v4-Q6_K.gguf
+0.00.167.327 E llama_model_load_from_file_impl: failed to load model
+0.00.168.132 E common_fit_params: encountered an error while trying to fit params to free device memory: failed to load model
+0.00.168.166 E gguf_init_from_reader: invalid magic characters: '????', expected 'GGUF'
+0.00.168.180 E llama_model_load: error loading model: llama_model_loader: failed to load model from D:\BaiduNetdiskDownload\Local-AI\models\9b\gguf\kittyrev9b-b1v4-Q6_K.gguf
+0.00.168.181 E llama_model_load_from_file_impl: failed to load model
+0.00.168.183 E cmn  common_init_: failed to load model 'D:\BaiduNetdiskDownload\Local-AI\models\9b\gguf\kittyrev9b-b1v4-Q6_K.gguf'
+0.00.168.185 E srv    load_model: failed to load model, 'D:\BaiduNetdiskDownload\Local-AI\models\9b\gguf\kittyrev9b-b1v4-Q6_K.gguf'
+0.00.168.188 I srv    operator(): operator(): cleaning up before exit...
+0.00.169.100 E srv  server_run_i: exiting due to model loading error
