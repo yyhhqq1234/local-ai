@@ -1,3 +1,5 @@
+// [LEGACY] 2026-11-21 定档：本文件已停止维护，唯一真相源是 lib/index.js（纯 ESM，无需编译）。
+// 详见 src/README.md。不要按本文件重建 lib，也不要假定它与 lib 同步。
 /**
  * NinferAdapter —— 把本地 NInfer 引擎（OpenAI 兼容 /v1/chat/completions）接进 DSH 的 llm seam。
  *
@@ -454,3 +456,4 @@ export class NinferAdapter extends LlmAdapter {
     yield { type: 'finish', reason: { kind } as never }
   }
 }
+

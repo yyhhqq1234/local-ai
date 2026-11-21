@@ -60,3 +60,7 @@ _work/_research/csunx/
 ~$*
 
 
+
+# 原始训练材料存放区（操作者指定：永不可删，内容不入库）
+train/user-temp/
+!train/user-temp/.gitkeep

@@ -1,3 +1,5 @@
+// [LEGACY] 2026-11-21 定档：本文件已停止维护，唯一真相源是 lib/index.js（纯 ESM，无需编译）。
+// 详见 src/README.md。不要按本文件重建 lib，也不要假定它与 lib 同步。
 /**
  * NInfer 引擎/模型管理器 —— 纯 Node 实现，无第三方依赖。
  *
@@ -411,3 +413,4 @@ export class NinferManager {
     return this.start(overrides)
   }
 }
+

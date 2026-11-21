@@ -62,7 +62,7 @@
 | 路径 | 用途 |
 |---|---|
 | `plugins/dsh-local-ai/lib/index.js` | **运行时产物**，所有适配器补丁落在这里（改前必须 `cp` 一份 `.bak-thinkN`） |
-| `plugins/dsh-local-ai/src/adapter.ts` | 源码（与 lib 同步，重建时不丢逻辑） |
+| `plugins/dsh-local-ai/src/*.ts` | **[LEGACY 2026-11-21] 早期骨架，已停止维护**；唯一真相源是 `lib/index.js`（纯 ESM，无需编译），详见 `plugins/dsh-local-ai/src/README.md` |
 | `plugins/dsh-local-ai/PATCHES.md` | 逐轮改动记录，改完必须追加 |
 | `_work/session-audit/` | 会话解帧与校验脚本（`unframe2.mjs` / `bench_speed2.mjs` / `verify_*.mjs`） |
 | `_work/session-audit/ninfer-stats.jsonl` | 每请求统计：tools / systemChars / totalChars / sample / effort / payloadBytes |

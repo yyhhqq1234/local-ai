@@ -1,3 +1,5 @@
+// [LEGACY] 2026-11-21 定档：本文件已停止维护，唯一真相源是 lib/index.js（纯 ESM，无需编译）。
+// 详见 src/README.md。不要按本文件重建 lib，也不要假定它与 lib 同步。
 /**
  * @dsh-external/dsh-ninfer-local —— NInfer 本地模型后端。
  *
@@ -274,3 +276,4 @@ export function apply(ctx: Context, config: Config): void {
     },
   })), 'dsh-ninfer-local: params tool')
 }
+

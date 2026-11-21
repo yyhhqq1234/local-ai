@@ -1974,3 +1974,20 @@ B 强制 300 token 触发截断 : 1189 字 / 11.5s / 自动续写补完，收在
 办公室 1500 字 : 3752 字 · 21 个直白词 · 1.68/300 字 · 35.5s · 结尾干净
 修复前出过一次：4698 字只有 5 个词（0.32/300）→ 现已被密度护栏拦下
 ```
+
+### 2026-11-21 21:15 · src/ 定档为 LEGACY + 新增 train/user-temp
+
+**src 与 lib 的关系定档**（原本 AGENTS.md 声称"src 与 lib 同步"，实测不成立）
+```
+lib/index.js 153 KB：唯一真相源，纯 ESM 无需编译，含门控/协议/意图路由/护栏全部实装逻辑
+src/*.ts 45 KB ：早期骨架，compactSystemText / textToolProtocol / gateHit / holdText / nsfwGate 全部 0 命中
+处置：src/README.md 写明定档；三个 .ts 加 [LEGACY] 头；AGENTS.md §3 同步更正
+      lib/ 仍由根仓库 git add -f 强制纳入版本控制（不带它就复现不出当前行为）
+```
+
+**train/user-temp（操作者指定：永不可删，内容不入库）**
+```
+已建 train/user-temp/（空，仅 .gitkeep 占位，未放任何材料）
+.gitignore 新增：train/user-temp/ + !train/user-temp/.gitkeep
+自检：git check-ignore train/user-temp/x.bin → .gitignore:65 命中
+```
